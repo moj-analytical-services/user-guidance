@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - master
+    docker:
+      - image: moj-analytical-services/user-guidance
+
+    steps:
+      - checkout
+
+      - run:
+          name: Build the user guidance
+          command: |
+            bundle exec middleman build --build-dir docs
+
+      - run:
+          name: Replace .nojekyll
+          command: |
+            touch docs/.nojekyll
+
+      - run:
+          name: Deploy to GitHub
+          command: |
+            set -e
+            [ -z "${GITHUB_TOKEN}" ] && exit 0
+            git config --global user.name calumabarnett
+            git config --global user.email calum.barnett@digital.justice.gov.uk
+            git clone -b gh-pages \
+              https://${GITHUB_TOKEN}@github.com/${CIRLCE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git \
+              output
+            cd output
+            git rm -rf --ignore-unmatch *
+            cp -r ../docs/* ./
+            git add --all .
+            git commit -m "Circle CI: updated guidance"
+            [ "${CIRCLE_BRANCH}" != "master" ] && exit 0
+            git push -q origin gh-pages
