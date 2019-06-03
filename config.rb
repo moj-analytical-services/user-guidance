@@ -2,8 +2,8 @@ require 'govuk_tech_docs'
 
 GovukTechDocs.configure(self)
 
-set :relative_links, true
+set :site_url, ""
 
-set :css_dir, "/user-guidance/stylesheets"
-set :js_dir, "/user-guidance/javascripts"
-set :image_dir, "/user-guidance/images"
+configure :build do
+    set :http_prefix, '/user-guidance'
+end
