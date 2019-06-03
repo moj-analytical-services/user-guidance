@@ -9,4 +9,4 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 # Include the tech docs gem
-gem 'govuk_tech_docs'
+gem 'govuk_tech_docs', git: 'https://github.com/lhokktyn/tech-docs-gem', branch: 'fix-multipage-nav-toc'
