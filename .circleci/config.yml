@@ -28,7 +28,7 @@ jobs:
             git config --global user.name calumabarnett
             git config --global user.email calum.barnett@digital.justice.gov.uk
             git clone -b gh-pages \
-              https://${GITHUB_TOKEN}@github.com/${CIRLCE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git \
+              https://${GITHUB_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git \
               output
             cd output
             git rm -rf --ignore-unmatch *
