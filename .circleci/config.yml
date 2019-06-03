@@ -5,7 +5,7 @@ jobs:
       only:
         - master
     docker:
-      - image: calumabarnett/analytical-platform-user-guidance
+      - image: calumabarnett/analytical-platform-user-guide
 
     steps:
       - checkout
