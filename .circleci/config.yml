@@ -1,25 +1,25 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
-      - image: calumabarnett/analytical-platform-user-guidance
-
+      - image: quay.io/mojanalytics/user-guidance:latest
+        auth:
+          username: $QUAY_USERNAME
+          password: $QUAY_PASSWORD
+    filter:
+      branches:
+        only:
+          - master
     steps:
       - checkout
-
       - run:
           name: Build the user guidance
           command: |
             bundle exec middleman build --build-dir docs
-
       - run:
           name: Replace .nojekyll
           command: |
             touch docs/.nojekyll
-
       - run:
           name: Deploy to GitHub
           command: |
