@@ -8,10 +8,6 @@ jobs:
         auth:
           username: $QUAY_USERNAME
           password: $QUAY_PASSWORD
-    filter:
-      branches:
-        only:
-          - master
     working_directory: ~/project
     steps:
       - checkout
@@ -30,12 +26,33 @@ jobs:
   deploy:
     docker:
       - image: 'circleci/python:2.7'
-    filter:
-      branches:
-        only: master
     steps:
       - attach_workspace:
           at: ~/project/user-guidance/docs/
       - aws-s3/sync:
           from: ~/project/user-guidance/docs
           to: "s3://user-guidance.analytical-platform.services.justice.gov.uk"
+
+workflows:
+  version: 2
+  build-only:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - master
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
