@@ -4,6 +4,22 @@
 
 If you are working with personal data you have a responsibility to ensure that you comply with the requirements of the General Data Protection Regulation (GDPR) and the Data Protection Act (DPA) 2018.
 
+### What is personal data?
+
+Personal data includes information relating to a living individual who can be:
+
+*   directly identified from the information
+*   indirectly identified from the information in combination with other information
+
+Personal data could include information such as:
+
+*   names
+*   personal identifiers
+*   dates of birth
+*   addresses
+
+You can find detailed guidance from the ICO on determining what constitutes personal data [here](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/what-is-personal-data/).
+
 ### Principles of the GDPR
 
 The GDPR has seven key principles:

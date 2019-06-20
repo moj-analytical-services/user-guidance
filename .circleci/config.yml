@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
   build:
     docker:
@@ -10,6 +12,7 @@ jobs:
       branches:
         only:
           - master
+    working_directory: ~/project
     steps:
       - checkout
       - run:
@@ -20,20 +23,19 @@ jobs:
           name: Replace .nojekyll
           command: |
             touch docs/.nojekyll
-      - run:
-          name: Deploy to GitHub
-          command: |
-            set -e
-            [ -z "${GITHUB_TOKEN}" ] && exit 0
-            git config --global user.name calumabarnett
-            git config --global user.email calum.barnett@digital.justice.gov.uk
-            git clone -b gh-pages \
-              https://${GITHUB_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git \
-              output
-            cd output
-            git rm -rf --ignore-unmatch *
-            cp -r ../docs/* ./
-            git add --all .
-            git commit -m "Circle CI: updated guidance"
-            [ "${CIRCLE_BRANCH}" != "master" ] && exit 0
-            git push -q origin gh-pages
+      - persist_to_workspace:
+          root: ~/project/user-guidance/docs/
+          paths:
+            - "*"
+  deploy:
+    docker:
+      - image: 'circleci/python:2.7'
+    filter:
+      branches:
+        only: master
+    steps:
+      - attach_workspace:
+          at: ~/project/user-guidance/docs/
+      - aws-s3/sync:
+          from: ~/project/user-guidance/docs
+          to: "s3://user-guidance.analytical-platform.services.justice.gov.uk"

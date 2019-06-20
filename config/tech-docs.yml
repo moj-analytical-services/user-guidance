@@ -2,17 +2,14 @@
 host: https://moj-analytical-services.github.io/user-guidance
 
 # Header-related options
-show_govuk_logo: true
+show_govuk_logo: false
 service_name: MoJ Analytical Platform
-service_link: https://cpanel-master.services.alpha.mojanalytics.xyz
-phase: Beta
+service_link: https://moj-analytical-services.github.io/user-guidance
+phase: 
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://www.larry-the-cat.service.gov.uk
-  Get Started: https://www.larry-the-cat.service.gov.uk/get-started
-  Documentation: /
-  Support: https://www.larry-the-cat.service.gov.uk/support
+  Control panel: https://cpanel-master.services.alpha.mojanalytics.xyz
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
