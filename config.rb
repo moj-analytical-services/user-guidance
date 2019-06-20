@@ -4,6 +4,6 @@ GovukTechDocs.configure(self)
 
 set :site_url, ""
 
-configure :build do
+=begin configure :build do
     set :http_prefix, '/user-guidance'
-end
+end =end
