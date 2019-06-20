@@ -20,7 +20,7 @@ jobs:
           command: |
             touch docs/.nojekyll
       - persist_to_workspace:
-          root: ~/project/user-guidance/docs/
+          root: ~/project/docs/
           paths:
             - "*"
   deploy:
@@ -28,9 +28,9 @@ jobs:
       - image: 'circleci/python:2.7'
     steps:
       - attach_workspace:
-          at: ~/project/user-guidance/docs/
+          at: ~/project/docs/
       - aws-s3/sync:
-          from: ~/project/user-guidance/docs
+          from: ~/project/docs
           to: "s3://user-guidance.analytical-platform.services.justice.gov.uk"
 
 workflows:
