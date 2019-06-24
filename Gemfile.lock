@@ -1,7 +1,5 @@
-GIT
-  remote: https://github.com/lhokktyn/tech-docs-gem
-  revision: 4fabee6e56455a13e0f487533a3f481c1839ec88
-  branch: fix-multipage-nav-toc
+PATH
+  remote: ../tech-docs-gem
   specs:
     govuk_tech_docs (1.8.2)
       activesupport
