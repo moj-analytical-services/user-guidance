@@ -1,7 +1,9 @@
-PATH
-  remote: ../tech-docs-gem
+GIT
+  remote: https://github.com/moj-analytical-services/tech-docs-gem
+  revision: b5ec12f27095e223cafd648962baee5f443c3731
+  branch: sticky-footer
   specs:
-    govuk_tech_docs (1.8.2)
+    govuk_tech_docs (1.8.1)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
@@ -52,7 +54,7 @@ GEM
       sass (>= 3.2, < 3.5)
     concurrent-ruby (1.1.5)
     contracts (0.13.0)
-    dotenv (2.7.2)
+    dotenv (2.7.4)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)

@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: quay.io/mojanalytics/user-guidance:latest
+      - image: quay.io/mojanalytics/user-guidance:1.0
         auth:
           username: $QUAY_USERNAME
           password: $QUAY_PASSWORD
