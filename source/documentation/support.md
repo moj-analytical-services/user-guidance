@@ -1,4 +1,4 @@
-# How to get support
+# How to get Support
 
 ## Summary
 
@@ -25,6 +25,7 @@ For every problem though there are a few quick steps you can try that will make 
 ### Platform Support
 
 The MoJ Digitech team is responsible for supporting problems with the underlying analytical platform. If there is a issue relating to the running of the platform or surrounding infrastructure then they can provide support. Examples of this include:
+
 
 * Bugs or unexpected issues
     + Platform crashing or inaccessible
@@ -78,9 +79,11 @@ Details on how to produce a good reproducible example can be found here:
 https://stackoverflow.com/help/mcve
 https://github.com/tidyverse/reprex
 
+
 ## Raising Issues
 
 Rather than posting questions on Slack you could also visit the analytical platform [Github page](https://github.com/ministryofjustice/analytics-platform/issues) and raise a formal issue ticket. This will then flag your issue directly to the MoJ Digitech team who will respond through the issue log on Github. There is a fixed format for raising issues which should be followed to ensure the team can help:
 https://github.com/ministryofjustice/analytics-platform/blob/master/.github/ISSUE_TEMPLATE.md
+
 
 This approach of raising issues also applies to any package, model or project that has a Github page. These issue logs are the most common method for highlighting problems in open source project, many R packages for example have a Github page where you can raise issues with the developer or search to see whether your problem has already been raised.

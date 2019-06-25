@@ -1,16 +1,30 @@
 # Introduction
 
+## What is the Analytical Platform?
+
+__The Analytical Platform is a cloud–based system that provides a range of services, tools and resources to analysts across MoJ.__
+
+The Analytical Platform:
+
+*   provides access to the latest versions of open–source analytical software, such as RStudio and JupyterLab, allowing analysts to work in the way that suits them best
+*   allows analysts to freely install packages from CRAN and PyPI, enabling them to utilise advanced analytical tools and techniques, including text mining, predictive analytics and data visualisation
+*   uses Amazon S3 and Athena to provide a single location for all of our data, including a growing set of curated data, and GitHub to provide a single location for all of our code -- this enables analysts to collaborate more effectively, share knowledge and produce high–quality reproducible analysis
+*   allows analysts to build and deploy interactive apps and web pages that can be used to communicate analysis and insight to decision–makers
+*   gives analysts the tools to develop reproducible analytical pipelines (RAPs) to automate time–consuming and repetitive tasks, allowing them to focus on interpreting the results
+*   is built in a cloud–based ecosystem that is easy to access remotely from all MoJ IT systems and provides analysts with access to powerful computational resources that can be scaled to meet demand -- this allows analysts to quickly and easily work with big data and perform complex analytical tasks
+*   is secure, resilient and has high availability -- this means analysts can depend on it to store their work and data, and to complete time–sensitive and business–critical projects
+
 ## Get started
 
 To get started on the Analytical Platform, you should complete the following steps:
 
-1.  Read our acceptable use policy and coding standards.
-2.  Sign up for a GitHub account.
-3.  Verify your email address for GitHub.
-4.  Configure two-factor authentication for GitHub.
-5.  Request an account from the Analytical Platform team.
-6.  Accept your invitation to the MoJ Analytical Services GitHub organisation.
-7.  Configure two-factor authentication for the Analytical Platform.
+1.  [Read our acceptable use policy and coding standards](#read-our-acceptable-use-policy-and-coding-standards).
+2.  [Sign up for a GitHub account](#sign-up-for-a-github-account).
+3.  [Verify your email address for GitHub](#verify-your-email-address-for-github).
+4.  [Configure two-factor authentication for GitHub](#configure-two-factor-authentication-for-github).
+5.  [Request an account from the Analytical Platform team](#request-an-account-from-the-analytical-platform-team).
+6.  [Accept your invitation to the MoJ Analytical Services GitHub organisation](#accept-your-invitation-to-the-moj-analytical-services-github-organisation).
+7.  [Configure two-factor authentication for the Analytical Platform](#configure-two-factor-authentication-for-the-analytical-platform).
 
 ### Read our acceptable use policy and coding standards
 

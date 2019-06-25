@@ -12,7 +12,7 @@ For the format of deploy.json, see the relevant subject:
 * [Web app](https://moj-analytical-services.github.io/platform_user_guidance/deploying-a-static-web-app.html#deploy.json-1)
 * [Airflow pipeline](https://moj-analytical-services.github.io/platform_user_guidance/data-pipelines.html#deploy.json)
 
-Changes to deploy.json only take effect when committed to GitHub (master branch), a Release is created and the deploy is successful (see [Scan organisation and deploy][Scan organisation and deploy]).
+Changes to deploy.json only take effect when committed to GitHub (master branch), a Release is created and the deploy is successful (see [Scan organisation and deploy](/static-app.html#scan-organisation-and-deploy)).
 
 ## Starting a build/deploy
 
