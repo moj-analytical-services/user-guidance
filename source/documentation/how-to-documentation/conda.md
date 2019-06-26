@@ -1,147 +1,265 @@
 # Manage dependencies using Conda
 
-## Unified package management for both R and Python
+## What is Conda?
 
-### Faster builds
+Conda is a package, dependency and environment management system developed and maintained by Anaconda. It can be used to quickly install and update packages and their dependencies. It can also be used to create, export and load environments that can be easily shared with others.
 
-CRAN[^what_is_cran] mirrors do not provide linux[^linux_note] compiled binaries
-for packages. This means a long wait when doing `install.packages` both in an R
-Studio session and when running a Docker build for a `shiny` application.
+## What are the advantages of using Conda?
 
-### Cross Language
+Conda has several advantages:
 
-Both `dbtools` and `s3tools` rely on Python packages through the `reticulate` R
-to Python bridge. `packrat` only handles R dependencies, this means that
-`packrat` is not enough to reproducibly and reliably manage all of your
-application's dependencies.
+* packages are pre-compiled for Linux – this means that R packages can be installed faster in RStudio or when deploying an RShiny app
+* it can manage packages and dependencies across multiple languages at once – for example, it can be used to manage packages in projects that use both R and Python
+* it can be used to install and manage system libraries and their dependencies
 
-`conda` supports managing both Python and R dependencies in a single
-`environment`. It can make sure all of these libraries are compatible with each
-other.
+## How do I access Conda?
 
-## Installing Packages
+Conda is installed for all users running R 3.5.1 or higher.
 
-If you need to find a package name you can use the [anaconda search] to find the
-name. Run `conda install PACKAGENAME` in the `Terminal` tab to install it. For
-more advanced usage have a look at the [conda cheat sheet].
+You will be running this version or higher if you have deployed or redeployed RStudio since 7 March 2019.
 
-### R
-
-Most CRAN (around 95%) are available through `conda`, they have the same name as
-the CRAN package name with an additional `r-` prefix. This is to avoid clashes
-with Python packages with the same name.
-
-#### Examples:
-
-##### Install a package
-
-| `install.packages` (in R-Console) | `conda install` (in Terminal) |
-| --------------------------------- | ----------------------------- |
-| `install.packages('Rcpp')`        | `conda install r-Rcpp`        |
-
-![](images/conda/conda_install_rcpp.gif)
-
-##### Install a specific version of a package
-
-| `install.packages`                                                                                              | conda install                   |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| `require(devtools)`<br> `install_version("ggplot2", version = "2.2.1", repos = "http://cran.us.r-project.org")` | `conda install r-ggplot2=2.2.1` |
-
-![](images/conda/conda_install_specific_version.gif)
-
-### Python
-
-Python packages do not require a prefix and can simply be installed using their
-name.
-
-#### Examples
-
-##### Install a package
-
-In the terminal run: `conda install numpy`
-
-which you can now access in your R session
+You can check your version of R by running the following code in the RStudio console:
 
 ```r
-library(reticulate)
-np <- import("numpy")
-np$arange(15)
+`R.Version()$version.string`
 ```
 
-![](images/conda/np_from_conda.gif)
+If you are running a lower version of R and would like to be upgraded, contact the Analytical Platform team.
 
-### Operating System Packages
+## Environments
 
-Even if you want to continue using `packrat` to manage your R packages you can
-use conda to resolve operating system dependencies like libxml2.
+> A Conda environment is a directory that contains a specific collection of Conda packages that you have installed. For example, you may have one environment with NumPy 1.7 and its dependencies, and another environment with NumPy 1.6 for legacy testing. If you change one environment, your other environments are not affected.
+>
+> Source: [conda.io](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html)
 
-#### Examples
+### RStudio
 
-##### Installing a package that relies on OS dependency
+Because the Analytical Platform uses an open-source version of RStudio, only one Conda environment is available. This means you must be careful when switching between projects.
 
-Suppose you want to install the R package `bigIntegerAlgos` but it fails because
-it depends on a system level library called `gmp`. Switch to the terminal and
-use `conda` to install it. Then switch back to the R console and try to use
-`install.packages` again.
+#### Reset an environment
 
-![](images/conda/conda_install_with_os_dep_v2.gif)
+You should reset your environment whenever you start a new project or switch to a new project in RStudio. Before resetting your environment, you should make sure that you have [exported](#Export-an-environment) the environment for your current project.
 
-## Platform limitations
-
-Usually when using Conda, it makes sense to have one environment per project,
-but because we are using the Open Source version of R Studio, there is only a
-single Conda environment available.
-
-This means having to be careful to make sure packages don't pollute your
-environment from another project. The
-[following section](#environment-management) explains how to manage your
-environments.
-
-## Environment Management
-
-### Reset your _Environment_ to default
-
-Recommended before starting a new project. Will ensure that no unused
-dependencies are exported when you export an `environment.yml` for this project.
+To reset an environment, run the following code in a terminal:
 
 ```bash
-conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env update --prune -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
+conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && \\
+conda env update --prune -n rstudio -f /tmp/base.yml && \\
+rm /tmp/base.yml
 ```
 
-### Exporting your _Environment_
+#### Export an environment
 
-This is similar to making a `packrat.lock` file, it catalogues all of the
-dependencies installed in your environment so that another user can restore a
-working environment for your application. Check this `environment.yml` file into
-your git repository.
+Exporting an environment will generate a file called `environment.yml` in your project directory. This is similar to a `packrat.lock` file and contains information about all the packages installed in your current environment. You should push this file to GitHub so other users can reproduce your environment when working on a project.
+
+To export an environment, run the following code in a terminal:
 
 ```bash
 conda env export | grep -v "^prefix: " > environment.yml
 ```
 
-### Making your R Studio Environment match an `environment.yml`
+#### Load an environment
 
-When checking out a project that has an `environment.yml` do this to install any
-packages required by the project that you don't have in your working
-environment.
+To load an environment from an `environment.yml` file, run the following code in a terminal:
 
 ```bash
 conda env update -f environment.yml --prune
 ```
 
-[packrat]: https://rstudio.github.io/packrat/
-[anaconda search]: https://anaconda.org/search
-[conda cheat sheet]:
-  https://conda.io/projects/conda/en/latest/user-guide/cheatsheet.html
+This will match your environment to the `environment.yml` file.
 
-[^linux_note]:
+### JupyterLab
 
-  Linux (Debian) is the environment that applications in the Analytical Platform
-  run on.
+When working in JupyterLab, you can create multiple environments for different project that you can easily change between without having to export, reset and load environments each time.
 
-[^what_is_cran]:
+#### View a list of environments
 
-  The "Comprehensive R Archive Network" (CRAN) is a collection of sites which
-  carry identical material, consisting of the R distribution(s), the contributed
-  packages and binaries.
-  
+To view a list of environments, run the following code in a terminal:
+
+```bash
+conda env list
+```
+
+This will return a list similar to the following:
+
+```bash
+conda environments:
+rstudio               /home/jovyan/.conda/envs/rstudio
+base                  /opt/conda
+testenv           \*   /opt/conda/envs/testenv
+```
+
+Here, `*` indicates the environment that is currently activated.
+
+#### Create a new environment
+
+To create a new environment, run the following code in a terminal:
+
+```bash
+conda create -n ENVNAME
+```
+
+Here, you should replace `ENVNAME` with the name of the new environment you want to create.
+
+#### Change environment
+
+To change to a different environment, run the following code in a terminal:
+
+```bash
+conda activate ENVNAME
+```
+
+Here, you should replace `ENVNAME` with the name of the environment you want to change to.
+
+#### Remove an environment
+
+To remove an environment, run the following code in a terminal:
+
+```bash
+conda remove -n ENVNAME --all
+```
+
+Here, you should replace `ENVNAME` with the name of the environment you want to remove.
+
+You should not remove either the `base` or `rstudio` environments. You should be careful when removing any other environments, as they cannot be recovered.
+
+## Packages
+
+You can use Conda to install packages for a number of different languages, including R and Python, as well as system libraries. Many packages for R and Python, including almost all major packages, are available through Conda.
+
+Anaconda itself maintains thousands of packages for both [R](https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/) and [Python](https://docs.anaconda.com/anaconda/packages/py3.7_linux-64/). A large number of additional packages are also built and maintained by the community, for example, by [conda-forge](https://conda-forge.org/).
+
+Most R packages in Conda have names of the form `r-PACKAGENAME`, where `PACKAGENAME` is the name of the package on CRAN or MRAN. Although almost all R packages from CRAN or MRAN are available through, some may not be.
+
+You can search for available packages on [anaconda.com](https://anaconda.com) or by running the following code in a terminal:
+
+```bash
+conda search -f PACKAGENAME
+```
+
+Here, you should replace `PACKAGENAME` with the name of the package you want to search for.
+
+### Install a package with default options
+
+#### Conda
+
+To install a package using Conda, run the following code in a terminal:
+
+```bash
+conda install PACKAGENAME
+```
+
+Here, you should replace `PACKAGENAME` with the name of the package you want to install.
+
+#### R
+
+If an R package you want to install is not available through Conda, you can install it by running the following code in R:
+
+```r
+install.packages('PACKAGENAME')
+```
+
+Here, you should replace `PACKAGENAME` with the name of the package you want to install.
+
+#### pip
+
+If a Python package you want to install is not available through Conda, you can install it using pip.
+
+To use pip within a Conda environment, you must first install it by running the following code in a terminal:
+
+```bash
+conda install pip
+```
+
+You can then install packages within the Conda environment by running the following code in a terminal:
+
+```bash
+pip install PACKAGENAME
+```
+
+Here, you should replace `PACKAGENAME` is the name of the package you want to install.
+
+### Install a specific version of a package
+
+#### Conda
+
+To install a specific version of a package using Conda, run the following code in a terminal:
+
+```bash
+conda install PACKAGENAME=X.Y.Z
+```
+
+Here, you should replace `PACKAGENAME` with the name of the package you want to install and `X.Y.Z` with the version of the package you want to install.
+
+#### R
+
+If a specific version of an R package you want to install is not available through Conda, you can install by running the following code in R:
+
+```r
+remotes::install_version('PACKAGENAME', version = 'X.Y.Z')
+```
+
+Here, you should replace `PACKAGENAME` with the name of the package you want to install and `X.Y.Z` with the version of the package you want to install.
+
+#### pip
+
+If a specific version of a Python package you want to install is not available through Conda, you can install it using pip.
+
+To use pip within a Conda environment, you must first install it by running the following code in a terminal:
+
+```bash
+conda install pip
+```
+
+You can then install specific versions of packages within the Conda environment by running the following code in a terminal:
+
+```bash
+pip install PACKAGENAME==X.Y.Z
+```
+
+Here, you should replace `PACKAGENAME` with the name of the package you want to install and `X.Y.Z` with the version of the package you want to install.
+
+### View installed packages
+
+To view all packages installed in your current environment, run the following code in a terminal:
+
+```bash
+conda list
+```
+
+### Examples
+
+### Install a Python package and access it in R
+
+In this example, we will demonstrate how to install the Python package `numpy`.
+
+To install `numpy` using Conda, run the following code in a terminal:
+
+```bash
+conda install numpy
+```
+
+This package can now be accessed within R. For example:
+
+```r
+library(reticulate)
+np <- reticulate::import('numpy')
+np$arange(10)
+```
+
+### Install a system library required by an R package
+
+Suppose you want to install the R package `bigIntegerAlgos` using `install.packages` but it fails because
+it depends on a system library called `gmp`, which is not installed.
+
+To install this system library, run the following code in a terminal:
+
+```bash
+conda install gmp
+```
+
+You would now be able to install the R package using `install.packages`.
+
+## Further information
+
+The Conda [website](https://conda.io/en/latest/) provides comprehensive documentation on Conda. The Conda [cheat sheet](https://conda.io/projects/conda/en/latest/_downloads/1f5ecf5a87b1c1a8aaf5a7ab8a7a0ff7/conda-cheatsheet.pdf) also provides a useful quick reference.
