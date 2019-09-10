@@ -101,17 +101,19 @@ You can find more detailed information and guidance on the scope, meaning and ap
 
 ### Data protection impact assessments
 
->   A Data Protection Impact Assessment (DPIA) is a process to help you identify and minimise the data protection risks of a project.
+> A Data Protection Impact Assessment (DPIA) is a process to help you identify and minimise the data protection risks of a project.
 >
->   Source: [ICO](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/data-protection-impact-assessments/)
+> Source: [ICO](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/data-protection-impact-assessments/)
+
+When starting any project that involves the processing of personal data, you should complete a [DPIA screening document](https://intranet.justice.gov.uk/documents/2018/05/data-protection-impact-assessments-screening-template.doc) and submit this to the MoJ data compliance team ([data.compliance@justice.gov.uk](mailto:data.compliance@justice.gov.uk)). The MoJ data compliance team will provide feedback on the document and let you know if you need to complete a full DPIA within three working days.
 
 You may have to complete and submit a DPIA differently depending on which organisation owns the data:
 
-*   [MoJ HQ]()
-*   [OPG]()
-*   [HMPPS]()
-*   [HMCTS]()
-*   [LAA]()
+* [MoJ HQ]()
+* [OPG]()
+* [HMPPS]()
+* [HMCTS]()
+* [LAA]()
 
 ### Privacy notices
 
@@ -171,7 +173,7 @@ You may not be required to complete all of the questions below depending on the 
 * __Name of the main person carrying out the data movement__
 * __Email address of the main person carrying out the data movement__
 * __Phone number of the main person carrying out the data movement__
-    
+
 #### The data
 
 *   __What data is being moved?__

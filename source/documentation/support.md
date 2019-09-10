@@ -1,4 +1,41 @@
-# How to get support
+# Support
+
+* Slack (Analytical Platform team, other channels)
+* Stack Overflow
+* GitHub (including GitHub issues)
+* Incident response
+
+## Analytical Platform team 
+
+The Analytical Platform team is responsible for providing support for issues relating to:
+
+
+* Unavailability of tools and services, such as RStudio
+* Administration
+  * Accounts
+  * Data sources
+  * Apps
+* Authorisation
+
+You can contact the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/messages/C4PF7QAJZ/) Slack channel or by email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
+
+You can also submit issues on [GitHub](https://github.com/ministryofjustice/analytics-platform/issues).
+
+## Data engineering team
+
+The data engineering team is responsible for providing support for issues relating to:
+
+* curated databases, such as CREST and NOMIS
+* Airflow
+
+## Create a minimal reproducible example
+
+When seeking support, it is useful to provide an example that others can use to understand and reproduce the issue you are having. Stack Overflow provide useful [guidance](https://stackoverflow.com/help/minimal-reproducible-example) on how to create a minimal reproducible example.
+
+In general, you should ensure that examples:
+
+* use as little code as possible
+* 
 
 ## Summary
 
