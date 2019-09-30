@@ -1,18 +1,21 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: https://moj-analytical-services.github.io/user-guidance
+host: https://user-guidance.services.alpha.mojanalytics.xyz
 
 # Header-related options
 show_govuk_logo: false
 service_name: MoJ Analytical Platform
-service_link: https://moj-analytical-services.github.io/user-guidance
+service_link: https://user-guidance.services.alpha.mojanalytics.xyz
 phase: 
 
 # Links to show on right-hand-side of header
 header_links:
-  Control panel: https://cpanel-master.services.alpha.mojanalytics.xyz
+  Control panel: https://controlpanel.services.alpha.mojanalytics.xyz
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
+
+# Enable banner change for pages that are overdue review
+show_expiry: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id:

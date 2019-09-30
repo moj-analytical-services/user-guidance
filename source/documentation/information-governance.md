@@ -117,21 +117,7 @@ You may have to complete and submit a DPIA differently depending on which organi
 
 ### Privacy notices
 
-## Data management
-
-### Permissions and access
-
-Access to data and apps on the Analytical Platform should be provided on a need-to-know basis.
-
-If you are an admin for data source, you can control which users have access from the Analytical Platform control panel.
-
-Some app access permissions can be specified in `deploy.json` (see Section \@ref(grant-app-access)), however, users cannot manage an app's user access list themselves.
-
-DOM1 and MacBook users can request access to a data source (for themselves, other users or customers) on the [#ap-admin-request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel. Quantum users should email the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk).
-
-If requesting access to a data source, you should provide the GitHub usernames of the relevant users. If requesting access to an app, you should provide the email addresses of the relevant users.
-
-#### Best practice guidelines
+### Best practice guidelines
 
 All users should comply with the following best practice guidelines for retaining personal data.
 
@@ -148,7 +134,11 @@ The relevant information asset owner (IAO) should be able to advise if any addit
 
 ## Data movements
 
-All data movements should take place safely and securely to ensure that data is protected at all times, including when in transit. To facilitate this, when moving any data onto the Analytical Platform, you must complete a data movement form. The data movement form can be found <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUQVY2VUczTUNPUzlZQTJTNjFWVUowWUxUMS4u" target="_blank">here</a>.
+All data movements should take place safely and securely to ensure that data is protected at all times, including when in transit. To facilitate this, when moving any data onto the Analytical Platform, you must complete a data movement form. 
+
+<a class="govuk-button" role="button" draggable="false" href="https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUQVY2VUczTUNPUzlZQTJTNjFWVUowWUxUMS4u" data-module="govuk-button">
+  Complete a data movement form
+</a>
 
 Depending on the details of the data movement, you may also be required to complete or update:
 

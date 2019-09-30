@@ -10,6 +10,12 @@
 # Ignore the build directory
 /docs
 
+# Ignore VS Code config
+.vscode/
+
+# Ignore markdownlint config
+.markdownlint.json
+
 # Ignore cache
 /.sass-cache
 /.cache

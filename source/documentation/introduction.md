@@ -10,7 +10,6 @@ To get started on the Analytical Platform, you should complete the following ste
 4.  Configure two-factor authentication for GitHub.
 5.  Request an account from the Analytical Platform team.
 6.  Accept your invitation to the MoJ Analytical Services GitHub organisation.
-7.  Configure two-factor authentication for the Analytical Platform.
 
 ### Read our acceptable use policy and coding standards
 
@@ -40,7 +39,7 @@ If you do not verify your email address at this stage, you can do it later by fo
 
 To get access to the Analytical Platform, you must first configure two-factor authentication (2FA) for GitHub using a mobile app (on your personal or work phone) or via text message. To configure 2FA for GitHub, follow the instructions [here](https://help.github.com/en/articles/configuring-two-factor-authentication).
 
-We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use [__Authy__](https://authy.com/) for the following reasons:
+We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use [Authy](https://authy.com/) for the following reasons:
 
 1.  You can sync 2FA tokens across multiple devices, including mobiles, tablets and computers.
 2.  You can create encrypted recovery backups in case you lose your device.
@@ -49,7 +48,7 @@ We recommend that you configure 2FA using a mobile app. In particular, we recomm
 
 ### Request an account from the Analytical Platform team
 
-To request an account for the Analytical Platform, you should send an email with your GitHub username to the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk). The team will then invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
+To request an account for the Analytical Platform, you should send an email with your GitHub username to [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk). The team will then invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
 
 ### Accept your invitation to the MoJ Analytical Services GitHub organisation
 
@@ -57,17 +56,13 @@ When you are invited to join the MoJ Analytical Services GitHub organisation, yo
 
 You can also accept your invitation by signing in to GitHub and visiting the [organisation page](https://github.com/moj-analytical-services).
 
-### Configure two-factor authentication for the Analytical Platform
-
-When you sign in to the Analytical Platform for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
-
-To sign in, go to the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
-
-You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described in Section \@ref(configure-two-factor-authentication-for-github), we recommend that you use __Authy__.
-
 ## Access the Analytical Platform
 
-The main entry point to the Analytical Platform is the [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
+The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
+
+When you sign in to the Analytical Platform for the first time, you may be prompted to configure additional 2FA for the Analytical Platform itself, depending on the network you are using.
+
+If you are prompted to configure 2FA for the Analytical Platform, you must complete this using a mobile app (on your personal or work phone). As described [here](#configure-two-factor-authentication-for-github), we recommend that you use Authy.
 
 You may also need to access other services and tools on the Analytical Platform:
 
@@ -85,7 +80,7 @@ Before using RStudio, JupyterLab and Airflow, you must first deploy them.
 
 To deploy RStudio, JupyterLab and Airflow on the Analytical Platform, you should complete the following steps:
 
-1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
 3.  Select the __Deploy__ buttons next to RStudio, JupyterLab and Airflow.
 
@@ -95,7 +90,7 @@ It may take a few minutes for the tools to deploy.
 
 To open RStudio, JupyterLab or Airflow:
 
-1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
 3.  Select the __Open__ button to the right of the tool's name.
 
@@ -105,7 +100,7 @@ If your RStudio, JupyterLab or Airflow is not working as expected, it may help t
 
 To restart RStudio, JupyterLab or Airflow:
 
-1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
 3.  Select the __Restart__ button to the right of the tool's name.
 
@@ -115,17 +110,17 @@ If your RStudio, JupyterLab or Airflow instance is inactive for an extended peri
 
 1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
-3.  Select the __Unidle__ button to the right of the tool's name. 
+3.  Select the __Open__ button to the right of the tool's name. 
 
 Unidling usually only takes a few seconds, however, it can take up to several minutes.
 
 ## Configure Git and GitHub
 
-To configure Git and GitHub for the Analytical Platform, you must complete the following steps:
+To configure Git and GitHub for the Analytical Platform, you must:
 
-1.  [Create an SSH key](#create-an-ssh-key).
-2.  [Add the SSH key to GitHub](#add-the-ssh-key-to-github).
-3.  [Configure your username and email in Git on the Analytical Platform](#configure-your-username-and-email-in-git-on-the-analytical-platform).
+1.  Create an SSH key.
+2.  Add the SSH key to GitHub.
+3.  Configure your username and email in Git on the Analytical Platform.
 
 ### Create an SSH key
 
@@ -133,7 +128,7 @@ You can create an SSH key in RStudio or JupyterLab. We recommend that you use RS
 
 #### RStudio
 
-To create an SSH key in RStudio, follow the steps below:
+To create an SSH key in RStudio:
 
 1.  Open RStudio from the Analytical Platform control panel.
 2.  In the menu bar, select __Tools__ then __Global Options...__
@@ -146,23 +141,23 @@ To create an SSH key in RStudio, follow the steps below:
 
 #### JupyterLab
 
-To create an SSH key in JupyterLab, follow the steps below:
+To create an SSH key in JupyterLab:
 
 1.  Open JupyerLab from the Analytical Platform control panel.
 2.  Select the __+__ icon in the file browser to open a new Launcher tab.
 3.  Select __Terminal__ from the 'Other' section.
-4.  Create an SSH key by running:
+4.  Create an SSH key by running:  
     ```
     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-    ```
+    ```  
      Here, you should substitute the email address you used to sign up to GitHub.
 5.  When prompted to enter a file in which to save the key, press Enter to accept the default location.
 6.  When prompted to enter a passphrase, press Enter to not set a passphrase.
-6.  View the SSH key by running:  
+7.  View the SSH key by running:  
     ```
     cat /home/jovyan/.ssh/id_rsa.pub
-    ```
-7.  Select the SSH key and copy it to the clipboard by pressing Ctrl+C on windows or ⌘C on Mac.
+    ```  
+8.  Select the SSH key and copy it to the clipboard by pressing Ctrl+C on windows or ⌘C on Mac.
 
 ### Add the SSH key to GitHub
 
@@ -170,27 +165,25 @@ To add the SSH key to GitHub, you should follow the guidance [here](https://help
 
 ### Configure you username and email in Git on the Analytical Platform
 
-To configure your username and email in Git on the Analytical Platform using RStudio or JupyterLab, follow the steps below:
+To configure your username and email in Git on the Analytical Platform using RStudio or JupyterLab:
 
 1.  Open a new terminal:
     +   In RStudio, select __Tools__ in the menu bar and then __Shell...__
     +   In JupyterLap, select the __+__ icon in the file browser and then select __Terminal__ from the __Other__ section in the new Launcher tab.
-2.  Configure your username by running:
+2.  Configure your username by running:  
     ```
     git config --global user.name 'Your Name'
-    ```
+    ```  
     Here, you should substitute your GitHub username.
-3.  Configure your email address by runnung:
+3.  Configure your email address by runnung:  
     ```
     git config --global user.email 'your_email@example.com'
-    ```
+    ```  
     Here, you should substitute the email address you used to sign up to GitHub.
-
-Further guidance on using Git and GitHub with the Analytical Platform can be found in Section \@ref(github).
 
 ## Contact us
 
-To get support, you can contact the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/messages/C1PTUTC3F/) Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk). You can get more information on Slack in Section \@ref(slack).
+To get support, you can contact the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/messages/C1PTUTC3F/) Slack channel or at [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
 
 For more information on support, including incident response, please see our [key support information](https://github.com/ministryofjustice/analytics-platform-ops/wiki/Key-support-information). 
 
@@ -198,12 +191,12 @@ For more information on support, including incident response, please see our [ke
 
 ### What is Slack?
 
-Slack is a collaboration tool that helps teams work more effectively together. You can use Slack in several ways:
+Slack is a collaboration tool that helps teams work more effectively together. You can use Slack to:
 
-*   to get technical support for the Analytical Platform and analytical tools, such as R, Python and Git
-*   to submit admin requests relating to apps and data sources on the Analytical Platform
-*   to share knowledge, expertise and best practice
-*   to communicate quickly with other Analytical Platform users as an alternative to email
+*   get technical support for the Analytical Platform and analytical tools, such as R, Python and Git
+*   submit admin requests relating to apps and data sources on the Analytical Platform
+*   share knowledge, expertise and best practice
+*   tcommunicate quickly with other Analytical Platform users as an alternative to email
 
 ### Access Slack
 
