@@ -1,4 +1,4 @@
-# Manage dependencies using Conda
+# Conda
 
 ## What is Conda?
 

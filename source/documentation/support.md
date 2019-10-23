@@ -1,34 +1,50 @@
 # Support
 
-* Slack (Analytical Platform team, other channels)
-* Stack Overflow
-* GitHub (including GitHub issues)
-* Incident response
+## Technical support
 
-## Analytical Platform team 
+### Analytical Platform team 
 
 The Analytical Platform team is responsible for providing support for issues relating to:
 
+* the availability of tools and services, such as RStudio and JupyterLab
+* the administration of user accounts, data sources and apps
+* the deployment of apps and Airflow pipelines
+* the control panel
+* information governance and data movements
 
-* Unavailability of tools and services, such as RStudio
-* Administration
-  * Accounts
-  * Data sources
-  * Apps
-* Authorisation
-
-You can contact the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/messages/C4PF7QAJZ/) Slack channel or by email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
+You can contact the Analytical Platform team on the [#analytical_platform](https://app.slack.com/client/T1PU1AP6D/C4PF7QAJZ) or [#ap_admin_request]([https://](https://app.slack.com/client/T1PU1AP6D/CBLAGCQG6)) Slack channels or by email at [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
 
 You can also submit issues on [GitHub](https://github.com/ministryofjustice/analytics-platform/issues).
 
-## Data engineering team
+### Data Engineering team
 
-The data engineering team is responsible for providing support for issues relating to:
+The Data Engineering team is responsible for providing support for issues relating to:
 
 * curated databases, such as CREST and NOMIS
-* Airflow
+* the configuration of Airflow tasks
 
-## Create a minimal reproducible example
+You can contact the Data Engineering team on the [#data_engineers](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel or by email at [data_engineering@digital.justice.gov.uk](mailto:data_engineering@digital.justice.gov.uk).
+
+## Coding support
+
+Users are responsible themselves for the code they write on the Analytical Platform. The Analytical Platform and Data Engineering teams do not provide support for coding issues.
+
+### Slack
+
+You can get coding support from other Analytical Platform users on the following [Slack](https://asdslack.slack.com) channels:
+
+* [#git](https://app.slack.com/client/T1PU1AP6D/C4VF9PRLK)
+* [#intro_r](https://app.slack.com/client/T1PU1AP6D/CGKSJV9HN)
+* [#python](https://app.slack.com/client/T1PU1AP6D/C1Q09V86S)
+* [#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719)
+
+### Stack Overflow
+
+### Training
+
+## General principles
+
+### Minimal reproducible examples
 
 When seeking support, it is useful to provide an example that others can use to understand and reproduce the issue you are having. Stack Overflow provide useful [guidance](https://stackoverflow.com/help/minimal-reproducible-example) on how to create a minimal reproducible example.
 
@@ -36,14 +52,6 @@ In general, you should ensure that examples:
 
 * use as little code as possible
 * 
-
-## Summary
-
-- The Analytical Platform team in MOJ Digital & Technology is responsible for providing access to software like R Studio and Jupyter.
-- Analysts themselves are responsible for the code they write in these tools, and the Platform team is not responsible for assisting with problems with this code.  As a rule of thumb, if the problem you're experiencing would also occur with R Studio or Python installed on a standalone computer, then the platform team don't offer support.
-- If you've read through the user guidance and are still stuck, the best place to go for support is the [analytical-platform](https://asdslack.slack.com/messages/C4PF7QAJZ/#) Slack channel for issues with the platform, or [the R channel](https://asdslack.slack.com/messages/C1PUCG719/#) and [python channel](https://asdslack.slack.com/messages/C1Q09V86S/#) to get support from peers in your code.
-
-What follows provides further details about how to ask for support, and what you can do to get your issues resolved as quickly as possible.
 
 ## Intro
 
@@ -61,15 +69,7 @@ For every problem though there are a few quick steps you can try that will make 
 
 ### Platform Support
 
-The MoJ Digitech team is responsible for supporting problems with the underlying analytical platform. If there is a issue relating to the running of the platform or surrounding infrastructure then they can provide support. Examples of this include:
 
-* Bugs or unexpected issues
-    + Platform crashing or inaccessible
-    + Deployment of Shiny apps not working
-
-* Administration of accounts
-    + Reset authorisation
-    + Access priviledges not working as expected
 
 This **does not** include any problems which occur as a result of the limitations or incorrect use of software by users on the platform. If issues occur whilst running code or using version control please see the sections below. Remember the first port of call for using the platform should always be this user document.
 
@@ -83,9 +83,6 @@ We direct users to Slack for support because that means that users can quickly s
 
 There is no team who is responsible for offering support, but we have an active community of colleagues who offer support voluntarily.  Users are responsible for the code they create and are expected to debug and solve problems themselves.
 
-If you need support, there are a multitude of resources:
-
-* This platform user guidance document contains a number of different sections explaining how the platform interfaces with R and common issues that may occur.
 
 * There is an R [slack channel](https://asdslack.slack.com/) which is visited frequently by R users from across ASD, please use this forum to ask questions or post examples of code, putting your problem out in the open is also a great way to help others who may be experiencing the same thing.
 

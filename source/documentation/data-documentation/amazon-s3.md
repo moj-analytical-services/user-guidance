@@ -1,4 +1,4 @@
-# Work with Amazon S3
+# Amazon S3
 
 ## What is Amazon S3?
 
@@ -25,21 +25,32 @@ Standard users can currently only create new warehouse data sources in the Analy
 
 To create a new warehouse data source:
 
-1.  Go to the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Warehouse data__ tab.
 3.  Select __Create a new warehouse data source__.
 4.  Enter a name for the warehouse data source -- this must be prefixed with '-alpha'.
 5.  Select __Create__.
 
-When you create a new warehouse data source, only you will initially have access. As an admin of the data source, you will be able to add and remove other users from the data access group as required. Further information on managing data access groups can be found in Section \@ref(manage-access-to-a-bucket).
+When you create a new warehouse data source, only you will initially have access. As an admin of the data source, you will be able to add and remove other users from the data access group as required.
 
-### Access levels
+### Data access levels
 
-Every bucket has three access levels:
+Every bucket has three data access levels:
 
 *   Read only
 *   Read/write
 *   Admin -- this provides read/write access and allows the user to add and remove other users from the bucket's data access group
+
+### Path-specific access
+
+As well as choosing an access level, you can also restrict a user's access to specific paths in a bucket by entering each path on a new line in the 'Paths' textarea field when adding the user to a data access group. For example:
+
+    /folder-one/*
+    /folder-two/*
+
+This would give the user access to only `/folder-one` and `/folder-two` in the bucket and nothing else.
+
+If you leave this field blank, the user will be able to access everything in the bucket.
 
 ### Request access to a bucket
 
@@ -47,31 +58,34 @@ To gain access to a bucket (warehouse data source or app data source), you must 
 
 If you know an admin of the bucket you require access to, you should ask them to add you to the data access group.
 
-If you do not know any of the admins of the bucket you require access to, you can ask the Analytical Platform team to add you to the data access group on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk).
+If you do not know any of the admins of the bucket you require access to, you can ask the Analytical Platform team to add you to the data access group on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/).
 
 When requesting access to a bucket, you should specify the name of the bucket and the level of access you require. You should only request access to data that you have a genuine business need to access and should only request the lowest level of access required for you to complete your work. You may be required to demonstrate the business need for you to access a bucket if requested by a bucket admin or an information asset owner (IAO).
 
 ### Manage access to a bucket
 
-Bucket admins can currently only manage access to warehouse data sources in the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz/). You cannot manage access to buckets directly in the Amazon S3 console.
+Bucket admins can currently only manage access to warehouse data sources in the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/). You cannot manage access to buckets directly in the Amazon S3 console.
 
-To manage access to a warehouse data source:
+To manage access to a data source:
 
-1.  Go to the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
-2.  Select the __Warehouse data__ tab.
-3.  Select the name of the warehouse data source you want to manage.
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
+2.  Select the __Warehouse data__ tab or the __Webapp data__ tab, as relevant.
+3.  Select the name of the data source you want to manage.
 
 To add a new user to the data access group:
 
 1.  Type the user's GitHub username into the input field labelled __Grant access to this data to other users__.
 2.  Select the user from the drop-down list.
-3.  Select __Grant access__.
+3.  Select the required data access level.
+4.  Either leave the 'Paths' field blank or enter a list of paths to provide restricted access.
+5.  Select __Grant access__.
 
 To edit the access level of a user:
 
 1.  Select __Edit access level__ next to the name of the user.
-2.  Select the checkbox next to the access level you wish to grant the user.
-3.  Select __Save__.
+2.  Select required data access level.
+3.  Either leave the 'Paths' field blank or enter a list of paths to provide restricted access.
+4.  Select __Save__.
 
 To remove a user from the data access group:
 

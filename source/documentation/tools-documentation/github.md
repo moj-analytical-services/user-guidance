@@ -1,4 +1,4 @@
-# Work with Git and GitHub
+# Git and GitHub
 
 ## Clone a repository
 

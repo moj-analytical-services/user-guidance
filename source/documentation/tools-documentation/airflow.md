@@ -1,4 +1,4 @@
-# Schedule tasks using Airflow
+# Airflow
 
 ## Summary
 
