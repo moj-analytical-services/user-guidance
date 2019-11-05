@@ -4,13 +4,20 @@ orbs:
 jobs:
   build:
     docker:
-      - image: quay.io/mojanalytics/user-guidance:1.0
-        auth:
-          username: $QUAY_USERNAME
-          password: $QUAY_PASSWORD
+      - image: ruby:2.6.3-alpine
     working_directory: ~/project
     steps:
+      - run:
+          name: Install system dependencies
+          command: |
+            apk update
+            apk add --no-cache build-base nodejs npm git openssh-client bash 
       - checkout
+      - run:
+          name: Install Ruby dependencies
+          command: |
+            gem install bundler:2.0.2
+            bundle install
       - run:
           name: Build the user guidance
           command: |

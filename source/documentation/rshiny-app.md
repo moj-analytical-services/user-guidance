@@ -6,7 +6,7 @@
 
 To create and deploy a Shiny app, you should complete the following steps:
 
-1.  Copy the app template.
+1.  Use the app template.
 2.  Create a new webapp.
 3.  Clone the repository.
 4.  Develop the app.
@@ -17,29 +17,31 @@ To create and deploy a Shiny app, you should complete the following steps:
 9.  Add users to the app.
 10. Access the app.
 
-### Copy the app template
+### Use the app template
 
-To copy the app template:
+To create a new repository based on the Shiny app template:
 
-1.  Go to [github.com/new/import](https://github.com/new/import).
-2.  Fill in the form:
-    +   Your old repository’s clone URL: `https://github.com/moj-analytical-services/rshiny-template`
-    +   Owner: `moj-analytical-services`
-    +   Name: The name of your app, e.g., `my-app`
-    +   Privacy: Private
-6.  Select __Begin import__.
+1. Go to the [rshiny-template](https://github.com/moj-analytical-services/rshiny-template) repository.
+2. Select __Use this template__.
+3. Fill in the form:
+    + Owner: `moj-analytical-services`
+    + Name: The name of your app, for example, `my-app`
+    + Privacy: Private
+4. Select __Create repository from template__.
 
 This copies the entire contents of the app template to a new repository.
 
-![](images/shiny/copy-template.png)
-
 ### Create a new webapp
 
-Standard users are not able to create new webapps or webapp data sources themselves.
+To create a new webapp or webapp data source, ask the Analytical Platform team on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
 
-To create a new webapp or webapp data source, ask the Analytical Platform team on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk), if you are a Quantum user.
+You should:
 
-You should provide the URL of the app's GitHub repository as well as any existing webapp data sources it should be connected to.
+* provide the URL of the app's GitHub repository
+* indicate if a new webapp data source needs to be created
+* indicate if any existing webapp data sources need to be connected
+
+The Analytical Platform team will create the webapp and will make you an admin user.
 
 ### Clone the repository
 
@@ -50,8 +52,8 @@ To clone the repository:
 3.  Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select __Use SSH__.
 4.  Copy the SSH URL. This should start with `git@`.
 5.  In RStudio, select __File__ > __New project...__ > __Version control__ > __Git__.
-7.  Paste the SSH URL in the __Repository URL__ field.
-8.  Select __Create Project__.
+6.  Paste the SSH URL in the __Repository URL__ field.
+7.  Select __Create Project__.
 
 ![](images/shiny/ssh-key.png)
 
@@ -87,11 +89,13 @@ The list is stored in a file called `packrat/packrat.lock`. You must ensure that
 
 You can set some access permissions for your app in the `deploy.json` file that is included with the app template. This file is used by Concourse to detect apps that are ready to build and deploy.
 
-The `allowed_ip_ranges` parameter controls where your app can be accessed from. It can take any combination of the following values `["DOM1", "QUANTUM", "102PF Wifi"]` or `["Any"]`.
+The `allowed_ip_ranges` parameter controls where your app can be accessed from. It can take any combination of `["DOM1", "QUANTUM", "102PF Wifi", "Digital Wifi and VPN"]` or `["Any"]`.
 
-The `disable_authentication` parameter controls whether sign-in (using a link or one-time passcode sent to an authorised email address) is required for users to access the app. It can take the values `true` or `false`. In general, this should be set to `false`.
+The `disable_authentication` parameter controls whether sign-in (using a link or one-time passcode sent to an authorised email address) is required for users to access the app when on an allowed network. It can take the values `true` or `false`. In general, this should be set to `false`.
 
 When `disable_authentication` is set to `true`, users do not need to go through a sign-in process but can still only access an app using a system specified in `allowed_ip_ranges`. This is a relatively weak security measure, as discussed [here](https://ministryofjustice.github.io/security-guidance/standards/authentication/#ip-addresses). As such, if you wish to disable authentication, you should first discuss this with the Analytical Platform team.
+
+Changes to `deploy.json` only take effect when they are committed to GitHub, a release is created and the deployment is successful.
 
 ### Create a release in GitHub
 
@@ -114,11 +118,26 @@ If your app does not deploy automatically, you should first check that the pipel
 
 If the app still does not deploy automatically, you can manually trigger a build by pressing the `+` icon in the top right corner of Concourse.
 
-For more information about using Concourse, see the [build and deploy](/build-deploy.html) chapter.
+For more information about using Concourse, see [here](/build-deploy.html).
 
-### Add users to the app
+### Manage app users
 
-If `disable_authentication` is set to `false` in the `deploy.json` file, access to the app will be controlled by email address. You can ask the Analytical Platform team to add or remove users to the access list on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk), if you are a Quantum user.
+If `disable_authentication` is set to `false` in the `deploy.json` file, access to the app will be controlled by email address.
+
+To manage the users of your app:
+
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
+2.  Select the __Webapps__ tab.
+3.  Select the name of the app you want to manage or select __Manage app__.
+
+To add app users:
+
+1.  Enter the email addresses of the users in the box titled 'Add app customers by entering their email addresses' -- multiple email addresses can be separated by spaces, tabs, commas and semicolons, and can contain capital letters.
+2.  Select __Add customer__.
+
+To remove an app user, select __Remove customer__ next to the email address of the customer you want to remove.
+
+You can ask the Analytical Platform team to add or remove users to the access list on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by email([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
 
 ### Access the app
 
@@ -145,6 +164,63 @@ A `Dockerfile` reference can be found [here](https://docs.docker.com/engine/refe
 A Shiny app can find out who is using it. This can be useful to log an audit trail of significant events. Specifically it can determine the email address that the user logged into the app with. (Obviously this is sensitive data and needs data protection concerns looking after - e.g. proportionate, transparent, consent, secure etc).
 
 See the example: https://github.com/moj-analytical-services/shiny-headers-demo
+
+Note: these features require you to be using the Analytical platform's version of `shiny-server`.
+
+#### Email address
+
+
+You can obtain the logged in user's email address by using the following code in the `server` function of your app:
+
+```r
+get("HTTP_USER_EMAIL", envir=session$request)
+```
+
+[This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L58)
+in `shiny-headers-demo` shows the code in context.
+
+#### Full user profile
+
+You can access the full user profile by making a request directly from the shiny
+app to the auth-proxy's `/userinfo` endpoint using the following code inside your `server` function.
+
+```r
+# these libraries are required
+# library(httr)
+# library(jsonlite)
+
+profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(cookie=get("HTTP_COOKIE", envir=session$request))), "text"))
+```
+
+[This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L61)
+shows the code in context.
+
+##### Example User Info Response
+```json
+{
+    "email": "name@example.gov.uk",
+    "email_verified": true,
+    "user_id": "email|12345121312",
+    "picture": "https://s.gravatar.com/avatar/94deebe3b87fc5e9b3b4469112573cc0?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fna.png",
+    "nickname": "name",
+    "identities": [
+        {
+            "user_id": "12345121312",
+            "provider": "email",
+            "connection": "email",
+            "isSocial": false
+        }
+    ],
+    "updated_at": "2019-07-15T09:54:34.353Z",
+    "created_at": "2018-07-12T14:26:45.663Z",
+    "name": "name@example.gov.uk",
+    "last_ip": "1.1.1.1",
+    "last_login": "2019-07-15T09:54:34.353Z",
+    "logins_count": 20,
+    "blocked_for": [],
+    "guardian_authenticators": []
+}
+```
 
 ## Troubleshooting
 
@@ -183,8 +259,8 @@ If you are having issues with `packrat.lock`, follow the steps below:
 3.  Enable packrat using `packrat::init()`.
 4.  Capture all package dependencies using `packrat::snapshot()`.
 5.  Uncomment all code in the project and install package dependencies one by one.
-5.  Rerun `packrat::snapshot()`.
-6.  Redeploy the app.
+6.  Rerun `packrat::snapshot()`.
+7.  Redeploy the app.
 
 ### Kibana
 
@@ -210,7 +286,7 @@ By default, Kibana only shows logs for the last 15 minutes. If no logs are avail
 
 To change the time range, select the clock icon in the menu bar. There are several presets or you can define a custom time range.
 
-Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches. To enable these features, select __Options__ from within the search bar, then toggle __Turn on query features__.
+Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches. To enable these features, select __Options___ from within the search bar, then toggle __Turn on query features__.
 
 ### Deploying locally
 

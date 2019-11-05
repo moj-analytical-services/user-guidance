@@ -1,32 +1,33 @@
-# Deploying a Static Web App
+# Deploying a static webapp
 
-The following steps to deploy a static HTML web site are as follows:
+There are two ways to deploy a static webapp.
 
-1. Copy the [template project](https://github.com/moj-analytical-services/webapp-template) within Github to a new repository, with a name of your choice.
-2. Work on your static website - the exposed content will be in the `www/` directory and `www/index.html` will be the landing page.
-3. When you're ready to share it, access the [services control panel](https://jenkins.services.alpha.mojanalytics.xyz/), find your app, and click 'Build now'. This will prepare your site for deployment.
-4. Set the desired access permissions in `deploy.json` (i.e. whether it should be available for DOM1, Quantum, or external).
-5. When you're ready to share it, in GitHub create a 'release' and it will deploy in a few minutes.
-6. Ask the Platform team to add and remove users from your app in the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel.
+## Choice of Static Web App Deployment
 
-Step-by-step instructions are below.
+### Option 1
 
-## Step-by-step guide to depolying an static web app
+This option uses [this template](https://github.com/moj-analytical-services/webapp-template) to deploy a full static webapp from GitHub. You may want to use this option if it is important to maintain version history for the full webapp. It also makes it easier for you and your collaborators to understand how the webapp works, make edits and review changes.
 
-### Copy the template project into a new Github repository
+### Option 2
 
-1. Begin by making a **copy** of the [template project](https://github.com/moj-analytical-services/webapp-template) on Github: https://github.com/new/import
-
-2. Enter `https://github.com/moj-analytical-services/webapp-template` in the input box entitled 'your old repository’s clone URL:'
-
-3. Ensure the 'owner' of the new repository is 'moj-analytical-services' and choose a name for your repository:
-
-4. Make sure the repo is 'private' (this should be the default value):
-
-5. Click 'Begin import'
+This option uses [this template](https://github.com/moj-analytical-services/s3-proxy-webapp-template) to deploy a static webapp from S3. You may want to use this option if you are less worried about versioning the content of your webapp and want to automatically update the frontend of your webapp based on data in S3 (for example, using an Airflow task to automatically generate HTML content).
 
 
-   ![](images/static/static_clone.gif)
+## Step-by-step guide to deploying a static webapp
+
+### Use the webapp template
+
+To create a new repository based on the webapp template:
+
+1. Go to the [webapp-template](https://github.com/moj-analytical-services/webapp-template) repository (option 1) or the [s3-proxy-webapp-template](https://github.com/moj-analytical-services/s3-proxy-webapp-template) repository (option 2).
+2. Select __Use this template__.
+3. Fill in the form:
+    + Owner: `moj-analytical-services`
+    + Name: The name of your app, for example, `my-app`
+    + Privacy: Private
+4. Select __Create repository from template__.
+
+This copies the entire contents of the app template to a new repository.
 
 ### In your chosen development enviroment, clone the git repository
 
@@ -47,29 +48,39 @@ If you navigate to your new repository's home page (which will have a url in the
 
 ### Work on your web app
 
-Work on your web app using your chosen development enviroment. As you work, commit your changes to Github using your chosen Github workflow.
+Work on your web app using your chosen development environment. As you work, commit your changes to GitHub using your chosen GitHub workflow.
+
+#### Option 1
+
+Add the webapp files (HTML, CSS, JavaScript, etc.) to the `www/` directory of your repository. This will be the root directory of the webapp.
+
+#### Option 2
+
+In your Dockerfile, set the line `ENV AWS_S3_BUCKET=alpha-app-your-app-bucket` to the name of your webapp's S3 bucket. Once your webapp is deployed you can set up your app to read data from the bucket you specified. The webapp will look for and host a `index.html` file that should be located in the root directory of your app's S3 bucket.
 
 ### Scan organisation and deploy
 
-Include a `deploy.json` file so that Concourse will automatically build and deploy your app, so that it is running and customers can access it. For more about this see: [Build and deploy guidance](https://moj-analytical-services.github.io/platform_user_guidance/build-and-deploy.html)
+Include a `deploy.json` file so that Concourse will automatically build and deploy your app, so that it is running and customers can access it. For more about this see [here](/build-deploy.html).
 
 ### Grant secure access to the app
 
-To grant access to someone, in the [Control Panel's Wepapps tag](https://cpanel-master.services.dev.mojanalytics.xyz/#Webapps) find your App and click "Manage App". In the 'App customers' section you can let people view your app by putting one or more email addresses in the text box and clicking "Add customer".
+To grant access to someone, in the [Control Panel's Wepapps tag](https://controlpanel.services.alpha.mojanalytics.xyz/webapps) find your App and click "Manage App". In the 'App customers' section you can let people view your app by putting one or more email addresses in the text box and clicking "Add customer".
 
 You can also let anyone access it by setting `"disable_authentication": true` in the `deploy.json` and redeploying it - see above.
 
 **Note** that users can only access the app from a computer on a specified corporate network. These are defined in the `deploy.json` under the parameter `allowed_ip_ranges` - see below.
 
-#### deploy.json
+#### Set access permissions
 
-`allowed_ip_ranges`: `["DOM1", "QUANTUM", "102PF Wifi"]` or `["Any"]`.
+You can set some access permissions for your app in the `deploy.json` file that is included with the app template. This file is used by Concourse to detect apps that are ready to build and deploy.
 
-`disable_authentication`: to let anyone access the app, set this to `true`, otherwise `false` restricts it to people authorized for the app in the control panel.
+The `allowed_ip_ranges` parameter controls where your app can be accessed from. It can take any combination of `["DOM1", "QUANTUM", "102PF Wifi", "Digital Wifi and VPN"]` or `["Any"]`.
 
-If you deployed with authentication enabled users are granted access to the app using a list of email addresses separated with a space, comma or semicolon.
+The `disable_authentication` parameter controls whether sign-in (using a link or one-time passcode sent to an authorised email address) is required for users to access the app when on an allowed network. It can take the values `true` or `false`. In general, this should be set to `false`.
 
-Changes to deploy.json only take effect when committed to GitHub, a Release is created and the deploy is successful (see [Scan organisation and deploy](#scan-organisation-and-deploy))
+When `disable_authentication` is set to `true`, users do not need to go through a sign-in process but can still only access an app using a system specified in `allowed_ip_ranges`. This is a relatively weak security measure, as discussed [here](https://ministryofjustice.github.io/security-guidance/standards/authentication/#ip-addresses). As such, if you wish to disable authentication, you should first discuss this with the Analytical Platform team.
+
+Changes to `deploy.json` only take effect when they are committed to GitHub, a release is created and the deployment is successful.
 
 ## Accessing the app
 
@@ -80,6 +91,7 @@ So for the example project above "static-web-deploy", the deployment URL will be
 Note that characters that are not compatible with website URLs are converted. So, repositories with underscores in their name (e.g. `repository_name.apps...`) will be converted to dashes for the URL (e.g. `repository_name.apps...`).
 
 ![](images/static/static_deployed.gif)
+
 
 ## Advanced deployment
 
