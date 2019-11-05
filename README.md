@@ -1,4 +1,4 @@
-# Technical Documentation
+# Analytical Platform User Guidance
 
 This project uses the [Tech Docs Template][template], which is a [Middleman template][mmt] that you can use to build technical documentation using a GOV.UK style.
 
