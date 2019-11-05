@@ -2,29 +2,20 @@
 
 ## What is the Analytical Platform?
 
-__The Analytical Platform is a cloud–based system that provides a range of services, tools and resources to analysts across MoJ.__
+__The Analytical Platform is a data analysis environment, providing modern tools and key datasets for MoJ analysts__
 
-The Analytical Platform:
+It offers:
 
-*   provides access to the latest versions of open–source analytical software, such as RStudio and JupyterLab, allowing analysts to work in the way that suits them best
-*   allows analysts to freely install packages from CRAN and PyPI, enabling them to utilise advanced analytical tools and techniques, including text mining, predictive analytics and data visualisation
-*   uses Amazon S3 and Athena to provide a single location for all of our data, including a growing set of curated data, and GitHub to provide a single location for all of our code -- this enables analysts to collaborate more effectively, share knowledge and produce high–quality reproducible analysis
-*   allows analysts to build and deploy interactive apps and web pages that can be used to communicate analysis and insight to decision–makers
-*   gives analysts the tools to develop reproducible analytical pipelines (RAPs) to automate time–consuming and repetitive tasks, allowing them to focus on interpreting the results
-*   is built in a cloud–based ecosystem that is easy to access remotely from all MoJ IT systems and provides analysts with access to powerful computational resources that can be scaled to meet demand -- this allows analysts to quickly and easily work with big data and perform complex analytical tasks
-*   is secure, resilient and has high availability -- this means analysts can depend on it to store their work and data, and to complete time–sensitive and business–critical projects
+* modern data tools and services
+* centralised data
+* reproducible analysis
+* secure and well-engineered environment
+
+See [about the Analytical Platform](/about.html).
 
 ## Get started
 
-To get started on the Analytical Platform, you should complete the following steps:
-
-1.  [Read our acceptable use policy and coding standards](#read-our-acceptable-use-policy-and-coding-standards).
-2.  [Sign up for a GitHub account](#sign-up-for-a-github-account).
-3.  [Verify your email address for GitHub](#verify-your-email-address-for-github).
-4.  [Configure two-factor authentication for GitHub](#configure-two-factor-authentication-for-github).
-5.  [Request an account from the Analytical Platform team](#request-an-account-from-the-analytical-platform-team).
-6.  [Accept your invitation to the MoJ Analytical Services GitHub organisation](#accept-your-invitation-to-the-moj-analytical-services-github-organisation).
-7.  [Configure two-factor authentication for the Analytical Platform](#configure-two-factor-authentication-for-the-analytical-platform).
+To get started on the Analytical Platform, you should complete the following steps.
 
 ### Read our acceptable use policy and coding standards
 
@@ -75,13 +66,13 @@ You can also accept your invitation by signing in to GitHub and visiting the [or
 
 When you sign in to the Analytical Platform for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
 
-To sign in, go to the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+To sign in, go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 
-You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described in Section \@ref(configure-two-factor-authentication-for-github), we recommend that you use __Authy__.
+You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend that you use __Authy__.
 
 ## Access the Analytical Platform
 
-The main entry point to the Analytical Platform is the [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
+The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
 
 You may also need to access other services and tools on the Analytical Platform:
 
@@ -99,7 +90,7 @@ Before using RStudio, JupyterLab and Airflow, you must first deploy them.
 
 To deploy RStudio, JupyterLab and Airflow on the Analytical Platform, you should complete the following steps:
 
-1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
 3.  Select the __Deploy__ buttons next to RStudio, JupyterLab and Airflow.
 
@@ -109,7 +100,7 @@ It may take a few minutes for the tools to deploy.
 
 To open RStudio, JupyterLab or Airflow:
 
-1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
 3.  Select the __Open__ button to the right of the tool's name.
 
@@ -119,7 +110,7 @@ If your RStudio, JupyterLab or Airflow is not working as expected, it may help t
 
 To restart RStudio, JupyterLab or Airflow:
 
-1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
 3.  Select the __Restart__ button to the right of the tool's name.
 
@@ -127,9 +118,9 @@ To restart RStudio, JupyterLab or Airflow:
 
 If your RStudio, JupyterLab or Airflow instance is inactive for an extended period of time (for example, overnight) it will be idled.
 
-1.  Go the Analytical Platform [control panel](https://cpanel-master.services.alpha.mojanalytics.xyz).
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
-3.  Select the __Unidle__ button to the right of the tool's name. 
+3.  Select the __Open__ button to the right of the tool's name. 
 
 Unidling usually only takes a few seconds, however, it can take up to several minutes.
 
@@ -200,11 +191,11 @@ To configure your username and email in Git on the Analytical Platform using RSt
     ```
     Here, you should substitute the email address you used to sign up to GitHub.
 
-Further guidance on using Git and GitHub with the Analytical Platform can be found in Section \@ref(github).
+See [using GitHub with platform](/github.html).
 
 ## Contact us
 
-To get support, you can contact the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/messages/C1PTUTC3F/) Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk). You can get more information on Slack in Section \@ref(slack).
+To get support, you can contact the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/messages/C1PTUTC3F/) Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk). You can get more information on Slack below.
 
 For more information on support, including incident response, please see our [key support information](https://github.com/ministryofjustice/analytics-platform-ops/wiki/Key-support-information). 
 

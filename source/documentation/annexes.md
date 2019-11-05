@@ -18,13 +18,11 @@ You can monitor your memory usage using [Grafana](https://grafana.services.alpha
 Current memory limits:
 
 <div style="height:0px;font-size:0px;">&nbsp;</div>
-
 | Container type | Minimum | Maximum  |
 | -------------- | ------- | -------- |
 | R Studio | 5 GB | 20 GB |
 | Jupyter | 1 GB | 12 GB |
 | App | no limit | no limit |
-
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
 You can work on a dataset that is bigger than your memory by reading in a bit of the data at a time and writing results back to disk as you go. If you're working on big data then consider taking advantage of tech like Amazon Athena or Apache Spark, which are available through the Analytical Platform too.
@@ -85,7 +83,7 @@ However, if you have not logged into the platform for more than a month, you wil
 
 The first time you log into the Analytical Platform, you will be asked to set up 2FA.  
 
-Your welcome email will direct you to the platform [Control Panel](https://cpanel-master.services.alpha.mojanalytics.xyz/).
+Your welcome email will direct you to the platform [Control Panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
 
 #### Step 1: Log into Github to identify yourself to the Analytical Platform
 
@@ -106,25 +104,3 @@ Note: If you get the error 'Wrong or expired code', you need to make sure that y
 #### You're now done
 
 Once you're entered your platform 2FA code in the interface above, you should now have access to the platform.  You will need to enter your platform 2FA code around once a day as you use the platform.
-
-## Data Minimisation
-
-In order to reduce cybersecurity/information risks to data and promote/maintain a privacy-centered approach you should consider how data can be minimised or obfuscated before being imported if you can do so while maintaining analytical usefulness and data integrity.
-
-### Pseudonymisation
-
-Pseudonymisation is "...the processing of personal data in such a manner that the personal data can no longer be attributed to a specific data subject without the use of additional information..."
-
-An example of pseudonymisation would be replacing the name of an individual with a unique hashed value. This would preserve the concept of an individual person but would mean their name is not stored in the Analytical Platform when it is not directly needed.
-
-This is pseudonymisation as the Analytical Platform with the data that it now holds can no longer identify that person without other data that it likely does not have.
-
-### Anonymisation
-
-Anonymisation is "...information which does not relate to an identified or identifiable natural person or to personal data rendered anonymous in such a manner that the data subject is not or no longer identifiable [even when joined with other accessible data]..."
-
-Under current data protection legislation, true anonymisation is quite hard to achieve but should be considered.
-
-An example of anonymisation would be using summary values such as where there are 1000 unique 'users' in your database, the Analytical Platform held data only holds the '1000' information, not each individual user record.
-
-This is anonymisation as the Analytical Platform with the data that it now holds can no longer identify any person at all, as it will be mathematically impossible to use the number '1000' to identify any individual.
