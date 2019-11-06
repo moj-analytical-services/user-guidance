@@ -1,5 +1,7 @@
 # Analytical Platform user guidance
 
+[![CircleCI](https://circleci.com/gh/moj-analytical-services/user-guidance.svg?style=svg)](https://circleci.com/gh/moj-analytical-services/user-guidance)
+
 The Analytical Platform user guidance uses the [Tech Docs Template][template]. To find out more about how to use this template, see the [Tech Docs Template documentation][tdt-docs].
 
 ## Build and deployment process
@@ -53,7 +55,7 @@ To find out more about how to work with Markdown files, see the [Change your con
 When contributing to the user guidance, you should make sure that your changes: 
 * are consistent with the Government Digital Service (GDS) [style guide][style-guide]
 * meet [government accessibility requirements][accessibility] as far as possible
-* follow the spelling and grammar conventions outlined in the Analytical Platform [A to Z].
+* follow the spelling and grammar conventions outlined in the Analytical Platform [A to Z][a-to-z].
 
 You should use the terminology 
 
