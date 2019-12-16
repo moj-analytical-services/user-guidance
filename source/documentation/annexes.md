@@ -2,32 +2,40 @@
 
 ## Memory limits
 
-All the software running on the Analytical Platform has its memory controlled. Each running software container has a minimum and maximum amount available. Here's an explanation of the key terms:
+All the software running on the Analytical Platform has its memory controlled. Each running software container has a 'requested' amount and 'limit' available. Here's an explanation of the key terms:
 
 * 'memory' is needed for your app and code, but the limiting factor is usually the data that you 'load into memory'. Data is in memory if it is assigned to a variable, which includes a data frame.
 * a 'container' is for one user's instance of a tool (e.g. Sandra's R Studio or Bob's Jupyter) or app (e.g. the PQ Shiny App or the KPIs Web App).
-* 'Minimum memory' is the amount the container is guaranteed. It is reserved for it.
-* 'Maximum memory' may be available, but your container is competing for this memory with other containers on the server it happens to be running on. If you try to use more than is available or more than the Maximum then your container will be restarted.
+* 'Requested memory' is the amount the container is guaranteed. It is reserved for it.
+* 'Limit' is the maximum amount of memory it can consume, if it is available. Your container is competing for this memory with other containers on the server it happens to be running on. If you try to use more than is available or more than the Limit then your container will be restarted.
 
 e.g. Sandra runs her code in R Studio, which loads 8GB of data into a data frame, and she sees in Grafana that this takes 10GB of memory. This is above the minimum of 5GB, and because the servers aren't too busy the extra 5GB are available. Later the server that her R Studio container is running on happens to get full and when she tries to do something that needs another 1GB memory (i.e. total 11GB) she finds that R Studio restarts, interrupting her work for a few minutes. She restarts her code, but because her R Studio now happens to be running on a different server that is less busy, she finds she can run her code and use 11GB fine.
 
-You can monitor your memory usage using [Grafana](https://grafana.services.alpha.mojanalytics.xyz/login) (there is also a link from the Control Panel). Scroll down to "User RAM usage" and you can click on your name to just show yours. Also useful is to adjust the time period from being the "Last 1 hour", by clicking on the label at the top-right corner.
+You can monitor your memory usage using [Grafana](https://grafana.services.alpha.mojanalytics.xyz/login) (there is also a link from the Control Panel). To display your tool's usage:
+
+1. Select the "Home" menu, then select the "Kubernetes / Pods" Dashboard
+2. In the "Namespace" box start typing your GitHub username then select it e.g. "user-davidread"
+3. In the "Pod" box select the tools - R Studio or Jupyter. It only shows ones which have been running recently.
+4. The "Memory Usage" shows a timeline. Compare your current usage: "Current: r-studio-server" with the corresponding "Requested" and "Limit" values.
+5. You may wish to adjust the time period shown, for example to "Last 5 minutes", by clicking on the clock icon in the top-right corner.
 
 ![](images/annexes/ram-usage.png)
 
 Current memory limits:
 
 <div style="height:0px;font-size:0px;">&nbsp;</div>
-| Container type | Minimum | Maximum  |
-| -------------- | ------- | -------- |
-| R Studio | 5 GB | 20 GB |
+| Container type | Requested | Limit    |
+| -------------- | --------- | -------- |
+| R Studio | 8 GB (was 5 GB) | 20 GB |
 | Jupyter | 1 GB | 12 GB |
 | App | no limit | no limit |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
+Older R Studio versions requested only 5 GB. You can see the amount of memory your R Studio requests by looking in Grafana for your R Studio pod. To increase it to 8 GB you need to [Upgrade your R Studio](#upgrade-analytical-tools).
+
 You can work on a dataset that is bigger than your memory by reading in a bit of the data at a time and writing results back to disk as you go. If you're working on big data then consider taking advantage of tech like Amazon Athena or Apache Spark, which are available through the Analytical Platform too.
 
-Our laptops tend to have only 8GB or 16GB, so it's an advantage of the AP that we can offer more. We are open to increasing the maximum memory, so let us know if you need more, to help us make a case for covering the additional cost.
+Our laptops tend to have only 8GB or 16GB, so it's an advantage of the AP that we can offer more. We are open to increasing the maximum memory, so let us know if you need more, to help us justify the additional cost.
 
 ## What are the benefits of Github and why do we recommend it?
 

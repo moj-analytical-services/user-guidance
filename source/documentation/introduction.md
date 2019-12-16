@@ -120,9 +120,17 @@ If your RStudio, JupyterLab or Airflow instance is inactive for an extended peri
 
 1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
-3.  Select the __Open__ button to the right of the tool's name. 
+3.  Select the __Open__ button to the right of the tool's name.
 
 Unidling usually only takes a few seconds, however, it can take up to several minutes.
+
+### Upgrade analytical tools
+
+Occasionally new versions of R Studio are made available on the Analytical Platform. In this case all users will be given the opportunity to upgrade on the control panel. New versions provide new features and bugfixes to the tool. In addition, there some releases come with improvements to the way RStudio is containerized and integrated with Analytical Platform. You should aim to upgrade when it is offered, although just in case it causes minor incompatibilities with your R code, you should not do it in the days just before you have a critical release of your work.
+
+1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
+2.  Select the __Analytical tools__ tab.
+3.  Select the __Upgrade__ button to the right of the tool's name.
 
 ## Configure Git and GitHub
 
