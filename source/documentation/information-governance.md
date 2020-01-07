@@ -36,7 +36,14 @@ You can move data classified as OFFICIAL (including OFFICIAL-SENSITIVE) onto the
 
 All data movements should take place safely and securely to ensure that data is protected at all times, including when in transit.
 
-If you want to move personal data onto the Analytical Platform, you may need to complete some additional steps.
+For all data movements, you must:
+
+* [obtain approval](#iao-and-siro-approval) from the relevant Information Asset Owner (IAO) and/or Senior Information Risk Officer (SIRO)
+* complete a [data movement form](#data-movement-form)
+
+If you data movement involves a particularly complex integration or is recurring, you must complete a [technical migration form](#technical-migration-form).
+
+If you want to move personal data onto the Analytical Platform, you may need to complete some additional steps as outlined below.
 
 ### Personal data
 
