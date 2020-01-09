@@ -290,58 +290,58 @@ Kibana also has experimental autocomplete and simple syntax tools that you can u
 
 ### Deploying locally
 
-If you have a MacBook, you can use Docker locally to test and troubleshoot your R Shiny app. You can download Docker Desktop for Mac [here](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
+If you have a MacBook, you can use Docker locally to test and troubleshoot your RShiny app. You can download Docker Desktop for Mac [here](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
 
 To build and run your R Shiny app locally, follow the steps below:
 
-1.  Clone your app's repository to a new folder on your MacBook -- this guarantees that the app will be built using the same code as on the Analytical Platform.
+1.  Clone your app's repository to a new folder on your MacBook -- this guarantees that the app will be built using the same code as on the Analytical Platform. You may need to [create a new connection to GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
 2.  Open a terminal session and navigate to the directory containing the `Dockerfile` using the `cd` command.
 3.  Build the Docker image by running:
-    ```{bash docker build, eval=FALSE}
-    docker build . -t <image tag>
+    ```{bash}
+    docker build . -t IMAGE:TAG
     ```
-    where `image tag` is a tag you want to give the image.
+    where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `0.1`.
 4.  Run a Docker container created from the Docker image by running:
-    ```{bash docker run, eval=FALSE}
-    docker run -p 80:80 <image tag>
+    ```{bash}
+    docker run -p 80:80 IMAGE:TAG
     ```
 5.  Go to [127.0.0.1:80](127.0.0.1:80) to view the app.
 
 If the app does not work, follow the steps below to troubleshoot it:
 
 1.  Start a bash session in a Docker container created from the Docker image by running:
-    ```{bash docker bash run, eval=FALSE}
-    docker run -it -p 80:80 <image tag> bash
+    ```{bash}
+    docker run -it -p 80:80 IMAGE:TAG bash
     ```
 2.  Install the `nano` text editor by running:
-    ```{bash install nano, eval=FALSE}
+    ```{bash}
     apt-get update
     apt-get install nano
     ```
 3.  Open `shiny-server.conf` in the `nano` text editor by running:
-    ```{bash open conf, eval=FALSE}
+    ```{bash}
     nano /etc/shiny-server/shiny-server.conf
     ```
 4.  Add the following lines at the beginning of `shiny-server.conf`:
-    ```{bash add lines, eval=FALSE}
+    ```{bash}
     access_log /var/log/shiny-server/access.log tiny;
     preserve_logs true;
     ```
 5.  Write the changes by pressing `Ctrl+O`.
 6.  Exit the `nano` text editor by pressing `Ctrl+X`.
 7.  Increase the verbosity of logging and start the Shiny server by running:
-    ```{bash increase verbosity, eval=FALSE}
+    ```{bash}
     export SHINY_LOG_LEVEL=TRACE
     /bin/shiny-server.sh
     ```
 8.  Open a new terminal session.
 9.  Start a new bash session in the Docker container by running:
-    ```{bash run bash, eval=FALSE}
-    docker exec -it <CONTAINER ID> bash
+    ```{bash}
+    docker exec -it CONTAINER_ID bash
     ```
-    You can find the `CONTAINER ID` by running `docker ps`.
+    You can find the `CONTAINER_ID` by running `docker ps`.
 10. View the logs by running:
-    ```{bash view logs, eval=FALSE}
+    ```{bash}
     cat /var/log/shiny-server/access.log
     ```
     
