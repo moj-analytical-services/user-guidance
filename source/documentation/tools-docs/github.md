@@ -1,4 +1,4 @@
-# Using Github with the platform
+# GitHub
 
 Before you can use Github with R Studio or Jupyter, you need to connect them together by creating an 'ssh key'.  Full guidance is [here](https://moj-analytical-services.github.io/platform_user_guidance/introduction.html#configure-git-and-github)
 

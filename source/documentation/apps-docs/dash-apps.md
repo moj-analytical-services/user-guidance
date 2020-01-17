@@ -1,4 +1,4 @@
-# Access Local Ports in Jupyter
+# Dash apps
 
 If you are developing a web application using Jupyter you will probably want to
 preview that web app before you deploy it. The Analytical Platform provides a special set of

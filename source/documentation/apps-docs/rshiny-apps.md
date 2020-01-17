@@ -1,4 +1,4 @@
-# Deploying an R Shiny app
+# RShiny apps
 
 ## Basic deployment
 
