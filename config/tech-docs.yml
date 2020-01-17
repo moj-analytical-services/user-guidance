@@ -33,3 +33,7 @@ prevent_indexing: false
 
 show_contribution_banner: true
 github_repo: moj-analytical-services
+
+# Slack options
+owner_slack_workspace: asdslack
+default_owner_slack: '#analytical_platform'
