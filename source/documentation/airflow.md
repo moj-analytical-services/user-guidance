@@ -219,7 +219,6 @@ task = KubernetesPodOperator(
     in_cluster=True,
     task_id="example_task_name", # the name of the task
     get_logs=True,
-    dag=dag,
     is_delete_operator_pod=True,
     annotations={"iam.amazonaws.com/role": ROLE},
 )
@@ -256,19 +255,19 @@ To build and test your Docker image locally, follow the steps below:
 1.  Clone your Airflow repository to a new folder on your MacBook -- this guarantees that the Docker image will be built using the same code as on the Analytical Platform. You may need to [create a new connection to GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
 2.  Open a terminal session and navigate to the directory containing the `Dockerfile` using the `cd` command.
 3.  Build the Docker image by running:
-    ```{bash}
+    ```
     docker build . -t IMAGE:TAG
     ```
     where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `0.1`.
 4.  Run a Docker container created from the Docker image by running:
-    ```{bash}
+    ```
     docker run IMAGE:TAG
     ```
     This will run the command specified in the `CMD` line of the `Dockerfile`. This will fail if your command requires access to resources on the Analytical Platform, such as data stored in Amazon S3.
 
 You can start a bash session in a running Docker container for debugging and troubleshooting purposes by running:
-```{bash}
-docker run -it IMAGE:TAG bash
+```
+docker run -it IMAGE:TAG
 ```
 ### Test a DAG
 
