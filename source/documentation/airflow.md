@@ -267,7 +267,7 @@ To build and test your Docker image locally, follow the steps below:
 
 You can start a bash session in a running Docker container for debugging and troubleshooting purposes by running:
 ```
-docker run -it IMAGE:TAG
+docker run -it IMAGE:TAG bash
 ```
 ### Test a DAG
 
