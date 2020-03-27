@@ -1,14 +1,14 @@
 # Using Github with the platform
 
-Before you can use Github with R Studio or Jupyter, you need to connect them together by creating an 'ssh key'.  Full guidance is [here](https://moj-analytical-services.github.io/platform_user_guidance/introduction.html#configure-git-and-github)
+Before you can use Github with R Studio or Jupyter, you need to connect them together by creating an 'ssh key'. Full guidance is [here](../introduction.html#create-an-ssh-key)
 
-Github enables you to collaborate with colleagues on code and share you work with them. It puts your code in a centralised, searchable place. It enables easier and more robust approaches to quality assurance, and it enables you to version control your work.  More information about the benefits of Github can be found [here](https://moj-analytical-services.github.io/platform_user_guidance/annexes.html#what-are-the-benefits-of-github-and-why-do-we-recommend-it).
+Github enables you to collaborate with colleagues on code and share you work with them. It puts your code in a centralised, searchable place. It enables easier and more robust approaches to quality assurance, and it enables you to version control your work. More information about the benefits of Github can be found [here](../annexes.html#what-are-the-benefits-of-github-and-why-do-we-recommend-it).
 
 If you are new to Git and Github, it is worth clarifying the difference between Git and Github. Git is the software that looks after the version control of code, whereas Github is the website on which you publish and share your version controlled code. In practice this means you use Git to track versions of your code, and then submit those changes to Github.
 
-This guide provides a step-by-step guide of how to create a GitHub project repo, followed by how to sync with it in R Studio and Jupyter.  You can find more in-depth Git training resources [here](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-r-studio.html#git-training-resources)
+This guide provides a step-by-step guide of how to create a GitHub project repo, followed by how to sync with it in R Studio and Jupyter.
 
-Note:  If any of the animated gifs below do not display correctly, try a different web browser e.g. Microsoft Edge, which is installed on your DOM1 machine.
+Note: If any of the animated gifs below do not display correctly, try a different web browser e.g. Microsoft Edge, which is installed on your DOM1 machine.
 
 ## Creating your project repo on GitHub
 
@@ -20,7 +20,7 @@ Note that if you want to contribute to an existing project, you can skip this st
 
 In your web browser go to `github.com` and make sure you're signed in.
 
-Once signed in, go to the MoJ Analytical Services homepage at https://github.com/moj-analytical-services/
+Once signed in, go to the MoJ Analytical Services [homepage](https://github.com/moj-analytical-services/).
 
 Then follow the steps in this gif to create a new repository.
 
@@ -28,9 +28,9 @@ Then follow the steps in this gif to create a new repository.
 
 Notes:
 
-* Leave your repository 'private' for now - the default setting.  In the next step you will add access to colleagues and possibly make it 'public' (on the internet).
+* Leave your repository 'private' for now - the default setting. In the next step you will add access to colleagues and possibly make it 'public' (on the internet).
 
-* Make sure the owner is set to 'moj-analytical-services'.  This is the default setting, so long as you have clicked on 'New' from the https://github.com/moj-analytical-services homepage.
+* Make sure the owner is set to 'moj-analytical-services'. This is the default setting, so long as you have clicked on 'New' from the MoJ Analytical Services [homepage](https://github.com/moj-analytical-services).
 
 
 ### Step 2:  Navigate to your new Repository on GitHub to decide who can see your code
@@ -46,7 +46,7 @@ We find that for most of our work, there’s no reason not to add the ‘+everyo
 
 Warning: Repos should contain **no passwords/secrets and no data** (apart from small reference tables) - this is particulary important for public repos, but applies to private ones too. And remember that GitHub shows the *full history* of files and changes in your repo, so removing these things requires special effort.
 
-For more info, see: [Choosing public or private repos](#public-or-private-repos)
+For more info, see [choosing public or private repos](#choosing-public-or-private-repos).
 
 Notes:
 
@@ -66,7 +66,7 @@ Follow the steps in this gif:
 
 Notes:
 
-* When you copy the link to the repo from Github, ensure you use the ssh link, which start `git@github.com` as opposed to the https one, which start `https://github.com/`
+* When you copy the link to the repo from Github, ensure you use the ssh link, which starts `git@github.com` as opposed to the https one, which starts `https://github.com/`.
 
 ### Step 2: Edit your files, track them using Git, and sync ('push') changes to Github
 
@@ -208,9 +208,9 @@ A *public repo* is visible to the world. Again, it is particulary important thes
 A *Private repo* is internal to the `moj-analytical-services` GitHub organisation and not visible to the outside world.
 The repo's Owners and Admins can control which people / teams can see the repo on GitHub by going to **_Settings_ > _Collaborators & Teams_** and adding teams to read/write/admin access groups.
 To maximise collaboration _within_ the organisation but still keep code that shouldn't be in the public domain (e.g. unpublished commentary on a `.Rmd` file) hidden from anyone _outside_ the organisation, you can add the group `everyone` here.
-This also makes your code [searchable.](https://moj-analytical-services.github.io/platform_user_guidance/using-github-with-the-platform.html#other-tips-and-tricks-work-in-progress)
+This also makes your code [searchable](../github.html#other-tips-and-tricks).
 
-#### Choosing public or private repos {#public-or-private-repos}
+#### Choosing public or private repos
 
 As an organization we aspire to use public repos by default.
 There are a host of [benefits of coding in the open](https://gds.blog.gov.uk/2017/09/04/the-benefits-of-coding-in-the-open/).
@@ -277,7 +277,7 @@ Putting the secret in ~/.Rprofile - a file outside your repo directories - avoid
 
 Never put a secret or password in your code. Even when the repo is private. See MOJ policy: <https://ministryofjustice.github.io/security-guidance/standards/secrets-management/#application--infrastructure-secrets>
 
-## Other tips and tricks [Work in progress!]
+## Other tips and tricks
 
 ### Search the code in MoJ Analytical Services to see who else has used a package.
 
