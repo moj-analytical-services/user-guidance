@@ -105,7 +105,7 @@ To remove a user from the data access group:
 
 You can upload files to Amazon S3 from your local computer or from RStudio or JupyterLab.
 
-When uploading files to Amazon S3, you should ensure that you follow all necessary [information governance](#information-governance) procedures. In particular, you must complete a data movement form when moving any data onto the Analytical Platform.
+When uploading files to Amazon S3, you should ensure that you follow all necessary [information governance](../information-governance.html) procedures. In particular, you must complete a data movement form when moving any data onto the Analytical Platform.
 
 ### Amazon S3 Console
 
@@ -176,7 +176,7 @@ You can use the Amazon S3 Console to download files to your local computer (for 
 
 To download a file using the Amazon S3 Console:
 
-1.  Log in to the [AWS Management Console](https://http://aws.services.alpha.mojanalytics.xyz) using your Analytical Platform account.
+1.  Log in to the [AWS Management Console](https://aws.services.alpha.mojanalytics.xyz) using your Analytical Platform account.
 2.  Select __Services__ from the menu bar.
 3.  Select __S3__ from the drop down menu.
 4.  Select the file you want to download.

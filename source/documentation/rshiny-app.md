@@ -145,7 +145,7 @@ Your deployed app can be accessed at `repository-name.apps.alpha.mojanalytics.xy
 
 If the repository name contains underscores, these will be converted to dashes in the app URL. For example, an app with a repository called `repository_name` would have the URL `repository-name.apps.alpha.mojanalytics.xyz`.
 
-When accessing an app, you can choose whether to sign in using an email link (default) or a one-time passcode. To sign in with a one-time passcode, add `/login?method=code` to the end of the app's URL e.g. https://kpi-s3-proxy.apps.alpha.mojanalytics.xyz/login?method=code. (This requires the app to have been deployed since the auth-proxy [release on 30/1/19](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.8).)
+When accessing an app, you can choose whether to sign in using an email link (default) or a one-time passcode. To sign in with a one-time passcode, add `/login?method=code` to the end of the app's URL, for example, `https://kpi-s3-proxy.apps.alpha.mojanalytics.xyz/login?method=code`. This requires the app to have been deployed since the auth-proxy [release on 30/01/19](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.8).
 
 ## Advanced
 
@@ -161,14 +161,13 @@ A `Dockerfile` reference can be found [here](https://docs.docker.com/engine/refe
 
 ### Getting the current user of the app
 
-A Shiny app can find out who is using it. This can be useful to log an audit trail of significant events. Specifically it can determine the email address that the user logged into the app with. (Obviously this is sensitive data and needs data protection concerns looking after - e.g. proportionate, transparent, consent, secure etc).
+An  RShiny app can find out who is using it. This can be useful to log an audit trail of significant events. Specifically, it can determine the email address that the user logged into the app with. This is sensitive data, so you must ensure that you are following all relevant information governance processes.
 
-See the example: https://github.com/moj-analytical-services/shiny-headers-demo
+The [shiny-headers-demo](https://github.com/moj-analytical-services/shiny-headers-demo) repository contains an example of how to do this.
 
-Note: these features require you to be using the Analytical platform's version of `shiny-server`.
+These features require you to be using the Analytical Platform version of `shiny-server`.
 
 #### Email address
-
 
 You can obtain the logged in user's email address by using the following code in the `server` function of your app:
 
@@ -181,11 +180,9 @@ in `shiny-headers-demo` shows the code in context.
 
 #### Full user profile
 
-You can access the full user profile by making a request directly from the shiny
-app to the auth-proxy's `/userinfo` endpoint using the following code inside your `server` function.
+You can access the full user profile by making a request directly from the RShiny app to the auth-proxy's `/userinfo` endpoint using the following code inside your `server` function.
 
 ```r
-# these libraries are required
 # library(httr)
 # library(jsonlite)
 
@@ -195,7 +192,7 @@ profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(co
 [This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L61)
 shows the code in context.
 
-##### Example User Info Response
+##### Example response
 ```json
 {
     "email": "name@example.gov.uk",

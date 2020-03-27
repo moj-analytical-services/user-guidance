@@ -104,7 +104,7 @@ The `deploy.json` file contains configuration information that is used by Concou
 
 It is of the following form:
 
-```{json}
+```json
 {
     "mojanalytics-deploy": "v1.0.0",
     "type": "airflow_dag",
@@ -120,7 +120,9 @@ The `requirements.txt` file contains a list of Python packages to install that a
 
 To capture the requirements of your project, run the following command in a terminal:
 
-    pip freeze > requirements.txt
+```sh
+pip freeze > requirements.txt
+```
 
 You can also use conda, packrat, renv or other package management tools to capture the dependencies required by your pipeline. If using one of these tools, you will need to update the `Dockerfile` to install required packages correctly.
 
@@ -168,7 +170,7 @@ To clone the repository:
 
 A DAG is defined in a Python script. An example DAG script using the `KubernetesPodOperator` is outlined below:
 
-```{python}
+```python
 from datetime import datetime
 
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
@@ -255,20 +257,22 @@ To build and test your Docker image locally, follow the steps below:
 1.  Clone your Airflow repository to a new folder on your MacBook -- this guarantees that the Docker image will be built using the same code as on the Analytical Platform. You may need to [create a new connection to GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
 2.  Open a terminal session and navigate to the directory containing the `Dockerfile` using the `cd` command.
 3.  Build the Docker image by running:
-    ```
+    ```sh
     docker build . -t IMAGE:TAG
     ```
     where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `0.1`.
 4.  Run a Docker container created from the Docker image by running:
-    ```
+    ```sh
     docker run IMAGE:TAG
     ```
     This will run the command specified in the `CMD` line of the `Dockerfile`. This will fail if your command requires access to resources on the Analytical Platform, such as data stored in Amazon S3.
 
 You can start a bash session in a running Docker container for debugging and troubleshooting purposes by running:
-```
+
+```sh
 docker run -it IMAGE:TAG bash
 ```
+
 ### Test a DAG
 
 You can test a DAG in your Airflow sandbox, before deploying in the production environment.

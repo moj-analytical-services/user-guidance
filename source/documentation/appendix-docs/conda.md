@@ -143,7 +143,3 @@ conda env update -f environment.yml --prune
 [anaconda search]: https://anaconda.org/search
 [conda cheat sheet]:
   https://conda.io/projects/conda/en/latest/user-guide/cheatsheet.html
-
-```{r global_options, include=FALSE}
-{knitr::opts_chunk$set(eval = FALSE)}
-```
