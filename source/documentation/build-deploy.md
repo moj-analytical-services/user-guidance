@@ -8,9 +8,9 @@ Concourse automatically scans git repositories in the [moj-analytical-services](
 
 For the format of deploy.json, see the relevant subject:
 
-* [R Shiny app](#rshiny-deploy)
-* [Web app](https://moj-analytical-services.github.io/platform_user_guidance/deploying-a-static-web-app.html#deploy.json-1)
-* [Airflow pipeline](https://moj-analytical-services.github.io/platform_user_guidance/data-pipelines.html#deploy.json)
+* [R Shiny app](../rshiny-app.html)
+* [Web app](../static-app.html)
+* [Airflow pipeline](../airflow.html)
 
 Changes to deploy.json only take effect when committed to GitHub (master branch), a Release is created and the deploy is successful (see [Scan organisation and deploy](/static-app.html#scan-organisation-and-deploy)).
 
@@ -20,7 +20,7 @@ To trigger a Concourse build/deploy, make sure your code is committed and pushed
 
 Your task appears in Concourse within 30 seconds. Find it in Concourse to start it as follows:
 
-1. Open Concourse: https://concourse.services.alpha.mojanalytics.xyz/
+1. Open [Concourse](https://concourse.services.alpha.mojanalytics.xyz).
 2. Select team 'main'.
 3. Click 'login with ap-main' followed by your GitHub login and possibly 2FA for GitHub and possibly 2FA for AP.
 4. Click the hamburger icon: ![Hamburger menu icon](images/build_and_deploy/concourse_menu.png) (top-left) to see the list of repos that can be built.

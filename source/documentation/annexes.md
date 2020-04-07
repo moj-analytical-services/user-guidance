@@ -31,7 +31,7 @@ Current memory limits:
 | App | no limit | no limit |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
-Older R Studio versions requested only 5 GB. You can see the amount of memory your R Studio requests by looking in Grafana for your R Studio pod. To increase it to 8 GB you need to [Upgrade your R Studio](#upgrade-analytical-tools).
+Older R Studio versions requested only 5 GB. You can see the amount of memory your R Studio requests by looking in Grafana for your R Studio pod. To increase it to 8 GB you need to [Upgrade your R Studio](../introduction.html#upgrade-analytical-tools).
 
 You can work on a dataset that is bigger than your memory by reading in a bit of the data at a time and writing results back to disk as you go. If you're working on big data then consider taking advantage of tech like Amazon Athena or Apache Spark, which are available through the Analytical Platform too.
 
@@ -105,7 +105,7 @@ In this step, you set up the second layer of 2FA, your Platform 2FA.
 
 Scan the code using your smartphone app, and enter the code that comes up on your smartphone.
 
-Note: If you get the error 'Wrong or expired code', you need to make sure that your phone's clock is accurate.  See [here](https://moj-analytical-services.github.io/platform_user_guidance/common-errors-and-solutions.html#i-have-entered-my-2fa-code-but-the-platform-will-not-accept-it)
+Note: If you get the error 'Wrong or expired code', you need to make sure that your phone's clock is accurate.  See [here](../errors.html#i-have-entered-my-2fa-code-but-the-platform-will-not-accept-it)
 
 ![](images/2fa/platform_2fa.png)
 

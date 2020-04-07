@@ -114,7 +114,7 @@ always be `/_tunnel_/8050/` e.g.
 ### Run server from the terminal
 
 ```sh
-yovyan@jupyter-lab-r4vi-jupyter-7cb4bb58cf-6hngf:~$ python3 app.py
+$ python3 app.py
  * Serving Flask app "app" (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.

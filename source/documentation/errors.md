@@ -110,4 +110,4 @@ Most phones syncronise their time with the network provider, so this is not a pr
 
 ## I'm having problems deploying a Shiny app
 
-For help resolving deployment problems, see the [advanced deployment](https://moj-analytical-services.github.io/platform_user_guidance/deploying-a-shiny-app.html#advanced-deployment) section of the docs.
+For help resolving deployment problems, see the [advanced deployment](../rshiny-app.html#advanced) section of the docs.
