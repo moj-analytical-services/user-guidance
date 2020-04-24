@@ -23,18 +23,26 @@ Most (around 95%) R packages on CRAN are available through `conda`. They have th
 
 #### Examples
 
-##### Installing a package:
+The following tables show conda commands and their base R analogues.
 
+- Installing a package:
+
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 | `install.packages` (in R-Console) | `conda install` (in Terminal) |
 | --------------------------------- | ----------------------------- |
 | `install.packages('Rcpp')`        | `conda install r-Rcpp`        |
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 
-![install package gif here](images/conda/conda_install_rcpp.gif)
 
-##### Installing a specific version of a package
+![](images/conda/conda_install_rcpp.gif)
+
+- Installing a specific version of a package
+
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 | `install.packages`                                                                                               | conda install                   |
 | ---------------------------------------------------------------------------------------------------------------- | ------------------------------- |
 | `require(devtools)`</br> `install_version("ggplot2", version = "2.2.1", repos = "http://cran.us.r-project.org")` | `conda install r-ggplot2=2.2.1` |
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 
 ![Specific version gif here](images/conda/conda_install_specific_version.gif)
 
@@ -48,6 +56,7 @@ name.
 ##### Install a package
 
 In the terminal run: `conda install numpy`. You can now access in your R session:
+
 ```r
 library(reticulate)
 np <- import("numpy")
@@ -117,12 +126,15 @@ There are a number of limitations and pitfalls to conda management to be aware o
 
 While Anaconda hosts most of the R packages available on CRAN (the Comprehensive R Archive Network), some R packages on Anaconda only have binaries built for certain versions of R. You can identify the available versions by inspecting the first few characters of the Build part of the filename on its page on anaconda.org, like so:
 
-![](images/conda/anaconda_R_version_number_example.png)
+![](images/conda/anaconda_R_version_number_example.PNG)
 
 Alternatively, if you use `conda search PACKAGENAME`, you can look in the Field column:
 ![](images/conda/conda_search_R_version_number_example.PNG)
 
-If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process. Instead, you should install the package locally via `install.packages()` or `remotes::install_github()`. For Shiny apps, you can add an `install.packages()` step to the Dockerfile to install additional packages not covered by the conda environment.yml, like so:
+If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process. 
+
+Instead, you should install the package locally via `install.packages()` or `remotes::install_github()`. For Shiny apps, you can add an `install.packages()` step to the Dockerfile to install additional packages not covered by the conda environment.yml, like so:
+
 ```bash
 RUN R -e "install.packages('waffle', repos = 'https://cinc.rud.is')"
 ```
@@ -133,9 +145,11 @@ RUN R -e "install.packages('waffle', repos = 'https://cinc.rud.is')"
 
 #### Packrat
 
-Packrat is the most well-known package management tool for R. There's more information about it here: https://rstudio.github.io/packrat/
+Packrat is the most well-known package management tool for R. There's more information about it here: <https://rstudio.github.io/packrat/>
 
-It has some significant downsides. It can be quite temperamental, and difficult to debug when things go wrong - in the earlier days of the Analytical Platform, the majority of support issues related to getting Packrat working. Furthermore, the Platform version of RStudio runs on a Linux virtual machine, and CRAN mirrors do not provide Linux compiled binaries for packages. This means that packages need to be compiled on the Analytical Platform every time they're installed, which can take a long time. This means a long wait when doing `install.packages` both in an RStudio session, and when running a Docker build for a `shiny` application.
+It has some significant downsides. It can be quite temperamental, and difficult to debug when things go wrong - in the earlier days of the Analytical Platform, the majority of support issues related to getting Packrat working. 
+
+Furthermore, the Platform version of RStudio runs on a Linux virtual machine, and CRAN mirrors do not provide Linux compiled binaries for packages. This means that packages need to be compiled on the Analytical Platform every time they're installed, which can take a long time. This means a long wait when doing `install.packages` both in an RStudio session, and when running a Docker build for a `shiny` application.
 
 #### Renv
 
