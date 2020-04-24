@@ -131,6 +131,7 @@ Occasionally new versions of R Studio are made available on the Analytical Platf
 1.  Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 2.  Select the __Analytical tools__ tab.
 3.  Select the __Upgrade__ button to the right of the tool's name.
+4.  The "Status" changes to "Deploying" and then "Upgraded". The "Upgrade" button will no longer visible (until another version becomes available).
 
 ## Configure Git and GitHub
 
