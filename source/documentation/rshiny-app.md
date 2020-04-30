@@ -27,9 +27,9 @@ To create a new repository based on the Shiny app template:
     + Owner: `moj-analytical-services`
     + Name: The name of your app, for example, `my-app`
     + Privacy: Private
-4. Select __Create repository from template__.
+4. Select __Create repository from template__. This copies the entire contents of the app template to a new repository.
 
-This copies the entire contents of the app template to a new repository.
+__NOTE__: In order to use conda in your RShiny app, you will need to use the [conda branch of the rshiny-template repository](https://github.com/moj-analytical-services/rshiny-template/tree/conda). If your application requires the use of Python, including using `dbtools` to query Amazon Athena databases, you will need to use the conda version of the app template.
 
 ### Create a new webapp
 
@@ -45,7 +45,7 @@ The Analytical Platform team will create the webapp and will make you an admin u
 
 ### Clone the repository
 
-To clone the repository:
+To clone the repository into RStudio:
 
 1.  Navigate to the app's repository on GitHub.
 2.  Select __Clone or download__.
@@ -69,11 +69,13 @@ Your app can take one of several forms:
 4.  A list with `ui` and `server` components.
 5.  an R Shiny app object created by `shinyApp`.
 
-By default, the template contains `server.R` and `ui.R` files, however, you may wish to take a different approach depending on your requirements. For example, using `app.R`, it is possible to deploy R Shiny apps from within a package, as [here](https://github.com/RobinL/costmodelr/blob/b328902026bd1cce5d17b487e310c59725ea4d62/R/shiny_explorer.r#L20).
+By default, the template contains `server.R` and `ui.R` files. However, you may wish to take a different approach depending on your requirements. For example, using `app.R`, it is possible to deploy R Shiny apps from within a package, as [here](https://github.com/RobinL/costmodelr/blob/b328902026bd1cce5d17b487e310c59725ea4d62/R/shiny_explorer.r#L20).
 
 ### Manage dependencies
 
-Most apps will have dependencies on various third-party packages (e.g., `dplyr`). These packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as packrat or Conda.
+Most apps will have dependencies on various third-party packages (e.g., `dplyr`). These packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as packrat, renv, or conda.
+
+There is more guidance on package management [here.](https://user-guidance.services.alpha.mojanalytics.xyz/appendix/conda/#package-management)
 
 If using packrat, ensure that it is enabled for your project in RStudio.
 
