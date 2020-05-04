@@ -3,11 +3,13 @@
 
 ## Introduction
 
-A key element of ensuring analysis is reproducible is maintaining a record of the versions of packages used to produce said analysis. There are a number of tools available for both R and Python to support package management. Due to the specific setup of the Analytical Platform, we recommend using Conda for R over other package management systems. 
+A key element of ensuring analysis is reproducible is maintaining a record of the versions of packages used to produce said analysis. There are a number of tools available for both R and Python to support package management. Due to the specific setup of the Analytical Platform, we recommend using Conda for R over other package management systems.
 
 ## R
 
 ### Conda
+
+See also: [Calum's Conda slides for Coffee & Code](https://github.com/moj-analytical-services/coffee-and-coding-public/blob/master/2019-10-30%20Conda/conda.pdf)
 
 Conda is a unified package management system that supports managing both Python and R dependencies in a single `environment`. It can make sure all of these libraries are compatible with each other. Conda is available for both RStudio and JupyterLab on the Analytical Platform, though note that RStudio and JupyterLab have separate environments so dependencies won't be shared between the applications.
 
@@ -23,7 +25,7 @@ Most (around 95%) R packages on CRAN are available through `conda`. They have th
 
 #### Examples
 
-##### Installing a package:
+##### Installing a package
 
 | `install.packages` (in R-Console) | `conda install` (in Terminal) |
 | --------------------------------- | ----------------------------- |
@@ -32,6 +34,7 @@ Most (around 95%) R packages on CRAN are available through `conda`. They have th
 ![install package gif here](images/conda/conda_install_rcpp.gif)
 
 ##### Installing a specific version of a package
+
 | `install.packages`                                                                                               | conda install                   |
 | ---------------------------------------------------------------------------------------------------------------- | ------------------------------- |
 | `require(devtools)`</br> `install_version("ggplot2", version = "2.2.1", repos = "http://cran.us.r-project.org")` | `conda install r-ggplot2=2.2.1` |
@@ -40,6 +43,7 @@ Most (around 95%) R packages on CRAN are available through `conda`. They have th
 
 
 #### Python
+
 You can also use Conda to install Python packages for use in R through `reticulate`. Python packages do not require a prefix and can simply be installed using their
 name.
 
@@ -48,6 +52,7 @@ name.
 ##### Install a package
 
 In the terminal run: `conda install numpy`. You can now access in your R session:
+
 ```r
 library(reticulate)
 np <- import("numpy")
@@ -123,6 +128,7 @@ Alternatively, if you use `conda search PACKAGENAME`, you can look in the Field 
 ![](images/conda/conda_search_R_version_number_example.PNG)
 
 If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process. Instead, you should install the package locally via `install.packages()` or `remotes::install_github()`. For Shiny apps, you can add an `install.packages()` step to the Dockerfile to install additional packages not covered by the conda environment.yml, like so:
+
 ```bash
 RUN R -e "install.packages('waffle', repos = 'https://cinc.rud.is')"
 ```
@@ -140,4 +146,3 @@ It has some significant downsides. It can be quite temperamental, and difficult 
 #### Renv
 
 [Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package billed as "Packrat 2.0". This has a number of improvements over Packrat, in the speed of download and reduction of issues of 00LOCK files that often plague Packrat. However, it is still not able to deal with OS-level dependencies, so Conda is still preferred.
-
