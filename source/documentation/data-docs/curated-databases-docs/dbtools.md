@@ -24,7 +24,7 @@ You should also ensure that the following dependencies are installed and loaded:
 
 For more information on installing packages, see Appendix \@ref(installing-packages).
 
-To install and the latest version of `dbtools`, run the following code:
+To install the latest version of `dbtools`, run the following code:
 
 ```
 devtools::install_github("moj_analytical_services/dbtools")
