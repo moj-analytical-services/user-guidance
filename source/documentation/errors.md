@@ -111,3 +111,22 @@ Most phones syncronise their time with the network provider, so this is not a pr
 ## I'm having problems deploying a Shiny app
 
 For help resolving deployment problems, see the [advanced deployment](../rshiny-app.html#advanced) section of the docs.
+
+## Geospatial data package problems
+
+Some conda environments may prevent you from installing some packages relating to geospatial data, such as `sf` and `rgeos`. In order to get access to these packages, you need to create and activate a brand new conda environment, which will allow you to install the required packages.
+
+To create a new conda environment, go to the terminal and enter 
+```
+conda create --name myenv
+```
+Replacing `myenv` with the environment name.
+```
+conda deactivate
+conda activate myenv
+```
+Will set this environment to be your currently active environment. From here, install packages as you would normally, with
+```
+conda install packagename
+```
+Don't forget to add this new environment to your currently active `.libPath()`, which is done in the console.
