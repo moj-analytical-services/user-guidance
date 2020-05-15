@@ -159,7 +159,7 @@ To upload a file to Amazon S3, use the following code:
 import boto3
 
 s3 = boto3.resource('s3')
-s3.object('bucket_name', 'key').put(Body=object)
+s3.Object('bucket_name', 'key').put(Body=object)
 ```
 
 If you receive an `ImportError`, try restarting your kernel, so that Python recognises your `boto3` installation.

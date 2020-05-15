@@ -51,23 +51,23 @@ If you are working with personal data you have a responsibility to ensure that y
 
 In practice, this means you must ensure that:
 
-*   you are processing personal data in accordance with the [principles of the GDPR](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/principles/) and the [rights of individuals](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/)
-*   you have a lawful basis for processing the personal data
-*   you have fulfilled all necessary governance requirements
+* you are processing personal data in accordance with the [principles of the GDPR](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/principles/) and the [rights of individuals](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/)
+* you have a lawful basis for processing the personal data
+* you have fulfilled all necessary governance requirements
 
 #### What is personal data?
 
 Personal data is information that relates to an individual who can be identified or who is identifiable:
 
-*   directly from the information in question
-*   indirectly from the information in question in combination with other information
+* directly from the information in question
+* indirectly from the information in question in combination with other information
 
 Personal data could include information such as:
 
-*   names
-*   personal identifiers
-*   dates of birth
-*   addresses
+* names
+* personal identifiers
+* dates of birth
+* addresses
 
 You can find detailed guidance from the ICO on what constitutes personal data [here](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/key-definitions/what-is-personal-data/). Further information on handling personal data in MoJ can be found [here](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/personal-data/).
 
@@ -76,13 +76,13 @@ You can find detailed guidance from the ICO on what constitutes personal data [h
 Anonymisation is the process of removing personal information from data such that individuals can no longer be identified. Data that has been fully anonymised is not considered personal data and is not subject to the GDPR.
 
 > The principles of data protection should therefore not apply to anonymous information, namely information which does not relate to an identified or identifiable natural person or to personal data rendered anonymous in such a manner that the data subject is not or no longer identifiable.
-> 
+>
 > Source: [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679)
 
 If it is possible to identify an individual from the data by any reasonable means, the data will not have been fully anonymised but rather pseudonymised.
 
 > Pseudonymisation means the processing of personal data in such a manner that the personal data can no longer be attributed to a specific data subject without the use of additional information, provided that such additional information is kept separately and is subject to technical and organisational measures to ensure that the personal data are not attributed to an identified or identifiable natural person.
-> 
+>
 > Source: [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679)
 
 Pseudonymisation may involve replacing names or other personal identifiers with reference numbers or other artificial identifiers, while maintaining a lookup enabling individuals to be re-identified.
@@ -99,19 +99,19 @@ A data controller is an entity registered with the Information Commissioner's Of
 
 The data controller could be another MoJ agency or public body (for which MoJ is not the responsible controller), another government department or a third party. You can use the [ICO Data Protection Register](https://ico.org.uk/ESDWebPages/Search) to determine whether an entity is a controller. The following agencies and public bodies are data controllers:
 
-*   Criminal Injuries Compensation Authority (CICA)
-*   Children and Family Court Advisory and Support Service (CAFCASS)
-*   Criminal Cases Review Commission (CCRC)
-*   Legal Services Board (LSB)
-*   Parole Board for England and Wales
-*   Youth Justice Board for England and Wales (YJB)
-*   Civil Justice Council (CJC)
-*   Family Justice Council (FJC)
-*   Sentencing Council for England and Wales
-*   Office for Legal Complaints (Legal Ombudsman for England and Wales)
-*   The Official Solicitor to the Senior Courts
-*   The Public Trustee
-*   Prisons and Probation Ombudsman (PPO)
+* Criminal Injuries Compensation Authority (CICA)
+* Children and Family Court Advisory and Support Service (CAFCASS)
+* Criminal Cases Review Commission (CCRC)
+* Legal Services Board (LSB)
+* Parole Board for England and Wales
+* Youth Justice Board for England and Wales (YJB)
+* Civil Justice Council (CJC)
+* Family Justice Council (FJC)
+* Sentencing Council for England and Wales
+* Office for Legal Complaints (Legal Ombudsman for England and Wales)
+* The Official Solicitor to the Senior Courts
+* The Public Trustee
+* Prisons and Probation Ombudsman (PPO)
 
 #### Moving personal data
 
@@ -125,8 +125,8 @@ You should also check if a [privacy notice](https://ico.org.uk/for-organisations
 
 If a privacy notice already exists, you should update it to reflect use of the Analytical Platform. In particular, you should ensure the privacy notice informs individuals that their data will be:
 
-*   shared with Amazon Web Services, Inc. (AWS)
-*   stored outside of the UK but within the EU
+* shared with Amazon Web Services, Inc. (AWS)
+* stored outside of the UK but within the EU
 
 You should then complete the following steps, as for all movements of data onto the Analytical Platform.
 
@@ -138,7 +138,7 @@ For all data movements, you should obtain approval from the Information Asset Ow
 
 If the data movement involves a particularly complex integration (for example, an integration with another AWS account or database system) or is recurring, you must complete a technical migration form.
 
-You can find a template technical migration form [here](https://justiceuk.sharepoint.com/:w:/s/AnalyticalPlatform/EafJPVHk2NRCjZm1WGFPOJcBpkJ-pH8L2o0hKma2bsbWow?e=0pWGjc).
+You can find the template technical migration form in [Sharepoint](https://justiceuk.sharepoint.com/:w:/s/AnalyticalPlatform/EafJPVHk2NRCjZm1WGFPOJcBpkJ-pH8L2o0hKma2bsbWow?e=0pWGjc) or take a copy of [this one in Google Drive](https://drive.google.com/open?id=1xj4TzpyQBOAd84E1DqtLdvgjPZb2oJ38NTsIJrh4GQc).
 
 You should submit your completed technical migration form to the Analytical Platform team at [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
 
@@ -146,7 +146,7 @@ You should submit your completed technical migration form to the Analytical Plat
 
 For all data movements, you must complete a data movement form. Before completing a data movement form, you should ensure that you have already obtained all necessary approvals and completed all other information governance requirements.
 
-The data movement form can be found [here](https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUREVBSzk4WTg1WFk1OFU4V1QyWUE5VUoyNC4u).
+The data movement form can be found [here](https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUREVBSzk4WTg1WFk1OFU4V1QyWUE5VUoyNC4u). When you submit the form, it will be [processed by the Analytical Platform team](https://github.com/ministryofjustice/analytics-platform/wiki/Data-movement-requests).
 
 ## Reporting security incidents
 

@@ -9,6 +9,8 @@ A key element of ensuring analysis is reproducible is maintaining a record of th
 
 ### conda
 
+When exploring this section, you may also find the [slides](https://github.com/moj-analytical-services/coffee-and-coding-public/blob/master/2019-10-30%20Conda/conda.pdf) from the Coffee and Coding session on conda useful.
+
 Conda is a unified package management system that supports managing both Python and R dependencies in a single `environment`. It can make sure all of these libraries are compatible with each other. Conda is available for both RStudio and JupyterLab on the Analytical Platform, though note that RStudio and JupyterLab have separate environments so dependencies won't be shared between the applications.
 
 A key example within Analytical Services where conda is useful: both `dbtools` and `s3tools` rely on Python packages through the `reticulate` R-to-Python bridge. `packrat` only handles R dependencies; this means that `packrat` is not enough to reproducibly and reliably manage all of your application's dependencies.
@@ -36,9 +38,11 @@ Installing a package:
 
 ![](images/conda/conda_install_rcpp.gif)
 
+
 Installing a specific version of a package
 
 <div style="height:0px;font-size:0px;">&nbsp;</div>
+
 | `install.packages`                                                                                               | conda install                   |
 | ---------------------------------------------------------------------------------------------------------------- | ------------------------------- |
 | `require(devtools)`</br> `install_version("ggplot2", version = "2.2.1", repos = "http://cran.us.r-project.org")` | `conda install r-ggplot2=2.2.1` |
@@ -46,10 +50,7 @@ Installing a specific version of a package
 
 ![Specific version gif here](images/conda/conda_install_specific_version.gif)
 
-
-#### Python
-You can also use conda to install Python packages, for use in R through the `reticulate` package. Python packages do not require a prefix and can simply be installed using their
-name.
+You can also use conda to install Python packages, for use in R through the `reticulate` package. Python packages do not require a prefix and can simply be installed using theirname.
 
 #### Examples
 
