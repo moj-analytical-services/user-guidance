@@ -69,7 +69,7 @@ Your app can take one of several forms:
 4.  A list with `ui` and `server` components.
 5.  an R Shiny app object created by `shinyApp`.
 
-By default, the template contains `server.R` and `ui.R` files. However, you may wish to take a different approach depending on your requirements. For example, using `app.R`, it is possible to deploy R Shiny apps from within a package, as [here](https://github.com/RobinL/costmodelr/blob/b328902026bd1cce5d17b487e310c59725ea4d62/R/shiny_explorer.r#L20).
+By default, the template contains `server.R` and `ui.R` files. However, you may wish to take a different approach depending on your requirements. For example, using `app.R`, it is possible to deploy RShiny apps from within a package, as [here](https://github.com/RobinL/costmodelr/blob/b328902026bd1cce5d17b487e310c59725ea4d62/R/shiny_explorer.r#L20).
 
 ### Manage dependencies
 
