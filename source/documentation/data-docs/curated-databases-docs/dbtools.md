@@ -4,9 +4,9 @@
 
 ## R
 
-Please visit the repository for the R package [dbtools](https://github.com/moj-analytical-services/dbtools/) which gives details as to how to install and use the package.
+The [README](https://github.com/moj-analytical-services/dbtools/blob/master/README.md) in the [dbtools](https://github.com/moj-analytical-services/dbtools/) repository gives details on how to install and use the package with R.
 
 
 ## Python
 
-Please visit the repository for the Python package [pydbtools](https://github.com/moj-analytical-services/pydbtools/) which gives details as to how to install and use the package.
+The [README](https://github.com/moj-analytical-services/pydbtools/blob/master/README.md) in the [pydbtools](https://github.com/moj-analytical-services/pydbtools/) repository gives details on how to install and use the package with Python.
