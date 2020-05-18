@@ -184,7 +184,7 @@ The slides from from the ASD git training are [available here (dom1 access only)
 
 ## Safety barriers
 
-The platform has configured simple "safety barriers" to reduce risk of accidentally exposing sensitive data on GitHub. For example it stops you committing a CSV file, because in most circumstances you should not put data into GitHub - it should be kept in an S3 bucket where it can be shared with authorized people. These rules can be overridden if that makes more sense.
+The platform has configured simple "safety barriers" to reduce risk of accidentally exposing sensitive data on GitHub. For example it stops you committing a CSV file, because in most circumstances you should not put data into GitHub - it should be kept in an S3 bucket where it can be shared with authorized people (rather than the whole of DASD). This is the case even for internal or private repositories, because it doesn't take much to make these public in the future. These rules can be overridden if that makes more sense.
 
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 | What | How it's configured | Reasoning | How to override |
@@ -192,6 +192,7 @@ The platform has configured simple "safety barriers" to reduce risk of accidenta
 | Data files (.csv, .xls etc) & zip files | ~/.gitignore | You should not put data into GitHub - it should be kept in an S3 bucket where it can be shared with authorized people. | When you add the file: `git add -f <filename>` |
 | Zip files | ~/.gitignore | It's better to unpack these files and commit the raw source. You can't keep track of diffs of individual files if you keep them bundled up. There might be a data file lurking in the zip, which isn't checked if it is bundled like this. Note: git has its own built in compression methods. | When you add the file: `git add -f <filename>` |
 | Large files (>5 Mb) | ~/.git-templates/hooks/pre-commit | Likely to be data | When you commit: `git commit --no-verify` |
+| Notebook output stripping | ~/.git-templates/hooks/pre-commit | Jupyter Notebook output often contains data | When you commit: `ENABLE_NBSTRIPOUT=false; git commit` |
 | Pushing to non-official GitHub organizations | ~/.git-templates/hooks/pre-push | It would be outside MoJ control - not normally allowed. | When you push: `git push -f <remote> <branch>` |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
