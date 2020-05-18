@@ -77,13 +77,13 @@ Your app can take one of several forms:
 4.  A list with `ui` and `server` components.
 5.  an R Shiny app object created by `shinyApp`.
 
-By default, the template contains `server.R` and `ui.R` files. However, you may wish to take a different approach depending on your requirements. For example, using `app.R`, it is possible to deploy RShiny apps from within a package, as [here](https://github.com/RobinL/costmodelr/blob/b328902026bd1cce5d17b487e310c59725ea4d62/R/shiny_explorer.r#L20).
+By default, the template contains `server.R` and `ui.R` files. However, you may wish to take a different approach depending on your requirements. For example, using `app.R`, it is possible to deploy RShiny apps from within a package, as in this [example from the costmodelr package](https://github.com/RobinL/costmodelr/blob/b328902026bd1cce5d17b487e310c59725ea4d62/R/shiny_explorer.r#L20).
 
 ### Manage dependencies
 
 Most apps will have dependencies on various third-party packages (e.g., `dplyr`). These packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as packrat, renv, or conda.
 
-There is more guidance on package management [here.](https://user-guidance.services.alpha.mojanalytics.xyz/appendix/conda/#package-management)
+You can find further guidance in the [package management](https://user-guidance.services.alpha.mojanalytics.xyz/appendix/conda/#package-management) section.
 
 If using packrat, ensure that it is enabled for your project in RStudio.
 
@@ -103,7 +103,7 @@ The `allowed_ip_ranges` parameter controls where your app can be accessed from. 
 
 The `disable_authentication` parameter controls whether sign-in (using a link or one-time passcode sent to an authorised email address) is required for users to access the app when on an allowed network. It can take the values `true` or `false`. In general, this should be set to `false`.
 
-When `disable_authentication` is set to `true`, users do not need to go through a sign-in process but can still only access an app using a system specified in `allowed_ip_ranges`. This is a relatively weak security measure, as discussed [here](https://ministryofjustice.github.io/security-guidance/standards/authentication/#ip-addresses). As such, if you wish to disable authentication, you should first discuss this with the Analytical Platform team.
+When `disable_authentication` is set to `true`, users do not need to go through a sign-in process but can still only access an app using a system specified in `allowed_ip_ranges`. This is a relatively weak security measure, as discussed in the [MoJ security guidance on IP addresses](https://ministryofjustice.github.io/security-guidance/standards/authentication/#ip-addresses). As such, if you wish to disable authentication, you should first discuss this with the Analytical Platform team.
 
 Changes to `deploy.json` only take effect when they are committed to GitHub, a release is created and the deployment is successful.
 
@@ -128,7 +128,7 @@ If your app does not deploy automatically, you should first check that the pipel
 
 If the app still does not deploy automatically, you can manually trigger a build by pressing the `+` icon in the top right corner of Concourse.
 
-For more information about using Concourse, see [here](/build-deploy.html).
+For more information about using Concourse, see the [build and deploy](/build-deploy.html) section.
 
 ### Manage app users
 
@@ -167,7 +167,7 @@ In most cases, you will not need to change the `Dockerfile` when deploying your 
 
 If your app uses packages that have additional system dependencies, you will need to add these in the `Dockerfile`. If you are unsure how to do this, contact the Analytical Platform team.
 
-A `Dockerfile` reference can be found [here](https://docs.docker.com/engine/reference/builder/).
+A `Dockerfile` reference can be found in the [Docker documentation](https://docs.docker.com/engine/reference/builder/).
 
 ### Getting the current user of the app
 
@@ -255,7 +255,7 @@ In general, it is also good practice to:
 
 ### App sign-in
 
-Some anti-virus software and spam filters pre-click links in emails, meaning that app sign-in links do work. In this case, you should sign in using a one-time passcode, as described [here](#access-the-app).
+Some anti-virus software and spam filters pre-click links in emails, meaning that app sign-in links do work. In this case, you should sign in using a one-time passcode, as described in [access the app](#access-the-app) section.
 
 ### Packrat
 
@@ -297,7 +297,7 @@ Kibana also has experimental autocomplete and simple syntax tools that you can u
 
 ### Deploying locally
 
-If you have a MacBook, you can use Docker locally to test and troubleshoot your RShiny app. You can download Docker Desktop for Mac [here](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
+If you have a MacBook, you can use Docker locally to test and troubleshoot your RShiny app. You can download Docker Desktop for Mac from the [Docker website](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
 
 To build and run your R Shiny app locally, follow the steps below:
 
