@@ -269,32 +269,37 @@ The platform has configured simple "safety barriers" to reduce risk of accidenta
 
 ## Private R packages on GitHub: PAT authentication
 
-### Private and public repositories
+### Public, internal and private repositories
 
-GitHub repositories can be public or private.
+GitHub repositories can public, internal or private.
 
-In either case, repos should contain **no passwords/secrets and no data** (apart from small reference tables) - this is particulary important for public repos, but applies to private ones too. And remember that GitHub shows the *full history* of files and changes in your repo, so removing these things requires special effort.
+In any case, repos should contain **no passwords/secrets and no data** (apart from small reference tables) - this is particulary important for public repos, but applies to internal and private ones too. And remember that GitHub shows the *full history* of files and changes in your repo, so removing these things requires special effort.
 
 A *public repo* is visible to the world. Again, it is particulary important these contain no passwords/secrets or data.
 
-A *Private repo* is internal to the `moj-analytical-services` GitHub organisation and not visible to the outside world.
-The repo's Owners and Admins can control which people / teams can see the repo on GitHub by going to **_Settings_ > _Collaborators & Teams_** and adding teams to read/write/admin access groups.
-To maximise collaboration _within_ the organisation but still keep code that shouldn't be in the public domain (e.g. unpublished commentary on a `.Rmd` file) hidden from anyone _outside_ the organisation, you can add the group `everyone` here.
-This also makes your code [searchable](../github.html#other-tips-and-tricks).
+An *internal repo* is internal to the `moj-analytical-services` GitHub organisation and not visible to the outside world. The repo's Owners and Admins can control which people / teams can see the repo on GitHub by going to **_Settings_ > _Collaborators & Teams_** and adding teams to read/write/admin access groups. ('Internal' is equivalent to 'private' but adding the group `everyone` with read permission.)
+
+A *Private repo* is visible only to the users/team specifically added to the repo by the repo's owners (or organization admins). Configure this here: **_Settings_ > _Collaborators & Teams_**
 
 #### Choosing public, internal or private repos
 
-As an organization we aspire to use public repos by default.
+As an organization we aspire to use *public* repos by default.
 There are a host of [benefits of coding in the open](https://gds.blog.gov.uk/2017/09/04/the-benefits-of-coding-in-the-open/).
 With research and analysis it builds trust and transparency with the public, and reproducible methods allows others to test and build on your work.
 
 However, it requires more discipline to avoid mistakes like slipping secrets and sensitive information, so tends to require more experienced developers and care over any political sensitivities related to the topics your analysis covers: open-source coding is continuous and worldwide publishing.
 
-As a result, sometime Internal and Private repos are necessary, for example when it reveals a sensitive policy change that is not yet announced.
+As a result, sometime *internal* and *private* repos are necessary, for example when it reveals a sensitive policy change that is not yet announced.
 
-* Internal - not visible to the public. However it allows other users of MOJ Analytical Platform to read the code, which is good for learning and sharing methods.
+In this case, an *internal* repo has huge benefits over a *private repo* because it gives the code visibility amongst internal users:
 
-* Private - only the team working on it can view it. It is unlikely to be appropriate for MoJ work.
+* it is good for learning and sharing methods
+* it is good for collaboration
+* it makes your code [searchable](../github.html#other-tips-and-tricks).
+
+Choosing *internal* still keeps code that shouldn't be in the public domain (e.g. unpublished commentary on a `.Rmd` file) hidden from anyone _outside_ the organisation.
+
+*Private* repos are unlikely to be appropriate for MoJ work, but are available if necessary.
 
 If in doubt, discuss with your manager and/or the AP team.
 
