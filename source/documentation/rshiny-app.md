@@ -308,7 +308,7 @@ To build and run your R Shiny app locally, follow the steps below:
     where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `0.1`.
 4.  Run a Docker container created from the Docker image by running:
     ```{bash}
-    docker run -p 80:80 IMAGE:TAG
+    docker run -p 80:9999 IMAGE:TAG
     ```
 5.  Go to [127.0.0.1:80](127.0.0.1:80) to view the app.
 
