@@ -24,12 +24,13 @@ To create a new repository based on the Shiny app template:
 1. Go to the [rshiny-template](https://github.com/moj-analytical-services/rshiny-template) repository.
 2. Press the "Branch: master" button and choose a suitable branch, according to the requirements of your app:
 
-   | Branch | How it will run your Shiny app   |
-   |--------|----------------------------------|
-   | master | R 3.5.1 with Conda packaging |
-   | r-3.4  | R 3.4.2 with Packrat packaging |
+    | Branch | How it will run your Shiny app   |
+    |--------|----------------------------------|
+    | master | R 3.5.1 with Conda packaging     |
+    | r-3.4  | R 3.4.2 with Packrat packaging   |
 
-   It's recommended when you start a new project to upgrade your R Studio version to the latest offered in Control Panel, and select an R Shiny template from this list that matches the R version you have in R Studio.
+    It's recommended when you start a new project to upgrade your R Studio version to the latest offered in Control Panel, and select an R Shiny template from this list that matches the R version you have in R Studio.
+
 3. Select __Use this template__.
 4. Fill in the form:
     + Owner: `moj-analytical-services`
