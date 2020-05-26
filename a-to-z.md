@@ -24,7 +24,7 @@ Use app to refer to all types of app on the Analytical Platform. Do not use the 
 Use the following terms to refer to specific types of app:
 
 * Dash app
-* RShiny app
+* R Shiny app
 * static web app
 
 ### Concourse
@@ -83,8 +83,8 @@ Do not use the term repo.
 ### Repository names
 Enclose the names of GitHub repositories in single backticks so they are displayed as inline code. For example \`user-guidance\`, would be displayed as `user-guidance`.
 
-### RShiny
-Upper case. No space or hyphen.
+### R Shiny
+Upper case.
 
 ### RStudio
 Upper case. No space or hyphen.
