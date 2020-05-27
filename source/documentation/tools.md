@@ -36,8 +36,8 @@ For R:
 For Python:
 
 * **venv** and **pip** - Recommended for Python in Analytical Platform, because it's easier and more reliable than conda.
-* **conda environment** installing packages with just **conda** - can help when you have a package package with a C extension that pip struggles with compiling or installing the binaries
-* **conda environment** installing packages with **conda** and **pip** - gives you the broadest range of package install options. However conda and pip don't play wonderfully together, so can be annoying - not recommended.
+* **conda environment** installing packages with just **conda** - not recommended, but it might help when you have a package package with a C extension that pip struggles with compiling or installing the binaries
+* **conda environment** installing packages with **conda** and **pip** - not recommended, but gives you the broadest range of package install options. However conda and pip don't play well together - use at your own risk!
 
 ## Conda
 
@@ -188,6 +188,16 @@ Furthermore, the Analytical Platform version of RStudio runs on a Linux virtual 
 
 ## venv and pip
 
+### Intro to pip, PyPI and virtual environments
+
+[pip](https://pip.pypa.io/en/stable/) is a terminal command used to install and upgrade Python packages.
+
+[PyPI](https://pypi.org) is the main Python package repository. It's 'official', but that doesn't mean a lot - like most of these open source package repositories, a poor quality or even malicious package can easily be uploaded there, so do your diligence when picking them.
+
+A [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) (or `venv`, for short) is a directory you can install a particular python executable and python packages into, away from your machine's default ones. Typically each project/repo you work on should have a different venv, and then you never have to deal with conflicting requirements between projects. When you 'activate' a particular venv, then when you run `python` or `pip`, then it will work with the venv's python executale and python packages.
+
+### Setup Jupyter to use a venv
+
 When you want to use venv with Jupyter you also have to create a Jupyter kernel that links your Jupyter notebook instance to the virtual environment you created, i.e. telling it 'whenever I want to run a python command divert it through this python copy which is my virtual environment rather than the base one'.
 
 When you run `source venvname/bin/activate` in the terminal it is only making that diversion for other things that go on in the terminal (or in an IDE like VSCode it picks this cue up too), so you need to do another step in Jupyter.
@@ -199,6 +209,7 @@ So say I’m starting a new project I need to do this:
     ```bash
     python3 -m venv venvname
     ```
+    Tip: In case you're wondering about the differences of `python` vs `python3` (and `pip` vs `pip3`), adding the `3` just makes sure you're using Python 3, instead of the old standard Python 2. This isn't a problem for Analytical Platform, or other recent Linux and MacOS releases, which default to Python 3. But if in case you find yourself using older OSs, you might like to get in the habit of specify the `3` when you create the venv (`python3 -m venv venvname`). Once you've activating the venv you'll always get Python 3.
 
 2. Activate the environment in the terminal to divert any terminal commands (e.g. pip installs): (terminal)
 
@@ -209,9 +220,9 @@ So say I’m starting a new project I need to do this:
 3. Install the module ipykernel within this venv (for creating/managing kernels for ipython which is what jupyter sits on top of): terminal (with venv activated)
 
     ```bash
-    pip3 install ipykernel
+    pip install ipykernel
     ```
-   (before this step `pip3 list` should show almost none if any packages; after it will have about 10 as this has quite a few deps)
+   (before this step `pip freeze` should show almost none if any packages; after it will have about 10 as this has quite a few deps)
 4. Create a kernel attached to this virtual environment so Jupyter knows it exists: terminal (with venv activated)
 
     ```bash
@@ -230,7 +241,11 @@ To resume work on this after working on another project:
    to activate the venv in terminal, which enables you to use the installed packages and install more packages to there.
 2. Open the notebook - it’s remembered which kernel you wanted to use for this notebook and you can carry on working with the packages available.
 
-The `myvenv` folder should not be added into git. You should add `venv/` to your .gitignore to avoid this.
+Note: *Once you have associated the kernel with the venv you dont need to recreate/update it*. Any packages that are installed to the venv via pip after the kernel is established also carry through and are available to the kernel (thats why I find it useful to picture the kernel as a dude diverting traffic)
+
+### venv usage
+
+A venv folder (`myvenv` in the example above) should not be added into git. You should add `venv/` to your .gitignore to avoid this.
 
 You should write a `requirements.txt` (called this by tradition not necessity), so that other users know what packages are needed. i.e. the next user just needs to:
 
@@ -239,9 +254,3 @@ You should write a `requirements.txt` (called this by tradition not necessity), 
 3. Install packages using:
    ```pip3 install -r requirements.txt```
 4. Create a Kernel attached to this venv (using step (4) from first post).
-
-Tips:
-
-* *Once you have associated the kernel with the venv you dont need to recreate/update it*. Any packages that are installed to the venv via pip after the kernel is established also carry through and are available to the kernel (thats why I find it useful to picture the kernel as a dude diverting traffic)
-
-* To clear up doubt about `python` vs `python3` and `pip` vs `pip3`, it's best to be in the habit of specifying the `3` in these commands, just in case you find yourself on a machine (like in MacOS) which still defaults to Python 2 versions, which is not really used any more at MoJ.
