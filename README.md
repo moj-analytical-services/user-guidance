@@ -20,13 +20,13 @@ To make changes to the documentation for the Tech Docs Template website, edit fi
 
 The `.html.md.erb` files control the structure of the guidance. These files support content in:
 
-- Markdown
-- HTML
-- Ruby
+* Markdown
+* HTML
+* Ruby
 
 They are generally of the form:
 
-```
+```yaml
 ---
 title: Page title
 weight: 10
@@ -52,12 +52,11 @@ To find out more about how to work with Markdown files, see the [Change your con
 
 ### Style
 
-When contributing to the user guidance, you should make sure that your changes: 
+When contributing to the user guidance, you should make sure that your changes:
+
 * are consistent with the Government Digital Service (GDS) [style guide][style-guide]
 * meet [government accessibility requirements][accessibility] as far as possible
 * follow the spelling and grammar conventions outlined in the Analytical Platform [A to Z][a-to-z].
-
-You should use the terminology 
 
 ## Preview your changes locally
 
