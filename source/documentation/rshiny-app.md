@@ -24,7 +24,7 @@ To create a new repository based on the Shiny app template:
 1. Go to the [rshiny-template](https://github.com/moj-analytical-services/rshiny-template) repository.
 2. Press the "Branch: master" button and choose a suitable branch, according to the requirements of your app:
 
-    | Branch | How it will run your Shiny app   |
+    | Branch | How it will run your R Shiny app   |
     |--------|----------------------------------|
     | master | R 3.5.1 with Conda packaging     |
     | r-3.4  | R 3.4.2 with Packrat packaging   |
