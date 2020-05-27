@@ -34,15 +34,19 @@ Your task appears in Concourse within 30 seconds. Find it in Concourse to start 
     * Brown = aborted
     * Orange = errored
 7. To start the job (this first time): Click *play* (on the left, against your repo name) AND the "*+*":
-   ![Play and "+" buttons](images/build_and_deploy/concourse_new_build.png)
 
-   It should go grey (pending)
-   ![Pending state](images/build_and_deploy/concourse_pending.png)
+    ![Play and "+" buttons](images/build_and_deploy/concourse_new_build.png)
 
-   After 30 seconds it should got yellow (building). If it does not go yellow, check the task is not paused (and possibly the job itself is paused) - press play if is showing.
-   ![In progress state](images/build_and_deploy/concourse_in_progress.png)
+    It should go grey (pending):
 
-   It will build/deploy, taking 5 minutes to an hour. You can track progress and see any errors like this:
-   ![Error state](images/build_and_deploy/concourse_error.png)
+    ![Pending state](images/build_and_deploy/concourse_pending.png)
+
+    After 30 seconds it should got yellow (building). If it does not go yellow, check the task is not paused (and possibly the job itself is paused) - press play if is showing.
+
+    ![In progress state](images/build_and_deploy/concourse_in_progress.png)
+
+    It will build/deploy, taking 5 minutes to an hour. You can track progress and see any errors like this:
+
+    ![Error state](images/build_and_deploy/concourse_error.png)
 
 Subsequent build/deploys are started about 5 seconds after doing a GitHub release (unless someone pressed the pause button on the Concourse task). You have to refresh Concourse in your browser to see a fresh build.
