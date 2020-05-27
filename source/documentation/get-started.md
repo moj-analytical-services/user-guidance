@@ -61,6 +61,11 @@ You must configure 2FA for the Analytical Platform using a mobile app (on your p
 
 The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
 
+If you're going to use RStudio or Jupyter then the next step should be:
+
+* [deploy and open RStudio or Jupyter](tools.html#managing-your-analytical-tools)
+* [setup to access GitHub from RStudio or Jupyter](github.html#setup-github-keys-to-access-it-from-rstudio-and-jupyter)
+
 You may also need to access other services and tools on the Analytical Platform:
 
 * [Airflow](https://airflow.tools.alpha.mojanalytics.xyz)
@@ -68,11 +73,6 @@ You may also need to access other services and tools on the Analytical Platform:
 * [Concourse](https://concourse.services.alpha.mojanalytics.xyz)
 * [Grafana](https://grafana.services.alpha.mojanalytics.xyz)
 * [Kibana](https://kibana.services.alpha.mojanalytics.xyz)
-
-If you're going to use R Studio or Jupyter then the next step should be:
-
-* [deploy and open R Studio or Jupyter](tools.html#deploy-analytical-tools)
-* [setup to access GitHub from R Studio or Jupyter]()
 
 ## Contact us
 
