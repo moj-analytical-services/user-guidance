@@ -29,7 +29,7 @@ To create a new repository based on the Shiny app template:
     | master | R 3.5.1 with Conda packaging     |
     | r-3.4  | R 3.4.2 with Packrat packaging   |
 
-    It's recommended when you start a new project to upgrade your R Studio version to the latest offered in Control Panel, and select an R Shiny template from this list that matches the R version you have in R Studio.
+    It's recommended, when you start a new project, to upgrade your RStudio version to the latest offered in Control Panel, and select an R Shiny template from this list that matches the R version you have in RStudio.
 
 3. Select __Use this template__.
 4. Fill in the form:
