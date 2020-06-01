@@ -209,7 +209,7 @@ So say I’m starting a new project I need to do this:
     ```bash
     python3 -m venv venvname
     ```
-    Tip: In case you're wondering about the differences of `python` vs `python3` (and `pip` vs `pip3`), adding the `3` just makes sure you're using Python 3, instead of the old standard Python 2. This isn't a problem for Analytical Platform, or other recent Linux and MacOS releases, which default to Python 3. But if in case you find yourself using older OSs, you might like to get in the habit of specify the `3` when you create the venv (`python3 -m venv venvname`). Once you've activating the venv you'll always get Python 3.
+    Tip: In case you're wondering about the differences of `python` vs `python3`, adding the `3` just makes sure you're using Python 3, instead of the old standard Python 2. This isn't a problem for Analytical Platform, or other recent Linux and MacOS releases, which default to Python 3. But if in case you find yourself using older OSs, you might like to get in the habit of specify the `3` when you create the venv (`python3 -m venv venvname`). Once you've activating the venv you'll always get Python 3.
 
 2. Activate the environment in the terminal to divert any terminal commands (e.g. pip installs): (terminal)
 
@@ -220,9 +220,9 @@ So say I’m starting a new project I need to do this:
 3. Install the module ipykernel within this venv (for creating/managing kernels for ipython which is what jupyter sits on top of): terminal (with venv activated)
 
     ```bash
-    pip install ipykernel
+    pip3 install ipykernel
     ```
-   (before this step `pip freeze` should show almost none if any packages; after it will have about 10 as this has quite a few deps)
+   (before this step `pip3 freeze` should show almost none if any packages; after it will have about 10 as this has quite a few deps)
 4. Create a kernel attached to this virtual environment so Jupyter knows it exists: terminal (with venv activated)
 
     ```bash
