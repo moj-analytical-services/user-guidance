@@ -244,7 +244,7 @@ Create a new pull request and request a review from `moj-analytical-services/dat
 
 When you merge your pull request into the master branch, your pipeline will be automatically detected by Airflow.
 
-You can view your pipeline in the Airflow UI at [airflow.services.alpha.mojanalytics.xyz](https://airflow.services.alpha.mojanalytics.xyz). You can find more information on using the Airflow UI in the [Airflow documentation](https://airflow.apache.org/docs/stable/ui.html).
+You can view your pipeline in the Airflow UI at [airflow.tools.alpha.mojanalytics.xyz](https://airflow.tools.alpha.mojanalytics.xyz). You can find more information on using the Airflow UI in the [Airflow documentation](https://airflow.apache.org/docs/stable/ui.html).
 
 ## Testing
 
