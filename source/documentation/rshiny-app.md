@@ -37,8 +37,6 @@ To create a new repository based on the Shiny app template:
     + Privacy: Private
 5. Select __Create repository from template__. This copies the entire contents of the app template to a new repository.
 
-__NOTE__: In order to use conda in your RShiny app, you will need to use the [conda branch of the rshiny-template repository](https://github.com/moj-analytical-services/rshiny-template/tree/conda). If your application requires the use of Python, including using `dbtools` to query Amazon Athena databases, you will need to use the conda version of the app template.
-
 ### Create a new webapp
 
 To create a new webapp or webapp data source, ask the Analytical Platform team on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
