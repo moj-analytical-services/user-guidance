@@ -1,14 +1,89 @@
-# Using Github with the platform
+# Using GitHub with the platform
 
-Before you can use Github with R Studio or Jupyter, you need to connect them together by creating an 'ssh key'. Full guidance is [here](../introduction.html#create-an-ssh-key)
+Code written on the Analytical Platform should be stored in a git repository on GitHub. This includes R, Python and notebooks. Be careful NOT to include data or [secrets](#secrets-and-passwords) on GitHub. (Data goes in [S3 buckets](../data.html) and secrets, such as passwords or API keys, should be in Parameter Store.)
+
+**Note** Before you can use Github with R Studio or Jupyter, you need to connect them together by creating an 'ssh key'. Full guidance is [here](#setup-github-keys-to-access-it-from-r-studio-and-jupyter).
 
 Github enables you to collaborate with colleagues on code and share you work with them. It puts your code in a centralised, searchable place. It enables easier and more robust approaches to quality assurance, and it enables you to version control your work. More information about the benefits of Github can be found [here](../annexes.html#what-are-the-benefits-of-github-and-why-do-we-recommend-it).
 
 If you are new to Git and Github, it is worth clarifying the difference between Git and Github. Git is the software that looks after the version control of code, whereas Github is the website on which you publish and share your version controlled code. In practice this means you use Git to track versions of your code, and then submit those changes to Github.
 
-This guide provides a step-by-step guide of how to create a GitHub project repo, followed by how to sync with it in R Studio and Jupyter.
+Follow the step-by-step guide [of how to create a GitHub project repo](#creating-your-project-repo-on-github), followed by how to sync with it in R Studio and Jupyter.
 
 Note: If any of the animated gifs below do not display correctly, try a different web browser e.g. Microsoft Edge, which is installed on your DOM1 machine.
+
+## Setup GitHub keys to access it from R Studio and Jupyter
+
+To configure Git and GitHub for the Analytical Platform, you must complete the following steps:
+
+1. [Create an SSH key](#create-an-ssh-key).
+2. [Add the SSH key to GitHub](#add-the-ssh-key-to-github).
+3. [Configure your username and email in Git on the Analytical Platform](#configure-your-username-and-email-in-git-on-the-analytical-platform).
+
+### Create an SSH key
+
+You can create an SSH key in RStudio or JupyterLab. We recommend that you use RStudio.
+
+#### RStudio
+
+To create an SSH key in RStudio, follow the steps below:
+
+1. Open RStudio from the Analytical Platform control panel.
+2. In the menu bar, select __Tools__ then __Global Options...__
+3. In the options window, select __Git/SVN__ in the navigation menu.
+4. Select __Create RSA key...__
+5. Select __Create__.
+6. Select __Close__ when the information window appears.
+7. Select __View public key__.
+8. Copy the SSH key to the clipboard by pressing Ctrl+C on Windows or ⌘C on Mac.
+
+#### JupyterLab
+
+To create an SSH key in JupyterLab, follow the steps below:
+
+1. Open JupyerLab from the Analytical Platform control panel.
+2. Select the __+__ icon in the file browser to open a new Launcher tab.
+3. Select __Terminal__ from the 'Other' section.
+4. Create an SSH key by running:
+
+    ```bash
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    ```
+   Here, you should substitute the email address you used to sign up to GitHub.
+5. When prompted to enter a file in which to save the key, press Enter to accept the default location.
+6. When prompted to enter a passphrase, press Enter to not set a passphrase.
+7. View the SSH key by running:
+
+    ```bash
+    cat /home/jovyan/.ssh/id_rsa.pub
+    ```
+8. Select the SSH key and copy it to the clipboard by pressing Ctrl+C on windows or ⌘C on Mac.
+
+### Add the SSH key to GitHub
+
+To add the SSH key to GitHub, you should follow the guidance [here](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account).
+
+### Configure you username and email in Git on the Analytical Platform
+
+To configure your username and email in Git on the Analytical Platform using RStudio or JupyterLab, follow the steps below:
+
+1. Open a new terminal:
+    * In RStudio, select __Tools__ in the menu bar and then __Shell...__
+    * In JupyterLap, select the __+__ icon in the file browser and then select __Terminal__ from the __Other__ section in the new Launcher tab.
+2. Configure your username by running:
+
+     ```bash
+     git config --global user.name 'Your Name'
+     ```
+    Here, you should substitute your GitHub username.
+3. Configure your email address by runnung:
+
+     ```bash
+     git config --global user.email 'your_email@example.com'
+     ```
+    Here, you should substitute the email address you used to sign up to GitHub.
+
+See [using GitHub with platform](/github.html).
 
 ## Creating your project repo on GitHub
 
@@ -31,7 +106,6 @@ Notes:
 * Leave your repository 'private' for now - the default setting. In the next step you will add access to colleagues and possibly make it 'public' (on the internet).
 
 * Make sure the owner is set to 'moj-analytical-services'. This is the default setting, so long as you have clicked on 'New' from the MoJ Analytical Services [homepage](https://github.com/moj-analytical-services).
-
 
 ### Step 2:  Navigate to your new Repository on GitHub to decide who can see your code
 
@@ -58,7 +132,7 @@ Here's how you can sync with your new GitHub repo in R Studio.
 
 ### Step 1:  Navigate to your platform R Studio and make a copy of the Github project in your R Studio
 
-In this step, we create a copy of the definitive GitHub project in your personal R Studio workspace.  This means you have a version of the project which you can work on and change.
+In this step, we create a copy of the definitive GitHub project in your personal R Studio workspace. This means you have a version of the project which you can work on and change.
 
 Follow the steps in this gif:
 
@@ -92,7 +166,6 @@ In R Studio, click the 'Push' button (the green up arrow).  This will send any c
 Notes:
 
 * After pushing, make sure you refresh the GitHub page in your web browser to see changes.
-
 
 **That's it!  If you're working on a personal project, and are not collaborating with others, those three basic steps will allow you to apply version control to your work with Github**
 
@@ -147,8 +220,6 @@ Make changes to the code, commit them, and push them to Github.
 
 ![](images/github/make_changes_and_push.gif)
 
-
-
 ### Step 4: View changes on Github and create pull request
 
 You can now view the changes in Github.
@@ -175,12 +246,12 @@ If you are new to git and you want to learn more, we recommend that you complete
 
 The slides from from the ASD git training are [available here (dom1 access only)](file://dom1.infra.int/data/hq/102PF/Shared/Group_LCDSHD2/Analytical Services/ASD Training/Training materials/git/git_training_slides.pdf)
 
-- [Using Github with R](http://happygitwithr.com/)
-- [Introductory interactive tutorial](https://try.github.io/levels/1/challenges/1).
-- Quickstart guide and cheatsheet [here](http://rogerdudler.github.io/git-guide/) and in pdf format  [here](http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf).
-- More in depth materials:
-    - [Learn Git branching](http://learngitbranching.js.org/)
-    - [Git from the inside out](https://maryrosecook.com/blog/post/git-from-the-inside-out)
+* [Using Github with R](http://happygitwithr.com/)
+* [Introductory interactive tutorial](https://try.github.io/levels/1/challenges/1).
+* Quickstart guide and cheatsheet [here](http://rogerdudler.github.io/git-guide/) and in pdf format  [here](http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf).
+* More in depth materials:
+  * [Learn Git branching](http://learngitbranching.js.org/)
+  * [Git from the inside out](https://maryrosecook.com/blog/post/git-from-the-inside-out)
 
 ## Safety barriers
 
@@ -198,34 +269,43 @@ The platform has configured simple "safety barriers" to reduce risk of accidenta
 
 ## Private R packages on GitHub: PAT authentication
 
-### Private and public repositories
+### Public, internal and private repositories
 
-GitHub repositories can be public or private.
+GitHub repositories can public, internal or private.
 
-In either case, repos should contain **no passwords/secrets and no data** (apart from small reference tables) - this is particulary important for public repos, but applies to private ones too. And remember that GitHub shows the *full history* of files and changes in your repo, so removing these things requires special effort.
+In any case, repos should contain **no passwords/secrets and no data** (apart from small reference tables) - this is particulary important for public repos, but applies to internal and private ones too. And remember that GitHub shows the *full history* of files and changes in your repo, so removing these things requires special effort.
 
 A *public repo* is visible to the world. Again, it is particulary important these contain no passwords/secrets or data.
 
-A *Private repo* is internal to the `moj-analytical-services` GitHub organisation and not visible to the outside world.
-The repo's Owners and Admins can control which people / teams can see the repo on GitHub by going to **_Settings_ > _Collaborators & Teams_** and adding teams to read/write/admin access groups.
-To maximise collaboration _within_ the organisation but still keep code that shouldn't be in the public domain (e.g. unpublished commentary on a `.Rmd` file) hidden from anyone _outside_ the organisation, you can add the group `everyone` here.
-This also makes your code [searchable](../github.html#other-tips-and-tricks).
+An *internal repo* is internal to the `moj-analytical-services` GitHub organisation and not visible to the outside world. The repo's Owners and Admins can control which people / teams can see the repo on GitHub by going to **_Settings_ > _Collaborators & Teams_** and adding teams to read/write/admin access groups. ('Internal' is equivalent to 'private' but adding the group `everyone` with read permission.)
 
-#### Choosing public or private repos
+A *Private repo* is visible only to the users/team specifically added to the repo by the repo's owners (or organization admins). Configure this here: **_Settings_ > _Collaborators & Teams_**
 
-As an organization we aspire to use public repos by default.
+#### Choosing public, internal or private repos
+
+As an organization we aspire to use *public* repos by default.
 There are a host of [benefits of coding in the open](https://gds.blog.gov.uk/2017/09/04/the-benefits-of-coding-in-the-open/).
 With research and analysis it builds trust and transparency with the public, and reproducible methods allows others to test and build on your work.
 
 However, it requires more discipline to avoid mistakes like slipping secrets and sensitive information, so tends to require more experienced developers and care over any political sensitivities related to the topics your analysis covers: open-source coding is continuous and worldwide publishing.
 
-As a result, sometime Private repos can be necessary, for example when it reveals a sensitive policy change that is not yet announced.
+As a result, sometime *internal* and *private* repos are necessary, for example when it reveals a sensitive policy change that is not yet announced.
+
+In this case, an *internal* repo has huge benefits over a *private repo* because it gives the code visibility amongst internal users:
+
+* it is good for learning and sharing methods
+* it is good for collaboration
+* it makes your code [searchable](../github.html#other-tips-and-tricks).
+
+Choosing *internal* still keeps code that shouldn't be in the public domain (e.g. unpublished commentary on a `.Rmd` file) hidden from anyone _outside_ the organisation.
+
+*Private* repos are unlikely to be appropriate for MoJ work, but are available if necessary.
 
 If in doubt, discuss with your manager and/or the AP team.
 
 ### Private R packages for reproducible analysis
 
-When a repo (e.g. an R package) is private you need to use a Personal Access Token (PAT) to access it from R. This token acts much like a password to your personal GitHub account. If you don't use the token then you get: `Error: HTTP error 404. Not Found`. (GitHub doesn't even acknowledge the existence of the repo, to avoid speculative searching for private repositories.)
+When a repo (e.g. an R package) is internal or private you need to use a Personal Access Token (PAT) to access it from R. This token acts much like a password to your personal GitHub account. If you don't use the token then you get: `Error: HTTP error 404. Not Found`. (GitHub doesn't even acknowledge the existence of the repo, to avoid speculative searching for private repositories.)
 
 ### Generating a PAT
 
@@ -274,7 +354,7 @@ Now your code can include `remotes::install_github` to install an R package from
 
 Putting the secret in ~/.Rprofile - a file outside your repo directories - avoids the serious error of putting the token (a secret) in your repo.
 
-**Security reminder**
+#### Secrets and passwords
 
 Never put a secret or password in your code. Even when the repo is private. See MOJ policy: <https://ministryofjustice.github.io/security-guidance/standards/secrets-management/#application--infrastructure-secrets>
 
