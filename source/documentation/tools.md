@@ -35,9 +35,11 @@ For R:
 
 For Python:
 
-* [**venv** and **pip**](#venv-and-pip) - Recommended for Python in Analytical Platform, because it's easier and more reliable than conda.
-* [**conda environment**](#conda) installing packages with just **conda** - not recommended, but it might help when you have a package package with a C extension that pip struggles with compiling or installing the binaries
+* [**venv** and **pip**](#venv-and-pip) - Recommended for Python in Analytical Platform, because it's easier, more reliable and has a much bigger community than conda.
+* [**conda environment**](#conda) installing packages with just **conda** - not recommended, but it might help for the occasional package whose C extension doesn't install well with pip (perhaps the pip package isn't the newer 'wheel' type, or it doesn't have a binary suitable for our distribution)
 * [**conda environment**](#conda) installing packages with **conda** and **pip** - not recommended, but gives you the broadest range of package install options. However conda and pip don't play well together - use at your own risk!
+
+**Note on support:** the Analytical Platform team does not offer support on the topic of packaging. DASD users are encouraged to use their #r, #conda and #python Slack channels to support each other, or ask your line manager about training. Of course, if there is something broken with the platform itself, or something unique about the platform that prevents you from installing a library, then of course do raise it with the team in the normal ways.
 
 ## Conda
 
