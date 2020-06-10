@@ -185,6 +185,16 @@ It has some significant downsides. It can be quite temperamental, and difficult 
 
 Furthermore, the Analytical Platform version of RStudio runs on a Linux virtual machine, and CRAN mirrors do not provide Linux compiled binaries for packages. This means that packages need to be compiled on the Analytical Platform every time they're installed, which can take a long time. This means a long wait when doing `install.packages` both in an RStudio session, and when running a Docker build for an RShiny application.
 
+### Packrat usage
+
+To use packrat, ensure that it is enabled for your project in RStudio: select __Tools__ > __Project Options...__ > __Packrat__ > __Use packrat with this project__.
+
+When packrat is enabled, run `packrat::snapshot()` to generate a list of packages used in the project, their sources and their current versions.
+
+You may also wish to run `packrat::clean()` to remove unused packages from the list.
+
+The list is stored in a file called `packrat/packrat.lock`. You must ensure that you have committed this file to GitHub before deploying your app.
+
 ### Renv
 
 [Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package billed as "Packrat 2.0". This has a number of improvements over Packrat, in the speed of download and reduction of issues of 00LOCK files that often plague Packrat. However, it is still not able to deal with OS-level dependencies, so conda is still preferred.
