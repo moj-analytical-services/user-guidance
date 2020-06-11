@@ -41,6 +41,102 @@ For Python:
 
 **Note on support:** the Analytical Platform team does not offer support on the topic of packaging. DASD users are encouraged to use their #r, #conda and #python Slack channels to support each other, or ask your line manager about training. Of course, if there is something broken with the platform itself, or something unique about the platform that prevents you from installing a library, then of course do raise it with the team in the normal ways.
 
+## R's install.packages()
+
+**NB Only use this method for playing - use Conda for project work.**
+
+You can install R packages from the R Console:
+
+```R
+install.packages("ggplot2")
+```
+
+This will find the latest version of the package in CRAN and install it in: `~/R/library`.
+
+However this method is pretty basic. Refer to the tips in the following sections.
+
+### Package version incompatible with R version
+
+Often if you try to install the latest version of a package, it will require a more recent version of R than you have:
+
+```bash
+> install.packages("text2vec")
+Installing package into ‘/home/davidread/R/library’
+(as ‘lib’ is unspecified)
+Warning in install.packages :
+  package ‘text2vec’ is not available (for R version 3.5.1)
+```
+
+There are a few options to avoid this:
+
+Solution 1: AP may have a newer version of RStudio tool which might have the version of R needed. To upgrade, see: [Managing your analytical tools](managing-your-analytical-tools)
+
+Solution 2: Use [conda](#conda) - it's recommended for use with Analytical Platform in general. It works out which version is compatible with your R version (make sure you run this in the Terminal):
+
+```bash
+conda install r-test2vec
+```
+
+Solution 3: Specify a version that is compatible with your R version. e.g. at https://www.rdocumentation.org/packages/text2vec look at the "depends" field for the R version it requires. Change the version (drop-down at the top) to go back to see how it changes for older releases. You can see that text2vec 6.0 requires R (>= 3.6.0), but text2vec 5.1 requires only R (>= 3.2.0).
+
+```R
+devtools::install_version('text2vec', version='0.5.1')
+```
+
+### Package installed with a different R version - when using install.packages()
+
+Typical error output
+
+```R
+> install.packages("ggplot2")
+...
+Error : package ‘tibble’ was installed by an R version with different internals; it needs to be reinstalled for use with this R version
+```
+
+It's saying that this package, which is a dependency of the one you're installing, was installed with an R version you used to have.
+
+Solution 1 - You might fix this by installing the package it names:
+
+```R
+> install.packages('tibble')
+```
+
+However you may have to do this for a lot of packages.
+
+Solution 2 - Wipe your packages and reinstall them.
+
+It begs the question of what you have installed. Although you can [get a list](https://www.r-bloggers.com/list-of-user-installed-r-packages-and-their-versions/) it's often unmanageably long, including all the little dependencies of what you actually installed in the first place. Best use conda next time!
+
+But you can get rid of all the installed packages (use the terminal):
+
+```bash
+rm -rf ~/R/library/*
+```
+
+### "Broken" packages (typically `r-pillar`)
+
+When installing packages (e.g. during a concourse build of a webapp) you may see an error like this:
+
+```bash
+$ conda env export -n base grep -v ""prefix: " > /tmp/base.yml &
+ conda env update --prune -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
+
+Collecting package metadata (repodata.json): done
+Solving environment: failed
+ResolvePackageNotFound:
+    - r-pillar=1.4.2=h6115d3f_O
+```
+
+This happens when a package on conda is marked as _broken_. r-pillar seems to suffer this frequently.
+
+To fix this:
+
+1. Remove `r-pillar` (or the offending package) from environment.yml. `r-pillar` is provided by the base conda environment and chances are that the user doesn't need it in their app, so it can be safely removed.
+
+2. Update the version of `r-pillar` to the [latest one](https://anaconda.org/conda-forge/r-pillar/files) on conda-forge 
+
+3. Update the base environment. The above two fixes are quick but don't solve the underlying problem that one of our dependencies in the base environment has been marked as broken. The ultimate fix is to update the [base packages](https://github.com/ministryofjustice/analytics-platform-rstudio/blob/master/files/conda_packages).
+
 ## Conda
 
 When exploring this section, you may also find the [slides](https://github.com/moj-analytical-services/coffee-and-coding-public/blob/master/2019-10-30%20Conda/conda.pdf) from the Coffee and Coding session on conda useful.
@@ -144,6 +240,54 @@ conda env export | grep -v "^prefix: " > environment.yml
 When checking out a project that has an `environment.yml`, run the below command to install any packages required by the project that you don't have in your working environment.
 
 ```bash
+conda env update -f environment.yml --prune
+```
+
+### Conda tips
+
+#### Conda version
+
+When you run conda (In R Studio at least) it says:
+
+```bash
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.7.5
+  latest version: 4.8.3
+
+Please update conda by running
+
+    $ conda update -n base conda
+```
+
+Please ignore this warning - this can only be done centrally by Analytical Platform team.
+
+If you try to upgrade conda yourself, it will fail:
+
+```bash
+EnvironmentNotWritableError: The current user does not have write permissions to the target environment.
+  environment location: /opt/conda
+```
+
+This is because conda is installed into the read-only part of the docker image. Users can only edit things in /home/$USER.
+
+### Package installed with a different R version - when using conda
+
+Typical error output:
+
+```bash
+> conda install ggplot2
+...
+Error : package ‘tibble’ was installed by an R version with different internals; it needs to be reinstalled for use with this R version
+```
+
+It's saying that this package, which is a dependency of the one you're installing, was installed with an R version you used to have.
+
+To fix this, wipe your installed packages and reinstall them from your environment.yml.
+
+```bash
+# reset your conda environment
+conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env update --prune -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
+# reinstall packages
 conda env update -f environment.yml --prune
 ```
 
