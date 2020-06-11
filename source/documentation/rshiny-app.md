@@ -33,9 +33,9 @@ To create a new repository based on the Shiny app template:
 
 3. Select __Use this template__.
 4. Fill in the form:
-    + Owner: `moj-analytical-services`
-    + Name: The name of your app, for example, `my-app`
-    + Privacy: Private
+    * Owner: `moj-analytical-services`
+    * Name: The name of your app, for example, `my-app`
+    * Privacy: Private
 5. Select __Create repository from template__. This copies the entire contents of the app template to a new repository.
 
 ### Create a new webapp
@@ -119,7 +119,7 @@ To create a release in GitHub:
 5.  Describe the contents of the release.
 6.  Select __Publish release__.
 
-### Deploy in Concourse
+### Build and deploy in Concourse
 
 Once you have created a release in GitHub, Concourse should automatically start to deploy your app within a few minutes.
 
@@ -128,6 +128,53 @@ If your app does not deploy automatically, you should first check that the pipel
 If the app still does not deploy automatically, you can manually trigger a build by pressing the `+` icon in the top right corner of Concourse.
 
 For more information about using Concourse, see the [build and deploy](/build-deploy.html) section.
+
+#### Troubleshooting build & deploy
+
+##### Packrat
+
+If you are having issues with `packrat.lock`, follow the steps below:
+
+1. Delete the entire `packrat` directory.
+2. Comment out all code in the project.
+3. Enable packrat using `packrat::init()`.
+4. Capture all package dependencies using `packrat::snapshot()`.
+5. Uncomment all code in the project and install package dependencies one by one.
+6. Rerun `packrat::snapshot()`.
+7. Redeploy the app.
+
+##### Deployment exceeded its progress deadline
+
+This error can show at the end of the concourse build log:
+
+    Waiting for deployment "crc-workforce-qa-tool-webapp" rollout to finish: 1 out of 3 new replicas have been updated...
+    error: deployment "crc-workforce-qa-tool-webapp" exceeded its progress deadline
+
+This means that there was an error during the startup of the app. To see the log, go to Control Panel, find the app and then view the logs. Alternatively view the logs in [Kibana](#kibana).
+
+##### The application failed to start
+
+Sometimes, an R Shiny app can deploy successfully but result in the following error:
+
+    An error has occurred
+    The application failed to start
+
+    The application exited during initialization
+
+This is generic error that means there is an error in your R code or there are missing packages.
+
+To see the app startup log, go to Control Panel, find the app and then view the logs. Alternatively view the logs in [Kibana](#kibana).
+
+To try to fix this you should:
+
+* explicitly reference all third-party packages using the double colon operator (i.e. use `shiny::hr()` as opposed to `hr()`)
+* ensure that you have called `packrat::snapshot()` and committed `packrat.lock` to GitHub, if using `packrat`
+
+In general, it is also good practice to:
+
+* minimise the number of packages you use in your project
+* test your app early and often
+* test using a cloned copy of the app's repository to avoid issues arising as a result of uncomitted local changes
 
 ### Manage app users
 
@@ -155,6 +202,39 @@ Your deployed app can be accessed at `repository-name.apps.alpha.mojanalytics.xy
 If the repository name contains underscores, these will be converted to dashes in the app URL. For example, an app with a repository called `repository_name` would have the URL `repository-name.apps.alpha.mojanalytics.xyz`.
 
 When accessing an app, you can choose whether to sign in using an email link (default) or a one-time passcode. To sign in with a one-time passcode, add `/login?method=code` to the end of the app's URL, for example, `https://kpi-s3-proxy.apps.alpha.mojanalytics.xyz/login?method=code`. This requires the app to have been deployed since the auth-proxy [release on 30/01/19](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.8).
+
+#### Troubleshooting app sign-in
+
+##### "That email address is not authorized for this app (or possibly another error occurred)" error, after entering email address
+
+1. Check that the user is authorised to access the app:
+    1. Log in to the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
+    2. Navigate to the app detail page.
+    3. Check if the user's email address is listed under 'App customers'.
+    4. If it is not, refer them to the app owner to obtain access.
+2. Check that the user is using the correct email address – there is sometimes confusion between @justice and @digital.justice email addresses.
+
+##### "Access denied" error, having entered email address and clicked link
+
+1. Check that the user is not trying to use the same link to access the app multiple times – links expire after the first user and a new one must be requested.
+2. Check that the user is trying to access the app using Chrome or Firefox – if links automatically open in Internet Explorer, they may need to copy and paste the link without clicking it into Chrome or Firefox.
+
+Some anti-virus software and spam filters pre-click links in emails, meaning that app sign-in links do work. In this case, you should sign in using a one-time passcode, as described above in [access the app](#access-the-app) section.
+
+##### "IP x.x.x.x is not whitelisted"
+
+Check that the user is trying to access the app from one of the trusted networks specified in `deploy.json`.
+
+##### Other troubleshooting tips
+
+* Check that they are trying to access the app using a URL beginning with `https://` not `http://`.
+* Look for similar issues log in the [`analytics-platform`](https://github.com/ministryofjustice/analytics-platform/issues) repository.
+* Try asking the user to clear their cookies by visiting https://alpha-analytics-moj.eu.auth0.com/logout and try again.
+
+In addition the AP team can:
+
+* Check the Auth0 logs for the app in [Kibana](#kibana)
+* Check the Auth0 logs in the [Auth0 console](https://manage.auth0.com)
 
 ## Advanced
 
@@ -229,44 +309,6 @@ shows the code in context.
 ```
 
 ## Troubleshooting
-
-### Common errors
-
-Sometimes, an R Shiny app can deploy successfully but result in the following error:
-```{bash error, eval=FALSE}
-An error has occurred
-The application failed to start
-
-The application exited during initialization
-```
-This is generic error that means there is an error in your R code or there are missing packages.
-
-To try to fix this you should:
-
-*   explicitly reference all third-party packages using the double colon operator (i.e. use `shiny::hr()` as opposed to `hr()`)
-*   ensure that you have called `packrat::snapshot()` and committed `packrat.lock` to GitHub, if using `packrat`
-
-In general, it is also good practice to:
-
-*   minimise the number of packages you use in your project
-*   test your app early and often
-*   test using a cloned copy of the app's repository to avoid issues arising as a result of uncomitted local changes
-
-### App sign-in
-
-Some anti-virus software and spam filters pre-click links in emails, meaning that app sign-in links do work. In this case, you should sign in using a one-time passcode, as described in [access the app](#access-the-app) section.
-
-### Packrat
-
-If you are having issues with `packrat.lock`, follow the steps below:
-
-1.  Delete the entire `packrat` directory.
-2.  Comment out all code in the project.
-3.  Enable packrat using `packrat::init()`.
-4.  Capture all package dependencies using `packrat::snapshot()`.
-5.  Uncomment all code in the project and install package dependencies one by one.
-6.  Rerun `packrat::snapshot()`.
-7.  Redeploy the app.
 
 ### Kibana
 
