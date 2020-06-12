@@ -74,7 +74,7 @@ Solution 1: AP may have a newer version of RStudio tool which might have the ver
 Solution 2: Use [conda](#conda) - it's recommended for use with Analytical Platform in general. It works out which version is compatible with your R version (make sure you run this in the Terminal):
 
 ```bash
-conda install r-test2vec
+conda install r-text2vec
 ```
 
 Solution 3: Specify a version that is compatible with your R version. e.g. at https://www.rdocumentation.org/packages/text2vec look at the "depends" field for the R version it requires. Change the version (drop-down at the top) to go back to see how it changes for older releases. You can see that text2vec 6.0 requires R (>= 3.6.0), but text2vec 5.1 requires only R (>= 3.2.0).
@@ -129,13 +129,11 @@ ResolvePackageNotFound:
 
 This happens when a package on conda is marked as _broken_. r-pillar seems to suffer this frequently.
 
-To fix this:
+To fix this there are a couple of things you can try:
 
 1. Remove `r-pillar` (or the offending package) from environment.yml. `r-pillar` is provided by the base conda environment and chances are that the user doesn't need it in their app, so it can be safely removed.
 
-2. Update the version of `r-pillar` to the [latest one](https://anaconda.org/conda-forge/r-pillar/files) on conda-forge 
-
-3. Update the base environment. The above two fixes are quick but don't solve the underlying problem that one of our dependencies in the base environment has been marked as broken. The ultimate fix is to update the [base packages](https://github.com/ministryofjustice/analytics-platform-rstudio/blob/master/files/conda_packages).
+2. Update the version of `r-pillar` to the [latest one](https://anaconda.org/conda-forge/r-pillar/files) on conda-forge.
 
 ## Conda
 
