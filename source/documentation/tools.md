@@ -145,13 +145,25 @@ A key example within Analytical Services where conda is useful: both `dbtools` a
 
 ### Installing Packages
 
-the Anaconda organisation has its own repository of packages hosted on [https://anaconda.org](https://anaconda.org). If you need to find a package name you can use the [anaconda search](https://anaconda.org/search) to find the package name.
+The Anaconda organisation has its own repository of packages hosted on [https://anaconda.org](https://anaconda.org). If you need to find a package name you can use the [anaconda search](https://anaconda.org/search) to find the package name.
 
 To install a package through conda, run the command `conda install PACKAGENAME` in the Terminal tab. This is recommended over using `install.packages()` as the package will be installed into the conda environment in a way that can be repeated when replicating the analysis - see [Environment management](#Environment-management) section for more.
 
 Most (around 95%) R packages on CRAN are available through conda. They have the same name as the CRAN package name with an additional `r-` prefix. This is to avoid clashes with Python packages with the same name.
 
-#### Examples
+#### Example
+
+In the terminal run: `conda install numpy`. You can now access in your R session:
+
+```r
+library(reticulate)
+np <- import("numpy")
+np$arange(15)
+```
+
+![insert np_from-conda.gif](images/conda/np_from_conda.gif)
+
+#### Comparison with install.packages()
 
 The following tables show conda commands and their base R analogues.
 
@@ -166,8 +178,7 @@ Installing a package:
 
 ![](images/conda/conda_install_rcpp.gif)
 
-
-Installing a specific version of a package
+#### Installing a specific version of a package
 
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
@@ -179,20 +190,6 @@ Installing a specific version of a package
 ![Specific version gif here](images/conda/conda_install_specific_version.gif)
 
 You can also use conda to install Python packages, for use in R through the `reticulate` package. Python packages do not require a prefix and can simply be installed using theirname.
-
-#### Examples
-
-##### Install a package
-
-In the terminal run: `conda install numpy`. You can now access in your R session:
-
-```r
-library(reticulate)
-np <- import("numpy")
-np$arange(15)
-```
-
-![insert np_from-conda.gif](images/conda/np_from_conda.gif)
 
 ### Operating System Packages
 
@@ -221,6 +218,20 @@ This is recommended to run before starting a new project. This will ensure that 
 ```bash
 conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env update --prune -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
 ```
+
+#### Hard reset of your environment
+
+If you have tried [Reset your environment to default](#reset-your-environment-to-default) and are still having problems, try this hard reset:
+
+1. Deleting all the files in the environment. For example, to clear the `rstudio` conda environment (which is the default one):
+
+    ```bash
+    rm -rf ~/.conda/envs/rstudio
+    ```
+
+    You might get errors about `Directory not empty` or `Device or resource busy` but usually these can be ignored - the bulk of these packages will be gone.
+
+2. In Control Panel, for R Studio, select the "Restart" button
 
 #### Exporting your _Environment_
 
