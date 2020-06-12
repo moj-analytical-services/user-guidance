@@ -105,7 +105,7 @@ To remove a user from the data access group:
 
 You can upload files to Amazon S3 from your local computer or from RStudio or JupyterLab.
 
-When uploading files to Amazon S3, you should ensure that you follow all necessary [information governance](../information-governance.html) procedures. In particular, you must complete a data movement form when moving any data onto the Analytical Platform.
+When uploading files to Amazon S3, you should ensure that you follow all necessary [information governance](../../information-governance.html) procedures. In particular, you must complete a data movement form when moving any data onto the Analytical Platform.
 
 ### Amazon S3 Console
 
