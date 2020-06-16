@@ -49,7 +49,7 @@ To create a new repository from the Airflow template:
 3. Fill in the form:
     + Owner: `moj-analytical-services`
     + Name: The name of your pipeline prefixied with `airflow-`, for example, `airflow-my-pipeline`
-    + Privacy: Private
+    + Privacy: Internal (refer to the [public, internal and private repositories](github.html#public-internal-and-private-repositories) section)
 4. Select __Create repository from template__.
 
 This copies the entire contents of the Airflow template to a new repository.

@@ -35,7 +35,7 @@ To create a new repository based on the Shiny app template:
 4. Fill in the form:
     * Owner: `moj-analytical-services`
     * Name: The name of your app, for example, `my-app`
-    * Privacy: Private
+    * Privacy: Internal (refer to the [public, internal and private repositories](github.html#public-internal-and-private-repositories) section)
 5. Select __Create repository from template__. This copies the entire contents of the app template to a new repository.
 
 ### Create a new webapp
