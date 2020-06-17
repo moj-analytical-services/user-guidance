@@ -150,7 +150,7 @@ This error can show at the end of the concourse build log:
     Waiting for deployment "crc-workforce-qa-tool-webapp" rollout to finish: 1 out of 3 new replicas have been updated...
     error: deployment "crc-workforce-qa-tool-webapp" exceeded its progress deadline
 
-This means that there was an error during the startup of the app. To see the log, go to Control Panel, find the app and then view the logs. Alternatively view the logs in [Kibana](#kibana).
+This means that there was an error during the startup of the app. See: [Troubleshooting app start-up](#troubleshooting-app-start-up)
 
 ##### The application failed to start
 
@@ -163,18 +163,37 @@ Sometimes, an R Shiny app can deploy successfully but result in the following er
 
 This is generic error that means there is an error in your R code or there are missing packages.
 
-To see the app startup log, go to Control Panel, find the app and then view the logs. Alternatively view the logs in [Kibana](#kibana).
+#### Troubleshooting app start-up
+
+If the app doesn't start, you need to check the logs: go to Control Panel, find the app and then view the logs. Alternatively view the logs in [Kibana](#kibana).
+
+##### "there is no package called X"
+
+A common error is like this:
+
+    info: Error in library(ROI.plugin.lpsolve) :
+        there is no package called ‘ROI.plugin.lpsolve’
+
+This means your R code is trying to use a package ('lpsolve' in this example), but it can't be found. There are a few potential reasons it can't find it.
 
 To try to fix this you should:
 
 * explicitly reference all third-party packages using the double colon operator (i.e. use `shiny::hr()` as opposed to `hr()`)
-* ensure that you have called `packrat::snapshot()` and committed `packrat.lock` to GitHub, if using `packrat`
+* check if the package is specified in your repo's environment.yml (if using Conda) / packrat.lock (if using Packrat). If it is not, use re-export your environment - [conda instructions](tools.html#exporting-your-environment) / `packrat::snapshot()`
 
 In general, it is also good practice to:
 
 * minimise the number of packages you use in your project
 * test your app early and often
-* test using a cloned copy of the app's repository to avoid issues arising as a result of uncomitted local changes
+* test using a cloned copy of the app's repository to avoid issues arising as a result of uncommitted local changes
+
+##### ECONNREFUSED error
+
+If the Shiny app fails to start fully, then as a consequence then you'll see an error in the logs like this:
+
+    error: undefined {"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":7999,"timestamp":"2020-06-17T09:57:49.895Z"}
+
+To find out what is causing this, look for an earlier error.
 
 ### Manage app users
 
