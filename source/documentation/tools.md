@@ -487,3 +487,28 @@ To resume work on this after working on another project:
 2. Open the notebook - it’s remembered which kernel you wanted to use for this notebook and you can carry on working with the packages available.
 
 Note: *Once you have associated the kernel with the venv you dont need to recreate/update it*. Any packages that are installed to the venv via pip after the kernel is established are immediately available to the kernel.
+
+### Using pipenv in Jupyter
+
+pipenv is another envorinment manager for Python. If you wish to to use this tool please refer to their [basic guidance](https://pipenv-fork.readthedocs.io/en/latest/basics.html) on how to set it up. This section assumes that you already have a `Pipfile` and `Pipfile.lock` in the root directory of your project folder. 
+
+1. In the terminal, activate your pipenv:
+
+    ```bash
+    cd myproject
+    pipenv install
+    ```
+
+2. Install the module ipykernel within this pipenv (for creating/managing kernels for ipython which is what Jupyter sits on top of):
+
+    ```bash
+    pipenv install ipykernel
+    ```
+
+3. Create a Jupyter kernel which is configured to use your pipenv. (Change the display name to match your project name):
+
+    ```bash
+    python -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
+    ```
+
+4. In Jupyter, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
