@@ -479,36 +479,36 @@ Jupyter won't use your venv, and the packages installed into it, unless you do t
 To resume work on this after working on another project:
 
 1. Activate the environment:
+
    ```bash
    cd myproject
    source venv/bin/activate
    ```
-   to activate the venv in terminal, which enables you to use the installed packages and install more packages to there.
+
+   Now you've activated this terminal with your venv, things you run on the command-line will default to using your venv for python packages, rather than the system's packages. That's useful if you run 'python', run python scripts or 'pip install' more packages.
+
 2. Open the notebook - it’s remembered which kernel you wanted to use for this notebook and you can carry on working with the packages available.
 
 Note: *Once you have associated the kernel with the venv you dont need to recreate/update it*. Any packages that are installed to the venv via pip after the kernel is established are immediately available to the kernel.
 
 ### Using pipenv in Jupyter
 
-pipenv is another envorinment manager for Python. If you wish to to use this tool please refer to their [basic guidance](https://pipenv-fork.readthedocs.io/en/latest/basics.html) on how to set it up. This section assumes that you already have a `Pipfile` and `Pipfile.lock` in the root directory of your project folder. 
+pipenv is another environment manager for Python. In general, please refer to their [basic guidance](https://pipenv-fork.readthedocs.io/en/latest/basics.html).
 
-1. In the terminal, activate your pipenv:
+Set-up for a project results in the creation of `Pipfile` and `Pipfile.lock` in the root directory of your project folder.
 
-    ```bash
-    cd myproject
-    pipenv install
-    ```
+The instructions for someone to install the packages specified in Pipefile/Pipefile.lock, are as follows (you don't create a venv yourself, nor is it necessary to 'activate' the pipenv environment):
 
-2. Install the module ipykernel within this pipenv (for creating/managing kernels for ipython which is what Jupyter sits on top of):
+```bash
+cd myproject
+pipenv install
+```
 
-    ```bash
-    pipenv install ipykernel
-    ```
+To use the pipenv in Jupyter, compared to [using a venv in Jupyter](using-a-venv-in-jupyter), the syntax of creating the kernel is simply adjusted to:
 
-3. Create a Jupyter kernel which is configured to use your pipenv. (Change the display name to match your project name):
+```bash
+pipenv install ipykernel
+python -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
+```
 
-    ```bash
-    python -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
-    ```
-
-4. In Jupyter, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
+And then select the kernel in Jupyter as [normal](using-a-venv-in-jupyter).
