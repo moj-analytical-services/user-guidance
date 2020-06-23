@@ -31,7 +31,7 @@ pip install <package_name>
 
 ## Conda
 
-If you are using conda, you can install R, Python and operating system packages by running the following in a terminal:
+If you are using conda, you can install R and operating system packages by running the following in a terminal:
 
 ```
 conda install <package_name>
