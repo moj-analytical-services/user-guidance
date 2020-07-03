@@ -84,7 +84,7 @@ Most apps will have dependencies on various third-party packages (for example, `
 
 In your project repository you will need a file that lists your dependencies. We use 'package management' to manage these lists. The packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as conda, packrat or renv. For further guidance see the [package management](tools.html#managing-your-analytical-tools) section.
 
-If using conda, you will need to [list your dependencies in your project's environment.yml](tools.html#exporting-your-environment).
+If using conda, you will need to [export your dependencies](tools.html#exporting-your-environment) to an `environment.yml` file.
 
 If using packrat, you will need to [export your dependencies](tools.html#packrat-usage) to a `packrat/packrat.lock` file.
 
