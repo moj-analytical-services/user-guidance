@@ -78,21 +78,17 @@ Your app can take one of several forms:
 
 By default, the template contains `server.R` and `ui.R` files. However, you may wish to take a different approach depending on your requirements. For example, using `app.R`, it is possible to deploy RShiny apps from within a package, as in this [example from the costmodelr package](https://github.com/RobinL/costmodelr/blob/b328902026bd1cce5d17b487e310c59725ea4d62/R/shiny_explorer.r#L20).
 
-### Manage dependencies
+### List your package dependencies
 
-Most apps will have dependencies on various third-party packages (e.g., `dplyr`). These packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as packrat, renv, or conda.
+Most apps will have dependencies on various third-party packages (for example, `dplyr`).
 
-You can find further guidance in the [package management](https://user-guidance.services.alpha.mojanalytics.xyz/appendix/conda/#package-management) section.
+In your project repository you will need a file that lists your dependencies. We use 'package management' to manage these lists. The packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as conda, packrat or renv. For further guidance see the [package management](tools.html#managing-your-analytical-tools) section.
 
-If using packrat, ensure that it is enabled for your project in RStudio.
+If using conda, you will need to [export your dependencies](tools.html#exporting-your-environment) to an `environment.yml` file.
 
-To enable packrat, select __Tools__ > __Project Options...__ > __Packrat__ > __Use packrat with this project__.
+If using packrat, you will need to [export your dependencies](tools.html#packrat-usage) to a `packrat/packrat.lock` file.
 
-When packrat is enabled, run `packrat::snapshot()` to generate a list of packages used in the project, their sources and their current versions.
-
-You may also wish to run `packrat::clean()` to remove unused packages from the list.
-
-The list is stored in a file called `packrat/packrat.lock`. You must ensure that you have committed this file to GitHub before deploying your app.
+The Dockerfile in the app's repository contains a command to install the packages in the list. This command will be run when Concourse builds the app.
 
 ### Set access permissions
 
