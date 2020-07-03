@@ -86,7 +86,7 @@ In your project repository you will need a file that lists your dependencies. We
 
 If using conda, you will need to [list your dependencies in your project's environment.yml](tools.html#exporting-your-environment).
 
-If using packrat, you will need to [list your dependencies in your project's packrat/packrat.lock](tools.html#packrat-usage).
+If using packrat, you will need to [export your dependencies](tools.html#packrat-usage) to a `packrat/packrat.lock` file.
 
 (During the Concourse build of an app, the app repo's Dockerfile has a command to install packages in the list.)
 
