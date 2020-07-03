@@ -80,7 +80,7 @@ By default, the template contains `server.R` and `ui.R` files. However, you may 
 
 ### List your package dependencies
 
-Most apps will have dependencies on various third-party packages (e.g., `dplyr`).
+Most apps will have dependencies on various third-party packages (for example, `dplyr`).
 
 In your project repo you will need a file that lists your dependencies. We use 'package management' to management these lists. The packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as conda, packrat or renv. For further guidance see: [package management](tools.html#managing-your-analytical-tools).
 
