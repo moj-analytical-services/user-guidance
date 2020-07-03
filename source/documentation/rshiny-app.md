@@ -88,7 +88,7 @@ If using conda, you will need to [export your dependencies](tools.html#exporting
 
 If using packrat, you will need to [export your dependencies](tools.html#packrat-usage) to a `packrat/packrat.lock` file.
 
-(During the Concourse build of an app, the app repo's Dockerfile has a command to install packages in the list.)
+The Dockerfile in the app's repository contains a command to install the packages in the list. This command will be run when Concourse builds the app.
 
 ### Set access permissions
 
