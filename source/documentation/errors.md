@@ -36,7 +36,7 @@ Errors like the following can typically be ignored:
 
 They seem to occur when R Studio has been unable to restore your session following a crash.  Note the items in your R environment will no longer be there following a crash, and you'll need to re-run your scripts to bring your data back into memory.
 
-Crashes often occur when you run out of memory.  For now, you can use `pryr` to track your memory usage - see [here](https://rdrr.io/cran/pryr/man/mem_used.html).  We are working on giving users greater visibility of their memory usage.
+Crashes often occur when you run out of memory. For more about tracking and freeing memory in RStudio, see: [RStudio memory](annexes.html#rstudio-memory).
 
 ## Status Code 502 error message
 
