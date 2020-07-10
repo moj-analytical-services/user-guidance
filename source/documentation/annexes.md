@@ -41,7 +41,7 @@ Our laptops tend to have only 8GB or 16GB, so it's an advantage of the AP that w
 
 To understand what is taking up the memory, you can use [pryr](https://rdrr.io/cran/pryr/man/mem_used.html).
 
-To free up memory in RStudio indiscriminately, do a [hard reset of your RStudio environment](tools.html#hard-reset-of-your-environment)
+To free up memory in RStudio indiscriminately, do a [hard reset of your RStudio environment](tools.html#hard-reset-of-your-environment).
 
 ## What are the benefits of Github and why do we recommend it?
 
