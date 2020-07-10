@@ -22,6 +22,46 @@ Use the buttons shown against each tool to manage your copy of the tool:
 * "Restart" - Often problems with the tool can be solved by restarting the software on the server.
 * "Upgrade" - Another release of the tool is available. Occasionally new versions of R Studio are made available on the Analytical Platform. In this case all users will be given the opportunity to upgrade on the control panel. New versions provide new features and bugfixes to the tool. In addition, there some releases come with improvements to the way RStudio is containerized and integrated with Analytical Platform. You should aim to upgrade when it is offered, although just in case it causes minor incompatibilities with your R code, you should not do it in the days just before you have a critical release of your work. When pressed, the status will change to 'Deploying' and then 'Upgraded'. The __Upgrade__ button will no longer be visible (until another version becomes available).
 
+## Using RStudio
+
+For general guidance in using RStudio, see the [RStudio documentation](https://docs.rstudio.com/).
+
+### RStudio memory issues
+
+RStudio crashes when it runs out of memory. This is because memory is a finite resource, and it's not easy to predict memory usage or exact availability. But if your data is of order of a couple of gigabytes or more, then simply putting it all into a dataframe, or doing processing on it, may mean you run out of memory. For more about memory capacity in the Analytical Platform, and how to work with larger datasets, see the [memory limits](annexes.html#memory-limits) section.
+
+To find out if you have hit the memory limit, you can check [Grafana](https://grafana.services.alpha.mojanalytics.xyz/login). For guidance in using it, see the [memory limits](annexes.html#memory-limits) section.
+
+To understand what is taking up the memory, you can use the [pryr](https://rdrr.io/cran/pryr/man/mem_used.html) package. To free up a bit of memory, for example when a variable points to a big dataframe, you can instead assign something a null to the variable, and then run [`gc()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/gc).
+
+If RStudio crashes on startup, or for a simple way to clear all the memory, you should [clear your RStudio session](#clearing-your-rstudio-session).
+
+### Clearing your RStudio session
+
+The RStudio session is the short term 'state' of RStudio, including:
+
+* which project and files are open (displayed in the RStudio interface)
+* console and terminal history
+* the global environment – R variables that have been set and are held in memory
+
+The session is persisted between restarts of RStudio, to make it easier for you to pick up where you left off. However you can clear it to solve a number of problems, including if the memory is full.
+
+To clear the RStudio session:
+
+1. Close RStudio, if it is open in any window (because it continually saves its session to disk).
+
+2. Open JupyterLab.
+3. In JupyterLab, open a Terminal and run:
+
+   ```bash
+   rm -rf ~/.rstudio.bak; mv ~/.rstudio/ ~/.rstudio.bak
+   ```
+4. In the control panel, select the __Restart__ button for RStudio.
+
+   ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
+
+5. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
+
 ## Package management
 
 A key element of ensuring analysis is reproducible is maintaining a record of the versions of packages used to produce said analysis.
@@ -211,17 +251,19 @@ Note: usually when using conda, it makes sense to have one environment per proje
 but because we are using the Open Source version of R Studio, there is only a
 single conda environment available. This means having to be careful to make sure packages don't pollute your environment from another project. The following commands can be used to manage your environments.
 
-#### Reset your _Environment_ to default
+#### Reset your conda environment to default
 
-This is recommended to run before starting a new project. This will ensure that no unused dependencies are exported when you export an `environment.yml` for this project.
+This will delete packages that you have installed in your `rstudio` conda environment, leaving only the base packages:
 
 ```bash
 conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env update --prune -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
 ```
 
-#### Hard reset of your environment
+It is recommended to do this before starting a new project, to ensure that no unused dependencies are exported when you export an `environment.yml` for this project.
 
-If you have tried [Reset your environment to default](#reset-your-environment-to-default) and are still having problems, try this hard reset:
+#### Hard reset of your conda environment
+
+This will completely delete your `rstudio` conda environment, and recreate it with the base packages:
 
 1. Deleting all the files in the environment. For example, to clear the `rstudio` conda environment (which is the default one):
 
@@ -232,6 +274,8 @@ If you have tried [Reset your environment to default](#reset-your-environment-to
     You might get errors about `Directory not empty` or `Device or resource busy` but usually these can be ignored - the bulk of these packages will be gone.
 
 2. In Control Panel, for R Studio, select the "Restart" button
+
+It can be useful to do this if you have tried to [reset your conda environment to default](#reset-your-conda-environment-to-default) and are still having problems.
 
 #### Exporting your _Environment_
 
