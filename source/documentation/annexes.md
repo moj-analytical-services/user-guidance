@@ -37,7 +37,7 @@ You can work on a dataset that is bigger than your memory by reading in a bit of
 
 Our laptops tend to have only 8GB or 16GB, so it's an advantage of the AP that we can offer more. We are open to increasing the maximum memory, so let us know if you need more, to help us justify the additional cost.
 
-### RStudio memory
+### RStudio memory usage
 
 To understand what is taking up the memory, you can try [pryr](https://rdrr.io/cran/pryr/man/mem_used.html).
 
