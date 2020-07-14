@@ -16,7 +16,7 @@ Changes to deploy.json only take effect when committed to GitHub (master branch)
 
 ## Starting a build/deploy
 
-To trigger a Concourse build/deploy, make sure your code is committed and pushed to GitHub and then [create a release on GitHub](https://help.github.com/articles/creating-releases/). Call the first release `v0.0.1`, then `v0.0.2` etc. The version should always go up in number, or it won't build. It's good practise to use [semantic versioning](https://semver.org/).
+To trigger a Concourse build/deploy, make sure your code is committed and pushed to GitHub and then [create a release on GitHub](https://help.github.com/articles/creating-releases/). It's good practise to use [semantic versioning](https://semver.org/), for example to call the first release `v0.0.1`, then `v0.0.2` etc. The version should always go up in number: concourse automatically looks for a version higher than the one it last deployed, so if your latest release has a version number lower than the currently deployed version it won't build. [You can check your version order here.](https://semvercompare.azurewebsites.net/).
 
 Your task appears in Concourse within 30 seconds. Find it in Concourse to start it as follows:
 
