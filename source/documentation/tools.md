@@ -253,7 +253,7 @@ single conda environment available. This means having to be careful to make sure
 
 #### Reset your conda environment to default
 
-This will delete packages that the user has installed your "rstudio" conda environment, leaving only the base packages:
+This will delete packages that you have installed in your `rstudio` conda environment, leaving only the base packages:
 
 ```bash
 conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env update --prune -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
