@@ -35,7 +35,7 @@ For R:
 
 For Python:
 
-* [**venv** and **pip**](#venv-and-pip) - Recommended for Python in Analytical Platform, because it's easier, more reliable and has a much bigger community than conda.
+* [**venv** and **pip**](#venv-and-pip) - Recommended for Python in Analytical Platform, because it's easier, more reliable and has a much bigger community than conda. **NOTE:** To use pip with venv, you may need to delete the `.bash_aliases` file (`rm .bash_aliases`) in your home directory.
 * [**conda environment**](#conda) installing packages with just **conda** - not recommended, but it might help for the occasional package whose C extension doesn't install well with pip (perhaps the pip package isn't the newer 'wheel' type, or it doesn't have a binary suitable for our distribution)
 * [**conda environment**](#conda) installing packages with **conda** and **pip** - not recommended, but gives you the broadest range of package install options. However conda and pip don't play well together - use at your own risk!
 
@@ -363,6 +363,8 @@ The list is stored in a file called `packrat/packrat.lock`. You must ensure that
 A [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) (or `venv`, for short) is a directory you can install a particular python executable and python packages into, away from your machine's default ones. Typically each project/repo you work on should have a different venv, and then you never have to deal with conflicting requirements between projects. When you 'activate' a particular venv, then when you run `python` or `pip`, then it will work with the venv's python executale and python packages.
 
 ### Basic usage
+
+**NOTE:** You may need to delete the `.bash_aliases` file (`rm .bash_aliases`) from your home directory for pip to work properly within a virtual environment.
 
 Create a venv for your project, called 'venv':
 
