@@ -55,7 +55,7 @@ To clear the RStudio session:
 
    ```bash
    rm -rf ~/.rstudio.bak; mv ~/.rstudio/ ~/.rstudio.bak
-3. In Control Panel click "Restart" for RStudio:
+3. In the control panel, select the __Restart__ button for RStudio.
 
    ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
 
