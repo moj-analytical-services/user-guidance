@@ -256,7 +256,7 @@ single conda environment available. This means having to be careful to make sure
 This will delete packages that you have installed in your `rstudio` conda environment, leaving only the base packages:
 
 ```bash
-conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env update --prune -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
+conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env create --force -n rstudio -f /tmp/base.yml && rm /tmp/base.yml
 ```
 
 It is recommended to do this before starting a new project, to ensure that no unused dependencies are exported when you export an `environment.yml` for this project.
@@ -362,7 +362,7 @@ Alternatively, if you use `conda search PACKAGENAME`, you can look in the Field 
 
 ![](images/conda/conda_search_R_version_number_example.PNG)
 
-If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process. 
+If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process.
 
 Instead, you should install the package locally via `install.packages()` or `remotes::install_github()`. For RShiny apps, you can add an `install.packages()` step to the `Dockerfile` to install additional packages not covered by the conda environment.yml, like so:
 
