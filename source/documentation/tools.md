@@ -263,7 +263,7 @@ It is recommended to do this before starting a new project, to ensure that no un
 
 #### Hard reset of your conda environment
 
-This will completely delete your "rstudio" conda environment, and recreate it with the base packages:
+This will completely delete your `rstudio` conda environment, and recreate it with the base packages:
 
 1. Deleting all the files in the environment. For example, to clear the `rstudio` conda environment (which is the default one):
 
