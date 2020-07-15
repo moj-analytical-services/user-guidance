@@ -24,7 +24,7 @@ Use the buttons shown against each tool to manage your copy of the tool:
 
 ## Using RStudio
 
-For general guidance in using RStudio, see the [RStudio documentation](https://docs.rstudio.com/)
+For general guidance in using RStudio, see the [RStudio documentation](https://docs.rstudio.com/).
 
 ### RStudio memory issues
 
