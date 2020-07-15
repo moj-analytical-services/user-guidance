@@ -48,7 +48,7 @@ The session is persisted between restarts of RStudio, to make it easier for you 
 
 To clear the RStudio session:
 
-1. Close RStudio, if it is open in any window (because continually saves its session to disk).
+1. Close RStudio, if it is open in any window (because it continually saves its session to disk).
 
 2. Open JupyterLab. In JupyterLab open a Terminal and run:
 
