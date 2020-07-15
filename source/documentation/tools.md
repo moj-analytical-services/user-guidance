@@ -59,7 +59,7 @@ To clear the RStudio session:
 
    ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
 
-4. In Control Panel click "Open" for RStudio. It takes 1-5 minutes to be running again, and then refreshing the browser should show RStudio.
+4. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
 
 ## Package management
 
