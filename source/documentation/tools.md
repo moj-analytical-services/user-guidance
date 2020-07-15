@@ -41,8 +41,8 @@ To free up memory, it's often easiest to [clear your RStudio session](#clearing-
 The RStudio session is the short term 'state' of RStudio, including:
 
 * which project and files are open (displayed in the RStudio interface)
-* Console and Terminal's history
-* the 'Global Environment' - R variables that have been set and are held in memory
+* console and terminal history
+* the global environment – R variables that have been set and are held in memory
 
 The session is persisted between restarts of RStudio, to make it easier for you to pick up where you left off. However you can clear it to solve a number of problems, including if the memory is full.
 
