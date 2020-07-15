@@ -275,7 +275,7 @@ This will completely delete your `rstudio` conda environment, and recreate it wi
 
 2. In Control Panel, for R Studio, select the "Restart" button
 
-It can be useful to do this if you have tried [Reset your conda environment to default](#reset-your-conda-environment-to-default) and are still having problems.
+It can be useful to do this if you have tried to [reset your conda environment to default](#reset-your-conda-environment-to-default) and are still having problems.
 
 #### Exporting your _Environment_
 
