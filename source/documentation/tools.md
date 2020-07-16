@@ -75,7 +75,7 @@ For R:
 
 For Python:
 
-* [**venv** and **pip**](#venv-and-pip) - Recommended for Python in Analytical Platform, because it's easier, more reliable and has a much bigger community than conda. **NOTE:** To use pip with venv, you may need to delete the `.bash_aliases` file (`rm .bash_aliases`) in your home directory.
+* [**venv** and **pip**](#venv-and-pip) - Recommended for Python in Analytical Platform, because it's easier, more reliable and has a much bigger community than conda.
 * [**conda environment**](#conda) installing packages with just **conda** - not recommended, but it might help for the occasional package whose C extension doesn't install well with pip (perhaps the pip package isn't the newer 'wheel' type, or it doesn't have a binary suitable for our distribution)
 * [**conda environment**](#conda) installing packages with **conda** and **pip** - not recommended, but gives you the broadest range of package install options. However conda and pip don't play well together - use at your own risk!
 
@@ -408,7 +408,7 @@ A [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) (or
 
 ### Basic usage
 
-**NOTE:** You may need to delete the `.bash_aliases` file (`rm .bash_aliases`) from your home directory for pip to work properly within a virtual environment.
+**NOTE:** To use pip with a virtual environment you should delete your `.bash_aliases` file from your home directory, if you have it: `rm .bash_aliases`. Otherwise you'll find it always install packages to `~/.local` instead of the activated virtual environment. Only users who joined the Analytical Platform before 31st July 2020 has the problematic alias contained in this file.
 
 Create a venv for your project, called 'venv':
 
