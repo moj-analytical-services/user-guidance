@@ -51,14 +51,16 @@ To clear the RStudio session:
 1. Close RStudio, if it is open in any window (because it continually saves its session to disk).
 
 2. Open JupyterLab.
+
 3. In JupyterLab, open a Terminal and run:
 
-   ```bash
-   rm -rf ~/.rstudio.bak; mv ~/.rstudio/ ~/.rstudio.bak
-   ```
+    ```bash
+    rm -rf ~/.rstudio.bak; mv ~/.rstudio/ ~/.rstudio.bak
+    ```
+
 4. In the control panel, select the __Restart__ button for RStudio.
 
-   ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
+    ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
 
 5. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
 
