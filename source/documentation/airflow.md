@@ -251,7 +251,7 @@ dag = DAG(
     schedule_interval=None,
 )
 
-# It is good practice to use the same name for teh task_id and task_name.
+# It is good practice to use the same name for the `task_id` and `task_name` parameters.
 # When doing so make sure to only use numbers, characters and '-' to define the name.
 task_id = "example-task-name", 
 task = KubernetesPodOperator(
