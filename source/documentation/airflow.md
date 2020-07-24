@@ -168,16 +168,60 @@ To clone the repository:
 
 ### Create a DAG script
 
-A DAG is defined in a Python script. An example DAG script using the `KubernetesPodOperator` is outlined below:
+A DAG is defined in a Python script. An two examples of a DAG script are outlined below. One using the `basic_kubernetes_pod_operator` and the other the `KubernetesPodOperator`. Note that the `basic_kubernetes_pod_operator` is a function created and managed by the Data Engineering Team to make it easier to run tasks on your sandboxed airflow instance or the main airflow deployment. If you require something with more functionality the we suggest using the full `KubernetesPodOperator`. Examples of both are below.
+
+#### Example DAG (basic_kubernetes_pod_operator)
+
+```python
+from datetime import datetime
+
+from mojap_airflow_tools.operators import basic_kubernetes_pod_operator
+from airflow.models import DAG
+
+IMAGE_VERSION = "v1.0.0" # the Docker image version that Airflow will use – this should correspond to the latest release version of your Airflow project repository
+REPO = "airflow-repository-name" # the name of the repository on GitHub
+
+ROLE = "airflow_iam_role_name" # the role name defined in iam_config.yml
+
+default_args = {
+    "depends_on_past": False,
+    "email_on_failure": True,
+    "owner": "github_username", # your GitHub username
+    "email": ["example@justice.gov.uk"], # your email address registered on GitHub
+}
+
+dag = DAG(
+    dag_id="example_dag", # the name of the DAG
+    default_args=default_args,
+    description=(
+        "Example description." # a description of what your DAG does
+    ),
+    start_date=datetime(2019, 9, 30),
+    schedule_interval=None,
+)
+
+task = basic_kubernetes_pod_operator(
+    task_id="example-task-name", # Should only use characters, numbers and '-' for a task_id
+    dag=dag,
+    repo_name=REPO,
+    release=IMAGE_VERSION,
+    role=ROLE,
+    sandboxed=False, # True if using your sandboxed airflow, False if running on our main airflow deployment
+)
+```
+
+The `basic_kubernetes_pod_operator` automates a lot of the parameters that are needed to be defined when using the `KubernetesPodOperator`. This is the recommended operator to use and you should only use the `KubernetesPodOperator` if you need to provide more specific and advanced pod deployments.
+
+For more information on the `basic_kubernetes_pod_operator` you can view [it's repo here](https://github.com/moj-analytical-services/mojap-airflow-tools).
+
+#### Example DAG (KubernetesPodOperator)
+
 
 ```python
 from datetime import datetime
 
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow.utils.log.logging_mixin import LoggingMixin
 from airflow.models import DAG
-
-log = LoggingMixin().log
 
 IMAGE_VERSION = "v1.0.0" # the Docker image version that Airflow will use – this should correspond to the latest release version of your Airflow project repository
 REPO = "airflow-repository-name" # the name of the repository on GitHub
@@ -207,6 +251,9 @@ dag = DAG(
     schedule_interval=None,
 )
 
+# It is good practice to use the same name for the `task_id` and `task_name` parameters.
+# When doing so make sure to only use numbers, characters and '-' to define the name.
+task_id = "example-task-name", 
 task = KubernetesPodOperator(
     dag=dag,
     namespace=NAMESPACE,
@@ -217,14 +264,16 @@ task = KubernetesPodOperator(
         "AWS_DEFAULT_REGION": "eu-west-1",
     },
     labels={"app": dag.dag_id},
-    name="example_task_name", # the name of the task
+    name=task_id
     in_cluster=True,
-    task_id="example_task_name", # the name of the task
+    task_id=task_id
     get_logs=True,
     is_delete_operator_pod=True,
     annotations={"iam.amazonaws.com/role": ROLE},
 )
 ```
+
+#### Tips on writing a DAG
 
 The `schedule_interval` can be defined using a cron expression as a `str` (such as `0 0 * * *`), a cron preset (such as `@daily`) or a `datetime.timedelta` object. You can find more information on scheduling DAGs in the [Airflow documentation](https://airflow.apache.org/docs/stable/scheduler.html).
 
