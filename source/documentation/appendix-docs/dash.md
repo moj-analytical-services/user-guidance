@@ -147,4 +147,4 @@ alternatively, contact us by [email](mailto:analytical_platform@digital.justice.
 to request an upgrade.
 
 [dash]: https://dash.plot.ly/
-[Slack channel]: (https://asdslack.slack.com/messages/anaytical_platform/
+[Slack channel]: https://asdslack.slack.com/messages/anaytical_platform/
