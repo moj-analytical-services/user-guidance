@@ -5,10 +5,10 @@ preview that web app before you deploy it. The Analytical Platform provides a sp
 endpoints under `/\_tunnel\_/<portNumber>/` that route to exposed HTTP ports on
 the localhost. There are a few things you need to keep in mind:
 
-* `<portNumber>` can only be one from a limited range. By default, you can only route
+- `<portNumber>` can only be one from a limited range. By default, you can only route
   to ports 8050 and 4040--4050 inclusive. You should make your web app listen on
   one of those.
-* The `/_tunnel_/<portNumber>/` endpoint will only tunnel to services bound to a
+- The `/_tunnel_/<portNumber>/` endpoint will only tunnel to services bound to a
   non--public IP address. By default, many web frameworks bind to host `127.0.0.1`.
   You will need to change this to `0.0.0.0` or the tunnel won't work. This is to
   prevent inadvertently exposing webapps to the tunnel.
@@ -34,6 +34,7 @@ dependencies by adding these to either `requirements.txt` and `pip` or
 `environment.yaml` and `conda`.
 
 ### Example code
+
 Save the Dash hello world app to a new python file called `app.py`:
 
 ```python
@@ -104,8 +105,8 @@ There are two important things to note here, where this code differs from the
 Plotly Dash example:
 
 1. The `Dash` class must be instantiated with a `url_base_pathname`. This should
-always be `/_tunnel_/8050/` e.g.
-`app = dash.Dash('app', server=server, url_base_pathname='/_tunnel_/8050/')`.
+   always be `/_tunnel_/8050/` e.g.
+   `app = dash.Dash('app', server=server, url_base_pathname='/_tunnel_/8050/')`.
 
 2. When you run the server, it must be bound to `0.0.0.0`, e.g., `app.run_server(host='0.0.0.0')`.
 
