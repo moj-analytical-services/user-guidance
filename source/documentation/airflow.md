@@ -6,20 +6,20 @@
 
 Airflow can be used to:
 
-* run time-consuming processing tasks overnight
-* run tasks on a regular schedule
-* run end-to-end processing workflows involving multiple steps and dependencies
-* monitor the performance of workflows and identify issues
+- run time-consuming processing tasks overnight
+- run tasks on a regular schedule
+- run end-to-end processing workflows involving multiple steps and dependencies
+- monitor the performance of workflows and identify issues
 
 ## Concepts
 
 There are a few key concepts of Airflow:
 
-* an Airflow pipeline is defined by a directed acyclic graph (DAG), which is made up of a number of individual tasks
-* a DAG could be simple, for example, `task_1 >> task_2 >> task_3`, meaning run `task_1` then `task_2` then `task_3`
-* a task can be dependent on multiple previous tasks and can trigger multiple other tasks when it is completed
-* each pipeline has a GitHub repository, containing code files that will be run (for example, R or Python scripts) plus configuration files that define the environment in which each task will be run
-* you can run a pipeline on a regular schedule or trigger it manually by selecting the __▶__ (trigger dag) button in the [Airflow user interface](https://airflow.tools.alpha.mojanalytics.xyz)
+- an Airflow pipeline is defined by a directed acyclic graph (DAG), which is made up of a number of individual tasks
+- a DAG could be simple, for example, `task_1 >> task_2 >> task_3`, meaning run `task_1` then `task_2` then `task_3`
+- a task can be dependent on multiple previous tasks and can trigger multiple other tasks when it is completed
+- each pipeline has a GitHub repository, containing code files that will be run (for example, R or Python scripts) plus configuration files that define the environment in which each task will be run
+- you can run a pipeline on a regular schedule or trigger it manually by selecting the **▶** (trigger dag) button in the [Airflow user interface](https://airflow.tools.alpha.mojanalytics.xyz)
 
 You can find out more about other important concepts in the [Airflow documentation](https://airflow.apache.org/docs/stable/concepts.html).
 
@@ -34,8 +34,8 @@ To set up an Airflow pipeline, you should:
 5. Create a pull request.
 6. Test the pipeline in your Airflow sandbox.
 7. Create a new release.
-8.  Clone the [`airflow-dags`](https://github.com/moj-analytical-services/airflow-dags) repository from GitHub and create a new branch.
-9.  Create a DAG script.
+8. Clone the [`airflow-dags`](https://github.com/moj-analytical-services/airflow-dags) repository from GitHub and create a new branch.
+9. Create a DAG script.
 10. Push your changes to GitHub.
 11. Create a pull request and request review from the Data Engineering team.
 12. Merge the pull request into the master branch.
@@ -45,12 +45,12 @@ To set up an Airflow pipeline, you should:
 To create a new repository from the Airflow template:
 
 1. Go to the [`template-airflow-python`](https://github.com/moj-analytical-services/template-airflow-python) repository.
-2. Select __Use this template__.
+2. Select **Use this template**.
 3. Fill in the form:
-    + Owner: `moj-analytical-services`
-    + Name: The name of your pipeline prefixied with `airflow-`, for example, `airflow-my-pipeline`
-    + Privacy: Internal (refer to the [public, internal and private repositories](github.html#public-internal-and-private-repositories) section)
-4. Select __Create repository from template__.
+   - Owner: `moj-analytical-services`
+   - Name: The name of your pipeline prefixied with `airflow-`, for example, `airflow-my-pipeline`
+   - Privacy: Internal (refer to the [public, internal and private repositories](github.html#public-internal-and-private-repositories) section)
+4. Select **Create repository from template**.
 
 This copies the entire contents of the Airflow template to a new repository.
 
@@ -59,12 +59,12 @@ This copies the entire contents of the Airflow template to a new repository.
 To clone the repository:
 
 1.  Navigate to the repository on GitHub.
-2.  Select __Clone or download__.
-3.  Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select __Use SSH__.
+2.  Select **Clone or download**.
+3.  Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
 4.  Copy the SSH URL. This should start with `git@`.
-5.  In RStudio, select __File__ > __New project...__ > __Version control__ > __Git__.
-6.  Paste the SSH URL in the __Repository URL__ field.
-7.  Select __Create Project__.
+5.  In RStudio, select **File** > **New project...** > **Version control** > **Git**.
+6.  Paste the SSH URL in the **Repository URL** field.
+7.  Select **Create Project**.
 
 ### Create scripts for the tasks you want to run
 
@@ -78,9 +78,9 @@ You can automatically format your code using tools like [`black`](https://pypi.o
 
 The Airflow template contains a `Dockerfile` and number of configuration files that you may need to update:
 
-* `iam_config.json`
-* `deploy.json`
-* `requirements.txt`
+- `iam_config.json`
+- `deploy.json`
+- `requirements.txt`
 
 #### `Dockerfile`
 
@@ -106,9 +106,9 @@ It is of the following form:
 
 ```json
 {
-    "mojanalytics-deploy": "v1.0.0",
-    "type": "airflow_dag",
-    "role_name" : "role_name"
+  "mojanalytics-deploy": "v1.0.0",
+  "type": "airflow_dag",
+  "role_name": "role_name"
 }
 ```
 
@@ -135,10 +135,11 @@ Create a branch and push your changes to GitHub.
 When you create a new pull request, Concourse will automatically try to build a Docker image from the `Dockerfile` contained in your branch. The image will have the tag `repository_name:branch_name`, where `repository_name` is the name of the repository and `branch_name` is the name of the branch from which you have created the pull request.
 
 Concourse also runs a number of tests. It:
-* checks if you have made any changes to the IAM policy
-* checks if the IAM role can be created correctly
-* checks that your Python code is correctly formatted according to [Flake8](http://flake8.pycqa.org/en/latest/) rules
-* runs project-specific unit tests with [pytest](https://docs.pytest.org/en/latest/)
+
+- checks if you have made any changes to the IAM policy
+- checks if the IAM role can be created correctly
+- checks that your Python code is correctly formatted according to [Flake8](http://flake8.pycqa.org/en/latest/) rules
+- runs project-specific unit tests with [pytest](https://docs.pytest.org/en/latest/)
 
 All of these tests should be passing before you merge your changes.
 
@@ -159,12 +160,12 @@ To create a release, follow the [GitHub guidance](https://help.github.com/en/git
 To clone the repository:
 
 1.  Navigate to the repository on GitHub.
-2.  Select __Clone or download__.
-3.  Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select __Use SSH__.
+2.  Select **Clone or download**.
+3.  Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
 4.  Copy the SSH URL. This should start with `git@`.
-5.  In RStudio, select __File__ > __New project...__ > __Version control__ > __Git__.
-6.  Paste the SSH URL in the __Repository URL__ field.
-7.  Select __Create Project__.
+5.  In RStudio, select **File** > **New project...** > **Version control** > **Git**.
+6.  Paste the SSH URL in the **Repository URL** field.
+7.  Select **Create Project**.
 
 ### Create a DAG script
 
@@ -216,7 +217,6 @@ For more information on the `basic_kubernetes_pod_operator` you can view [it's r
 
 #### Example DAG (KubernetesPodOperator)
 
-
 ```python
 from datetime import datetime
 
@@ -251,9 +251,7 @@ dag = DAG(
     schedule_interval=None,
 )
 
-# It is good practice to use the same name for the `task_id` and `task_name` parameters.
-# When doing so make sure to only use numbers, characters and '-' to define the name.
-task_id = "example-task-name", 
+task_id = "example-task-name", # It is good practice to use the same name for the `task_id` and `task_name` parameters. When doing so make sure to only use numbers, characters and '-' to define the name.
 task = KubernetesPodOperator(
     dag=dag,
     namespace=NAMESPACE,
@@ -310,10 +308,11 @@ To build and test your Docker image locally, follow the steps below:
     ```sh
     docker build . -t IMAGE:TAG
     ```
-    
+
     where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `0.1`.
+
 4.  Run a Docker container created from the Docker image by running:
-    
+
     ```sh
     docker run IMAGE:TAG
     ```
