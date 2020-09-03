@@ -412,7 +412,7 @@ A [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) (or
 
 **NOTE:** You may need to delete the `.bash_aliases` file (`rm .bash_aliases`) from your home directory for pip to work properly within a virtual environment.
 
-Create a venv for your project, called 'venv':
+Create a venv for your project, called 'venv' (make sure you run this in the Terminal):
 
 ```bash
 cd myproject
