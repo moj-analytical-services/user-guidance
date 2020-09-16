@@ -76,11 +76,22 @@ If you make changes to the `config/tech-docs.yml` configuration file, you will n
 
 To build the HTML pages from content in your `source` folder, run:
 
-```
+```sh
 bundle exec middleman build
 ```
 
 Every time you run this command, the `build` folder gets generated from scratch. This means any changes to the `build` folder that are not part of the build command will get overwritten.
+
+## Update dependencies
+
+To update this repo's Ruby dependencies, run:
+
+```sh
+bundle update
+bundle exec middleman server  # and quickly test it in your browser
+```
+
+Now commit the updated `Gemfile.lock` in a PR, as usual.
 
 ## Troubleshooting
 
