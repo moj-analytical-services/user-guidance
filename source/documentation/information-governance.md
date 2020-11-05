@@ -146,6 +146,8 @@ You should submit your completed technical migration form to the Analytical Plat
 
 For all data movements, you must complete a data movement form. Before completing a data movement form, you should ensure that you have already obtained all necessary approvals and completed all other information governance requirements.
 
+For more detailed guidance, see [how to complete a data movement form](appendix/data-movement-form.html)
+
 The data movement form can be found [here](https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUREVBSzk4WTg1WFk1OFU4V1QyWUE5VUoyNC4u). When you submit the form, it will be [processed by the Analytical Platform team](https://github.com/ministryofjustice/analytics-platform/wiki/Data-movement-requests).
 
 ## Reporting security incidents
