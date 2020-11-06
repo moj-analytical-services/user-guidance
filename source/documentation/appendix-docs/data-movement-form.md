@@ -31,13 +31,13 @@ details of your data movement.
 
 #### What is the security marking of the data?
 
-The Analytical Platform is suitable for data classified as OFFICIAL and
-OFFICIAL-SENSITIVE. SECRET and TOP SECRET data is not allowed on the Analytical
-Platform. Information on security markings and classifying information can be
-found on the
+The Analytical Platform is suitable for data classified as OFFICIAL, including
+data that is marked OFFICIAL-SENSITIVE. SECRET and TOP SECRET data is not
+allowed on the Analytical Platform. Information on security markings and
+classifying information can be found on the
 [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/classifying-information/).
 
-#### Will the data be modified or changed in order to mask sensitive content orpersonal information?
+#### Will the data be modified or changed in order to mask sensitive content or personal information?
 
 Guidance on masking and anonymisation can be found in the
 [anonymisation and pseudonymisation](../../information-governance.html#anonymisation-and-pseudonymisation)
@@ -64,10 +64,12 @@ Further information on handling personal data in MoJ can be found on the
 
 #### Is MoJ the data controller responsible for the data?
 
-A data controller is an entity registered with the Information Commissioner's
-Office (ICO) that exercises overall control over the purposes and means of the
-processing of personal data. MoJ is the controller for MoJ HQ, HMPPS, HMCTS,
-LAA, OPG and some other agencies and public bodies.
+MoJ is the data controller for any data collected by or on behalf of MoJ HQ,
+HMPPS, HMCTS, LAA, OPG and some other agencies and public bodies. MoJ may also
+be a joint data controller for any data shared with the ministry by other
+organisations, such as other government department. This should be specified in
+the data sharing agreement or memorandum of understanding that governs the
+sharing of the data.
 
 #### Who is the data controller responsible for the data?
 
@@ -255,6 +257,17 @@ required.
 ## Information assurance
 
 #### Have you discussed the data movement with the relevant information security team(s)?
+
+It is not mandatory to consult any other information security teams before
+submitting a data movement form, however, it is advisable to do so when:
+
+- the data is new
+- you want to move a large quantity of data
+- you want to move data on a regular basis
+- the data is particularly sensitive
+- the method of transfer is non-standard
+- the data will be retained on the Analytical Platform for longer than is
+  permitted for operational purposes
 
 Some information security teams that may be relevant are:
 
