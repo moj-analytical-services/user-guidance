@@ -65,7 +65,7 @@ Further information on handling personal data in MoJ can be found on the
 #### Is MoJ the data controller responsible for the data?
 
 MoJ is the data controller for any data collected by or on behalf of MoJ HQ,
-HMPPS, HMCTS, LAA, OPG and some other agencies and public bodies. MoJ may also
+HMPPS, HMCTS, LAA, OPG, CICA and some other agencies and public bodies. MoJ may also
 be a joint data controller for any data shared with the ministry by other
 organisations, such as other government department. This should be specified in
 the data sharing agreement or memorandum of understanding that governs the
@@ -85,7 +85,6 @@ correct data controller is.
 
 The following agencies and public bodies are data controllers:
 
-- Criminal Injuries Compensation Authority (CICA)
 - Children and Family Court Advisory and Support Service (CAFCASS)
 - Criminal Cases Review Commission (CCRC)
 - Legal Services Board (LSB)
