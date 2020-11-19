@@ -127,12 +127,10 @@ You can also directly navigate to a bucket in the AWS S3 Console by selecting __
 
 You can upload files in RStudio on the Analytical Platform to Amazon S3 using the `s3tools` package.
 
-`s3tools` should be preinstalled for all users of the Analytical Platform. If you find that `s3tools` is not installed, you can install it by running the following code:
+`s3tools` should be preinstalled for all users of the Analytical Platform. If you find that `s3tools` is not installed, you can install it by running the following code in a terminal:
 
-```{r install-s3-tools, eval=FALSE}
-install.packages('remotes')
-library(remotes)
-remotes::install_github('moj-analytical-services/s3tools')
+```
+conda install -c moj-analytical-services r-s3tools
 ```
 
 `s3tools` contains three functions for uploading files to Amazon S3:
