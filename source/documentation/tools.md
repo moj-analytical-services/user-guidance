@@ -482,11 +482,11 @@ Before you can run this project, you need some files setup in your home dir, usi
 
     # create a virtual environment
     cd myproject
-    python3 -m venv venv
+    python -m venv venv
 
     # install the python packages required
     . venv/bin/activate
-    pip3 install -r requirements.txt
+    python -m pip install -r requirements.txt
 
 ## Run notebooks
 
@@ -523,7 +523,7 @@ Jupyter won't use your venv, and the packages installed into it, unless you do t
 2. Install the module ipykernel within this venv (for creating/managing kernels for ipython which is what Jupyter sits on top of):
 
     ```bash
-    pip3 install ipykernel
+    python -m pip install ipykernel
     ```
 
 3. Create a Jupyter kernel which is configured to use your venv. (Change the display name to match your project name):
