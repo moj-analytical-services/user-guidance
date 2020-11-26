@@ -453,7 +453,7 @@ six==1.15.0
 With the venv activated, if you run some python script from the terminal, the package will be available to it. e.g.
 
 ```bash
-(venv) $ python -c 'import pandas; print(pandas); print("It worked")'
+(venv) $ python3 -c 'import pandas; print(pandas); print("It worked")'
 <module 'pandas' from '/home/jovyan/myproject/venv/lib/python3.7/site-packages/pandas/__init__.py'>
 It worked
 ```
@@ -493,7 +493,7 @@ Before you can run this project, you need some files setup in your home dir, usi
 In Jupyter, before you can successfully run the notebook, you'll need to select the Jupyter kernel for this project. If it doesn't appear in the drop-down list, run this in a terminal:
 
     . myproject/venv/bin/activate
-    python -m ipykernel install --user --name="venv" --display-name="My project (Python3)"
+    python3 -m ipykernel install --user --name="venv" --display-name="My project (Python3)"
 
 ```
 
@@ -506,7 +506,7 @@ To run the python scripts, you'll need to activate the virtual env first:
 
     cd myproject
     . venv/bin/activate
-    python myscript.py
+    python3 myscript.py
 ```
 
 ### Using a venv in Jupyter
@@ -529,7 +529,7 @@ Jupyter won't use your venv, and the packages installed into it, unless you do t
 3. Create a Jupyter kernel which is configured to use your venv. (Change the display name to match your project name):
 
     ```bash
-    python -m ipykernel install --user --name="venvname" --display-name="My project (Python3)"
+    python3 -m ipykernel install --user --name="venvname" --display-name="My project (Python3)"
     ```
 
 4. In Jupyter, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
@@ -566,7 +566,7 @@ To use the pipenv in Jupyter, compared to [using a venv in Jupyter](using-a-venv
 
 ```bash
 pipenv install ipykernel
-python -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
+python3 -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
 ```
 
 And then select the kernel in Jupyter as [normal](using-a-venv-in-jupyter).
