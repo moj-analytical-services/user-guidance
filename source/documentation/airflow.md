@@ -354,7 +354,7 @@ You should also set the `NAMESPACE` variable in your DAG script to be your own n
 
 You should only use your Airflow sandbox for testing purposes.
 
-### Troubleshooting
+## Troubleshooting
 
 If a task fails in Airflow, you can click on it and view the logs. The final few lines before `Event with job id your-task-id-9stuff876 Failed` should indicate the problem. As always, it is a good idea to have print statements in your code to help identify the stage at which it failed.
 Here are some common errors you might encounter:
@@ -378,7 +378,7 @@ The following are the essential aspects in a Dockerfile
 ### Configuration of software to be installed
 
 There are a couple of parts to this. The first is the basic foundation image to work with. This encompasses the operating system and basic software, like python. This is defined in the `FROM` part of a Dockerfile, eg. `FROM python:3.7`. You should select this from a list available on the AP.
-Additionally you will want to install specific Python or R packages that you use in your code. This is best done by activating a conda environment:
+Additionally you will want to install specific Python or R packages that you use in your code. You can do this with `RUN pip install -r requirements.txt` as referenced above. To be robust, you should pin all versions (`package==1.2.0`). For complicated installations this is best done by activating a conda environment:
 ```
 COPY environment.yml environment.yml
 RUN conda env create -f environment.yml
