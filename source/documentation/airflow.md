@@ -22,21 +22,21 @@ There are a few key concepts of Airflow:
 - an Airflow task is defined with python code by a Directed Acyclic Graph (DAG), which is made up of one or more ordered (directed) connected tasks (graph), without loops (acyclic)
 - a DAG could be simple, for example, `task_1 >> task_2 >> task_3`, meaning run `task_1` then `task_2` then `task_3`
 - each task can be dependent on multiple previous tasks and can trigger multiple other tasks when it is completed
-- each pipeline references a GitHub repository, containing code files that will be run (for example, R or Python scripts) plus configuration files that define the environment in which each task will be run
+- each DAG references a GitHub repository, containing code files that will be run (for example, R or Python scripts) plus configuration files that define the environment in which each task will be run
 - you can run a DAG on a regular schedule or trigger it manually by selecting the **▶** (trigger dag) button in the [Airflow user interface](https://airflow.tools.alpha.mojanalytics.xyz)
 
 You can find out more about other important concepts in the [Airflow documentation](https://airflow.apache.org/docs/stable/concepts.html).
 
-## Set up an Airflow pipeline
+## Set up an Airflow DAG
 
-To set up an Airflow pipeline, you should:
+To set up an Airflow DAG, you should:
 
 1. Create a new repository from the [Airflow template](https://github.com/moj-analytical-services/template-airflow-python).
 2. Create scripts for the tasks you want to run.
 3. Update the Dockerfile and other configuration files.
 4. Push your changes to GitHub.
 5. Create a pull request.
-6. Test the pipeline in your Airflow sandbox.
+6. Test the DAG in your Airflow sandbox.
 7. Create a new release (and check concourse has built it).
 8. Clone the [`airflow-dags`](https://github.com/moj-analytical-services/airflow-dags) repository from GitHub and create a new branch.
 9. Create a DAG script.
@@ -52,7 +52,7 @@ To create a new repository from the Airflow template:
 - Select **Use this template**.
 - Fill in the form:
    - Owner: `moj-analytical-services`
-   - Name: The name of your pipeline prefixied with `airflow-`, for example, `airflow-my-pipeline`
+   - Name: The name of your repo prefixied with `airflow-`, for example, `airflow-my-repo`
    - Privacy: Internal (refer to the [public, internal and private repositories](github.html#public-internal-and-private-repositories) section)
 - Select **Create repository from template**.
 
@@ -72,7 +72,7 @@ To clone the repository:
 
 ### (2) Create scripts for the tasks you want to run
 
-You can create scripts in any programming language, including R and Python. You may want to test your scripts in RStudio or JupyterLab on the Analytical Platform before running them as part of a pipeline.
+You can create scripts in any programming language, including R and Python. You should test your scripts in RStudio or JupyterLab on the Analytical Platform before running them as part of a DAG, as they will be far esier to debug here. Be aware of the working directory your scripts run from during development, as you will need to replicate this in your Docker image later.
 
 All Python scripts in your Airflow repository should be formatted according to [`flake8`](https://pypi.org/project/flake8/) rules. `flake8` is a code linter that analyses your Python code and flags bugs, programming errors and stylistic errors.
 
@@ -96,7 +96,7 @@ Some python packages, such as `numpy` or `lxml`, depend on C extensions. If inst
 
 #### `iam_config.yml`
 
-The `iam_config.yml` file defines the permissions that will be attached to the IAM role used by the Airflow pipeline when it is run.
+The `iam_config.yml` file defines the permissions that will be attached to the IAM role used by the Airflow DAG when it is run.
 
 The `iam_role_name` must start with `airflow_`, be lowercase, contain underscores only between words and be unique on the Analytical Platform.
 
@@ -104,7 +104,7 @@ You can find detailed guidance on how to define permissions in the [`iam_builder
 
 #### `deploy.json`
 
-The `deploy.json` file contains configuration information that is used by Concourse when building and deploying the pipeline.
+The `deploy.json` file contains configuration information that is used by Concourse when building and deploying the image.
 
 It is of the following form:
 
@@ -120,7 +120,7 @@ You should change `role_name` to match the name specified in `iam_config.yml`.
 
 #### `requirements.txt`
 
-The `requirements.txt` file contains a list of Python packages to install that are required by your pipeline. You can find out more in the [pip guidance](https://pip.readthedocs.io/en/1.1/requirements.html).
+The `requirements.txt` file contains a list of Python packages to install that are required by your code. You can find out more in the [pip guidance](https://pip.readthedocs.io/en/1.1/requirements.html).
 
 To capture the requirements of your project, run the following command in a terminal:
 
@@ -128,7 +128,7 @@ To capture the requirements of your project, run the following command in a term
 pip freeze > requirements.txt
 ```
 
-You can also use conda, packrat, renv or other package management tools to capture the dependencies required by your pipeline. If using one of these tools, you will need to update the `Dockerfile` to install required packages correctly.
+You can also use conda, packrat, renv or other package management tools to capture the dependencies required by your code. If using one of these tools, you will need to update the `Dockerfile` to install required packages correctly.
 
 ### (4) Push your changes to GitHub
 
@@ -302,9 +302,9 @@ Create a new pull request and request a review from `moj-analytical-services/dat
 
 ### (12) Merge the pull request into the master branch
 
-When you merge your pull request into the master branch, your pipeline will be automatically detected by Airflow.
+When you merge your pull request into the master branch, your DAG will be automatically detected by Airflow.
 
-You can view your pipeline in the Airflow UI at [airflow.tools.alpha.mojanalytics.xyz](https://airflow.tools.alpha.mojanalytics.xyz). You can find more information on using the Airflow UI in the [Airflow documentation](https://airflow.apache.org/docs/stable/ui.html).
+You can view your DAG in the Airflow UI at [airflow.tools.alpha.mojanalytics.xyz](https://airflow.tools.alpha.mojanalytics.xyz). You can find more information on using the Airflow UI in the [Airflow documentation](https://airflow.apache.org/docs/stable/ui.html).
 
 ## Testing
 
@@ -346,9 +346,9 @@ To deploy your Airflow sandbox, follow the instructions in the [Work with Analyt
 
 Deploying your Airflow sandbox will create an `airflow` folder in your home directory on the Analytical Platform. This folder contains three subfolders: `db`, `dags` and `logs`.
 
-Once you have deployed your Airflow sandbox, you should store the script for the DAG you want to test in the `airflow/dags` folder in your home directory on the Analytical Platform. Airflow scans this folder every three minutes and will automatically detect your pipeline.
+Once you have deployed your Airflow sandbox, you should store the script for the DAG you want to test in the `airflow/dags` folder in your home directory on the Analytical Platform. Airflow scans this folder every three minutes and will automatically detect your DAG.
 
-To ensure that your pipeline runs correctly, you should set the `ROLE` variable in your DAG script to be your own IAM role on the Analytical Platform. This is your GitHub username in lowercase prefixed with `alpha_user_`. For example, if your GitHub username was `Octocat-MoJ`, your IAM role would be `alpha_user_octocat-moj`.
+To ensure that your DAG runs correctly, you should set the `ROLE` variable in your DAG script to be your own IAM role on the Analytical Platform. This is your GitHub username in lowercase prefixed with `alpha_user_`. For example, if your GitHub username was `Octocat-MoJ`, your IAM role would be `alpha_user_octocat-moj`.
 
 You should also set the `NAMESPACE` variable in your DAG script to be your own namespace on the Analytical Platform. This is your GitHub username in lowercase prefixed with `user-`. For example, if your GitHub username was `Octocat-MoJ`, your namespace would be `user-octocat-moj`.
 
