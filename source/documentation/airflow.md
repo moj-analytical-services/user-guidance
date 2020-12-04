@@ -6,7 +6,7 @@
 
 Airflow is simply a scheduling tool. In the analytical platform implementation, it runs on its own virtual computer watching time go by, waiting to run pre-defined tasks created by platform users. Airflow allows you to make these tasks fairly complicated, taking account of dependencies between them, retries on failure, and email notification.
 To create an item for Airflow to schedule (known as a 'DAG'), you need to create a python file which defines the (one or more) tasks involved. This python file must be added to the `airflow-dags` repo. Every 3 minutes, Airflow is updated using the master branch from that repo.
-In terms of the content of the scheduled tasks, an Airflow DAG.py file will only reference an 'image'. An image is just a definition of what a virtual computer contains - installed software and files. We use Docker for this. All Airflow does is use that image to create a virtual machine on the cluster. It is up to you to create the image and manage what it does when Airflow launches it. This is done within your github repo using a Dockerfile. The Dockerfile describes the virtual environment: the software you require, the scripts and files you use, and what to do when it starts.
+In terms of the content of the scheduled tasks, an Airflow DAG.py file will only reference an 'image'. An image is just a definition of what a virtual computer contains - installed software and files. We use Docker for this. Airflow simply uses that image to create a virtual machine on the AP cluster. It is up to you to create the image and manage what it does once Airflow launches it. This is done within your github repo using a Dockerfile. The Dockerfile describes the virtual environment: the software you require, the scripts and files you use, and what to do when it starts.
 
 Airflow can be used to:
 
@@ -377,7 +377,29 @@ The following are the essential aspects in a Dockerfile
 
 ### Configuration of software to be installed
 
-There are a couple of parts to this. The first is the basic foundation image to work with. This encompasses the operating system and basic software, like python. This is defined in the `FROM` part of a Dockerfile, eg. `FROM python:3.7`. You should select this from a list available on the AP.
+There are a couple of parts to this. The first is the basic foundation image to work with. This encompasses the operating system and basic software, like python. This is defined in the `FROM` part of a Dockerfile, eg. `FROM python:3.7`. 
+<details>
+<summary>You should select this from a list available on the AP.</summary>
+
+```
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:3.7
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:3.7-slim
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:alpine3.10
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:slim
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:3.7-slim-buster
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:alpine3.9
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:3.6
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/python:3.6-slim
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/r-base:3.5.0
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/rocker:shiny-3.4.2
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/amancevice:pandas-0.25.2
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/moj-spark-jovyan:baseenv
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/nginx-unprivileged:stable-alpine
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/continuumio:miniconda3
+593291632749.dkr.ecr.eu-west-1.amazonaws.com/pottava:s3-proxy
+```
+
+</details>
 Additionally you will want to install specific Python or R packages that you use in your code. You can do this with `RUN pip install -r requirements.txt` as referenced above. To be robust, you should pin all versions (`package==1.2.0`). For complicated installations this is best done by activating a conda environment:
 ```
 COPY environment.yml environment.yml
@@ -393,6 +415,6 @@ You will need to specify what files from within your repo exist within the Docke
 ### Scripting concerns
 
 All Dockerfiles need an `ENTRYPOINT`, which sets the inital action taken when the image runs. Typically this will be a shell command to run a program and script, eg. `ENTRYPOINT python -u scripts/run.py`, or `ENTRYPOINT Rscript scripts/run.R`. You can set any script control logic within the entrypoint script.
-You should be mindful of the working directory when working with Docker images (that is, the path from which programs see other files relatively). This should be reflected in any file path references in your code. A good convention would be too keep the root level of the repo as the working directory, asnd preserve the file structure in your Dockerfile. You can set the workng directory within a Dockerfile with `WORKDIR`.
+You should be mindful of the working directory when working with Docker images (that is, the path from which programs see other files relatively). This should be reflected in any file path references in your code. A good convention would be to keep the root level of the repo as the working directory within your code, and preserve the file structure in your Dockerfile. You can set the workng directory within a Dockerfile with `WORKDIR`.
 
 There is a list of Dockerfile commands and documentation [here](https://docs.docker.com/engine/reference/builder/).
