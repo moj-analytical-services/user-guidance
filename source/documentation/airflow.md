@@ -417,4 +417,4 @@ You will need to specify what files from within your repo exist within the Docke
 All Dockerfiles need an `ENTRYPOINT`, which sets the inital action taken when the image runs. Typically this will be a shell command to run a program and script, eg. `ENTRYPOINT python -u scripts/run.py`, or `ENTRYPOINT Rscript scripts/run.R`. You can set any script control logic within the entrypoint script.
 You should be mindful of the working directory when working with Docker images (that is, the path from which programs see other files relatively). This should be reflected in any file path references in your code. A good convention would be to keep the root level of the repo as the working directory within your code, and preserve the file structure in your Dockerfile. You can set the workng directory within a Dockerfile with `WORKDIR`.
 
-There is a list of Dockerfile commands and documentation [here](https://docs.docker.com/engine/reference/builder/).
+There is a list of `Dockerfile` commands and documentation on the [Docker website](https://docs.docker.com/engine/reference/builder/).
