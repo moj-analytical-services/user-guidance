@@ -88,7 +88,7 @@ The Airflow template contains a `Dockerfile` and number of configuration files t
 
 #### `Dockerfile`
 
-A `Dockerfile` is a text file that contains the commands used to build a Docker image. A Docker image is the code to create a well-defined, self-contained virtual computer. You can see an [example Dockerfile](https://github.com/moj-analytical-services/template-airflow-python/blob/master/Dockerfile) in the Airflow template.
+A `Dockerfile` is a text file that contains the commands used to build a Docker image. A Docker image becomes a Docker container at runtime and contains everything needed to run your code in a consistent and reproducible way. You can see an [example Dockerfile](https://github.com/moj-analytical-services/template-airflow-python/blob/master/Dockerfile) in the Airflow template.
 
 You can use the same Docker image for multiple tasks by using an environment variable to call different scripts as in this [example](https://github.com/moj-analytical-services/airflow-magistrates-data-engineering/blob/58ac895abb8a87208f7b6b33426883b2b0e1dba4/Dockerfile#L19).
 
