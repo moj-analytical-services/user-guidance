@@ -72,7 +72,7 @@ To clone the repository:
 
 ### (2) Create scripts for the tasks you want to run
 
-You can create scripts in any programming language, including R and Python. You should test your scripts in RStudio or JupyterLab on the Analytical Platform before running them as part of a DAG, as they will be far esier to debug here. Be aware of the working directory your scripts run from during development, as you will need to replicate this in your Docker image later.
+You can create scripts in any programming language, including R and Python. You should test your scripts in RStudio or JupyterLab on the Analytical Platform before running them as part of a DAG, as they will be far easier to debug here. Be aware of the working directory your scripts run from during development, as you will need to replicate this in your Docker image later.
 
 All Python scripts in your Airflow repository should be formatted according to [`flake8`](https://pypi.org/project/flake8/) rules. `flake8` is a code linter that analyses your Python code and flags bugs, programming errors and stylistic errors.
 
