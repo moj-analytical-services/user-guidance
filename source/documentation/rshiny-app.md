@@ -234,7 +234,7 @@ When accessing an app, you can choose whether to sign in using an email link (de
 1. Check that the user is not trying to use the same link to access the app multiple times – links expire after the first user and a new one must be requested.
 2. Check that the user is trying to access the app using Chrome or Firefox – if links automatically open in Internet Explorer, they may need to copy and paste the link without clicking it into Chrome or Firefox.
 
-Some anti-virus software and spam filters pre-click links in emails, meaning that app sign-in links do work. In this case, you should sign in using a one-time passcode, as described above in [access the app](#access-the-app) section.
+Sometimes the link doesn't work because it gets accessed by a system such as anti-virus software, spam filters or the email client's 'link previewer' (e.g. to display the web page when you hover over the link). In this case, you should sign in using a one-time passcode, as described above in [access the app](#access-the-app) section.
 
 ##### "IP x.x.x.x is not whitelisted"
 
