@@ -500,7 +500,7 @@ In Jupyter, before you can successfully run the notebook, you'll need to select 
 
 ```
 
-And your project has analytical scripts that run in a terminal you could add:
+And if your project has analytical scripts that run in a terminal you could add:
 
 ```markdown
 ## Run scripts
@@ -541,12 +541,12 @@ To resume work on this after working on another project:
 
 1. Activate the environment:
 
-   ```bash
-   cd myproject
-   source venv/bin/activate
-   ```
+    ```bash
+    cd myproject
+    source venv/bin/activate
+    ```
 
-   Now you've activated this terminal with your venv, things you run on the command-line will default to using your venv for python packages, rather than the system's packages. That's useful if you run 'python', run python scripts or 'pip install' more packages.
+    Now you've activated this terminal with your venv, things you run on the command-line will default to using your venv for python packages, rather than the system's packages. That's useful if you run 'python', run python scripts or 'pip install' more packages.
 
 2. Open the notebook - it’s remembered which kernel you wanted to use for this notebook and you can carry on working with the packages available.
 
