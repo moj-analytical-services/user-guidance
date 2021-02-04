@@ -315,7 +315,7 @@ You can get a PAT from your GitHub user profile. A user can generate a number of
 
 To generate your PAT for reading private repos in R:
 
-  1. Click [this link](https://github.com/settings/tokens/new?scopes=repo&description=R:GITHUB_PAT) to take you to right Github settings page. Or else you can navigate there on the Github site by going to **_Settings > Developer Settings > Personal Access Tokens_**
+  1. Navigate to the [GitHub personal access tokens page](https://github.com/settings/tokens/new?scopes=repo&description=R:GITHUB_PAT). You can also access this from any other GitHub page by selecting your user icon, then **Settings**, then **Developer settings**, then **Personal access tokens**.
   
   2. Select **_Generate new token_** and select the **scope** of access you want to grant using this token.
   
