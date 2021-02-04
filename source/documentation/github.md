@@ -329,7 +329,7 @@ To generate your PAT for reading private repos in R:
 
 ### Using a PAT to authenticate in R/RStudio
 
-You should store your PAT in a special R file, called .Renviron, in your *home directory* (on AP). This file gets run when you start R, putting the PAT into the system environment variable `GITHUB_PAT`. This is where common R packages (e.g. remotes, devtools and renv) will look for it.
+You should store your PAT in a special R file, called `.Renviron` in your home directory on the Analytical Platform. This file gets run when you start R, putting the PAT into the system environment variable `GITHUB_PAT`. This is where common R packages (for example, remotes, devtools and renv) will look for it.
 
 Set this up by running this in your R console (you only need to run it once; do **not** save this line in any file in any repo) and substitute your own PAT Token in place of the example PAT `ax451...8838b1` below:
   
