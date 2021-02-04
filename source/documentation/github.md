@@ -315,8 +315,7 @@ You can get a PAT from your GitHub user profile. A user can generate a number of
 
 To generate your PAT for reading private repos in R:
 
-  1. Navigate to **_Settings > Developer Settings > Personal Access Tokens_**
-  !['PAT' page on GitHub](images/pat/pat-settings.png)
+  1. Click [this link](https://github.com/settings/tokens/new?scopes=repo&description=R:GITHUB_PAT) to take you to right Github settings page. Or else you can navigate there on the Github site by going to **_Settings > Developer Settings > Personal Access Tokens_**
   
   2. Select **_Generate new token_** and select the **scope** of access you want to grant using this token.
   
@@ -330,12 +329,12 @@ To generate your PAT for reading private repos in R:
 
 ### Using a PAT to authenticate in R/RStudio
 
-You should store your PAT in an R profile file in your *home directory* (on AP). This file gets run when you start R, putting the PAT into the system environment variable `GITHUB_PAT`. This is where common R packages (e.g. remotes and devtools) will look for it.
+You should store your PAT in a special R file, called .Renviron, in your *home directory* (on AP). This file gets run when you start R, putting the PAT into the system environment variable `GITHUB_PAT`. This is where common R packages (e.g. remotes, devtools and renv) will look for it.
 
 Set this up by running this in your R console (you only need to run it once; do **not** save this line in any file in any repo) and substitute your own PAT Token in place of the example PAT `ax451...8838b1` below:
   
 ```{r, eval = FALSE}
-writeLines('Sys.setenv("GITHUB_PAT" = "ax451...8838b1")', con = "~/.Rprofile")
+writeLines("GITHUB_PAT=ax451...8838b1", con = "~/.Renviron")
 ```
 
 **Warning: This line should not be put in any repo, and this .Rprofile file should not be added to any repo.**
