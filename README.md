@@ -10,7 +10,7 @@ The user guidance is built and deployed using CircleCI.
 
 When you create a PR, CircleCI will check that your changes build correctly.
 
-When you merge a PR into `master`, CircleCI will build the user guidance and deploy the output files to a bucket in Amazon S3. The user guidance is then served at [user-guidance.services.alpha.mojanalytics.xyz][url] through a content delivey network (CDN) provided by Amazon CloudFront.
+When you merge a PR into `main`, CircleCI will build the user guidance and deploy the output files to a bucket in Amazon S3. The user guidance is then served at [user-guidance.services.alpha.mojanalytics.xyz][url] through a content delivey network (CDN) provided by Amazon CloudFront.
 
 ## Contribute to the guidance
 
