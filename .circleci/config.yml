@@ -48,18 +48,18 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
+                - main
   build-and-deploy:
     jobs:
       - build:
           filters:
             branches:
               only:
-                - master
+                - main
       - deploy:
           filters:
             branches:
               only:
-                - master
+                - main
           requires:
             - build
