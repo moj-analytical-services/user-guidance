@@ -58,13 +58,13 @@ This copies the entire contents of the Airflow template to a new repository.
 
 To clone the repository:
 
-1.  Navigate to the repository on GitHub.
-2.  Select **Clone or download**.
-3.  Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
-4.  Copy the SSH URL. This should start with `git@`.
-5.  In RStudio, select **File** > **New project...** > **Version control** > **Git**.
-6.  Paste the SSH URL in the **Repository URL** field.
-7.  Select **Create Project**.
+1. Navigate to the repository on GitHub.
+2. Select **Clone or download**.
+3. Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
+4. Copy the SSH URL. This should start with `git@`.
+5. In RStudio, select **File** > **New project...** > **Version control** > **Git**.
+6. Paste the SSH URL in the **Repository URL** field.
+7. Select **Create Project**.
 
 ### Create scripts for the tasks you want to run
 
@@ -159,13 +159,13 @@ To create a release, follow the [GitHub guidance](https://help.github.com/en/git
 
 To clone the repository:
 
-1.  Navigate to the repository on GitHub.
-2.  Select **Clone or download**.
-3.  Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
-4.  Copy the SSH URL. This should start with `git@`.
-5.  In RStudio, select **File** > **New project...** > **Version control** > **Git**.
-6.  Paste the SSH URL in the **Repository URL** field.
-7.  Select **Create Project**.
+1. Navigate to the repository on GitHub.
+2. Select **Clone or download**.
+3. Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
+4. Copy the SSH URL. This should start with `git@`.
+5. In RStudio, select **File** > **New project...** > **Version control** > **Git**.
+6. Paste the SSH URL in the **Repository URL** field.
+7. Select **Create Project**.
 
 ### Create a DAG script
 
@@ -301,9 +301,9 @@ If you have a MacBook, you can use Docker locally to build and test your Docker 
 
 To build and test your Docker image locally, follow the steps below:
 
-1.  Clone your Airflow repository to a new folder on your MacBook -- this guarantees that the Docker image will be built using the same code as on the Analytical Platform. You may need to [create a new connection to GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
-2.  Open a terminal session and navigate to the directory containing the `Dockerfile` using the `cd` command.
-3.  Build the Docker image by running:
+1. Clone your Airflow repository to a new folder on your MacBook -- this guarantees that the Docker image will be built using the same code as on the Analytical Platform. You may need to [create a new connection to GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
+2. Open a terminal session and navigate to the directory containing the `Dockerfile` using the `cd` command.
+3. Build the Docker image by running:
 
     ```sh
     docker build . -t IMAGE:TAG
@@ -311,7 +311,7 @@ To build and test your Docker image locally, follow the steps below:
 
     where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `0.1`.
 
-4.  Run a Docker container created from the Docker image by running:
+4. Run a Docker container created from the Docker image by running:
 
     ```sh
     docker run IMAGE:TAG

@@ -1,87 +1,4 @@
-# RStudio and JupyterLab
-
-Analytical Platform comes with tools including:
-
-* RStudio - a development environment for writing R code and R Shiny apps
-* JupyterLab - a development environment for writing Python code including Python notebooks
-* Airflow - see [Airflow section](../airflow.html)
-
-## Managing your analytical tools
-
-Tools on Analytical Platform include RStudio, JupyterLab and Airflow sandbox. To use these, each user must 'start' their own copy of the software. This gives them the benefit of reserved memory space (compared to the more common shared R Studio Server), and some control over the version of R that is running.
-
-To manage your tools:
-
-1. Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
-2. Select the __Analytical tools__ tab.
-
-Use the buttons shown against each tool to manage your copy of the tool:
-
-* "Deploy" - The tool is not yet deployed - this is the initial state. You need to "Deploy" to be able to use the tool for the first time. It sets you up with the latest version and starts it. This may few minutes.
-* "Open" - The tool is either "Idled" (configured but not running) or "Ready" (running). If your RStudio, JupyterLab or Airflow instance is inactive on a Tuesday evening it will be idled. Press "Open" to navigate to the tool in your browser, and if it is not running it will start it (run or "unidle" it). Starting a tool usually takes about 30 seconds, but occasionally will take a few minutes.
-* "Restart" - Often problems with the tool can be solved by restarting the software on the server.
-* "Upgrade" - Another release of the tool is available. Occasionally new versions of R Studio are made available on the Analytical Platform. In this case all users will be given the opportunity to upgrade on the control panel. New versions provide new features and bugfixes to the tool. In addition, there some releases come with improvements to the way RStudio is containerized and integrated with Analytical Platform. You should aim to upgrade when it is offered, although just in case it causes minor incompatibilities with your R code, you should not do it in the days just before you have a critical release of your work. When pressed, the status will change to 'Deploying' and then 'Upgraded'. The __Upgrade__ button will no longer be visible (until another version becomes available).
-
-## Using RStudio
-
-For general guidance in using RStudio, see the [RStudio documentation](https://docs.rstudio.com/).
-
-### RStudio memory issues
-
-RStudio crashes when it runs out of memory. This is because memory is a finite resource, and it's not easy to predict memory usage or exact availability. But if your data is of order of a couple of gigabytes or more, then simply putting it all into a dataframe, or doing processing on it, may mean you run out of memory. For more about memory capacity in the Analytical Platform, and how to work with larger datasets, see the [memory limits](annexes.html#memory-limits) section.
-
-To find out if you have hit the memory limit, you can check [Grafana](https://grafana.services.alpha.mojanalytics.xyz/login). For guidance in using it, see the [memory limits](annexes.html#memory-limits) section.
-
-If RStudio crashes on startup, and you've identified from Grafana that it is because the memory is full, then you can fix it by [clearing your RStudio session](#clearing-your-rstudio-session).
-
-Once RStudio is running again, you can get a better understanding of what takes up memory by using the [pryr](https://rdrr.io/cran/pryr/man/mem_used.html) package. To free up a bit of memory, for example when a variable points to a big dataframe, you can instead assign something a null to the variable, and then run [`gc()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/gc). To free up all the user memory you can click on the 'broom' to [clear the environment](https://community.rstudio.com/t/i-want-to-do-a-complete-wipe-down-and-reset-of-my-r-rstudio/6712/4).
-
-### Clearing your RStudio session
-
-The RStudio session is the short term 'state' of RStudio, including:
-
-* which project and files are open (displayed in the RStudio interface)
-* console and terminal history
-* the global environment – R variables that have been set and are held in memory
-
-The session is persisted between restarts of RStudio, to make it easier for you to pick up where you left off. However you can clear it to solve a number of problems, including if the memory is full.
-
-To clear the RStudio session:
-
-1. Close RStudio, if it is open in any window (because it continually saves its session to disk).
-
-2. Open JupyterLab.
-
-3. In JupyterLab, open a Terminal and run:
-
-    ```bash
-    rm -rf ~/.rstudio.bak; mv ~/.rstudio/ ~/.rstudio.bak
-    ```
-
-4. In the control panel, select the __Restart__ button for RStudio.
-
-    ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
-
-5. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
-
-## Package management
-
-A key element of ensuring analysis is reproducible is maintaining a record of the versions of packages used to produce said analysis.
-
-There are a number of tools available for both R and Python to support package management.
-
-For R:
-
-* [**conda**](#conda) - Recommended for R in Analytical Platform. (Conda is only provided on AP with RStudio images which have R 3.5.1 and later. So if you have the older RStudio with R 3.4 then you'll need to use Packrat instead.)
-* [**packrat**](#packrat) - not recommended for R, but remains an option.
-
-For Python:
-
-* [**venv** and **pip**](#venv-and-pip) - Recommended for Python in Analytical Platform, because it's easier, more reliable and has a much bigger community than conda. **NOTE:** To use pip with venv, you may need to delete the `.bash_aliases` file (`rm .bash_aliases`) in your home directory.
-* [**conda environment**](#conda) installing packages with just **conda** - not recommended, but it might help for the occasional package whose C extension doesn't install well with pip (perhaps the pip package isn't the newer 'wheel' type, or it doesn't have a binary suitable for our distribution)
-* [**conda environment**](#conda) installing packages with **conda** and **pip** - not recommended, but gives you the broadest range of package install options. However conda and pip don't play well together - use at your own risk!
-
-**Note on support:** the Analytical Platform team does not offer support on the topic of packaging. DASD users are encouraged to use their #r, #conda and #python Slack channels to support each other, or ask your line manager about training. Of course, if there is something broken with the platform itself, or something unique about the platform that prevents you from installing a library, then of course do raise it with the team in the normal ways.
+# Package Management
 
 ## Conda
 
@@ -122,7 +39,6 @@ Installing a package:
 | --------------------------------- | ----------------------------- |
 | `install.packages('Rcpp')`        | `conda install r-Rcpp`        |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
-
 
 ![](images/conda/conda_install_rcpp.gif)
 
@@ -252,35 +168,51 @@ conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env updat
 conda env update -f environment.yml --prune
 ```
 
-### RShiny
+## Renv
 
-To use conda in RShiny applications, you will need to use a different `Dockerfile` to deploy the app. The [conda branch of the rshiny-template](https://github.com/moj-analytical-services/rshiny-template/tree/conda) has an appropriate `Dockerfile` for this purpose. This is also necessary if you wish to use Python in your Shiny application, including using `dbtools` for accessing Amazon Athena databases.
+[Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package management solution for RStudio.
 
-### Analytical Platform limitations
+For a full guide to installing packages, workflow and installing custom pacakges (e.g. S3tools) please see the [introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
 
-There are a number of limitations and pitfalls to conda management to be aware of.
+Unless a project has been abled for renv, files in RStudio 1.4 will be installed to a temporary directory.
 
-#### R package versions on conda
+### Migrating Existing Projects
 
-While Anaconda hosts most of the R packages available on CRAN (the Comprehensive R Archive Network), some R packages on Anaconda only have binaries built for certain versions of R. You can identify the available versions by inspecting the first few characters of the Build part of the filename on its page on anaconda.org, like so:
+For projects that currently use Conda or Packrat it is relatively simple to migrate to using renv
 
-![](images/conda/anaconda_R_version_number_example.PNG)
+* Enable renv on the project
+* [Consent to using Renv](https://rstudio.github.io/renv/reference/consent.html) `renv::consent()`
+* Remove any existing Conda or packrat configuration from your R files
 
-Alternatively, if you use `conda search PACKAGENAME`, you can look in the Field column:
+## Using R Renv with Python Venv
 
-![](images/conda/conda_search_R_version_number_example.PNG)
+See the [Renv Python documentation](https://rstudio.github.io/renv/articles/python.html) for further guidance.
 
-If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process.
+To use Renv with Python venv, type
 
-Instead, you should install the package locally via `install.packages()` or `remotes::install_github()`. For RShiny apps, you can add an `install.packages()` step to the `Dockerfile` to install additional packages not covered by the conda environment.yml, like so:
-
-```bash
-RUN R -e "install.packages('waffle', repos = 'https://cinc.rud.is')"
+```text
+renv::use_python()
 ```
 
-### JupyterLab
+## Packrat
 
-See: <https://github.com/RobinL/cheatsheets_etc/blob/master/jupyter_conda.md>
+**NB Use of `packrat` is deprecated on the Analytical Platform - the guidance below is for information only because legacy projects may still use `packrat`.**
+
+Packrat is the most well-known package management tool for R. There's more information about it here: <https://rstudio.github.io/packrat/>
+
+It has some significant downsides. It can be quite temperamental, and difficult to debug when things go wrong - in the earlier days of the Analytical Platform, the majority of support issues related to getting Packrat working.
+
+Furthermore, the Analytical Platform version of RStudio runs on a Linux virtual machine, and CRAN mirrors do not provide Linux compiled binaries for packages. This means that packages need to be compiled on the Analytical Platform every time they're installed, which can take a long time. This means a long wait when doing `install.packages` both in an RStudio session, and when running a Docker build for an RShiny application.
+
+### Packrat usage
+
+To use packrat, ensure that it is enabled for your project in RStudio: select __Tools__ > __Project Options...__ > __Packrat__ > __Use packrat with this project__.
+
+When packrat is enabled, run `packrat::snapshot()` to generate a list of packages used in the project, their sources and their current versions.
+
+You may also wish to run `packrat::clean()` to remove unused packages from the list.
+
+The list is stored in a file called `packrat/packrat.lock`. You must ensure that you have committed this file to GitHub before deploying your app.
 
 ## R's install.packages()
 
@@ -376,31 +308,6 @@ To fix this there are a couple of things you can try:
 
 2. Update the version of `r-pillar` to the [latest one](https://anaconda.org/conda-forge/r-pillar/files) on conda-forge.
 
-
-
-## Packrat
-**NB Use of `packrat` is deprecated on the Analytical Platform - the guidance below is for information only because legacy projects may still use `packrat`.**
-
-Packrat is the most well-known package management tool for R. There's more information about it here: <https://rstudio.github.io/packrat/>
-
-It has some significant downsides. It can be quite temperamental, and difficult to debug when things go wrong - in the earlier days of the Analytical Platform, the majority of support issues related to getting Packrat working.
-
-Furthermore, the Analytical Platform version of RStudio runs on a Linux virtual machine, and CRAN mirrors do not provide Linux compiled binaries for packages. This means that packages need to be compiled on the Analytical Platform every time they're installed, which can take a long time. This means a long wait when doing `install.packages` both in an RStudio session, and when running a Docker build for an RShiny application.
-
-### Packrat usage
-
-To use packrat, ensure that it is enabled for your project in RStudio: select __Tools__ > __Project Options...__ > __Packrat__ > __Use packrat with this project__.
-
-When packrat is enabled, run `packrat::snapshot()` to generate a list of packages used in the project, their sources and their current versions.
-
-You may also wish to run `packrat::clean()` to remove unused packages from the list.
-
-The list is stored in a file called `packrat/packrat.lock`. You must ensure that you have committed this file to GitHub before deploying your app.
-
-### Renv
-
-[Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package billed as "Packrat 2.0". This has a number of improvements over Packrat, in the speed of download and reduction of issues of 00LOCK files that often plague Packrat. However, it is still not able to deal with OS-level dependencies, so conda is still preferred.
-
 ## venv and pip
 
 ### Intro to pip, PyPI and virtual environments
@@ -490,86 +397,3 @@ Before you can run this project, you need some files setup in your home dir, usi
     # install the python packages required
     . venv/bin/activate
     pip3 install -r requirements.txt
-
-## Run notebooks
-
-In Jupyter, before you can successfully run the notebook, you'll need to select the Jupyter kernel for this project. If it doesn't appear in the drop-down list, run this in a terminal:
-
-    . myproject/venv/bin/activate
-    python3 -m ipykernel install --user --name="venv" --display-name="My project (Python3)"
-
-```
-
-And if your project has analytical scripts that run in a terminal you could add:
-
-```markdown
-## Run scripts
-
-To run the python scripts, you'll need to activate the virtual env first:
-
-    cd myproject
-    . venv/bin/activate
-    python3 myscript.py
-```
-
-### Using a venv in Jupyter
-
-Jupyter won't use your venv, and the packages installed into it, unless you do the following set-up:
-
-1. In the terminal, activate your venv:
-
-    ```bash
-    cd myproject
-    source venv/bin/activate
-    ```
-
-2. Install the module ipykernel within this venv (for creating/managing kernels for ipython which is what Jupyter sits on top of):
-
-    ```bash
-    pip3 install ipykernel
-    ```
-
-3. Create a Jupyter kernel which is configured to use your venv. (Change the display name to match your project name):
-
-    ```bash
-    python3 -m ipykernel install --user --name="venvname" --display-name="My project (Python3)"
-    ```
-
-4. In Jupyter, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
-
-To resume work on this after working on another project:
-
-1. Activate the environment:
-
-    ```bash
-    cd myproject
-    source venv/bin/activate
-    ```
-
-    Now you've activated this terminal with your venv, things you run on the command-line will default to using your venv for python packages, rather than the system's packages. That's useful if you run 'python', run python scripts or 'pip install' more packages.
-
-2. Open the notebook - it’s remembered which kernel you wanted to use for this notebook and you can carry on working with the packages available.
-
-Note: *Once you have associated the kernel with the venv you dont need to recreate/update it*. Any packages that are installed to the venv via pip after the kernel is established are immediately available to the kernel.
-
-### Using pipenv in Jupyter
-
-pipenv is another environment manager for Python. In general, please refer to their [basic guidance](https://pipenv-fork.readthedocs.io/en/latest/basics.html).
-
-Set-up for a project results in the creation of `Pipfile` and `Pipfile.lock` in the root directory of your project folder.
-
-The instructions for someone to install the packages specified in Pipefile/Pipefile.lock, are as follows (you don't create a venv yourself, nor is it necessary to 'activate' the pipenv environment):
-
-```bash
-cd myproject
-pipenv install
-```
-
-To use the pipenv in Jupyter, compared to [using a venv in Jupyter](using-a-venv-in-jupyter), the syntax of creating the kernel is simply adjusted to:
-
-```bash
-pipenv install ipykernel
-python3 -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
-```
-
-And then select the kernel in Jupyter as [normal](using-a-venv-in-jupyter).

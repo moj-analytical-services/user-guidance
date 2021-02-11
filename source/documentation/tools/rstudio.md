@@ -1,0 +1,59 @@
+# RStudio
+
+For general guidance in using RStudio, see the [RStudio documentation](https://docs.rstudio.com/).
+
+## RStudio memory issues
+
+RStudio crashes when it runs out of memory. This is because memory is a finite resource, and it's not easy to predict memory usage or exact availability. But if your data is of order of a couple of gigabytes or more, then simply putting it all into a dataframe, or doing processing on it, may mean you run out of memory. For more about memory capacity in the Analytical Platform, and how to work with larger datasets, see the [memory limits](annexes.html#memory-limits) section.
+
+To find out if you have hit the memory limit, you can check [Grafana](https://grafana.services.alpha.mojanalytics.xyz/login). For guidance in using it, see the [memory limits](annexes.html#memory-limits) section.
+
+If RStudio crashes on startup, and you've identified from Grafana that it is because the memory is full, then you can fix it by [clearing your RStudio session](#clearing-your-rstudio-session).
+
+Once RStudio is running again, you can get a better understanding of what takes up memory by using the [pryr](https://rdrr.io/cran/pryr/man/mem_used.html) package. To free up a bit of memory, for example when a variable points to a big dataframe, you can instead assign something a null to the variable, and then run [`gc()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/gc). To free up all the user memory you can click on the 'broom' to [clear the environment](https://community.rstudio.com/t/i-want-to-do-a-complete-wipe-down-and-reset-of-my-r-rstudio/6712/4).
+
+## Clearing your RStudio session
+
+The RStudio session is the short term 'state' of RStudio, including:
+
+* which project and files are open (displayed in the RStudio interface)
+* console and terminal history
+* the global environment – R variables that have been set and are held in memory
+
+The session is persisted between restarts of RStudio, to make it easier for you to pick up where you left off. However you can clear it to solve a number of problems, including if the memory is full.
+
+To clear the RStudio session:
+
+1. Close RStudio, if it is open in any window (because it continually saves its session to disk).
+
+2. Open JupyterLab.
+
+3. In JupyterLab, open a Terminal and run:
+
+    ```bash
+    rm -rf ~/.rstudio.bak; mv ~/.rstudio/ ~/.rstudio.bak
+    ```
+
+4. In the control panel, select the __Restart__ button for RStudio.
+
+    ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
+
+5. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
+
+## R package versions on Conda
+
+While Anaconda hosts most of the R packages available on CRAN (the Comprehensive R Archive Network), some R packages on Anaconda only have binaries built for certain versions of R. You can identify the available versions by inspecting the first few characters of the Build part of the filename on its page on anaconda.org, like so:
+
+![](images/conda/anaconda_R_version_number_example.PNG)
+
+Alternatively, if you use `conda search PACKAGENAME`, you can look in the Field column:
+
+![](images/conda/conda_search_R_version_number_example.PNG)
+
+If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process.
+
+Instead, you should install the package locally via `install.packages()` or `remotes::install_github()`. For RShiny apps, you can add an `install.packages()` step to the `Dockerfile` to install additional packages not covered by the conda environment.yml, like so:
+
+```bash
+RUN R -e "install.packages('waffle', repos = 'https://cinc.rud.is')"
+```
