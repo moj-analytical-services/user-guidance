@@ -10,3 +10,5 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 # Include the tech docs gem
 gem 'govuk_tech_docs', git: 'https://github.com/moj-analytical-services/tech-docs-gem'
+
+gem "webrick", "~> 1.7"
