@@ -1,5 +1,13 @@
 # Package Management
 
+There are multiple package managers available for RStudio, JupyterLab & Airflow depending on the version you are using:
+
+- renv
+- Conda
+- packrat
+
+Conda is the current standard on the Analytical Platform, this is soon to be replaced with renv for simpler package management.
+
 ## Conda
 
 When exploring this section, you may also find the [slides](https://github.com/moj-analytical-services/coffee-and-coding-public/blob/master/2019-10-30%20Conda/conda.pdf) from the Coffee and Coding session on conda useful.

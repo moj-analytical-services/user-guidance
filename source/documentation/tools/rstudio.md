@@ -4,9 +4,9 @@ For general guidance in using RStudio, see the [RStudio documentation](https://d
 
 ## RStudio memory issues
 
-RStudio crashes when it runs out of memory. This is because memory is a finite resource, and it's not easy to predict memory usage or exact availability. But if your data is of order of a couple of gigabytes or more, then simply putting it all into a dataframe, or doing processing on it, may mean you run out of memory. For more about memory capacity in the Analytical Platform, and how to work with larger datasets, see the [memory limits](annexes.html#memory-limits) section.
+RStudio crashes when it runs out of memory. This is because memory is a finite resource, and it's not easy to predict memory usage or exact availability. But if your data is of order of a couple of gigabytes or more, then simply putting it all into a dataframe, or doing processing on it, may mean you run out of memory. For more about memory capacity in the Analytical Platform, and how to work with larger datasets, see the [memory limits](../annexes.html#memory-limits) section.
 
-To find out if you have hit the memory limit, you can check [Grafana](https://grafana.services.alpha.mojanalytics.xyz/login). For guidance in using it, see the [memory limits](annexes.html#memory-limits) section.
+To find out if you have hit the memory limit, you can check [Grafana](https://grafana.services.alpha.mojanalytics.xyz/login). For guidance in using it, see the [memory limits](../annexes.html#memory-limits) section.
 
 If RStudio crashes on startup, and you've identified from Grafana that it is because the memory is full, then you can fix it by [clearing your RStudio session](#clearing-your-rstudio-session).
 
@@ -26,19 +26,13 @@ To clear the RStudio session:
 
 1. Close RStudio, if it is open in any window (because it continually saves its session to disk).
 
-2. Open JupyterLab.
+2. Open the control panel, navigate to Analytical tool, click [resetting your home directory](https://controlpanel.services.alpha.mojanalytics.xyz/reset-user-home/).
 
-3. In JupyterLab, open a Terminal and run:
-
-    ```bash
-    rm -rf ~/.rstudio.bak; mv ~/.rstudio/ ~/.rstudio.bak
-    ```
-
-4. In the control panel, select the __Restart__ button for RStudio.
+3. Select the __Restart__ button for RStudio.
 
     ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
 
-5. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
+4. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
 
 ## R package versions on Conda
 

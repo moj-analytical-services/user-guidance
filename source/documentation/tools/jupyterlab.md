@@ -13,9 +13,9 @@ In Jupyter, before you can successfully run the notebook, you'll need to select 
 python3 -m ipykernel install --user --name="venv" --display-name="My project (Python3)"
 ```
 
-And if your project has analytical scripts that run in a terminal you could add:
-
 ## Run scripts
+
+And if your project has analytical scripts that run in a terminal you could add:
 
 To run the python scripts, you'll need to activate the virtual env first:
 
@@ -78,11 +78,11 @@ cd myproject
 pipenv install
 ```
 
-To use the pipenv in Jupyter, compared to [using a venv in Jupyter](using-a-venv-in-jupyter), the syntax of creating the kernel is simply adjusted to:
+To use the pipenv in Jupyter, compared to [using a venv in Jupyter](../tools/package-management.html#venv-and-pip), the syntax of creating the kernel is simply adjusted to:
 
 ```bash
 pipenv install ipykernel
 python3 -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
 ```
 
-And then select the kernel in Jupyter as [normal](using-a-venv-in-jupyter).
+And then select the kernel in Jupyter as [normal](../tools/package-management.html#venv-and-pip).
