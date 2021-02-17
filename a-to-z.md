@@ -98,6 +98,10 @@ Upper case.
 
 Upper case.
 
+## renv
+
+Lower case.
+
 ## Repository
 
 Do not use the term repo.
