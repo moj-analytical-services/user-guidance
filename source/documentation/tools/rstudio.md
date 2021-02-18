@@ -33,21 +33,3 @@ To clear the RStudio session:
     ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
 
 4. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
-
-## R package versions on Conda
-
-While Anaconda hosts most of the R packages available on CRAN (the Comprehensive R Archive Network), some R packages on Anaconda only have binaries built for certain versions of R. You can identify the available versions by inspecting the first few characters of the Build part of the filename on its page on anaconda.org, like so:
-
-![](images/conda/anaconda_R_version_number_example.PNG)
-
-Alternatively, if you use `conda search PACKAGENAME`, you can look in the Field column:
-
-![](images/conda/conda_search_R_version_number_example.PNG)
-
-If there isn't an appropriate build for a package, attempting to `conda install` that package will result in conda attempting to match the environment to the superior (or inferior) version of R, asking if you want to install/upgrade/downgrade a long list of packages in the process.
-
-Instead, you should install the package locally via `install.packages()` or `remotes::install_github()`. For RShiny apps, you can add an `install.packages()` step to the `Dockerfile` to install additional packages not covered by the conda environment.yml, like so:
-
-```bash
-RUN R -e "install.packages('waffle', repos = 'https://cinc.rud.is')"
-```
