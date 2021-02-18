@@ -4,7 +4,7 @@ This guidance provides information on how to use the Ministry of Justice's Analy
 
 ## What is the Analytical Platform?
 
-__The Analytical Platform is a data analysis environment, providing modern tools and key datasets for MoJ analysts__
+> The Analytical Platform is a data analysis environment, providing modern tools and key datasets for MoJ analysts
 
 It offers:
 
