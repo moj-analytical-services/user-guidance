@@ -25,6 +25,7 @@ __All users will:__
 * understand that their use of the Analytical Platform may be monitored;
 * ensure that all transfers of data onto and within the Analytical Platform are conducted safely and securely;
 * not access the Analytical Platform from any non-MoJ IT system, such as a personal computer;
+* ensure your machine's operating system is up to date and patched, according to the [MOJ patching policy](https://intranet.justice.gov.uk/guidance/security/it-computer-security/ict-security-policy-framework/patch-management-standard/). You must use a supported version of the OS - meaning that security patches are still being released for it. If you have access to sensitive data you must install 'critical' or 'high risk' patches within 7 days.
 * not share their account or login credentials with any other person;
 * not use the same login credentials for more than one system or purpose;
 * not store any data on the Analytical Platform that is classified as SECRET or TOP SECRET;
