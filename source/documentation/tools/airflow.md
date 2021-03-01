@@ -179,35 +179,35 @@ from datetime import datetime
 from mojap_airflow_tools.operators import basic_kubernetes_pod_operator
 from airflow.models import DAG
 
-IMAGE_VERSION = "v1.0.0" # the Docker image version that Airflow will use – this should correspond to the latest release version of your Airflow project repository
-REPO = "airflow-repository-name" # the name of the repository on GitHub
+IMAGE_VERSION = "v1.0.0"  # the Docker image version that Airflow will use – this should correspond to the latest release version of your Airflow project repository
+REPO = "airflow-repository-name"  # the name of the repository on GitHub
 
-ROLE = "airflow_iam_role_name" # the role name defined in iam_config.yml
+ROLE = "airflow_iam_role_name"  # the role name defined in iam_config.yml
 
 default_args = {
     "depends_on_past": False,
     "email_on_failure": True,
-    "owner": "github_username", # your GitHub username
-    "email": ["example@justice.gov.uk"], # your email address registered on GitHub
+    "owner": "github_username",  # your GitHub username
+    "email": ["example@justice.gov.uk"],  # your email address registered on GitHub
 }
 
 dag = DAG(
-    dag_id="example_dag", # the name of the DAG
+    dag_id="example_dag",  # the name of the DAG
     default_args=default_args,
     description=(
-        "Example description." # a description of what your DAG does
+        "Example description."  # a description of what your DAG does
     ),
     start_date=datetime(2019, 9, 30),
     schedule_interval=None,
 )
 
 task = basic_kubernetes_pod_operator(
-    task_id="example-task-name", # Should only use characters, numbers and '-' for a task_id
+    task_id="example-task-name",  # Should only use characters, numbers and '-' for a task_id
     dag=dag,
     repo_name=REPO,
     release=IMAGE_VERSION,
     role=ROLE,
-    sandboxed=False, # True if using your sandboxed airflow, False if running on our main airflow deployment
+    sandboxed=False,  # True if using your sandboxed airflow, False if running on our main airflow deployment
 )
 ```
 
@@ -223,35 +223,35 @@ from datetime import datetime
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow.models import DAG
 
-IMAGE_VERSION = "v1.0.0" # the Docker image version that Airflow will use – this should correspond to the latest release version of your Airflow project repository
-REPO = "airflow-repository-name" # the name of the repository on GitHub
+IMAGE_VERSION = "v1.0.0"  # the Docker image version that Airflow will use – this should correspond to the latest release version of your Airflow project repository
+REPO = "airflow-repository-name"  # the name of the repository on GitHub
 
 IMAGE = (
     f"593291632749.dkr.ecr.eu-west-1.amazonaws.com/"
     f"{REPO}:{IMAGE_VERSION}"
 )
 
-ROLE = "airflow_iam_role_name" # the role name defined in iam_config.yml
+ROLE = "airflow_iam_role_name"  # the role name defined in iam_config.yml
 NAMESPACE = "airflow"
 
 default_args = {
     "depends_on_past": False,
     "email_on_failure": True,
-    "owner": "github_username", # your GitHub username
-    "email": ["example@justice.gov.uk"], # your email address registered on GitHub
+    "owner": "github_username",  # your GitHub username
+    "email": ["example@justice.gov.uk"],  # your email address registered on GitHub
 }
 
 dag = DAG(
-    dag_id="example_dag", # the name of the DAG
+    dag_id="example_dag",  # the name of the DAG
     default_args=default_args,
     description=(
-        "Example description." # a description of what your DAG does
+        "Example description."  # a description of what your DAG does
     ),
     start_date=datetime(2019, 9, 30),
     schedule_interval=None,
 )
 
-task_id = "example-task-name", # It is good practice to use the same name for the `task_id` and `task_name` parameters. When doing so make sure to only use numbers, characters and '-' to define the name.
+task_id = "example-task-name",  # It is good practice to use the same name for the `task_id` and `task_name` parameters. When doing so make sure to only use numbers, characters and '-' to define the name.
 task = KubernetesPodOperator(
     dag=dag,
     namespace=NAMESPACE,
@@ -273,7 +273,7 @@ task = KubernetesPodOperator(
 
 #### Tips on writing a DAG
 
-The `schedule_interval` can be defined using a cron expression as a `str` (such as `0 0 * * *`), a cron preset (such as `@daily`) or a `datetime.timedelta` object. You can find more information on scheduling DAGs in the [Airflow documentation](https://airflow.apache.org/docs/stable/scheduler.html).
+The `schedule_interval` can be defined using a cron expression as a `str` (such as `0 0 * * *`), a cron preset (such as `"@daily"`) or a `datetime.timedelta` object. You can find more information on scheduling DAGs in the [Airflow documentation](https://airflow.apache.org/docs/stable/scheduler.html).
 
 Airflow will run your DAG at the end of each interval. For example, if you create a DAG with `start_date=datetime(2019, 9, 30)` and `schedule_interval=@daily`, the first run marked `2019-09-30` will be triggered at `2019-09-30T23:59` and subsequent runs will be triggered every 24 hours thereafter.
 
