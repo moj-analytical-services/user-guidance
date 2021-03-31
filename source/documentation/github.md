@@ -271,7 +271,7 @@ The platform has configured simple "safety barriers" to reduce risk of accidenta
 
 ### Public, internal and private repositories
 
-GitHub repositories can public, internal or private.
+GitHub repositories can be public, internal or private.
 
 In any case, repos should contain **no passwords/secrets and no data** (apart from small reference tables) - this is particulary important for public repos, but applies to internal and private ones too. And remember that GitHub shows the *full history* of files and changes in your repo, so removing these things requires special effort.
 
