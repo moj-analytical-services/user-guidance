@@ -94,7 +94,7 @@ The Dockerfile in the app's repository contains a command to install the package
 
 You can set some access permissions for your app in the `deploy.json` file that is included with the app template. This file is used by Concourse to detect apps that are ready to build and deploy.
 
-The `allowed_ip_ranges` parameter controls where your app can be accessed from. It can take any combination of `["DOM1", "QUANTUM", "102PF Wifi", "Digital Wifi and VPN"]` or `["Any"]`.
+The `allowed_ip_ranges` parameter controls where your app can be accessed from. It can take any combination of `["DOM1", "QUANTUM", "102PF Wifi", "Digital Wifi and VPN", "Alan Turing Institute", "MoJo"]` or `["Any"]`.
 
 The `disable_authentication` parameter controls whether sign-in (using a link or one-time passcode sent to an authorised email address) is required for users to access the app when on an allowed network. It can take the values `true` or `false`. In general, this should be set to `false`.
 
@@ -407,5 +407,5 @@ If the app does not work, follow the steps below to troubleshoot it:
     ```{bash}
     cat /var/log/shiny-server/access.log
     ```
-    
+
 For further details, see the [Shiny server documentation](https://docs.rstudio.com/shiny-server/).
