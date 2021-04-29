@@ -1,6 +1,6 @@
 # Airflow
 
-> Airflow is a platform created by community to programmatically author, schedule and monitor workflows.
+> Airflow is a platform created by the community to programmatically author, schedule and monitor workflows.
 >
 > Source: [Airflow](https://airflow.apache.org)
 
@@ -15,7 +15,7 @@ Airflow can be used to:
 
 There are a few key concepts of Airflow:
 
-- an Airflow pipeline is defined by a directed acyclic graph (DAG), which is made up of a number of individual tasks
+- an Airflow pipeline is defined by a Directed Acyclic Graph (DAG), which is made up of a number of individual tasks
 - a DAG could be simple, for example, `task_1 >> task_2 >> task_3`, meaning run `task_1` then `task_2` then `task_3`
 - a task can be dependent on multiple previous tasks and can trigger multiple other tasks when it is completed
 - each pipeline has a GitHub repository, containing code files that will be run (for example, R or Python scripts) plus configuration files that define the environment in which each task will be run
@@ -62,9 +62,13 @@ To clone the repository:
 2. Select **Clone or download**.
 3. Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
 4. Copy the SSH URL. This should start with `git@`.
-5. In RStudio, select **File** > **New project...** > **Version control** > **Git**.
-6. Paste the SSH URL in the **Repository URL** field.
-7. Select **Create Project**.
+5. In RStudio:
+    * select **File** > **New project...** > **Version control** > **Git**.
+    * Paste the SSH URL in the **Repository URL** field.
+    * Select **Create Project**.
+6. In jupyter-lab:
+    * select **File** > **New** > **Terminal**
+    * type `git clone` and paste the SSH URL and hit enter
 
 ### Create scripts for the tasks you want to run
 
@@ -132,7 +136,7 @@ Create a branch and push your changes to GitHub.
 
 ### Create a pull request
 
-When you create a new pull request, Concourse will automatically try to build a Docker image from the `Dockerfile` contained in your branch. The image will have the tag `repository_name:branch_name`, where `repository_name` is the name of the repository and `branch_name` is the name of the branch from which you have created the pull request.
+When you create a new pull request, Concourse will automatically try to build a Docker image from the `Dockerfile` contained in your branch. The image will have the tag `repository_name:branch_name`, where `repository_name` is the name of the repository and `branch_name` is the name of the branch from which you have created the pull request. This image will not be availble for use.
 
 Concourse also runs a number of tests. It:
 
@@ -163,9 +167,13 @@ To clone the repository:
 2. Select **Clone or download**.
 3. Ensure that the dialogue says 'Clone with SSH'. If the dialogue says 'Clone with HTTPS' select **Use SSH**.
 4. Copy the SSH URL. This should start with `git@`.
-5. In RStudio, select **File** > **New project...** > **Version control** > **Git**.
-6. Paste the SSH URL in the **Repository URL** field.
-7. Select **Create Project**.
+5. In RStudio:
+    * select **File** > **New project...** > **Version control** > **Git**.
+    * Paste the SSH URL in the **Repository URL** field.
+    * Select **Create Project**.
+6. In jupyter-lab:
+    * select **File** > **New** > **Terminal**
+    * type `git clone` and paste the SSH URL and hit enter
 
 ### Create a DAG script
 
@@ -309,7 +317,7 @@ To build and test your Docker image locally, follow the steps below:
     docker build . -t IMAGE:TAG
     ```
 
-    where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `0.1`.
+    where `IMAGE` is a name for the image, for example, `my-docker-image`, and `TAG` is the version number, for example, `v0.1`.
 
 4. Run a Docker container created from the Docker image by running:
 
@@ -317,7 +325,33 @@ To build and test your Docker image locally, follow the steps below:
     docker run IMAGE:TAG
     ```
 
-    This will run the command specified in the `CMD` line of the `Dockerfile`. This will fail if your command requires access to resources on the Analytical Platform, such as data stored in Amazon S3.
+    This will run the command specified in the `CMD` line of the `Dockerfile`. This will fail if your command requires access to resources on the Analytical Platform, such as data stored in Amazon S3 unless the correct environment variables are passed to the docker container. You would need the following environment varaibles to ensure correct access to all the AP resources:
+
+    * AWS_REGION
+    * AWS_DEFAULT_REGION
+    * AWS_ACCESS_KEY_ID
+    * AWS_SECRET_ACCESS_KEY
+    * AWS_SESSION_TOKEN
+    * AWS_SECURITY_TOKEN
+
+    These can be set in your local environment using `AWS_VAULT` and then passed freely to the docker image.
+
+    It is **very** important these values are never commited to GitHub or stored in files
+
+    each of these can be passed to the docker image by running the following:
+
+    ```sh
+    docker run \
+    --env AWS_REGION=$AWS_REGION \
+    --env AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
+    --env AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    --env AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+    --env AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \
+    --env AWS_SECURITY_TOKEN=$AWS_SECURITY_TOKEN \
+    IMAGE:TAG
+    ```
+
+    Oher environment variables such as `PYTHON_SCRIPT_NAME` or `R_SCRIPT_NAME` can be passed in the same way
 
 You can start a bash session in a running Docker container for debugging and troubleshooting purposes by running:
 
@@ -340,3 +374,7 @@ To ensure that your pipeline runs correctly, you should set the `ROLE` variable 
 You should also set the `NAMESPACE` variable in your DAG script to be your own namespace on the Analytical Platform. This is your GitHub username in lowercase prefixed with `user-`. For example, if your GitHub username was `Octocat-MoJ`, your namespace would be `user-octocat-moj`.
 
 You should only use your Airflow sandbox for testing purposes.
+
+### Other resources
+
+Data engineering ran a coffee and coding on airflow, the code used can be found [here](https://github.com/moj-analytical-services/Coffee-and-Coding/tree/master/2020-04-27%20Airflow%20on%20AP)
