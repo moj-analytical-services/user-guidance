@@ -10,7 +10,7 @@ You can access the AWS console at [aws.services.alpha.mojanalytics.xyz](https://
 
 To access Athena, select __Services__, then __Athena__.
 
-![](images/curated-databases/access-athena-2.png)
+![](../../../images/curated-databases/access-athena-2.png)
 
 This will bring you to the Athena query editor. Here, you can:
 
@@ -18,7 +18,7 @@ This will bring you to the Athena query editor. Here, you can:
 *   write, run and save queries
 *   view and download query outputs to your local computer
 
-![](images/curated-databases/access-athena-3.png)
+![](../../../images/curated-databases/access-athena-3.png)
 
 ## Previewing tables and views
 
@@ -38,13 +38,8 @@ LIMIT 10;
 
 ## Working with views
 
-You can create, update and delete views using the code described in the [SQL](../sql) section, however, you can also take advantage of the Athena UI.
+You can update and delete views using the code described in the [SQL](./sql) section, however, you can also take advantage of the Athena UI.
 
-### Create a view
-
-Selecting __Create view__ in the database window generates an example query that you can edit to create a new view.
-
-![](images/curated-databases/athena-create-2.png)
 
 ### Modify and delete a view
 
@@ -52,11 +47,11 @@ To modify a view, select the three dots (⋮) to the right of the view name and 
 
 To delete a view, select the three dots (⋮) to the right of the view name and select __Delete view__.
 
-![](images/curated-databases/athena-create-3.png)
+![](../../../images/curated-databases/athena-create-3.png)
 
 ## Working with tables
 
-As for views, you can create, update and delete tables using the code in the [SQL](../sql) section, however, you must also specify the storage format and location of the table in S3.
+You can create, update and delete tables using the code in the [SQL](./sql) section, however, you must also specify the storage format and location of the table in S3.
 
 You can also use the Athena UI. In particular, the Athena UI allows you to create tables directly from data stored in S3 or by using the AWS Glue Crawler. This guidance does not cover use of the AWS Glue Crawler.
 
@@ -114,7 +109,7 @@ Selecting __Create table__ in the database window brings up a menu list with the
     +   CREATE TABLE
     +   CREATE TABLE AS SELECT
 
-![](images/curated-databases/athena-create-1.png)
+![](../../../images/curated-databases/athena-create-1.png)
 
 Selecting __CREATE TABLE__ or __CREATE TABLE AS SELECT__ generates an example query that you can edit to create a new table. These example queries are of the same form as those described in the previous section.
 
@@ -151,4 +146,8 @@ When you have run a query, you can download the output to your local computer as
 
 To download the output, select the page icon above the results table.
 
-![](images/curated-databases/athena-create-4.png)
+![](../../../images/curated-databases/athena-create-4.png)
+
+## SQL resources
+
+You might find the [SQL Training repository](https://github.com/moj-analytical-services/sql_training) useful. This training is for using SQL (Athena) with the Analytical Platform.
