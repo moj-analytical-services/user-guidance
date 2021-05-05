@@ -11,12 +11,12 @@ jobs:
           name: Install system dependencies
           command: |
             apk update
-            apk add --no-cache build-base nodejs npm git openssh-client bash 
+            apk add --no-cache build-base nodejs npm git openssh-client bash
       - checkout
       - run:
           name: Install Ruby dependencies
           command: |
-            gem install bundler:2.0.2
+            gem install bundler:2.2.8
             bundle install
       - run:
           name: Build the user guidance
@@ -32,7 +32,7 @@ jobs:
             - "*"
   deploy:
     docker:
-      - image: 'circleci/python:2.7'
+      - image: "circleci/python:2.7"
     steps:
       - attach_workspace:
           at: ~/project/docs/
