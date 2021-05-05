@@ -14,7 +14,8 @@ To access Athena, select __Services__, then __Athena__.
 
 This will bring you to the Athena query editor. Here, you can:
 
-*   access and create databases, tables and views
+*   access and create databases and tables
+*   access and modify views
 *   write, run and save queries
 *   view and download query outputs to your local computer
 
@@ -138,7 +139,7 @@ Once the query has been completed, the output will be displayed in the results w
 
 You can save a query (not including the resulting output) by selecting __Save as__ and entering a name and description. Saved queries are available from the __Saved Queries__ tab in the Athena toolbar.
 
-You can also create tables and views from queries by selecting __Create__ and entering a name. Tables and views that you create will be visible in the database window at the left of the page.
+You can also create tables from queries by selecting __Create__ and entering a name. Tables that you create will be visible in the database window at the left of the page.
 
 ## Download query outputs
 
