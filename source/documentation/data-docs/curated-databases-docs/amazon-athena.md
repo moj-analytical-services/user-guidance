@@ -59,24 +59,47 @@ You can also use Rstudio, JupyterLab and the Athena UI. In particular, the Athen
 
 ### Using RStudio
 
-The Analytical platform hosts a number of alternaative coding environments. For those experienved in R, you can query Athena in R using the RStudio tool.
+The Analytical platform hosts a number of analytical coding environments. For those experienved in R, you can query Athena in __R__ using the __RStudio__ tool.
 
 To execute Athena queries, we recommend using dbtools. This package uses the Python package pydbtools under the hood and works alongside user IAM policies on the platform. It is also significantly faster than using database drivers provided by Amazon.
 
-Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for creating, querying and deleting tables.
+Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for __creating, querying and deleting tables__.
 
 
 ### Using JupyterLab
 
-Another tool available on the platform is JupyterLab, which you can use to query Athena data via Python scripts.
+Another analytical tool available on the platform is JupyterLab, which you can use to query Athena data via __Python__ scripts.
 
 To do this, install the [pydbtools](https://github.com/moj-analytical-services/pydbtools/) package. This is a wrapper for awswrangler that which presets/defines some of the input parameters to the athena module functions to align with our platform setup.
 
-You can perform advanced tasks such as utilising temporary tables, creating and deleting. See the [quickstart guide](https://github.com/moj-analytical-services/pydbtools/#quickstart-guide) for more details.
+You can perform advanced tasks such as utilising __temporary tables, creating and deleting__. See the [quickstart guide](https://github.com/moj-analytical-services/pydbtools/#quickstart-guide) for more details.
 
-### Create a table
 
-#### Using code
+### Using the Athena UI
+
+#### Create a table
+Selecting **Create table** in the database window brings up a menu list with the following options:
+
+- **Create table**
+  - From S3 bucket data
+  - from AWS Glue Crawler
+- **SQL templates**
+  - CREATE TABLE
+  - CREATE TABLE AS SELECT
+
+![](../../../images/curated-databases/athena-create-1.png)
+
+Selecting **CREATE TABLE** or **CREATE TABLE AS SELECT** generates an example query that you can edit to create a new table. These example queries are of the same form as those described in the previous section.
+
+Selecting **from S3 bucket data** will open a new window that guides you through four steps to create a new table from data in S3:
+
+1. Select which database to store your table in, input a name for your table and input the S3 path to the data from which you want to make the table. The S3 path should be of the form `s3://bucket/folder/`.
+2. Select the format of the input data. You may also have to complete additional fields depending on the format of the input data.
+3. Input the name and data type of each column in the table. When adding a large number of columns, it may be easier to use the **Bulk add columns** option.
+4. Select whether you want to partition the data in the table. This step is optional.
+
+
+#### Create a table using SQL code
 
 If using code to create a table in Athena, you must also specify the storage format and location of the table in S3.
 
@@ -118,28 +141,6 @@ LOCATION 'location';
 Here, `format` and `location` are the same as above.
 
 
-### Using the Athena UI
-
-Selecting **Create table** in the database window brings up a menu list with the following options:
-
-- **Create table**
-  - From S3 bucket data
-  - from AWS Glue Crawler
-- **SQL templates**
-  - CREATE TABLE
-  - CREATE TABLE AS SELECT
-
-![](../../../images/curated-databases/athena-create-1.png)
-
-Selecting **CREATE TABLE** or **CREATE TABLE AS SELECT** generates an example query that you can edit to create a new table. These example queries are of the same form as those described in the previous section.
-
-Selecting **from S3 bucket data** will open a new window that guides you through four steps to create a new table from data in S3:
-
-1. Select which database to store your table in, input a name for your table and input the S3 path to the data from which you want to make the table. The S3 path should be of the form `s3://bucket/folder/`.
-2. Select the format of the input data. You may also have to complete additional fields depending on the format of the input data.
-3. Input the name and data type of each column in the table. When adding a large number of columns, it may be easier to use the **Bulk add columns** option.
-4. Select whether you want to partition the data in the table. This step is optional.
-
 ### Delete a table
 
 To delete a table using the Athena UI, select the three dots (⋮) next to the name of the table you want to delete and select **Delete table**. 
@@ -169,8 +170,8 @@ To download the output, select the page icon above the results table.
 ![](../../../images/curated-databases/athena-create-4.png)
 
 
-
-
 ## SQL resources
 
 You might find the [SQL Training repository](https://github.com/moj-analytical-services/sql_training) useful. This training is for using SQL (Athena) with the Analytical Platform.
+
+__SQL__ (pronounced 'S-Q-L' or 'sequel') is a programming language used to access and manipulate databases. There are several versions of SQL that share a common framework but can have different syntax and functionality. The version of SQL used by [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is based on [Presto 0.217](https://prestodb.io/docs/0.217/index.html).
