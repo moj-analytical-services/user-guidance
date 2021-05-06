@@ -1,6 +1,6 @@
 # Amazon Athena
 > Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.
-
+>
 > Source: [AWS](https://docs.aws.amazon.com/athena/latest/ug/what-is.html)
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
@@ -29,48 +29,34 @@ To access Athena, select **Services**, then **Athena**.
 This will bring you to the Athena query editor. Here, you can:
 
 - access and create databases and tables
-- access and modify views
 - write, run and save queries
 - view and download query outputs to your local computer
 
 ![](../../../images/curated-databases/access-athena-3.png)
 
-## Previewing tables aand views
+## Previewing tables
 
-In many cases, it may be useful to preview a table or view to get a better understanding of its structure and contents.
+In many cases, it may be useful to preview a table to get a better understanding of its structure and contents.
 
-To preview a table or view, select a database using the dropdown menu and find the object you want to preview either directly from the list or using the **Filter table and views...** search bar.
+To preview a table, select a database using the dropdown menu and find the object you want to preview either directly from the list or using the **Filter table and views...** search bar.
 
-You can view the name and type of each column in a table or view by selecting the blue arrow to the left of the object name.
+You can view the name and type of each column in a table by selecting the blue arrow to the left of the object name.
 
-To run a query to preview a table, select the three dots (⋮) to the right of the object name and select **Preview table**. This will run the following query that selects all columns from the table or view and returns 10 rows from the output:
+To run a query to preview a table, select the three dots (⋮) to the right of the object name and select **Preview table**. This will run the following query that selects all columns from the table and returns 10 rows from the output:
 
 ```
 SELECT *
-FROM database_name.table_name_or_view
+FROM database_name.table_name
 LIMIT 10;
 ```
 
 ## Working with tables
 
-You can create, update and delete tables using the code in the [SQL](./sql) section, however, you must also specify the storage format and location of the table in S3.
+You can create, update and delete tables using the code in the [SQL](./sql.md) section, however, you must also specify the storage format and location of the table in S3.
 
 You can also use Rstudio, JupyterLab and the Athena UI. In particular, the Athena UI allows you to create tables directly from data stored in S3 or by using the AWS Glue Crawler. This guidance does not cover use of the AWS Glue Crawler.
 
-## Working with views
-
-You can update and delete views using the code described in the [SQL](./sql) section, however, you can also take advantage of the Athena UI.
-
-### Modify and delete a view
-
-To modify a view, select the three dots (⋮) to the right of the view name and select __Show/edit query__.
-
-To delete a view, select the three dots (⋮) to the right of the view name and select __Delete view__.
-![](../../../images/curated-databases/athena-create-3.png)
-
-
-
-### Using RStudio
+## Using RStudio
 
 The Analytical platform hosts a number of analytical coding environments. For those experienced in __R__, you can query Athena using the __RStudio__ tool.
 
@@ -79,7 +65,7 @@ To execute Athena queries, we recommend using [__dbtools__](https://github.com/m
 Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for __creating, querying and deleting tables__.
 
 
-### Using JupyterLab
+## Using JupyterLab
 
 Another analytical tool available on the platform is JupyterLab, which you can use to query Athena data via __Python__ scripts.
 
@@ -88,7 +74,7 @@ To do this, install the [pydbtools](https://github.com/moj-analytical-services/p
 You can perform advanced tasks such as utilising __temporary tables, creating and deleting__. See the [quickstart guide](https://github.com/moj-analytical-services/pydbtools/#quickstart-guide) for more details.
 
 
-### Using the Athena UI
+## Using the Athena UI
 ### Create a table
 #### Create a table using drop-down menus
 Selecting **Create table** in the database window brings up a menu list with the following options:
@@ -183,8 +169,8 @@ To download the output, select the page icon above the results table.
 ![](../../../images/curated-databases/athena-create-4.png)
 
 
-## SQL resources
+### SQL resources
 
-You might find the [SQL Training repository](https://github.com/moj-analytical-services/sql_training) useful. This training is for using SQL (Athena) with the Analytical Platform.
+You might find the [SQL Training](https://github.com/moj-analytical-services/sql_training) repository useful. This training is for using SQL (Athena) with the Analytical Platform.
 
 __SQL__ (pronounced 'S-Q-L' or 'sequel') is a programming language used to access and manipulate databases. There are several versions of SQL that share a common framework but can have different syntax and functionality. The version of SQL used by [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is based on [Presto 0.217](https://prestodb.io/docs/0.217/index.html).
