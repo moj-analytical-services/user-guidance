@@ -37,17 +37,17 @@ This will bring you to the Athena query editor. Here, you can:
 
 ## Previewing tables
 
-In many cases, it may be useful to preview a table to get a better understanding of its structure and contents.
+In many cases, it may be useful to preview a table or view to get a better understanding of its structure and contents.
 
-To preview a table , select a database using the dropdown menu and find the object you want to preview either directly from the list or using the **Filter table and views...** search bar.
+To preview a table or view, select a database using the dropdown menu and find the object you want to preview either directly from the list or using the **Filter table and views...** search bar.
 
-You can view the name and type of each column in a table by selecting the blue arrow to the left of the object name.
+You can view the name and type of each column in a table or view by selecting the blue arrow to the left of the object name.
 
-To run a query to preview a table, select the three dots (⋮) to the right of the object name and select **Preview table**. This will run the following query that selects all columns from the table and returns 10 rows from the output:
+To run a query to preview a table, select the three dots (⋮) to the right of the object name and select **Preview table**. This will run the following query that selects all columns from the table or view and returns 10 rows from the output:
 
 ```
 SELECT *
-FROM database_name.table_name
+FROM database_name.table_name_or_view
 LIMIT 10;
 ```
 
