@@ -228,10 +228,10 @@ You can find out more about how to use `s3browser` on [GitHub](https://github.co
 
 #### `pandas`
 
-You can use any of the `pandas` read functions (for example, `read_csv` or `read_json`) to download data directly from Amazon S3. This requires that you have installed the `s3fs` package. To install the `s3fs` package, run the following code in a terminal:
+You can use any of the `pandas` read functions (for example, `read_csv` or `read_json`) to download data directly from Amazon S3. This requires that you have installed the `pandas` and `s3fs` packages. To install these, run the following code in a terminal:
 
 ```
-pip install s3fs
+pip install pandas s3fs
 ```
 
 As an example, to read a CSV, you should run the following code:
