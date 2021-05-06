@@ -35,7 +35,7 @@ This will bring you to the Athena query editor. Here, you can:
 
 ![](../../../images/curated-databases/access-athena-3.png)
 
-## Previewing tables
+## Previewing tables aand views
 
 In many cases, it may be useful to preview a table or view to get a better understanding of its structure and contents.
 
@@ -56,6 +56,19 @@ LIMIT 10;
 You can create, update and delete tables using the code in the [SQL](./sql) section, however, you must also specify the storage format and location of the table in S3.
 
 You can also use Rstudio, JupyterLab and the Athena UI. In particular, the Athena UI allows you to create tables directly from data stored in S3 or by using the AWS Glue Crawler. This guidance does not cover use of the AWS Glue Crawler.
+
+## Working with views
+
+You can update and delete views using the code described in the [SQL](./sql) section, however, you can also take advantage of the Athena UI.
+
+### Modify and delete a view
+
+To modify a view, select the three dots (⋮) to the right of the view name and select __Show/edit query__.
+
+To delete a view, select the three dots (⋮) to the right of the view name and select __Delete view__.
+![](../../../images/curated-databases/athena-create-3.png)
+
+
 
 ### Using RStudio
 
