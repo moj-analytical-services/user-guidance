@@ -59,9 +59,9 @@ You can also use Rstudio, JupyterLab and the Athena UI. In particular, the Athen
 
 ### Using RStudio
 
-The Analytical platform hosts a number of analytical coding environments. For those experienved in R, you can query Athena in __R__ using the __RStudio__ tool.
+The Analytical platform hosts a number of analytical coding environments. For those experienced in __R__, you can query Athena using the __RStudio__ tool.
 
-To execute Athena queries, we recommend using dbtools. This package uses the Python package pydbtools under the hood and works alongside user IAM policies on the platform. It is also significantly faster than using database drivers provided by Amazon.
+To execute Athena queries, we recommend using [__dbtools__](https://github.com/moj-analytical-services/dbtools/). This package uses the Python package pydbtools under the hood and works alongside user IAM policies on the platform. It is also significantly faster than using database drivers provided by Amazon.
 
 Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for __creating, querying and deleting tables__.
 
@@ -76,8 +76,8 @@ You can perform advanced tasks such as utilising __temporary tables, creating an
 
 
 ### Using the Athena UI
-
-#### Create a table
+### Create a table
+#### Create a table using drop-down menus
 Selecting **Create table** in the database window brings up a menu list with the following options:
 
 - **Create table**
@@ -145,7 +145,7 @@ Here, `format` and `location` are the same as above.
 
 To delete a table using the Athena UI, select the three dots (⋮) next to the name of the table you want to delete and select **Delete table**. 
 
-#### Run a query
+### Run a query
 
 To create and run a new query:
 
