@@ -1,8 +1,22 @@
 # Amazon Athena
-
 > Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.
->
+
 > Source: [AWS](https://docs.aws.amazon.com/athena/latest/ug/what-is.html)
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+<!-- code_chunk_output -->
+- [Accessing Amazon Athena](#accessing-amazon-athena)
+- [Previewing tables](#previewing-tables)
+- [Working with tables](#working-with-tables)
+- [Using RStudio](#using-rstudio)
+- [Using JupyterLab](#using-jupyterlab)
+- [Using the Athena UI](#using-the-athena-ui)
+  - [Creating tables](#create-a-table)
+  - [Deleting tables](#delete-a-table)
+  - [Run a query](#run-a-query)
+  - [Downoad query outputs](#download-query-outputs)
+  - [SQL resources](#sql-resources)
+<!-- /code_chunk_output -->
 
 ## Accessing Amazon Athena
 
@@ -41,7 +55,24 @@ LIMIT 10;
 
 You can create, update and delete tables using the code in the [SQL](./sql) section, however, you must also specify the storage format and location of the table in S3.
 
-You can also use the Athena UI. In particular, the Athena UI allows you to create tables directly from data stored in S3 or by using the AWS Glue Crawler. This guidance does not cover use of the AWS Glue Crawler.
+You can also use Rstudio, JupyterLab and the Athena UI. In particular, the Athena UI allows you to create tables directly from data stored in S3 or by using the AWS Glue Crawler. This guidance does not cover use of the AWS Glue Crawler.
+
+### Using RStudio
+
+The Analytical platform hosts a number of alternaative coding environments. For those experienved in R, you can query Athena in R using the RStudio tool.
+
+To execute Athena queries, we recommend using dbtools. This package uses the Python package pydbtools under the hood and works alongside user IAM policies on the platform. It is also significantly faster than using database drivers provided by Amazon.
+
+Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for creating, querying and deleting tables.
+
+
+### Using JupyterLab
+
+Another tool available on the platform is JupyterLab, which you can use to query Athena data via Python scripts.
+
+To do this, install the [pydbtools](https://github.com/moj-analytical-services/pydbtools/) package. This is a wrapper for awswrangler that which presets/defines some of the input parameters to the athena module functions to align with our platform setup.
+
+You can perform advanced tasks such as utilising temporary tables, creating and deleting. See the [quickstart guide](https://github.com/moj-analytical-services/pydbtools/#quickstart-guide) for more details.
 
 ### Create a table
 
@@ -86,7 +117,8 @@ LOCATION 'location';
 
 Here, `format` and `location` are the same as above.
 
-#### Using the Athena UI
+
+### Using the Athena UI
 
 Selecting **Create table** in the database window brings up a menu list with the following options:
 
@@ -110,9 +142,9 @@ Selecting **from S3 bucket data** will open a new window that guides you through
 
 ### Delete a table
 
-To delete a table using the Athena UI, select the three dots (⋮) next to the name of the table you want to delete and select **Delete table**.
+To delete a table using the Athena UI, select the three dots (⋮) next to the name of the table you want to delete and select **Delete table**. 
 
-## Run a query
+#### Run a query
 
 To create and run a new query:
 
@@ -128,7 +160,7 @@ You can save a query (not including the resulting output) by selecting **Save as
 
 You can also create tables from queries by selecting **Create** and entering a name. Tables that you create will be visible in the database window at the left of the page.
 
-## Download query outputs
+#### Download query outputs
 
 When you have run a query, you can download the output to your local computer as a CSV file.
 
@@ -136,21 +168,8 @@ To download the output, select the page icon above the results table.
 
 ![](../../../images/curated-databases/athena-create-4.png)
 
-#### Using RStudio
 
-The Analytical platform hosts a number of alternaative coding environments. For those experienved in R, you can query Athena in R using the RStudio tool.
 
-To execute Athena queries, we recommend using dbtools. This package uses the Python package pydbtools under the hood and works alongside user IAM policies on the platform. It is also significantly faster than using database drivers provided by Amazon.
-
-Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for creating, querying and deleting tables.
-
-#### Using JupyterLab
-
-Another tool available on the platform is JupyterLab, which you can use to query Athena data via Python scripts.
-
-To do this, install the [pydbtools](https://github.com/moj-analytical-services/pydbtools/) package. This is a wrapper for awswrangler that which presets/defines some of the input parameters to the athena module functions to align with our platform setup.
-
-You can perform advanced tasks such as utilising temporary tables, creating and deleting. See the [quickstart guide](https://github.com/moj-analytical-services/pydbtools/#quickstart-guide) for more details.
 
 ## SQL resources
 
