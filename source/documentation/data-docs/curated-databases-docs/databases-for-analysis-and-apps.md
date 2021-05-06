@@ -1,20 +1,20 @@
-# Using Databases and data for apps
+# Using databases and data for apps
 
-This section covers how and when to use different tools to query our databases on the Analytical Platform and what to consider when giving data to a deployed app. This section assumes you are getting data from databases that are already created on the Analytical platform. If you need to upload data to the platform see the sections on [S3](#s3) and [information governance](#information-governance).
+This section covers how and when to use different tools to query our databases on the Analytical Platform and what to consider when giving data to a deployed app. This section assumes you are getting data from databases that are already created on the Analytical Platform. If you need to upload data to the platform see the sections on [S3](#s3) and [information governance](#information-governance).
 
 ## Guidance on using our databases for analysis
 
-We use `pydbtools` (for Python) and `dbtools` (for R) on the Analytical Platform to query our databases (You can find out more information about them in the [dbtools section](#dbtools)). Both these tools use an [SQL](#sql) Engine called [Athena](#amazon-athena) to query large datasets in S3 just like a normal relational database system. When you want to manipulate or query the databases on the Analytical Platform consider the following:
+We use `pydbtools` (for Python) and `dbtools` (for R) on the Analytical Platform to query our databases. You can find out more information about them in the [dbtools section](#dbtools). Both these tools use an [SQL](#sql) Engine called [Athena](#amazon-athena) to query large datasets in S3 just like a normal relational database system. When you want to manipulate or query the databases on the Analytical Platform consider the following:
 
-- A good general rule is first to use Athena and SQL for aggregation, joins, and filtering of your data, and then to bring the resulting table into R/Python for more nuanced analytical calculations and transforms.
+- A good general rule is first to use SQL (via `dbtools` or `pydbtools`) for aggregation, joins, and filtering of your data, and then to bring the resulting table into RStudio or JupyterLab for more nuanced analytical calculations and transforms.
 
-- If you just need to aggregate, join or filter your data and not do anything special with it then it might be worth considering doing all of your transforms using SQL Athena.
+- If you just need to aggregate, join or filter your data and not do anything special with it then it might be worth considering doing all of your transforms using SQL with `dbtools` or `pydbtools`.
 
-- Athena is likely to perform joins, aggregates, and filters much faster than your RStudio or JupyterLab environment.
+- Performing joins, aggregates, and filters with SQL via `dbtools` or `pydbtools` is likely to be much faster than doing this within RStudio or JupyterLab environment using e.g. `dplyr` or `pandas`.
 
 - When you read the data into RStudio/JupyterLab it will store it in the memory (RAM) of your environment. Currently environments have 12GB of memory, which is easily sufficient for most needs. If your data is too large for this capacity it will break the environment, and crash.
 
-If in doubt about best practices we have slack channels for R, Python, SQL, etc where you can ask.
+If in doubt about best practices we have Slack channels for R, Python, SQL, etc where you can ask.
 
 ## Guidance on using databases / data for deployed apps
 
@@ -27,8 +27,8 @@ Apps are typically accessed by users without Analytical Platform accounts, so we
 When you access things on the Analytical Platform, you do so by taking on your 'role', which lists the set of things that you are permitted to do. This is how you interact with RStudio, Jupyter, Airflow, S3 buckets, etc. Since apps also need permissions to access things, they also have roles. When app users are interacting with an app, it will be carrying out tasks using its own role. In order to minimise the damage that an app could do in the unlikely event of it being compromised, we provide apps with much more restricted roles than those given to users. What this means is:
 
 - Apps cannot access (read/write) S3 buckets created by the AP users (instead they have their own 'app buckets' prefixed with `alpha-app-`)
-- Apps cannot access databases created for the AP users (these are all of the curated databases created by the Data Engineering Team)
-- Users can access (read/write) app buckets (permissions to do this are given via the Control Panel).
+- Apps cannot access curated databases created by the Data Engineering Team
+- Both apps and users can access (read/write) app buckets (permissions to do this are given via the Control Panel).
 
 If you create an app that needs specific data from our databases then you need to consider the following practices:
 
@@ -41,14 +41,14 @@ When writing data to your app bucket you should only ever give the app the minim
 There are multiple ways you can do this and it is up to you to determine how best to do it.
 
 - You could manually run some code from your RStudio or JupyterLab environment that writes the necessary data to the app bucket whenever it needs updating
-- You could write an Airflow script that writes data from a database to the app bucket meaning the app still only has access to its very specific area in AWS.
+- You could write an Airflow script that writes data from a database to the app bucket.
 - When updating data for Shiny apps you often need to restart the R session so it refreshes the cached data. You can do this using Airflow (to see how to do this search the [airflow dags repository](https://github.com/moj-analytical-services/airflow-dags) for the `BashOperator`).
 
 #### Creating a database for your app
 
 > Note this is only recommended for users who understand how to create/manage databases on Athena. See other parts of guidance on these tools for more details on how to use them.
 
-In most cases you will not need to do this as it will be unnecessary. However, if you feel like you do need to create an Athena SQL database because your app requires the processing power from Athena or the data you are reading in is too large to be cached then you will need to do the following:
+In most cases you will not need to do this. Apps typically do not require this volume of data (see "Data minimisation"). However, if you feel like you do need to create an Athena SQL database because your app requires the processing power from Athena or the data you are reading in is too large to be cached then you will need to do the following:
 
 - Create an Athena database that will be used for your app (the data will still sit in the app bucket but it will also need a Glue schema created in order for Athena to query it).
 - Message on the data-engineer slack channel to ask them to add this database for your app. Explain why the Athena database is needed for the app.
