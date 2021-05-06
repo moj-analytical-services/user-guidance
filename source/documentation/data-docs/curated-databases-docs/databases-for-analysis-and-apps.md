@@ -1,4 +1,4 @@
-# Using Databases and data for Apps
+# Using Databases and data for apps
 
 This section covers how and when to use different tools to query our databases on the Analytical Platform and what to consider when giving data to a deployed app. This section assumes you are getting data from databases that are already created on the Analytical platform. If you need to upload data to the platform see the sections on [S3](#s3) and [information governance](#information-governance).
 
@@ -28,7 +28,7 @@ When you access things on the Analytical Platform, you do so by taking on your '
 
 - Apps cannot access (read/write) S3 buckets created by the AP users (instead they have their own 'app buckets' prefixed with `alpha-app-`)
 - Apps cannot access databases created for the AP users (these are all of the curated databases created by the Data Engineering Team)
-- Users can access (read/write) to app buckets (permissions to do this are given via the Control Panel).
+- Users can access (read/write) app buckets (permissions to do this are given via the Control Panel).
 
 If you create an app that needs specific data from our databases then you need to consider the following practices:
 
