@@ -1,8 +1,8 @@
-# SQL
+# SQL quickguide
 
-__SQL__ (pronounced 'S-Q-L' or 'sequel') is a programming language used to access and manipulate databases. There are several versions of SQL that share a common framework but can have different syntax and functionality. The version of SQL used by [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is based on [Presto 0.172](https://prestodb.github.io/docs/current/).
+__SQL__ (pronounced 'S-Q-L' or 'sequel') is a programming language used to access and manipulate databases. There are several versions of SQL that share a common framework but can have different syntax and functionality. The version of SQL used by [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is based on [Presto 0.217](https://prestodb.io/docs/0.217/index.html).
 
-SQL is not case-sensitive.
+This guide will cover some basic concepts to get you going, but if you're looking for something more in depth, take a look at the SQL Training repo [here](https://github.com/moj-analytical-services/sql_training).
 
 ## Database structure
 
