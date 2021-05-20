@@ -231,7 +231,7 @@ You can find out more about how to use `s3browser` on [GitHub](https://github.co
 You can use any of the `pandas` read functions (for example, `read_csv` or `read_json`) to download data directly from Amazon S3. This requires that you have installed the `pandas` and `s3fs` packages. To install these, run the following code in a terminal:
 
 ```
-pip install pandas s3fs
+python -m pip install pandas s3fs
 ```
 
 As an example, to read a CSV, you should run the following code:
@@ -267,3 +267,9 @@ If you receive an `ImportError`, try restarting your kernel, so that Python reco
 Here, you should substitute `'bucket_name'` with the name of the bucket, `'key'` with the path of the object in Amazon S3 and `local_path` with the local path where you would like to save the downloaded file.
 
 You can find more information in the [package documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Object.download_file).
+
+#### `AWS Data Wrangler`
+
+You can also use `AWS Wrangler` to work with data stored in Amazon S3.
+
+More information can be found in the [product documentation](https://aws-data-wrangler.readthedocs.io/en/stable/tutorials/003%20-%20Amazon%20S3.html).
