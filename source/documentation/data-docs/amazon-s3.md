@@ -133,13 +133,15 @@ You can upload files in RStudio on the Analytical Platform to Amazon S3 using th
 conda install -c moj-analytical-services r-s3tools
 ```
 
+This will then allow you to activate it in future with the standard `library(s3tools)` command.
+
 `s3tools` contains three functions for uploading files to Amazon S3:
 
 *   `write_file_to_s3`
 *   `write_df_to_csv_in_s3`
 *   `write_df_to_table_in_s3`
 
-You can find out more about how to use these functions on [GitHub](https://github.com/moj-analytical-services/s3tools) or by using the help operator in RStudio (for example, `?s3tools::write_file_to_s3`).
+You can find out more about how to use these functions on [GitHub](https://github.com/moj-analytical-services/s3tools) or by using the help operator in RStudio (for example, `?s3tools::write_file_to_s3`). Note, that when writing a file to S3 using S3 tools, the pattern used should be `write_file_to_s3('file', 'bucket/file')` as the file writer will default to a name of NA if no other name is supplied.
 
 ### JupyterLab
 
