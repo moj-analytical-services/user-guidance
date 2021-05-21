@@ -133,13 +133,15 @@ You can upload files in RStudio on the Analytical Platform to Amazon S3 using th
 conda install -c moj-analytical-services r-s3tools
 ```
 
+This will then allow you to activate it in future with the standard `library(s3tools)` command.
+
 `s3tools` contains three functions for uploading files to Amazon S3:
 
 *   `write_file_to_s3`
 *   `write_df_to_csv_in_s3`
 *   `write_df_to_table_in_s3`
 
-You can find out more about how to use these functions on [GitHub](https://github.com/moj-analytical-services/s3tools) or by using the help operator in RStudio (for example, `?s3tools::write_file_to_s3`).
+You can find out more about how to use these functions on [GitHub](https://github.com/moj-analytical-services/s3tools) or by using the help operator in RStudio (for example, `?s3tools::write_file_to_s3`). Note, that when writing a file to S3 using S3 tools, the pattern used should be `write_file_to_s3('file', 'bucket/file')` as the file writer will default to a name of NA if no other name is supplied.
 
 ### JupyterLab
 
@@ -228,10 +230,10 @@ You can find out more about how to use `s3browser` on [GitHub](https://github.co
 
 #### `pandas`
 
-You can use any of the `pandas` read functions (for example, `read_csv` or `read_json`) to download data directly from Amazon S3. This requires that you have installed the `s3fs` package. To install the `s3fs` package, run the following code in a terminal:
+You can use any of the `pandas` read functions (for example, `read_csv` or `read_json`) to download data directly from Amazon S3. This requires that you have installed the `pandas` and `s3fs` packages. To install these, run the following code in a terminal:
 
 ```
-pip install s3fs
+python -m pip install pandas s3fs
 ```
 
 As an example, to read a CSV, you should run the following code:
@@ -267,3 +269,9 @@ If you receive an `ImportError`, try restarting your kernel, so that Python reco
 Here, you should substitute `'bucket_name'` with the name of the bucket, `'key'` with the path of the object in Amazon S3 and `local_path` with the local path where you would like to save the downloaded file.
 
 You can find more information in the [package documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Object.download_file).
+
+#### `AWS Data Wrangler`
+
+You can also use `AWS Wrangler` to work with data stored in Amazon S3.
+
+More information can be found in the [product documentation](https://aws-data-wrangler.readthedocs.io/en/stable/tutorials/003%20-%20Amazon%20S3.html).
