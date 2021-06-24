@@ -82,7 +82,7 @@ You can automatically format your code using tools like [`black`](https://pypi.o
 
 The Airflow template contains a `Dockerfile` and number of configuration files that you may need to update:
 
-- `iam_config.json`
+- `iam_config.yaml`
 - `deploy.json`
 - `requirements.txt`
 
@@ -94,9 +94,9 @@ You can use the same Docker image for multiple tasks by using an environment var
 
 Some python packages, such as `numpy` or `lxml`, depend on C extensions. If installed via pip using a `requirements.txt` file, these C extensions are compiled, which can be slow and liable to failure. To avoid this with `numpy` (which is needed by `pandas`) you can instead install the Debian package `python-numpy`.
 
-#### `iam_config.yml`
+#### `iam_config.yaml`
 
-The `iam_config.yml` file defines the permissions that will be attached to the IAM role used by the Airflow pipeline when it is run.
+The `iam_config.yaml` file defines the permissions that will be attached to the IAM role used by the Airflow pipeline when it is run.
 
 The `iam_role_name` must start with `airflow_`, be lowercase, contain underscores only between words and be unique on the Analytical Platform.
 
