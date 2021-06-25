@@ -8,7 +8,7 @@ There are several different data sources on the Analytical Platform:
 
 ## Home directories
 
-Home directories have a two purposes:
+Home directories have two purposes:
  * storing config files that are needed to allow you to use the AP
  * storing local copies of code and analytical outputs while you are working on them
 
