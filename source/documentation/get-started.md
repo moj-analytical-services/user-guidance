@@ -32,12 +32,15 @@ If you do not verify your email address at this stage, you can do it later by fo
 
 To get access to the Analytical Platform, you must first configure two-factor authentication (2FA) for GitHub using a mobile app (on your personal or work phone) or via text message. To configure 2FA for GitHub, follow the instructions [here](https://help.github.com/en/articles/configuring-two-factor-authentication).
 
-We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use [__Authy__](https://authy.com/) for the following reasons:
+We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used. 
+For Android see:
+- [Google Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
+- [Microsoft Authenticator – Apps on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator&hl=en_GB&gl=US)
 
-1. You can sync 2FA tokens across multiple devices, including mobiles, tablets and computers.
-2. You can create encrypted recovery backups in case you lose your device.
-3. You can use Touch ID, PIN codes and passwords to protect access to your 2FA tokens.
-4. You can still access secure websites when you don't have phone signal.
+For iPhone see: 
+- [‎Google Authenticator on the App Store - App Store - Apple](https://apps.apple.com/us/app/google-authenticator/id388497605)
+- [Microsoft Authenticator on the App Store - App Store - Apple](https://apps.apple.com/gb/app/microsoft-authenticator/id983156458)
+
 
 ### Request an account from the Analytical Platform team
 
