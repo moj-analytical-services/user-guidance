@@ -58,7 +58,7 @@ When you sign in to the Analytical Platform for the first time, you will be prom
 
 To sign in, go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 
-You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend that you use __Authy__.
+You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
 
 ## Access the Analytical Platform
 
