@@ -35,7 +35,7 @@ To get access to the Analytical Platform, you must first configure two-factor au
 We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used. 
 For Android see:
 - [Google Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
-- [Microsoft Authenticator – Apps on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator&hl=en_GB&gl=US)
+- [Microsoft Authenticator – Apps on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator)
 
 For iPhone see: 
 - [‎Google Authenticator on the App Store - App Store - Apple](https://apps.apple.com/us/app/google-authenticator/id388497605)
