@@ -98,7 +98,7 @@ The `allowed_ip_ranges` parameter controls where your app can be accessed from. 
 
 The `disable_authentication` parameter controls whether sign-in (using a link or one-time passcode sent to an authorised email address) is required for users to access the app when on an allowed network. It can take the values `true` or `false`. In general, this should be set to `false`.
 
-When `disable_authentication` is set to `true`, users do not need to go through a sign-in process but can still only access an app using a system specified in `allowed_ip_ranges`. This is a relatively weak security measure, as discussed in the [MoJ security guidance on IP addresses](https://ministryofjustice.github.io/security-guidance/standards/authentication/#ip-addresses). As such, if you wish to disable authentication, you should first discuss this with the Analytical Platform team.
+When `disable_authentication` is set to `true`, users do not need to go through a sign-in process but can still only access an app using a system specified in `allowed_ip_ranges`. This is a relatively weak security measure, as discussed in the [MoJ security guidance on IP addresses](http://security-guidance.service.justice.gov.uk/authentication/#trusting-ip-addresses). As such, if you wish to disable authentication, you should first discuss this with the Analytical Platform team.
 
 Changes to `deploy.json` only take effect when they are committed to GitHub, a release is created and the deployment is successful.
 
