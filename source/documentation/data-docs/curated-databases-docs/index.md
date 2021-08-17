@@ -4,6 +4,6 @@ This is guidance contains information on using curated databases on the Analytic
 
 * [SQL](sql/)
 * [Amazon Athena](amazon-athena/)
-* [`dbtools`](dbtools/)
+* [dbtools](dbtools/)
 * [Databases](databases/)
-* [Metadata search tool](metadata-search-tool/)
+* [Data Discovery Tool](data-documentation/)
