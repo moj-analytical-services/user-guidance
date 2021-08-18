@@ -10,7 +10,7 @@ You can access the AWS console at [aws.services.alpha.mojanalytics.xyz](https://
 
 To access Athena, select **Services**, then **Athena**.
 
-![](../../../images/curated-databases/access-athena-2.png)
+![](images/curated-databases/access-athena-2.png)
 
 This will bring you to the Athena query editor. Here, you can:
 
@@ -123,10 +123,6 @@ To create and run a new query:
 Progress information, including the estimated time elapsed will be displayed in the results window while the query is being processed.
 
 Once the query has been completed, the output will be displayed in the results window.
-
-You can save a query (not including the resulting output) by selecting **Save as** and entering a name and description. Saved queries are available from the **Saved Queries** tab in the Athena toolbar.
-
-You can also create tables from queries by selecting **Create** and entering a name. Tables that you create will be visible in the database window at the left of the page.
 
 ## Download query outputs
 
