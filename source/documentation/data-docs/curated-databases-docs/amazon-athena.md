@@ -4,22 +4,6 @@
 >
 > Source: [AWS](https://docs.aws.amazon.com/athena/latest/ug/what-is.html)
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-<!-- code_chunk_output -->
-
-- [Accessing Amazon Athena](#accessing-amazon-athena)
-- [Previewing tables](#previewing-tables)
-- [Working with tables](#working-with-tables)
-- [Using RStudio](#using-rstudio)
-- [Using JupyterLab](#using-jupyterlab)
-- [Using the Athena UI](#using-the-athena-ui)
-  - [Creating tables](#create-a-table)
-  - [Deleting tables](#delete-a-table)
-  - [Run a query](#run-a-query)
-  - [Downoad query outputs](#download-query-outputs)
-  - [SQL resources](#sql-resources)
-  <!-- /code_chunk_output -->
-
 ## Accessing Amazon Athena
 
 You can access the AWS console at [aws.services.alpha.mojanalytics.xyz](https://aws.services.alpha.mojanalytics.xyz). You may need to login with GitHub and go through two-factor authentication.
