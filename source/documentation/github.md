@@ -141,6 +141,7 @@ Follow the steps in this gif:
 Notes:
 
 * When you copy the link to the repo from Github, ensure you use the ssh link, which starts `git@github.com` as opposed to the https one, which starts `https://github.com/`.
+* If this is your first time cloning a repo from Github you may be prompted to answer if you want to continue. Type yes and click enter.
 
 ### Step 2: Edit your files, track them using Git, and sync ('push') changes to Github
 
