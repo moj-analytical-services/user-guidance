@@ -24,13 +24,18 @@ Data governance is achieved with a clear process for getting approval to put dat
 
 AP gives analysts the tools to develop reproducible analytical pipelines (RAPs) to automate time–consuming and repetitive tasks, allowing them to focus on interpreting the results.
 
-Reproducible analytical pipelines are achieved in AP with three elements:
+Reproducible analytical pipelines are achieved in AP with four elements:
 
 * datasets are versioned - snapshots of the data are taken when imported into AP with automated pipelines
 * code is versioned - in GitHub
 * system libraries are standardized - a standardized virtual machine running R Studio/Jupyter, or code running in an explicitly defined Dockerfile
+* project local dependencies are managed - using renv with RStudio, or venv with JupyterLab, to create project local package libraries
 
-GitHub provides a single location for all of our code -- this enables analysts to collaborate more effectively, share knowledge, do peer review and produce high–quality reproducible analysis
+For more information on RAPs, please read the following online materials: [RAP Manual](https://moj-analytical-services.github.io/rap-manual/), [RAP Companion](https://ukgovdatascience.github.io/rap_companion/), or [this blog post](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/).
+
+GitHub provides a single location for all of our code -- this enables analysts to collaborate more effectively, share knowledge, do peer review and produce high–quality reproducible analysis. Internally developed packages containing peer reviewed functions with unit tests to solve common analytical problems, such as the R package [mojrap](https://github.com/moj-analytical-services/mojrap), will help in this regard when adopted more widely and contributed to by the analytical community. This will also promote the harmonisation of coding approaches across teams and reduce the duplication of similar functions.
+
+To engage further with the MoJ RAP community, please contact Aidan Mews to join the RAP publication group team on MS Teams, or join the [#rap](https://app.slack.com/client/T1PU1AP6D/C02DSC3Q4P6) channel on Slack.
 
 ## Secure and well-engineered environment
 
