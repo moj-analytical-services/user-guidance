@@ -171,7 +171,7 @@ library(botor)
 s3_write(your_df, write.csv, "s3://your_bucket/your_key.csv")
 ```
 
-You can find out more about how to use these and other functions in [the documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
+You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
 
 ### JupyterLab
 
@@ -282,7 +282,7 @@ library(botor)
 your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
 ```
 
-You can find out more about how to use these and other functions in [the documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_read`).
+You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
 
 ### JupyterLab
 
