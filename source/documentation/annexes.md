@@ -75,6 +75,15 @@ Here is some more details of what Git offers:
 
 Finally, we have chosed git specifically because it seems to be by far the most popular version control system - see [here](https://insights.stackoverflow.com/survey/2017#work-version-control) and [here](https://trends.google.co.uk/trends/explore?date=all&q=tfs,svn,mercurial,git)
 
+
+## Reproducible Analytical Pipelines
+
+The Reproducible Analytical Pipeline (RAP) is an alternative production methodology for automating the bulk of steps involved in creating a statistical report, interactive dashboard, or other analytical product. It fundamentally involves replacing manual steps with code, organised into functions that have been peer reviewed, with associated unit tests, and ideally also organised into pacakges with relevant documentation and automated testing. Datasets are manipulated into a tidy format, i.e. one variable per column, and one record per row, to faciliate analysis with functions. To enable reproducibility, packages are managed using software such as renv for R, which creates project local package environments, or venv for Python, which creates a virtual Python environment. Typically, where public packages exist with functions relevant to the task at hand, these are made use of in place of writing new ones with similar functionality, or the public packages are added to if the new functions will be useful to others. For example, MoJ developed packages hosted on GitHub designed to solve tasks analysts commonly face in creating statistical publications, such as the [mojrap](https://github.com/moj-analytical-services/mojrap) R package, will help in this regard when adopted more widely and contributed to. This will also promote the harmonisation of coding approaches across teams and reduce the duplication of similar functions, which facilites the creation of new RAPs.
+
+For more information on RAPs, please see the following: [RAP Manual](https://moj-analytical-services.github.io/rap-manual/), [RAP Companion](https://ukgovdatascience.github.io/rap_companion/), or [this blog post](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/). Real life examples of RAPs created by MoJ analysts can be found on the [DASD Automation Team's website](https://moj-analytical-services.github.io/automation-team/).
+
+To engage further with the MoJ RAP community, please contact Aidan Mews to join the RAP publication group team on MS Teams, or join the [#rap](https://app.slack.com/client/T1PU1AP6D/C02DSC3Q4P6) channel on Slack.
+
 ## Step by step guide to setup Two Factor Authentication
 
 Two factor authentication (2FA) is critical to the security of the platform.  We have opted to use smartphone based 2FA apps due to the expense of giving out hardware tokens like the RSA device you use to log into DOM1.
