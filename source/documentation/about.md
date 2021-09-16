@@ -32,7 +32,7 @@ The AP supports reproducible analytical pipelines with these elements:
 
 GitHub provides a single location for all of our code -- this enables analysts to collaborate more effectively, share knowledge, do peer review and produce high–quality reproducible analysis.
 
-More details on what a RAP is and its benefits can be found [here](../annexes.html#Reproducible Analytical Pipelines)
+More details on what a RAP is and its benefits can be found [here](../annexes.html#Reproducible Analytical Pipelines).
 
 ## Secure and well-engineered environment
 
