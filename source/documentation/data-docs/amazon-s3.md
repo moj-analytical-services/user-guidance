@@ -127,6 +127,8 @@ You can also directly navigate to a bucket in the AWS S3 Console by selecting __
 
 #### `s3tools`
 
+s3tools is set to be deprecated alongside the launch of RStudio v4.0.5 on the platform. If you are starting a new project, we'd advise using `botor` for anything involving buckets on the platform. 
+
 You can upload files in RStudio on the Analytical Platform to Amazon S3 using the `s3tools` package.
 
 `s3tools` should be preinstalled for all users of the Analytical Platform. If you find that `s3tools` is not installed, you can install it by running the following code in a terminal:
@@ -152,7 +154,7 @@ which use `renv` for managing environments. It requires the Python package
 `boto3` and will be installed by running the following code:
 
 ```{r install-botor-write, eval=FALSE}
-renv::init()
+renv::init(bare = TRUE) # remove bare = TRUE if you'd like to move your existing packages over to renv
 renv::use_python()
 renv::install('reticulate')
 reticulate::py_install('boto3')
