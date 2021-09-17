@@ -22,20 +22,20 @@ renv::install('botor')
 
 but on the current test version it's not quite that simple. 
 
-First open your project, and then in the **console**__ run
+First open your project, and then in the **console** run
 
 ```r
 if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") # install renv if it doesn't exist on your system
 renv::init(bare = TRUE)
 ```
 
-and then in the terminal run
+Then in the terminal run
 
 ```bash
 python3 -m venv renv/venv --without-pip --system-site-packages
 ```
 
-Then, finally, in the RStudio console run
+Finally, in the RStudio console run the remaining lines:
 
 ```r
 renv::use_python('renv/venv/bin/python')
@@ -44,7 +44,7 @@ reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
-You can now use `library(botor)` as usual, and `renv::snapshot()` to 
+You should now be able to use `library(botor)` as usual, and `renv::snapshot()` to 
 lock the R and Python library versions for recreation by collaborators or
 within a deployment.
 
