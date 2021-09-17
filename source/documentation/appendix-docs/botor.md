@@ -11,7 +11,8 @@ code that uses `s3tools`.
 Eventually this will be achieved by running
 
 ```r
-renv::init()
+# remove bare = TRUE if you'd like to move your existing packages over to renv
+renv::init(bare = TRUE) 
 renv::use_python()
 renv::install('reticulate')
 reticulate::py_install('boto3')
@@ -29,14 +30,11 @@ python3 -m venv venv --without-pip --system-site-packages
 Then in the RStudio console run
 
 ```r
-renv::init()
+# remove bare = TRUE if you'd like to move your existing packages over to renv,
+# keep it set to TRUE if you're already using botor, dbtools or reticulate 
+# otherwise it will point to the wrong or a non-existent Python
+renv::init(bare = TRUE)
 renv::use_python('venv/bin/python')
-```
-
-You may need to restart your R session at this point. In RStudio press the red
-"off" button in the top right. 
-
-```r
 renv::install('reticulate')
 reticulate::py_install('boto3')
 renv::install('botor')
@@ -274,7 +272,7 @@ s3_path_to_full_df <- function(s3_path, ...) {
            fileext)) {
     # read from s3 using our designated method
     botor::s3_read(paste0('s3://',s3_path), 
-                   fun = accepted_direct_fileext[[tolower(fileext)]])
+                   fun = accepted_direct_fileext[[tolower(fileext)]], ...)
   } else {
     read_using(FUN = readxl::read_excel, s3_path = s3_path, ...)
   }
@@ -332,6 +330,62 @@ write_df_to_csv_in_s3(
     s3_path = "alpha-hmpps-covid-data-processing/mtcars_boto.csv", 
     row.names = FALSE
 )
+```
+
+#### `list_files_in_buckets`
+
+```r
+list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
+                                  path_only = FALSE, max = "unused") {
+  if (is.null(bucket_filter)) {
+    stop(paste0("You must provide one or more buckets e.g. ",
+                "accessible_files_df('alpha-everyone')  This function will ",
+                "list their contents"))
+  }
+  if(!is.character(bucket_filter)) {
+    stop("Supplied bucket_filter is not of class: character")
+  }
+  if(!is.character(prefix)&!is.null(prefix)) {
+    stop("Supplied prefix is not of class: character")
+  }
+  list_files_in_bucket <- function(bucket) {
+    # trim s3:// if included by the user - removed so we can supply both
+    # alpha-... and s3://alpha-...
+    bucket <- gsub('^s3://', "", bucket)
+    cols_to_keep <- c("key","last_modified","size","bucket_name")
+    path_prefix <- (paste0('s3://', bucket, "/", prefix))
+    list <- botor::s3_ls(path_prefix)
+    if (is.null(list)) {
+      warning(path_prefix, ' matches 0 files')
+      return(list)
+    }
+    list <- list[,cols_to_keep]
+    list["path"] <- paste(list$bucket_name, list$key, sep = '/')
+    if(is.null(prefix)) {
+      return(list)
+    } else {
+      return(list[grepl(prefix, list$key, ignore.case = TRUE),])
+    }
+  }
+  file_list <- dplyr::bind_rows(purrr::map(bucket_filter, list_files_in_bucket))
+  if (path_only) return(file_list$path)
+  file_list
+}
+```
+
+##### Examples
+
+```r
+list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
+                      prefix = 'BASS.csv')
+list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
+                      prefix = 'deaths')
+# Type in the full string you watch to match...
+list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
+                      prefix = 'deaths/fatalities') 
+# or prefix works using a partial match, so a shorter string will now work
+list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing",
+                      prefix = 'fat') 
 ```
 
 ### `botor` examples
