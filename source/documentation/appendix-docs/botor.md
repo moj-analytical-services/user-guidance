@@ -5,12 +5,15 @@ our Amazon S3 data storage, replacing [`s3tools`](https://github.com/moj-analyti
 This guidance gives some hints on how to get going with `botor` and migrate 
 code that uses `s3tools`.
 
+This guidance assumes you have experience with `renv`. If you require a recap or guidance, please see the following [renv documentation from the platform guidance](https://github.com/moj-analytical-services/user-guidance/blob/dd896e73ed5be0dc42b9b38cd20e1e49e7cde560/source/documentation/tools/package-management.md#renv) or the [official renv documentation](https://rstudio.github.io/renv/articles/renv.html).
+
 ## Installation
 
 Eventually this will be achieved by running
 
 ```r
-renv::init()
+if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") # install renv if it doesn't exist on your system
+renv::init(bare = TRUE)
 renv::use_python()
 renv::install('reticulate')
 reticulate::py_install('boto3')
@@ -19,23 +22,29 @@ renv::install('botor')
 
 but on the current test version it's not quite that simple. 
 
-First open your project, and then in the terminal run
-
-```bash
-python3 -m venv venv --without-pip --system-site-packages
-```
-
-Then in the RStudio console run
+First open your project, and then in the **console** run
 
 ```r
-renv::init()
-renv::use_python('venv/bin/python')
+if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") # install renv if it doesn't exist on your system
+renv::init(bare = TRUE)
+```
+
+Then in the terminal run
+
+```bash
+python3 -m venv renv/venv --without-pip --system-site-packages
+```
+
+Finally, in the RStudio console run the remaining lines:
+
+```r
+renv::use_python('renv/venv/bin/python')
 renv::install('reticulate')
 reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
-You can now use `library(botor)` as usual, and `renv::snapshot()` to 
+You should now be able to use `library(botor)` as usual, and `renv::snapshot()` to 
 lock the R and Python library versions for recreation by collaborators or
 within a deployment.
 
