@@ -385,7 +385,7 @@ list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing",
                       prefix = 'deaths/fatalities') 
 # or prefix works using a partial match, so a shorter string will now work
 list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing",
-                      prefix = 'fat') 
+                      prefix = 'deaths/fat') 
 ```
 
 ### `botor` examples
