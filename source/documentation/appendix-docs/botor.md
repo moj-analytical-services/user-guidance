@@ -5,11 +5,23 @@ our Amazon S3 data storage, replacing [`s3tools`](https://github.com/moj-analyti
 This guidance gives some hints on how to get going with `botor` and migrate 
 code that uses `s3tools`.
 
-This guidance assumes you have experience with `renv`. If you require a recap or guidance, please see the following [renv documentation from the platform guidance](https://github.com/moj-analytical-services/user-guidance/blob/dd896e73ed5be0dc42b9b38cd20e1e49e7cde560/source/documentation/tools/package-management.md#renv) or the [official renv documentation](https://rstudio.github.io/renv/articles/renv.html).
+This guidance assumes you have experience with `renv`. If you require a recap or guidance, please see either the [renv documentation from the platform guidance](https://github.com/moj-analytical-services/user-guidance/blob/dd896e73ed5be0dc42b9b38cd20e1e49e7cde560/source/documentation/tools/package-management.md#renv) or the [official renv documentation](https://rstudio.github.io/renv/articles/renv.html).
+
+# Table of Contents
+* [Installation](#installation)
+* [Using botor](#usage)
+  * [Reading data](#reading-data)
+  * [Writing data](#writing-data)
+  * [Other useful functions](#other-useful-functions)
+* [Migrating from s3tools](#migrating-from-s3tools)
+  * [read_using](#read_using)
+  * [s3_path_to_full_df](#s3_path_to_full_df)
+  * [write_df_to_csv_in_s3](#write_df_to_csv_in_s3)
+  * [botor examples and comparisons](#botor-examples)
 
 ## Installation
 
-Eventually this will be achieved by running
+_Eventually_ this will be achieved by running
 
 ```r
 if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") # install renv if it doesn't exist on your system
@@ -22,14 +34,14 @@ renv::install('botor')
 
 but on the current test version it's not quite that simple. 
 
-First open your project, and then in the **console** run
+First open your project, and in the **console** run
 
 ```r
 if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") # install renv if it doesn't exist on your system
 renv::init(bare = TRUE)
 ```
 
-Then in the terminal run
+Then in the **terminal** run
 
 ```bash
 python3 -m venv renv/venv --without-pip --system-site-packages
@@ -74,11 +86,14 @@ Other formats can be handled in a similar fashion.
 sas_data <- s3_read("s3://alpha-mybucket/my_data.sas7bdat", haven::read_sas)
 feather_data <- s3_read("s3://alpha-mybucket/my_data.feather", 
                         feather::read_feather)
+json_data <- s3_read('s3://botor/example-data/mtcars.json', jsonlite::fromJSON)
 ```
+
+See `?botor::s3_read` for additional options.
 
 `openxlsx::read.xlsx` will only open
 files with the `.xlsx` suffix but `s3_read` uses a temporary file without
-a suffix. To get around this either use `readxl::read_excel` or run
+a suffix. To get around this either use `readxl::read_excel` or run the following for `openxlsx`
 
 ```r
 temp_loc <- tempfile(fileext=".xlsx")
@@ -120,7 +135,7 @@ s3_write(df, "s3://alpha-mybucket/my_data.csv.gz", readr::write_csv,
          compress = "gzip")
 ```
 
-To upload a file to the local filesystem run
+To upload a file from the local filesystem run
 
 ```r
 s3_upload_file("my_local_data.csv", "s3://alpha-mybucket/my_data.csv")
@@ -188,7 +203,6 @@ replace `s3tools` calls.
 #### `read_using`
 
 ```r
-# updated read_using function
 read_using <- function(FUN, s3_path, overwrite = TRUE, ...) {
   # trim s3:// if included by the user
   s3_path <- gsub('^s3://', "", s3_path)
@@ -244,13 +258,14 @@ s3_path_to_full_df <- function(s3_path, ...) {
   }
   # if we are using a function accepted by s3_read, then use that to parse 
   # the data
+  s3_path <- paste0('s3://',s3_path)
   if(grepl(paste0('(?i)', names(accepted_direct_fileext), collapse = "|"), 
            fileext)) {
     # read from s3 using our designated method
-    botor::s3_read(paste0('s3://',s3_path), 
+    botor::s3_read(s3_path, 
                    fun = accepted_direct_fileext[[tolower(fileext)]])
   } else {
-    read_using(FUN = readxl::read_excel, s3_path = s3_path, ..)
+    read_using(FUN = readxl::read_excel, s3_path = s3_path, ...)
   }
 }
 ```
@@ -258,14 +273,12 @@ s3_path_to_full_df <- function(s3_path, ...) {
 ##### Examples
 
 ```r
-s3_path_to_full_df('s3://alpha-hmpps-covid-data-processing/HMPPS-deaths.csv')
+s3_path_to_full_df('s3://alpha-everyone/mtcars_boto.csv')
 s3_path_to_full_df(
-    paste0("alpha-hmpps-covid-data-processing/",
-           "covid19infectionsurveydatasets20210521.xlsx"), 
+    "alpha-everyone/my_excel_workbook.xlsx"), 
     sheet = 2)
 s3_path_to_full_df(
-    paste0("alpha-hmpps-covid-data-processing/", 
-           "capacity-reports/COVID-19CapacityImpact-20200427.xlsm"), 
+    "alpha-everyone/folder1/test.xlsm"), 
     sheet = 1)
 ```
 
@@ -274,7 +287,7 @@ s3_path_to_full_df(
 ```r
 write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE, ...) { 
   # add errors
-  if(!any(grepl('data.frame', df %>% class()))) {
+  if(!any(grepl('data.frame', class(df)))) {
     stop("df entered isn't a valid dataframe object")
   }
   if(tools::file_ext(s3_path) != 'csv') {
@@ -283,11 +296,11 @@ write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE, ...) {
   # trim s3:// if included by the user - removed so we can supply both 
   # alpha-... and s3://alpha - and then add again
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
-  if(!overwrite & s3_file_exists(s3_path)) {
+  if(!overwrite & botor::s3_exists(s3_path)) {
     stop("s3_path entered already exists and overwrite is FALSE")
   }
   # write csv
-  botor::s3_write(df, fun = write.csv, uri = paste0("s3://", s3_path), ...)
+  botor::s3_write(df, fun = write.csv, uri = s3_path, ...)
 }
 ```
 
@@ -296,11 +309,11 @@ write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE, ...) {
 ```r
 write_df_to_csv_in_s3(
     df = mtcars, 
-    s3_path = "alpha-hmpps-covid-data-processing/mtcars_boto.csv"
+    s3_path = "alpha-everyone/mtcars_boto.csv"
 )
 write_df_to_csv_in_s3(
     df = mtcars, 
-    s3_path = "alpha-hmpps-covid-data-processing/mtcars_boto.csv", 
+    s3_path = "alpha-everyone/mtcars_boto.csv", 
     row.names = FALSE
 )
 ```
