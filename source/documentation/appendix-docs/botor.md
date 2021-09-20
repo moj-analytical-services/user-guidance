@@ -351,11 +351,9 @@ write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE, multipar
   # trim s3:// if included by the user
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   
-  p <- parse_path(s3_path)
-  
-  if (overwrite || !(s3_file_exists(s3_path))) {
+  if (overwrite || !(botor::s3_exists(s3_path_test))) {
     tryCatch(
-      botor::s3_upload_file(local_file_path, full_s3_path(s3_path)),
+      botor::s3_upload_file(local_file_path, s3_path_test),
       error = function(c) {
         message(glue::glue("Could not upload {local_file_path} to {s3_path}"),
                 appendLF = TRUE)
@@ -366,7 +364,6 @@ write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE, multipar
     stop("File already exists and you haven't set overwrite = TRUE, stopping")
   }
   
-  return()
 }
 ```
 
