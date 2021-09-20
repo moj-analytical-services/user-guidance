@@ -18,6 +18,7 @@ This guidance assumes you have experience with `renv`. If you require a recap or
   * [s3_path_to_full_df](#s3_path_to_full_df)
   * [write_df_to_csv_in_s3](#write_df_to_csv_in_s3)
   * [download_file_from_s3](#download_file_from_s3)
+  * [write_file_to_s3](#write_file_to_s3)
   * [botor examples and comparisons](#botor-examples)
 
 ## Installation
@@ -206,11 +207,11 @@ replace `s3tools` calls.
 ```r
 read_using <- function(FUN, s3_path, overwrite = TRUE, ...) {
   # trim s3:// if included by the user
-  s3_path <- gsub('^s3://', "", s3_path)
+  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   # find fileext
   file_ext <- paste0('.', tools::file_ext(s3_path))
   # download file to tempfile()
-  tmp <- botor::s3_download_file(paste0('s3://', s3_path), 
+  tmp <- botor::s3_download_file(s3_path, 
                                  tempfile(fileext = file_ext), 
                                  force = overwrite)
   FUN(tmp, ...)
@@ -237,7 +238,7 @@ read_using(FUN=readxl::read_excel, s3_path="alpha-test-team/mpg.xlsx")
 # botor::s3_read directly
 s3_path_to_full_df <- function(s3_path, ...) {
   # trim s3:// if included by the user
-  s3_path <- gsub('^s3://', "", s3_path,)
+  s3_path <- paste0('s3://', gsub('^s3://', "", s3_path))
   # fileexts accepted by s3_read
   accepted_direct_fileext <- c('csv' = read.csv, 
                                'json' = jsonlite::fromJSON,
@@ -259,7 +260,6 @@ s3_path_to_full_df <- function(s3_path, ...) {
   }
   # if we are using a function accepted by s3_read, then use that to parse 
   # the data
-  s3_path <- paste0('s3://',s3_path)
   if(grepl(paste0('(?i)', names(accepted_direct_fileext), collapse = "|"), 
            fileext)) {
     # read from s3 using our designated method
@@ -325,10 +325,7 @@ write_df_to_csv_in_s3(
 download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
   
   # trim s3:// if included by the user
-  s3_path <- gsub('^s3://',"",s3_path)
-  
-  # add s3:// back in where required
-  s3_path <- paste0('s3://', s3_path)
+  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   
   if (!(file.exists(local_path)) || overwrite) {
     # download file
@@ -344,6 +341,33 @@ download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
 
 ```r
 download_file_from_s3("alpha-everyone/mtcars_boto.csv", "local_folder/mtcars_boto.csv", overwrite = TRUE)
+```
+
+#### `write_file_to_s3`
+
+```
+write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE, multipart=TRUE) {
+  
+  # trim s3:// if included by the user
+  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
+  
+  p <- parse_path(s3_path)
+  
+  if (overwrite || !(s3_file_exists(s3_path))) {
+    tryCatch(
+      botor::s3_upload_file(local_file_path, full_s3_path(s3_path)),
+      error = function(c) {
+        message(glue::glue("Could not upload {local_file_path} to {s3_path}"),
+                appendLF = TRUE)
+        stop(c, appendLF = TRUE)
+      }
+    )
+  } else {
+    stop("File already exists and you haven't set overwrite = TRUE, stopping")
+  }
+  
+  return()
+}
 ```
 
 ### `botor` examples
