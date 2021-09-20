@@ -1,18 +1,32 @@
 # Migrating to `botor`
 
 The new version of RStudio on the Analytical Platform uses `botor` to access
-our Amazon S3 data storage, replacing 
-[`s3tools`](https://github.com/moj-analytical-services/s3tools). 
+our Amazon S3 data storage, replacing [`s3tools`](https://github.com/moj-analytical-services/s3tools). 
 This guidance gives some hints on how to get going with `botor` and migrate 
 code that uses `s3tools`.
 
+This guidance assumes you have experience with `renv`. If you require a recap or guidance, please see either the [renv documentation from the platform guidance](https://github.com/moj-analytical-services/user-guidance/blob/dd896e73ed5be0dc42b9b38cd20e1e49e7cde560/source/documentation/tools/package-management.md#renv) or the [official renv documentation](https://rstudio.github.io/renv/articles/renv.html).
+
+# Table of Contents
+* [Installation](#installation)
+* [Using botor](#usage)
+  * [Reading data](#reading-data)
+  * [Writing data](#writing-data)
+  * [Other useful functions](#other-useful-functions)
+* [Migrating from s3tools](#migrating-from-s3tools)
+  * [read_using](#read_using)
+  * [s3_path_to_full_df](#s3_path_to_full_df)
+  * [write_df_to_csv_in_s3](#write_df_to_csv_in_s3)
+  * [download_file_from_s3](#download_file_from_s3)
+  * [botor examples and comparisons](#botor-examples)
+
 ## Installation
 
-Eventually this will be achieved by running
+_Eventually_ this will be achieved by running
 
 ```r
-# remove bare = TRUE if you'd like to move your existing packages over to renv
-renv::init(bare = TRUE) 
+if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") # install renv if it doesn't exist on your system
+renv::init(bare = TRUE)
 renv::use_python()
 renv::install('reticulate')
 reticulate::py_install('boto3')
@@ -21,41 +35,40 @@ renv::install('botor')
 
 but on the current test version it's not quite that simple. 
 
-First open your project, and then in the terminal run
-
-```bash
-python3 -m venv venv --without-pip --system-site-packages
-```
-
-Then in the RStudio console run
+First open your project, and in the **console** run
 
 ```r
-# remove bare = TRUE if you'd like to move your existing packages over to renv,
-# keep it set to TRUE if you're already using botor, dbtools or reticulate 
-# otherwise it will point to the wrong or a non-existent Python
+if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") # install renv if it doesn't exist on your system
 renv::init(bare = TRUE)
-renv::use_python('venv/bin/python')
+```
+
+Then in the **terminal** run
+
+```bash
+python3 -m venv renv/venv --without-pip --system-site-packages
+```
+
+Finally, in the RStudio console run the remaining lines:
+
+```r
+renv::use_python('renv/venv/bin/python')
 renv::install('reticulate')
 reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
-You can now use `library(botor)` as usual, and `renv::snapshot()` to 
+You should now be able to use `library(botor)` as usual, and `renv::snapshot()` to 
 lock the R and Python library versions for recreation by collaborators or
 within a deployment.
 
-For more on `renv` see 
-[the documentation](https://rstudio.github.io/renv/articles/renv.html), 
-particularly on 
-[Using Python with renv](https://rstudio.github.io/renv/articles/python.html). 
-The [reticulate documentation](https://rstudio.github.io/reticulate/) is also 
-likely to be useful.
+For more on `renv` see [the documentation](https://rstudio.github.io/renv/articles/renv.html), 
+particularly on [Using Python with renv](https://rstudio.github.io/renv/articles/python.html). 
+The [reticulate documentation](https://rstudio.github.io/reticulate/) is also likely to be useful.
 
 ## Usage
 ### Reading data
 
-Reading from S3 is handled by the 
-[`s3_read`](https://daroczig.github.io/botor/reference/s3_read.html)
+Reading from S3 is handled by the [`s3_read`](https://daroczig.github.io/botor/reference/s3_read.html)
 function. This takes a full S3 path, which must include the prefix `s3://`,
  and a read function as parameters. For example, to read a csv file run
 
@@ -68,24 +81,20 @@ t <- s3_read("s3://alpha-mybucket/my_data.csv", readr::read_csv)
 dt <- s3_read("s3://alpha-mybucket/my_data.csv", data.table::fread)
 ```
 
-Additional arguments to the read function can be added to the end of the
-parameters.
-
-```r
-t <- s3_read("s3://alpha-mybucket/my_data.csv", readr::read_csv, sheet = 2)
-```
-
 Other formats can be handled in a similar fashion.
 
 ```r
 sas_data <- s3_read("s3://alpha-mybucket/my_data.sas7bdat", haven::read_sas)
 feather_data <- s3_read("s3://alpha-mybucket/my_data.feather", 
                         feather::read_feather)
+json_data <- s3_read('s3://botor/example-data/mtcars.json', jsonlite::fromJSON)
 ```
+
+See `?botor::s3_read` for additional options.
 
 `openxlsx::read.xlsx` will only open
 files with the `.xlsx` suffix but `s3_read` uses a temporary file without
-a suffix. To get around this either use `readxl::read_excel` or run
+a suffix. To get around this either use `readxl::read_excel` or run the following for `openxlsx`
 
 ```r
 temp_loc <- tempfile(fileext=".xlsx")
@@ -109,32 +118,15 @@ s3_download_file("s3://alpha-mybucket/my_data.csv", "my_local_data.csv")
 
 ### Writing data
 
-Similarly writing to S3 is handled by the 
-[`s3_write`](https://daroczig.github.io/botor/reference/s3_download_file.html)
-function. This takes an R object, a write function with a parameter named 
-`file`, and a full S3 path as parameters. For example,
+Similarly writing to S3 is handled by the [`s3_write`](https://daroczig.github.io/botor/reference/s3_download_file.html)
+function. This takes an R object, a write function, and a full S3 path as
+parameters. For example,
 
 ```r
 s3_write(df, readr::write_csv, "s3://alpha-mybucket/my_data.csv")
+s3_write(df, feather::write_feather, "s3://alpha-mybucket/my_data.feather")
 s3_write(df, haven::write_sas, "s3://alpha-mybucket/my_data.sas7bdat")
 s3_write(df, openxlsx::write.xlsx, "s3://alpha-mybucket/my_data.xlsx")
-```
-
-Additional arguments to the write function can be added to the end of the
-parameters.
-
-```r
-s3_write(df, readr::write_csv, "s3://alpha-mybucket/my_data.csv", na = "")
-```
-
-Some write functions, such as `feather::write_feather`, use a different name 
-for their file location. In this case run
-
-```r
-temp_loc <- tempfile(fileext = "feather")
-feather::write_feather(df, temp_loc)
-s3_upload_file(temp_loc, "s3://alpha-mybucket/my_data.feather")
-unlink(temp_loc)
 ```
 
 Data can also be compressed before writing.
@@ -144,7 +136,7 @@ s3_write(df, "s3://alpha-mybucket/my_data.csv.gz", readr::write_csv,
          compress = "gzip")
 ```
 
-To upload a file to the local filesystem run
+To upload a file from the local filesystem run
 
 ```r
 s3_upload_file("my_local_data.csv", "s3://alpha-mybucket/my_data.csv")
@@ -185,18 +177,18 @@ For further information consult the
 
 _Note:_ To turn off the debugging warnings found within the `botor` library, 
 please use the following:
-
 ```r
 library(logger)
 log_threshold(WARN, namespace = 'botor')
 ```
 
-_Warning:_ `botor` does not currently support refreshing credentials, due to a 
-limitation with using `boto3` through `reticulate`. You may get an error 
-message
+_Warning:_ `botor` does not currently support refreshing credentials, most 
+likely due to a limitation with using `boto3` through `reticulate` You may get
+an error message
 
 ```
-Python `RuntimeError`: Credentials were refreshed, but the refreshed credentials are still expired.
+Error in py_call_impl(callable, dots$args, dots$keywords) : 
+  RuntimeError: Credentials were refreshed, but the refreshed credentials are still expired.
 ```
 
 In this event you will need to restart your R session; in RStudio this is
@@ -212,7 +204,6 @@ replace `s3tools` calls.
 #### `read_using`
 
 ```r
-# updated read_using function
 read_using <- function(FUN, s3_path, overwrite = TRUE, ...) {
   # trim s3:// if included by the user
   s3_path <- gsub('^s3://', "", s3_path)
@@ -268,11 +259,12 @@ s3_path_to_full_df <- function(s3_path, ...) {
   }
   # if we are using a function accepted by s3_read, then use that to parse 
   # the data
+  s3_path <- paste0('s3://',s3_path)
   if(grepl(paste0('(?i)', names(accepted_direct_fileext), collapse = "|"), 
            fileext)) {
     # read from s3 using our designated method
-    botor::s3_read(paste0('s3://',s3_path), 
-                   fun = accepted_direct_fileext[[tolower(fileext)]], ...)
+    botor::s3_read(s3_path, 
+                   fun = accepted_direct_fileext[[tolower(fileext)]])
   } else {
     read_using(FUN = readxl::read_excel, s3_path = s3_path, ...)
   }
@@ -282,26 +274,21 @@ s3_path_to_full_df <- function(s3_path, ...) {
 ##### Examples
 
 ```r
-s3_path_to_full_df('s3://alpha-hmpps-covid-data-processing/HMPPS-deaths.csv')
+s3_path_to_full_df('s3://alpha-everyone/mtcars_boto.csv')
 s3_path_to_full_df(
-    paste0("alpha-hmpps-covid-data-processing/",
-           "covid19infectionsurveydatasets20210521.xlsx"), 
+    "alpha-everyone/my_excel_workbook.xlsx"), 
     sheet = 2)
 s3_path_to_full_df(
-    paste0("alpha-hmpps-covid-data-processing/", 
-           "capacity-reports/COVID-19CapacityImpact-20200427.xlsm"), 
+    "alpha-everyone/folder1/test.xlsm"), 
     sheet = 1)
 ```
 
 #### `write_df_to_csv_in_s3`
 
-`botor` uses multipart uploads automatically.
-
 ```r
-write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE, 
-                                  multipart = "unused", ...) { 
+write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE, ...) { 
   # add errors
-  if(!any(grepl('data.frame', df %>% class()))) {
+  if(!any(grepl('data.frame', class(df)))) {
     stop("df entered isn't a valid dataframe object")
   }
   if(tools::file_ext(s3_path) != 'csv') {
@@ -310,7 +297,7 @@ write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE,
   # trim s3:// if included by the user - removed so we can supply both 
   # alpha-... and s3://alpha - and then add again
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
-  if(!overwrite & s3_exists(s3_path)) {
+  if(!overwrite & botor::s3_exists(s3_path)) {
     stop("s3_path entered already exists and overwrite is FALSE")
   }
   # write csv
@@ -323,69 +310,40 @@ write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE,
 ```r
 write_df_to_csv_in_s3(
     df = mtcars, 
-    s3_path = "alpha-hmpps-covid-data-processing/mtcars_boto.csv"
+    s3_path = "alpha-everyone/mtcars_boto.csv"
 )
 write_df_to_csv_in_s3(
     df = mtcars, 
-    s3_path = "alpha-hmpps-covid-data-processing/mtcars_boto.csv", 
+    s3_path = "alpha-everyone/mtcars_boto.csv", 
     row.names = FALSE
 )
 ```
 
-#### `list_files_in_buckets`
+#### `download_file_from_s3`
 
-```r
-list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
-                                  path_only = FALSE, max = "unused") {
-  if (is.null(bucket_filter)) {
-    stop(paste0("You must provide one or more buckets e.g. ",
-                "accessible_files_df('alpha-everyone')  This function will ",
-                "list their contents"))
+```
+download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
+  
+  # trim s3:// if included by the user
+  s3_path <- gsub('^s3://',"",s3_path)
+  
+  # add s3:// back in where required
+  s3_path <- paste0('s3://', s3_path)
+  
+  if (!(file.exists(local_path)) || overwrite) {
+    # download file
+    botor::s3_download_file(uri = s3_path, file = local_path, force = overwrite)
+  } else {
+    stop("The file already exists locally and you didn't specify overwrite=TRUE")
   }
-  if(!is.character(bucket_filter)) {
-    stop("Supplied bucket_filter is not of class: character")
-  }
-  if(!is.character(prefix)&!is.null(prefix)) {
-    stop("Supplied prefix is not of class: character")
-  }
-  list_files_in_bucket <- function(bucket) {
-    # trim s3:// if included by the user - removed so we can supply both
-    # alpha-... and s3://alpha-...
-    bucket <- gsub('^s3://', "", bucket)
-    cols_to_keep <- c("key","last_modified","size","bucket_name")
-    path_prefix <- (paste0('s3://', bucket, "/", prefix))
-    list <- botor::s3_ls(path_prefix)
-    if (is.null(list)) {
-      warning(path_prefix, ' matches 0 files')
-      return(list)
-    }
-    list <- list[,cols_to_keep]
-    list["path"] <- paste(list$bucket_name, list$key, sep = '/')
-    if(is.null(prefix)) {
-      return(list)
-    } else {
-      return(list[grepl(prefix, list$key, ignore.case = TRUE),])
-    }
-  }
-  file_list <- dplyr::bind_rows(purrr::map(bucket_filter, list_files_in_bucket))
-  if (path_only) return(file_list$path)
-  file_list
+  
 }
 ```
 
 ##### Examples
 
 ```r
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
-                      prefix = 'BASS.csv')
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
-                      prefix = 'deaths')
-# Type in the full string you watch to match...
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
-                      prefix = 'deaths/fatalities') 
-# or prefix works using a partial match, so a shorter string will now work
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing",
-                      prefix = 'deaths/fat') 
+download_file_from_s3("alpha-everyone/mtcars_boto.csv", "local_folder/mtcars_boto.csv", overwrite = TRUE)
 ```
 
 ### `botor` examples
@@ -395,7 +353,7 @@ examples on the
 [`s3tools` homepage](https://github.com/moj-analytical-services/s3tools), 
 which will hopefully help with converting existing code.
 
-#### Which buckets do I have access to?
+### Which buckets do I have access to?
 
 ```r
 s3tools::accessible_buckets()
@@ -405,7 +363,7 @@ There is no obvious way to achieve this with `botor`,
 [s3_list_buckets](https://daroczig.github.io/botor/reference/s3_list_buckets.html)
 is the closest, listing all buckets in the organisation. 
 
-#### What files do I have access to?
+### What files do I have access to?
 
 ```r
 ## List all the files in the alpha-everyone bucket
@@ -450,8 +408,8 @@ botor::s3_ls('s3://alpha-everyone') %>%
     dplyr::filter(grepl("iris*.xls",path)) 
 ```
 
-#### Reading files
-##### `csv` files
+### Reading files
+#### `csv` files
 
 ```r
 df <- s3tools::s3_path_to_full_df(
@@ -481,7 +439,7 @@ df <- obj$Body$read()$decode() %>%
     head(n = 5)
 ```
 
-##### Other file types
+#### Other file types
 
 ```r
 # Uses readxl if installed, otherwise errors
@@ -514,12 +472,11 @@ df <- botor::s3_read("s3://alpha-everyone/s3tools_tests/iris_base.sas7bdat",
 
 df <- s3tools::read_using(
     FUN=readr::read_csv, path = "alpha-everyone/s3tools_tests/iris_base.csv")
-# Use s3_read in botor to specify the read function
 df <- s3_read("s3://alpha-everyone/s3tools_tests/iris_base.csv",
               readr::read_csv)
 ```
 
-#### Downloading files
+### Downloading files
 
 `botor` will default to not checking whether it's overwriting files.
 
@@ -547,8 +504,8 @@ df <- botor::s3_download_file(
 )
 ```
 
-#### Writing data to S3
-##### Writing files to S3
+### Writing data to S3
+#### Writing files to S3
 
 `botor` will not check if files written to S3 already exist.
 
@@ -576,7 +533,7 @@ botor::s3_upload_file("my_downloaded_file.csv",
                       "s3://alpha-everyone/delete/my_downloaded_file.csv")
 ```
 
-##### Writing a dataframe to s3 in csv format
+#### Writing a dataframe to s3 in csv format
 
 ```r
 s3tools::write_df_to_csv_in_s3(iris, "alpha-everyone/delete/iris.csv")
@@ -593,7 +550,3 @@ s3tools::write_df_to_csv_in_s3(iris, "alpha-everyone/delete/iris.csv",
                                overwrite =TRUE)
 botor::s3_write(iris, "s3://alpha-everyone/delete/iris.csv", write.csv)
 ```
-
-
-
-
