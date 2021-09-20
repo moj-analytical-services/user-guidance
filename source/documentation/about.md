@@ -24,13 +24,15 @@ Data governance is achieved with a clear process for getting approval to put dat
 
 AP gives analysts the tools to develop reproducible analytical pipelines (RAPs) to automate time–consuming and repetitive tasks, allowing them to focus on interpreting the results.
 
-Reproducible analytical pipelines are achieved in AP with three elements:
+The AP supports reproducible analytical pipelines with these elements:
 
 * datasets are versioned - snapshots of the data are taken when imported into AP with automated pipelines
 * code is versioned - in GitHub
 * system libraries are standardized - a standardized virtual machine running R Studio/Jupyter, or code running in an explicitly defined Dockerfile
 
-GitHub provides a single location for all of our code -- this enables analysts to collaborate more effectively, share knowledge, do peer review and produce high–quality reproducible analysis
+GitHub provides a single location for all of our code -- this enables analysts to collaborate more effectively, share knowledge, do peer review and produce high–quality reproducible analysis.
+
+More details on what a RAP is and its benefits can be found [here](../annexes.html#Reproducible Analytical Pipelines).
 
 ## Secure and well-engineered environment
 
