@@ -17,6 +17,7 @@ This guidance assumes you have experience with `renv`. If you require a recap or
   * [read_using](#read_using)
   * [s3_path_to_full_df](#s3_path_to_full_df)
   * [write_df_to_csv_in_s3](#write_df_to_csv_in_s3)
+  * [download_file_from_s3](#download_file_from_s3)
   * [botor examples and comparisons](#botor-examples)
 
 ## Installation
@@ -316,6 +317,33 @@ write_df_to_csv_in_s3(
     s3_path = "alpha-everyone/mtcars_boto.csv", 
     row.names = FALSE
 )
+```
+
+#### `download_file_from_s3`
+
+```
+download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
+  
+  # trim s3:// if included by the user
+  s3_path <- gsub('^s3://',"",s3_path)
+  
+  # add s3:// back in where required
+  s3_path <- paste0('s3://', s3_path)
+  
+  if (!(file.exists(local_path)) || overwrite) {
+    # download file
+    botor::s3_download_file(uri = s3_path, file = local_path, force = overwrite)
+  } else {
+    stop("The file already exists locally and you didn't specify overwrite=TRUE")
+  }
+  
+}
+```
+
+##### Examples
+
+```r
+download_file_from_s3("alpha-everyone/mtcars_boto.csv", "local_folder/mtcars_boto.csv", overwrite = TRUE)
 ```
 
 ### `botor` examples
