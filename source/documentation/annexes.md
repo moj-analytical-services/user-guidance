@@ -80,12 +80,12 @@ Finally, we have chosed git specifically because it seems to be by far the most 
 
 The Reproducible Analytical Pipeline (RAP) is an alternative production methodology for automating the bulk of steps involved in creating a statistical report, interactive dashboard, or other analytical product. At its heart it involves replacing manual tasks with code, and usually includes:
 
-* organising repeated code chunks into functions that have been peer reviewed with associated unit tests, and ideally also organised into packages with relevant documentation and automated testing. 
+* Organising repeated code chunks into functions that have been peer reviewed with associated unit tests, and ideally also organised into packages with relevant documentation and automated testing. 
 * Wrangling datasets into a tidy format, i.e. one variable per column, and one record per row, to faciliate analysis with vectorized functions. 
-* Using package managers to ensure reproducibility, such as `renv` for R which creates project local package environments, or `venv` for Python which creates a virtual Python environment. 
-* Using functions from public packages where relevant functions exist for the task at hand, rather than writing new ones with similar functionality. Where this is not the case and new functions would benefit others, they are contributed to other packages or added in a new package to benefit others.
+* Managing dependencies inside virtual environments to facilitate reproducibility, using tools such as `renv` for R or `venv` for Python.
+* Using functions from public packages where relevant functions exist for the task at hand, rather than writing new ones with similar functionality. Where this is not the case and new functions would benefit others, they are contributed to other packages or added to a new package.
 
-Packages developed within MoJ and hosted on GitHub designed to address tasks analysts commonly face in creating RAPs, such as the [`mojrap`](https://github.com/moj-analytical-services/mojrap) R package, will facilitate the creation of new RAPs, when adopted more widely and contributed to. This will also promote the harmonisation of coding approaches across teams and reduce the duplication of similar functions.
+Packages developed within MoJ and hosted on GitHub designed to address tasks analysts commonly face in creating RAPs, such as the [`mojrap`](https://github.com/moj-analytical-services/mojrap) R package, will facilitate the creation of new RAPs when adopted more widely and contributed to. This will also promote the harmonisation of coding approaches across teams and reduce the duplication of similar functions.
 
 For more information on RAPs, please see the following: [RAP Manual](https://moj-analytical-services.github.io/rap-manual/), [RAP Companion](https://ukgovdatascience.github.io/rap_companion/), or [this blog post](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/). Real life examples of RAPs created by MoJ analysts can be found on the [DASD Automation Team's website](https://moj-analytical-services.github.io/automation-team/).
 
