@@ -246,11 +246,11 @@ replace `s3tools` calls.
 ```r
 read_using <- function(FUN, s3_path, ...) {
   # trim s3:// if included by the user
-  s3_path <- gsub('^s3://', "", s3_path)
+  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   # find fileext
   file_ext <- paste0('.', tools::file_ext(s3_path))
   # download file to tempfile()
-  tmp <- botor::s3_download_file(paste0('s3://', s3_path), 
+  tmp <- botor::s3_download_file(s3_path, 
                                  tempfile(fileext = file_ext), 
                                  force = overwrite)
   FUN(tmp, ...)
@@ -277,7 +277,7 @@ read_using(FUN=readxl::read_excel, s3_path="alpha-test-team/mpg.xlsx")
 # botor::s3_read directly
 s3_path_to_full_df <- function(s3_path, ...) {
   # trim s3:// if included by the user
-  s3_path <- gsub('^s3://', "", s3_path,)
+  s3_path <- paste0('s3://', gsub('^s3://', "", s3_path))
   # fileexts accepted by s3_read
   accepted_direct_fileext <- c('csv' = read.csv, 
                                'json' = jsonlite::fromJSON,
@@ -299,7 +299,6 @@ s3_path_to_full_df <- function(s3_path, ...) {
   }
   # if we are using a function accepted by s3_read, then use that to parse 
   # the data
-  s3_path <- paste0('s3://',s3_path)
   if(grepl(paste0('(?i)', names(accepted_direct_fileext), collapse = "|"), 
            fileext)) {
     # read from s3 using our designated method
@@ -366,10 +365,10 @@ s3_path_to_preview_df('alpha-mybucket/my_data.csv')
 ```r
 download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
   # trim s3:// if included by the user
-  s3_path <- gsub('^s3://',"",s3_path)
-  # add s3:// back in where required
-  s3_path <- paste0('s3://', s3_path)
+  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   if (!(file.exists(local_path)) || overwrite) {
+    # download file
+    botor::s3_download_file(uri = s3_path, file = local_path, force = overwrite)
     # download file
     botor::s3_download_file(uri = s3_path, file = local_path, 
                             force = overwrite)
@@ -466,6 +465,7 @@ write_df_to_table_in_s3(
 ```r
 write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE, 
                              multipart = "unused") {
+  # ensure s3:// is present if not already
   s3_path <- paste0("s3://", gsub("^s3://", "", s3_path))
   if (overwrite || !(s3_file_exists(s3_path))) {
     tryCatch(
@@ -476,6 +476,7 @@ write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE,
         stop(c, appendLF = TRUE)
       }
     )
+
   } else {
     stop("File already exists and you haven't set overwrite = TRUE, stopping")
   }
@@ -544,7 +545,6 @@ list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing",
 list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
                       prefix = 'fat') 
 ```
-
 
 
 ### `botor` examples
