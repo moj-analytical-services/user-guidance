@@ -57,6 +57,10 @@ First open your project, and in the **console** run
 ```r
 # install renv if it doesn't exist on your system
 if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") 
+# Initialise the renv environment. Remove bare = TRUE if you'd like to move 
+# your existing packages over to renv, but keep it set to TRUE if you're 
+# already using botor, dbtools or reticulate otherwise it will point to the 
+# wrong or a non-existent Python.
 renv::init(bare = TRUE)
 ```
 
@@ -70,10 +74,6 @@ to create a Python virtual environment.
 Finally, in the RStudio console run the remaining lines:
 
 ```r
-# Initialise the renv environment. Remove bare = TRUE if you'd like to move 
-# your existing packages over to renv, but keep it set to TRUE if you're 
-# already using botor, dbtools or reticulate otherwise it will point to the 
-# wrong or a non-existent Python.
 renv::use_python('renv/venv/bin/python')
 renv::install('reticulate')
 reticulate::py_install('boto3')
