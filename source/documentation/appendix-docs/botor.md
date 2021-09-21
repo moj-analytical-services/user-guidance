@@ -123,7 +123,7 @@ following for `openxlsx`
 ```r
 s3_read_xlsx <- function(s3_path, ...) {
     temp_loc <- tempfile(fileext=".xlsx")
-    s3_download_file(, temp_loc)
+    s3_download_file(s3_path, temp_loc)
     wb <- openxlsx::read.xlsx(s3_path, temp_loc, ...)
     unlink(temp_loc)
     return(wb)
