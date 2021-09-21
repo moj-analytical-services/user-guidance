@@ -364,11 +364,9 @@ s3_path_to_preview_df('alpha-mybucket/my_data.csv')
 
 ```r
 download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
-  # trim s3:// if included by the user
+  # trim s3:// if included by the user and add it back in where required
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   if (!(file.exists(local_path)) || overwrite) {
-    # download file
-    botor::s3_download_file(uri = s3_path, file = local_path, force = overwrite)
     # download file
     botor::s3_download_file(uri = s3_path, file = local_path, 
                             force = overwrite)
