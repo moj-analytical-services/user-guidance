@@ -126,7 +126,7 @@ s3_read_xlsx <- function(s3_path, ...) {
     s3_download_file(, temp_loc)
     wb <- openxlsx::read.xlsx(s3_path, temp_loc, ...)
     unlink(temp_loc)
-    wb
+    return(wb)
 s3_read_xlsx("s3://alpha-mybucket/my_data.xlsx")
 ```
 
