@@ -330,7 +330,7 @@ s3_path_to_preview_df = function(s3_path, ...) {
   split_path <- stringr::str_split(s3_path, "/")[[1]]
   bucket <- split_path[1]
   key <- stringr::str_c(split_path[-1], collapse="/")    
-  fext <- tolower(tools::file_ext(p$key))
+  fext <- tolower(tools::file_ext(key))
   if (!(fext %in% c("csv", "tsv"))) {
     message(stringr::str_glue("Preview not supported for {fext} files"))
     NULL
