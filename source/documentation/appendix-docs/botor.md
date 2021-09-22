@@ -81,6 +81,20 @@ reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
+If this process goes wrong run
+
+```r
+renv::deactivate()
+```
+
+in the console and 
+
+```bash
+rm -rf renv renv.lock .Rprofile requirements.txt
+```
+
+in the terminal, restart your R session, and start again.
+
 You should now be able to use `library(botor)` as usual, and `renv::snapshot()` 
 to lock the R and Python library versions for recreation by collaborators or
 within a deployment.
