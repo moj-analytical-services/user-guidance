@@ -37,7 +37,8 @@ _Eventually_ this will be achieved by running
 # install renv if it doesn't exist on your system
 if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv") 
 # Remove bare = TRUE if you'd like to move your existing packages over to 
-# renv
+# renv. This is not a good idea if you're migrating from s3tools as
+# renv will attempt to install that library.
 renv::init(bare = TRUE) 
 # Tell renv to use Python and set up a virtual environment
 renv::use_python()
