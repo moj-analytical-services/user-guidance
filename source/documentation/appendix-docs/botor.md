@@ -163,7 +163,7 @@ alternative name for the `file` parameter.
 s3_write_feather <- function(df, s3_path, ...) {
     temp_loc <- tempfile(fileext=".feather")
     feather::write_feather(df, temp_loc, ...)
-    s3_upload_file(temp_loc, s3_path)
+    botor::s3_upload_file(temp_loc, s3_path)
     unlink(temp_loc)
 }
 s3_write_feather(df, "s3://alpha-mybucket/my_data.feather")
