@@ -123,7 +123,7 @@ following for `openxlsx`
 ```r
 s3_read_xlsx <- function(s3_path, ...) {
     temp_loc <- tempfile(fileext=".xlsx")
-    s3_download_file(s3_path, temp_loc)
+    botor::s3_download_file(s3_path, temp_loc)
     wb <- openxlsx::read.xlsx(s3_path, temp_loc, ...)
     unlink(temp_loc)
     return(wb)
@@ -164,7 +164,7 @@ alternative name for the `file` parameter.
 s3_write_feather <- function(df, s3_path, ...) {
     temp_loc <- tempfile(fileext=".feather")
     feather::write_feather(df, temp_loc, ...)
-    s3_upload_file(temp_loc, s3_path)
+    botor::s3_upload_file(temp_loc, s3_path)
     unlink(temp_loc)
 }
 s3_write_feather(df, "s3://alpha-mybucket/my_data.feather")
@@ -249,7 +249,7 @@ read_using <- function(FUN, s3_path, ...) {
   # trim s3:// if included by the user
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   # find fileext
-  file_ext <- paste0('.', tools::file_ext(s3_path))
+  file_ext <- paste0('.', tolower(tools::file_ext(s3_path)))
   # download file to tempfile()
   tmp <- botor::s3_download_file(s3_path, 
                                  tempfile(fileext = file_ext), 
@@ -290,7 +290,7 @@ s3_path_to_full_df <- function(s3_path, ...) {
   # specify all other accepted filetypes
   excel_filepaths <- c('xlsx', 'xls', 'xlsm')
   accepted_fileext <- c(names(accepted_direct_fileext), excel_filepaths)
-  fileext <- tools::file_ext(s3_path)
+  fileext <- tolower(tools::file_ext(s3_path))
   # error if invalid filepath is entered
   if(!grepl(paste0('(?i)', accepted_fileext, collapse = "|"), fileext)) {
     stop(paste0("Invalid filetype entered. Please confirm that your file",
@@ -331,7 +331,7 @@ s3_path_to_preview_df = function(s3_path, ...) {
   split_path <- stringr::str_split(s3_path, "/")[[1]]
   bucket <- split_path[1]
   key <- stringr::str_c(split_path[-1], collapse="/")    
-  fext <- tolower(tools::file_ext(p$key))
+  fext <- tolower(tools::file_ext(key))
   if (!(fext %in% c("csv", "tsv"))) {
     message(stringr::str_glue("Preview not supported for {fext} files"))
     NULL
@@ -431,7 +431,7 @@ write_df_to_table_in_s3 <- function(df, s3_path, overwrite = FALSE,
   if(!any(grepl('data.frame', class(df)))) {
     stop("df entered isn't a valid dataframe object")
   }
-  if(tools::file_ext(s3_path) != 'csv') {
+  if(tolower(tools::file_ext(s3_path)) != 'csv') {
     stop("s3_path entered is either not a csv or is missing the .csv suffix")
   }
   # trim s3:// if included by the user - removed so we can supply both 
