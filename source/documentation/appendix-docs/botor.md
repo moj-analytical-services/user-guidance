@@ -505,43 +505,65 @@ write_file_to_s3("my_local_data.csv", "s3://alpha-mybucket/my_data.csv")
 
 #### `list_files_in_buckets`
 
+This function in particular goes round the houses a bit to maintain 
+compatibility with `s3tools`. The `magrittr`, `dplyr`, `purrr`, `httr` and
+`gdata` packages will need to be installed. The `etag` and `storageclass`
+columns in the returned dataframe are set to `NA` as `botor` does not
+provide these.
+
 ```r
-list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
-                                  path_only = FALSE, max = "unused") {
-  if (is.null(bucket_filter)) {
-    stop(paste0("You must provide one or more buckets e.g. ",
-                "accessible_files_df('alpha-everyone')  This function will ",
-                "list their contents"))
-  }
-  if(!is.character(bucket_filter)) {
-    stop("Supplied bucket_filter is not of class: character")
-  }
-  if(!is.character(prefix)&!is.null(prefix)) {
-    stop("Supplied prefix is not of class: character")
-  }
-  list_files_in_bucket <- function(bucket) {
-    # trim s3:// if included by the user - removed so we can supply both
-    # alpha-... and s3://alpha-...
-    bucket <- gsub('^s3://', "", bucket)
-    cols_to_keep <- c("key","last_modified","size","bucket_name")
-    path_prefix <- (paste0('s3://', bucket, "/", prefix))
-    list <- botor::s3_ls(path_prefix)
-    if (is.null(list)) {
-      warning(path_prefix, ' matches 0 files')
-      return(list)
+library(magrittr)
+list_files_in_buckets <- function(bucket_filter=NULL, prefix=NULL,
+                                  path_only=FALSE, max=NULL) {
+  # Function to return files from a single bucket
+  list_files_in_bucket <- function(bucket, prefix=NULL) {
+    full_path <- paste0("s3://", gsub('^s3://', "", bucket))
+    uri <- httr::parse_url(full_path)
+    uri$path <- prefix
+    uri <- httr::build_url(uri)
+    # Return NULL is the list is empty otherwise the code below
+    # will break
+    file_list <- botor::s3_ls(uri)
+    if (is.null(file_list)) {
+      return(NULL)
     }
-    list <- list[,cols_to_keep]
-    list["path"] <- paste(list$bucket_name, list$key, sep = '/')
-    if(is.null(prefix)) {
-      return(list)
-    } else {
-      return(list[grepl(prefix, list$key, ignore.case = TRUE),])
-    }
+    # Change the returned data frame to match that of s3tools 
+    file_list %>%
+      dplyr::mutate(
+        # Lose the trailing "/" for directories
+        # (directories are shown in the filenames in s3tools)
+        key = stringr::str_replace(key, "/$", ""),
+        filename = stringr::str_extract(key, "[^/]*$"),
+        size_readable = gdata::humanReadable(size),
+        # Not included in s3_ls
+        etag = NA,
+        storageclass = NA
+      ) %>%
+      dplyr::select(
+        filename,
+        path = uri,
+        size_readable,
+        key,
+        lastmodified = last_modified,
+        etag,
+        size,
+        storageclass,
+        bucket = bucket_name
+      )
   }
-  file_list <- dplyr::bind_rows(purrr::map(bucket_filter, 
-                                           list_files_in_bucket))
-  if (path_only) return(file_list$path)
-  file_list
+  # Combine the returned data frames for each bucket into one
+  fs <- purrr::map(
+    bucket_filter,
+    list_files_in_bucket,
+    prefix=prefix) %>%
+    dplyr::bind_rows() %>%
+    as.data.frame()
+  # Check if only the path is to be returned
+  if (path_only) {
+    return(fs$path)
+  } else {
+    return(fs)
+  }
 }
 ```
 
@@ -558,6 +580,9 @@ list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing",
 # ... or match the start of the string, so a shorter string will work
 list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
                       prefix = 'fat') 
+# ... or list files from multiple buckets
+list_files_in_buckets(
+  bucket_filter = c("alpha-mydata", "alpha-moredata"), prefix = "test")
 ```
 
 
