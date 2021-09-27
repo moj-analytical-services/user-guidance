@@ -291,6 +291,8 @@ read_using(FUN=readxl::read_excel, s3_path="alpha-test-team/mpg.xlsx")
 ```r
 # if you are using a file with .gz, .bz or .xz extension, please use
 # botor::s3_read directly
+# if you are using a file with .gz, .bz or .xz extension, please use
+# botor::s3_read directly
 s3_path_to_full_df <- function(s3_path, ...) {
   # trim s3:// if included by the user
   s3_path <- paste0('s3://', gsub('^s3://', "", s3_path))
@@ -318,10 +320,21 @@ s3_path_to_full_df <- function(s3_path, ...) {
   if(grepl(paste0('(?i)', names(accepted_direct_fileext), collapse = "|"), 
            fileext)) {
     # read from s3 using our designated method
-    botor::s3_read(s3_path, 
-                   fun = accepted_direct_fileext[[tolower(fileext)]])
+    tryCatch({
+      botor::s3_read(s3_path, fun = accepted_direct_fileext[[tolower(fileext)]])
+    },
+    error = function(cond){
+      stop("\nError, file cannot be parsed. \nYou either don't have access to this bucket, or are using an invalid s3_path argument (the s3_path you've entered needs correcting).")
+    })
+
   } else {
-    read_using(FUN = readxl::read_excel, s3_path = s3_path, ...)
+    tryCatch({
+      read_using(FUN = readxl::read_excel, s3_path = s3_path, ...)
+    },
+    error = function(cond){
+      stop("\nError, file cannot be parsed. \nYou either don't have access to this bucket, or are using an invalid s3_path argument (the s3_path you've entered needs correcting).")
+    })
+    
   }
 }
 ```
@@ -383,9 +396,23 @@ download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
   # trim s3:// if included by the user and add it back in where required
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   if (!(file.exists(local_path)) || overwrite) {
+    local_path_folders <- stringr::str_extract(local_path, ".*[\\/]+")
+    if(!is.na(local_path)) {
+      dir.create(local_path_folders, showWarnings = FALSE, recursive = TRUE)
+    }
     # download file
-    botor::s3_download_file(uri = s3_path, file = local_path, 
-                            force = overwrite)
+    tryCatch({
+      # download file to tempfile()
+      botor::s3_download_file(s3_path, 
+                              local_path, 
+                              force = overwrite)
+    },
+    error = function(cond){
+      stop("\nError, file cannot be found. \nYou either don't have access to this bucket, or are using an invalid s3_path argument (file does not exist).")
+    })
+    
+    
+    
   } else {
     stop(paste0("The file already exists locally and you didn't specify", 
                 " overwrite=TRUE"))
