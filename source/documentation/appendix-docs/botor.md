@@ -291,8 +291,6 @@ read_using(FUN=readxl::read_excel, s3_path="alpha-test-team/mpg.xlsx")
 ```r
 # if you are using a file with .gz, .bz or .xz extension, please use
 # botor::s3_read directly
-# if you are using a file with .gz, .bz or .xz extension, please use
-# botor::s3_read directly
 s3_path_to_full_df <- function(s3_path, ...) {
   # trim s3:// if included by the user
   s3_path <- paste0('s3://', gsub('^s3://', "", s3_path))
