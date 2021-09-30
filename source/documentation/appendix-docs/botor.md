@@ -255,7 +255,8 @@ the red "off" button in the top right.
 ### Replacement functions
 
 This section contains functions that can be used within legacy code to 
-replace `s3tools` calls.
+replace `s3tools` calls. All these functions need `botor` and its
+dependencies installed, please see [Installation](#installation) for guidance. 
 
 #### `read_using`
 
@@ -350,6 +351,8 @@ s3_path_to_full_df(
 ```
 
 #### `s3_path_to_preview_df`
+
+The library `stringr` needs to be installed.
 
 ```r
 s3_path_to_preview_df = function(s3_path, ...) {
@@ -510,7 +513,7 @@ write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE,
     tryCatch(
       botor::s3_upload_file(local_file_path, full_s3_path(s3_path)),
       error = function(c) {
-        message(glue::glue("Could not upload {local_file_path} to {s3_path}"),
+        message(paste0("Could not upload ", local_file_path, " to ", s3_path),
                 appendLF = TRUE)
         stop(c, appendLF = TRUE)
       }
@@ -529,6 +532,8 @@ write_file_to_s3("my_local_data.csv", "s3://alpha-mybucket/my_data.csv")
 ```
 
 #### `list_files_in_buckets`
+
+The libraries `dplyr` and `purrr` need to be installed.
 
 ```r
 list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
