@@ -87,7 +87,7 @@ If this process goes wrong run
 renv::deactivate()
 ```
 
-in the console and 
+in the terminal and 
 
 ```bash
 rm -rf renv renv.lock .Rprofile requirements.txt
