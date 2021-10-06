@@ -570,6 +570,7 @@ list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
   }
   file_list <- dplyr::bind_rows(purrr::map(bucket_filter, 
                                            list_files_in_bucket))
+  if(is.numeric(max)) file_list <- head(file_list, max)
   if (path_only) return(file_list$path)
   file_list
 }
