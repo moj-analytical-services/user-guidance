@@ -44,7 +44,7 @@ For iPhone see:
 
 ### Request an account from the Analytical Platform team
 
-To request an account for the Analytical Platform, you should send an email with your GitHub username to the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk). The team will then invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
+To request an account for the Analytical Platform, you should send an email with your GitHub username to the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk). Please provide details of your role and team, and why you need an account on the platform.  The team will then invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
 
 ### Accept your invitation to the MoJ Analytical Services GitHub organisation
 
