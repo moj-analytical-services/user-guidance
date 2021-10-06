@@ -511,7 +511,7 @@ write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE,
   s3_path <- paste0("s3://", gsub("^s3://", "", s3_path))
   if (overwrite || !(botor::s3_exists(s3_path))) {
     tryCatch(
-      botor::s3_upload_file(local_file_path, full_s3_path(s3_path)),
+      botor::s3_upload_file(local_file_path, s3_path),
       error = function(c) {
         message(paste0("Could not upload ", local_file_path, " to ", s3_path),
                 appendLF = TRUE)
