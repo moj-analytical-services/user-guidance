@@ -172,23 +172,23 @@ Notes:
 
 ## Jupyter
 
-Git functions aren't built into Jupyter Lab. Use the command line instead - see below.
+Git functions aren't built into JupyterLab. Use the command line instead - see below.
 
-You can get to the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of Jupyter Lab).
+You can get to the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of JupyterLab).
 
 ## Command line
 
 Once you are comfortable using the Terminal (in either R Studio or Jupyter) you can run all Git commands from the command line.
 
-### Make a copy of a Github project ('cloning')
+### Make a copy of a GitHub project ('cloning')
 
-Use your browser to go to the repo you want to copy. Click on 'Code' and select the 'SSH' tab. You'll see a link. Click on the button to its right (the overlapping rectangles) to copy that link.
+Use your browser to go to the repository you want to copy. Click on 'Code' and select the 'SSH' tab. You'll see a link. Click on the button to its right (the overlapping rectangles) to copy that link.
 
-![A button labelled 'Code' with a dropdown showing the cloning interface. The 'SSH' tab is active, and shows the first part of an SSH link. To the right of the link is a grey button with two overlapping squares.](images/github/github_clone.gif "Github's cloning interface")
+![A button labelled 'Code' with a dropdown showing the cloning interface. The 'SSH' tab is active, and shows the first part of an SSH link. To the right of the link is a grey button with two overlapping squares.](images/github/github_clone.gif "GitHub's cloning interface")
 
 In the command line, navigate to the directory where you want to keep your copy of the project. 
 
-Type `git clone` followed by the link you've just copied from Github. So to clone this guidance enter: `git clone git@github.com:moj-analytical-services/user-guidance.git`
+Type `git clone` followed by the link you've just copied from GitHub. So to clone this guidance enter: `git clone git@github.com:moj-analytical-services/user-guidance.git`
 
 ### Add files to your next commit ('staging')
 
@@ -205,7 +205,7 @@ You can also type `git add .` to add _all_ changed files to your next commit. Be
 
 To commit and add a message in one command, use `git commit -m "Your commit message"`. This is useful if you're only including a short commit message.
 
-### Sync work with Github ('pushing')
+### Sync work with GitHub ('pushing')
 
 'Push' your commits to GitHub: `git push origin <branch_name>`. 
 
