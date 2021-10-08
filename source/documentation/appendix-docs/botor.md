@@ -268,8 +268,7 @@ read_using <- function(FUN, s3_path, ...) {
   file_ext <- paste0('.', tolower(tools::file_ext(s3_path)))
   # download file to tempfile()
   tmp <- botor::s3_download_file(s3_path, 
-                                 tempfile(fileext = file_ext), 
-                                 force = TRUE)
+                                 tempfile(fileext = file_ext))
   FUN(tmp, ...)
 }
 ```
