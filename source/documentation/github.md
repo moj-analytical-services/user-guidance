@@ -184,7 +184,7 @@ Once you are comfortable using the Terminal (in either R Studio or Jupyter) you 
 
 Use your browser to go to the repository you want to copy. Click on 'Code' and select the 'SSH' tab. You'll see a link. Click on the button to its right (the overlapping rectangles) to copy that link.
 
-![A button labelled 'Code' with a dropdown showing the cloning interface. The 'SSH' tab is active, and shows the first part of an SSH link. To the right of the link is a grey button with two overlapping squares.](images/github/github_clone.gif "GitHub's cloning interface")
+![A button labelled 'Code' with a dropdown showing the cloning interface. The 'SSH' tab is active, and shows the first part of an SSH link. To the right of the link is a grey button with two overlapping squares.](images/github/github_clone.png "GitHub's cloning interface")
 
 In the command line, navigate to the directory where you want to keep your copy of the project. 
 
