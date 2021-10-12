@@ -130,7 +130,7 @@ Notes:
 
 Here's how you can sync with your new GitHub repo in R Studio.
 
-### Step 1:  Navigate to your platform R Studio and make a copy of the Github project in your R Studio
+### Step 1: Navigate to your platform R Studio and make a copy of the Github project in your R Studio
 
 In this step, we create a copy of the definitive GitHub project in your personal R Studio workspace. This means you have a version of the project which you can work on and change.
 
@@ -143,7 +143,7 @@ Notes:
 * When you copy the link to the repo from Github, ensure you use the ssh link, which starts `git@github.com` as opposed to the https one, which starts `https://github.com/`.
 * If this is your first time cloning a repo from Github you may be prompted to answer if you want to continue. Type yes and click enter.
 
-### Step 2: Edit your files, track them using Git, and sync ('push') changes to Github
+### Step 2: Edit your files and track them using Git
 
 Edit your files as usual using R Studio.
 
@@ -172,15 +172,44 @@ Notes:
 
 ## Jupyter
 
-There is not the same integration. Use the command-line - see below.
+Git functions aren't built into JupyterLab. Use the command line instead - see below.
 
-## Command-line
+You can get to the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of JupyterLab).
 
-Once you are comfortable using the Terminal (in either R Studio or Jupyter) you can do steps 3 and 4 using the following git commands:
+## Command line
 
-* Select the files that you want to commit: `git add <filename1> <filename2>` ((This will 'add' them to git's 'index' / 'staging' area)
-* 'Commit' the files you have added: `git commit`. After calling this command, you need to provide a commit message: in R Studio it provides a popup; in Jupyter it'll start an editor where you write the message, before saving and exiting it.
-* 'Push' your commits to GitHub: `git push origin <branch_name>`. Most likely your branch name will be `master` which is the default. So your code would be `git push origin master`.
+Once you are comfortable using the Terminal (in either R Studio or Jupyter) you can run all Git commands from the command line.
+
+### Make a copy of a GitHub project ('cloning')
+
+Use your browser to go to the repository you want to copy. Click on 'Code' and select the 'SSH' tab. You'll see a link. Click on the button to its right (the overlapping rectangles) to copy that link.
+
+![A button labelled 'Code' with a dropdown showing the cloning interface. The 'SSH' tab is active, and shows the first part of an SSH link. To the right of the link is a grey button with two overlapping squares.](images/github/github_clone.gif "GitHub's cloning interface")
+
+In the command line, navigate to the directory where you want to keep your copy of the project. 
+
+Type `git clone` followed by the link you've just copied from GitHub. So to clone this guidance enter: `git clone git@github.com:moj-analytical-services/user-guidance.git`
+
+### Add files to your next commit ('staging')
+
+Add changed files to your next commit with: `git add <filename1> <filename2>`
+
+This is known as 'staging' the files. 
+
+You can also type `git add .` to add _all_ changed files to your next commit. Before you do this, use `git status` to check which files will be added.
+
+
+### Commit files
+
+'Commit' the files you've added: `git commit`. After calling this command, you need to provide a commit message. R Studio provides a popup. Jupyter will start an editor where you write the message, before saving and exiting it.
+
+To commit and add a message in one command, use `git commit -m "Your commit message"`. This is useful if you're only including a short commit message.
+
+### Sync work with GitHub ('pushing')
+
+'Push' your commits to GitHub: `git push origin <branch_name>`. 
+
+The default branch name is `main`. If you're pushing to this your command would be `git push origin master`.
 
 ## Working on a branch
 
