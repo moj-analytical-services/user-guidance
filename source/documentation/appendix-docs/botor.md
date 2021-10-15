@@ -268,8 +268,7 @@ read_using <- function(FUN, s3_path, ...) {
   file_ext <- paste0('.', tolower(tools::file_ext(s3_path)))
   # download file to tempfile()
   tmp <- botor::s3_download_file(s3_path, 
-                                 tempfile(fileext = file_ext), 
-                                 force = overwrite)
+                                 tempfile(fileext = file_ext))
   FUN(tmp, ...)
 }
 ```
@@ -509,9 +508,9 @@ write_file_to_s3 <- function(local_file_path, s3_path, overwrite=FALSE,
                              multipart = "unused") {
   # ensure s3:// is present if not already
   s3_path <- paste0("s3://", gsub("^s3://", "", s3_path))
-  if (overwrite || !(s3_file_exists(s3_path))) {
+  if (overwrite || !(botor::s3_exists(s3_path))) {
     tryCatch(
-      botor::s3_upload_file(local_file_path, full_s3_path(s3_path)),
+      botor::s3_upload_file(local_file_path, s3_path),
       error = function(c) {
         message(paste0("Could not upload ", local_file_path, " to ", s3_path),
                 appendLF = TRUE)
@@ -570,6 +569,7 @@ list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
   }
   file_list <- dplyr::bind_rows(purrr::map(bucket_filter, 
                                            list_files_in_bucket))
+  if(is.numeric(max)) file_list <- head(file_list, max)
   if (path_only) return(file_list$path)
   file_list
 }
@@ -759,8 +759,8 @@ df <- botor::s3_download_file(
 ```r
 s3tools::write_file_to_s3("my_downloaded_file.csv", 
                           "alpha-everyone/delete/my_downloaded_file.csv")
-# With botor check if an S3 object already exists with s3_file_exists
-if (!botor::s3_file_exists(
+# With botor check if an S3 object already exists with s3_exists
+if (!botor::s3_exists(
         "s3://alpha-everyone/delete/my_downloaded_file.csv") {
     botor::s3_upload_file(
         "my_downloaded_file.csv", 
@@ -785,7 +785,7 @@ botor::s3_upload_file("my_downloaded_file.csv",
 ```r
 s3tools::write_df_to_csv_in_s3(iris, "alpha-everyone/delete/iris.csv")
 # s3_write will always overwrite an existing object 
-if (!botor::s3_file_exists("s3://alpha-everyone/delete/iris.csv") {
+if (!botor::s3_exists("s3://alpha-everyone/delete/iris.csv") {
     botor::s3_write(iris, "s3://alpha-everyone/delete/iris.csv", write.csv)
 } else {
     stop("s3://alpha-everyone/delete/iris.csv already exists")
