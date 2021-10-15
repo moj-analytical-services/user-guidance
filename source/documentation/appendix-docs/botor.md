@@ -75,7 +75,7 @@ to create a Python virtual environment.
 Finally, in the RStudio console run the remaining lines:
 
 ```r
-renv::use_python('renv/venv/bin/python')
+renv::use_python('renv/venv/bin/python3')
 renv::install('reticulate')
 reticulate::py_install('boto3')
 renv::install('botor')
