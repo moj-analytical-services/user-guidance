@@ -31,7 +31,7 @@ or guidance, please see either the
 
 ## Installation
 
-_Eventually_ this will be achieved by running
+Using Analytical Tools [rstudio 4.1.7] Rstudio 4.0.5 or later:  
 
 ```r
 # install renv if it doesn't exist on your system
@@ -51,7 +51,7 @@ reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
-but on the current test version it's not quite that simple. 
+but on earlier test versions it's not quite that simple: 
 
 First open your project, and in the **console** run
 
