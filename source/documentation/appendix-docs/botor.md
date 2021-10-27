@@ -253,18 +253,6 @@ library(logger)
 log_threshold(WARN, namespace = 'botor')
 ```
 
-_Warning:_ `botor` does not currently support refreshing credentials due to a 
-limitation with using `boto3` through `reticulate`. You may get an error 
-message
-
-```
-Error in py_call_impl(callable, dots$args, dots$keywords) : 
-  RuntimeError: Credentials were refreshed, but the refreshed credentials are still expired.
-```
-
-In this event you will need to restart your R session; in RStudio this is
-the red "off" button in the top right.
-
 ## Migrating from `s3tools`
 
 ### Replacement functions
