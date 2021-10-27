@@ -125,6 +125,10 @@ You can also directly navigate to a bucket in the AWS S3 Console by selecting __
 
 ### RStudio
 
+#### `s3tools`
+
+s3tools is set to be deprecated alongside the launch of RStudio v4.0.5 on the platform. If you are starting a new project, we'd advise using `botor` for anything involving buckets on the platform. 
+
 You can upload files in RStudio on the Analytical Platform to Amazon S3 using the `s3tools` package.
 
 `s3tools` should be preinstalled for all users of the Analytical Platform. If you find that `s3tools` is not installed, you can install it by running the following code in a terminal:
@@ -142,6 +146,34 @@ This will then allow you to activate it in future with the standard `library(s3t
 *   `write_df_to_table_in_s3`
 
 You can find out more about how to use these functions on [GitHub](https://github.com/moj-analytical-services/s3tools) or by using the help operator in RStudio (for example, `?s3tools::write_file_to_s3`). Note, that when writing a file to S3 using S3 tools, the pattern used should be `write_file_to_s3('file', 'bucket/file')` as the file writer will default to a name of NA if no other name is supplied.
+
+#### `botor`
+
+`botor` will replace `s3tools` on newer versions of RStudio
+which use `renv` for managing environments. It requires the Python package
+`boto3` and will be installed by running the following code:
+
+```{r install-botor-write, eval=FALSE}
+renv::init(bare = TRUE) # remove bare = TRUE if you'd like to move your existing packages over to renv
+renv::use_python()
+renv::install('reticulate')
+reticulate::py_install('boto3')
+renv::install('botor')
+```
+
+`botor` contains two functions for downloading or reading files from Amazon S3:
+
+* `s3_upload_file`
+* `s3_write`
+
+For example, to write a dataframe to csv, run the following code:
+
+```{r botor-read-example}
+library(botor)
+s3_write(your_df, write.csv, "s3://your_bucket/your_key.csv")
+```
+
+You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
 
 ### JupyterLab
 
@@ -186,7 +218,7 @@ You can also directly navigate to a bucket in the AWS S3 Console by selecting __
 
 ### RStudio
 
-You can download or read files in RStudio on the Analytical Platform from Amazon S3 using the `s3tools` or `s3browser` packages.
+You can download or read files in RStudio on the Analytical Platform from Amazon S3 using the `s3tools`, `s3browser`, or , for newer versions of RStudio, `botor` packages.
 
 #### `s3tools`
 
@@ -225,6 +257,34 @@ To open the browser, run:
 s3browser::file_explorer_s3()
 ```
 You can find out more about how to use `s3browser` on [GitHub](https://github.com/moj-analytical-services/s3browser).
+
+#### `botor`
+
+`botor` will replace `s3tools` on newer versions of RStudio
+which use `renv` for managing environments. It requires the Python package
+`boto3` and will be installed by running the following code:
+
+```{r install-botor-read, eval=FALSE}
+renv::init()
+renv::use_python()
+renv::install('reticulate')
+reticulate::py_install('boto3')
+renv::install('botor')
+```
+
+`botor` contains two functions for downloading or reading files from Amazon S3:
+
+* `s3_download_file`
+* `s3_read`
+
+For example, to read a dataframe to csv, run the following code:
+
+```{r botor-read-example}
+library(botor)
+your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
+```
+
+You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
 
 ### JupyterLab
 
