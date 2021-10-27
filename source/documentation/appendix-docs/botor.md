@@ -264,7 +264,13 @@ dependencies installed, please see [Installation](#installation) for guidance.
 read_using <- function(FUN, s3_path, ...) {
   # trim s3:// if included by the user
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
-  botor::s3_read(s3_path, FUN, ...)
+  # find fileext
+  file_ext <- paste0('.', tolower(tools::file_ext(s3_path)))
+  # download file to tempfile()
+  tmp <- botor::s3_download_file(s3_path, 
+                                 tempfile(fileext = file_ext), 
+                                 force = TRUE)
+  FUN(tmp, ...)
 }
 ```
 
