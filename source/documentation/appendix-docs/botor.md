@@ -51,7 +51,22 @@ reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
-but on earlier test versions it's not quite that simple: 
+If you get an error
+
+```
+Error in main_process_python_info() : 
+  function 'Rcpp_precious_remove' not provided by package 'Rcpp'
+```
+
+then install a later version of Rcpp using
+
+```r
+renv::install('Rcpp@1.0.7')
+```
+
+and restart your R session.
+
+On earlier test versions it's not quite that simple: 
 
 First open your project, and in the **console** run
 
@@ -237,18 +252,6 @@ please use the following:
 library(logger)
 log_threshold(WARN, namespace = 'botor')
 ```
-
-_Warning:_ `botor` does not currently support refreshing credentials due to a 
-limitation with using `boto3` through `reticulate`. You may get an error 
-message
-
-```
-Error in py_call_impl(callable, dots$args, dots$keywords) : 
-  RuntimeError: Credentials were refreshed, but the refreshed credentials are still expired.
-```
-
-In this event you will need to restart your R session; in RStudio this is
-the red "off" button in the top right.
 
 ## Migrating from `s3tools`
 
