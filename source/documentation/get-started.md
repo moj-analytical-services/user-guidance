@@ -41,6 +41,11 @@ For iPhone see:
 - [‎Google Authenticator on the App Store - App Store - Apple](https://apps.apple.com/us/app/google-authenticator/id388497605)
 - [Microsoft Authenticator on the App Store - App Store - Apple](https://apps.apple.com/gb/app/microsoft-authenticator/id983156458)
 
+During the setup process for any 2FA application, we recommend disabling any “Dark” Mode, Extension or Settings (including themes) in your preferred browser. 
+
+Some 2FA applications and QR scanners are unable to scan the QR code generated on a black background. Therefore, these applications and scanners work best, when a QR code is generated, on a white background. 
+
+You can re-enable your “Dark” Mode, Extension or Settings once this process has been completed.
 
 ### Request an account from the Analytical Platform team
 
@@ -59,6 +64,8 @@ When you sign in to the Analytical Platform for the first time, you will be prom
 To sign in, go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz).
 
 You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
+
+As described above, please disable any “Dark” Mode, Extension or Settings (including themes) in your preferred browser, during the 2FA setup process.
 
 ## Access the Analytical Platform
 
