@@ -60,6 +60,8 @@ To sign in, go to the Analytical Platform [control panel](https://controlpanel.s
 
 You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
 
+**NOTE:** If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform. 
+
 ## Access the Analytical Platform
 
 The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
