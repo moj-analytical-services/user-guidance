@@ -67,6 +67,8 @@ You must configure 2FA for the Analytical Platform using a mobile app (on your p
 
 As described above, please disable any “Dark” Mode, Extension or Settings (including themes) in your preferred browser, during the 2FA setup process.
 
+**NOTE:** If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
+
 ## Access the Analytical Platform
 
 The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
