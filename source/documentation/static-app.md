@@ -29,6 +29,17 @@ To create a new repository based on the webapp template:
 
 This copies the entire contents of the app template to a new repository.
 
+### Create a new webapp
+
+To create a new webapp or webapp data source, ask the Analytical Platform team on the #ap_admin_request Slack channel or by email (analytical_platform@digital.justice.gov.uk).
+
+You should:
+
+provide the URL of the app’s GitHub repository
+indicate if a new webapp data source needs to be created
+indicate if any existing webapp data sources need to be connected
+The Analytical Platform team will create the webapp and will make you an admin user.
+
 ### In your chosen development enviroment, clone the git repository
 
 You can find the clone link on the Github repository.
