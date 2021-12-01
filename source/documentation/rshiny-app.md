@@ -40,7 +40,7 @@ To create a new repository based on the Shiny app template:
 
 ### Create a new webapp
 
-To create a new webapp or webapp data source, ask the Analytical Platform team on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
+To create a new webapp or webapp data source, ask the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/archives/C4PF7QAJZ) Slack channel or by email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
 
 You should:
 
@@ -208,7 +208,7 @@ To add app users:
 
 To remove an app user, select __Remove customer__ next to the email address of the customer you want to remove.
 
-You can ask the Analytical Platform team to add or remove users to the access list on the [#ap_admin_request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or by email([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
+You can ask the Analytical Platform team to add or remove users to the access list on the [#analytical_platform](https://asdslack.slack.com/archives/C4PF7QAJZ) Slack channel or by email([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
 
 ### Access the app
 

@@ -31,7 +31,7 @@ This copies the entire contents of the app template to a new repository.
 
 ### Create a new webapp
 
-To create a new webapp or webapp data source, ask the Analytical Platform team on the #ap_admin_request Slack channel or by email (analytical_platform@digital.justice.gov.uk).
+To create a new webapp or webapp data source, ask the Analytical Platform team on the #[analytical_platform](https://asdslack.slack.com/archives/C4PF7QAJZ) Slack channel or by email (analytical_platform@digital.justice.gov.uk).
 
 You should:
 
