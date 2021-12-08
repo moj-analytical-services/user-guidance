@@ -297,7 +297,7 @@ The platform has configured simple "safety barriers" to reduce risk of accidenta
 | Pushing to non-official GitHub organizations | ~/.git-templates/hooks/pre-push | It would be outside MoJ control - not normally allowed. | When you push: `git push -f <remote> <branch>` |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
-## Private R packages on GitHub: PAT authentication
+## Private R packages on GitHub
 
 ### Public, internal and private repositories
 
@@ -335,53 +335,17 @@ If in doubt, discuss with your manager and/or the AP team.
 
 ### Private R packages for reproducible analysis
 
-When a repo (e.g. an R package) is internal or private you need to use a Personal Access Token (PAT) to access it from R. This token acts much like a password to your personal GitHub account. If you don't use the token then you get: `Error: HTTP error 404. Not Found`. (GitHub doesn't even acknowledge the existence of the repo, to avoid speculative searching for private repositories.)
+When a repository (e.g. an R package) is internal or private you need to authenticate to access it from R. 
+If you don't then you will get: `Error: HTTP error 404. Not Found`. (GitHub doesn't even acknowledge the existence of the repo, to avoid speculative searching for private repositories.)
 
-### Generating a PAT
-
-You can get a PAT from your GitHub user profile. A user can generate a number of tokens that grant various different levels of permission.
-
-**The PAT must be kept secret and protected like a password. It must not be shared with other users. Only generate your PAT to have the minimum permissions needed for the job.**
-
-To generate your PAT for reading private repos in R:
-
-  1. Navigate to the [GitHub personal access tokens page](https://github.com/settings/tokens/new?scopes=repo&description=R:GITHUB_PAT). You can also access this from any other GitHub page by selecting your user icon, then **Settings**, then **Developer settings**, then **Personal access tokens**, and on that page select **_Generate new token_**.
-  
-  2. Ensure that the **scope** of access you want to grant using this token is set only to 'repo'.
-  
-     **IMPORTANT: Only select the first group: 'repo'. Granting other rights can be dangerous if your PAT falls into the wrong hands, allowing someone else to irrevocably delete your repos, read and change your user profile settings, or even access billing information. If you need to to use other rights, consult with the AP team for advice on security arrangements to protect the PAT.**
-  !['New PAT' page](images/pat/pat-scope.png)
-  
-  3. Copy your PAT to the clipboard. It is now ready to paste directly into the place it will be used, which is likely to be your R or Python environment - see the next section.
-  
-     Note: Although GitHub won't show this PAT again, DON'T save it elsewhere. If you need a PAT in the future (eg you wiped your .rstudio folder) simply create a new PAT, and revoke the previous one. Storing secrets unnecessarily, particularly in plain text, is a security hazard.
-  ![The page displaying the new PAT](images/pat/pat-copy.png)
-
-### Using a PAT to authenticate in R/RStudio
-
-You should store your PAT in a special R file, called `.Renviron` in your home directory on the Analytical Platform. This file gets run when you start R, putting the PAT into the system environment variable `GITHUB_PAT`. This is where common R packages (for example, remotes, devtools and renv) will look for it.
-
-Set this up by running this in your R console (you only need to run it once; do **not** save this line in any file in any repo) and substitute your own PAT Token in place of the example PAT `ax451...8838b1` below:
-  
-```{r, eval = FALSE}
-writeLines("GITHUB_PAT=ax451...8838b1", con = "~/.Renviron")
-```
-
-**Warning: This line should not be put in any repo, and this .Rprofile file should not be added to any repo.**
-
-Now restart your R Session (in the menu 'Session' -> 'Restart R'). You can check it worked by typing in your R console to see the token:
+The `remotes` package enables you to install private R packages using the same ssh credentials you use to close repositories from github.
+To install a package which is stored in the moj-analytical-services organisation on github, in a repository called `package_repo_name` then you can use the command:
 
 ```{r, eval = FALSE}
-Sys.getenv("GITHUB_PAT")
+remotes::install_git("git@github.com:moj-analytical-services/package_repo_name.git")
 ```
 
-Now your code can include `remotes::install_github` to install an R package from which is in a private repo using the token. For example:
-
-  ```{r, eval = FALSE}
-  remotes::install_github("moj-analytical-services/[private-package]@v1.6")
-  ```
-
-Putting the secret in ~/.Rprofile - a file outside your repo directories - avoids the serious error of putting the token (a secret) in your repo.
+Replace `package_repo_name` for the repository you have developed your package in.
 
 #### Secrets and passwords
 
