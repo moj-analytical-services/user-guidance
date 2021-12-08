@@ -345,7 +345,13 @@ To install a package which is stored in the moj-analytical-services organisation
 remotes::install_git("git@github.com:moj-analytical-services/package_repo_name.git")
 ```
 
-Replace `package_repo_name` for the repository you have developed your package in.
+or, if using `renv` then:
+
+```{r, eval = FALSE}
+renv::install("git@github.com:moj-analytical-services/package_repo_name.git")
+```
+
+In both cases, replace `package_repo_name` for the repository you have developed your package in.
 
 #### Secrets and passwords
 
