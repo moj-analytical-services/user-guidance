@@ -541,6 +541,14 @@ The libraries `dplyr` and `purrr` need to be installed.
 ```r
 list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
                                   path_only = FALSE, max = "unused") {
+  historic_column_names <- c(
+    "key" = "key",
+    "last_modified" = "lastmodified",
+    "size" = "size",
+    "bucket_name" = "bucket",
+    "path" = "path"
+  )
+  
   if (is.null(bucket_filter)) {
     stop(paste0("You must provide one or more buckets e.g. ",
                 "accessible_files_df('alpha-everyone')  This function will ",
@@ -574,6 +582,10 @@ list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
   file_list <- dplyr::bind_rows(purrr::map(bucket_filter, 
                                            list_files_in_bucket))
   if(is.numeric(max)) file_list <- head(file_list, max)
+  # apply some finishing touches so it aligns with s3tools version
+  colnames(file_list) <- stringr::str_replace_all(colnames(file_list), historic_column_names)
+  file_list[["filename"]] = coalesce(stringr::str_extract(file_list$key, "[^\\/]+$"), stringr::str_replace_all(file_list$key, "\\/", ""))
+  
   if (path_only) return(file_list$path)
   file_list
 }
@@ -582,16 +594,13 @@ list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
 ##### Examples
 
 ```r
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
-                      prefix = 'BASS.csv')
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
-                      prefix = 'deaths')
+
 # Type in the full string you watch to match...
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
-                      prefix = 'fatalities') 
-# ... or match the start of the string, so a shorter string will work
-list_files_in_buckets(bucket_filter = "alpha-hmpps-covid-data-processing", 
-                      prefix = 'fat') 
+list_files_in_buckets(bucket_filter = "alpha-everyone", 
+                      prefix = 'iris.csv')
+# Or just the initial part of the string...
+list_files_in_buckets(bucket_filter = "alpha-everyone", 
+                      prefix = 'iris') 
 ```
 
 
@@ -649,14 +658,14 @@ s3tools::list_files_in_buckets('alpha-everyone') %>%
     dplyr::filter(grepl("iris",path)) # Use a regular expression
 # Using botor
 botor::s3_ls('s3://alpha-everyone') %>% 
-    dplyr::filter(grepl("iris",path))
+    dplyr::filter(grepl("iris",uri))
 
 ## All excel files containing 'iris';
 s3tools::list_files_in_buckets('alpha-everyone') %>% 
     dplyr::filter(grepl("iris*.xls",path)) 
 # Using botor
 botor::s3_ls('s3://alpha-everyone') %>% 
-    dplyr::filter(grepl("iris*.xls",path)) 
+    dplyr::filter(grepl("iris*.xls",uri)) 
 ```
 
 ### Reading files
