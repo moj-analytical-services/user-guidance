@@ -400,7 +400,7 @@ download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
   # trim s3:// if included by the user and add it back in where required
   s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
   if (!(file.exists(local_path)) || overwrite) {
-    local_path_folders <- stringr::str_extract(local_path, ".*[\\/]+")
+    local_path_folders <- stringr::str_extract(local_path, ".*[\\\\/]+")
     if(!is.na(local_path)) {
       dir.create(local_path_folders, showWarnings = FALSE, recursive = TRUE)
     }
