@@ -584,7 +584,7 @@ list_files_in_buckets <- function(bucket_filter = NULL, prefix = NULL,
   if(is.numeric(max)) file_list <- head(file_list, max)
   # apply some finishing touches so it aligns with s3tools version
   colnames(file_list) <- stringr::str_replace_all(colnames(file_list), historic_column_names)
-  file_list[["filename"]] = dplyr::coalesce(stringr::str_extract(file_list$key, "[^\\/]+$"), stringr::str_replace_all(file_list$key, "\\/", ""))
+  file_list[["filename"]] = dplyr::coalesce(stringr::str_extract(file_list$key, "[^\\/]+$"), stringr::str_replace_all(file_list$key, "\\\\/", ""))
   
   if (path_only) return(file_list$path)
   file_list
