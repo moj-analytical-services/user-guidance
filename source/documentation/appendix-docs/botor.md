@@ -41,7 +41,9 @@ if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv")
 # renv will attempt to install that library.
 renv::init(bare = TRUE) 
 # Tell renv to use Python and set up a virtual environment
-renv::use_python()
+# if you get an error here, remove the python path argument and 
+# manually select the version of python you require
+renv::use_python(python='/usr/bin/python3')
 # Install reticulate so we can make calls to Python libraries, required by
 # botor
 renv::install('reticulate')
