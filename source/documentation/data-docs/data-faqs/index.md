@@ -20,7 +20,7 @@ Data should be stored in an s3 bucket. You can create a new s3 bucket in the con
 
 **Python/JupyterLab**: You can read/write directly from s3 using pandas. However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
 
-**R/Rstudio**: The recommended package to use is (botor)[https://github.com/daroczig/botor].
+**R/Rstudio**: The recommended package to use is [botor](https://github.com/daroczig/botor).
 
 ## How do I query a database on the Platform?
 
