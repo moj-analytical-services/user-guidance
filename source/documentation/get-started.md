@@ -125,7 +125,7 @@ Conversations in Slack are organised into channels, which each have a specific t
 
 * the [#git](), [#r]() and [#python]() channels can be used to get support from other users with any technical queries or questions -- the #[intro_r channel]() is aimed specifically at new users of R
 * the [#analytical_platform]() channel is used for general discussion of the Analytical Platform -- it is also monitored by the Analytical Platform team, who can help out with any technical queries or requests. Also used to request new or existing apps and app data sources
-* the [#data_engineers]() channel is used for general discussion of data engineering and for getting in touch with the data engineering team with any technical queries or requests (such as airflow DAG reviews, database access, data discovery tool, etc).
+* the [#ask-data-engineering]() channel is used for general discussion of data engineering and for getting in touch with the data engineering team with any technical queries or requests (such as airflow DAG reviews, database access, data discovery tool, etc).
 * the [#data_science]() channel is used for general discussion of data science tools and techniques
 * the [#general]() channel is used for any discussions that don’t fit anywhere else
 * the [#10sc]() channel can be used to get in touch with other people working at 10SC and to ask any questions about the building

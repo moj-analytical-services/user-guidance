@@ -24,7 +24,7 @@ Webapp data sources are used to store data that is accessed by code run by the A
 
 If you request that a webapp data source is created when setting up a new app, the app will automatically be given read-only access. You will also be given admin access to the bucket and can provide access to other users you need to collaborate with.
 
-The Data Engineering team also manage some buckets that are not shown in the control panel and that are not available to standard users. These buckets are used to store incoming raw data, which may be processed or fed into curated data pipelines. For more information, contact the Data Engineering team on the [#data_engineers](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel.
+The Data Engineering team also manage some buckets that are not shown in the control panel and that are not available to standard users. These buckets are used to store incoming raw data, which may be processed or fed into curated data pipelines. For more information, contact the Data Engineering team on the [#ask-data-engineers](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel.
 
 You can view the data sources you have access to in the control panel.
 
