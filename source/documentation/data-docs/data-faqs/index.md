@@ -16,6 +16,8 @@ If you are looking for access to a user created bucket, then the admin of that b
 
 Data should be stored in an s3 bucket. You can create a new s3 bucket in the control panel. Data can be uploaded manually via the AWS console (which can be accessed through the control panel) or you can write it from RStudio or JupyterLab.
 
+If your data contains anything that could be considered personal information, you should ensure you have permission from the Information Asset Owner to move it onto the Analytical Platform; and ensure you have filled out a data movement form. You may also require a DPIA. See the Information Governance section for more detail.
+
 ## How do I read/write data from an s3 bucket?
 
 **Python/JupyterLab**: You can read/write directly from s3 using pandas. However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
@@ -28,7 +30,7 @@ Databases on the AP use Amazon Athena which allow you to query data using SQL. Y
 
 **The Amazon Athena workbench**: If you [log into the AWS console](aws.services.alpha.mojanalytics.xyz.) and click Services -> Athena, you'll see the Athena workbench. This is good for testing your queries.
 
-**Python/JupyterLab**: To run queries and/or read data into a pandas DataFrame, use `pydbtools`. More details are (here)[https://github.com/moj-analytical-services/pydbtools]. Remember to install the latest version!
+**Python/JupyterLab**: To run queries and/or read data into a pandas DataFrame, use `pydbtools`. More details are [here](https://github.com/moj-analytical-services/pydbtools). Remember to install the latest version!
 
 **R/RStudio**: There is currently no single recommended package for querying databases in R. There is [dbtools](https://github.com/moj-analytical-services/dbtools) which should work on the "old" platform. [Rdbtools](https://github.com/moj-analytical-services/Rdbtools) should work on the "new" platform, but is not officially supported so should be used with caution.
 
