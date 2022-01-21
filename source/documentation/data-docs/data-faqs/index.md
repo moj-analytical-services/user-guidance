@@ -16,7 +16,7 @@ If you are looking for access to a user created bucket, then the admin of that b
 
 Data should be stored in an s3 bucket. You can create a new s3 bucket in the control panel. Data can be uploaded manually via the AWS console (which can be accessed through the control panel) or you can write it from RStudio or JupyterLab.
 
-If your data contains anything that could be considered personal information, you should ensure you have permission from the Information Asset Owner to move it onto the Analytical Platform; and ensure you have filled out a data movement form. You may also require a DPIA. See the Information Governance section for more detail.
+If your data contains anything that could be considered personal information, you must follow guidance from the data privacy team which can be found on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/).
 
 ## How do I read/write data from an s3 bucket?
 
