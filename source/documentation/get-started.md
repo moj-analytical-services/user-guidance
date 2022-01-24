@@ -71,7 +71,7 @@ As described above, please disable any “Dark” Mode, Extension or Settings (i
 
 ## Access the Analytical Platform
 
-The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz). If you are a new member of the organisation and/or using the platform for the first time, please use the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
+The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz). If you are a new member of the organisation, are using the platform for the first time or have been upgrade to the new infrastructure, please use the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
 
 If you're going to use RStudio or Jupyter then the next step should be:
 
