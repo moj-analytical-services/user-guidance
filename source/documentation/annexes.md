@@ -130,3 +130,13 @@ Note: If you get the error 'Wrong or expired code', you need to make sure that y
 #### You're now done
 
 Once you're entered your platform 2FA code in the interface above, you should now have access to the platform.  You will need to enter your platform 2FA code around once a day as you use the platform.
+
+## Infrastructure Migration - step by step instructions 
+
+1. Before upgrading make sure that you and your teams have pushed everything to GitHub or saved to s3 as the home directories will be wiped
+2. We will ask for your GitHub username so we can enable the upgrade on our end 
+3. Once we do that, when you log in again to the AP, you will see the following message: ‘You are now eligible to upgrade. Please click here’
+4. The URL link for the AP will change, so as soon as you upgrade make sure you save the link
+5. The Control Panel is not changing at all, so once you are on the Tools page just choose what version of Tool you want to deploy 
+6.Once you deploy the tool, you will have to reconnect to Github by setting up your SSH keys again for each tool, following the [user guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#content)
+7. You are now done
