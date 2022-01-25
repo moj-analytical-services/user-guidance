@@ -9,7 +9,7 @@ phase:
 
 # Links to show on right-hand-side of header
 header_links:
-  Control panel: https://controlpanel.services.alpha.mojanalytics.xyz
+  Control panel: https://controlpanel.services.analytical-platform.service.justice.gov.uk/
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
