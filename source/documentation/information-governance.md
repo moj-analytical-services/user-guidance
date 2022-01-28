@@ -35,16 +35,6 @@ When requesting access to a data source, you should provide the GitHub usernames
 You can move data classified as OFFICIAL (including OFFICIAL-SENSITIVE) onto the Analytical Platform. SECRET and TOP SECRET data is not allowed on the Analytical Platform.
 
 All data movements should take place safely and securely to ensure that data is protected at all times, including when in transit.
-
-For all data movements, you must:
-
-* [obtain approval](#iao-and-siro-approval) from the relevant Information Asset Owner (IAO) and/or Senior Information Risk Officer (SIRO)
-* complete a [data movement form](#data-movement-form)
-
-If you data movement involves a particularly complex integration or is recurring, you must complete a [technical migration form](#technical-migration-form).
-
-If you want to move personal data onto the Analytical Platform, you may need to complete some additional steps as outlined below.
-
 ### Personal data
 
 If you are working with personal data you have a responsibility to ensure that you are compliant with the requirements of the General Data Protection Regulation (GDPR) and the Data Protection Act (DPA) 2018. This responsibility applies regardless of where you are processing the data.
@@ -54,6 +44,8 @@ In practice, this means you must ensure that:
 * you are processing personal data in accordance with the [principles of the GDPR](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/principles/) and the [rights of individuals](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/)
 * you have a lawful basis for processing the personal data
 * you have fulfilled all necessary governance requirements
+
+If your data contains anything that could be considered personal information, you must follow guidance from the data privacy team which can be found on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/). You are best to contact the Data Privacy Team at privacy@justice.gov.uk. A Data Protection Impact Assessment (DPIA) may have already been completed for your dataset but may need to be updated to reflect your use case, or a new one may be required. The Data Privacy Team will be able to advise.
 
 #### What is personal data?
 
@@ -113,42 +105,20 @@ The data controller could be another MoJ agency or public body (for which MoJ is
 * The Public Trustee
 * Prisons and Probation Ombudsman (PPO)
 
-#### Moving personal data
+The Data Privacy Team (privacy@justice.gov.uk) should be able to advise you.
 
-If you want to move personal data onto the Analytical Platform, you should check if a [Data Protection Impact Assessment (DPIA)](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/data-protection-impact-assessments-dpias/) or Privacy Impact Assessment (PIA) already exists for the processing of the personal data. The Information Asset Owner (IAO) of the data should be able to advise you if a DPIA or PIA already exists.
+#### Privacy Notice
 
-If a DPIA or PIA already exists, you should update the document to reflect use of the Analytical Platform. You should ensure that any changes are reviewed and approved by the IAO.
-
-If a DPIA or PIA does not already exist, you should complete a [DPIA screening document](https://intranet.justice.gov.uk/documents/2018/05/data-protection-impact-assessments-screening-template.doc) and submit this to the Data Protection Officer (DPO) at [data.compliance@justice.gov.uk](mailto:data.compliance@justice.gov.uk). You should also submit a final copy of the document to the Analytical Platform team at [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
-
-You should also check if a [privacy notice](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-be-informed/) already exists. A privacy notice provides information to individuals about how and why their personal data is being collected and processed.
+You should also check if a [privacy notice](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-be-informed/) already exists (privacy@justice.gov.uk should be able to advise). A privacy notice provides information to individuals about how and why their personal data is being collected and processed.
 
 If a privacy notice already exists, you should update it to reflect use of the Analytical Platform. In particular, you should ensure the privacy notice informs individuals that their data will be:
 
 * shared with Amazon Web Services, Inc. (AWS)
 * stored outside of the UK but within the EU
 
-You should then complete the following steps, as for all movements of data onto the Analytical Platform.
-
 ### IAO and SIRO approval
 
-For all data movements, you should obtain approval from the Information Asset Owner (IAO). Depending on local information governance requirements, for some complex or high-risk data movements you may also need to obtain approval from the Senior Information Risk Officer (SIRO). The IAO should be able to advise if approval from the SIRO is required.
-
-### Technical migration form
-
-If the data movement involves a particularly complex integration (for example, an integration with another AWS account or database system) or is recurring, you must complete a technical migration form.
-
-You can find the template technical migration form in [Sharepoint](https://justiceuk.sharepoint.com/:w:/s/AnalyticalPlatform/EafJPVHk2NRCjZm1WGFPOJcBpkJ-pH8L2o0hKma2bsbWow?e=0pWGjc) or take a copy of [this one in Google Drive](https://drive.google.com/open?id=1xj4TzpyQBOAd84E1DqtLdvgjPZb2oJ38NTsIJrh4GQc).
-
-You should submit your completed technical migration form to the Analytical Platform team at [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
-
-### Data movement form
-
-For all data movements, you must complete a data movement form. Before completing a data movement form, you should ensure that you have already obtained all necessary approvals and completed all other information governance requirements.
-
-For more detailed guidance, see [how to complete a data movement form](appendix/data-movement-form.html)
-
-The data movement form can be found [here](https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUREVBSzk4WTg1WFk1OFU4V1QyWUE5VUoyNC4u). When you submit the form, it will be [processed by the Analytical Platform team](https://github.com/ministryofjustice/analytics-platform/wiki/Data-movement-requests).
+For all data movements containing personal data, you should obtain approval from the Information Asset Owner (IAO). Depending on local information governance requirements, for some complex or high-risk data movements you may also need to obtain approval from the Senior Information Risk Officer (SIRO). The IAO should be able to advise if approval from the SIRO is required.
 
 ## Reporting security incidents
 
