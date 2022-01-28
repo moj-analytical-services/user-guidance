@@ -34,7 +34,7 @@ You can only create new warehouse data sources in the Analytical Platform contro
 
 To create a new warehouse data source:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
 2.  Select the __Warehouse data__ tab.
 3.  Select __Create new warehouse data source__.
 4.  Enter a name for the warehouse data source -- this must be prefixed with 'alpha-'.
@@ -73,11 +73,11 @@ When requesting access to a bucket, you should specify the name of the bucket an
 
 ### Manage access to a bucket
 
-Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk//). You cannot manage access to buckets directly in the Amazon S3 console.
+Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz//). You cannot manage access to buckets directly in the Amazon S3 console.
 
 To manage access to a data source:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
 2.  Select the __Warehouse data__ tab or the __Webapp data__ tab, as relevant.
 3.  Select the name of the data source you want to manage.
 
@@ -113,7 +113,7 @@ You can use the Amazon S3 Console to upload files from your local computer (for 
 
 To upload files using the Amazon S3 Console:
 
-1.  Log in to the [AWS Management Console](https://aws.services.analytical-platform.service.justice.gov.uk) using your Analytical Platform account.
+1.  Log in to the [AWS Management Console](https://aws.services.alpha.mojanalytics.xyz) using your Analytical Platform account.
 2.  Select __Services__ from the menu bar.
 3.  Select __S3__ from the drop down menu.
 4.  Select the bucket and folder you want to upload files to.
@@ -229,7 +229,7 @@ You can use the Amazon S3 Console to download files to your local computer (for 
 
 To download a file using the Amazon S3 Console:
 
-1.  Log in to the [AWS Management Console](https://aws.services.analytical-platform.service.justice.gov.uk) using your Analytical Platform account.
+1.  Log in to the [AWS Management Console](https://aws.services.alpha.mojanalytics.xyz) using your Analytical Platform account.
 2.  Select __Services__ from the menu bar.
 3.  Select __S3__ from the drop down menu.
 4.  Select the file you want to download.

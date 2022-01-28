@@ -61,7 +61,7 @@ You can also accept your invitation by signing in to GitHub and visiting the [or
 
 When you sign in to the Analytical Platform for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
 
-To sign in, go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/)or the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+To sign in, go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/)or the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 
 You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
 
@@ -71,7 +71,7 @@ As described above, please disable any “Dark” Mode, Extension or Settings (i
 
 ## Access the Analytical Platform
 
-The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). If you are a new member of the organisation, are using the platform for the first time or have been upgrade to the new infrastructure, please use the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
+The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/). If you are a new member of the organisation, are using the platform for the first time or have been upgrade to the new infrastructure, please use the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
 
 If you're going to use RStudio or Jupyter then the next step should be:
 
@@ -81,7 +81,7 @@ If you're going to use RStudio or Jupyter then the next step should be:
 You may also need to access other services and tools on the Analytical Platform:
 
 * [Airflow](https://airflow.tools.alpha.mojanalytics.xyz)
-* [AWS console](https://aws.services.analytical-platform.service.justice.gov.uk)
+* [AWS console](https://aws.services.alpha.mojanalytics.xyz)
 * [Concourse](https://concourse.services.alpha.mojanalytics.xyz)
 * [Grafana](https://grafana.services.alpha.mojanalytics.xyz)
 * [Kibana](https://kibana.services.alpha.mojanalytics.xyz)
