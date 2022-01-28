@@ -197,7 +197,7 @@ If `disable_authentication` is set to `false` in the `deploy.json` file, access 
 
 To manage the users of your app:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
 2.  Select the __Webapps__ tab.
 3.  Select the name of the app you want to manage or select __Manage app__.
 
@@ -223,7 +223,7 @@ When accessing an app, you can choose whether to sign in using an email link (de
 ##### "That email address is not authorized for this app (or possibly another error occurred)" error, after entering email address
 
 1. Check that the user is authorised to access the app:
-    1. Log in to the [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk//).
+    1. Log in to the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz//).
     2. Navigate to the app detail page.
     3. Check if the user's email address is listed under 'App customers'.
     4. If it is not, refer them to the app owner to obtain access.

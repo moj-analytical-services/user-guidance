@@ -28,7 +28,7 @@ If your data contains anything that could be considered personal information, yo
 
 Databases on the AP use Amazon Athena which allow you to query data using SQL. You shouldn't need to know about Athena in detail to query databases on the AP, but if you are interested you may wish to [read more about it](https://aws.amazon.com/athena/). There are three ways you can query data (there is more detail on all three of these in `Data` section of this guidance):
 
-**The Amazon Athena workbench**: If you [log into the AWS console](aws.services.analytical-platform.service.justice.gov.uk.) and click Services -> Athena, you'll see the Athena workbench. This is good for testing your queries.
+**The Amazon Athena workbench**: If you [log into the AWS console](aws.services.alpha.mojanalytics.xyz.) and click Services -> Athena, you'll see the Athena workbench. This is good for testing your queries.
 
 **Python/JupyterLab**: To run queries and/or read data into a pandas DataFrame, use `pydbtools`. More details are [here](https://github.com/moj-analytical-services/pydbtools). Remember to install the latest version!
 

@@ -26,7 +26,7 @@ To clear the RStudio session:
 
 1. Close RStudio, if it is open in any window (because it continually saves its session to disk).
 
-2. Open the control panel, navigate to Analytical tool, click [resetting your home directory](https://controlpanel.services.analytical-platform.service.justice.gov.uk//reset-user-home/).
+2. Open the control panel, navigate to Analytical tool, click [resetting your home directory](https://controlpanel.services.alpha.mojanalytics.xyz//reset-user-home/).
 
 3. Select the __Restart__ button for RStudio.
 
