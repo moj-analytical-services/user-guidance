@@ -179,7 +179,7 @@ You can find out more about how to use these and other functions in the [Migrati
 
 #### `mojap-arrow-pd-parser`
 
-Snappily named `mojap-pd-arrow-parser` provides easy csv, jsonl and parquet file writers. To install in terminal:
+Snappily named `mojap-arrow-pd-parser` provides easy csv, jsonl and parquet file writers. To install in terminal:
 
 ```bash
 pip install arrow-pd-parser
@@ -192,7 +192,7 @@ from arrow_pd_parser import writer
 writer.write("s3://bucket_name/file.csv")
 ```
 
-`mojap-pd-arrow-parser` infers the file type from the extension, so for example `writer.write("s3://bucket_name/file.snappy.parquet")` would write a (snappy compressed) parquet file without need for specifying the file type.
+`mojap-arrow-pd-parser` infers the file type from the extension, so for example `writer.write("s3://bucket_name/file.snappy.parquet")` would write a (snappy compressed) parquet file without need for specifying the file type.
 
 The package also has a lot of other functionality including specifying data types when writing (or reading). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
 
@@ -312,7 +312,7 @@ You can find out more about how to use these and other functions in the [Migrati
 
 #### `mojap-arrow-pd-parser`
 
-`mojap-pd-arrow-parser` provides easy csv, jsonl and parquet file readers. To install in terminal:
+`mojap-arrow-pd-parser` provides easy csv, jsonl and parquet file readers. To install in terminal:
 
 ```bash
 pip install arrow-pd-parser
@@ -325,7 +325,7 @@ from arrow_pd_parser import reader
 reader.read("s3://bucket_name/file.csv")
 ```
 
-`mojap-pd-arrow-parser` infers the file type from the extension, so for example `reader.read("s3://bucket_name/file.parquet")` would read a parquet file without need for specifying the file type.
+`mojap-arrow-pd-parser` infers the file type from the extension, so for example `reader.read("s3://bucket_name/file.parquet")` would read a parquet file without need for specifying the file type.
 
 The package also has a lot of other functionality including specifying data types when reading (or writing). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
 
