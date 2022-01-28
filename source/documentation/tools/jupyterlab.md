@@ -25,27 +25,33 @@ cd myproject
 python3 myscript.py
 ```
 
-### Using a venv in Jupyter
+### Using a virtual environment in Jupyter
 
-Jupyter won't use your venv, and the packages installed into it, unless you do the following set-up:
+It is advisable to use a different virtual environment (venv) for each project you do in Python. There is a little bit of set up to get Jupyter working with a venv. Follow the instructions below to get started:
 
-1. In the terminal, activate your venv:
+0. If you haven't yet created a virtual environment for your project, in terminal run:
 
     ```bash
     cd myproject
+    python3 -m venv venv
+    ```
+
+1. In the terminal, inside your project directory, activate your venv:
+
+    ```bash
     source venv/bin/activate
     ```
 
 2. Install the module ipykernel within this venv (for creating/managing kernels for ipython which is what Jupyter sits on top of):
 
     ```bash
-    pip3 install ipykernel
+    pip install ipykernel
     ```
 
 3. Create a Jupyter kernel which is configured to use your venv. (Change the display name to match your project name):
 
     ```bash
-    python3 -m ipykernel install --user --name="venvname" --display-name="My project (Python3)"
+    python3 -m ipykernel install --user --name="venv" --display-name="My project (Python3)"
     ```
 
 4. In Jupyter, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
@@ -59,7 +65,7 @@ To resume work on this after working on another project:
     source venv/bin/activate
     ```
 
-    Now you've activated this terminal with your venv, things you run on the command-line will default to using your venv for python packages, rather than the system's packages. That's useful if you run 'python', run python scripts or 'pip install' more packages.
+    Now you've activated this terminal with your venv, things you run on the command-line will default to using your venv for python packages, rather than the system's packages. That's useful if you run 'python3', run python scripts or 'pip install' more packages.
 
 2. Open the notebook - it’s remembered which kernel you wanted to use for this notebook and you can carry on working with the packages available.
 

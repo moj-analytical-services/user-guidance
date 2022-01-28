@@ -347,20 +347,18 @@ When you work with your project's packages in a terminal, you'll want to 'activa
 
 You'll notice the prompt changes to show that the venv is activated: `(venv) jovyan@jupyter-lab-davidread-ju-6966d9b9b4-7zvsk:~/myproject$`
 
-With the venv activated you can install some packages using pip3:
+With the venv activated you can install some packages using pip:
 
 ```bash
-(venv) $ pip3 install pandas
+(venv) $ pip install pandas
 ```
-
-Tip: Use `pip3` instead of `pip`, because Analytical Platform has setup `pip` to always install to `~/.local/`. Bear with us while we fix this.
 
 The packages will get installed to your venv, in `venv/lib/python3.7/site-packages/`.
 
 You can see what packages are installed using 'pip freeze':
 
 ```bash
-(venv) $ pip3 freeze
+(venv) $ pip freeze
 numpy==1.18.4
 pandas==1.0.4
 python-dateutil==2.8.1
@@ -381,7 +379,7 @@ In JupyterLab, to be able to use the venv's packages (instead of the system pack
 When you commit your code, to ensure reproducibility, you should also commit an up-to-date record of what packages you've installed. The simplest way is to do:
 
 ```bash
-(venv) $ pip3 freeze >requirements.txt
+(venv) $ pip freeze >requirements.txt
 (venv) $ git add requirements.txt
 ```
 
@@ -404,4 +402,4 @@ Before you can run this project, you need some files setup in your home dir, usi
 
     # install the python packages required
     . venv/bin/activate
-    pip3 install -r requirements.txt
+    pip install -r requirements.txt
