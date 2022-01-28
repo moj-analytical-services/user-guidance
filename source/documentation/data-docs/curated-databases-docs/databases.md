@@ -9,7 +9,7 @@ To see what databases are available and how to request access, see the [README](
 
 > Note, you must be a member of the [moj-analytical-services](https://github.com/moj-analytical-services) GitHub organisation to access the repository.
 
-To find out about the metadata of the curated databases (without making a database access request), you can use the [metadata search tool](#metadata-search-tool).
+To find out about the metadata of the curated databases (without making a database access request), you can use the [data discovery tool](../data-documentation).
 
 ## User-maintained databases
 

@@ -177,6 +177,27 @@ You can find out more about how to use these and other functions in the [Migrati
 
 ### JupyterLab
 
+#### `mojap-arrow-pd-parser`
+
+Snappily named `mojap-arrow-pd-parser` provides easy csv, jsonl and parquet file writers. To install in terminal:
+
+```bash
+pip install arrow-pd-parser
+```
+
+To write a csv file to s3:
+
+```python
+from arrow_pd_parser import writer
+writer.write("s3://bucket_name/file.csv")
+```
+
+`mojap-arrow-pd-parser` infers the file type from the extension, so for example `writer.write("s3://bucket_name/file.snappy.parquet")` would write a (snappy compressed) parquet file without need for specifying the file type.
+
+The package also has a lot of other functionality including specifying data types when writing (or reading). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
+
+#### `boto3`
+
 You can upload files in JupyterLab on the Analytical Platform to Amazon S3 using the `boto3` package.
 
 You can install `boto3` by running the following code in a terminal:
@@ -287,6 +308,26 @@ your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
 You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
 
 ### JupyterLab
+
+
+#### `mojap-arrow-pd-parser`
+
+`mojap-arrow-pd-parser` provides easy csv, jsonl and parquet file readers. To install in terminal:
+
+```bash
+pip install arrow-pd-parser
+```
+
+To read a csv file from s3:
+
+```python
+from arrow_pd_parser import reader
+reader.read("s3://bucket_name/file.csv")
+```
+
+`mojap-arrow-pd-parser` infers the file type from the extension, so for example `reader.read("s3://bucket_name/file.parquet")` would read a parquet file without need for specifying the file type.
+
+The package also has a lot of other functionality including specifying data types when reading (or writing). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
 
 #### `pandas`
 
