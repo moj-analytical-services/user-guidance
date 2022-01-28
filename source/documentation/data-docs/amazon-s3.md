@@ -185,14 +185,14 @@ Snappily named `mojap-arrow-pd-parser` provides easy csv, jsonl and parquet file
 pip install arrow-pd-parser
 ```
 
-To write a csv file to s3:
+To write a dataframe (df) to a csv file in s3:
 
 ```python
 from arrow_pd_parser import writer
-writer.write("s3://bucket_name/file.csv")
+writer.write(df, "s3://bucket_name/file.csv")
 ```
 
-`mojap-arrow-pd-parser` infers the file type from the extension, so for example `writer.write("s3://bucket_name/file.snappy.parquet")` would write a (snappy compressed) parquet file without need for specifying the file type.
+`mojap-arrow-pd-parser` infers the file type from the extension, so for example `writer.write(df, "s3://bucket_name/file.snappy.parquet")` would write a (snappy compressed) parquet file without need for specifying the file type.
 
 The package also has a lot of other functionality including specifying data types when writing (or reading). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
 
