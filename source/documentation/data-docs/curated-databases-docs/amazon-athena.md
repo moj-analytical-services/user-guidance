@@ -46,9 +46,11 @@ You can also use Rstudio, JupyterLab and the Athena UI. In particular, the Athen
 
 The Analytical platform hosts a number of analytical coding environments. For those experienced in **R**, you can query Athena using the **RStudio** tool.
 
-To execute Athena queries, we recommend using [**dbtools**](https://github.com/moj-analytical-services/dbtools/). This package uses the Python package pydbtools under the hood and works alongside user IAM policies on the platform. It is also significantly faster than using database drivers provided by Amazon.
+To execute Athena queries, you can use the data engineering team maintained package [dbtools](https://github.com/moj-analytical-services/dbtools/). This package uses the Python package pydbtools under the hood and works alongside user IAM policies on the platform. It is also significantly faster than using database drivers provided by Amazon.
 
 Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for **creating, querying and deleting tables**.
+
+You can also use [Rdbtools](https://github.com/moj-analytical-services/dbtools/). This is an analytical platform community maintained package which has some additional functionality that `dbtools` does not.
 
 ## Using JupyterLab
 
