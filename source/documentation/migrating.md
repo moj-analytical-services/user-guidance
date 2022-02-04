@@ -8,9 +8,9 @@ we are migrating the platform to a new ‘managed cluster’.
 This will bring the following benefits for users:
 
 * Access to the latest version of analytical tools (RStudio and JupyterLab)
-* We can retire problematic tech like conda for RStudio (this will be replaced by renv) and * concourse (this will be replaced by GitHub Actions as a next step)
-& Enhanced security
-& Enhanced reliability and easier maintenance, leading to a better service
+* We can retire problematic tech like conda for RStudio (this will be replaced by **renv**) and concourse (this will be replaced by **GitHub Actions** as a next step)
+* Enhanced security
+* Enhanced reliability and easier maintenance, leading to a better service
 
 The new environment has been built and we are in the process of migrating all users to it.
 
