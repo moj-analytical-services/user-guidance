@@ -35,6 +35,8 @@ When requesting access to a data source, you should provide the GitHub usernames
 You can move data classified as OFFICIAL (including OFFICIAL-SENSITIVE) onto the Analytical Platform. SECRET and TOP SECRET data is not allowed on the Analytical Platform.
 
 All data movements should take place safely and securely to ensure that data is protected at all times, including when in transit.
+
+If you are moving sensitive or personal data, please complete a data movements form on OneTrust. To request access to OneTrust or for further information on how to complete the form please contact privacy@justice.gov.uk.
 ### Personal data
 
 If you are working with personal data you have a responsibility to ensure that you are compliant with the requirements of the General Data Protection Regulation (GDPR) and the Data Protection Act (DPA) 2018. This responsibility applies regardless of where you are processing the data.
