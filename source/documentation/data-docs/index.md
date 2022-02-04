@@ -1,18 +1,17 @@
 # Data
+#### There are several different data sources on the Analytical Platform:
 
-There are several different data sources on the Analytical Platform:
-
-* [FAQs](data-faqs/)
 * [Amazon S3](amazon-s3/)
 * [Curated databases](curated-databases/)
-* Home directories
+* [Home directories](home-directories)
 
-## Home directories
+#### Getting the data you need
 
-Home directories have two purposes:
- * storing config files that are needed to allow you to use the AP
- * storing local copies of code and analytical outputs while you are working on them
+The data you need may already exist on the Analytical Platform. The diagram below shows the process for getting access to it. More details on each step is contained in the guidance.
 
-Analysts are expected to keep their home directories clean and clear, and avoid storing large amounts of data there. Any files stored in home directories may be removed without warning by the AP admin team in order to maintain the functioning of the AP.
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;url&quot;:&quot;https://drive.google.com/uc?id=102NHlVpV_LAwWJBSNErk4y4-S6ink_9N&amp;export=download&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/embed2.js?&fetch=https%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D102NHlVpV_LAwWJBSNErk4y4-S6ink_9N%26export%3Ddownload"></script>
 
-In addition, we will periodically review home storage and may remove files from users with the largest storage without warning.
+#### FAQs
+
+There are also some [FAQs](data-faqs/) on data access.
