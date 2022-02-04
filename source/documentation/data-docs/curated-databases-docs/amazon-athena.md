@@ -50,7 +50,7 @@ To execute Athena queries, you can use the data engineering team maintained pack
 
 Follow the [setup guidance](https://github.com/moj-analytical-services/dbtools/#setup) to get started. The quickstart guidance [here](https://github.com/moj-analytical-services/dbtools/#examples) provides detailed examples for **creating, querying and deleting tables**.
 
-You can also use [Rdbtools](https://github.com/moj-analytical-services/dbtools/). This is an analytical platform community maintained package which has some additional functionality that `dbtools` does not.
+You can also use [Rdbtools](https://github.com/moj-analytical-services/dbtools/). This is an analytical platform community maintained package which has some additional functionality that `dbtools` does not. It can be used with the understanding that if the package requires fixing or updating, it is the responsibility of those using the package to do so.
 
 ## Using JupyterLab
 
