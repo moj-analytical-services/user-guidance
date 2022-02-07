@@ -23,9 +23,9 @@ As Conda has now been removed. You will need to install packages using Renv. See
 
 ### Notable Packages
 
-#### DBTools
+#### `dbtools`
 
-dbtools (i.e. the R wrapper for `pydbtools`) requires a little setup:
+`dbtools` (i.e. the R wrapper for `pydbtools`) is the data engineering maintained package for accessing Athena databases from R. It requires a little setup:
 
 - Call `renv::use_python()`
 
