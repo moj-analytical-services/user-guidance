@@ -22,7 +22,9 @@ To configure Git and GitHub for the Analytical Platform, you must complete the f
 
 ### Create an SSH key
 
-You can create an SSH key in RStudio or JupyterLab. We recommend that you use RStudio.
+You can create an SSH key in RStudio or JupyterLab. You will need an SSH key for each tool that you use.
+
+_You can obviously copy one ssh key from rstudio to jupyter, please do not do this, its insecure. Use an SSH key per environment that you are in._
 
 #### RStudio
 
