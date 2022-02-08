@@ -156,7 +156,7 @@ following for `openxlsx`
 s3_read_xlsx <- function(s3_path, ...) {
     temp_loc <- tempfile(fileext=".xlsx")
     botor::s3_download_file(s3_path, temp_loc)
-    wb <- openxlsx::read.xlsx(s3_path, temp_loc, ...)
+    wb <- openxlsx::read.xlsx(temp_loc, ...)
     unlink(temp_loc)
     return(wb)
 }
