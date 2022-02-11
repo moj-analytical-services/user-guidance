@@ -34,7 +34,7 @@ You can only create new warehouse data sources in the Analytical Platform contro
 
 To create a new warehouse data source:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 2.  Select the __Warehouse data__ tab.
 3.  Select __Create new warehouse data source__.
 4.  Enter a name for the warehouse data source -- this must be prefixed with 'alpha-'.
@@ -73,11 +73,11 @@ When requesting access to a bucket, you should specify the name of the bucket an
 
 ### Manage access to a bucket
 
-Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz//). You cannot manage access to buckets directly in the Amazon S3 console.
+Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). You cannot manage access to buckets directly in the Amazon S3 console.
 
 To manage access to a data source:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 2.  Select the __Warehouse data__ tab or the __Webapp data__ tab, as relevant.
 3.  Select the name of the data source you want to manage.
 

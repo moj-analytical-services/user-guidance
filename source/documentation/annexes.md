@@ -109,7 +109,7 @@ However, if you have not logged into the platform for more than a month, you wil
 
 The first time you log into the Analytical Platform, you will be asked to set up 2FA.  
 
-Your welcome email will direct you to the platform [Control Panel](https://controlpanel.services.alpha.mojanalytics.xyz//).
+Your welcome email will direct you to the platform [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 
 #### Step 1: Log into Github to identify yourself to the Analytical Platform
 

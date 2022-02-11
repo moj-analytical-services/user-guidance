@@ -197,7 +197,7 @@ If `disable_authentication` is set to `false` in the `deploy.json` file, access 
 
 To manage the users of your app:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 2.  Select the __Webapps__ tab.
 3.  Select the name of the app you want to manage or select __Manage app__.
 
