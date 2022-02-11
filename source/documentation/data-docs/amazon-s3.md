@@ -127,7 +127,7 @@ You can also directly navigate to a bucket in the AWS S3 Console by selecting __
 
 #### `s3tools`
 
-s3tools is set to be deprecated alongside the launch of RStudio v4.0.5 on the platform. If you are starting a new project, we'd advise using `botor` for anything involving buckets on the platform. 
+s3tools is set to be deprecated alongside the launch of RStudio v4.0.5 on the platform. If you are starting a new project, we'd advise using [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) or [botor](../../appendix/botor.html) for anything involving buckets on the platform.
 
 You can upload files in RStudio on the Analytical Platform to Amazon S3 using the `s3tools` package.
 
