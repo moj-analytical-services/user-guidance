@@ -367,7 +367,7 @@ To deploy your Airflow sandbox, follow the instructions in the [Managing your An
 
 Deploying your Airflow sandbox will create an `airflow` folder in your home directory on the Analytical Platform. This folder contains three subfolders: `db`, `dags` and `logs`.
 
-Once you have deployed your Airflow sandbox, you should store the script for the DAG you want to test in the `airflow/dags` folder in your home directory on the Analytical Platform. Airflow scans this folder every three minutes and will automatically detect your pipeline.
+Once you have deployed your Airflow sandbox, you should store the script for the DAG you want to test in the `airflow/dags` folder in your home directory in Jupyterlab. Airflow scans this folder every three minutes and will automatically detect your pipeline.
 
 To ensure that your pipeline runs correctly, you should set the `ROLE` variable in your DAG script to be your own IAM role on the Analytical Platform. This is your GitHub username in lowercase prefixed with `alpha_user_`. For example, if your GitHub username was `Octocat-MoJ`, your IAM role would be `alpha_user_octocat-moj`.
 
