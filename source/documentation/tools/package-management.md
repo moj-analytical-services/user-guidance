@@ -374,7 +374,7 @@ With the venv activated, if you run some python script from the terminal, the pa
 It worked
 ```
 
-In JupyterLab, to be able to use the venv's packages (instead of the system packages), see [Using a venv in Jupyter](#using-a-venv-in-jupyter)
+In JupyterLab, to be able to use the venv's packages (instead of the system packages), see [Using a venv in Jupyter](jupyterlab.html#using-a-virtual-environment-in-jupyter)
 
 When you commit your code, to ensure reproducibility, you should also commit an up-to-date record of what packages you've installed. The simplest way is to do:
 
