@@ -14,7 +14,7 @@ Tools on Analytical Platform include RStudio, JupyterLab and Airflow sandbox. To
 
 To manage your tools:
 
-1. Go the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+1. Go the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/)or the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) if you have been upgraded or are using the Analytical Platform for the first time.
 2. Select the __Analytical tools__ tab.
 
 Use the buttons shown against each tool to manage your copy of the tool:

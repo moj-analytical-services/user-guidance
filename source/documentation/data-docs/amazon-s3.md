@@ -34,7 +34,7 @@ You can only create new warehouse data sources in the Analytical Platform contro
 
 To create a new warehouse data source:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/). If you are a new member of the organisation, are using the platform for the first time or have been upgraded to the new infrastructure, please use the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 2.  Select the __Warehouse data__ tab.
 3.  Select __Create new warehouse data source__.
 4.  Enter a name for the warehouse data source -- this must be prefixed with 'alpha-'.
