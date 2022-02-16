@@ -22,7 +22,7 @@ Some instructions before you upgrade:
 
 ## What happens when it’s time?
 
-* We aim to upgrade people in batches so that we can manage any teeting issues incrementally. Before you are due to upgrade you will be notified by email and on the [#ap-upgrade-testing](https://asdslack.slack.com/archives/C02JFGPHU8G) channel on slack.  Once you have back up your code and data (see 'Preparation' above) you can just click the link to the [new control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) which will instigate your upgrade.
+* We aim to upgrade people in batches so that we can manage any teething issues incrementally. When it's your turn to upgrade you will be notified by email and on the [#ap-upgrade-testing](https://asdslack.slack.com/archives/C02JFGPHU8G) channel on slack.  Once you have backed up your code and data (see 'Preparation' above) you can just click the link to the [new control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) which will instigate your upgrade.
 * The URL link / address for the Analytical Platform has changed, so make sure you save the link and update any bookmarks. The new link is [https://controlpanel.services.analytical-platform.service.justice.gov.uk/](https://controlpanel.services.analytical-platform.service.justice.gov.uk/)
 * Upgrade done - enjoy!
 
@@ -32,7 +32,7 @@ Some instructions before you upgrade:
 * The Control Panel is not changing at all, so once you are on the Tools page just choose what version of Tool you want to deploy (we recommend using the latest available versions)
 * Once you deploy your tools, you will have to reconnect to GitHub using your SSH key.  You will need to do this separately for JupyterLab and RStudio as the Home Directories are no longer connected. Guidance [here](/github.html#setup-github-keys-to-access-it-from-r-studio-and-jupyter)
 * As part of the upgrade, s3tools which was built internally by a group of analysts and data engineers will cease to work
-* This has been replaced by boto3 and there is now official guidance on how to change your projects. This can be found [here](/appendix/botor.html#installation)
+* This has been replaced by botor and there is now official guidance on how to change your projects. This can be found [here](/appendix/botor.html#installation)
 * Conda has been replaced by renv and further guidance can be found [here](/tools/package-management.html#renv)
 * Currently no Apps will be impacted by the upgrade and once all the users are on-boarded on the new infrastructure, we will be focusing on the Apps.
 
