@@ -91,6 +91,7 @@ Then in the **terminal** run
 ```bash
 python3 -m venv renv/venv --without-pip --system-site-packages
 ```
+
 to create a Python virtual environment.
 
 Finally, in the RStudio console run the remaining lines:
@@ -254,6 +255,7 @@ For further information consult the
 
 _Note:_ To turn off the debugging warnings found within the `botor` library,
 please use the following:
+
 ```r
 logger::log_threshold('WARN', namespace = 'botor')
 ```
