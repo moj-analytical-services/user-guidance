@@ -255,8 +255,7 @@ For further information consult the
 _Note:_ To turn off the debugging warnings found within the `botor` library,
 please use the following:
 ```r
-library(logger)
-log_threshold(WARN, namespace = 'botor')
+logger::log_threshold('WARN', namespace = 'botor')
 ```
 
 ## Migrating from `s3tools`
