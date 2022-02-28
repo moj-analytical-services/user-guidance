@@ -23,7 +23,7 @@ Some instructions before you upgrade:
 ## What happens when it’s time?
 
 * We aim to upgrade people in batches on a Monday lunchtime. Before your upgrade you will be notified by email and on the [#ap-upgrade-testing](https://asdslack.slack.com/archives/C02JFGPHU8G) channel on slack.  Please tell us your Github username so we can enable the upgrade for you.
-* When we’ve enabled your upgrade, next time you log into the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/), you’ll see a button to upgrade.  Click this and you’ll be taken to the new platform.  Alternatively, you can just go to the [new control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) which will instigate your upgrade.
+* When we’ve enabled your upgrade, you can just go to the [new control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) which will instigate your upgrade.
 * The URL link / address for the Analytical Platform will change, so as soon as you upgrade make sure you save the link and update any bookmarks. The new link is [https://controlpanel.services.analytical-platform.service.justice.gov.uk/](https://controlpanel.services.analytical-platform.service.justice.gov.uk/)
 * Upgrade done - enjoy!
 
