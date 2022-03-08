@@ -63,7 +63,7 @@ To create an SSH key in JupyterLab, follow the steps below:
 
 ### Add the SSH key to GitHub
 
-To add the SSH key to GitHub, you should follow the guidance [here](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account).
+To add the SSH key to GitHub, you should follow the guidance [here](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account). If you are only migrating your environment, you will only need to add your SSH key and set up the github user name and email, after which you should be able to use your old repositories. To try to clone them, follow [this guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#step-1-navigate-to-your-platform-r-studio-and-make-a-copy-of-the-github-project-in-your-r-studio) for R, and [this guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#command-line) for Python.
 
 ### Configure you username and email in Git on the Analytical Platform
 
