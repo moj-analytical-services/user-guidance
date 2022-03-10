@@ -20,6 +20,18 @@ This will bring you to the Athena query editor. Here, you can:
 
 ![](images/curated-databases/access-athena-3.png)
 
+### Athena Access Issue
+
+Some users may find when first running a query in the Athena editor, that they get an error similar to:
+
+```
+Access denied when writing output to url: s3://<bucket_name>/<file_name.csv>. 
+Please ensure you are allowed to access the S3 bucket. 
+If you are encrypting query results with KMS key, please ensure you are allowed to access your KMS key
+```
+
+A fix for this error can be found [here](https://github.com/moj-analytical-services/user-guidance-internal/wiki/Athena-set-up-issue).
+
 ## Previewing tables
 
 In many cases, it may be useful to preview a table to get a better understanding of its structure and contents.
