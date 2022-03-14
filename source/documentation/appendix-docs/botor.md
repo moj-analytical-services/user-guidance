@@ -38,15 +38,17 @@ or guidance, please see either the
 Using Analytical Tools [rstudio 4.1.7] Rstudio 4.0.5 or later:
 
 ```r
+# Make sure the latest package versions are used
+options(repos = "cran.rstudio.com")
 # install renv if it doesn't exist on your system
 if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv")
 # Remove bare = TRUE if you'd like to move your existing packages over to
 # renv. This is not a good idea if you're migrating from s3tools as
 # renv will attempt to install that library.
 renv::init(bare = TRUE)
-# Tell renv to use Python and set up a virtual environment
-# if you get an error here, remove the python path argument and
-# manually select the version of python you require
+# Tell renv to use Python and set up a virtual environment.
+# If you get an error here, remove the python path argument and
+# manually select the version of python you require.
 renv::use_python(python='/usr/bin/python3')
 # Install reticulate so we can make calls to Python libraries, required by
 # botor
@@ -72,43 +74,13 @@ renv::install('Rcpp@1.0.7')
 
 and restart your R session.
 
-On earlier test versions it's not quite that simple:
-
-First open your project, and in the **console** run
-
-```r
-# install renv if it doesn't exist on your system
-if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv")
-# Initialise the renv environment. Remove bare = TRUE if you'd like to move
-# your existing packages over to renv, but keep it set to TRUE if you're
-# already using botor, dbtools or reticulate otherwise it will point to the
-# wrong or a non-existent Python.
-renv::init(bare = TRUE)
-```
-
-Then in the **terminal** run
-
-```bash
-python3 -m venv renv/venv --without-pip --system-site-packages
-```
-to create a Python virtual environment.
-
-Finally, in the RStudio console run the remaining lines:
-
-```r
-renv::use_python('renv/venv/bin/python')
-renv::install('reticulate')
-reticulate::py_install('boto3')
-renv::install('botor')
-```
-
 If this process goes wrong run
 
 ```r
 renv::deactivate()
 ```
 
-in the terminal and
+in the console and
 
 ```bash
 rm -rf renv renv.lock .Rprofile requirements.txt
@@ -133,20 +105,22 @@ and a read function as parameters. For example, to read a csv file run
 
 ```r
 # For a dataframe,
-df <- s3_read("s3://alpha-mybucket/my_data.csv", read.csv)
+df <- botor::s3_read("s3://alpha-mybucket/my_data.csv", read.csv)
 # for a tibble,
-t <- s3_read("s3://alpha-mybucket/my_data.csv", readr::read_csv)
+t <- botor::s3_read("s3://alpha-mybucket/my_data.csv", readr::read_csv)
 # and for a data.table
-dt <- s3_read("s3://alpha-mybucket/my_data.csv", data.table::fread)
+dt <- botor::s3_read("s3://alpha-mybucket/my_data.csv", data.table::fread)
 ```
 
 Other formats can be handled in a similar fashion.
 
 ```r
-sas_data <- s3_read("s3://alpha-mybucket/my_data.sas7bdat", haven::read_sas)
-feather_data <- s3_read("s3://alpha-mybucket/my_data.feather",
-                        feather::read_feather)
-json_data <- s3_read('s3://botor/example-data/mtcars.json', jsonlite::fromJSON)
+sas_data <- botor::s3_read("s3://alpha-mybucket/my_data.sas7bdat", 
+                           haven::read_sas)
+feather_data <- botor::s3_read("s3://alpha-mybucket/my_data.feather",
+                               feather::read_feather)
+json_data <- botor::s3_read('s3://botor/example-data/mtcars.json', 
+                            jsonlite::fromJSON)
 ```
 
 See `?botor::s3_read` for additional options.
@@ -170,14 +144,15 @@ s3_read_xlsx("s3://alpha-mybucket/my_data.xlsx")
 For large data files there's a handy option to uncompress compressed files.
 
 ```r
-df <- s3_read("s3://alpha-mybucket/my_data.csv.gz", read.csv,
-              extract = "gzip")
+df <- botor::s3_read("s3://alpha-mybucket/my_data.csv.gz", 
+                     read.csv, extract = "gzip")
 ```
 
 To download a file to the local filesystem run
 
 ```r
-s3_download_file("s3://alpha-mybucket/my_data.csv", "my_local_data.csv")
+botor::s3_download_file("s3://alpha-mybucket/my_data.csv", 
+                        "my_local_data.csv")
 ```
 
 ### Writing data
@@ -188,9 +163,12 @@ specifying the path to the data, and a full S3 path as
 parameters. For example,
 
 ```r
-s3_write(df, readr::write_csv, "s3://alpha-mybucket/my_data.csv")
-s3_write(df, haven::write_sas, "s3://alpha-mybucket/my_data.sas7bdat")
-s3_write(df, openxlsx::write.xlsx, "s3://alpha-mybucket/my_data.xlsx")
+botor::s3_write(df, readr::write_csv, 
+                "s3://alpha-mybucket/my_data.csv")
+botor::s3_write(df, haven::write_sas, 
+                "s3://alpha-mybucket/my_data.sas7bdat")
+botor::s3_write(df, openxlsx::write.xlsx, 
+                "s3://alpha-mybucket/my_data.xlsx")
 ```
 
 This won't work for functions such as `feather::write_feather` that use an
@@ -209,14 +187,15 @@ s3_write_feather(df, "s3://alpha-mybucket/my_data.feather")
 Data can also be compressed before writing.
 
 ```r
-s3_write(df, "s3://alpha-mybucket/my_data.csv.gz", readr::write_csv,
-         compress = "gzip")
+botor::s3_write(df, "s3://alpha-mybucket/my_data.csv.gz", 
+                readr::write_csv, compress = "gzip")
 ```
 
 To upload a file from the local filesystem run
 
 ```r
-s3_upload_file("my_local_data.csv", "s3://alpha-mybucket/my_data.csv")
+botor::s3_upload_file("my_local_data.csv", 
+                      "s3://alpha-mybucket/my_data.csv")
 ```
 
 ### Other useful functions
@@ -227,13 +206,13 @@ present.
 
 ```r
 # List all the objects in a bucket
-s3_ls("s3://alpha-mybucket")
+botor::s3_ls("s3://alpha-mybucket")
 # List all the objects in the bucket's data directory
-s3_ls("s3://alpha-mybucket/data/")
+botor::s3_ls("s3://alpha-mybucket/data/")
 # List all the objects in the bucket's data directory beginning with p
-s3_ls("s3://alpha-mybucket/data/p")
+botor::s3_ls("s3://alpha-mybucket/data/p")
 # Won't work
-s3_ls("s3://alpha-mybu")
+botor::s3_ls("s3://alpha-mybu")
 ```
 
 This returns a `data.frame`, the `uri` column is probably the most useful
@@ -244,8 +223,9 @@ checks if an object exists, which is useful as `s3_write` will overwrite an
 object regardless.
 
 ```r
-if (!s3_exists("s3://alpha-mybucket/my_data.csv")) {
-    s3_write(df, "s3://alpha-mybucket/my_data.csv", readr::write_csv)
+if (!botor::s3_exists("s3://alpha-mybucket/my_data.csv")) {
+    botor::s3_write(df, "s3://alpha-mybucket/my_data.csv", 
+                    readr::write_csv)
 }
 ```
 
