@@ -180,9 +180,39 @@ conda env update -f environment.yml --prune
 
 [Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package management solution for RStudio.
 
-For a full guide to installing packages, workflow and installing custom pacakges (e.g. S3tools) please see the [introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+For a full guide to installing packages, workflow and installing custom packages please see the [introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
 
-Unless a project has been abled for renv, files in RStudio 1.4 will be installed to a temporary directory.
+Before you start installing packages using renv, you need to enable it in RStudio. You do this by navigating to the Tools menu and going through the following steps:
+
+Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
+
+Basic commands to follow to install packages for `renv` are:
+
+```r
+
+## If you are starting a fresh repository, run this:
+renv::init(bare = TRUE) 
+ 
+## or if you are starting a fresh repository but would like to move your existing packages over to renv:
+renv::init()
+
+# then to install a package:
+renv::install("packagename")
+```
+
+If you are installing the recommended package for accessing data from s3, `botor`, you will need to do the following:
+
+```R
+renv::use_python() # at the prompt, choose to use python3
+renv::install('reticulate')
+```
+Restart the session (Ctrl+Alt+F10 on a windows machine). And then:
+
+```r
+reticulate::py_install('boto3')
+renv::install('botor')
+```
+
 
 ### Migrating Existing Projects
 
