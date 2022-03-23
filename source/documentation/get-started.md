@@ -96,7 +96,7 @@ The main entry point to the Analytical Platform is the control panel.
 
 When you sign in to the Control Panel for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
 
-To sign in, go to the Analytical Platform [legacy control panel](https://controlpanel.services.alpha.mojanalytics.xyz/) or the [latest control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+If you are a new member of the organisation, are using the platform for the first time or have been upgraded to the new infrastructure, please sign in to the [latest control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) otherwise go to the [legacy control panel](https://controlpanel.services.alpha.mojanalytics.xyz/). 
 
 You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
 
