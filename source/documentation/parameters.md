@@ -22,11 +22,24 @@ Parameters are the preferred method of storing secrets in the Analytical Platfor
 
 Parameters have their own tab in the control panel.
 
-| Field | Description | Examples |
-| ----- | ----------- | -------- |
-| Role name | The IAM Role name for the thing that needs access to the secret. Apps are: `alpha_app_APP` Airflow pipelines are: `airflow_PIPELINE` | `alpha_app_matrixbooking` `airflow_github_logs` |
-| Key | A name you can choose for this secret | `DB_PWD` `maps_api_key` |
-| Value | The secret itself | `AIzaSyAqDsnMnOTAyNKXKt3HRuIvLTCctaFVCLQ` |
+#### Role name 
+
+Description: The IAM Role name for the thing that needs access to the secret. 
+Apps are: `alpha_app_APP` Airflow pipelines are: `airflow_PIPELINE`.
+
+Example: `alpha_app_matrixbooking`
+
+#### Key 
+
+Description: A name you can choose for this secret 
+
+Example: `DB_PWD` `maps_api_key` 
+
+#### Value 
+
+Description: The secret itself 
+
+Example: `zzzzzzzzzzzz` 
 
 ### Limitations
 

@@ -5,8 +5,8 @@
 Analytical Platform comes with tools including:
 
 * RStudio - a development environment for writing R code and R Shiny apps
-* JupyterLab - see [JupyterLab section](../jupyterlab.html)
-* Airflow - see [Airflow section](../airflow.html)
+* JupyterLab - see [JupyterLab section](./jupyterlab.html)
+* Airflow - see [Airflow section](./airflow.html)
 
 ## Managing your analytical tools
 

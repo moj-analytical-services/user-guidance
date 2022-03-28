@@ -15,6 +15,8 @@ the localhost. There are a few things you need to keep in mind:
 
 ## Running Plotly [Dash] apps
 
+See [Coffee and Coding session on Building webapps in Python using Plotly Dash](https://github.com/moj-analytical-services/Coffee-and-Coding/tree/master/2020-04-14%20Python%20webapps%20using%20Plotly%20Dash)
+
 ### Install dependencies
 
 In the terminal, install the Dash dependencies:

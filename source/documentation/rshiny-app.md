@@ -17,6 +17,8 @@ To create and deploy a Shiny app, you should complete the following steps:
 9.  Add users to the app.
 10. Access the app.
 
+**NOTE: Renaming Apps**  You can't rename the app by just renaming the Github repo. You need to create a new repository with the new name and use the old one as a template. Then setup a new webapp.
+
 ### Use the app template
 
 To create a new repository based on the Shiny app template:
