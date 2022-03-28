@@ -48,35 +48,10 @@ Usually this doesn't cause anything to crash.  You just need to wait for the cur
 
 One example of when this can happen is if you attempt to save a file whilst a long-running script is running.  R Studio has to wait until the script has finished running to attempt to save the file.  However, sometimes the wait is too long, causing a timeout.  In this case, you just need to wait for the code to finish running, and then press save again.
 
+## Too many redirects error in browser
 
-## Unable to access data using `aws.s3` package.
+ Auth0, which provides the 2FA, can misremembering logins, giving an issue of "too many redirects". One solution is to clear your cookies. Another solution, to not lose all your cookies, is to go to [https://alpha-analytics-moj.eu.auth0.com/v2/logout](https://alpha-analytics-moj.eu.auth0.com/v2/logout) to properly log out so you can log back in again. 
 
-Unfortuntely `aws.s3` does not support the granular file access permission model we are using on the platform.  Specifically, it is unable to automatically provide the user with the right file access credentials.  We provide `s3tools` as a solution to this problem, which manages your credentials for you.
-
-We recommend that, where possible, users should use `s3tools`.  Where this is not possible, include a call to `s3tools::get_credentials()` prior to making the call to `aws.s3`, and this will guarantee that fresh credentials are generated before your call to `aws.s3`
-
-## `s3tools::s3_path_to_full_df()` fails on Excel file
-
-`s3tools::s3_path_to_full_df` attempts to read in data from various filetypes, including Excel, but this sometimes fails.
-
-If it does, you have two options:
-
-#### Option 1:  Use s3tools::read_using()
-
-This allows you to specify what function you want to use to attempt to read the file. So, for example you can do: 
-`s3tools::read_using(openxlsx::readWorkbook, path = "alpha-everyone/my_excel.xlsx")` to attempt to read the file `alpha-everyone/my_excel.xlsx` using `openxlsx::readWorkbook`
-
-#### Option 2:  Save the file to your project directory and load it from there, rather than from S3
-```
-s3tools::get_credentials()
-aws.s3::save_object("my_excel.xlsx", "alpha-everyone", "file_name_to_save_to_in_home_directory.xlsx")
-```
-
-and then read it in using e.g.
-
-`openxlsx::readWorkbook("file_name_to_save_to_in_home_directory.xlsx")`
-
-Note, it's best to avoid using `aws.s3` directly, see [here](https://github.com/moj-analytical-services/platform_user_guidance/blob/master/05-errors.Rmd#unable-to-access-data-using-awss3-package)
 
 ## Two-factor authentication problems {#two-factor-auth-issues}
 
@@ -130,3 +105,32 @@ Will set this environment to be your currently active environment. From here, in
 conda install packagename
 ```
 Don't forget to add this new environment to your currently active `.libPath()`, which is done in the console.
+
+## Unable to access data using `aws.s3` package.
+
+Unfortuntely `aws.s3` does not support the granular file access permission model we are using on the platform.  Specifically, it is unable to automatically provide the user with the right file access credentials.  We provide `s3tools` as a solution to this problem, which manages your credentials for you.
+
+We recommend that, where possible, users should use `s3tools`.  Where this is not possible, include a call to `s3tools::get_credentials()` prior to making the call to `aws.s3`, and this will guarantee that fresh credentials are generated before your call to `aws.s3`
+
+## `s3tools::s3_path_to_full_df()` fails on Excel file
+
+`s3tools::s3_path_to_full_df` attempts to read in data from various filetypes, including Excel, but this sometimes fails.
+
+If it does, you have two options:
+
+#### Option 1:  Use s3tools::read_using()
+
+This allows you to specify what function you want to use to attempt to read the file. So, for example you can do: 
+`s3tools::read_using(openxlsx::readWorkbook, path = "alpha-everyone/my_excel.xlsx")` to attempt to read the file `alpha-everyone/my_excel.xlsx` using `openxlsx::readWorkbook`
+
+#### Option 2:  Save the file to your project directory and load it from there, rather than from S3
+```
+s3tools::get_credentials()
+aws.s3::save_object("my_excel.xlsx", "alpha-everyone", "file_name_to_save_to_in_home_directory.xlsx")
+```
+
+and then read it in using e.g.
+
+`openxlsx::readWorkbook("file_name_to_save_to_in_home_directory.xlsx")`
+
+Note, it's best to avoid using `aws.s3` directly, see [here](https://github.com/moj-analytical-services/platform_user_guidance/blob/master/05-errors.Rmd#unable-to-access-data-using-awss3-package)

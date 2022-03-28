@@ -4,7 +4,7 @@
 
 - The Analytical Platform team in MOJ Digital & Technology is responsible for providing access to software like R Studio and Jupyter.
 - Analysts themselves are responsible for the code they write in these tools, and the Platform team is not responsible for assisting with problems with this code.  As a rule of thumb, if the problem you're experiencing would also occur with R Studio or Python installed on a standalone computer, then the platform team don't offer support.
-- If you've read through the user guidance and are still stuck, the best place to go for support is the [#analytical-platform](https://app.slack.com/client/T1PU1AP6D/C4PF7QAJZ) Slack channel for issues with the platform, or the [#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) channel and [#python](https://app.slack.com/client/T1PU1AP6D/C1Q09V86S) channel to get support from peers in your code.
+- If you've read through the user guidance and are still stuck, the best place to go for support is the [#analytical-platform-support](https://app.slack.com/client/T1PU1AP6D/C4PF7QAJZ) Slack channel for issues with the platform, or the [#r](https://app.slack.com/client/T1PU1AP6D/C1PUCG719) channel and [#python](https://app.slack.com/client/T1PU1AP6D/C1Q09V86S) channel to get support from peers in your code.
 
 What follows provides further details about how to ask for support, and what you can do to get your issues resolved as quickly as possible.
 

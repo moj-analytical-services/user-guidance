@@ -363,7 +363,7 @@ docker run -it IMAGE:TAG bash
 
 You can test a DAG in your Airflow sandbox, before deploying in the production environment.
 
-To deploy your Airflow sandbox, follow the instructions in the [Work with Analytical Tools](introduction.html#deploy-analytical-tools) section of the guidance.
+To deploy your Airflow sandbox, follow the instructions in the [Work with Analytical Tools](./#deploy-analytical-tools) section of the guidance.
 
 Deploying your Airflow sandbox will create an `airflow` folder in your home directory on the Analytical Platform. This folder contains three subfolders: `db`, `dags` and `logs`.
 

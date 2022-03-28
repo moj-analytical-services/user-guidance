@@ -117,9 +117,7 @@ Slack is a collaboration tool that helps teams work more effectively together. Y
 
 ### Access Slack
 
-You can access our Slack workspace [here](https://asdslack.slack.com).
-
-To create an account, you will need an email address ending in one of the following:
+Send a request to join the ASD Slack workspace [here](https://asdslack.slack.com), once you are part of the workspace you can access the channels within it. To create an account, you will need an email address ending in one of the following:
 
 * @justice.gsi.gov.uk 
 * @digital.justice.gov.uk
@@ -139,7 +137,11 @@ You may have to access Slack differently depending on the IT system you use:
  
 ### Channels
 
-Conversations in Slack are organised into channels, which each have a specific topic. Channels can be public (all users can join) or private (users can only join by invitation) and can be created based on teams, projects, locations, tools and techniques among others.
+Conversations in Slack are organised into channels, which each have a specific topic. After getting access to slack workspace you need to separately join channels. Channels can be:
+
+* public (all users can join) or 
+* private (users can only join by invitation) or 
+* be created based on teams, projects, locations, tools and techniques among others. 
 
  There are several public channels that are widely used and may be useful to join:
 

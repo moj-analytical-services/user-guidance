@@ -58,7 +58,7 @@ For projects that currently use Conda or Packrat it is relatively simple to migr
 
 See the [Renv Python documentation](https://rstudio.github.io/renv/articles/python.html) for further guidance.
 
-To use Renv with Python venv, type
+To activate Python integration within renv, type
 
 ```text
 renv::use_python()
