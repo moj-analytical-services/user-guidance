@@ -19,9 +19,25 @@ To create and deploy a Shiny app, you should complete the following steps:
 
 **NOTE: Renaming Apps**  You can't rename the app by just renaming the Github repo. You need to create a new repository with the new name and use the old one as a template. Then setup a new webapp.
 
-### Use the app template
+### Use the app template 
+
+#### Rstudio 4
+
+To create a new repository based on the Rstudio 4 Shiny app template:
+
+1. Go to [rshiny-template-405](https://github.com/moj-analytical-services/rshiny-template-405) repository. 
+
+2. On the main branch select __Use this template__.
+3. Fill in the form:
+    * Owner: `moj-analytical-services`
+    * Name: The name of your app, for example, `my-app`
+    * Privacy: Internal (refer to the [public, internal and private repositories](github.html#public-internal-and-private-repositories) section)
+4. Select __Create repository from template__. This copies the entire contents of the app template to a new repository.
+
+#### Legacy Rstudio 3
 
 To create a new repository based on the Shiny app template:
+
 
 1. Go to the [rshiny-template](https://github.com/moj-analytical-services/rshiny-template) repository.
 2. Press the "Branch: master" button and choose a suitable branch, according to the requirements of your app:
@@ -84,7 +100,9 @@ By default, the template contains `server.R` and `ui.R` files. However, you may 
 
 Most apps will have dependencies on various third-party packages (for example, `dplyr`).
 
-In your project repository you will need a file that lists your dependencies. We use 'package management' to manage these lists. The packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as conda, packrat or renv. For further guidance see the [package management](tools.html#managing-your-analytical-tools) section.
+In your project repository you will need a file that lists your dependencies. We use 'package management' to manage these lists. The packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as renv,  conda, or packrat. For further guidance see the [package management](tools.html#managing-your-analytical-tools) section.
+
+if using renv, see [Dockerized Shiny Apps with Dependencies](https://hosting.analythium.io/dockerized-shiny-apps-with-dependencies/).
 
 If using conda, you will need to [export your dependencies](tools.html#exporting-your-environment) to an `environment.yml` file.
 
