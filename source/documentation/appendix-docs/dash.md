@@ -1,17 +1,18 @@
-# Access Local Ports in Jupyter
+# Running your app within Jupyter
 
-If you are developing a web application using Jupyter you will probably want to
-preview that web app before you deploy it. The Analytical Platform provides a special set of
-endpoints under `/\_tunnel\_/<portNumber>/` that route to exposed HTTP ports on
-the localhost. There are a few things you need to keep in mind:
+It is likely that you will want to preview and test your app before you deploy it. 
+However because of security implications we cannot allow arbritrary ports to be opened.
+Instead, you have to use the `/\_tunnel\_/` endpoint we have provided.
 
-- `<portNumber>` can only be one from a limited range. By default, you can only route
-  to ports 8050 and 4040--4050 inclusive. You should make your web app listen on
-  one of those.
-- The `/_tunnel_/<portNumber>/` endpoint will only tunnel to services bound to a
-  non--public IP address. By default, many web frameworks bind to host `127.0.0.1`.
-  You will need to change this to `0.0.0.0` or the tunnel won't work. This is to
-  prevent inadvertently exposing webapps to the tunnel.
+Currently the only supported port is 8050, so the url of your app will be `/\_tunnel\_/8050/`
+
+A few things to bear in mind
+- You can only run one app on the `8050` port at a time.
+- Your app, by default will only respond to `127.0.0.1` which will not work with the tunnel. You should make sure it responds to `0.0.0.0` instead.
+- The base URL of your app will need to be set (while in Jupyter development) to be `/_tunnel_/8050/` (see the dash walkthrough below for an example)
+- Only you will be able to access this url.
+
+_In the old system there was support for a range of ports, so it is possible you may not be using 8050 in existing code. Please update your code accordingly._
 
 ## Running Plotly [Dash] apps
 
@@ -36,6 +37,8 @@ dependencies by adding these to either `requirements.txt` and `pip` or
 ### Example code
 
 Save the Dash hello world app to a new python file called `app.py`:
+
+N.B. You will need to have pandas installed for this code to work.
 
 ```python
 import dash
