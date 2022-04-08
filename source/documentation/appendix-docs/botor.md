@@ -74,6 +74,37 @@ renv::install('Rcpp@1.0.7')
 
 and restart your R session.
 
+On earlier test versions it's not quite that simple:
+
+First open your project, and in the **console** run
+
+```r
+# install renv if it doesn't exist on your system
+if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv")
+# Initialise the renv environment. Remove bare = TRUE if you'd like to move
+# your existing packages over to renv, but keep it set to TRUE if you're
+# already using botor, dbtools or reticulate otherwise it will point to the
+# wrong or a non-existent Python.
+renv::init(bare = TRUE)
+```
+
+Then in the **terminal** run
+
+```bash
+python3 -m venv renv/venv --without-pip --system-site-packages
+```
+
+to create a Python virtual environment.
+
+Finally, in the RStudio console run the remaining lines:
+
+```r
+renv::use_python('renv/venv/bin/python')
+renv::install('reticulate')
+reticulate::py_install('boto3')
+renv::install('botor')
+```
+
 If this process goes wrong run
 
 ```r
@@ -234,9 +265,9 @@ For further information consult the
 
 _Note:_ To turn off the debugging warnings found within the `botor` library,
 please use the following:
+
 ```r
-library(logger)
-log_threshold(WARN, namespace = 'botor')
+logger::log_threshold('WARN', namespace = 'botor')
 ```
 
 ## Migrating from `s3tools`

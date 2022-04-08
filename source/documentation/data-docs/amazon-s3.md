@@ -156,9 +156,20 @@ Tools -> Project options -> Environments and click on the tick box “Use renv w
 It requires the Python package `boto3` and will be installed by running the following code:
 
 ```{r install-botor-write, eval=FALSE}
-renv::init(bare = TRUE) # remove bare = TRUE if you'd like to move your existing packages over to renv
-renv::use_python()
+## If you are starting a fresh repository, run this:
+renv::init(bare = TRUE) 
+ 
+## or if you are starting a fresh repository but would like to move your existing packages over to renv:
+renv::init()
+ 
+## or if you already have renv set, don't `init` the `renv` at all.
+
+## then, go ahead with the botor installation:
+renv::use_python() ## at the prompt, choose to use python3
 renv::install('reticulate')
+ 
+## Restart the session (Ctrl+Alt+F10 on a windows machine). And then:
+ 
 reticulate::py_install('boto3')
 renv::install('botor')
 ```
