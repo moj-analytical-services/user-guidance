@@ -149,9 +149,11 @@ You can find out more about how to use these functions on [GitHub](https://githu
 
 #### `botor`
 
-`botor` will replace `s3tools` on newer versions of RStudio
-which use `renv` for managing environments. It requires the Python package
-`boto3` and will be installed by running the following code:
+`botor` will replace `s3tools` on newer versions of RStudio which use `renv` for managing environments. If your project isn’t yet set up to use renv, before you start installing packages, you need to enable for your project in RStudio. You do this by navigating to the Tools menu and going through the following steps:
+
+Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
+
+It requires the Python package `boto3` and will be installed by running the following code:
 
 ```{r install-botor-write, eval=FALSE}
 ## If you are starting a fresh repository, run this:
@@ -292,9 +294,11 @@ You can find out more about how to use `s3browser` on [GitHub](https://github.co
 
 #### `botor`
 
-`botor` will replace `s3tools` on newer versions of RStudio
-which use `renv` for managing environments. It requires the Python package
-`boto3` and will be installed by running the following code:
+`botor` will replace `s3tools` on newer versions of RStudio which use `renv` for managing environments. If your project isn't yet set up to use `renv`, before you start installing packages, you need to enable for your project in RStudio. You do this by navigating to the Tools menu and going through the following steps:
+
+Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
+
+It requires the Python package `boto3` and will be installed by running the following code:
 
 ```{r install-botor-read, eval=FALSE}
 renv::init()

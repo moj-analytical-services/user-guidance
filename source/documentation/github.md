@@ -1,6 +1,6 @@
-# Using GitHub with the platform
+# Git, Github and the command line
 
-Code written on the Analytical Platform should be stored in a git repository on GitHub. This includes R, Python and notebooks. Be careful NOT to include data or [secrets](#secrets-and-passwords) on GitHub. (Data goes in [S3 buckets](../data.html) and secrets, such as passwords or API keys, should be in Parameter Store.)
+Code written on the Analytical Platform should be stored in a git repository on GitHub. This includes R, Python and notebooks. Be careful NOT to include data or [secrets](#secrets-and-passwords) on GitHub. (Data goes in [S3 buckets](../data) and secrets, such as passwords or API keys, should be in Parameter Store.)
 
 **Note** Before you can use Github with R Studio or Jupyter, you need to connect them together by creating an 'ssh key'. Full guidance is [here](#setup-github-keys-to-access-it-from-r-studio-and-jupyter).
 
@@ -65,7 +65,7 @@ To create an SSH key in JupyterLab, follow the steps below:
 
 To add the SSH key to GitHub, you should follow the guidance [here](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account). If you are only migrating your environment, you will only need to add your SSH key and set up the github user name and email, after which you should be able to use your old repositories. To try to clone them, follow [this guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#step-1-navigate-to-your-platform-r-studio-and-make-a-copy-of-the-github-project-in-your-r-studio) for R, and [this guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#command-line) for Python.
 
-### Configure you username and email in Git on the Analytical Platform
+### Configure your username and email in Git on the Analytical Platform
 
 To configure your username and email in Git on the Analytical Platform using RStudio or JupyterLab, follow the steps below:
 
@@ -84,8 +84,6 @@ To configure your username and email in Git on the Analytical Platform using RSt
      git config --global user.email 'your_email@example.com'
      ```
     Here, you should substitute the email address you used to sign up to GitHub.
-
-See [using GitHub with platform](/github.html).
 
 ## Creating your project repo on GitHub
 
@@ -122,7 +120,8 @@ We find that for most of our work, there’s no reason not to add the ‘+everyo
 
 Warning: Repos should contain **no passwords/secrets and no data** (apart from small reference tables) - this is particulary important for public repos, but applies to private ones too. And remember that GitHub shows the *full history* of files and changes in your repo, so removing these things requires special effort.
 
-For more info, see [choosing public or private repos](#choosing-public-or-private-repos).
+For more info, see [choosing public, internal or private repos](#choosing-public-internal-or-private-repos).
+
 
 Notes:
 
@@ -130,13 +129,13 @@ Notes:
 
 ## R Studio
 
-Here's how you can sync with your new GitHub repo in R Studio.
+Below are point and click steps you can use to sync with your new GitHub repo in R Studio. You can also use the [command line](#command-line).
 
 ### Step 1: Navigate to your platform R Studio and make a copy of the Github project in your R Studio
 
 In this step, we create a copy of the definitive GitHub project in your personal R Studio workspace. This means you have a version of the project which you can work on and change.
 
-Follow the steps in this gif:
+Follow the steps in this gif: (Note: we now recommend making repositories `Internal` which is not shown in this gif)
 
 ![clone repo](images/github/clone_repo.gif)
 
@@ -176,11 +175,34 @@ Notes:
 
 Git functions aren't built into JupyterLab. Use the command line instead - see below.
 
-You can get to the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of JupyterLab).
-
 ## Command line
 
-Once you are comfortable using the Terminal (in either R Studio or Jupyter) you can run all Git commands from the command line.
+The command line is the text interface to your Analytical Platform tools. When googling, it may also be referred to as the shell, terminal, or console (and perhaps other names). In Jupyter, you can get the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of JupyterLab). You can also use all these commands in RStudio by going to Tools -> Terminal -> New Terminal.
+
+Once you are comfortable using the Terminal (in either R Studio or Jupyter) you can run all Git commands from the command line. If you are quite new to the command line, there are a few commands you may find useful to know, in addition to the git commands described later in this section:
+
+* `mkdir`: create a new directory/folder
+* `cd`: change directory
+* `touch`: create a file
+* `ls`: list files
+
+For example, to create a new python script, `main.py` in a new folder, `scripts` you would do:
+
+```bash
+> mkdir scripts
+> cd scripts
+> touch main.py
+> ls
+main.py
+```
+
+You can go back a directory using `cd ..` and back to your home directory with `cd ~`. Some other commands you may wish to use are:
+
+* `rm <filename>`: delete file(s)
+* `cp <filename> <new_location>`: copy a file from current location to a new one
+* `mv <filename> <new_location>`: move a file from current location to a new one
+
+It is a good idea to avoid the use of whitespace in file, folder and repository names, but if you have included a space you can escape it using a backslash (e.g. `cd directory\ with\ spaces`). You can also hit the tab key to autocomplete if your file or directory already exists.
 
 ### Make a copy of a GitHub project ('cloning')
 
@@ -357,7 +379,7 @@ In both cases, replace `package_repo_name` for the repository you have developed
 
 #### Secrets and passwords
 
-Never put a secret or password in your code. Even when the repo is private. See MOJ policy: <https://ministryofjustice.github.io/security-guidance/standards/secrets-management/#application--infrastructure-secrets>
+Never put a secret or password in your code. Even when the repo is private. See MOJ policy: [https://security-guidance.service.justice.gov.uk/](https://security-guidance.service.justice.gov.uk/)
 
 ## Other tips and tricks
 
@@ -380,3 +402,15 @@ See [here](https://help.github.com/articles/tracing-changes-in-a-file/).  An exa
 ### View how files have changed on the platform and on
 
  [](images/github/view_history.gif)
+
+### Error when switching branches: fatal: index file smaller than expected. 
+
+This occurs when the index file gets corrupted, and can be fixed with: 
+
+```
+$ rm .git/index
+$ git add .
+$ git reset HEAD
+```
+
+

@@ -1,14 +1,31 @@
 # Get started
 
-## Get an account
+## Introduction
 
-You need an account before you can use the Analytical Platform. To do this, complete the following steps.
+You need 3 different accounts to use the Analytical Platform: 
+
+* Github Account 
+* Analytical Platform Account
+* Slack Account (recommended)
+
+To do this, complete the following steps.
 
 ### Read the acceptable use policy and coding standards
 
 Use of the Analytical Platform is subject to our [acceptable use policy](https://user-guidance.services.alpha.mojanalytics.xyz/aup.html). You should ensure that you have read and understood this before using the Analytical Platform.
 
 You should also follow our [coding standards](https://github.com/moj-analytical-services/our-coding-standards) when working on the Analytical Platform. These set out principles that you should follow when writing and reviewing code.
+
+## 1. Github Account 
+
+### What is Github?
+
+GitHub is a website and cloud-based service that helps developers store and manage their code, as well as track and control changes to their code. To understand exactly what GitHub is, you need to know two connected principles:
+
+* Version control
+* Git
+
+for more info see [An Introduction to GitHub](https://digital.gov/resources/an-introduction-github/)
 
 ### Sign up for a GitHub account
 
@@ -33,19 +50,35 @@ If you do not verify your email address at this stage, you can do it later by fo
 To get access to the Analytical Platform, you must first configure two-factor authentication (2FA) for GitHub using a mobile app (on your personal or work phone) or via text message. To configure 2FA for GitHub, follow the instructions [here](https://help.github.com/en/articles/configuring-two-factor-authentication).
 
 We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used. 
-For Android see:
-- [Google Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
-- [Microsoft Authenticator – Apps on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator)
 
-For iPhone see: 
-- [‎Google Authenticator on the App Store - App Store - Apple](https://apps.apple.com/us/app/google-authenticator/id388497605)
-- [Microsoft Authenticator on the App Store - App Store - Apple](https://apps.apple.com/gb/app/microsoft-authenticator/id983156458)
+For Android:
+- [Google Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
+- [Microsoft Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator)
+
+For iPhone: 
+- [‎Google Authenticator on the Apple App Store](https://apps.apple.com/us/app/google-authenticator/id388497605)
+- [Microsoft Authenticator on the Apple App Store](https://apps.apple.com/gb/app/microsoft-authenticator/id983156458)
 
 During the setup process for any 2FA application, we recommend disabling any “Dark” Mode, Extension or Settings (including themes) in your preferred browser. 
 
 Some 2FA applications and QR scanners are unable to scan the QR code generated on a black background. Therefore, these applications and scanners work best, when a QR code is generated, on a white background. 
 
 You can re-enable your “Dark” Mode, Extension or Settings once this process has been completed.
+
+## 2. Analytical Platform Account 
+
+### What is the Analytical Platform? 
+
+The Analytical Platform is a data analysis environment, providing modern tools and key datasets for MoJ analysts. 
+
+It offers:
+
+* modern data tools and services
+* centralised data
+* reproducible analysis
+* secure and well-engineered environment
+
+See [about the Analytical Platform](/about.html).
 
 ### Request an account from the Analytical Platform team
 
@@ -59,9 +92,11 @@ You can also accept your invitation by signing in to GitHub and visiting the [or
 
 ### Configure two-factor authentication for the Analytical Platform
 
-When you sign in to the Analytical Platform for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
+The main entry point to the Analytical Platform is the control panel. 
 
-To sign in, go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/)or the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+When you sign in to the Control Panel for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
+
+If you are a new member of the organisation, are using the platform for the first time or have been upgraded to the new infrastructure, please sign in to the [latest control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) otherwise go to the [legacy control panel](https://controlpanel.services.alpha.mojanalytics.xyz/). 
 
 You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
 
@@ -69,30 +104,7 @@ As described above, please disable any “Dark” Mode, Extension or Settings (i
 
 **NOTE:** If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
 
-## Access the Analytical Platform
-
-The main entry point to the Analytical Platform is the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/). If you are a new member of the organisation, are using the platform for the first time or have been upgrade to the new infrastructure, please use the [control panel for EKS-based analytical platform](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From here, you can access RStudio and JupyterLab and can manage your warehouse data sources.
-
-If you're going to use RStudio or Jupyter then the next step should be:
-
-* [deploy and open RStudio or Jupyter](tools.html#managing-your-analytical-tools)
-* [setup to access GitHub from RStudio or Jupyter](github.html#setup-github-keys-to-access-it-from-rstudio-and-jupyter)
-
-You may also need to access other services and tools on the Analytical Platform:
-
-* [Airflow](https://airflow.tools.alpha.mojanalytics.xyz)
-* [AWS console](https://aws.services.alpha.mojanalytics.xyz)
-* [Concourse](https://concourse.services.alpha.mojanalytics.xyz)
-* [Grafana](https://grafana.services.alpha.mojanalytics.xyz)
-* [Kibana](https://kibana.services.alpha.mojanalytics.xyz)
-
-## Contact us
-
-To get support, you can contact the Analytical Platform team on the [#analytical_platform](https://asdslack.slack.com/messages/C1PTUTC3F/) Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk). You can get more information on Slack below.
-
-For more information on support, including incident response, please see our [key support information](https://github.com/ministryofjustice/analytics-platform-ops/wiki/Key-support-information). 
-
-## Slack
+## 3. Slack Account
 
 ### What is Slack?
 
@@ -105,9 +117,15 @@ Slack is a collaboration tool that helps teams work more effectively together. Y
 
 ### Access Slack
 
-You can access our Slack workspace [here](https://asdslack.slack.com).
+Send a request to join the ASD Slack workspace [here](https://asdslack.slack.com), once you are part of the workspace you can access the channels within it. To create an account, you will need an email address ending in one of the following:
 
-To create an account, you will need an email address ending in @justice.gsi.gov.uk, @digital.justice.gov.uk, @cjs.gsi.gov.uk, @noms.gsi.gov.uk, @legalaid.gsi.gov.uk, @justice.gov.uk or @judiciary.uk.
+* @justice.gsi.gov.uk 
+* @digital.justice.gov.uk
+* @cjs.gsi.gov.uk
+* @noms.gsi.gov.uk
+* @legalaid.gsi.gov.uk
+* @justice.gov.uk
+* @judiciary.uk
 
 It is not mandatory to join or use Slack (although we highly recommend it) so you shouldn’t use it to make any important announcements and should ensure that you are not excluding anyone from the discussion.
 
@@ -119,13 +137,17 @@ You may have to access Slack differently depending on the IT system you use:
  
 ### Channels
 
-Conversations in Slack are organised into channels, which each have a specific topic. Channels can be public (all users can join) or private (users can only join by invitation) and can be created based on teams, projects, locations, tools and techniques among others.
+Conversations in Slack are organised into channels, which each have a specific topic. After getting access to slack workspace you need to separately join channels. Channels can be:
+
+* public (all users can join) or 
+* private (users can only join by invitation) or 
+* be created based on teams, projects, locations, tools and techniques among others. 
 
  There are several public channels that are widely used and may be useful to join:
 
-* the [#git](), [#r]() and [#python]() channels can be used to get support from other users with any technical queries or questions -- the #[intro_r channel]() is aimed specifically at new users of R
-* the [#analytical_platform]() channel is used for general discussion of the Analytical Platform -- it is also monitored by the Analytical Platform team, who can help out with any technical queries or requests. Also used to request new or existing apps and app data sources
+* the [#analytical-platform-support]() channel is used for general discussion of the Analytical Platform -- it is also monitored by the Analytical Platform team, who can help out with any technical queries or requests. Also used to request new or existing apps and app data sources
 * the [#ask-data-engineering]() channel is used for general discussion of data engineering and for getting in touch with the data engineering team with any technical queries or requests (such as airflow DAG reviews, database access, data discovery tool, etc).
+* the [#git](), [#r]() and [#python]() channels can be used to get support from other users with any technical queries or questions -- the #[intro_r channel]() is aimed specifically at new users of R
 * the [#data_science]() channel is used for general discussion of data science tools and techniques
 * the [#general]() channel is used for any discussions that don’t fit anywhere else
 * the [#10sc]() channel can be used to get in touch with other people working at 10SC and to ask any questions about the building
@@ -135,3 +157,29 @@ There are lots of other channels you can join or you can set up a new one if you
 ### Further information
 
 You can find out more about Slack and how to use it in the [Slack Help Centre](https://get.slack.help/hc/en-gb/).
+
+
+## Using the Analytical Platform
+
+The main entry point to the Analytical Platform is the Control Panel. 
+
+If you are a new member of the organisation, are using the platform for the first time or have been upgraded to the new infrastructure, please use the [latest control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) otherwise go to the [legacy control panel](https://controlpanel.services.alpha.mojanalytics.xyz/). 
+
+From the Control Panel , you can access RStudio and JupyterLab and can manage your warehouse data sources.
+
+If you're going to use RStudio or Jupyter then the next step should be:
+
+* [Deploy and open RStudio or Jupyter](tools.html#managing-your-analytical-tools)
+* [Setup to access GitHub from RStudio or Jupyter](github.html#setup-github-keys-to-access-it-from-rstudio-and-jupyter)
+
+You may also need to access other services and tools on the Analytical Platform:
+
+* [Airflow](https://airflow.tools.alpha.mojanalytics.xyz)
+* [AWS console](https://aws.services.alpha.mojanalytics.xyz)
+* [Concourse](https://concourse.services.alpha.mojanalytics.xyz)
+* [Grafana](https://grafana.services.alpha.mojanalytics.xyz)
+* [Kibana](https://kibana.services.alpha.mojanalytics.xyz)
+
+## Contact us
+
+To get support, you can contact the Analytical Platform team on the [#analytical-platform-support]() Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk). 

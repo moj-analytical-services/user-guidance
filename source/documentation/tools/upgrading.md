@@ -35,4 +35,4 @@ As Conda has now been removed. You will need to install packages using Renv. See
 
      You can either do that with `reticulate::py_install("pydbtools")`, or if you prefer the terminal, you can activate that virtualenv with the command renv/python/virtualenvs/renv-python-3.8.5/bin/activate.
 
-- Install dbtools using `remotes::install_github("moj-analytical-services/dbtools)`
+- Install dbtools using `remotes::install_github("moj-analytical-services/dbtools")`

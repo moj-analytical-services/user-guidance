@@ -6,9 +6,67 @@ There are multiple package managers available for RStudio, JupyterLab & Airflow 
 - Conda
 - packrat
 
-Conda is the current standard on the Analytical Platform, this is soon to be replaced with renv for simpler package management.
+Renv is the current standard for Rstudio on the Analytical Platform as it provides simpler package management. 
+
+## Renv
+
+[Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package management solution for RStudio.
+
+For a full guide to installing packages, workflow and installing custom packages please see the [introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+
+Before you start installing packages using renv, you need to enable it in RStudio. You do this by navigating to the Tools menu and going through the following steps:
+
+Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
+
+Basic commands to follow to install packages for `renv` are:
+
+```r
+
+## If you are starting a fresh repository, run this:
+renv::init(bare = TRUE) 
+ 
+## or if you are starting a fresh repository but would like to move your existing packages over to renv:
+renv::init()
+
+# then to install a package:
+renv::install("packagename")
+```
+
+If you are installing the recommended package for accessing data from s3, `botor`, you will need to do the following:
+
+```R
+renv::use_python() # at the prompt, choose to use python3
+renv::install('reticulate')
+```
+Restart the session (Ctrl+Alt+F10 on a windows machine). And then:
+
+```r
+reticulate::py_install('boto3')
+renv::install('botor')
+```
+
+
+### Migrating Existing Projects
+
+For projects that currently use Conda or Packrat it is relatively simple to migrate to using renv
+
+* Enable renv on the project
+* [Consent to using Renv](https://rstudio.github.io/renv/reference/consent.html) `renv::consent()`
+* Remove any existing Conda or packrat configuration from your R files
+
+## Using R Renv with Python Venv
+
+See the [Renv Python documentation](https://rstudio.github.io/renv/articles/python.html) for further guidance.
+
+To activate Python integration within renv, type
+
+```text
+renv::use_python()
+```
 
 ## Conda
+
+**NB Use of `conda` is now considered outdated for Rstudio on the Analytical Platform.**
 
 When exploring this section, you may also find the [slides](https://github.com/moj-analytical-services/coffee-and-coding-public/blob/master/2019-10-30%20Conda/conda.pdf) from the Coffee and Coding session on conda useful.
 
@@ -176,31 +234,7 @@ conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env updat
 conda env update -f environment.yml --prune
 ```
 
-## Renv
 
-[Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package management solution for RStudio.
-
-For a full guide to installing packages, workflow and installing custom pacakges (e.g. S3tools) please see the [introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
-
-Unless a project has been abled for renv, files in RStudio 1.4 will be installed to a temporary directory.
-
-### Migrating Existing Projects
-
-For projects that currently use Conda or Packrat it is relatively simple to migrate to using renv
-
-* Enable renv on the project
-* [Consent to using Renv](https://rstudio.github.io/renv/reference/consent.html) `renv::consent()`
-* Remove any existing Conda or packrat configuration from your R files
-
-## Using R Renv with Python Venv
-
-See the [Renv Python documentation](https://rstudio.github.io/renv/articles/python.html) for further guidance.
-
-To use Renv with Python venv, type
-
-```text
-renv::use_python()
-```
 
 ## Packrat
 
