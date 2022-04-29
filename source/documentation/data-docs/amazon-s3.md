@@ -125,27 +125,9 @@ You can also directly navigate to a bucket in the AWS S3 Console by selecting __
 
 ### RStudio
 
-#### `s3tools`
+#### `s3tools` / `Rs3tools`
 
-s3tools is set to be deprecated alongside the launch of RStudio v4.0.5 on the platform. If you are starting a new project, we'd advise using [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) or [botor](../../appendix/botor.html) for anything involving buckets on the platform.
-
-You can upload files in RStudio on the Analytical Platform to Amazon S3 using the `s3tools` package.
-
-`s3tools` should be preinstalled for all users of the Analytical Platform. If you find that `s3tools` is not installed, you can install it by running the following code in a terminal:
-
-```
-conda install -c moj-analytical-services r-s3tools
-```
-
-This will then allow you to activate it in future with the standard `library(s3tools)` command.
-
-`s3tools` contains three functions for uploading files to Amazon S3:
-
-*   `write_file_to_s3`
-*   `write_df_to_csv_in_s3`
-*   `write_df_to_table_in_s3`
-
-You can find out more about how to use these functions on [GitHub](https://github.com/moj-analytical-services/s3tools) or by using the help operator in RStudio (for example, `?s3tools::write_file_to_s3`). Note, that when writing a file to S3 using S3 tools, the pattern used should be `write_file_to_s3('file', 'bucket/file')` as the file writer will default to a name of NA if no other name is supplied.
+s3tools is now deprecated on the Analytical Platform due to changes in how the system allows users to connect to S3. If you are starting a new project, we'd advise using [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) or [botor](../../appendix/botor.html) for anything involving buckets on the platform. If you have existing code using s3tools, the community maintained [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) may be the better option.
 
 #### `botor`
 

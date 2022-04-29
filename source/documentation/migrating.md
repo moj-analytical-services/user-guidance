@@ -33,6 +33,7 @@ Some instructions before you upgrade:
 * Once you deploy the tool, you will have to reconnect to GitHub using your SSH key.  You will need to do this separately for JupyterLab and RStudio as the Home Directories are no longer connected. Guidance [here](/github.html#setup-github-keys-to-access-it-from-r-studio-and-jupyter)
 * As part of the upgrade, s3tools which was built internally by a group of analysts and data engineers will cease to work
 * This has been replaced by boto3 and there is now official guidance on how to change your projects. This can be found [here](/appendix/botor.html#installation)
+* A new community maintained tool, [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) is also available as an R-native, S3tools compatible alternative to Boto.
 * Conda has been replaced by renv and further guidance can be found [here](/tools/package-management.html#renv)
 * Currently no Apps will be impacted by the upgrade and once all the users are on-boarded on the new infrastructure, we will be focusing on the Apps.
 
