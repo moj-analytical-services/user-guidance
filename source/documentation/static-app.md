@@ -75,7 +75,7 @@ Include a `deploy.json` file so that Concourse will automatically build and depl
 
 ### Grant secure access to the app
 
-To grant access to someone, in the [Control Panel's Wepapps tag](https://controlpanel.services.alpha.mojanalytics.xyz//webapps) find your App and click "Manage App". In the 'App customers' section you can let people view your app by putting one or more email addresses in the text box and clicking "Add customer".
+To grant access to someone, in the [Control Panel's Wepapps tag](https://controlpanel.services.analytical-platform.service.justice.gov.uk/webapps) find your App and click "Manage App". In the 'App customers' section you can let people view your app by putting one or more email addresses in the text box and clicking "Add customer".
 
 You can also let anyone access it by setting `"disable_authentication": true` in the `deploy.json` and redeploying it - see above.
 

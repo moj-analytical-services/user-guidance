@@ -19,13 +19,13 @@ To create and deploy a Shiny app, you should complete the following steps:
 
 **NOTE: Renaming Apps**  You can't rename the app by just renaming the Github repo. You need to create a new repository with the new name and use the old one as a template. Then setup a new webapp.
 
-### Use the app template 
+### Use the app template
 
 #### Rstudio 4
 
 To create a new repository based on the Rstudio 4 Shiny app template:
 
-1. Go to [rshiny-template-405](https://github.com/moj-analytical-services/rshiny-template-405) repository. 
+1. Go to [rshiny-template-405](https://github.com/moj-analytical-services/rshiny-template-405) repository.
 
 2. On the main branch select __Use this template__.
 3. Fill in the form:
@@ -217,7 +217,7 @@ If `disable_authentication` is set to `false` in the `deploy.json` file, access 
 
 To manage the users of your app:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.alpha.mojanalytics.xyz/).
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 2.  Select the __Webapps__ tab.
 3.  Select the name of the app you want to manage or select __Manage app__.
 
@@ -243,7 +243,7 @@ When accessing an app, you can choose whether to sign in using an email link (de
 ##### "That email address is not authorized for this app (or possibly another error occurred)" error, after entering email address
 
 1. Check that the user is authorised to access the app:
-    1. Log in to the [control panel](https://controlpanel.services.alpha.mojanalytics.xyz//).
+    1. Log in to the [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
     2. Navigate to the app detail page.
     3. Check if the user's email address is listed under 'App customers'.
     4. If it is not, refer them to the app owner to obtain access.
