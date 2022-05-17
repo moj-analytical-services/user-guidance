@@ -1,6 +1,6 @@
 # Running your app within Jupyter
 
-It is likely that you will want to preview and test your app before you deploy it. 
+It is likely that you will want to preview and test your app before you deploy it.
 However because of security implications we cannot allow arbritrary ports to be opened.
 Instead, you have to use the `/\_tunnel\_/` endpoint we have provided.
 
@@ -147,7 +147,7 @@ team. It is intended for testing while developing an application.
 
 This feature has been introduced in the v0.6.5 jupyer-lab helm chart. If following
 this guide doesn't work for you it is likely that you're on an older version.
-Contact us on the `#analytical_platform` [Slack channel],
+Contact us on the `#analytical-platform` [Slack channel],
 alternatively, contact us by [email](mailto:analytical_platform@digital.justice.gov.uk)
 to request an upgrade.
 
