@@ -10,7 +10,7 @@ There are multiple package managers available for RStudio, JupyterLab & Airflow 
 
 This enables analysts to maintain a reproducible workflow by including a snapshot of all packages used within a project saved within the project files themselves that can be loaded and installed with a single consistent and reproducible method.
 
-This means that if you create come code one day, you (or another analyst who comes after you) should be able to pick it up several years later and run it without any difficulty - even if the packages used have themselves changed in the meantime.
+This means that if you create some code one day, you (or another analyst who comes after you) should be able to pick it up several years later and run it without any difficulty - even if the packages used have themselves changed in the meantime.
 
 For Rstudio there is the added imperative to use a package manager (usually renv) because the analytical platform will remove installed packages when the docker image is restarted (which occurs automatically, roughly once a week).
 
