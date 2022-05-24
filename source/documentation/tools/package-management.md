@@ -6,31 +6,101 @@ There are multiple package managers available for RStudio, JupyterLab & Airflow 
 - Conda
 - packrat
 
-Renv is the current standard for Rstudio on the Analytical Platform as it provides simpler package management. 
+## Why use a package manager?
+
+This enables analysts to maintain a reproducible workflow by including a snapshot of all packages used within a project saved within the project files themselves that can be loaded and installed with a single consistent and reproducible method.
+
+This means that if you create some code one day, you (or another analyst who comes after you) should be able to pick it up several years later and run it without any difficulty - even if the packages used have themselves changed in the meantime.
+
+For Rstudio there is the added imperative to use a package manager (usually renv) because the analytical platform will remove installed packages when the docker image is restarted (which occurs automatically, roughly once a week).
 
 ## Renv
 
-[Renv](https://rstudio.github.io/renv/articles/renv.html) is a newer package management solution for RStudio.
+[Renv](https://rstudio.github.io/renv/articles/renv.html) is the current standard for Rstudio on the Analytical Platform as it provides simpler package management than Conda or packrat which were previously recommended. 
 
-For a full guide to installing packages, workflow and installing custom packages please see the [introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+The basic renv commands are:
 
-Before you start installing packages using renv, you need to enable it in RStudio. You do this by navigating to the Tools menu and going through the following steps:
+| Command | Description |
+|------------------|---------------------------------------------|
+| `renv::init()`      | first time a project is created |
+| `renv::install()`   | install new packages |
+| `renv::snapshot()`  | save a description of packages to renv.lock |
+| `renv::restore()`   | install packages to match renv.lock |
 
-Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
 
-Basic commands to follow to install packages for `renv` are:
+The following gives an overview of these basic renv commands.
+For more details check out the Coffee and Coding [video](https://web.microsoftstream.com/video/3ec54ac3-473c-4268-9d54-9f7096338824) and [slides](https://github.com/moj-analytical-services/Coffee-and-Coding/tree/master/2022-05-04%20Introduction%20to%20renv%20package%20management), or for a full guide to installing packages, workflow and installing custom packages please see the [introduction to renv website](https://rstudio.github.io/renv/articles/renv.html).
+
+### Getting started with renv
+
+If you are using version 4 or greater of R on the analytical platform then renv should work straightaway.
+The only other things to note if you've not used renv before are:
+
+ + The first time you use renv, you may be asked to consent to some changes it makes to the way packages are installed - please select yes to this.
+ + If you previously used a different package management system (like Conda or packrat) remove any configuration files for these systems from your R files first.
+
+### Starting a new project with renv or adding renv to an existing project
+
+Basic commands to follow to install packages for renv are:
 
 ```r
 
-## If you are starting a fresh repository, run this:
+# install renv (if not already installed)
+install.packages(“renv”)
+
+# If you are starting a fresh repository, run this:
 renv::init(bare = TRUE) 
  
-## or if you are starting a fresh repository but would like to move your existing packages over to renv:
+# or if you are starting a fresh repository but would like to move your existing packages over to renv:
 renv::init()
 
-# then to install a package:
-renv::install("packagename")
 ```
+
+Then ensure you have committed and pushed the relevant files (.Rprofile, renv.lock, and renv/activate.R) to your github repository.
+These should be the only files which git suggests you commit - you **should not** commit the whole contents of the renv folder created when initialising a project. 
+
+Now you are ready to work on your project!
+
+### Working on a renv project
+
+You can work on your project as normal now, but when you install new packages and want to save the state of your package environment you must "snapshot" your packages.
+
+For instance, if you wanted to install `dplyr` and then update your package environment then the process would be:
+
+```r
+# install a package (the default is the latest available)
+renv::install("dplyr") 
+# or install a specific version of a package
+renv::install("dplyr@0.8.5")
+ 
+# snapshot your project
+renv::snapshot()
+
+# don’t forget to commit
+# renv.lock!
+
+```
+
+You can use `renv::install` or `install.packages` - renv will intercept any calls to `install.packages` and runs `renv::install` under the hood anyway.
+
+### Picking up a renv project
+
+If you pick up someone else's project from github who has been using renv then simply run `renv::restore()` to update your local package environment so it matches the renv.lock file.
+
+```r
+
+# clone the project into
+# Rstudio
+
+# grab the packages
+renv::restore()
+
+```
+
+Any time you pull a commit where the renv.lock file has changed, you will need to `renv::restore()` in order to make sure your package enviroment matches to the new renv.lock file.
+You will also have to do this if you change branches in your repository to one with a different renv.lock file.
+
+### Using renv with python
 
 If you are installing the recommended package for accessing data from s3, `botor`, you will need to do the following:
 
@@ -45,17 +115,6 @@ reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
-
-### Migrating Existing Projects
-
-For projects that currently use Conda or Packrat it is relatively simple to migrate to using renv
-
-* Enable renv on the project
-* [Consent to using Renv](https://rstudio.github.io/renv/reference/consent.html) `renv::consent()`
-* Remove any existing Conda or packrat configuration from your R files
-
-## Using R Renv with Python Venv
-
 See the [Renv Python documentation](https://rstudio.github.io/renv/articles/python.html) for further guidance.
 
 To activate Python integration within renv, type
@@ -64,6 +123,28 @@ To activate Python integration within renv, type
 renv::use_python()
 ```
 
+### Common pitfalls with renv
+
+
+|     Situation    |     Why/What happens?    |
+|---|---|
+|     Packages   disappearing    |     You aren’t using renv!    |
+|     Forgetting to `renv::snapshot()`    |     This won’t affect you running your   code, but anyone picking it up later will be out of sync. You can use `renv::status()` to check if packages and renv.lock match        |
+|     Switching branches    |     If different package requirements in   branches then must remember to `renv::restore()`   when switching between them – otherwise library reflects the previous branch    |
+|     Initialising renv   outside a project    |     renv will ask you not to do this – do not   use `force   = TRUE`!    |
+|     Stuck on old CRAN/MRAN    |     Packages (or versions) you know exist   won’t appear using install functions. Run `options(repos   = "cran.rstudio.com")`    |
+
+### renv tips and tricks
+
+
+|     Situation    |     Solution    |
+|---|---|
+|     Got into a total mess?    |     Start again! Run `renv::deactivate()` and then delete the renv.lock file and the renv/ folder   |
+|     Add a package from github    |   Use `renv::install("username/packagename")` or for a private package `renv::install("git@github.com:username/packagename.git")` |
+|     Upgrade all packages to latest    |   Run `renv::update()` or `renv::update("packagename")` for specific package. Always check that upgrading packages does not break your code before pushing to github for other users. |
+|     Update renv itself    |     `renv::upgrade()`. Useful if renv gains new functionality that you want to use.    |
+|     `Error in file(filename, "r", encoding = encoding) : 
+  cannot open the connection`    |     You've accidentally installed `renv` in your home directory 🏠 ! Delete [all of the files created by `renv`](https://rstudio.github.io/renv/articles/renv.html#infrastructure) from your home directory and retry.    |
 ## Conda
 
 **NB Use of `conda` is now considered outdated for Rstudio on the Analytical Platform.**
