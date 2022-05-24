@@ -31,12 +31,13 @@ The basic renv commands are:
 The following gives an overview of these basic renv commands.
 For more details check out the Coffee and Coding [video](https://web.microsoftstream.com/video/3ec54ac3-473c-4268-9d54-9f7096338824) and [slides](https://github.com/moj-analytical-services/Coffee-and-Coding/tree/master/2022-05-04%20Introduction%20to%20renv%20package%20management), or for a full guide to installing packages, workflow and installing custom packages please see the [introduction to renv website](https://rstudio.github.io/renv/articles/renv.html).
 
-### Getting started
-Before you start installing packages using renv, you need to enable it in RStudio. You do this by navigating to the Tools menu and going through the following steps:
+### Getting started with renv
 
-Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
+If you are using version 4 or greater of R on the analytical platform then renv should work straightaway.
+The only other things to note if you've not used renv before are:
 
-The first time you use renv, you may be asked to consent to some changes it makes to the way packages are installed - please select yes to this.
+ + The first time you use renv, you may be asked to consent to some changes it makes to the way packages are installed - please select yes to this.
+ + If you previously used a different package management system (like Conda or packrat) remove any configuration files for these systems from your R files first.
 
 ### Starting a new project with renv or adding renv to an existing project
 
@@ -54,8 +55,6 @@ renv::init(bare = TRUE)
 renv::init()
 
 ```
-
-If you previously used a different package management system (like Conda or packrat) remove any configuration files for these systems from your R files first.
 
 Then ensure you have committed and pushed the relevant files (.Rprofile, renv.lock, and renv/activate.R) to your github repository.
 
