@@ -16,7 +16,7 @@ For Rstudio there is the added imperative to use a package manager (usually renv
 
 ## Renv
 
-[Renv](https://rstudio.github.io/renv/articles/renv.html) is the current standard for Rstudio on the Analytical Platform as it provides simpler package management than Conda or packrat which were previously recommended. 
+[Renv](https://rstudio.github.io/renv/articles/renv.html) is the current standard for Rstudio on the Analytical Platform as it provides simpler package management than Conda or packrat which were previously recommended.
 
 The basic renv commands are:
 
@@ -49,14 +49,14 @@ Basic commands to follow to install packages for renv are:
 install.packages(“renv”)
 
 # If you are starting a fresh repository, run this:
-renv::init(bare = TRUE) 
- 
+renv::init(bare = TRUE)
+
 # or if you are starting a fresh repository but would like to move your existing packages over to renv:
 renv::init()
 ```
 
 Then ensure you have committed and pushed the relevant files (.Rprofile, renv.lock, and renv/activate.R) to your github repository.
-These should be the only files which git suggests you commit - you **should not** commit the whole contents of the renv folder created when initialising a project. 
+These should be the only files which git suggests you commit - you **should not** commit the whole contents of the renv folder created when initialising a project.
 
 Now you are ready to work on your project!
 
@@ -68,10 +68,10 @@ For instance, if you wanted to install `dplyr` and then update your package envi
 
 ```r
 # install a package (the default is the latest available)
-renv::install("dplyr") 
+renv::install("dplyr")
 # or install a specific version of a package
 renv::install("dplyr@0.8.5")
- 
+
 # snapshot your project
 renv::snapshot()
 
@@ -140,10 +140,9 @@ renv::use_python()
 |     Add a package from github    |   Use `renv::install("username/packagename")` or for a private package `renv::install("git@github.com:username/packagename.git")` |
 |     Upgrade all packages to latest    |   Run `renv::update()` or `renv::update("packagename")` for specific package. Always check that upgrading packages does not break your code before pushing to github for other users. |
 |     Update renv itself    |     `renv::upgrade()`. Useful if renv gains new functionality that you want to use.    |
-|     `Error in file(filename, "r", encoding = encoding) : 
-  cannot open the connection`    |     You've accidentally installed `renv` in your home directory 🏠 ! Delete [all of the files created by `renv`](https://rstudio.github.io/renv/articles/renv.html#infrastructure) from your home directory and retry.    |
-<div style="height:0px;font-size:0px;">&nbsp;</div>  
-  
+|     _Error in file(filename, "r", encoding = encoding) : cannot open the connection_    |     Oops, you've accidentally installed renv in your home directory 🏠 ! Delete [all of the files created by renv](https://rstudio.github.io/renv/articles/renv.html#infrastructure) from your home directory and retry.    |
+<div style="height:0px;font-size:0px;">&nbsp;</div>
+
 ## Conda
 
 **NB Use of `conda` is now considered outdated for Rstudio on the Analytical Platform.**
