@@ -56,7 +56,7 @@ renv::init()
 
 ```
 
-Then ensure you have committed and pushed the relevant files (.Rprofile, renv.lock, and renv/activate.R) to your github repository.
+Then ensure you have committed and pushed the relevant files (.Rprofile, renv.lock, and renv/activate.R) to your github repository. You **do not** need to commit the whole renv folder created when initialising a project. 
 
 Now you are ready to work on your project!
 
