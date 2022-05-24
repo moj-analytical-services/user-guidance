@@ -67,8 +67,10 @@ You can work on your project as normal now, but when you install new packages an
 For instance, if you wanted to install `dplyr` and then update your package environment then the process would be:
 
 ```r
-
+# install a package (the default is the latest available)
 renv::install("dplyr") 
+# or install a specific version of a package
+renv::install("dplyr@0.8.5")
  
 # snapshot your project
 renv::snapshot()
