@@ -143,7 +143,8 @@ renv::use_python()
 |     Add a package from github    |   Use `renv::install("username/packagename")` or for a private package `renv::install("git@github.com:username/packagename.git")` |
 |     Upgrade all packages to latest    |   Run `renv::update()` or `renv::update("packagename")` for specific package. Always check that upgrading packages does not break your code before pushing to github for other users. |
 |     Update renv itself    |     `renv::upgrade()`. Useful if renv gains new functionality that you want to use.    |
-
+|     `Error in file(filename, "r", encoding = encoding) : 
+  cannot open the connection`    |     You've accidentally installed `renv` in your home directory 🏠 ! Delete [all of the files created by `renv`](https://rstudio.github.io/renv/articles/renv.html#infrastructure) from your home directory and retry.    |
 ## Conda
 
 **NB Use of `conda` is now considered outdated for Rstudio on the Analytical Platform.**
