@@ -20,13 +20,14 @@ For Rstudio there is the added imperative to use a package manager (usually renv
 
 The basic renv commands are:
 
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 | Command | Description |
 |------------------|---------------------------------------------|
 | `renv::init()`      | first time a project is created |
 | `renv::install()`   | install new packages |
 | `renv::snapshot()`  | save a description of packages to renv.lock |
 | `renv::restore()`   | install packages to match renv.lock |
-
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 
 The following gives an overview of these basic renv commands.
 For more details check out the Coffee and Coding [video](https://web.microsoftstream.com/video/3ec54ac3-473c-4268-9d54-9f7096338824) and [slides](https://github.com/moj-analytical-services/Coffee-and-Coding/tree/master/2022-05-04%20Introduction%20to%20renv%20package%20management), or for a full guide to installing packages, workflow and installing custom packages please see the [introduction to renv website](https://rstudio.github.io/renv/articles/renv.html).
@@ -44,7 +45,6 @@ The only other things to note if you've not used renv before are:
 Basic commands to follow to install packages for renv are:
 
 ```r
-
 # install renv (if not already installed)
 install.packages(“renv”)
 
@@ -53,7 +53,6 @@ renv::init(bare = TRUE)
  
 # or if you are starting a fresh repository but would like to move your existing packages over to renv:
 renv::init()
-
 ```
 
 Then ensure you have committed and pushed the relevant files (.Rprofile, renv.lock, and renv/activate.R) to your github repository.
@@ -78,7 +77,6 @@ renv::snapshot()
 
 # don’t forget to commit
 # renv.lock!
-
 ```
 
 You can use `renv::install` or `install.packages` - renv will intercept any calls to `install.packages` and runs `renv::install` under the hood anyway.
@@ -88,13 +86,11 @@ You can use `renv::install` or `install.packages` - renv will intercept any call
 If you pick up someone else's project from github who has been using renv then simply run `renv::restore()` to update your local package environment so it matches the renv.lock file.
 
 ```r
-
 # clone the project into
 # Rstudio
 
 # grab the packages
 renv::restore()
-
 ```
 
 Any time you pull a commit where the renv.lock file has changed, you will need to `renv::restore()` in order to make sure your package enviroment matches to the new renv.lock file.
@@ -125,7 +121,7 @@ renv::use_python()
 
 ### Common pitfalls with renv
 
-
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 |     Situation    |     Why/What happens?    |
 |---|---|
 |     Packages   disappearing    |     You aren’t using renv!    |
@@ -133,10 +129,11 @@ renv::use_python()
 |     Switching branches    |     If different package requirements in   branches then must remember to `renv::restore()`   when switching between them – otherwise library reflects the previous branch    |
 |     Initialising renv   outside a project    |     renv will ask you not to do this – do not   use `force   = TRUE`!    |
 |     Stuck on old CRAN/MRAN    |     Packages (or versions) you know exist   won’t appear using install functions. Run `options(repos   = "cran.rstudio.com")`    |
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 
 ### renv tips and tricks
 
-
+<div style="height:0px;font-size:0px;">&nbsp;</div>
 |     Situation    |     Solution    |
 |---|---|
 |     Got into a total mess?    |     Start again! Run `renv::deactivate()` and then delete the renv.lock file and the renv/ folder   |
@@ -145,6 +142,8 @@ renv::use_python()
 |     Update renv itself    |     `renv::upgrade()`. Useful if renv gains new functionality that you want to use.    |
 |     `Error in file(filename, "r", encoding = encoding) : 
   cannot open the connection`    |     You've accidentally installed `renv` in your home directory 🏠 ! Delete [all of the files created by `renv`](https://rstudio.github.io/renv/articles/renv.html#infrastructure) from your home directory and retry.    |
+<div style="height:0px;font-size:0px;">&nbsp;</div>  
+  
 ## Conda
 
 **NB Use of `conda` is now considered outdated for Rstudio on the Analytical Platform.**
