@@ -40,7 +40,7 @@ You should ensure that DAGs or Roles across environments do not share write acce
 
 ## Define the DAG
 
-A DAG is defined in a Python script. An example of a DAG script is provided below, based on the example pipeline.
+A DAG is defined in a Python script. An example of a DAG script is provided below, based on the example pipeline. A few more example DAGs are available in [example_DAGS](https://github.com/moj-analytical-services/airflow/tree/main/environments/dev/dags/examples).
 
 ### DAG example
 
