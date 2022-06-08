@@ -7,13 +7,29 @@ Below are some key concepts in Airflow. What I discuss is covered in [this talk]
 
 *   [**Tasks**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html) These are the things you want to do. Let's say I want to run a script that does some basic data processing and then a second script that writes a report based on the processed data. You might want to model this as a set of tasks i.e. script1 -> script2
     
-*   [**Operator**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) Each task will have an `Operator` to run the task. There are loads of operators for example to run python or bash scripts or (as we mostly tend to do) launch docker containers based on images which contains the code
+*   [**Operator**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) Each task will have an `Operator` to run the task. There are loads of operators for example to run python or bash scripts or (as we mostly tend to do) launch docker containers based on images which contains the code. This is achieved using a Kubernetes cluster (more details below)
     
 *   [**DAG**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html) (Directed Acyclic Graph) is what Airflow groups a set of tasks together into a pipeline. DAGs have a schedule interval (a cron-expression of how often to start) "acyclic" because there can be branches and joins, but never loop back on itself. For example task A -> B -> C -> A is not allowed
     
 *   **Scheduler** As stated above you want to run airflow on a schedule. So you might want to run it every minute, hour, once every Tuesday at 4pm
     
 *   [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html) The Airflow UI makes it easy to monitor and troubleshoot your data pipelines. You can also use it to manually trigger your workflow
+
+
+What is Kubernetes
+------------------
+
+[Kubernetes](https://kubernetes.io/) is an open-source orchestration system for automating the deployment, scaling, and management of containers. You will not have access to the Kubernetes cluster but it's helpful to understand some key concepts.
+
+* [**Container**](https://www.docker.com/resources/what-container/) Technology for packaging the code for an application along with the dependencies it needs at run time
+
+* **Image** Stored instance of a Container that holds a set of software needed to run an application
+
+* **Docker** Software framework for building and running containers
+
+* **Cluster** A Kubernetes cluster is a set of worker machines, called nodes, to run the containers
+
+* [**Pod**](https://kubernetes.io/docs/concepts/workloads/pods/) Represents a set of running container(s) on your cluster
 
 
 Airflow Pipeline
@@ -25,9 +41,9 @@ Within the MoJ Analytical Platform, a typical Airflow pipeline consists of the f
 
 *   The DAG can be triggered by an analyst through the Airflow UI or through a schedule
 
-*   Instead of including the code within the DAG, we mainly use Kubernetes pod operators and pass in an image which contains the required python/R code. This mean the DAG will be a lightweight script and won’t read or process any data. This is vital when writing a DAG
+*   Instead of including the code within the DAG, we mainly use Kubernetes pod operators and pass in an image which contains the required python/R code. This mean the DAG will be a lightweight script and won’t read or process any data
     
-*   The Kubernetes pod operator launches a single-container [pod](https://kubernetes.io/docs/concepts/workloads/pods/) in a [Kubernetes](https://kubernetes.io/) cluster
+*   The Kubernetes pod operator launches a single-container pod in a Kubernetes cluster
     
 *   The pod will need permission to access various AWS resources (i.e. run an Athena query, read-write to a bucket, etc). This is achieved by assuming an [Identity and Access Management (IAM) role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) with the relevant permissions
     
