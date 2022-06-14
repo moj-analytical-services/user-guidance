@@ -6,13 +6,13 @@
     
 3.  Review the scripts/run.py file. This has some code to write and copy to S3. Leave as-is if you are creating an example pipeline. Otherwise replace with your own logic (see [Tips on writing the code](#Tips-on-writing-the-code))
     
-4.  Review the [Dockerfile](https://dsdmoj.atlassian.net/wiki/spaces/DEUD/pages/3944743134/Airflow+Pipelines+2.0+User+Guide#Dockerfile). The base image is set to python 3.9 by default, but you can use another image if you wish. Examples base images are commented out in the Dockerfile. See below for more details
+4.  Review the [Dockerfile](https://dsdmoj.atlassian.net/wiki/spaces/DEUD/pages/3944743134/Airflow+Pipelines+2.0+User+Guide#Dockerfile). The base image is set to python 3.9 by default, but you can use another image if you wish. Example base images are commented out in the Dockerfile. See below for more details.
     
 5.  Python libraries to install are specified in the [requirements.txt](https://dsdmoj.atlassian.net/wiki/spaces/DEUD/pages/3944743134/Airflow+Pipelines+2.0+User+Guide#requirements.txt) file. You can add more libraries to the requirements.txt file if required. See below for more details
     
 6.  Create a tag and release, ensuring Target is set on the main branch. Set the tag and release to v0.0.1 if you are creating an example pipeline
     
-7.  Go to the Actions tab and you should see the “Build, tag, push, and make available image to pods**”** action running
+7.  Go to the Actions tab and you should see the “Build, tag, push, and make available image to pods” action running
     
 8.  If you have permission, log in to [ECR](https://eu-west-1.console.aws.amazon.com/ecr/repositories?region=eu-west-1) and search for your image and tag.
     
@@ -41,7 +41,7 @@ You can also use conda, packrat, renv or other package management tools to captu
 
 ## Dockerfile
 
-A `Dockerfile` is a text file that contains the commands used to build a Docker image. It starts with a `FROM` directive, which specifies the [parent image](https://docs.docker.com/glossary/#parent-image) that your image is based on. Each subsequent declaration in the Dockerfile modifies this parent image. We have a range of parent images to chose from, including R images for running R code.
+A `Dockerfile` is a text file that contains the commands used to build a Docker image. It starts with a `FROM` directive, which specifies the [parent image](https://docs.docker.com/glossary/#parent-image) that your image is based on. Each subsequent declaration in the Dockerfile modifies this parent image. We have a range of parent images to chose from. R images have specific needs and you can base your Dockerfile on [airflow-sh-location](https://github.com/moj-analytical-services/airflow-sh-location/blob/master/Dockerfile). Alternatively you can wait until (template-airflow-r)[under construction] is ready.
 
 You can use the same Docker image for multiple tasks by passing an environment variable. In the [use\_kubernetes\_pod\_operator.py](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_kubernetes_pod_operators.py) example, we pass in the environment variable “write” and “copy” to first write to S3, then copy the file across, using the same `"template-airflow-python"` image.
 

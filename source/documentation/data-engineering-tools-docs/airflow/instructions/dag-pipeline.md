@@ -1,6 +1,6 @@
 # DAG pipeline
 
-Go to [airflow](https://github.com/moj-analytical-services/airflow). This repo contains the DAG definitions and roles used in our Airflow pipelines and is structured in the following way:
+The [airflow repo](https://github.com/moj-analytical-services/airflow) contains the DAG definitions and roles used in our Airflow pipelines and is structured in the following way:
 
 ```java
 airflow
@@ -49,17 +49,19 @@ from datetime import datetime
  
 from airflow.models import DAG
 from mojap_airflow_tools.operators import BasicKubernetesPodOperator
- 
-username = <<username>>
+
+username = {username}
 # As defined in the image repo
 IMAGE_TAG = "v0.0.1"
 REPO_NAME = f"airflow-{username}-example"
  
 """
-The role used by Airflow to run a task. This role must be specified 
-in the corresponding `roles/` folder in the same environment 
-(i.e. the role is defined in environments/dev/roles/example_role.yaml)
+The role used by Airflow to run a task. This role must be specified in the corresponding `roles/` folder in the same environment (i.e. the role is defined in environments/dev/roles/airflow_dev_{username}_example.yaml).
+
+The role must only contain alphanumeric or underscore characters [a-zA-Z0-9_]. This can be enforced using: 
+ROLE = re.sub(r"[\W]+", "", f"airflow_dev_{username}_example")
 """
+# ROLE = re.sub(r"[\W]+", "", f"airflow_dev_{username}_example")
 ROLE = f"airflow_dev_{username}_example"
  
 # For tips/advice on these args see the use_dummy_operator.py example
@@ -74,7 +76,7 @@ default_args = {
 dag = DAG(
     # Name of the dag (how it will appear on the Airflow UI)
     # We use the naming convention: <folder_name>.<filename>
-    dag_id=f"{username}.write_to_s3",
+    dag_id=f"{username}.copy_file_s3",
     default_args=default_args,
     description="A basic Kubernetes DAG",
     # Requires a start_date as a datetime object. This will be when the
@@ -127,7 +129,7 @@ In the example the schedule\_interval is set to None. The `schedule_interval` ca
 
 You can find more detailed guidance on DAG scripts, including on how to set up dependencies between tasks, in the [Airflow documentation](https://airflow.apache.org/docs/stable/tutorial.html).
 
-You can group multiple DAGs together in a folder making easier for others to understand how they relate to one another. This also allows you to add READMEs to these folders to again help others understand what the DAGs are for.
+You can group multiple DAGs together in a folder making it easier for others to understand how they relate to one another. This also allows you to add READMEs to these folders to again help others understand what the DAGs are for.
 
 **Actions**
 
@@ -135,14 +137,14 @@ You can group multiple DAGs together in a folder making easier for others to und
     
 2.  Create a new python file and give it an appropriate name. Name the file copy\_file\_s3.py if you are creating an example pipeline
     
-3.  If you are creating an example pipeline, paste the DAG example as-is but replace the <<username>> on line 10
+3.  If you are creating an example pipeline, paste the DAG example as-is but replace the "{username}" on line 10
     
 4.  If you are creating your own pipeline modify the IMAGE\_TAG, REPO\_NAME, ROLE, owner, dag\_id, scheduling and env\_vars as appropriate. You can also add additional tasks if required but stick to one DAG per python file.
     
 
 ### Using a High-Memory Node (Optional)
 
-You have the option to use a high-memory node for workloads that process large data sets in memory. Please note that a high-memory node is expensive to run so only use after testing and failing with a standard node. Also note that high-memory nodes need to be provisioned which means pods will take longer to start. Finally we have restricted the number of high-memory nodes that can be provisioned so please schedule appropriately.
+You have the option to use a high-memory node for workloads that process large data sets in memory (large datasets here typically meaning datasets larger than 2 GB). Please note that a high-memory node is expensive to run so only use after testing and failing with a standard node. Also note that high-memory nodes need to be provisioned which means pods will take longer to start. Finally we have restricted the number of high-memory nodes that can be provisioned so please schedule appropriately.
 
 Please see [use_high_memory_node.py](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_high_memory_node.py) for an example usage.
 
@@ -208,9 +210,9 @@ We use [IAM Builder](https://github.com/moj-analytical-services/iam_builder) to 
 
 1.  Create a new yaml file in airflow/dev/roles to store your IAM role policy. The name of the file must start with airflow\_dev and must match the `ROLE` variable in the DAG. Name the file airflow\_dev\_{username}\_example.yaml if you are creating an example pipeline
     
-2.  Define the IAM policy. You can include the field `iam_role_name` in your IAM config yaml but this must match the file name and the `ROLE` variable in the DAG. You only need to include the `iam_role_name` in the IAM config if you also have `glue_job: true` or `secrets: true`, otherwise it is optional.
+2.  Define the IAM policy. You can optionally include the field `iam_role_name` in your IAM config yaml but this must match the file name and the `ROLE` variable in the DAG. You only need to include the `iam_role_name` in the IAM config if you also have `glue_job: true` or `secrets: true`, otherwise it is optional.
     
-3.  If you are creating an example pipeline, paste the following code:
+3.  If you are creating an example pipeline, paste the following code, replacing "{username}" with your username:
     
 ```
 iam_role_name: airflow_dev_{username}_example
@@ -224,6 +226,8 @@ s3:
 
 The `airflow` repo validates the folder structure, DAGs (`validation.dags`) and Roles (`validation.roles`). The validation will run automatically when you raise a PR, but you can also validate using the command line to spot errors sooner.
 
+You’ll have to create and activate the python environment as specified in requirements-validation.txt. Make sure you are in the root of `airflow` repo and that you specify the full path to the file(s) you wish to validate
+
 The preferred method for running this validation is:
 
 ```java
@@ -232,7 +236,7 @@ flake8 .
 yamllint .
 ```
 
-You’ll have to create and activate the python environment as specified in requirements-validation.txt. Make sure you are in the root of `airflow` repo and that you specify the full path to the file(s) you wish to validate
+When running these tests for the example pipeline: `filepath1` should be `environments/dev/dags/{username}/copy_file_s3.py` and `filepath2` should be `environments/dev/roles/airflow_dev_{username}_example.yaml`
 
 ## Deploy the changes
 

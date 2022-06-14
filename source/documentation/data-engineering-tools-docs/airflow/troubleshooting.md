@@ -8,7 +8,7 @@
     
 *   This can be confusing when looking at the “Next Run” column on the UI, which gives the start time of the next interval. To find out the time when the job is next expected to run, click on the “i” which will give you the “Run After” time
     
-    ![](images/airflow/next-run.png)
+    ![](/source/images/airflow/next-run.png)
 *   Jobs using the high-memory nodes will take longer to start
     
 *   If you are using a package manager such a `renv`, `venv`, or `packrat`, you will need to ensure this environment is created _inside_ a folder that you have run `chmod` on (we would recommend this be your `WORKDIR`).
