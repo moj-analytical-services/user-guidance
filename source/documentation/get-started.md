@@ -172,11 +172,12 @@ If you're going to use RStudio or Jupyter then the next step should be:
 
 You may also need to access other services and tools on the Analytical Platform:
 
-* [Airflow](https://airflow.tools.alpha.mojanalytics.xyz)
 * [AWS console](https://aws.services.alpha.mojanalytics.xyz)
 * [Concourse](https://concourse.services.alpha.mojanalytics.xyz)
 * [Grafana](https://grafana.services.alpha.mojanalytics.xyz)
 * [Kibana](https://kibana.services.alpha.mojanalytics.xyz)
+
+The Data Engineering team also manages a set of [tools](/data-engineering-tools/index.html) such as Airflow.
 
 ## Contact us
 

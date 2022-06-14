@@ -42,7 +42,7 @@ There are multiple ways you can do this and it is up to you to determine how bes
 
 - You could manually run some code from your RStudio or JupyterLab environment that writes the necessary data to the app bucket whenever it needs updating
 - You could write an Airflow script that writes data from a database to the app bucket.
-- When updating data for Shiny apps you often need to restart the R session so it refreshes the cached data. You can do this using Airflow (to see how to do this search the [airflow dags repository](https://github.com/moj-analytical-services/airflow-dags) for the `BashOperator`).
+- When updating data for Shiny apps you often need to restart the R session so it refreshes the cached data. You can ask the AP team to create a cron job to automate this.
 
 #### Creating a database for your app
 

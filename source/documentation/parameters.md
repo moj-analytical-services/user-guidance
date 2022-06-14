@@ -71,36 +71,13 @@ results <- trains_api(Sys.getenv("api_username"), Sys.getenv("api_password"))
 
 The example `flights` Airflow pipeline will access a remote database. We'll set two parameters in the control panel:
 
-* Key: `db_username` Value: `moj_flight_db_user` Role_name: `airflow_flights`
-* Key: `db_password` Value: `G58aq&HF-FAKE-74PWtU` Role_name: `airflow_flights`
+* Key: `db_username` Value: `moj_flight_db_user` Role_name: `airflow_prod_flights`
+* Key: `db_password` Value: `G58aq&HF-FAKE-74PWtU` Role_name: `airflow_prod_flights`
 
-Add permissions to access these parameters to the role policy specified in the Airflow job's iam_policy.json:
+Add permissions to access these parameters to the role policy specified in the Airflow job's airflow_prod_flights.yaml:
 
-```json
-    {
-        "Sid": "readParams",
-        "Effect": "Allow",
-        "Action": [
-            "ssm:DescribeParameters",
-            "ssm:GetParameter",
-            "ssm:GetParameters",
-            "ssm:GetParameterHistory",
-            "ssm:GetParametersByPath"
-        ],
-        "Resource": [
-            "arn:aws:ssm:*:*:parameter/alpha/airflow/airflow_flights/*"
-        ]
-    },
-    {
-        "Sid": "allowDecrypt",
-        "Effect": "Allow",
-        "Action": [
-            "kms:Decrypt"
-        ],
-        "Resource": [
-            "arn:aws:kms:::key/*"
-        ]
-    }
+```yaml
+secrets: true
 ```
 
 The Airflow job will access the parameters like this:
@@ -108,7 +85,7 @@ The Airflow job will access the parameters like this:
 ```python
 from ssm_parameter_store import EC2ParameterStore
 store = EC2ParameterStore(region_name='eu-west-1')
-parameters = store.get_parameters_by_path('/alpha/airflow/airflow_flights/secrets/', strip_path=True, recursive=True)
+parameters = store.get_parameters_by_path('/alpha/airflow/airflow_prod_flights/secrets/', strip_path=True, recursive=True)
 db_username = parameters['db_username']
 db_password = parameters['db_password']
 ```
