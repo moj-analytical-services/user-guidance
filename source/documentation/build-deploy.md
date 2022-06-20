@@ -50,3 +50,6 @@ Your task appears in Concourse within 30 seconds. Find it in Concourse to start 
     ![Error state](images/build_and_deploy/concourse_error.png)
 
 Subsequent build/deploys are started about 5 seconds after doing a GitHub release (unless someone pressed the pause button on the Concourse task). You have to refresh Concourse in your browser to see a fresh build.
+
+### Upcoming Changes
+This page has been reviewed and updated on 20th June 2022. Please note that the process above will be changing once we migrate all Apps to the new EKS cluster, we will keep you updated but please check back here regularly for any updates.
