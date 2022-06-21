@@ -10,7 +10,6 @@ For the format of deploy.json, see the relevant subject:
 
 * [R Shiny app](../rshiny-app.html)
 * [Web app](../static-app.html)
-* [Airflow pipeline](../airflow.html)
 
 Changes to deploy.json only take effect when committed to GitHub (master branch), a Release is created and the deploy is successful (see [Scan organisation and deploy](/static-app.html#scan-organisation-and-deploy)).
 
