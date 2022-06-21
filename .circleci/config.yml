@@ -37,6 +37,7 @@ jobs:
       - attach_workspace:
           at: ~/project/docs/
       - aws-s3/sync:
+          arguments: '--delete'
           from: ~/project/docs
           to: "s3://user-guidance.analytical-platform.services.justice.gov.uk"
 
