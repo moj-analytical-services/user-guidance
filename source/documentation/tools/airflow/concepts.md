@@ -37,7 +37,7 @@ Airflow Pipeline
 
 Within the MoJ Analytical Platform, a typical Airflow pipeline consists of the following process. (Actions inside the grey box are automated)
 
-![](/source/images/airflow/airflow-pipeline.drawio.png)
+![](images/airflow/airflow-pipeline.drawio.png)
 
 *   The DAG can be triggered by an analyst through the Airflow UI or through a schedule
 
@@ -65,7 +65,7 @@ Note that you can skip this pipeline if you already have a working docker image 
 
 This deployment pipeline creates a docker image which contains the analytical code (python or R) that will be run in the dockerised task. Actions highlighted in grey are automated.
 
-![](/source/images/airflow/image-pipeline.drawio.png)
+![](images/airflow/image-pipeline.drawio.png)
 
 The image repo must contain the [build-and-push-to-ecr](https://github.com/moj-analytical-services/.github/blob/master/workflow-templates/data-engineering/build-and-push-to-ecr.yml) Github action to push the docker image to the Data Engineering [Elastic Container Registry](https://aws.amazon.com/ecr/) (ECR). This can be done by:
 
@@ -80,7 +80,7 @@ DAG Pipeline
 
 This deployment pipeline creates the [Directed Acyclic Graph (DAG)](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#) which defines the tasks that will be run, as well as the IAM role which the Kubernetes pod will need in order to access relevant AWS resources and services. Actions highlighted in grey are automated.
 
-![](/source/images/airflow/dag-pipeline.drawio.png)
+![](images/airflow/dag-pipeline.drawio.png)
 
 You must add the DAG and role policies to [airflow](https://github.com/moj-analytical-services/airflow) following specific rules. See [DAG pipeline](/data-engineering-tools/airflow/instructions/dag-pipeline) for more details. Once you raise the PR and it is approved by data engineering, various Github actions will automatically:
 

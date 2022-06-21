@@ -148,36 +148,10 @@ You have the option to use a high-memory node for workloads that process large d
 
 Please see [use_high_memory_node.py](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_high_memory_node.py) for an example usage.
 
-You’ll need to specify toleration and affinity:
+You’ll need to import the toleration and affinity:
 
 ```python
-tolerations = [
-    {
-        "key": "high-memory",
-        "operator": "Equal",
-        "value": "true",
-        "effect": "NoSchedule",
-    }
-]
-affinity = {
-    "nodeAffinity": {
-        "requiredDuringSchedulingIgnoredDuringExecution": {
-            "nodeSelectorTerms": [
-                {
-                    "matchExpressions": [
-                        {
-                            "key": "high-memory",
-                            "operator": "In",
-                            "values": [
-                                "true",
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    }
-}
+from imports.high_memory_constants import tolerations, affinity
 ```
 
 and add the following arguments to the KubernetesPodOperator:
