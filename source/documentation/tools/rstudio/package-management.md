@@ -1,4 +1,4 @@
-# R Package Management
+# R package management
 
 There are multiple package managers available for RStudio depending on the version you are using:
 

@@ -1,4 +1,4 @@
-# Python Package Management
+# Python package management
 
 ## venv and pip
 
@@ -6,7 +6,7 @@
 
 [PyPI](https://pypi.org) is the main Python package repository. It's 'official', but that doesn't mean a lot - like most of these open source package repositories, a poor quality or even malicious package can easily be uploaded there, so do your diligence when picking them.
 
-A [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) (or `venv`, for short) is a directory you can install a particular python executable and python packages into, away from your machine's default ones. Typically each project/repo you work on should have a different venv, and then you never have to deal with conflicting requirements between projects. When you 'activate' a particular venv, then when you run `python` or `pip`, then it will work with that venv's python executable and python packages.
+A [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) (or `venv`, for short) is a directory you can install a particular Python executable and Python packages into, away from your machine's default ones. Typically each project/repo you work on should have a different venv, and then you never have to deal with conflicting requirements between projects. When you 'activate' a particular venv, then run `python` or `pip`, those commands will work with that venv's Python executable and Python packages.
 
 ## Basic usage
 
@@ -19,7 +19,7 @@ cd myproject
 python3 -m venv venv
 ```
 
-(You'll probably want to add 'venv' to you .gitignore file, because this shouldn't be added to your git repo.)
+(Add 'venv' to your .gitignore file, because this shouldn't be added to your git repo.)
 
 When you work with your project's packages in a terminal, you'll want to 'activate' your venv:
 
@@ -48,7 +48,7 @@ pytz==2020.1
 six==1.15.0
 ```
 
-With the venv activated, if you run some python script from the terminal, the package will be available to it. e.g.
+With the venv activated, if you run a Python script from the terminal, the package will be available to it. For example:
 
 ```bash
 (venv) $ python3 -c 'import pandas; print(pandas); print("It worked")'
@@ -76,7 +76,7 @@ A project's README file is the traditional place to communicate usage of a requi
 ```markdown
 ## Setup
 
-Before you can run this project, you need some files setup in your home dir, using the terminal:
+Before you can run this project, you need to install some Python packages using the terminal:
 
     # create a virtual environment
     cd myproject
