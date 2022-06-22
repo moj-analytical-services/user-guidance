@@ -73,7 +73,7 @@ The image repo must contain the [build-and-push-to-ecr](https://github.com/moj-a
 * copying [template-airflow-r] (under construction) for R images
 * copying the Github action to an existing image repo
 
-Please see [Image pipeline](/data-engineering-tools/airflow/instructions/image-pipeline) for more details.
+Please see [Image pipeline](/data-engineering/airflow/instructions/image-pipeline) for more details.
 
 DAG Pipeline
 ---------------------
@@ -82,7 +82,7 @@ This deployment pipeline creates the [Directed Acyclic Graph (DAG)](https://airf
 
 ![](images/airflow/dag-pipeline.drawio.png)
 
-You must add the DAG and role policies to [airflow](https://github.com/moj-analytical-services/airflow) following specific rules. See [DAG pipeline](/data-engineering-tools/airflow/instructions/dag-pipeline) for more details. Once you raise the PR and it is approved by data engineering, various Github actions will automatically:
+You must add the DAG and role policies to [airflow](https://github.com/moj-analytical-services/airflow) following specific rules. See [DAG pipeline](/data-engineering/airflow/instructions/dag-pipeline) for more details. Once you raise the PR and it is approved by data engineering, various Github actions will automatically:
 
 *   validate the DAG and policies adhere to the rules
 *   notify DE through a slack notification

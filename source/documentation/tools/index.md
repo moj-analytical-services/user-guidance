@@ -36,4 +36,3 @@ The Analytical Platform community maintain the following R packages:
 
 * [dbtools](https://github.com/moj-analytical-services/dbtools)
 * [Rdbtools](https://github.com/moj-analytical-services/Rdbtools)
-* [botor]

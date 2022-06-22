@@ -12,11 +12,11 @@ These instructions will show you how to build and run a standard Airflow pipelin
 
 ## Create image and save to ECR
 
-See [Image pipeline](/data-engineering-tools/airflow/instructions/image-pipeline)
+See [Image pipeline](/data-engineering/airflow/instructions/image-pipeline)
 
 ## Create DAG and IAM Role
 
-See [DAG pipeline](/data-engineering-tools/airflow/instructions/dag-pipeline)
+See [DAG pipeline](/data-engineering/airflow/instructions/dag-pipeline)
 
 ## Run the Airflow Pipeline
 
