@@ -23,10 +23,10 @@ Airflow can be used to:
 
 - [Airflow template for R](https://github.com/moj-analytical-services/template-airflow-r): Github template repository for creating an R image to run an Airflow pipeline
 
-- [Airflow pipeline concepts](/data-engineering/airflow/concepts)
+- [Airflow pipeline concepts](/tools/airflow/concepts)
 
-- [Airflow Pipeline Instructions](/data-engineering/airflow/instructions): Step by step guide for creating an example Airflow pipeline and related resources 
+- [Airflow Pipeline Instructions](/tools/airflow/instructions): Step by step guide for creating an example Airflow pipeline and related resources 
 
-- [Troubleshooting Airflow Pipelines](/data-engineering/airflow/troubleshooting)
+- [Troubleshooting Airflow Pipelines](/tools/airflow/troubleshooting)
 
 - Support: contact the Data Engineering team on the #ask-data-engineering Slack channel
