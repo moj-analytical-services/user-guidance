@@ -1,6 +1,6 @@
 # Build and Deploy
 
-**Concourse** is the Analytical Platform service that automatically builds and deploys R Shiny apps, Web apps and Airflow data pipelines. This is also known as 'continuous integration' and 'continuous deployment' (CI/CD).
+**Concourse** is the Analytical Platform service that automatically builds and deploys R Shiny apps and Web apps. This is also known as 'continuous integration' and 'continuous deployment' (CI/CD).
 
 ## deploy.json
 
