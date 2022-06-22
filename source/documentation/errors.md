@@ -106,13 +106,10 @@ conda install packagename
 ```
 Don't forget to add this new environment to your currently active `.libPath()`, which is done in the console.
 
-## Unable to access data using `aws.s3` package.
-
-Unfortuntely `aws.s3` does not support the granular file access permission model we are using on the platform.  Specifically, it is unable to automatically provide the user with the right file access credentials.  We provide `s3tools` as a solution to this problem, which manages your credentials for you.
-
-We recommend that, where possible, users should use `s3tools`.  Where this is not possible, include a call to `s3tools::get_credentials()` prior to making the call to `aws.s3`, and this will guarantee that fresh credentials are generated before your call to `aws.s3`
 
 ## `s3tools::s3_path_to_full_df()` fails on Excel file
+
+**Note that `s3tools` has now been deprecated in favour of `Rs3tools`. We are retaining this information here in case of similar errors in `Rs3tools` as the general advice may be relevant.**
 
 `s3tools::s3_path_to_full_df` attempts to read in data from various filetypes, including Excel, but this sometimes fails.
 
