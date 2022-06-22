@@ -14,7 +14,7 @@ Key Points:
 - [RStudio 1.4](https://rstudio.com/products/rstudio/#rstudio-server)
 - [R version 4.0.3](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)
 
-As Conda has now been removed. You will need to install packages using Renv. See [package management](package-management.html#renv)
+Conda has now been removed. You will need to install packages using Renv. See [package management](package-management.html)
 
 ### Preparation
 

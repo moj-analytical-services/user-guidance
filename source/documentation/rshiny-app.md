@@ -100,13 +100,7 @@ By default, the template contains `server.R` and `ui.R` files. However, you may 
 
 Most apps will have dependencies on various third-party packages (for example, `dplyr`).
 
-In your project repository you will need a file that lists your dependencies. We use 'package management' to manage these lists. The packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as renv,  conda, or packrat. For further guidance see the [package management](tools.html#managing-your-analytical-tools) section.
-
-if using renv, see [Dockerized Shiny Apps with Dependencies](https://hosting.analythium.io/dockerized-shiny-apps-with-dependencies/).
-
-If using conda, you will need to [export your dependencies](tools.html#exporting-your-environment) to an `environment.yml` file.
-
-If using packrat, you will need to [export your dependencies](tools.html#packrat-usage) to a `packrat/packrat.lock` file.
+In your project repository you will need a file that lists your dependencies. We use 'package management' to manage these lists. The packages change through time and may not always be backwards compatible. To avoid compatibility issues and ensure reproducible outputs, it is necessary to use a package management system, such as renv,  conda, or packrat. For further guidance see the [R package management](tools/rstudio/package-management.html) section.
 
 The Dockerfile in the app's repository contains a command to install the packages in the list. This command will be run when Concourse builds the app.
 
@@ -195,7 +189,7 @@ This means your R code is trying to use a package ('lpsolve' in this example), b
 To try to fix this you should:
 
 * explicitly reference all third-party packages using the double colon operator (i.e. use `shiny::hr()` as opposed to `hr()`)
-* check if the package is specified in your repo's environment.yml (if using Conda) / packrat.lock (if using Packrat). If it is not, use re-export your environment - [conda instructions](tools.html#exporting-your-environment) / `packrat::snapshot()`
+* check if the package is specified in your repo's environment.yml (if using Conda) / packrat.lock (if using Packrat). If it is not, use re-export your environment / `packrat::snapshot()` (see [R Package Management](tools/rstudio/package-management.html))
 
 In general, it is also good practice to:
 

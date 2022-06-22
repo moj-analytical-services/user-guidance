@@ -37,7 +37,7 @@ You can work on a dataset that is bigger than your memory by reading in a bit of
 
 Our laptops tend to have only 8GB or 16GB, so it's an advantage of the AP that we can offer more. We are open to increasing the maximum memory, so let us know if you need more, to help us justify the additional cost.
 
-See also the [RStudio memory issues](tools.html#rstudio-memory-issues) section.
+See also the [RStudio memory issues](tools/rstudio/index.html#rstudio-memory-issues) section.
 
 ## What are the benefits of Github and why do we recommend it?
 
