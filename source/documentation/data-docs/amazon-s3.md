@@ -120,7 +120,7 @@ This section presents a comparison of the various tools available for accessing 
 
 The AWS S3 Console is a browser-based GUI tool. You can use the Amazon S3 console to view an overview of an object. The object overview in the console provides all the essential information for an object in one place.
 
-For further details, see [#amazon-s3-console].
+For further details, see the [guide](#amazon-s3-console) further down the page.
 
 #### RStudio
 
@@ -139,11 +139,12 @@ If you need the additional functionality available in `botor`, a guide to migrat
 
 In addition, an RStudio plugin, `s3browser` is available if you only want to browse your files.
 
-For further details, see the sections below on [#rs3tools], [#botor] and [#s3browser].
+For further details, see the sections below on [`Rs3tools`](#rs3tools), [`botor`](#botor) and [`s3browser`](#s3browser).
 
 #### JupyterLab
 
-The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab are : 
+The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab are :
+
 - Reading files : ```pandas``` , ```mojap-arrow-pd-parser``` 
 - Downloading / Uploading files : ```boto3```
 
@@ -182,28 +183,21 @@ To install `Rs3tools` follow the guidance on their [homepage](https://github.com
 To upload files using `Rs3Tools`
 
 Writing files to S3
-```
-    Rs3tools::write_file_to_s3("my_downloaded_file.csv", "alpha-everyone/delete/my_downloaded_file.csv")
 
-    # By default, if the file already exists you will receive an error.  To override:
-    Rs3tools::write_file_to_s3("my_downloaded_file.csv", "alpha-everyone/delete/my_downloaded_file.csv", overwrite =TRUE)
+```r
+Rs3tools::write_file_to_s3("my_downloaded_file.csv", "alpha-everyone/delete/my_downloaded_file.csv", overwrite=TRUE)  # if file already exists, you recieve an error. overwrite=True enables it to overwrite the file
 ```
 
 Writing a dataframe to S3 in csv format
-```
-    Rs3tools::write_df_to_csv_in_s3(dataframe_name, "alpha-everyone/delete/iris.csv")
 
-    # By default, if the file already exists you will receive an error.  To override:
-    Rs3tools::write_df_to_csv_in_s3(dataframe_name, "alpha-everyone/delete/iris.csv", overwrite =TRUE)
+```r
+Rs3tools::write_df_to_csv_in_s3(dataframe_name, "alpha-everyone/delete/iris.csv", overwrite =TRUE)
 ```
 
 Downloading a file from S3 using `Rs3Tools`
 
-```
-    Rs3tools::download_file_from_s3("alpha-everyone/s3tools_tests/iris_base.csv", "my_downloaded_file.csv")
-
-    # By default, if the file already exists you will receive an error.  To override:
-    Rs3tools::download_file_from_s3("alpha-everyone/s3tools_tests/iris_base.csv", "my_downloaded_file.csv", overwrite =TRUE)
+```r
+Rs3tools::download_file_from_s3("alpha-everyone/s3tools_tests/iris_base.csv", "my_downloaded_file.csv", overwrite =TRUE)
 ```
 
 ##### botor
@@ -212,36 +206,43 @@ You will need to use the package manager `renv` to install `botor`.
 To get started with `renv`, see our guidance on the [RStudio package management page](../tools/package-management.html#renv).
 
 Then, go ahead with the `botor` installation (this is slightly different from the guidance on [`botor`'s website](https://daroczig.github.io/botor/#installation) as we use the `renv` package manager):
+
 ```r
-    renv::use_python()    ## at the prompt, choose to use python3
-    renv::install('reticulate')
+renv::use_python()    ## at the prompt, choose to use python3
+renv::install('reticulate')
 ```
+
 Restart the session (Ctrl+Alt+F10 on a Windows machine). And then:
+
 ```r
-    reticulate::py_install('boto3')
-    renv::install('botor')
+reticulate::py_install('boto3')
+renv::install('botor')
 ```
 
 botor contains two functions for downloading or reading files from Amazon S3:
+
 ```r
-    s3_upload_file
-    s3_write
+s3_upload_file
+s3_write
 ```
 For example, to write a dataframe to csv, run the following code:
+
 ```r
-    library(botor)
-    s3_write(your_df, write.csv, "s3://your_bucket/your_key.csv")
+library(botor)
+s3_write(your_df, write.csv, "s3://your_bucket/your_key.csv")
 ```
 
 To read files, use one of the following:
+
 ```r
-    s3_download_file
-    s3_read
+s3_download_file
+s3_read
 ```
 And use as follows:
+
 ```r
-    library(botor)
-    your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
+library(botor)
+your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
 ```
 
 You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
@@ -278,22 +279,17 @@ pip install arrow-pd-parser
 To read/write a csv file from s3:
 
 ```python
-
 from arrow_pd_parser import reader, writer
 
-# Specifying the reader
-# Both reader statements are equivalent and call the same readers
-# under the hood
+# Specifying the reader Both reader statements are equivalent and call the same readers under the hood
 df1 = reader.read("s3://bucket_name/data/all_types.csv", file_format="csv")
 df2 = reader.csv.read("s3://bucket_name/data/all_types.csv")
 
 # You can also pass the reader args to the reader as kwargs
 df3 = reader.csv.read("s3://bucket_name/data/all_types.csv", nrows = 2)
-
 # The writer API has the same functionality
 writer.write(df1, file_format="parquet")
 writer.parquet.write(df1)
-
 ```
 
 `mojap-arrow-pd-parser` infers the file type from the extension, so for example `reader.read("s3://bucket_name/file.parquet")` would read a parquet file without need for specifying the file type.
@@ -330,7 +326,7 @@ pip install boto3
 
 To download a file from Amazon S3, you should use the following code:
 
-```
+```python
 import boto3
 
 s3 = boto3.resource('s3')
@@ -342,14 +338,14 @@ If you receive an `ImportError`, try restarting your kernel, so that Python reco
 Here, you should substitute `'bucket_name'` with the name of the bucket, `'key'` with the path of the object in Amazon S3 and `local_path` with the local path where you would like to save the downloaded file.
 
 To upload a file to Amazon S3, you should use the following code:
-```
+
+```python
 #Upload sample contents to s3
 s3 = boto3.client('s3')
 data = b'This is the content of the file uploaded from python boto3'
 file_name='your_file_name.txt'
 response =s3.put_object(Bucket= your_bucket_name,Body= data,Key= file_name)
 print('AWS response code for uploading file is '+str(response['ResponseMetadata']['HTTPStatusCode']))
-
 ```
 
 You can find more information in the [package documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Object.download_file).
