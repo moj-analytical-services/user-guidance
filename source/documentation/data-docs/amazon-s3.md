@@ -132,10 +132,9 @@ The installation process for `botor` takes longer as it requires a Python enviro
 
 Generally, we recommend using `Rs3tools` unless there is a specific need for the additional functionality in `botor`.
 
-You may also see mentions of another tool, `s3tools`.
-`s3tools` is now deprecated and has been replaced by `Rs3tools`.
-Most of the original functionality is available via `Rs3tools`, so this is a good replacement if you are looking to update older code that relied on the `s3tools` package.
-If you need the additional functionality available in `botor`, a guide to migration is available [here](https://user-guidance.services.alpha.mojanalytics.xyz/appendix/botor.html#migrating-to-botor).
+You may also see mentions of another tool, `s3tools`. `s3tools` is now deprecated and has been replaced by `Rs3tools`.More information is available in this [ADR Record](https://silver-dollop-30c6a355.pages.github.io/documentation/30-architecture/40-architecture-decision-records/104-ADR104-replacing-s3tools.html#adr104-replacing-s3tools-with-botor)
+
+Most of the original functionality is available via `Rs3tools`, so this is a good replacement if you are looking to update older code that relied on the `s3tools` package.If you need the additional functionality available in `botor`, a guide to migration is available [here](https://user-guidance.services.alpha.mojanalytics.xyz/appendix/botor.html#migrating-to-botor).
 
 In addition, an RStudio plugin, `s3browser` is available if you only want to browse your files.
 

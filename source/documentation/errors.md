@@ -109,7 +109,7 @@ Don't forget to add this new environment to your currently active `.libPath()`, 
 
 ## `s3tools::s3_path_to_full_df()` fails on Excel file
 
-**Note that `s3tools` has now been deprecated in favour of `Rs3tools`. We are retaining this information here in case of similar errors in `Rs3tools` as the general advice may be relevant.**
+**Note that `s3tools` has now been deprecated in favour of `Rs3tools`. We are retaining this information here in case of similar errors in `Rs3tools` as the general advice may be relevant.** More information is available in this [ADR Record](https://silver-dollop-30c6a355.pages.github.io/documentation/30-architecture/40-architecture-decision-records/104-ADR104-replacing-s3tools.html#adr104-replacing-s3tools-with-botor)
 
 `s3tools::s3_path_to_full_df` attempts to read in data from various filetypes, including Excel, but this sometimes fails.
 
