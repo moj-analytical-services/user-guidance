@@ -3,7 +3,7 @@
 What is Airflow
 ---------------
 
-Below are some key concepts in Airflow. What is discuss is covered in [this talk](https://drive.google.com/file/d/1DVN4HXtOC-HXvv00sEkoB90mxLDnCIKc/view?usp=sharing).
+Below are some key concepts in Airflow. What is discussed is covered in more detail in [this talk](https://drive.google.com/file/d/1DVN4HXtOC-HXvv00sEkoB90mxLDnCIKc/view?usp=sharing).
 
 *   [**Tasks**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html) These are the things you want to do; the building blocks of the pipeline. Let's say I want to run a script that does some basic data processing when a specific file is created in a particular location. Once this processing is done, a second script writes a report based on the processed data. You might want to model this as a set of tasks i.e. file_created_sensor -> script_1 -> script_2.
     
@@ -19,15 +19,17 @@ Below are some key concepts in Airflow. What is discuss is covered in [this talk
 What is Kubernetes
 ------------------
 
-[Kubernetes](https://kubernetes.io/) is an open-source orchestration system for automating the deployment, scaling, and management of containers. You will not have access to the Kubernetes cluster but it's helpful to understand some key concepts.
+[Kubernetes](https://kubernetes.io/) is an open-source orchestration system for automating the deployment, scaling, and management of containers. We use it in conjunction with Airflow to run Airflow pipelines. You will not have access to the Kubernetes cluster but it's helpful to understand the key concepts.
 
 * [**Container**](https://www.docker.com/resources/what-container/) The term to describe a portable software package of code for an application along with the dependencies it needs at run time. Containers isolate software from its environment and ensure that it works uniformly regardless of underlying infrastructure (e.g. running on Windows vs. Linux).
 
 * [**Image**](https://docs.docker.com/get-started/overview/#images) act as a set of instructions to build a container, like a template.
 
-* **Docker** Software framework for building and running containers.
+* [**Docker**](https://www.docker.com/) Software framework for building and running containers.
 
-* **Cluster** A Kubernetes cluster is a set of connected worker machines, called nodes, to run the containers.
+* [**Cluster**](https://kubernetes.io/docs/concepts/overview/components/) When you deploy Kubernetes, you get a cluster. A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications.
+
+* [**Node**](https://kubernetes.io/docs/concepts/architecture/nodes/) Kubernetes runs your workload by placing containers into Pods to run on Nodes. A node may be a virtual or physical machine, depending on the cluster. Kubernetes can create nodes with different specifications (e.g. high-memory) and force pods to run on specific nodes.
 
 * [**Pod**](https://kubernetes.io/docs/concepts/workloads/pods/) a group of one or more containers with shared resources, and a specification for how to run the containers.
 
@@ -117,5 +119,3 @@ When not to use an Airflow
 --------------------------
 
 *   to trigger an Analytical Platform app (the Analytical Platform team can create cron jobs for this)
-    
-*   to trigger a one-time memory-intensive overnight task (it will be quicker to create a cron job for this)

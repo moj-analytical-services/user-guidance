@@ -7,7 +7,7 @@
 Airflow can be used to:
 
 - run tasks on a regular schedule
-- run tasks on a high-memory node
+- run memory-intensive workloads
 - run end-to-end processing workflows involving multiple steps and dependencies
 - monitor the performance of workflows and identify issues
 
