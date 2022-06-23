@@ -103,14 +103,15 @@ To remove a user from the data access group:
 
 ## Interacting with Amazon S3 via the Analytical Platform
 
-You can upload or download files to/from Amazon S3 from your local computer or from
+You can upload files to Amazon S3 from your local computer or download files from Amazon S3 to your local computer using below tools
+
 - Amazon S3 console
 - RStudio
 - JupyterLab
 
 When uploading files to Amazon S3, you should ensure that you follow all necessary [information governance](../../information-governance.html) procedures. In particular, you must complete a data movement form when moving any data onto the Analytical Platform.
 
-**Check about policy for downloading data**
+Downloading the data from Amazon S3 to your local machine is also considered as data movement and therefore needs to be managed as such in accordance with the necessary [information governance](../../information-governance.html) procedures, particularly for Personal Identifiable Information.
 
 ### Your options
 
