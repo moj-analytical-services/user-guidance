@@ -18,8 +18,9 @@ The data engineering team maintain a number of databases on the Analytical Platf
 
 ### Data Uploader
 Under construction
+
 ### Create a Derived Table
-Under construction
+Implements a tool called dbt, for creating persistent derived tables in Athena. Visit the [Create a Derived Table repo](https://github.com/moj-analytical-services/create-a-derived-table) to see progress, or sign up for testing on the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) Slack channel.
 
 ### Python packages
 
