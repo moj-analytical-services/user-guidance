@@ -54,6 +54,9 @@ username = {username}
 # As defined in the image repo
 IMAGE_TAG = "v0.0.1"
 REPO_NAME = f"airflow-{username}-example"
+# This can be any number. 
+# In the case of R images, it must match the userid in the dockerfile
+USER_ID = 1337
  
 """
 The role used by Airflow to run a task. This role must be specified in the corresponding `roles/` folder in the same environment (i.e. the role is defined in environments/dev/roles/airflow_dev_{username}_example.yaml).
@@ -106,7 +109,7 @@ for the task_id value.
 task_id = "task-1"
 task = BasicKubernetesPodOperator(
     dag=dag,
-    run_as_user=1234,
+    run_as_user=USER_ID,
     repo_name=REPO_NAME,
     release=IMAGE_TAG,
     role=ROLE,
