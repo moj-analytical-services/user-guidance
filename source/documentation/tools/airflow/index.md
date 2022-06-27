@@ -1,6 +1,6 @@
 # Airflow
 
-> Airflow is a platform created by the community to programmatically author, schedule and monitor workflows
+> Airflow is a platform to programmatically author, schedule and monitor workflows
 >
 > Source: [Airflow](https://airflow.apache.org)
 
