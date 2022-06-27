@@ -101,15 +101,58 @@ To remove a user from the data access group:
 1.  Select __Edit access level__ next to the name of the user.
 2.  Select __Revoke access__.
 
-## Upload files to Amazon S3
+## Interacting with Amazon S3 via the Analytical Platform
 
-You can upload files to Amazon S3 from your local computer or from RStudio or JupyterLab.
+You can upload files to Amazon S3 from your local computer or download files from Amazon S3 to your local computer using below tools
+
+- Amazon S3 console
+- RStudio
+- JupyterLab
 
 When uploading files to Amazon S3, you should ensure that you follow all necessary [information governance](../../information-governance.html) procedures. In particular, you must complete a data movement form when moving any data onto the Analytical Platform.
 
-### Amazon S3 Console
+Downloading the data from Amazon S3 to your local machine is also considered as data movement and therefore needs to be managed as such in accordance with the necessary [information governance](../../information-governance.html) procedures, particularly for Personal Identifiable Information.
 
-You can use the Amazon S3 Console to upload files from your local computer (for example, personal or shared storage on DOM1 or Quantum) only.
+### Your options
+
+This section presents a comparison of the various tools available for accessing Amazon S3 on each platform; further details on setup and usage are given below.
+
+#### AWS Console
+
+The AWS S3 Console is a browser-based GUI tool. You can use the Amazon S3 console to view an overview of an object. The object overview in the console provides all the essential information for an object in one place.
+
+For further details, see the [guide](#amazon-s3-console) further down the page.
+
+#### RStudio
+
+There are two main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via RStudio: `Rs3tools` and `botor`. Either of these options works well on the Analytical Platform, and you should pick whichever best suits your use-case.
+
+`Rs3tools` is an R-native community-developed MoJ project which consists of a set of helper tools to access Amazon S3 buckets on the Analytical Platform.
+
+The installation process for `botor` takes longer as it requires a Python environment (`botor` is a wrapper around Python's `boto3` library). However, it contains a larger range of functionality.
+
+Generally, we recommend using `Rs3tools` unless there is a specific need for the additional functionality in `botor`.
+
+You may also see mentions of another tool, `s3tools`. `s3tools` is now deprecated and has been replaced by `Rs3tools`.More information is available in this [ADR Record](https://silver-dollop-30c6a355.pages.github.io/documentation/30-architecture/40-architecture-decision-records/104-ADR104-replacing-s3tools.html#adr104-replacing-s3tools-with-botor)
+
+Most of the original functionality is available via `Rs3tools`, so this is a good replacement if you are looking to update older code that relied on the `s3tools` package.If you need the additional functionality available in `botor`, a guide to migration is available [here](https://user-guidance.services.alpha.mojanalytics.xyz/appendix/botor.html#migrating-to-botor).
+
+In addition, an RStudio plugin, `s3browser` is available if you only want to browse your files.
+
+For further details, see the sections below on [`Rs3tools`](#rs3tools), [`botor`](#botor) and [`s3browser`](#s3browser).
+
+#### JupyterLab
+
+The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab are :
+
+- Reading files : ```pandas``` , ```mojap-arrow-pd-parser``` 
+- Downloading / Uploading files : ```boto3```
+
+### Installation and usage
+
+#### Amazon S3 Console
+
+You can use the Amazon S3 Console to upload/download files from/to your local computer (for example, personal or shared storage on DOM1 or Quantum) only.
 
 To upload files using the Amazon S3 Console:
 
@@ -119,145 +162,93 @@ To upload files using the Amazon S3 Console:
 4.  Select the bucket and folder you want to upload files to.
 5.  Select __Upload__.
 6.  Select __Add files__ or drag and drop the files you want to upload.
-7.  Select __Upload__ -- you do not need to complete steps 2, 3 or 4.
+7.  Select __Upload__.
 
-You can also directly navigate to a bucket in the AWS S3 Console by selecting __Open on AWS__ in the Analytical Platform control panel.
+Downloading a file using the Amazon S3 Console follows a similar process:
 
-### RStudio
+1.  Follow steps 1-3 from the list above.
+2.  Navigate to the bucket and select the file you want to download.
+3.  Select __Download__ or __Download as__ as appropriate.
 
-#### `s3tools` / `Rs3tools`
+You can also directly navigate to a bucket in the AWS S3 Console by selecting __Open on AWS__ in the Analytical Platform Control Panel.
 
-s3tools is now deprecated on the Analytical Platform due to changes in how the system allows users to connect to S3. If you are starting a new project, we'd advise using [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) or [botor](../../appendix/botor.html) for anything involving buckets on the platform. If you have existing code using s3tools, the community maintained [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) may be the better option.
 
-#### `botor`
+#### RStudio
 
-`botor` will replace `s3tools` on newer versions of RStudio which use `renv` for managing environments. If your project isn’t yet set up to use renv, before you start installing packages, you need to enable for your project in RStudio. You do this by navigating to the Tools menu and going through the following steps:
+##### Rs3tools
 
-Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
+To install `Rs3tools` follow the guidance on their [homepage](https://github.com/moj-analytical-services/Rs3tools#installation).
 
-It requires the Python package `boto3` and will be installed by running the following code:
 
-```{r install-botor-write, eval=FALSE}
-## If you are starting a fresh repository, run this:
-renv::init(bare = TRUE)
+To upload files using `Rs3Tools`
 
-## or if you are starting a fresh repository but would like to move your existing packages over to renv:
-renv::init()
+Writing files to S3
 
-## or if you already have renv set, don't `init` the `renv` at all.
+```r
+Rs3tools::write_file_to_s3("my_downloaded_file.csv", "alpha-everyone/delete/my_downloaded_file.csv", overwrite=TRUE)  # if file already exists, you recieve an error. overwrite=True enables it to overwrite the file
+```
 
-## then, go ahead with the botor installation:
-renv::use_python() ## at the prompt, choose to use python3
+Writing a dataframe to S3 in csv format
+
+```r
+Rs3tools::write_df_to_csv_in_s3(dataframe_name, "alpha-everyone/delete/iris.csv", overwrite =TRUE)
+```
+
+Downloading a file from S3 using `Rs3Tools`
+
+```r
+Rs3tools::download_file_from_s3("alpha-everyone/s3tools_tests/iris_base.csv", "my_downloaded_file.csv", overwrite =TRUE)
+```
+
+##### botor
+
+You will need to use the package manager `renv` to install `botor`.
+To get started with `renv`, see our guidance on the [RStudio package management page](../tools/package-management.html#renv).
+
+Then, go ahead with the `botor` installation (this is slightly different from the guidance on [`botor`'s website](https://daroczig.github.io/botor/#installation) as we use the `renv` package manager):
+
+```r
+renv::use_python()    ## at the prompt, choose to use python3
 renv::install('reticulate')
+```
 
-## Restart the session (Ctrl+Alt+F10 on a windows machine). And then:
+Restart the session (Ctrl+Alt+F10 on a Windows machine). And then:
 
+```r
 reticulate::py_install('boto3')
 renv::install('botor')
 ```
 
-`botor` contains two functions for downloading or reading files from Amazon S3:
+botor contains two functions for downloading or reading files from Amazon S3:
 
-* `s3_upload_file`
-* `s3_write`
-
+```r
+s3_upload_file
+s3_write
+```
 For example, to write a dataframe to csv, run the following code:
 
-```{r botor-read-example}
+```r
 library(botor)
 s3_write(your_df, write.csv, "s3://your_bucket/your_key.csv")
 ```
 
+To read files, use one of the following:
+
+```r
+s3_download_file
+s3_read
+```
+And use as follows:
+
+```r
+library(botor)
+your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
+```
+
 You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
 
-### JupyterLab
 
-#### `mojap-arrow-pd-parser`
-
-Snappily named `mojap-arrow-pd-parser` provides easy csv, jsonl and parquet file writers. To install in terminal:
-
-```bash
-pip install arrow-pd-parser
-```
-
-To write a dataframe (df) to a csv file in s3:
-
-```python
-from arrow_pd_parser import writer
-writer.write(df, "s3://bucket_name/file.csv")
-```
-
-`mojap-arrow-pd-parser` infers the file type from the extension, so for example `writer.write(df, "s3://bucket_name/file.snappy.parquet")` would write a (snappy compressed) parquet file without need for specifying the file type.
-
-The package also has a lot of other functionality including specifying data types when writing (or reading). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
-
-#### `boto3`
-
-You can upload files in JupyterLab on the Analytical Platform to Amazon S3 using the `boto3` package.
-
-You can install `boto3` by running the following code in a terminal:
-
-```
-pip install boto3
-```
-
-To upload a file to Amazon S3, use the following code:
-
-```
-import boto3
-
-s3 = boto3.resource('s3')
-s3.Object('bucket_name', 'key').put(Body=object)
-```
-
-If you receive an `ImportError`, try restarting your kernel, so that Python recognises your `boto3` installation.
-
-Here, you should substitute `'bucket_name'` with the name of the bucket, `'key'` with the path of the object in Amazon S3 and `object` with the object you want to upload.
-
-You can find more information in the [package documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Object.put).
-
-## Download or read files from Amazon S3
-
-### Amazon S3 Console
-
-You can use the Amazon S3 Console to download files to your local computer (for example, personal or shared storage on DOM1 or Quantum) only.
-
-To download a file using the Amazon S3 Console:
-
-1.  Log in to the [AWS Management Console](https://aws.services.alpha.mojanalytics.xyz) using your Analytical Platform account.
-2.  Select __Services__ from the menu bar.
-3.  Select __S3__ from the drop down menu.
-4.  Select the file you want to download.
-5.  Select __Download__ or __Download as__ as appropriate.
-
-You can also directly navigate to a bucket in the AWS S3 Console by selecting __Open on AWS__ in the Analytical Platform control panel.
-
-### RStudio
-
-You can download or read files in RStudio on the Analytical Platform from Amazon S3 using the `s3tools`, `s3browser`, or , for newer versions of RStudio, `botor` packages.
-
-#### `s3tools`
-
-`s3tools` should be preinstalled for all users of the Analytical Platform. If you find that `s3tools` is not installed, you can install it by running the following code:
-
-```{r install-s3-tools-2, eval=FALSE}
-install.packages('remotes')
-library(remotes)
-remotes::install_github('moj-analytical-services/s3tools')
-```
-
-`s3tools` contains four functions for downloading or reading files from Amazon S3:
-
-*   `download_file_from_s3`
-*   `s3_path_to_df`
-*   `s3_path_to_full_df`
-*   `s3_path_to_preview_df`
-
-You can find out more about how to use these functions on [GitHub](https://github.com/moj-analytical-services/s3tools) or by using the help operator in RStudio (for example, `?s3tools::download_file_from_s3`).
-
-#### `s3browser`
-
-`s3browser` provides a user interface within R that allows you to browse files you have access to in Amazon S3.
+#### s3browser
 
 You can install `s3browser` by running the following code:
 
@@ -274,38 +265,8 @@ s3browser::file_explorer_s3()
 ```
 You can find out more about how to use `s3browser` on [GitHub](https://github.com/moj-analytical-services/s3browser).
 
-#### `botor`
-
-`botor` will replace `s3tools` on newer versions of RStudio which use `renv` for managing environments. If your project isn't yet set up to use `renv`, before you start installing packages, you need to enable for your project in RStudio. You do this by navigating to the Tools menu and going through the following steps:
-
-Tools -> Project options -> Environments and click on the tick box “Use renv with this project” then press OK.
-
-It requires the Python package `boto3` and will be installed by running the following code:
-
-```{r install-botor-read, eval=FALSE}
-renv::init()
-renv::use_python()
-renv::install('reticulate')
-reticulate::py_install('boto3')
-renv::install('botor')
-```
-
-`botor` contains two functions for downloading or reading files from Amazon S3:
-
-* `s3_download_file`
-* `s3_read`
-
-For example, to read a dataframe to csv, run the following code:
-
-```{r botor-read-example}
-library(botor)
-your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
-```
-
-You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
-
 ### JupyterLab
-
+You can read/write directly from s3 using [pandas](https://pandas.pydata.org/docs/user_guide/index.html). However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
 
 #### `mojap-arrow-pd-parser`
 
@@ -315,14 +276,24 @@ You can find out more about how to use these and other functions in the [Migrati
 pip install arrow-pd-parser
 ```
 
-To read a csv file from s3:
+To read/write a csv file from s3:
 
 ```python
-from arrow_pd_parser import reader
-reader.read("s3://bucket_name/file.csv")
+from arrow_pd_parser import reader, writer
+
+# Specifying the reader Both reader statements are equivalent and call the same readers under the hood
+df1 = reader.read("s3://bucket_name/data/all_types.csv", file_format="csv")
+df2 = reader.csv.read("s3://bucket_name/data/all_types.csv")
+
+# You can also pass the reader args to the reader as kwargs
+df3 = reader.csv.read("s3://bucket_name/data/all_types.csv", nrows = 2)
+# The writer API has the same functionality
+writer.write(df1, file_format="parquet")
+writer.parquet.write(df1)
 ```
 
 `mojap-arrow-pd-parser` infers the file type from the extension, so for example `reader.read("s3://bucket_name/file.parquet")` would read a parquet file without need for specifying the file type.
+
 
 The package also has a lot of other functionality including specifying data types when reading (or writing). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
 
@@ -355,7 +326,7 @@ pip install boto3
 
 To download a file from Amazon S3, you should use the following code:
 
-```
+```python
 import boto3
 
 s3 = boto3.resource('s3')
@@ -365,6 +336,17 @@ s3.Object('bucket_name', 'key').download_file('local_path')
 If you receive an `ImportError`, try restarting your kernel, so that Python recognises your `boto3` installation.
 
 Here, you should substitute `'bucket_name'` with the name of the bucket, `'key'` with the path of the object in Amazon S3 and `local_path` with the local path where you would like to save the downloaded file.
+
+To upload a file to Amazon S3, you should use the following code:
+
+```python
+#Upload sample contents to s3
+s3 = boto3.client('s3')
+data = b'This is the content of the file uploaded from python boto3'
+file_name='your_file_name.txt'
+response =s3.put_object(Bucket= your_bucket_name,Body= data,Key= file_name)
+print('AWS response code for uploading file is '+str(response['ResponseMetadata']['HTTPStatusCode']))
+```
 
 You can find more information in the [package documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Object.download_file).
 
