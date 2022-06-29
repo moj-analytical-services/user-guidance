@@ -26,10 +26,17 @@ A tool for creating persistent derived tables in Athena
 
 The data engineering team maintain the following python packages:
 
-* [pydbtools](https://github.com/moj-analytical-services/pydbtools)
-* [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser)
-* [mojap-metadata](https://github.com/moj-analytical-services/mojap-metadata)
-* [dataengineeringutils3](https://github.com/moj-analytical-services/dataengineeringutils3)
+#### [pydbtools](https://github.com/moj-analytical-services/pydbtools)
+Standard package for querying MoJAP athena databases with useful features including temp table creation.
+
+#### [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser)
+Useful package for ensuring type conformance when reading with arrow or pandas
+
+#### [mojap-metadata](https://github.com/moj-analytical-services/mojap-metadata)
+MoJAP defined metadata that interacts with other packages (inc arrow-pd-parser) for ensuring type conformance as well as a number of schema converters.
+
+#### [dataengineeringutils3](https://github.com/moj-analytical-services/dataengineeringutils3)
+A collection of useful utilities for interacting with AWS
 
 ### R packages
 
