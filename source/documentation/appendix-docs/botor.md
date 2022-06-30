@@ -149,7 +149,7 @@ Other formats can be handled in a similar fashion.
 sas_data <- botor::s3_read("s3://alpha-mybucket/my_data.sas7bdat", 
                            haven::read_sas)
 feather_data <- botor::s3_read("s3://alpha-mybucket/my_data.feather",
-                               feather::read_feather)
+                               arrow::read_feather)
 json_data <- botor::s3_read('s3://botor/example-data/mtcars.json', 
                             jsonlite::fromJSON)
 ```
@@ -202,13 +202,13 @@ botor::s3_write(df, openxlsx::write.xlsx,
                 "s3://alpha-mybucket/my_data.xlsx")
 ```
 
-This won't work for functions such as `feather::write_feather` that use an
+This won't work for functions such as `arrow::write_feather` that use an
 alternative name for the `file` parameter.
 
 ```r
 s3_write_feather <- function(df, s3_path, ...) {
     temp_loc <- tempfile(fileext=".feather")
-    feather::write_feather(df, temp_loc, ...)
+    arrow::write_feather(df, temp_loc, ...)
     botor::s3_upload_file(temp_loc, s3_path)
     unlink(temp_loc)
 }
