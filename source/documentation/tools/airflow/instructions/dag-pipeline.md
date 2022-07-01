@@ -46,7 +46,6 @@ A DAG is defined in a Python script. An example of a DAG script is provided belo
 
 ``` python
 from datetime import datetime
- 
 from airflow.models import DAG
 from mojap_airflow_tools.operators import BasicKubernetesPodOperator
 
@@ -54,20 +53,22 @@ username = {username}
 # As defined in the image repo
 IMAGE_TAG = "v0.0.1"
 REPO_NAME = f"airflow-{username}-example"
-# This can be any number. 
-# In the case of R images, it must match the userid in the dockerfile
+# The user_id can be any number apart from 1000. In the case of R images, it must match the userid in the dockerfile
 USER_ID = 1337
  
 """
-The role used by Airflow to run a task. This role must be specified in the corresponding `roles/` folder in the same environment (i.e. the role is defined in environments/dev/roles/airflow_dev_{username}_example.yaml).
-
-The role must only contain alphanumeric or underscore characters [a-zA-Z0-9_]. This can be enforced using: 
+The role used by Airflow to run a task. 
+This role must be specified in the corresponding `roles/` folder in the same environment 
+(i.e. the role is defined in environments/dev/roles/airflow_dev_{username}_example.yaml).
+The role must only contain alphanumeric or underscore characters [a-zA-Z0-9_]. 
+This can be enforced using: 
 ROLE = re.sub(r"[\W]+", "", f"airflow_dev_{username}_example")
 """
+
 # ROLE = re.sub(r"[\W]+", "", f"airflow_dev_{username}_example")
 ROLE = f"airflow_dev_{username}_example"
  
-# For tips/advice on these args see the use_dummy_operator.py example
+# For tips/advice on the default args see the use_dummy_operator.py example
 default_args = {
     # Normally you want to set this to False.
     "depends_on_past": False,
@@ -92,9 +93,6 @@ dag = DAG(
  
 # Environmental variables for passing to the docker container
 env_vars={
-    "AWS_METADATA_SERVICE_TIMEOUT": "60",
-    "AWS_METADATA_SERVICE_NUM_ATTEMPTS": "5",
-    "AWS_DEFAULT_REGION": "eu-west-1",
     "RUN": "write",
     "TEXT": "Hello",
     "OUTPATH": f"s3://alpha-everyone/airflow-example/{username}/test.txt",
@@ -116,7 +114,6 @@ task = BasicKubernetesPodOperator(
     task_id=task_id,
     env_vars=env_vars
 )
- 
 task
 ```
 
@@ -221,7 +218,19 @@ When running these tests for the example pipeline: `filepath1` should be `enviro
     
 2.  This will start a set of github action workflows. Check that all workflows pass after your PR is submitted. If any of the workflows fail the PR cannot be merged in main (and therefore not deployed)
     
-3.  DE will be notified through a slack integration to approve the PR. Code changes made to files in the `environments/dev/dags` folder do not need to be approved
+3.  DE will be notified through a slack integration to approve the PR. Code changes made to files in the `environments/dev/dags` folder do not need approval:
+
+```java
+airflow
+├── environments
+│   ├── dev
+│   │   ├── dags
+│   │   │   ├── APPROVAL NOT REQUIRED
+│   │   └── roles
+│   │       ├── APPROVAL REQUIRED
+│   ├── prod
+│   │   └── APPROVAL REQUIRED
+```
     
 4.  Once checks pass and PR approved by DE, please merge the PR into main
     
