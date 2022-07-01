@@ -221,7 +221,19 @@ When running these tests for the example pipeline: `filepath1` should be `enviro
     
 2.  This will start a set of github action workflows. Check that all workflows pass after your PR is submitted. If any of the workflows fail the PR cannot be merged in main (and therefore not deployed)
     
-3.  DE will be notified through a slack integration to approve the PR. Code changes made to files in the `environments/dev/dags` folder do not need to be approved
+3.  DE will be notified through a slack integration to approve the PR. Code changes made to files in the `environments/dev/dags` folder do not need approval:
+
+```java
+airflow
+├── environments
+│   ├── dev
+│   │   ├── dags
+│   │   │   ├── APPROVAL NOT REQUIRED
+│   │   └── roles
+│   │       ├── APPROVAL REQUIRED
+│   ├── prod
+│   │   └── APPROVAL REQUIRED
+```
     
 4.  Once checks pass and PR approved by DE, please merge the PR into main
     
