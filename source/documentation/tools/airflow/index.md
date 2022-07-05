@@ -13,6 +13,8 @@ Airflow can be used to:
 
 ## Important links
 
+- [AWS control panel](https://aws.services.analytical-platform.service.justice.gov.uk/): You may need to login to aws first before accessing airflow. 
+
 - [Airflow dev UI](https://eu-west-1.console.aws.amazon.com/mwaa/home?region=eu-west-1#environments/dev/sso): for running and monitoring development and training workflows on the Airflow UI
 
 - [Airflow prod UI](https://eu-west-1.console.aws.amazon.com/mwaa/home?region=eu-west-1#environments/prod/sso): for running and monitoring production workflows on the Airflow UI
