@@ -14,7 +14,7 @@ When you merge a PR into `main`, CircleCI will build the user guidance and deplo
 
 ## Contribute to the guidance
 
-To make changes to the documentation for the Tech Docs Template website, edit files in the `source` folder of the repository.
+To make changes to the documentation for the Tech Docs Template website, edit files in the `source` folder of the repository. 
 
 ### Structure
 
