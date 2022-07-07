@@ -9,7 +9,7 @@ Currently the only supported port is 8050, so the url of your app will be `/\_tu
 A few things to bear in mind
 - You can only run one app on the `8050` port at a time.
 - Your app, by default will only respond to `127.0.0.1` which will not work with the tunnel. You should make sure it responds to `0.0.0.0` instead.
-- The base URL of your app will need to be set (while in Jupyter development) to be `/_tunnel_/8050/` (see the dash walkthrough below for an example)
+- The base URL of your app will need to be set (while in Jupyter development) to be `/\_tunnel\_/8050/` (see the dash walkthrough below for an example)
 - Only you will be able to access this url.
 
 _In the old system there was support for a range of ports, so it is possible you may not be using 8050 in existing code. Please update your code accordingly._
