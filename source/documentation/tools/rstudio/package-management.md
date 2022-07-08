@@ -128,7 +128,7 @@ renv::use_python()
 |     Forgetting to `renv::snapshot()`    |     This won’t affect you running your   code, but anyone picking it up later will be out of sync. You can use `renv::status()` to check if packages and renv.lock match        |
 |     Switching branches    |     If different package requirements in   branches then must remember to `renv::restore()`   when switching between them – otherwise library reflects the previous branch    |
 |     Initialising renv   outside a project    |     renv will ask you not to do this – do not   use `force   = TRUE`!    |
-|     Stuck on old CRAN/MRAN    |     Packages (or versions) you know exist   won’t appear using install functions. Run `options(repos   = "cran.rstudio.com")`    |
+|     Stuck on old CRAN/MRAN    |     Packages (or versions) you know exist   won’t appear using install functions. Run `options(repos   = "https://cloud.r-project.org/")`    |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
 ### renv tips and tricks
