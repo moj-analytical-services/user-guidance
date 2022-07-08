@@ -3,13 +3,21 @@
 Why use Airflow
 ---------------
 
-* run tasks on a regular schedule: The bentham app airflow pipeline runs daily and processes prisoner information from NOMIS and outputs the data to feather files. This forms the backend for the bentham app which is used by prison-based intelligence analysts to search through seized media. 
+**Run tasks on a regular schedule**
 
-* run memory-intensive workloads: The prison network airflow pipeline runs daily and downloads and processes ~100GB of data. Each prisoner is assigned a node and edges to link the nodes are created from data such as financial transactions, prison incidents, visits, seized mobile phone data. The pipeline cannot run using standard nodes and uses a high-memory node.
+For example the bentham app airflow pipeline runs daily and processes prisoner information from NOMIS and outputs the data to feather files. This forms the backend for the bentham app which is used by prison-based intelligence analysts to search through seized media. 
 
-* run end-to-end processing workflows involving multiple steps and dependencies: The Safety Diagnostic Tool airflow pipeline is extremely complex and made up of 7 tasks, each with different dependencies. For example, the ‘spells-correction’ task cleans prisoner spells data in NOMIS, which is then used to fit the Violence in Prisons Estimator (VIPER) model in the ‘viper’ task. This task provides a summary of prisoners’s violence that is used in the Safety Diagnostic Tool RShiny application.
+**Run memory-intensive workloads** 
 
-* monitor the performance of workflows, identify and resolve issues: Airflow allows users to visually monitor failed tasks and receive email notifications. Once corrected, users can restart the pipeline from that tasks instead of restarting the entire pipeline
+For example the prison network airflow pipeline runs daily and downloads and processes ~100GB of data. Each prisoner is assigned a node and edges to link the nodes are created from data such as financial transactions, prison incidents, visits, seized mobile phone data. The pipeline cannot run using standard nodes and uses a high-memory node.
+
+**Run end-to-end processing workflows involving multiple steps and dependencies**
+
+The Safety Diagnostic Tool (SDT) airflow pipeline is extremely complex and made up of 7 tasks, each with different dependencies. For example, the ‘spells-correction’ task cleans prisoner spells data in NOMIS, which is then used to fit the Violence in Prisons Estimator (VIPER) model in the ‘viper’ task. This task provides a summary of prisoners’s violence that is used in the SDT RShiny application.
+
+**Monitor the performance of workflows, identify and resolve issues**
+
+Airflow allows users to visually monitor failed tasks and receive email notifications. Once corrected, users can restart the pipeline from that task instead of restarting the entire pipeline
 
 
 What is Airflow
