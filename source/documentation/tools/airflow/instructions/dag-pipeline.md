@@ -1,4 +1,4 @@
-# DAG pipeline
+# DAG and Role pipeline
 
 The [airflow repo](https://github.com/moj-analytical-services/airflow) contains the DAG definitions and roles used in our Airflow pipelines and is structured in the following way:
 
