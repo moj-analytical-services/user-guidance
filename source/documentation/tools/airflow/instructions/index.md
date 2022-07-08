@@ -16,7 +16,7 @@ See [Image pipeline](/tools/airflow/instructions/image-pipeline)
 
 ## Create DAG and IAM Role
 
-See [DAG pipeline](/tools/airflow/instructions/dag-pipeline)
+See [DAG and Role pipeline](/tools/airflow/instructions/dag-pipeline)
 
 ## Run the Airflow Pipeline
 
