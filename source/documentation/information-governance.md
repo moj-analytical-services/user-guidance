@@ -36,7 +36,7 @@ You can move data classified as OFFICIAL (including OFFICIAL-SENSITIVE) onto the
 
 All data movements should take place safely and securely to ensure that data is protected at all times, including when in transit.
 
-If you are moving sensitive or personal data, please complete a data movements form on OneTrust. It is your responsibility to know if your data contains personal information. To request access to OneTrust or for further information on how to complete the form please contact privacy@justice.gov.uk. You can find more information on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/).
+If you are moving sensitive or personal data, please complete a data movements form on OneTrust. It is your responsibility to know if your data contains personal information. To request access to OneTrust or for further information on how to complete the form please contact dataprotection@justice.gov.uk. You can find more information on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/).
 
 If your data movement is complex, or you will be regularly moving a large amount of data, you may wish to consult the data engineering team for support [#ask-data-engineering](https://asdslack.slack.com/archives/C8X3PP1TN).
 ### Personal data
@@ -49,7 +49,7 @@ In practice, this means you must ensure that:
 * you have a lawful basis for processing the personal data
 * you have fulfilled all necessary governance requirements
 
-If your data contains anything that could be considered personal information, you must follow guidance from the data privacy team which can be found on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/). You are best to contact the Data Privacy Team at privacy@justice.gov.uk. A Data Protection Impact Assessment (DPIA) may have already been completed for your dataset but may need to be updated to reflect your use case, or a new one may be required. The Data Privacy Team will be able to advise.
+If your data contains anything that could be considered personal information, you must follow guidance from the data protection team which can be found on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/). You are best to contact the Data Protection Team at dataprotection@justice.gov.uk. A Data Protection Impact Assessment (DPIA) may have already been completed for your dataset but may need to be updated to reflect your use case, or a new one may be required. The Data Protection Team will be able to advise.
 
 #### What is personal data?
 
@@ -109,11 +109,11 @@ The data controller could be another MoJ agency or public body (for which MoJ is
 * The Public Trustee
 * Prisons and Probation Ombudsman (PPO)
 
-The Data Privacy Team (privacy@justice.gov.uk) should be able to advise you.
+The Data Protection Team (dataprotection@justice.gov.uk) should be able to advise you.
 
 #### Privacy Notice
 
-You should also check if a [privacy notice](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-be-informed/) already exists (privacy@justice.gov.uk should be able to advise). A privacy notice provides information to individuals about how and why their personal data is being collected and processed.
+You should also check if a [privacy notice](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-be-informed/) already exists (dataprotection@justice.gov.uk should be able to advise). A privacy notice provides information to individuals about how and why their personal data is being collected and processed.
 
 If a privacy notice already exists, you should update it to reflect use of the Analytical Platform. In particular, you should ensure the privacy notice informs individuals that their data will be:
 
