@@ -39,7 +39,7 @@ Using Analytical Tools [rstudio 4.1.7] Rstudio 4.0.5 or later:
 
 ```r
 # Make sure the latest package versions are used
-options(repos = "cran.rstudio.com")
+options(repos = "https://cloud.r-project.org/")
 # install renv if it doesn't exist on your system
 if(!"renv" %in% installed.packages()[, "Package"]) install.packages("renv")
 # Remove bare = TRUE if you'd like to move your existing packages over to
