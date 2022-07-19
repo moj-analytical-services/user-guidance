@@ -17,3 +17,7 @@ Use the buttons shown against each tool to manage your copy of the tool:
 * "Upgrade" - another release of the tool is available. Occasionally new versions of tools are made available on the Analytical Platform. In this case you'll get the opportunity to upgrade on the control panel. New versions provide new features and bug fixes. In addition, some releases come with improvements to the way tools are containerized and integrated with the Analytical Platform. You should aim to upgrade when it is offered, although in case it may causes minor incompatibilities with your  code, you should not do it in the days just before you have a critical release of your work. When pressed, the status will change to 'Deploying' and then 'Upgraded'. The __Upgrade__ button will no longer be visible (until another version becomes available).
 
 At times very old versions of tools are deprecated/removed from platform but we always inform our users in advance over our slack channel.If you are using an old version of a tool which is due to be removed soon, please do upgrade to an appropriate version.
+
+The Control Panel also provides access to Airflow 2 as an AWS managed service.
+You can access the development and production instances of Airflow from the Tools page.
+For further details, see the [Airflow documentation](/tools/airflow/).
