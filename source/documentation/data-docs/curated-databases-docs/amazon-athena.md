@@ -6,7 +6,7 @@
 
 ## Accessing Amazon Athena
 
-You can access the AWS console at [aws.services.alpha.mojanalytics.xyz](https://aws.services.alpha.mojanalytics.xyz). You may need to login with GitHub and go through two-factor authentication.
+You can access the AWS console at [aws.services.analytical-platform.service.justice.gov.uk](https://aws.services.analytical-platform.service.justice.gov.uk). You may need to login with GitHub and go through two-factor authentication.
 
 To access Athena, select **Services**, then **Athena**.
 

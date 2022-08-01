@@ -156,7 +156,7 @@ You can use the Amazon S3 Console to upload/download files from/to your local co
 
 To upload files using the Amazon S3 Console:
 
-1.  Log in to the [AWS Management Console](https://aws.services.alpha.mojanalytics.xyz) using your Analytical Platform account.
+1.  Log in to the [AWS Management Console](https://aws.services.analytical-platform.service.justice.gov.uk) using your Analytical Platform account.
 2.  Select __Services__ from the menu bar.
 3.  Select __S3__ from the drop down menu.
 4.  Select the bucket and folder you want to upload files to.
