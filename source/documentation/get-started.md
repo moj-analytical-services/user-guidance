@@ -135,6 +135,10 @@ You may have to access Slack differently depending on the IT system you use:
 * if you use an MoJ Digital and Technology MacBook, you can access Slack from a browser or using the desktop app. You can also access Slack using the mobile app on your personal or work phone
 * if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use the mobile app on your personal or work phone
 
+## 4. Training
+
+You can find details on courses and training [here](https://moj-analytical-services.github.io/ap-tools-training/). Upcoming courses are also advertised on The Hive (see Data & Analysis email and Teams communcations).
+
 ### Channels
 
 Conversations in Slack are organised into channels, which each have a specific topic. After getting access to slack workspace you need to separately join channels. Channels can be:
