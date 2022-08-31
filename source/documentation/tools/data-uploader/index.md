@@ -91,7 +91,7 @@ If you have created a new database at step 2 the only option now is to create a 
 
 ## Step 4 of 4: Check your inputs before uploading your data
 
-Double check your inputs to the previous three steps. In particular if you are adding data to an existing table be absolutely certain you have the correct database and table name; **the current permissions allow anyone with access to the Upolader to append data to any existing table.** Ensure you are happy with any new database or table names as you will not be able to change these easily. If all is OK proceed with **Choose file** and **Upload file**. Otherwise click on the corresponding **Change** navigation button to return to a previous page and amend your input.
+Double check your inputs to the previous three steps. In particular if you are adding data to an existing table be absolutely certain you have the correct database and table name; **the current permissions allow anyone with access to the Uploader to append data to any existing table.** Ensure you are happy with any new database or table names as you will not be able to change these easily. If all is OK proceed with **Choose file** and **Upload file**. Otherwise click on the corresponding **Change** navigation button to return to a previous page and amend your input.
 
 A progress bar is included for your convenience. Once the upload begins a **Cancel** button becomes available, so you can abort if required. Note that with a small file the upload is usually so quick that you will not have time to abort.
 
