@@ -26,7 +26,7 @@ The Uploader is intended to be a simple user interface for uploading data to an 
 
 ## Authentication and accounts
 
-This uploader uses single sign on (SSO) authentication provided by Auth0. Open a pull request from a new branch to add your email to the [user list](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users.yaml) to gain access. A member of the team will approve the pull request, and after a few hours login should work.
+This uploader uses single sign on (SSO) authentication provided by Auth0. Open a pull request from a new branch to add your email to the [prod user list](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) to gain access. A member of the team will approve the pull request, and after a few hours login should work.
 
 ## Uploader flowchart
 
@@ -108,4 +108,4 @@ A progress bar is included for your convenience. Once the upload begins a **Canc
 
 The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and extraction_timestamp. This information is required to locate your data on the MoJ Analytical Platform.
 
-It can take up to 24 hours for newly created database, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
+It can take up to 24 hours for newly created database, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
