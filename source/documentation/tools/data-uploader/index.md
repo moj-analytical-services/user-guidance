@@ -1,16 +1,18 @@
 Instructions for users
 
-![](Aspose.Words.97c294da-8b7c-4219-91f8-260b7d2b9b38.001.png) [Why use the Uploader?](#_page0_x56.41_y291.16)
-
+- [Why use the Uploader?](#_page0_x56.41_y291.16)
 - [Authentication/Accounts](#_page0_x56.41_y405.98)
-  - [Uploader flowchart ](#_page0_x56.41_y472.84)![](Aspose.Words.97c294da-8b7c-4219-91f8-260b7d2b9b38.002.png) [Front page](#_page1_x56.41_y214.10)
-    - [Troubleshooting front page](#_page1_x56.41_y259.52)
-    - [Step 1 of 4: Data Governance Requirements ](#_page1_x56.41_y441.20)![](Aspose.Words.97c294da-8b7c-4219-91f8-260b7d2b9b38.003.png) [Step 2 of 4: Choose Database](#_page1_x56.41_y494.27)
-      - [Troubleshooting step 1](#_page1_x56.41_y581.53)
-      - [Step 3 of 4: Choose Table](#_page1_x56.41_y684.11)
-        - [Troubleshooting step 2 ](#_page2_x56.41_y74.78)![](Aspose.Words.97c294da-8b7c-4219-91f8-260b7d2b9b38.004.png) [Step 4 of 4: Check your inputs before uploading your data](#_page2_x56.41_y192.16)
-          - [Troubleshooting step 4](#_page2_x56.41_y265.13)
-        - [Upload complete](#_page2_x56.41_y349.34)
+- [Uploader flowchart ](#_page0_x56.41_y472.84)
+- [Front page](#_page1_x56.41_y214.10)
+  - [Troubleshooting front page](#_page1_x56.41_y259.52)
+- [Step 1 of 4: Data Governance Requirements ](#_page1_x56.41_y441.20)
+- [Step 2 of 4: Choose Database](#_page1_x56.41_y494.27)
+  - [Troubleshooting step 1](#_page1_x56.41_y581.53)
+- [Step 3 of 4: Choose Table](#_page1_x56.41_y684.11)
+  - [Troubleshooting step 2 ](#_page2_x56.41_y74.78)
+- [Step 4 of 4: Check your inputs before uploading your data](#_page2_x56.41_y192.16)
+  - [Troubleshooting step 4](#_page2_x56.41_y265.13)
+- [Upload complete](#_page2_x56.41_y349.34)
 
 **Why use the Uploader?**
 
@@ -30,7 +32,7 @@ When subsequent new data files are added to a data table they will be stored as 
 
 Automated validation is applied to the data pre upload to check the basics - there are checks that column names exist and are in the character set [A-Za-z0-9\_].
 
-![](Aspose.Words.97c294da-8b7c-4219-91f8-260b7d2b9b38.005.jpeg)
+![](../images/uploader/uploader_flowchart)
 
 **Front page**
 
