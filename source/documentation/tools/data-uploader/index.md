@@ -26,7 +26,7 @@ The Uploader is intended to be a simple user interface for uploading data to an 
 
 ## Authentication and accounts
 
-This uploader uses pasaswordless authentication provided by Auth0. Open a pull request from a new branch to add your email to the [prod user list](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) to gain access. A member of the team will approve the pull request, and after a few hours login should work.
+This uploader uses passwordless authentication provided by Auth0. Open a pull request from a new branch to add your email to the [prod user list](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) to gain access. A member of the team will approve the pull request, and after a few hours login should work.
 
 ## Uploader flowchart
 
