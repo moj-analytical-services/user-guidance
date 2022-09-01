@@ -1,6 +1,6 @@
 # Data Uploader
 
-Quickstart link to the [Uploader](https://data-eng-uploader-prod.apps.live.cloud-platform.service.justice.gov.uk/).
+Quickstart link to the production deployment [Uploader](https://data-eng-uploader-prod.apps.live.cloud-platform.service.justice.gov.uk/).
 
 - [Why use the Uploader?](#why-use-the-uploader)
 - [Authentication and accounts](#authentication-and-accounts)
@@ -32,9 +32,9 @@ This uploader uses passwordless authentication provided by Auth0. Open a pull re
 
 Data is stored in the S3 bucket in an SQL like structure with one or more databases at the top level, each of which may contain one or more data tables. If the database or data table already exists it will be available to choose in a drop down list, if not it must be created.
 
-When subsequent new data files are added to a data table they will be stored as separate partitions of that data table, and any schema changes will be represented in the final table as a union of every partition.  
+When subsequent new data files are added to a data table they will be stored as separate partitions of that data table, and any schema changes will be represented in the final table as a union of every partition.
 
-**Note**: the existing permissions infrastructure means that you can add to ANY table created by the uploader. Please check that the table selected for upload is correct so that time consuming rollbacks are not required.
+**Note: the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
 
 Automated validation is applied to the data pre upload to check the basics - there are checks that column names exist and are in the character set `[A-Za-z0-9_]`.
 
@@ -79,7 +79,7 @@ If your data is not part of an existing database select the option to create a n
 
 If you have created a new database at step 2 the only option now is to create a new data table. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. If you are adding to an existing database there will be options to create a new data table or add to an existing data table. 
 
-**Note**: the existing permissions infrastructure means that you can add to ANY table created by the uploader. Please check that the table selected for upload is correct so that time consuming rollbacks are not required.
+**Note: the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
 
 ### Troubleshooting step 2
 
@@ -91,7 +91,10 @@ If you have created a new database at step 2 the only option now is to create a 
 
 ## Step 4 of 4: Check your inputs before uploading your data
 
-Double check your inputs to the previous three steps. In particular if you are adding data to an existing table be absolutely certain you have the correct database and table name; **the current permissions allow anyone with access to the Uploader to append data to any existing table.** Ensure you are happy with any new database or table names as you will not be able to change these easily. If all is OK proceed with **Choose file** and **Upload file**. Otherwise click on the corresponding **Change** navigation button to return to a previous page and amend your input.
+Double check your inputs to the previous three steps. In particular if you are adding data to an existing table be absolutely certain you have the correct database and table name; 
+**the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
+
+Ensure you are happy with any new database or table names as you will not be able to change these easily. If all is OK proceed with **Choose file** and **Upload file**. Otherwise click on the corresponding **Change** navigation button to return to a previous page and amend your input.
 
 A progress bar is included for your convenience. Once the upload begins a **Cancel** button becomes available, so you can abort if required. Note that with a small file the upload is usually so quick that you will not have time to abort.
 
