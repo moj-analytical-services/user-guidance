@@ -79,7 +79,7 @@ If your data is not part of an existing database select the option to create a n
 
 If you have created a new database at step 2 the only option now is to create a new data table. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. If you are adding to an existing database there will be options to create a new data table or add to an existing data table. 
 
-**Note**: the existing permissions infrastructure means that you can add to ANY table created by the uploader. Please check that the table selected for upload is correct so that time consuming rollbacks are not required.
+**Note: the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
 
 ### Troubleshooting step 2
 
