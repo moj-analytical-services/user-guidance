@@ -36,7 +36,7 @@ When subsequent new data files are added to a data table they will be stored as 
 
 **Note**: the existing permissions infrastructure means that you can add to ANY table created by the uploader. Please check that the table selected for upload is correct so that time consuming rollbacks are not required.
 
-Automated validation is applied to the data pre upload to check the basics - there are checks that column names exist and are in the character set [A-Za-z0-9\_].
+Automated validation is applied to the data pre upload to check the basics - there are checks that column names exist and are in the character set `[A-Za-z0-9_]`.
 
 ![](../../../images/uploader/uploader_flowchart.png)
 
@@ -66,7 +66,7 @@ It is your responsibility to complete any relevant [data governance ](https://in
 
 ## Step 2 of 4: Choose database
 
-If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore [a-z0-9\_]. Note that new database names will be automatically prefixed with “data\_eng\_uploader\_\<env\>\_”, where \<env\> is either “dev”, “preprod” or “prod”. Otherwise, choose the existing database from the drop down menu.
+If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. Note that new database names will be automatically prefixed with `data_eng_uploader_<env>_`, where `<env>` is either `dev`, `preprod` or `prod`. Otherwise, choose the existing database from the drop down menu.
 
 ### Troubleshooting step 1
 
@@ -77,7 +77,7 @@ If your data is not part of an existing database select the option to create a n
 
 ## Step 3 of 4: Choose table
 
-If you have created a new database at step 2 the only option now is to create a new data table. Permitted characters include lower case alphanumeric characters and underscore [a-z0-9\_]. If you are adding to an existing database there will be options to create a new data table or add to an existing data table. 
+If you have created a new database at step 2 the only option now is to create a new data table. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. If you are adding to an existing database there will be options to create a new data table or add to an existing data table. 
 
 **Note**: the existing permissions infrastructure means that you can add to ANY table created by the uploader. Please check that the table selected for upload is correct so that time consuming rollbacks are not required.
 
@@ -101,11 +101,11 @@ A progress bar is included for your convenience. Once the upload begins a **Canc
 | - | - |
 |error “data is larger than 5GB”|see [Troubleshooting front page](#troubleshooting-front-page)|
 |error “data is not CSV, JSON or JSONL”|see [Troubleshooting front page](#troubleshooting-front-page)|
-|error "No column names detected..."|Ensure that csv files contain columns names in the first row. Column names may only use the character set [A-Za-z0-9\_]|
-|error "Column names contain special characters..."|Column names may only use the character set [A-Za-z0-9\_]|
+|error "No column names detected..."|Ensure that csv files contain columns names in the first row. Column names may only use the character set `[A-Za-z0-9_]`|
+|error "Column names contain special characters..."|Column names may only use the character set `[A-Za-z0-9_]`|
 
 ## Upload complete
 
-The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and extraction\_timestamp. This information is required to locate your data on the MoJ Analytical Platform.
+The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and `extraction_timestamp`. This information is required to locate your data on the MoJ Analytical Platform.
 
 It can take up to 24 hours for newly created database, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
