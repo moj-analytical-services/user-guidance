@@ -1,4 +1,4 @@
-# Instructions for users
+# Data Uploader
 
 Quickstart link to the [Uploader](https://data-eng-uploader-prod.apps.live.cloud-platform.service.justice.gov.uk/).
 
@@ -26,7 +26,7 @@ The Uploader is intended to be a simple user interface for uploading data to an 
 
 ## Authentication and accounts
 
-This uploader uses single sign on (SSO) authentication provided by Auth0. Open a pull request from a new branch to add your email to the [prod user list](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) to gain access. A member of the team will approve the pull request, and after a few hours login should work.
+This uploader uses passwordless authentication provided by Auth0. Open a pull request from a new branch to add your email to the [prod user list](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) to gain access. A member of the team will approve the pull request, and after a few hours login should work.
 
 ## Uploader flowchart
 
@@ -91,7 +91,7 @@ If you have created a new database at step 2 the only option now is to create a 
 
 ## Step 4 of 4: Check your inputs before uploading your data
 
-Double check your inputs to the previous three steps. In particular if you are adding data to an existing table be absolutely certain you have the correct database and table name; **the current permissions allow anyone with access to the Upolader to append data to any existing table.** Ensure you are happy with any new database or table names as you will not be able to change these easily. If all is OK proceed with **Choose file** and **Upload file**. Otherwise click on the corresponding **Change** navigation button to return to a previous page and amend your input.
+Double check your inputs to the previous three steps. In particular if you are adding data to an existing table be absolutely certain you have the correct database and table name; **the current permissions allow anyone with access to the Uploader to append data to any existing table.** Ensure you are happy with any new database or table names as you will not be able to change these easily. If all is OK proceed with **Choose file** and **Upload file**. Otherwise click on the corresponding **Change** navigation button to return to a previous page and amend your input.
 
 A progress bar is included for your convenience. Once the upload begins a **Cancel** button becomes available, so you can abort if required. Note that with a small file the upload is usually so quick that you will not have time to abort.
 
@@ -101,11 +101,11 @@ A progress bar is included for your convenience. Once the upload begins a **Canc
 | - | - |
 |error “data is larger than 5GB”|see [Troubleshooting front page](#troubleshooting-front-page)|
 |error “data is not CSV, JSON or JSONL”|see [Troubleshooting front page](#troubleshooting-front-page)|
-|error "No column names detected..."|Ensure that csv files contain columns names in the first row. Column names may only use the character set [A-Za-z0-9_]|
-|error "Column names contain special characters..."|Column names may only use the character set [A-Za-z0-9_]|
+|error "No column names detected..."|Ensure that csv files contain columns names in the first row. Column names may only use the character set [A-Za-z0-9\_]|
+|error "Column names contain special characters..."|Column names may only use the character set [A-Za-z0-9\_]|
 
 ## Upload complete
 
-The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and extraction_timestamp. This information is required to locate your data on the MoJ Analytical Platform.
+The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and extraction\_timestamp. This information is required to locate your data on the MoJ Analytical Platform.
 
 It can take up to 24 hours for newly created database, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
