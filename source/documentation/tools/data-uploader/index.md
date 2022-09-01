@@ -66,7 +66,7 @@ It is your responsibility to complete any relevant [data governance ](https://in
 
 ## Step 2 of 4: Choose database
 
-If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. Note that new database names will be automatically prefixed with `data_eng_uploader_<env>_`, where `<env>` is either `dev`, `preprod` or `prod`. Otherwise, choose the existing database from the drop down menu.
+If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. Note that new database names will be automatically prefixed with `data_eng_uploader_<env>`, where `<env>` is either `dev`, `preprod` or `prod`. Otherwise, choose the existing database from the drop down menu.
 
 ### Troubleshooting step 1
 
