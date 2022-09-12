@@ -21,7 +21,7 @@ Quickstart link to the production deployment [Uploader](https://data-eng-uploade
 
 The Uploader is aimed at colleagues who have data not already on the MoJ Analytical Platform and wish to upload them there to be able to apply Analytical Platform tools, such as Athena. Only tables created from this tool can be added to from this tool.
 
-The Uploader is intended to be a simple user interface for uploading data to an AWS S3 bucket on the MoJ Analytical Platform. It removes the requirement for colleagues to be familiar with the more technical AWS interface, and enables automated validation of data storage standards and schemas. 
+The Uploader is intended to be a simple user interface for uploading data to an AWS S3 bucket on the MoJ Analytical Platform. It removes the requirement for colleagues to be familiar with the more technical AWS interface, and enables automated validation of data storage standards and schemas. The Uploader may be used by internal and external colleagues alike. An MoJ Analytical Platform account is not required to upload data, but is required to view data from the platform.
 
 
 ## Authentication and accounts
@@ -55,8 +55,6 @@ Ensure your data meets the **Before you start** criteria and then click on **Sta
 |data file is very much larger than 5 GB|Uploader tool is currently impractical; upload via AWS console. Future Uploader may allow multi-part upload to 5 TB. |
 |data is not in one of the 3 supported formats (.csv, .json, .jsonl)|convert it; for example if is .xlsx you can easily convert to .csv |
 |uploading data violates [data governance ](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/)requirements|**STOP!** you may not upload these data|
-|do not have access to Analytical Platform|work through the steps to get an account [here](https://user-guidance.services.alpha.mojanalytics.xyz/get-started.html#get-started)|
-|do not have access to the required database|request access [here](https://github.com/moj-analytical-services/data-engineering-database-access)|
 |I want to replace existing data on the Analytical Platform|this is not possible with the Uploader. Consider this action may conflict with reproducibility principles.|
 |I want to upload multiple files|this is currently not possible via the Uploader|
 
@@ -68,7 +66,7 @@ It is your responsibility to complete any relevant [data governance ](https://in
 
 If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. Note that new database names will be automatically prefixed with `data_eng_uploader_<env>`, where `<env>` is either `dev`, `preprod` or `prod`. Otherwise, choose the existing database from the drop down menu.
 
-### Troubleshooting step 1
+### Troubleshooting step 2
 
 |**Problem**|**Solution**|
 | - | - |
@@ -81,7 +79,7 @@ If you have created a new database at step 2 the only option now is to create a 
 
 **Note: the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
 
-### Troubleshooting step 2
+### Troubleshooting step 3
 
 |**Problem**|**Solution**|
 | - | - |
@@ -112,3 +110,20 @@ A progress bar is included for your convenience. Once the upload begins a **Canc
 The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and `extraction_timestamp`. This information is required to locate your data on the MoJ Analytical Platform.
 
 It can take up to 24 hours for newly created database, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
+
+### Troubleshooting post upload
+
+|**Problem**|**Solution**|
+| - | - |
+|can't find my data in Athena|Uploaded data should be accessible on the Analytical Platform by the following morning (the job runs at about 02:00 GMT)|
+|do not have access to Analytical Platform|work through the steps to get an account [here](https://user-guidance.services.alpha.mojanalytics.xyz/get-started.html#get-started), help is also available at [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ)|
+|do not have access to the required database|request access [here](https://github.com/moj-analytical-services/data-engineering-database-access), please follow the README instructions and create a folder in database_access and in project_access|
+
+### Request database access example
+
+#### Dev
+If you are using the dev version of the Uploader then your data is accessible to all users listed in the [Standard Database Access project](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml). If your alpha_username is not already listed clone the repo, create a branch, add you alpha_username and raise a PR. One approved you will have access.
+
+#### Prod
+
+Example 
