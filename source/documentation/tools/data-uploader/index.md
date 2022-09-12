@@ -16,6 +16,8 @@ Quickstart link to the production deployment [Uploader](https://data-eng-uploade
 - [Step 4 of 4: Check your inputs before uploading your data](#step-4-of-4-check-your-inputs-before-uploading-your-data)
   - [Troubleshooting step 4](#troubleshooting-step-4)
 - [Upload complete](#upload-complete)
+  - [Troubleshooting post upload](#troubleshooting-post-upload)
+  - [Request database access example](#request-database-access-example)
 
 ## Why use the Uploader?
 
@@ -36,7 +38,7 @@ When subsequent new data files are added to a data table they will be stored as 
 
 **Note: the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
 
-Automated validation is applied to the data pre upload to check the basics - there are checks that column names exist and are in the character set `[A-Za-z0-9_]`.
+Automated validation is applied to the data pre upload to check the basics; that column names exist and are in the character set `[A-Za-z0-9_]`.
 
 ![](../../../images/uploader/uploader_flowchart.png)
 
@@ -64,7 +66,7 @@ It is your responsibility to complete any relevant [data governance ](https://in
 
 ## Step 2 of 4: Choose database
 
-If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. Note that new database names will be automatically prefixed with `data_eng_uploader_<env>`, where `<env>` is either `dev`, `preprod` or `prod`. Otherwise, choose the existing database from the drop down menu.
+If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. Note that new database names will be automatically prefixed with `data_eng_uploader_<env>`, where `<env>` is either `dev`, or `prod`. Otherwise, choose the existing database from the drop down menu.
 
 ### Troubleshooting step 2
 
@@ -109,7 +111,7 @@ A progress bar is included for your convenience. Once the upload begins a **Canc
 
 The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and `extraction_timestamp`. This information is required to locate your data on the MoJ Analytical Platform.
 
-It can take up to 24 hours for newly created database, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
+Newly uploaded data appear on the MoJ Analytical Platform by the following morning. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access), and there is a basic example below.
 
 ### Troubleshooting post upload
 
@@ -117,13 +119,38 @@ It can take up to 24 hours for newly created database, data table and newly uplo
 | - | - |
 |can't find my data in Athena|Uploaded data should be accessible on the Analytical Platform by the following morning (the job runs at about 02:00 GMT)|
 |do not have access to Analytical Platform|work through the steps to get an account [here](https://user-guidance.services.alpha.mojanalytics.xyz/get-started.html#get-started), help is also available at [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ)|
-|do not have access to the required database|request access [here](https://github.com/moj-analytical-services/data-engineering-database-access), please follow the README instructions and create a folder in database_access and in project_access|
+|do not have access to the required database|request access [here](https://github.com/moj-analytical-services/data-engineering-database-access), please follow the README instructions and see the [Request database access example](#request-database-access-example) below|
 
 ### Request database access example
 
-#### Dev
-If you are using the dev version of the Uploader then your data is accessible to all users listed in the [Standard Database Access project](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml). If your alpha_username is not already listed clone the repo, create a branch, add you alpha_username and raise a PR. One approved you will have access.
+#### Dev example
 
-#### Prod
+If you are using the dev version of the Uploader then your data is accessible to all users listed in the [Standard Database Access project](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml). If your `alpha_username` is not already listed clone the [repo](https://github.com/moj-analytical-services/data-engineering-database-access), create a branch, add you alpha_username and raise a PR. One approved you will have access.
 
-Example 
+#### Prod example 
+
+In your confirmation email of upload details you should have the "path to data in S3" which is required to set up access and will look something like this:
+
+- Path to data in S3: data-eng-uploader-prod-curated/data/database_name=my_database/table_name=my_table_1/extraction_timestamp=20220912123341Z/
+
+Clone the [repo](https://github.com/moj-analytical-services/data-engineering-database-access), create a new branch and make the following edits as required,
+
+- Create a folder under `database_access`, for example, we shall call it `my_example_data`
+- Under your new folder create 
+    - a README.md describing `my_example_data` and access levels
+    -  subfolders such as `full`, `my_table_1` depending on how you wish to govern access to all or some of the tables in the database
+- Under each subfolder create a file called `iam_config.yaml` which contains the path to data in S3 with an asterix wild card at the desired point
+    -  Configure access to all tables under `my_database`:
+
+    ![](../../../images/uploader/uploader_example_full_iam_config.png)
+    -  Configure access to all files under table `my_table_1`. The asterix is necessary as the table may be comprised of multiple partitions:
+    
+    ![](../../../images/uploader/uploader_example_table_1_iam_config.png)
+    - Configure access to a set of specfic tables:
+
+    ![](../../../images/uploader/uploader_example_set_tables_iam_config.png)
+- Now create a `project_access` folder as per [Submitting a curated database access request](https://github.com/moj-analytical-services/data-engineering-database-access#submitting-a-curated-database-access-request) instructions.
+    - The `project_id` must match the folder name under `database_access`, in this example this is `my_example_data`
+    - The resources listed must match the folder and subfolder names, in this example; `my_example_data/full` and `my_example_data/my_table_1`
+
+
