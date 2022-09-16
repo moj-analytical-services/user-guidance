@@ -2,8 +2,6 @@
 
 A development environment for writing Python code including Python notebooks
 
-See: <https://github.com/RobinL/cheatsheets_etc/blob/master/jupyter_conda.md>
-
 ## Run notebooks
 
 In Jupyter, before you can successfully run the notebook, you'll need to select the Jupyter kernel for this project. If it doesn't appear in the drop-down list, run this in a terminal:

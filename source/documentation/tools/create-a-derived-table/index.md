@@ -1,4 +1,6 @@
 # Create a Derived Table
+
+:warning: This service is in beta :warning:
 Read on to find out more or get in touch at the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
 
 ### Table of Contents
@@ -112,7 +114,7 @@ You're now ready to get dbt-ing!
 #### JupyterLab
 We're working to get Create a Derived Table up and running with JupyterLab, please bear with us.
 
-### Creating models
+## Creating models
 ### What is a model?
 A model is a `select` statement. Models are defined in `.sql` files and each `.sql` file contains one model/`select` statement.
 
@@ -176,13 +178,13 @@ Whereas you can use configurations to:
 - Declare whether a resource should persist its descriptions as comments in the database
 - Apply tags and "meta" properties
 
-### Where can I define configs?
+#### Where can I define configs?
 Depending on the resource type, configurations can be defined:
 - Using a `config()` Jinja macro within a model or test SQL file
 - Using a config property in a `.yaml` file
 - From the `dbt_project.yaml` file, under the corresponding resource key (models:, tests:, etc)
 
-### Config inheritance
+#### Config inheritance
 Configurations are prioritised in order of specificity, which is generally the order above: an in-file `config()` block takes precedence over properties defied in a `.yaml` file, which takes precedence over a config defined in the project file. (Note that generic tests work a little differently when it comes to specificity. See dbt's documentation on [test configs](https://docs.getdbt.com/reference/test-configs).)
 
 To apply a configuration to a model, or directory of models, define the resource path as nested dictionary keys. In the example below the `materialized: table` config has been applied to the entire `mojap_derived_tables` project. The `sentences` and `question_answers` directories have `tags` configured for all models in those respective directories.
