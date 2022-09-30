@@ -39,7 +39,7 @@ To sign up for a GitHub account, go to GitHub's [join page](https://github.com/j
 
 ### Verify your email address for GitHub
 
-Verifying your email address for GitHub ensures that your account is secure and gives you access to all of GitHub's features. Veryifying your email address is also required to sign in to the Analytical Platform.
+Verifying your email address for GitHub ensures that your account is secure and gives you access to all of GitHub's features. Verifying your email address is also required to sign in to the Analytical Platform.
 
 During sign up, GitHub will send you an email with a link to verify your email address.
 
@@ -84,6 +84,9 @@ See [about the Analytical Platform](/about.html).
 
 To request an account for the Analytical Platform, you should send an email with your GitHub username to the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk). Please provide details of your role and team, and why you need an account on the platform.  The team will then invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
 
+The invitation to join MoJ Analytical Services will usually be sent within 24 hours of your request.
+If you haven't received your invitation following that time period, you can follow up in the [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ) Slack channel (see [below](#3-slack-account) for joining details).
+
 ### Accept your invitation to the MoJ Analytical Services GitHub organisation
 
 When you are invited to join the MoJ Analytical Services GitHub organisation, you will receive an email with a link to accept the invitation.
@@ -92,11 +95,11 @@ You can also accept your invitation by signing in to GitHub and visiting the [or
 
 ### Configure two-factor authentication for the Analytical Platform
 
-The main entry point to the Analytical Platform is the control panel.
+The main entry point to the Analytical Platform is the Control Panel.
 
 When you sign in to the Control Panel for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
 
-If you are a new member of the organisation, are using the platform for the first time, please sign in to the [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+If you are a new member of the organisation, are using the platform for the first time, please sign in to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 
 You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
 
@@ -137,11 +140,11 @@ You may have to access Slack differently depending on the IT system you use:
 
 ## 4. Training
 
-You can find details on courses and training [here](https://moj-analytical-services.github.io/ap-tools-training/). Upcoming courses are also advertised on The Hive (see Data & Analysis email and Teams communcations).
+You can find details on courses and training [here](https://moj-analytical-services.github.io/ap-tools-training/). Upcoming courses are also advertised on The Hive (see Data & Analysis email and Teams communications).
 
 ### Channels
 
-Conversations in Slack are organised into channels, which each have a specific topic. After getting access to slack workspace you need to separately join channels. Channels can be:
+Conversations in Slack are organised into channels, which each have a specific topic. After getting access to Slack workspace you need to separately join channels. Channels can be:
 
 * public (all users can join) or
 * private (users can only join by invitation) or
@@ -149,12 +152,12 @@ Conversations in Slack are organised into channels, which each have a specific t
 
  There are several public channels that are widely used and may be useful to join:
 
-* the [#analytical-platform-support]() channel is used for general discussion of the Analytical Platform -- it is also monitored by the Analytical Platform team, who can help out with any technical queries or requests. Also used to request new or existing apps and app data sources
-* the [#ask-data-engineering]() channel is used for general discussion of data engineering and for getting in touch with the data engineering team with any technical queries or requests (such as airflow DAG reviews, database access, data discovery tool, etc).
-* the [#git](), [#r]() and [#python]() channels can be used to get support from other users with any technical queries or questions -- the #[intro_r channel]() is aimed specifically at new users of R
-* the [#data_science]() channel is used for general discussion of data science tools and techniques
-* the [#general]() channel is used for any discussions that don’t fit anywhere else
-* the [#10sc]() channel can be used to get in touch with other people working at 10SC and to ask any questions about the building
+* the [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ) channel is used for general discussion of the Analytical Platform -- it is also monitored by the Analytical Platform team, who can help out with any technical queries or requests. Also used to request new or existing apps and app data sources
+* the [#ask-data-engineering](https://asdslack.slack.com/archives/C8X3PP1TN) channel is used for general discussion of data engineering and for getting in touch with the data engineering team with any technical queries or requests (such as airflow DAG reviews, database access, data discovery tool, etc).
+* the [#git](https://asdslack.slack.com/archives/C4VF9PRLK), [#r](https://asdslack.slack.com/archives/C1PUCG719) and [#python](https://asdslack.slack.com/archives/C1Q09V86S) channels can be used to get support from other users with any technical queries or questions -- the #[intro_r channel](https://asdslack.slack.com/archives/CGKSJV9HN) is aimed specifically at new users of R
+* the [#data_science](https://asdslack.slack.com/archives/C1Z8Q18LS) channel is used for general discussion of data science tools and techniques
+* the [#general](https://asdslack.slack.com/archives/C1PTUTC3F) channel is used for any discussions that don’t fit anywhere else
+* the [#10sc](https://asdslack.slack.com/archives/CC43ZT8AH) channel can be used to get in touch with other people working at 10SC and to ask any questions about the building
 
 There are lots of other channels you can join or you can set up a new one if you think something is missing. You may also wish to set up private channels to discuss specific projects and can direct message individual users.
 
