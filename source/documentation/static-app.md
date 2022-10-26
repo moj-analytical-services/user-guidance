@@ -1,6 +1,9 @@
 # Deploying a static webapp
 
-There are two ways to deploy a static webapp.
+
+⚠️ New app deployments are currently paused until at least the beginning of 2023. If you have an existing app that requires redeployment, please raise an issue in [this repo](https://github.com/moj-analytical-services/analytical-platform-applications/issues) with the template Redeploy App Request. ⚠️
+
+There are two ways to deploy a static webapp. The above applies only to Option 1 (see below). If you wish to update the content of an s3 proxy app, this will still be possible via making updates to your file(s) in s3.
 
 ## Choice of Static Web App Deployment
 
