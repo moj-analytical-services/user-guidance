@@ -1,5 +1,7 @@
 # Deploying an R Shiny app
 
+⚠️ New app deployments are currently paused until at least the beginning of 2023. If you have an existing app that requires redeployment, please raise an issue in [this repo](https://github.com/moj-analytical-services/analytical-platform-applications/issues) with the template Redeploy App Request. ⚠️
+
 ## Basic deployment
 
 ### Summary
