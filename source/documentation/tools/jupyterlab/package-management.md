@@ -74,6 +74,7 @@ If a project has a 'requirements.txt' then you should install that into a venv.
 A project's README file is the traditional place to communicate usage of a requirements.txt. Because of that, this section is provided in markdown format so it can be copied into your project's README, and tailored as necessary:
 
 ```markdown
+
 ## Setup
 
 Before you can run this project, you need to install some Python packages using the terminal:
@@ -85,7 +86,7 @@ Before you can run this project, you need to install some Python packages using 
     # install the python packages required
     . venv/bin/activate
     pip install -r requirements.txt
-
+```
 
 ## Poetry
 We advise the use of [poetry](https://python-poetry.org/docs/) as a library.
@@ -96,9 +97,14 @@ It makes sure that libraries play well together.
 If virtualenv is used without poetry, you may start experiencing library version conflict and start getting warnings.
 
 ### setup steps:-
-- after creating your virtualenv and source it
-- ```
-    pip install poetry
+- after creating your virtualenv, activate your venv 
+    ```
+        source venv/bin/activate
+    ```
+
+- 
+    ```
+        pip install poetry
     ```
 - initialize poetry and tracking using 
     ```
