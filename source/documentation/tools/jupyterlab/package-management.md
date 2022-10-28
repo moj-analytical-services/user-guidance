@@ -32,7 +32,7 @@ You'll notice the prompt changes to show that the venv is activated: `(venv) jov
 With the venv activated you can install some packages using pip:
 
 ```bash
-(venv) $ pip install pandas
+(venv) $ pip install --user pandas
 ```
 
 The packages will get installed to your venv, in `venv/lib/python3.7/site-packages/`.
@@ -84,4 +84,4 @@ Before you can run this project, you need to install some Python packages using 
 
     # install the python packages required
     . venv/bin/activate
-    pip install -r requirements.txt
+    pip install --user -r requirements.txt
