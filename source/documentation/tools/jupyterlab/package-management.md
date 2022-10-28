@@ -84,4 +84,4 @@ Before you can run this project, you need to install some Python packages using 
 
     # install the python packages required
     . venv/bin/activate
-    pip install --user -r requirements.txt
+    pip install -r requirements.txt
