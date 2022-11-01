@@ -341,7 +341,7 @@ shows the code in context.
 
 ### Kibana
 
-All logs from deployed apps can be viewed in [Kibana](https://kibana.services.alpha.mojanalytics.xyz).
+All logs from deployed apps can be viewed in [Kibana](https://kibana.services.analytical-platform.service.justice.gov.uk).
 
 To view all app logs:
 
