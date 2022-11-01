@@ -233,7 +233,7 @@ To commit and add a message in one command, use `git commit -m "Your commit mess
 
 'Push' your commits to GitHub: `git push origin <branch_name>`. 
 
-The default branch name is `main`. If you're pushing to this your command would be `git push origin master`.
+The default branch name is `main`. If you're pushing to this your command would be `git push origin main`.
 
 ## Working on a branch
 
