@@ -32,7 +32,7 @@ You'll notice the prompt changes to show that the venv is activated: `(venv) jov
 With the venv activated you can install some packages using pip:
 
 ```bash
-(venv) $ pip install pandas
+(venv) $ pip install --user pandas
 ```
 
 The packages will get installed to your venv, in `venv/lib/python3.7/site-packages/`.
@@ -88,89 +88,6 @@ Before you can run this project, you need to install some Python packages using 
     pip install -r requirements.txt
 ```
 
-## Poetry
-We advise the use of [poetry](https://python-poetry.org/docs/) as a library.
+## Library conflicts & warnings
 
-### why use poetry 
-poetry stops conflicts between libraries and their dependencies.
-It makes sure that libraries play well together.
-If virtualenv is used without poetry, you may start experiencing library version conflict and start getting warnings.
-
-### setup steps:-
-- after creating your virtualenv, activate your venv 
-    ```
-        source venv/bin/activate
-    ```
-
-- 
-    ```
-        pip install poetry
-    ```
-- initialize poetry and tracking using 
-    ```
-    poetry init
-    ```
-- during init step, when asked the following questions, answer as follows 
-1. <i>`Author`</i> you can choose `n` or whoever wants to be the author
-2. <i>`Would you like to define your main dependencies interactively?`</i> choose `no`
-3. <i>`Would you like to define your development dependencies interactively?`</i> choose `no`
-- after a `pyproject.toml` file is created, you can now start installing your libraries.
-
-### install libraries
-guided steps
-- Use poetry to add library. Poetry will try and get the latest version.
-
-    ```
-        poetry add <library>
-    ```
-- If the library has a conflict, get all the versions and try using the next one down.
-    1. using 
-    ```
-        pip index versions <library
-    ```
-    2.  
-    ```
-        poetry add <library>@<version>
-    ```
-
-- If there is a conflict with another library, play around with the versions that work together
-- When finished you can export the libraries.
-    ```
-    poetry export > requirements.txt
-    ```
-
-- Use pip to install the libraries that now should work perfectly. 
-    ```
-        pip install -r requirements.txt
-    ```
-
-
-### listing available library versions
-```
-    pip index versions <library>
-```
-
-
-### exporting poetry libraries
-Exporting libraries is very similar to `pip freeze` and in poetry it is 
-
-```
-    poetry export
-```
-
-### Commiting files
-Of course, committing requirements.txt is important.
-
-You will want to commit to your repo `pyproject.toml` but not the poetry.lock
-When next wanting to install another library, you can use:-
-- select your venv.
-`source venv/bin/activate`
-
-```
-    poetry install
-```
-
-- then go ahead and install your new library the same way as above
-```
-    poetry add <library>
-```
+If you come across any conflicts or warnings when installing your libraries using pip we advise you use [poetry](https://python-poetry.org/docs/) to resolve them.
