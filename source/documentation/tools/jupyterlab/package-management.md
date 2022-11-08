@@ -172,6 +172,12 @@ Before you can run this project, you need to install some Python packages using 
     pip install -r requirements.txt
 ```
 
+<<<<<<< HEAD
 ## Library conflicts & warnings
 
 If you come across any conflicts or warnings when installing your libraries using pip we advise you use [poetry](https://python-poetry.org/docs/) to resolve them.
+=======
+## Library conflict
+
+If you should have any conflicts between python libraries we recommend using [poetry](https://python-poetry.org/docs/) to fix conflicts and installations.
+>>>>>>> 05eb017 (ANPL-1273 removed concise docs for poetry. replaced with links.)
