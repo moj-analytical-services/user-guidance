@@ -1,5 +1,9 @@
 # Build and Deploy
 
+⚠ New app deployments are currently paused until at least the beginning of 2023. If you have an existing app that requires redeployment, please raise an issue in [this repo](https://github.com/moj-analytical-services/analytical-platform-applications/issues) with the template Redeploy App Request. ⚠️
+
+This page has been reviewed and updated on 26th Oct 2022. Please note that the process below will be changing once we migrate all Apps to the new EKS cluster, we will keep you updated but please check back here regularly for any updates.
+
 **Concourse** is the Analytical Platform service that automatically builds and deploys R Shiny apps and Web apps. This is also known as 'continuous integration' and 'continuous deployment' (CI/CD).
 
 ## deploy.json
@@ -50,5 +54,3 @@ Your task appears in Concourse within 30 seconds. Find it in Concourse to start 
 
 Subsequent build/deploys are started about 5 seconds after doing a GitHub release (unless someone pressed the pause button on the Concourse task). You have to refresh Concourse in your browser to see a fresh build.
 
-### Upcoming Changes
-This page has been reviewed and updated on 20th June 2022. Please note that the process above will be changing once we migrate all Apps to the new EKS cluster, we will keep you updated but please check back here regularly for any updates.
