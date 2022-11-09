@@ -1,6 +1,6 @@
 # JupyterLab
 
-A development environment for writing Python code including Python notebooks
+A development environment for writing Python code including Python notebooks. If you are new to python and juptyerlab, there is a self-paced introduction which can be found [here](https://github.com/moj-analytical-services/intro-to-python).
 
 ## Run notebooks
 
