@@ -26,16 +26,16 @@ Current memory limits:
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 | Container type | Requested | Limit    |
 | -------------- | --------- | -------- |
-| R Studio | 8 GB (was 5 GB) | 20 GB |
-| Jupyter | 1 GB | 12 GB |
-| App | no limit | no limit |
+| R Studio | 12 GB | 12 GB |
+| Jupyter | 12 GB | 12 GB |
+| App | 100 MB | 8 GB |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
-Older R Studio versions requested only 5 GB. You can see the amount of memory your R Studio requests by looking in Grafana for your R Studio pod. To increase it to 8 GB you need to [Upgrade your R Studio](../introduction.html#upgrade-analytical-tools).
+From November 2022 all tools (RStudio and Jupyter) are allocated with `requests` and `limits` set to the same value.
 
 You can work on a dataset that is bigger than your memory by reading in a bit of the data at a time and writing results back to disk as you go. If you're working on big data then consider taking advantage of tech like Amazon Athena or Apache Spark, which are available through the Analytical Platform too.
 
-Our laptops tend to have only 8GB or 16GB, so it's an advantage of the AP that we can offer more. We are open to increasing the maximum memory, so let us know if you need more, to help us justify the additional cost.
+We are open to increasing the maximum memory, so let us know if you need more, to help us justify the additional cost.
 
 See also the [RStudio memory issues](tools/rstudio/index.html#rstudio-memory-issues) section.
 
