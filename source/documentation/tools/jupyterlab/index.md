@@ -8,7 +8,7 @@ In Jupyter, before you can successfully run the notebook, you'll need to select 
 
 ```bash
 . myproject/venv/bin/activate
-python3 -m ipykernel install --user --name="venv" --display-name="My project (Python3)"
+python3 -m ipykernel install --user --name="venv_PROJECTNAMEHERE" --display-name="My project (Python3)"
 ```
 
 ## Run scripts
@@ -49,7 +49,7 @@ It is advisable to use a different virtual environment (venv) for each project y
 3. Create a Jupyter kernel which is configured to use your venv. (Change the display name to match your project name):
 
     ```bash
-    python3 -m ipykernel install --user --name="venv" --display-name="My project (Python3)"
+    python3 -m ipykernel install --user --name="venv_PROJECTNAMEHERE" --display-name="My project (Python3)"
     ```
 
 4. In Jupyter, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
