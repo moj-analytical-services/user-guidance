@@ -163,12 +163,16 @@ There are lots of other channels you can join or you can set up a new one if you
 You can find out more about Slack and how to use it in the [Slack Help Centre](https://get.slack.help/hc/en-gb/).
 
 
-## Using the Analytical Platform
+## 5. Using the Analytical Platform
 
 The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 
 This allows you to access the various [Analytical Platform tools](tools)
 
-## Contact us
+## 6. Best Practice
+
+- See [MoJ Analytical IT Tools Strategy](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/) for recommended tools and wats of working
+
+## 7. Contact us
 
 To get support, you can contact the Analytical Platform team on the [#analytical-platform-support]() Slack channel or by [email](mailto:analytical_platform@digital.justice.gov.uk).
