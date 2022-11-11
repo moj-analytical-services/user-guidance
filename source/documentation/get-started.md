@@ -171,7 +171,7 @@ This allows you to access the various [Analytical Platform tools](tools)
 
 ## 6. Best Practice
 
-- See [MoJ Analytical IT Tools Strategy](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/) for recommended tools and wats of working
+- See [MoJ Analytical IT Tools Strategy](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/) for recommended tools and ways of working
 
 ## 7. Contact us
 
