@@ -3,8 +3,8 @@
 Quickstart link to the production deployment [Uploader](https://data-eng-uploader-prod.apps.live.cloud-platform.service.justice.gov.uk/).
 
 - [Why use the Uploader?](#why-use-the-uploader)
-- [Authentication and accounts](#authentication-and-accounts)
 - [Uploader flowchart ](#uploader-flowchart)
+- [Data Uploader pre-requisites](#Data-Uploader-pre-requisites)
 - [Login page](#login-page)
 - [Front page](#front-page)
   - [Troubleshooting front page](#troubleshooting-front-page)
@@ -16,17 +16,15 @@ Quickstart link to the production deployment [Uploader](https://data-eng-uploade
 - [Step 4 of 4: Check your inputs before uploading your data](#step-4-of-4-check-your-inputs-before-uploading-your-data)
   - [Troubleshooting step 4](#troubleshooting-step-4)
 - [Upload complete](#upload-complete)
+- [Limitations/awareness](#Limitations-and-awareness)
 
 ## Why use the Uploader?
 
+This runbook is useful for all users of the AP that would like to upload data to the AP using a simple User Interface instead of AWS.
+
 The Uploader is aimed at colleagues who have data not already on the MoJ Analytical Platform and wish to upload them there to be able to apply Analytical Platform tools, such as Athena. Only tables created from this tool can be added to from this tool.
 
-The Uploader is intended to be a simple user interface for uploading data to an AWS S3 bucket on the MoJ Analytical Platform. It removes the requirement for colleagues to be familiar with the more technical AWS interface, and enables automated validation of data storage standards and schemas. 
-
-
-## Authentication and accounts
-
-This uploader uses passwordless authentication provided by Auth0. Open a pull request from a new branch to add your email to the [prod user list](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) to gain access. A member of the team will approve the pull request, and after a few hours login should work.
+The Uploader is intended to be a simple user interface for uploading data to an AWS S3 bucket on the MoJ Analytical Platform. This removes the requirement for colleagues to be familiar with the more technical AWS interface and enables automated validation of data and schemas. 
 
 ## Uploader flowchart
 
@@ -39,6 +37,11 @@ When subsequent new data files are added to a data table they will be stored as 
 Automated validation is applied to the data pre upload to check the basics - there are checks that column names exist and are in the character set `[A-Za-z0-9_]`.
 
 ![](../../../images/uploader/uploader_flowchart.png)
+
+## Data Uploader pre-requisites
+- In order to utilise the data uploader, you are required to do a pull request. This can be done via [this github page](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) and then adding your email to the users list.  
+
+- Next you will need to get access to the [DPIA](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/data-protection-impact-assessments-dpias/) (Data Protection Impact Assessment) or an [MOJ analytical platform data movement Form](https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUREVBSzk4WTg1WFk1OFU4V1QyWUE5VUoyNC4u). This supplies legal cover for new datasets and gives legal cover to send official sensitive data to the prod site. If not, you will only be able to send non-sensitive test data.
 
 ## Login page
 
@@ -58,7 +61,6 @@ Ensure your data meets the **Before you start** criteria and then click on **Sta
 |do not have access to Analytical Platform|work through the steps to get an account [here](https://user-guidance.services.alpha.mojanalytics.xyz/get-started.html#get-started)|
 |do not have access to the required database|request access [here](https://github.com/moj-analytical-services/data-engineering-database-access)|
 |I want to replace existing data on the Analytical Platform|this is not possible with the Uploader. Consider this action may conflict with reproducibility principles.|
-|I want to upload multiple files|this is currently not possible via the Uploader|
 
 ## Step 1 of 4: Data governance requirements
 
@@ -68,7 +70,7 @@ It is your responsibility to complete any relevant [data governance ](https://in
 
 If your data is not part of an existing database select the option to create a new database, and specify the new database name. Permitted characters include lower case alphanumeric characters and underscore `[a-z0-9_]`. Note that new database names will be automatically prefixed with `data_eng_uploader_<env>`, where `<env>` is either `dev`, `preprod` or `prod`. Otherwise, choose the existing database from the drop down menu.
 
-### Troubleshooting step 1
+### Troubleshooting step 2
 
 |**Problem**|**Solution**|
 | - | - |
@@ -81,7 +83,7 @@ If you have created a new database at step 2 the only option now is to create a 
 
 **Note: the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
 
-### Troubleshooting step 2
+### Troubleshooting step 3
 
 |**Problem**|**Solution**|
 | - | - |
@@ -93,6 +95,8 @@ If you have created a new database at step 2 the only option now is to create a 
 
 Double check your inputs to the previous three steps. In particular if you are adding data to an existing table be absolutely certain you have the correct database and table name; 
 **the existing permissions infrastructure allows anyone with access to the Uploader to append data to _any_ existing table, however, you can only _view_ data you have permssion for.** For example, if you accidentally upload data to the wrong table, anyone with permission to view that table will be able to access your data. Please check that the table selected for the data upload is correct to avoid granting view access to unauthorised persons.
+
+Before the data has been uploaded, the uploader will undergo a check to see whether data standards have been adhered to, e.g. if the files uploaded are under 5GB each and in CSV/JSON or other compatible formats.
 
 Ensure you are happy with any new database or table names as you will not be able to change these easily. If all is OK proceed with **Choose file** and **Upload file**. Otherwise click on the corresponding **Change** navigation button to return to a previous page and amend your input.
 
@@ -111,4 +115,20 @@ A progress bar is included for your convenience. Once the upload begins a **Canc
 
 The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and `extraction_timestamp`. This information is required to locate your data on the MoJ Analytical Platform.
 
-It can take up to 24 hours for newly created database, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
+All Data that has been uploaded is subsequently moved to the AP at 1am every day. It can take up to 24 hours for a newly created database to show, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).  
+
+## Limitations and awareness
+
+- Users will have to wait 24 hours before data is on the analytical platform. This means that users will have to wait a while before they can visualise their data. If you would like to see the data earlier you will need to upload directly via AWS instead.
+
+- Cannot upload xls files, only csv, JSON and JSONL
+
+- Cannot replace existing data even if the data uploaded is inaccurate due to data governance requirements.
+
+- File size can only be 5GB.
+
+- S3 Bucket Database Name has a limit of 63 characters, this requires delimiting with underscores and ensuring that the file name is kept in lowercase, if you would like more information, look at the MoJ guidance for naming conventions.
+
+- S3 Table Names have a limit of 1024 characters. Similarly with database names this requires adhering to the [MoJ guidance](https://github.com/ministryofjustice/analytical-platform-uploader#data-governance-for-testing) for naming conventions.
+
+- We do not have access to the permissions infrastructure of the AP. This means that anyone can upload to any table created by the uploader through the uploader. This is not a security risk, as the uploader is purely a loading mechanism and not a viewing mechanism, but be aware users might upload data of a different schema to a table accidentally.
