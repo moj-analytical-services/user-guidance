@@ -74,6 +74,7 @@ If a project has a 'requirements.txt' then you should install that into a venv.
 A project's README file is the traditional place to communicate usage of a requirements.txt. Because of that, this section is provided in markdown format so it can be copied into your project's README, and tailored as necessary:
 
 ```markdown
+
 ## Setup
 
 Before you can run this project, you need to install some Python packages using the terminal:
@@ -85,3 +86,8 @@ Before you can run this project, you need to install some Python packages using 
     # install the python packages required
     . venv/bin/activate
     pip install -r requirements.txt
+```
+
+## Library conflicts & warnings
+
+If you come across any conflicts or warnings when installing your libraries using pip we advise you use [poetry](https://python-poetry.org/docs/) to resolve them.
