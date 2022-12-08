@@ -12,13 +12,13 @@ Access to curated databases is granted via the [database access repository](http
 
 If you are looking for access to a user created bucket, then the admin of that bucket should be able to grant you access. If you don't know who the admin is, or they are not able to grant you access, then ask in the `#analytical-platform` slack channel.
 
-## Where should I store my own data?
+## Where should I store my own data?
 
 Data should be stored in an s3 bucket. You can create a new s3 bucket in the control panel. Data can be uploaded manually via the AWS console (which can be accessed through the control panel) or you can write it from RStudio or JupyterLab.
 
 If your data contains anything that could be considered personal information, you must follow guidance from the data protection team which can be found on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/).
 
-## How do I read/write data from an s3 bucket?
+## How do I read/write data from an s3 bucket?
 
 **Python/JupyterLab**: You can read/write directly from s3 using pandas. However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
 
@@ -31,6 +31,8 @@ maintained, R-native version of S3tools that removes some of the complexity arou
 Databases on the AP use Amazon Athena which allow you to query data using SQL. You shouldn't need to know about Athena in detail to query databases on the AP, but if you are interested you may wish to [read more about it](https://aws.amazon.com/athena/). There are three ways you can query data (there is more detail on all three of these in `Data` section of this guidance):
 
 **The Amazon Athena workbench**: If you [log into the AWS console](https://aws.services.analytical-platform.service.justice.gov.uk) and click Services -> Athena, you'll see the Athena workbench. This is good for testing your queries.
+
+If you get `assumed-role/... is not authorized to perform: glue:GetDatabases`, [request database access](https://github.com/moj-analytical-services/data-engineering-database-access#standard-database-access).
 
 **Python/JupyterLab**: To run queries and/or read data into a pandas DataFrame, use `pydbtools`. More details are [here](https://github.com/moj-analytical-services/pydbtools). Remember to install the latest version!
 
