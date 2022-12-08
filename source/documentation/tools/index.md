@@ -2,15 +2,16 @@
 
 The MoJ Analytical Platform comes with various tools including:
 
-### [Control panel](control-panel.html) 
+### [Control panel](control-panel.html)
 The main entry point to the Analytical Platform
+
 ### [RStudio](rstudio)
 A development environment for writing R code and R Shiny apps
 
-### [JupyterLab](jupyterlab) 
+### [JupyterLab](jupyterlab)
 A development environment for writing Python code
 
-### [Airflow](airflow) 
+### [Airflow](airflow)
 A tool for scheduling and monitoring workflows
 
 ### [Data Discovery](../data/curated-databases/data-documentation)
