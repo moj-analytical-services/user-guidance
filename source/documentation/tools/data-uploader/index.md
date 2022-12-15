@@ -73,6 +73,14 @@ A progress bar is included for your convenience. Once the upload begins a **Canc
 The details of the upload will be sent in a confirmation email. This includes essential information such as database name, table name, Athena reference path, S3 bucket path and `extraction_timestamp`. This information is required to locate your data on the MoJ Analytical Platform.
 
 All Data that has been uploaded is subsequently moved to the AP at 1am every day. It can take up to 24 hours for a newly created database to show, data table and newly uploaded data to appear on the Analytical Platform. If you have created a new database the next step is to request access to it from the MoJ Analytical Platform; instructions to do so may be found [here](https://github.com/moj-analytical-services/data-engineering-database-access).
+
+## Getting access to uploaded data
+Data uploaded via the uploader are inacessible be default. To gain access, a database file and project access file need to be created in https://github.com/moj-analytical-services/data-engineering-database-access.
+
+Here is an example for the cjs dashboard:
+https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/cjs_dashboard
+https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/cjs_dashboard.yaml
+
 ### Troubleshooting
 
 |**Problem** |**Solution**|
