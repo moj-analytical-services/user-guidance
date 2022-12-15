@@ -1,7 +1,6 @@
 # Create a Derived Table
 
- <img src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png?v8" alt="Warning emoji" width="20"/>
- This service is in beta  <img src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png?v8" alt="Warning emoji" width="20"/> 
+⚠️ This service is in beta ⚠️
  
  Read on to find out more or get in touch at the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
 
