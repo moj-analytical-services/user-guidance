@@ -1,5 +1,7 @@
 ## Troubleshooting
 
+This page is intended to help users self-diagnose errors and is an evolving resource! Please check here first and then, if necessary, ask in our slack channel ![#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9). If you discover new errors and/or solutions please post on slack or edit this document and raise a PR.
+
 ### General troubleshooting tips
 - when you deploy dev models logs are created locally under `mojap_derived_tables/logs` these usually contain more helpful error messages.
 - `dbt clean` cleans out the local `logs` and `target` folders; it is good  practise to start a session with a clean slate.
