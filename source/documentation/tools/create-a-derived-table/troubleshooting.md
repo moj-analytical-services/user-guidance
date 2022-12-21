@@ -24,8 +24,8 @@ This page is intended to help users self-diagnose errors and is an evolving reso
 - The resource list in your project access config file in [data-engineeering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/project_access) must include both the source databases as referenced in the database access folder and any domains within `create-a-derived-table` that you wish to have read or write access to. For example
 ```
 resources:
-  - create_a_derived_table/prison
-  - create_a_derived_table/probation
+  - create_a_derived_table/domain_a
+  - create_a_derived_table/domain_b
 ```
 - 
 
