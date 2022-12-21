@@ -10,7 +10,7 @@ This page is intended to give users who have read through the [detailed instruct
 - `run_artefacts`: files created when models are compiled or run.
 - `seed`: lookup table.
 - `source`: any table on the MoJ Analytical Platform *not* created by `create-a-derived-table` which may be used as a starting point to derived models. 
-- `table`: tabular data in the usual sense; also a materialisation type that can be chosen for a `model`.
+- `table`: tabular data in the usual sense; also the default materialisation type for a `model`.
 
 
 ## Step by step
