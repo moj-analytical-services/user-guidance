@@ -90,4 +90,4 @@ From StackOverflow, [here](https://stackoverflow.com/questions/54375913/athena-q
 ### Is sqlfuff up to date?
 
 
-### --no-verify flag in Analytical Platform when uploading >5MB CSVs
+### `--no-verify` flag in Analytical Platform when uploading >5MB CSVs
