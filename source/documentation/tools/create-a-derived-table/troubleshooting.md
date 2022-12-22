@@ -9,7 +9,7 @@ This page is intended to help users self-diagnose errors and is an evolving reso
 - `dbt clean` cleans out the local `logs` and `target` folders; it is good  practise to start a session with a clean slate.
 - Under `mojap_derived_tables/target` there exist `compiled` and `run` folders containing a duplicate folder structure as under `mojap_derived_tables`. Here you can find your SQL code as compiled (with the Jinja rendered) and the DDL/DML run code. You can test each of these in Athena to check your SQL works as expected. 
 - Testing your code in Athena will also highlight any read access permission issues.
-All file names and paths should be lowercase.
+- All file names and paths should be lowercase.
 
 
 ### Can't find profiles.yml error
