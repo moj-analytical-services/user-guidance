@@ -325,7 +325,7 @@ Whereas you can use configurations to:
 
 ### Where can I define configs?
 
-Configure a whole directory of models, seeds, tests, etc. from the `dbt_project.yml` file, under the corresponding resource key (`models:`, `seeds:`, `tests:`, etc). In the example below the `materialized: table` configuration has been applied to the entire `mojap_derived_tables` project. The `sentences/` and `question_answers/` directories have schedule `tags` configured for all models in those respective directories. :warning: Only add configurations to your own work. :warning:
+Configure a whole directory of models, seeds, tests, etc. from the `dbt_project.yml` file, under the corresponding resource key (`models:`, `seeds:`, `tests:`, etc). In the example below the `materialized: table` configuration has been applied to the entire `mojap_derived_tables` project. The `sentences/` and `question_answers/` directories have schedule `tags` configured for all models in those respective directories. ⚠️ Only add configurations to your own work! ⚠️
 
 ```
 models:
