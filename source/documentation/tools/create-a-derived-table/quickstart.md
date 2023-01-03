@@ -16,7 +16,7 @@ This page is intended to give users who have read through the [detailed instruct
 
 
 ## Set up
-This list comprises everything you need to do to get set up and ready to start building models. 
+This list comprises everything you need to do and consider to get set up and ready to start building models collaboratively. See [Troubleshooting](/tools/create-a-derived-table/troubleshooting) if you have any problems.
 
 0. Read the detailed [create-a-derived-table instructions](/tools/create-a-derived-table/index).
 1. Check your use case is appropriate; you may contact the Data Modelling team for advice at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9).
@@ -27,11 +27,11 @@ This list comprises everything you need to do to get set up and ready to start b
 6. Create a project access file for your project in [data-engineering-database-access/project_access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/project_access). 
 7. In the project access file under `Resources` include the `create-a-derived-table` domains required to write models *to*, as well as the source databases you will be buildung models *from*. 
 8. If an MoJ Analytical Platform database is not listed as a source under [mojap_derived_tables/models/sources](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/sources) then it will need to be added, see [CONTRIBUTING](https://github.com/moj-analytical-services/create-a-derived-table/blob/main/CONTRIBUTING.md#updating-dbt-source-files).
-9. Set up RStudio IDE; set up a project and clone the repo into it, either via the GUI or Terminal,
+9. Set up RStudio IDE; set up a project and clone the repo into it. See [create-a-derived-table instructions](/tools/create-a-derived-table/index) for GUI instructions. Using Terminal navigate to where you want the `create-a-derived-table` project to sit and run
 ```
 git clone git@github.com:moj-analytical-services/create-a-derived-table.git
 ```
-10. Set up a Python virtual environment; activate; install requirements
+10. Navigate to the root of your `create-a-derived-table` directory in Terminal and set up a Python virtual environment; activate it, upgrade pip, and install requirements
 ```
 python3 -m venv venv
 source venv/bin/activate
@@ -43,12 +43,18 @@ pip install -r requirements.txt
 echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bash_profile
 source ~/.bash_profile
 ```
-12. Navigate to the `mojap_derived_tables` directory to run `dbt` commands. Check active connection with `dbt debug` and install `dbt` packages with `dbt deps`
+12. Navigate to the `mojap_derived_tables` directory to run `dbt` commands. Check you have an active connection,
 ```
 dbt debug
+```
+13. Install `dbt` packages,
+```
 dbt deps
 ```
-13. Use Github Workflow method to collaborate on a project. Branch off `main` and create a main branch for your project, `project-name-main`; all subsequent developers should branch off `project-name-main` to create feature branches for this project. When raising a PR ensure you merge into this branch, before merging into `main`; the PR summary should read something like "`github-user` wants to merge *X* commits into `project-name-main` from `project-name-feature-branch`".
+14. Use Github Workflow method to collaborate on a project. Branch off `main` and create a main branch for your project, `project-name-main`; all subsequent developers should branch off `project-name-main` to create feature branches for this project. When raising a PR ensure you merge into this branch, before merging into `main`; the PR summary should read something like "`github-user` wants to merge *X* commits into `project-name-main` from `project-name-feature-branch`".
+
+You are now ready to start building models collaboratively with `create-a-derived-tbale`. If you have any problems please check [Troubleshooting](/tools/create-a-derived-table/troubleshooting) , or ask at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) providing context.
+
 
 
 ## Using Create a Derived Table and dbt
