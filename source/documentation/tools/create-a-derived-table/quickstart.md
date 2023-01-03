@@ -19,13 +19,13 @@ This page is intended to give users who have read through the [detailed instruct
 This list comprises everything you need to do to get set up and ready to start building models. 
 
 0. Read the detailed [create-a-derived-table instructions](/tools/create-a-derived-table/index).
-1. Check your use case is appropriate; you may wish to contact the Data Modelling team for advice at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9).
+1. Check your use case is appropriate; you may contact the Data Modelling team for advice at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9).
 2. Decide an appropriate domain within `create-a-derived-table` for your project.
-3. Decide on naming conventions for your `models` in the form `database_name__table_name`, note separation using `__` ("dunder").
+3. Decide on naming conventions for your `models` in the form `database_name__table_name`, note separation using `__` ("dunder"). Database name must be unique within MoJ.
 4. Set up an [MoJ Analytical Platform account](https://user-guidance.services.alpha.mojanalytics.xyz/get-started.html#2-analytical-platform-account).
-5. Add yourself to [standard_database_access](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml) and raise a PR to gain access to `create_a_derived_table/basic` resource including access to`seeds` and `run_artefacts`.
+5. Add yourself to [standard_database_access](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml) and raise a PR to gain access to the `create_a_derived_table/basic` resource, which includes access to`seeds` and `run_artefacts`.
 6. Create a project access file for your project in [data-engineering-database-access/project_access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/project_access). 
-7. Under resources include the domains required to write models to, as well as the source databases. 
+7. In the project access file under `Resources` include the `create-a-derived-table` domains required to write models *to*, as well as the source databases you will be buildung models *from*. 
 8. If an MoJ Analytical Platform database is not listed as a source under [mojap_derived_tables/models/sources](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/sources) then it will need to be added, see [CONTRIBUTING](https://github.com/moj-analytical-services/create-a-derived-table/blob/main/CONTRIBUTING.md#updating-dbt-source-files).
 9. Set up RStudio IDE; set up a project and clone the repo into it, either via the GUI or Terminal,
 ```
@@ -48,11 +48,11 @@ source ~/.bash_profile
 dbt debug
 dbt deps
 ```
-13. Use Github Workflow method to collaborate on a project. Branch off `main` and create a main branch for your project, `project-name-main`, then all subsequent developers should branch off `project-name-main` to create their own feature branches for this project and merge into `project-name-main` before thi sis merged into `main`.
+13. Use Github Workflow method to collaborate on a project. Branch off `main` and create a main branch for your project, `project-name-main`; all subsequent developers should branch off `project-name-main` to create feature branches for this project. When raising a PR ensure you merge into this branch, before merging into `main`; the PR summary should read something like "`github-user` wants to merge *X* commits into `project-name-main` from `project-name-feature-branch`".
 
 
 ## Using Create a Derived Table and dbt
-Bear in mind `create-a-derived-table` 
+Bear in mind `create-a-derived-table`...
 
 
 
