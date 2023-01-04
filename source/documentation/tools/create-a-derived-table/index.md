@@ -172,7 +172,7 @@ You'll need an interactive development environment (IDE) to interact with the re
 
 ### JupyterLab
 
-We're working to get Create a Derived Table up and running with JupyterLab, please bear with us.
+We're currently not planning to get Create a Derived Table up and running with JupyterLab, as the RStudio IDE is sufficient.
 
 ### RStudio
 
@@ -354,6 +354,9 @@ models:
       materialized: incremental
       incremental_strategy: append
       partitioned_by: ['snapshot_date']
+      +column_types:
+        column_1: varchar(5)
+        column_2: int    
 ```
 
 If for some reason it is not possible or reasonable to apply a configuration in a property file, you can use a `config()` Jinja macro within a model or test SQL file. The following example shows how the same configuration above can be applied in a model or test file.
@@ -391,7 +394,8 @@ The most important function in dbt is [`ref()`](https://docs.getdbt.com/referenc
 `model_b.sql`
 
 ```
-select contact_id from {{ ref("model_a") }} where mojap_current_record=true
+select contact_id from {{ ref("model_a") }} 
+where mojap_current_record=true
 ```
 
 ## Materialisations
@@ -475,7 +479,23 @@ When dbt runs it generates artefacts. The most useful of these to you will be th
 
 ## <a id="using-the-plus-prefix"></a>Using the + prefix 
 
-The `+` prefix is a dbt syntax feature which helps disambiguate between resource paths and configurations in the `dbt_project.yml` file. If you see it used in the `dbt_project.yml` file and wonder what it is, read [dbt's guidance on using the `+` prefix](https://docs.getdbt.com/reference/resource-configs/plus-prefix).
+The `+` prefix is a dbt syntax feature which helps disambiguate between resource paths and configurations in the `dbt_project.yml` file. If you see it used in the `dbt_project.yml` file and wonder what it is, read [dbt's guidance on using the `+` prefix](https://docs.getdbt.com/reference/resource-configs/plus-prefix). It is also used to configure properties in a nested dictionary which take a dictionary of values in a model, seed or test config .yaml. For example, use `+column_types` rather than `column_types` since what follows are further key and value pairs defining the column names and the required data type. It doesn't hurt to use `+` prefix so it is recommended to always do so.
+
+```
+version: 2
+
+models:
+  - name: prison_safety_and_security__question_answer_fct
+    description: The question and answer fact table.
+    config:
+      materialized: incremental
+      incremental_strategy: append
+      partitioned_by: ['snapshot_date']
+      +column_types:
+        column_1: varchar(5)
+        column_2: int
+        column_3: string
+```
 
 ## Linting
 
