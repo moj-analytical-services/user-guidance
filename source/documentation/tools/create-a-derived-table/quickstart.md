@@ -1,10 +1,19 @@
 # Create a Derived Table Quickstart
 
-This page is intended to give users who have read through the [detailed instructions](/tools/create-a-derived-table/index) a quickstart reference to refresh their memory or refer to particular code snippets quickly. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
+This page is intended to give users who have read through the detailed [create-a-derived-table instructions](/tools/create-a-derived-table/index) a quickstart reference to refresh their memory. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
 
+## Contents
+- [Glossary](#glossary)
+- [Set up](#set-up)
+- [Tips](#tips)
 
 
 ## Glossary
+Glossary of key words in the context of `create-a-derived-table` / `dbt`.
+- `_dim`: dimension model suffix naming convention.
+- `_fct`: fact model suffix naming convention.
+- `_stg`: staging model suffix naming convention.
+- `.yaml`: preferred YAML file extension (rather than `.yml`).
 - `create-a-derived-table`: MoJ tool to create derived tables and serve them in AWS Athena. 
 - `dbt`: data build tool open source software which `create-a-derived-table` is built on.
 - `dbt-athena`: MoJ forked version of an open source community built `dbt` adapter to allow `dbt` to work with AWS Athena.
@@ -16,7 +25,7 @@ This page is intended to give users who have read through the [detailed instruct
 
 
 ## Set up
-This list comprises everything you need to do and consider to get set up and ready to start building models collaboratively. See [Troubleshooting](/tools/create-a-derived-table/troubleshooting) if you have any problems.
+This list comprises everything you need to do and consider to get set up and ready to start building models collaboratively. It is intended as a quick check or reference list and assumes you have read the detailed [create-a-derived-table instructions](/tools/create-a-derived-table/index). See [Troubleshooting](/tools/create-a-derived-table/troubleshooting) if you have any problems.
 
 0. Read the detailed [create-a-derived-table instructions](/tools/create-a-derived-table/index).
 1. Check your use case is appropriate; you may contact the Data Modelling team for advice at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9).
@@ -43,7 +52,7 @@ pip install -r requirements.txt
 echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bash_profile
 source ~/.bash_profile
 ```
-12. Navigate to the `mojap_derived_tables` directory to run `dbt` commands. Check you have an active connection,
+12. Navigate to the `mojap_derived_tables` directory in Terminal to run `dbt` commands. Check you have an active connection,
 ```
 dbt debug
 ```
@@ -53,15 +62,7 @@ dbt deps
 ```
 14. Use Github Workflow method to collaborate on a project. Branch off `main` and create a main branch for your project, `project-name-main`; all subsequent developers should branch off `project-name-main` to create feature branches for this project. When raising a PR ensure you merge into this branch, before merging into `main`; the PR summary should read something like "`github-user` wants to merge *X* commits into `project-name-main` from `project-name-feature-branch`".
 
-You are now ready to start building models collaboratively with `create-a-derived-tbale`. If you have any problems please check [Troubleshooting](/tools/create-a-derived-table/troubleshooting) , or ask at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) providing context.
-
-
-
-## Using Create a Derived Table and dbt
-Bear in mind `create-a-derived-table`...
-
-
-
+You are now ready to start building models collaboratively with `create-a-derived-tbale`. If you have any problems please check [Troubleshooting](/tools/create-a-derived-table/troubleshooting), or ask at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) providing context.
 
 
 ## Tips

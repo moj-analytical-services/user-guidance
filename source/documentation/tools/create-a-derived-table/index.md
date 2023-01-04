@@ -25,7 +25,7 @@
   - [Collaborating with Git](#collaborating-with-git)
     - [Creating branches](#creating-branches)
 - [Creating models](#creating-models)
-  - [What is a model?](#what-is-a-model-)
+  - [What is a model?](#what-is-a-model)
   - [Model properties](#model-properties)
     - [Where can I define configs?](#where-can-i-define-configs)
     - [Config inheritance](#config-inheritance)
@@ -33,17 +33,17 @@
     - [Sources](#sources)
     - [The ref function](#the-ref-function)
   - [Materialisations](#materialisations)
-- [What are seeds?](#what-are-seeds-)
+- [What are seeds?](#what-are-seeds)
 - [Tests](#tests)
   - [Custom generic tests](#custom-generic-tests)
   - [Singular tests](#singular-tests)
   - [Configuring tests](#configuring-tests)
-- [What else?](#what-else-)
+- [What else?](#what-else)
   - [Macros](#macros)
   - [Seeds](#seeds)
   - [dbt packages](#dbt-packages)
   - [dbt artefacts](#dbt-artefacts)
-  - [Using the + prefix](#using-the---prefix)
+  - [Using the + prefix](#using-the-plus-prefix)
   - [Linting](#linting)
     - [Linting YAML files](#linting-yaml-files)
     - [Linting SQL files](#linting-sql-files)
@@ -473,7 +473,7 @@ There is an ecosystem of packages containing helpful macros and tests you can us
 
 When dbt runs it generates artefacts. The most useful of these to you will be the logs in the `./mojap_derived_tables/logs/` directory and compiled SQL in the `./mojap_derived_tables/target/` directory. Compiled SQL can be useful when debugging errors as error messages will often refer to the line number in the compiled SQL and not that in your model file.
 
-## Using the + prefix
+## <a id="using-the-plus-prefix"></a>Using the + prefix 
 
 The `+` prefix is a dbt syntax feature which helps disambiguate between resource paths and configurations in the `dbt_project.yml` file. If you see it used in the `dbt_project.yml` file and wonder what it is, read [dbt's guidance on using the `+` prefix](https://docs.getdbt.com/reference/resource-configs/plus-prefix).
 

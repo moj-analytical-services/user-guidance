@@ -1,4 +1,4 @@
-## Troubleshooting
+# Troubleshooting
 
 This page is intended to help users self-diagnose errors. Please check here first and then, if necessary, ask in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), providing context. If you discover new errors and/or solutions please post on slack or edit this document and raise a PR.
 
@@ -64,6 +64,25 @@ HIVE_PATH_ALREADY_EXISTS: Target directory for table ‘database_name_dev_dbt.ta
 >If you use the external_location parameter in the CTAS query, then be sure to specify an Amazon Simple Storage Service (Amazon S3) location that's empty. The Amazon S3 location that you use to store the CTAS query results must have no data. When you run your CTAS query, the query checks that the path location or prefix in the Amazon S3 bucket has no data. If the Amazon S3 location already has data, the query doesn't overwrite the data.
 
 
+### May need to delete data at dbt-query-dump
+```
+You may need to manually clean the data at location ‘s3://dbt-query-dump/tables/...’ before retrying. Athena will not delete data in your account.
+```
+- Note *may*; this suggestion is usually unhelpful, and the location suggested *may* not exist.
+- Check your local logs under `create-a-a-derived-table/mojap_derived_tables/logs/dbt.log` 
+- However, it *may* help to delete your Glue database and tables from the Glue catalogue and the corresponding underlying data in the `mojap-derived-tables` S3 bucket, see [Delete dev models instructions](#delete-dev-models-instructions).
+
+
+### Query exhausted resources at this scale factor
+From StackOverflow, [here](https://stackoverflow.com/questions/54375913/athena-query-exhausted-resources-at-scale-factor).
+
+> Athena is just an EMR cluster with hive and prestodb installed. The problem you are facing is: Even if your query is distributed across X number of nodes, the ordering phase must be done by just a single node, the master node in this case. So, you can order as much data as the master node has memory.
+
+
+### Partial parse save file not found
+- Not an error; simply a statement that there is no pre-existing attempt to parse models and a full parse must be done.
+
+
 ### Database 'mojap' does not exist
 ```
 ...
@@ -80,25 +99,6 @@ Runtime Error
     FAILED: SemanticException [Error 10072]: Database does not exist: mojap
 ```
 This error appears to be an issue with `dbt-athena` failing to create the required database name, `mojap` is set as the default name (and does not exist) hence the final error. Best guesses; phantom remains of failed attempts to create the schema blocking new attempts, or a flakey connection between `dbt-athena` and Athena, or a timeout on the connection. When this issue first occured it seemed to jinx a particular database name, and the code worked fine under a different database name. If anyone has any ideas on this issue please post in [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit this document.
-
-
-### May need to delete data at dbt-query-dump
-```
-You may need to manually clean the data at location ‘s3://dbt-query-dump/tables/...’ before retrying. Athena will not delete data in your account.
-```
-- Note *may*; this suggestion is usually unhelpful, and the location suggested *may* not exist.
-- Check your local logs under `create-a-a-derived-table/mojap_derived_tables/logs/dbt.log` 
-- However, it *may* help to delete your Glue database and tables from the Glue catalogue and the corresponding underlying data in the `mojap-derived-tables` S3 bucket.
-
-
-### Query exhausted resources at this scale factor
-From StackOverflow, [here](https://stackoverflow.com/questions/54375913/athena-query-exhausted-resources-at-scale-factor).
-
-> Athena is just an EMR cluster with hive and prestodb installed. The problem you are facing is: Even if your query is distributed across X number of nodes, the ordering phase must be done by just a single node, the master node in this case. So, you can order as much data as the master node has memory.
-
-
-### Partial parse save file not found
-- Not an error; simply a statement that there is no pre-existing attempt to parse models and a full parse must be done.
 
 
 ### Is sqlfuff up to date?
