@@ -1,6 +1,6 @@
-# Create a Derived Table Quickstart
+# Create a Derived Table Quick Reference
 
-This page is intended to give users who have read through the detailed [create-a-derived-table instructions](/tools/create-a-derived-table/index) a quickstart reference to refresh their memory. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
+This page is intended to give users who have read through the detailed [create-a-derived-table instructions](/tools/create-a-derived-table/index) a quick reference to refresh their memory. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
 
 ## Contents
 - [Glossary](#glossary)
