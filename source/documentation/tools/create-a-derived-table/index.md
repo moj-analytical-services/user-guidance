@@ -57,7 +57,7 @@
 - [Resources](#resources)
 - [License](#license)
 
-:warning: This service is in beta :warning: Read on to find out more or get in touch at the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
+⚠️ This service is in beta ⚠️ Read on to find out more or get in touch at the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
 
 # What is Create a Derived Table?
 
@@ -403,7 +403,7 @@ where mojap_current_record=true
 Materialisations are strategies for persisting dbt models in a warehouse. There are four types of materializations built into dbt. They are:
 
 - [table](https://docs.getdbt.com/docs/build/materializations#table)
-- [view](https://docs.getdbt.com/docs/build/materializations#view) :warning: not currently supported :warning:
+- [view](https://docs.getdbt.com/docs/build/materializations#view) ⚠️ not currently supported ⚠️
 - [incremental](https://docs.getdbt.com/docs/build/materializations#incremental)
 - [ephemeral](https://docs.getdbt.com/docs/build/materializations#ephemeral)
 
@@ -411,7 +411,7 @@ Materialisations are strategies for persisting dbt models in a warehouse. There 
 
 Seeds are lookup tables easily created from a `.csv` file. Put the `.csv` in the [`./mojap_derived_tables/seeds/`](./mojap_derived_tables/seeds/) directory and follow the same directory structure requirements and naming conventions as for models. As with marts models, your seeds should have property files that have the same filename as the seed. Seeds can be accessed by anyone with standard database access and so must not contain sensitive data. Generally, seeds shouldn't contain more than 1000 rows, they don't contain complex data types, and they don't change very often. You can deploy a seed with more than 1000 rows, but it's not reccomended and it will take quite a long time to build.
 
-:warning: Seeds must not contain sensitive data. :warning:
+⚠️ Seeds must not contain sensitive data. ⚠️
 
 # Tests
 
