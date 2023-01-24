@@ -35,7 +35,7 @@ Automated validation is applied to the data pre upload to check the basics - the
 ![](../../../images/uploader/uploader_flowchart.png)
 
 ## Data Uploader pre-requisites
-- In order to utilise the data uploader, you are required to do a pull request. This can be done via [this github page](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) and then adding your email to the users list.  
+- In order to utilise the data uploader, you are required to do a pull request. This can be done via [this github page](https://github.com/ministryofjustice/analytical-platform-uploader/blob/main/application/users/uploader_users_prod.yaml) and then adding your email to the users list.  If your github user is unable to create a pull request you may need to be added to https://github.com/ministryofjustice which can be done on #ask-operations-engineering on the Justice Digital slack.
 
 - Next you will need to get access to the [DPIA](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/data-protection-impact-assessments-dpias/) (Data Protection Impact Assessment) or an [MOJ analytical platform data movement Form](https://forms.office.com/Pages/ResponsePage.aspx?id=KEeHxuZx_kGp4S6MNndq2I8ebMaq5PFBoMAkkhrMYHBUREVBSzk4WTg1WFk1OFU4V1QyWUE5VUoyNC4u). This supplies legal cover for new datasets and gives legal cover to send official sensitive data to the prod site. If not, you will only be able to send non-sensitive test data.
 
