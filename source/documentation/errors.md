@@ -131,3 +131,13 @@ and then read it in using e.g.
 `openxlsx::readWorkbook("file_name_to_save_to_in_home_directory.xlsx")`
 
 Note, it's best to avoid using `aws.s3` directly, see [here](https://github.com/moj-analytical-services/platform_user_guidance/blob/master/05-errors.Rmd#unable-to-access-data-using-awss3-package)
+
+### Error when switching branches: fatal: index file smaller than expected.
+
+This occurs when the index file gets corrupted, and can be fixed with:
+
+```
+$ rm .git/index
+$ git add .
+$ git reset HEAD
+```

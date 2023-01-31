@@ -65,6 +65,10 @@ Some 2FA applications and QR scanners are unable to scan the QR code generated o
 
 You can re-enable your “Dark” Mode, Extension or Settings once this process has been completed.
 
+### Read more about working with GitHub in MoJ
+
+We use GitHub to store code and collborate on it with others. You should read more about how to work with [git and GitHub](github) on the Analytical Platform. You will need to complete some additional steps before you can start working with it with RStudio or JupyterLab.
+
 ## 2. Analytical Platform Account
 
 ### What is the Analytical Platform?
