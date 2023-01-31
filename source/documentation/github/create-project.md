@@ -11,7 +11,7 @@ You can also use:
 
 To create a new repository, you should:
 
-1. Nativate to the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation page.
+1. Navigate to the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation page.
 2. In the repositories section, select **New**.
 3. Configure the properties of your repository, in line with the information below.
 4. Select **Create repository**.
