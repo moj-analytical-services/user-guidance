@@ -12,6 +12,8 @@ If RStudio crashes on startup, and you've identified from Grafana that it is bec
 
 Once RStudio is running again, you can get a better understanding of what takes up memory by using the [pryr](https://rdrr.io/cran/pryr/man/mem_used.html) package. To free up a bit of memory, for example when a variable points to a big dataframe, you can instead assign something a null to the variable, and then run [`gc()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/gc). To free up all the user memory you can click on the 'broom' to [clear the environment](https://community.rstudio.com/t/i-want-to-do-a-complete-wipe-down-and-reset-of-my-r-rstudio/6712/4).
 
+An alternative is to use [Airflow](https://user-guidance.services.alpha.mojanalytics.xyz/tools/airflow/concepts/#why-use-airflow) and run your R job as an Airflow task on a high-memory node.
+
 ## Clearing your RStudio session
 
 The RStudio session is the short term 'state' of RStudio, including:
