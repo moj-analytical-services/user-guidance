@@ -65,11 +65,11 @@ Some 2FA applications and QR scanners are unable to scan the QR code generated o
 
 You can re-enable your “Dark” Mode, Extension or Settings once this process has been completed.
 
-## 2. Analytical Platform Account
+## 2. Analytical Platform Account Access
 
 ### What is the Analytical Platform?
 
-The Analytical Platform is a data analysis environment, providing modern tools and key datasets for MoJ analysts.
+The Analytical Platform (often referred to as 'AP') is a data analysis environment, providing modern tools and key datasets for MoJ analysts.
 
 It offers:
 
@@ -79,6 +79,11 @@ It offers:
 * secure and well-engineered environment
 
 See [about the Analytical Platform](/about.html).
+
+The steps required to access the platform (and its resources) are as follows:
+1. [Request an account](#request-an-account-from-the-analytical-platform-team)
+2. [Wait for invite to our GitHub organisation, then accept](#accept-your-invitation-to-the-moj-analytical-services-github-organisation)
+3. [Sign in to the Analytical Platform for the first time](#sign-in-to-the-analytical-platform-for-the-first-time)
 
 ### Request an account from the Analytical Platform team
 
@@ -93,13 +98,13 @@ When you are invited to join the MoJ Analytical Services GitHub organisation, yo
 
 You can also accept your invitation by signing in to GitHub and visiting the [organisation page](https://github.com/moj-analytical-services).
 
-### Configure two-factor authentication for the Analytical Platform
+### Sign in to the Analytical Platform for the first time
 
-The main entry point to the Analytical Platform is the Control Panel.
+The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). 
 
 When you sign in to the Control Panel for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
 
-If you are a new member of the organisation, are using the platform for the first time, please sign in to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+If you are a new member of the organisation, are using the platform for the first time, you will need to log in at least once to be able to get access permissions for data within the platform.
 
 You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
 

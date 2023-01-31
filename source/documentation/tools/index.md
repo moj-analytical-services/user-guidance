@@ -25,7 +25,7 @@ A tool for creating persistent derived tables in Athena
 
 ### Python packages
 
-The data engineering team maintain a number of pythong packages, the following python packages are what we consider the most useful:
+The data engineering team maintain a number of python packages to help with data manipulation, as well as interfacing with data using our preferred services. The following python packages are those we consider the most useful:
 
 #### [pydbtools](https://github.com/moj-analytical-services/pydbtools)
 Standard package for querying MoJAP athena databases with useful features including temp table creation.
