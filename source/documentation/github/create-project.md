@@ -16,6 +16,10 @@ To create a new repository, you should:
 3. Configure the properties of your repository, in line with the information below.
 4. Select **Create repository**.
 
+#### Repository template
+
+You may find it helpful to use a repository template, such as the [moj-analytical-services/template-repository](https://github.com/moj-analytical-services/template-repository), instead of starting with a blank repository. Templates are often pre-configured with initial files and workflows, and sensible defaults that enable you to get going more quickly. You can also [create your own template repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository) that you can reuse and share with others.
+
 #### Owner
 
 You should select **moj-analytical-services** as the **Owner** of the repository. This should be selected by default.
