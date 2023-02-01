@@ -33,7 +33,7 @@ When choosing a name for your repository, we recommend:
 - keeping it short and simple
 - making it descriptive and meaningful
 - avoiding abbreviations and acronyms
-- using dashes to separate words
+- using dashes to separate words and not full stops or underscores
 
 #### Description
 
