@@ -10,7 +10,7 @@ In addition to this users can create their own S3 buckets which may have data us
 
 Access to curated databases is granted via the [database access repository](https://github.com/moj-analytical-services/data-engineering-database-access). Have a read through the guidance on there. If you are finding the process a little tricky, please ask for help in `#ask-data-engineering`. A data engineer will happily guide you through things.
 
-If you are looking for access to a user created bucket, then the admin of that bucket should be able to grant you access. If you don't know who the admin is, or they are not able to grant you access, then ask in the `#analytical-platform` slack channel.
+If you are looking for access to a user created bucket, then the admin of that bucket should be able to grant you access. If you don't know who the admin is, or they are not able to grant you access, then ask in the [#analytical-platform-support](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ) Slack channel.
 
 ## Where should I store my own data?
 

@@ -39,7 +39,7 @@ We are open to increasing the maximum memory, so let us know if you need more, t
 
 See also the [RStudio memory issues](tools/rstudio/index.html#rstudio-memory-issues) section.
 
-## What are the benefits of Github and why do we recommend it?
+## Benefits of GitHub
 
 Github is a central place to store our analytical projects - particularly those which are built primarily in code.
 
