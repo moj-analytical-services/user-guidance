@@ -81,6 +81,7 @@ It offers:
 See [about the Analytical Platform](/about.html).
 
 The steps required to access the platform (and its resources) are as follows:
+
 1. [Request an account](#request-an-account-from-the-analytical-platform-team)
 2. [Wait for invite to our GitHub organisation, then accept](#accept-your-invitation-to-the-moj-analytical-services-github-organisation)
 3. [Sign in to the Analytical Platform for the first time](#sign-in-to-the-analytical-platform-for-the-first-time)
@@ -100,7 +101,7 @@ You can also accept your invitation by signing in to GitHub and visiting the [or
 
 ### Sign in to the Analytical Platform for the first time
 
-The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). 
+The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 
 When you sign in to the Control Panel for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
 
