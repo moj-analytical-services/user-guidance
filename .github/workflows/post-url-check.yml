@@ -24,6 +24,7 @@ jobs:
 
   url-check:
     name: Check URL
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download a Build Artifact from build
