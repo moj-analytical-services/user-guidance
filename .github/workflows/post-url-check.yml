@@ -1,0 +1,42 @@
+name: post urk check
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    container:
+      image: ministryofjustice/tech-docs-github-pages-publisher:v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Compile Markdown to HTML and create artifact
+        run: |
+          /scripts/deploy.sh
+      - name: Upload artifact to be published
+        uses: actions/upload-artifact@v3
+        with:
+          name: github-pages
+          path: artifact.tar
+          retention-days: 1
+
+  url-check:
+    name: Check URL
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download a Build Artifact from build
+        uses: actions/download-artifact@v3
+        with:
+          name: github-pages
+          path: github-pages
+      - name: Unpack files and check URL links
+        run: |
+          cd github-pages
+          tar -xvf artifact.tar
+          npm install linkinator
+          npx linkinator . --recurse --markdown \
+            --skip https://ministryofjustice.github.io/template-documentation-site/images/govuk-large.png \
+          # "URL Check will fail on private and internal GitHub repositories"
