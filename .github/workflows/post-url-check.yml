@@ -1,4 +1,4 @@
-name: post urk check
+name: post url check
 
 on:
   workflow_dispatch:
