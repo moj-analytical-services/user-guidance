@@ -3,7 +3,7 @@ host: https://user-guidance.services.alpha.mojanalytics.xyz
 
 # Header-related options
 show_govuk_logo: false
-service_name: MoJ Analytical Platform
+service_name: Analytical Platform User Guide
 service_link: https://user-guidance.services.alpha.mojanalytics.xyz
 phase:
 
