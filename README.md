@@ -20,9 +20,9 @@ To make changes to the documentation for the Tech Docs Template website, edit fi
 
 The `.html.md.erb` files control the structure of the guidance. These files support content in:
 
-* Markdown
-* HTML
-* Ruby
+- Markdown
+- HTML
+- Ruby
 
 They are generally of the form:
 
@@ -34,7 +34,6 @@ last_reviewed_on: YYYY-MM-DD
 review_in: 2 years
 show_expiry: true
 ---
-
 <%= partial 'documentation/page-title' %>
 ```
 
@@ -54,9 +53,9 @@ To find out more about how to work with Markdown files, see the [Change your con
 
 When contributing to the user guidance, you should make sure that your changes:
 
-* are consistent with the Government Digital Service (GDS) [style guide][style-guide]
-* meet [government accessibility requirements][accessibility] as far as possible
-* follow the spelling and grammar conventions outlined in the Analytical Platform [A to Z][a-to-z].
+- are consistent with the Government Digital Service (GDS) [style guide][style-guide]
+- meet [government accessibility requirements][accessibility] as far as possible
+- follow the spelling and grammar conventions outlined in the Analytical Platform [A to Z][a-to-z].
 
 ## Preview your changes locally
 
