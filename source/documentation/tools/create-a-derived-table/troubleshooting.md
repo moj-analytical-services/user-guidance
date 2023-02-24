@@ -17,7 +17,10 @@ This page is intended to help users self-diagnose errors. Please check here firs
 - All file names and paths should be lowercase.
 
 ## Delete dev models instructions
-During development you may need to clear out any dev models you have created from the MoJ Analytical Platform and start afresh. To do this you will need to delete the Glue tables, Glue database and the data in S3 - in that order. ⚠️ Note that anyone with write access to a domain also has permission to delete from that domain, so please exercise caution. ⚠️
+During development you may need to clear out any dev models you have created from the MoJ Analytical Platform and start afresh. To do this you will need to delete the Glue tables, Glue database and the data in S3 - in that order. 
+
+⚠️ Note that anyone with write access to a domain also has permission to delete from that domain, so please exercise caution. ⚠️
+
 1. Delete the Glue tables from the Glue catalog.
 2. Delete the Glue database if necessary; the database may contain someone else's tables that you don't want to delete, also if you delete all the tables in a database it will automatically disappear.
 3. In S3 delete from the lowest level first; objects, tables, database; this makes sure there are no orphaned objects floating about and that you don’t unintentionally delete a database containing someone else’s work as well as your own.
@@ -49,18 +52,20 @@ resources:
 
 
 ### Problems with other models - does not exist error
-- you are getting fail errors on dev deployment pointing to models other than those you are working on.
+- you are getting fail errors on `dev` deployment pointing to models other than those you are working on.
 - this can be due to these models having been successfully deployed to prod and now the dev versions have expired, however the dev tests all still run
 - current fix is to redeploy to dev the models causing the problem
 - run `dbt run test` locally to check *all* tests pass before creating a PR.
+- Update - this error should no longer occur; the `dev` workflow now checks if the models and seeds that a test depends on exist before trying to run them, any that do not are excluded. All tests run in `prod`.
 
 
 ### Overwrite error in `dev` - HIVE_PATH_ALREADY_EXISTS
 ```
 HIVE_PATH_ALREADY_EXISTS: Target directory for table ‘database_name_dev_dbt.table_name’ already exists: s3://mojap-derived-tables/dev/models/domain_name=domain_name/database_name=database_name_dev_dbt/table_name=table_name. 
 ```
-- Normally when you redeploy a model the model is overwritten (unless you are using `incremental` strategy). However, sometimes, when developing code, things can get messy and you may need to manually delete the Glue database and tables from the Glue catalogue and the corresponding underlying data in the `mojap-derived-tables` S3 bucket. 
+- Normally when you redeploy a model the model is overwritten (unless you are using `incremental` strategy). However, sometimes, when developing code, things can get messy and you may need to manually delete the Glue database and tables from the Glue catalogue and the corresponding underlying data in the `mojap-derived-tables` S3 bucket. See [Delete dev models instructions](#delete-dev-models-instructions).
 - More info from [AWS knowledge centre](https://aws.amazon.com/premiumsupport/knowledge-center/athena-hive-path-already-exists/)
+
 >If you use the external_location parameter in the CTAS query, then be sure to specify an Amazon Simple Storage Service (Amazon S3) location that's empty. The Amazon S3 location that you use to store the CTAS query results must have no data. When you run your CTAS query, the query checks that the path location or prefix in the Amazon S3 bucket has no data. If the Amazon S3 location already has data, the query doesn't overwrite the data.
 
 
@@ -98,7 +103,7 @@ Runtime Error
   Runtime Error
     FAILED: SemanticException [Error 10072]: Database does not exist: mojap
 ```
-This error appears to be an issue with `dbt-athena` failing to create the required database name, `mojap` is set as the default name (and does not exist) hence the final error. Best guesses; phantom remains of failed attempts to create the schema blocking new attempts, or a flakey connection between `dbt-athena` and Athena, or a timeout on the connection. When this issue first occured it seemed to jinx a particular database name, and the code worked fine under a different database name. If anyone has any ideas on this issue please post in [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit this document.
+This error appears to be an issue with `dbt-athena` failing to create the required database name; `mojap` is set as the default name (and does not exist) hence the final error. This may occur when a user attempts an unsupported action; please note that `dbt-athena` adapter we are using does not support full `dbt` functionality, see the [repo README](https://github.com/ministryofjustice/dbt-athena). When this issue first occured it seemed to jinx a particular database name, and the code worked fine under a different database name.
 
 
 ### Is sqlfuff up to date?
