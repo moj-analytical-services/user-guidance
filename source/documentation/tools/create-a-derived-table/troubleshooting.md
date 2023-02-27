@@ -17,14 +17,20 @@ This page is intended to help users self-diagnose errors. Please check here firs
 - All file names and paths should be lowercase.
 
 ## Delete dev models instructions
-During development you may need to clear out any dev models you have created from the MoJ Analytical Platform and start afresh. To do this you will need to delete the Glue tables, Glue database and the data in S3 - in that order. 
+During development you may need to clear out any dev models you have created from the MoJ Analytical Platform and start afresh. To do this you will need to delete the Glue tables, Glue database and the data in S3, via the AWS Console.
 
 ⚠️ Note that anyone with write access to a domain also has permission to delete from that domain, so please exercise caution. ⚠️
 
-1. Delete the Glue tables from the Glue catalog.
-2. Delete the Glue database if necessary; the database may contain someone else's tables that you don't want to delete, also if you delete all the tables in a database it will automatically disappear.
-3. In S3 delete from the lowest level first; objects, tables, database; this makes sure there are no orphaned objects floating about and that you don’t unintentionally delete a database containing someone else’s work as well as your own.
+[Sign in to the AWS Console as an alpha_user](http://aws.services.analytical-platform.service.justice.gov.uk) (sign in with GitHub as you would for Analytical Platform Control Panel).
+
+NB: You may not have permission to access AWS Glue and action steps 1 and 2, if you do great (as this is tidier), if not, please proceed from step 3.
+
+1. **AWS Glue → Data Catalog → Tables**: Delete the Glue tables from the Glue catalog.
+2. **AWS Glue → Data Catalog → Databases**: Delete the Glue database if necessary; the database may contain someone else's tables that you don't want to delete; also if you delete all the tables in a database it will automatically disappear.
+3. **S3 → mojap-derived-tables bucket → dev/ → models/**: In S3 delete from the lowest level first; objects, tables, database; this makes sure there are no orphaned objects floating about and that you don’t unintentionally delete a database containing someone else’s work as well as your own.
 4. Run `dbt clean` to delete local run artefacts before reattempting to deploy models.
+
+
 
 
 ## Troubleshooting list
@@ -83,6 +89,7 @@ From StackOverflow, [here](https://stackoverflow.com/questions/54375913/athena-q
 
 > Athena is just an EMR cluster with hive and prestodb installed. The problem you are facing is: Even if your query is distributed across X number of nodes, the ordering phase must be done by just a single node, the master node in this case. So, you can order as much data as the master node has memory.
 
+This may be ameliorated with parallelisation/threading using a macro; [example here](https://github.com/moj-analytical-services/create-a-derived-table/blob/main/mojap_derived_tables/macros/generic/CJS_priority_projects/CJS_priority_projects__parallel_thread.sql).
 
 ### Partial parse save file not found
 - Not an error; simply a statement that there is no pre-existing attempt to parse models and a full parse must be done.
@@ -103,7 +110,7 @@ Runtime Error
   Runtime Error
     FAILED: SemanticException [Error 10072]: Database does not exist: mojap
 ```
-This error appears to be an issue with `dbt-athena` failing to create the required database name; `mojap` is set as the default name (and does not exist) hence the final error. This may occur when a user attempts an unsupported action; please note that `dbt-athena` adapter we are using does not support full `dbt` functionality, see the [repo README](https://github.com/ministryofjustice/dbt-athena). When this issue first occured it seemed to jinx a particular database name, and the code worked fine under a different database name.
+This error appears to be an issue with `dbt-athena` failing to create the required database name; `mojap` is set as the default database name (and does not exist) hence the final error. This may occur when a user attempts an unsupported action; please note that the `dbt-athena` adapter we are using does not support full `dbt` functionality, see the [dbt-athena repo README](https://github.com/ministryofjustice/dbt-athena). When this issue first occured it seemed to jinx a particular database name, and the code worked fine under a different database name.
 
 
 ### Is sqlfuff up to date?

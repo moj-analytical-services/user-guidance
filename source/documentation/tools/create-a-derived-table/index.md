@@ -15,23 +15,22 @@
 - [Getting started](#getting-started)
   - [Standard database access](#standard-database-access)
   - [Your Data Engineering Database Access project access file](#your-data-engineering-database-access-project-access-file)
-  - [Setting up your working environment](#setting-up-your-working-environment)
-    - [JupyterLab](#jupyterlab)
-    - [RStudio](#rstudio)
-    - [Cloning the repository](#cloning-the-repository)
-      - [Using the RStudio user interface](#using-the-rstudio-user-interface)
-      - [Using the terminal](#using-the-terminal)
+  - [Set up the RStudio working environment](#set-up-the-rstudio-working-environment)
+      - [Clone the repository using the RStudio GUI](#clone-the-repository-using-the-rstudio-gui)
+      - [Clone the repository using terminal](#clone-the-repository-using-terminal)
     - [Setting up a Python virtual environment](#setting-up-a-python-virtual-environment)
   - [Collaborating with Git](#collaborating-with-git)
-    - [Creating branches](#creating-branches)
+      - [Creating branches](#creating-branches)
+      - [Updating your branch with main](#updating-your-branch-with-main)
+  - [Show indent guides in RStudio](#show-indent-guides-in-rstudio)
 - [Creating models](#creating-models)
   - [What is a model?](#what-is-a-model)
   - [Model properties](#model-properties)
-    - [Where can I define configs?](#where-can-i-define-configs)
-    - [Config inheritance](#config-inheritance)
+      - [Where can I define configs?](#where-can-i-define-configs)
+      - [Config inheritance](#config-inheritance)
   - [Writing models](#writing-models)
-    - [Sources](#sources)
-    - [The ref function](#the-ref-function)
+      - [Sources](#sources)
+      - [The ref function](#the-ref-function)
   - [Materialisations](#materialisations)
 - [What are seeds?](#what-are-seeds)
 - [Tests](#tests)
@@ -44,14 +43,13 @@
   - [dbt artefacts](#dbt-artefacts)
   - [Using the + prefix](#using-the-plus-prefix)
   - [Linting](#linting)
-    - [Linting YAML files](#linting-yaml-files)
-    - [Linting SQL files](#linting-sql-files)
-    - [Fomatting SQL files](#fomatting-sql-files)
+      - [Linting YAML files](#linting-yaml-files)
+      - [Linting and formatting SQL files](#linting-and-formatting-sql-files)
 - [Scheduling](#scheduling)
 - [Deploying your tables](#deploying-your-tables)
   - [Dev](#dev)
-    - [Helpful commands](#helpful-commands)
-    - [How to use the incremental materialisation with the append strategy](#how-to-use-the-incremental-materialisation-with-the-append-strategy)
+      - [Helpful commands](#helpful-commands)
+      - [How to use the incremental materialisation with the append strategy](#how-to-use-the-incremental-materialisation-with-the-append-strategy)
   - [Prod](#prod)
 - [Resources](#resources)
 - [License](#license)
@@ -63,6 +61,8 @@
 Create a Derived Table is a service that brings dbt, Git, and data access controls together to allow you to deploy tables derived from data available on the Analytical Platform; straight to Athena, in a reproducible way, and with scheduled table updates. All you’ll need to do is submit the SQL to derive your tables along with a few configuration files in a GitHub PR. dbt is at the core of Create a Derived Table and it's packed full of features for transforming data using SQL so you'll need to get familiar with certain bits of dbt syntax. To learn more about dbt, take a look at [their documentation](https://docs.getdbt.com/docs/introduction). Some of the basics about working with dbt are covered below, but you can also sign up and work through [dbt's own training courses](https://courses.getdbt.com/collections) for free. The training uses their own user interface instead of Create a Derived Table but it's still relevant here.
 
 We’re still in beta so we'd love to get some of you using Create a Derived Table to get your feedback to help guide best practice data modelling in the Ministry of Justice and make sure we can continue to improve the user experience.
+
+<br />
 
 # The dbt project
 
@@ -129,6 +129,8 @@ If you have ideas about how you would like to structure your data model, please 
 
 Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help you out.
 
+<br />
+
 # Getting started
 
 ## Standard database access
@@ -165,21 +167,12 @@ business_case: >
   To create derived tables for Analytical Team 1.
 ```
 
-## Setting up your working environment
+## Set up the RStudio working environment
 
-You'll need an interactive development environment (IDE) to interact with the repository and write your SQL and YAML code, and a Python virtual environment for dbt to run in. The following sections will show you how to set that up.
+You'll need an interactive development environment (IDE) to interact with the repository and write your SQL and YAML code, and a Python virtual environment for dbt to run in. The following sections will show you how to set that up. It's worth noting at this point that you'll just be using RStudio as an IDE to interact with the repository (and git), write SQL and YAML code, and to run dbt commands from the terminal in a Python virtual environment. There is no R programming going on. We're currently not planning to get Create a Derived Table up and running with JupyterLab, as the RStudio IDE is sufficient.
 
-### JupyterLab
 
-We're currently not planning to get Create a Derived Table up and running with JupyterLab, as the RStudio IDE is sufficient.
-
-### RStudio
-
-It's worth noting at this point that you'll just be using RStudio as an IDE to interact with the repository (and git), write SQL and YAML code, and to run dbt commands from the terminal in a Python virtual environment. There's nothing related to the R programming language going on.
-
-### Cloning the repository
-
-#### Using the RStudio user interface
+### Clone the repository using the RStudio GUI
 
 Select `file` > `New Project...` > `Version Control` > `Git` and paste the following into the text fields and then select which directory you would like to clone the repository to.
 
@@ -189,16 +182,15 @@ Select `file` > `New Project...` > `Version Control` > `Git` and paste the follo
 <img src="../../../images/create-a-derived-table/new-version-control-project.png" alt="New R Studio version control project" width="400"/>
 
 
+### Clone the repository using the terminal
 
-#### Using the terminal
-
-`cd` to the directory which you'd like to clone the repository to and then run the following command:
+`cd` to the directory where you'd like to clone the repository to and then run the following command:
 
 ```
 git clone git@github.com:moj-analytical-services/create-a-derived-table.git
 ```
 
-### Setting up a Python virtual environment
+## Setting up a Python virtual environment
 
 In the terminal, `cd` into the root of the repository (`create-a-derived-table`). You can check you're in the correct directory by runnnig `pwd`. Once you've done that run:
 
@@ -264,7 +256,7 @@ If you're working on a data model as part of a team you can take inspiration fro
 
 ### Creating branches
 
-First make sure you're on the `main` branch by running:
+First make sure you're on the `main` branch by running the following in terminal:
 
 ```
 git status
@@ -293,6 +285,50 @@ git checkout -b <a1/model-a-development>
 ```
 
 replacing `a1` with your initals.
+
+
+### Updating your branch with main
+
+When working on your models it is likely that your branch will get out of date with the main branch. To update you branch with the latest changes from main open a terminal and run the following:
+
+Check your working tree, commit/push any changes if required
+
+```
+git status
+```
+
+Switch to the main branch and collect the latest changes, if any
+
+```
+git switch main
+git fetch
+git pull
+```
+
+Switch back to your branch and merge in the changes from main
+
+```
+git switch <your_branch>
+git merge main -m "update branch with main"
+```
+
+At this point you may have merge conflicts that need to be resolved; please see [GitHub resolve merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github). If required, ask for help on the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) slack channel.
+
+## Show indent guides in RStudio
+
+In RStudio you can display vertical guidelines to help you keep track of indetations in your code; this is very helpful in YAML files. In the RStudio IDE go to 
+
+**Tools → Global Options → Code → Display** 
+
+and check the box for **Show indent guides**. 
+
+You will also want to set your tab width to 2 spaces, to do this go to 
+
+**Tools → Global Options → Code → Editing**
+
+and check the box for **Insert spaces for Tab** and set **Tab width** to **2**.
+ 
+<br />
 
 # Creating models
 
@@ -406,11 +442,15 @@ Materialisations are strategies for persisting dbt models in a warehouse. There 
 - [incremental](https://docs.getdbt.com/docs/build/materializations#incremental)
 - [ephemeral](https://docs.getdbt.com/docs/build/materializations#ephemeral)
 
+<br />
+
 # What are seeds?
 
 Seeds are lookup tables easily created from a `.csv` file. Put the `.csv` in the [`./mojap_derived_tables/seeds/`](./mojap_derived_tables/seeds/) directory and follow the same directory structure requirements and naming conventions as for models. As with marts models, your seeds should have property files that have the same filename as the seed. Seeds can be accessed by anyone with standard database access and so must not contain sensitive data. Generally, seeds shouldn't contain more than 1000 rows, they don't contain complex data types, and they don't change very often. You can deploy a seed with more than 1000 rows, but it's not reccomended and it will take quite a long time to build.
 
 ⚠️ Seeds must not contain sensitive data. ⚠️
+
+<br />
 
 # Tests
 
@@ -462,8 +502,9 @@ models:
           - dbt_utils.not_constant
 ```
 
-# What else?
+<br />
 
+# What else?
 ## Macros
 
 Macros are just Jinja functions. You can write your own macros which should live at [`./mojap_derived_tables/macros/`](./mojap_derived_tables/macros/), see [dbt's docs on Jinja macros](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros).
@@ -478,7 +519,7 @@ When dbt runs it generates artefacts. The most useful of these to you will be th
 
 ## <a id="using-the-plus-prefix"></a>Using the + prefix 
 
-The `+` prefix is a dbt syntax feature which helps disambiguate between resource paths and configurations in the `dbt_project.yml` file. If you see it used in the `dbt_project.yml` file and wonder what it is, read [dbt's guidance on using the `+` prefix](https://docs.getdbt.com/reference/resource-configs/plus-prefix). It is also used to configure properties in a nested dictionary which take a dictionary of values in a model, seed or test config .yaml. For example, use `+column_types` rather than `column_types` since what follows are further key and value pairs defining the column names and the required data type. It doesn't hurt to use `+` prefix so it is recommended to always do so.
+The `+` prefix is a `dbt` syntax feature which helps disambiguate between resource paths and configurations in the `dbt_project.yml` file. If you see it used in the `dbt_project.yml` file and wonder what it is, read [dbt's guidance on using the `+` prefix](https://docs.getdbt.com/reference/resource-configs/plus-prefix). It is also used to configure properties in a nested dictionary which take a dictionary of values in a model, seed or test config `.yaml`. For example, use `+column_types` rather than `column_types` since what follows are further key and value pairs defining the column names and the required data type. It doesn't hurt to use `+` prefix so it is recommended to always do so.
 
 ```
 version: 2
@@ -502,6 +543,8 @@ Linting is the automated checking of your code for programmatic and stylistic er
 
 ### Linting YAML files
 
+YAML demands 2 spaces (not 1 tab) for each indentation, it can be frustrating, if you get spaces and tabs muddled (they are not always equivalent) as you can get a lint error but not be able to see it easily. We recommend setting up vertical guidlines in RStudio to keep track of your indentations, see above [Show indent guides in RStudio](#show-indent-guides-in-rstudio), and to use the spacebar to create 2 spaces for indentation.
+
 To lint a single YAML file, run:
 
 ```
@@ -514,7 +557,35 @@ Or a whole directory of YAML files by running:
 yamllint .../path/to/yaml/directory/
 ```
 
-### Linting SQL files
+#### Folded style `>`
+
+Use `>` to split code over multiple lines; each newline is interpreted as a space hence
+
+```
+  description: >
+    the quick brown fox
+    jumped over the lazy dog
+```
+
+is interpreted the same as 
+
+```
+  description: the quick brown fox jumped over the lazy dog
+```
+
+#### Literal style `|`
+
+Use `|` (pipe) to keep newlines, for instance when running subsequent commands in a GitHub action workflow
+
+```
+  run: |
+    python -m pip install --upgrade pip
+    pip install yamllint 
+```
+
+
+
+### Linting and formatting SQL files
 
 To lint a single SQL file, run:
 
@@ -528,9 +599,13 @@ Or a whole directory of SQL files by running:
 sqlfluff lint .../path/to/sql/directory/
 ```
 
-### Fomatting SQL files
-
 SQLFluff is a formatter as well as a linter. That means you can use it to edit your SQL files to match the linting rules. To format SQL files using SQLFluff replace `lint` in the commands above with `fix`.
+
+#### .sqlfluffignore
+
+The `.sqlfluffignore` file (found in the root of the repository) can be used to list files for SQLFluff to exclude from linting. This is **only** to be used if files continually fail linting, despite best efforts. To date this has only applied to complex macros. The default Jinja templater used by SQLFluff simply cannot deal with complex macros. The dbt templater should solve this issue, and we intend to trial it in the future.
+
+<br />
 
 # Scheduling
 
@@ -559,6 +634,8 @@ models:
 ```
 
 In the above example, the Prison Safety and Security team have configured their entire database to update daily except for the subdirectory of staging models that will update monthly.
+
+<br />
 
 # Deploying your tables
 
@@ -687,6 +764,8 @@ A model or seed is in 'prod' when they are merged into `main`. The data modellin
 s3://mojap-derived-tables/prod/run_artefacts/run_time=yyyy-mm-dd hh:mm:ss/
 ```
 
+<br />
+
 # Resources
 
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
@@ -694,6 +773,8 @@ s3://mojap-derived-tables/prod/run_artefacts/run_time=yyyy-mm-dd hh:mm:ss/
 - Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
 - Find [dbt events](https://events.getdbt.com) near you
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
+<br />
 
 # License
 
