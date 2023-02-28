@@ -559,7 +559,7 @@ yamllint .../path/to/yaml/directory/
 
 #### Folded style `>`
 
-Use `>` to split code over multiple lines; each newline is interpreted as a space hence
+Use `>` to split code over multiple lines; each newline is interpreted as a space (unless the newline is on an empty line or after a differently indented line) hence
 
 ```
   description: >
