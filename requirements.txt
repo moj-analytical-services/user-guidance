@@ -1,0 +1,1 @@
+mkdocs-tech-docs-template==0.0.20

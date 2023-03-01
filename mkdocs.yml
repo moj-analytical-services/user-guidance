@@ -1,0 +1,16 @@
+site_name: User Guidance
+docs_dir: source/documentation
+theme: 
+  name: tech_docs_template
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+nav:
+  - Home:
+      - index.md
+  - Contribute:
+      - contributing.md
+  - Tools: 
+      - tools/index.md
+      - control panel: tools/control-panel.md
