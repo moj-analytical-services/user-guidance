@@ -122,3 +122,5 @@ https://github.com/moj-analytical-services/data-engineering-database-access/blob
 - S3 Table Names have a limit of 1024 characters. Similarly with database names this requires adhering to the [MoJ guidance](https://github.com/ministryofjustice/analytical-platform-uploader#data-governance-for-testing) for naming conventions.
 
 - We do not have access to the permissions infrastructure of the AP. This means that anyone can upload to any table created by the uploader through the uploader. This is not a security risk, as the uploader is purely a loading mechanism and not a viewing mechanism, but be aware users might upload data of a different schema to a table accidentally.
+
+- You cannot upload files from a sharepoint location directly, you'll need to download the file locally first
