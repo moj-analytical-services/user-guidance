@@ -138,7 +138,7 @@ You can group multiple DAGs together in a folder making it easier for others to 
     
 2.  Create a new python file and give it an appropriate name. Name the file copy\_file\_s3.py if you are creating an example pipeline
     
-3.  If you are creating an example pipeline, paste the DAG example as-is but replace the "{username}" on line 10
+3.  If you are creating an example pipeline, paste the DAG example as-is but replace <<username>> and delete the comments
     
 4.  If you are creating your own pipeline modify the IMAGE\_TAG, REPO\_NAME, ROLE, owner, dag\_id, scheduling and env\_vars as appropriate. You can also add additional tasks if required but stick to one DAG per python file.
     
