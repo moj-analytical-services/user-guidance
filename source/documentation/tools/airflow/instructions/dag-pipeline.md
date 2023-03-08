@@ -49,7 +49,8 @@ from datetime import datetime
 from airflow.models import DAG
 from mojap_airflow_tools.operators import BasicKubernetesPodOperator
 
-username = {username}
+# Replace <<username>> with your username
+username = <<username>>
 # As defined in the image repo
 IMAGE_TAG = "v0.0.1"
 REPO_NAME = f"airflow-{username}-example"
@@ -92,7 +93,7 @@ dag = DAG(
 )
  
 # Environmental variables for passing to the docker container
-env_vars={
+env_vars = {
     "RUN": "write",
     "TEXT": "Hello",
     "OUTPATH": f"s3://alpha-everyone/airflow-example/{username}/test.txt",
