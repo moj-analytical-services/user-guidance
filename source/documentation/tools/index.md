@@ -21,7 +21,7 @@ The data engineering team maintain a number of databases on the Analytical Platf
 A web application to upload data to the MoJ Analytical Platform in a standardised way.
 
 ### [Create a Derived Table](create-a-derived-table)
-A tool for creating persistent derived tables in Athena
+A tool for creating persistent derived tables in Athena.
 
 ### Python packages
 

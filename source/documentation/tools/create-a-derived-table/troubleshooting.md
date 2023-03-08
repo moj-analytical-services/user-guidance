@@ -1,5 +1,7 @@
 # Troubleshooting
 
+⚠️ This service is in beta ⚠️
+
 This page is intended to help users self-diagnose errors. Please check here first and then, if necessary, ask in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), providing context. If you discover new errors and/or solutions please post on slack or edit this document and raise a PR.
 
 ## Contents
