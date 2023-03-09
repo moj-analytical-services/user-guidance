@@ -70,7 +70,7 @@ If you are using `dbtools` to query Athena then you must set an environment vari
 Sys.setenv(WR_WORKGROUP="test-athena-v3")
 ```
 
-If you are using Rdbtools then the environment variable you need to set is slightly different:
+If you are using `Rdbtools` then the environment variable you need to set is slightly different:
 
 ```r
 Sys.setenv(AWS_ATHENA_WORK_GROUP="test-athena-v3")
