@@ -97,7 +97,7 @@ env_vars = {
     "RUN": "write",
     "TEXT": "Hello",
     "OUTPATH": f"s3://alpha-everyone/airflow-example/{username}/test.txt",
-},
+}
  
 """
 It is good practice to set task_id as a variable above your task
