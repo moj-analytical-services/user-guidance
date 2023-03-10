@@ -2,7 +2,7 @@
 
 ## Where do I find out what data is already on the Platform?
 
-The data engineering team maintain a number of databases on the Platform (curated databases). The best way to find out about these is using the [data discovery tool](https://data-discovery-tool.apps.alpha.mojanalytics.xyz). To access the tool, you must sign in using an email link. Many users will have had their justice emails automatically added to the allow list. If you enter your email and are denied access, you can request to be added in `#ask-data-engineering` in Data and Analysis slack. The tool can be updated by anyone, so if you find something out about the data that isn't already documented, please do add to it!
+The data engineering team maintain a number of databases on the Platform (curated databases). The best way to find out about these is using the [data discovery tool](https://data-discovery-tool.analytical-platform.service.justice.gov.uk/) (access to the tool is now governed via GitHub; Analytical Platform users have access by default). The tool can be updated by anyone, so if you find something out about the data that isn't already documented, please do add to it!
 
 In addition to this users can create their own S3 buckets which may have data useful to other teams, you may have to ask around to see if there is an existing dataset that may suit your needs.
 
