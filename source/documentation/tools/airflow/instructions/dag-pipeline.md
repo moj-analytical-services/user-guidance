@@ -138,7 +138,7 @@ You can group multiple DAGs together in a folder making it easier for others to 
     
 2.  Create a new python file and give it an appropriate name. Name the file copy\_file\_s3.py if you are creating an example pipeline
     
-3.  If you are creating an example pipeline, paste the DAG example as-is but replace <<username>> making sure to include quotation marks
+3.  If you are creating an example pipeline, paste the DAG example as-is but replace <<username>> making sure to include quotation marks. You might need to update the IMAGE_TAG version number depending on the image that builds successfully in the GitHub repository. 
 
 4.  Delete the comments
     
