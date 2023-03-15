@@ -3,22 +3,26 @@
 The MoJ Analytical Platform comes with various tools including:
 
 ### [Control panel](control-panel.html)
-The main entry point to the Analytical Platform
+The main entry point to the Analytical Platform.
 
 ### [RStudio](rstudio)
-A development environment for writing R code and R Shiny apps
+A development environment for writing R code and R Shiny apps.
 
 ### [JupyterLab](jupyterlab)
-A development environment for writing Python code
-
-### [Airflow](airflow)
-A tool for scheduling and monitoring workflows
+A development environment for writing Python code.
 
 ### [Data Discovery](../data/curated-databases/data-documentation)
-The data engineering team maintain a number of databases on the Analytical Platform (curated databases). The best way to find out about these is using the data discovery tool
+The data engineering team maintain a number of databases on the Analytical Platform (curated databases). The best way to find out about these is using the data discovery tool.
 
 ### [Data Uploader](data-uploader)
 A web application to upload data to the MoJ Analytical Platform in a standardised way.
+
+### [Data Extractor](https://dsdmoj.atlassian.net/wiki/external/4218552361/NjgzYjgzY2Q5ZTQ0NDJlMzg0YTYwYjY5M2Y4YmU5ZTI?atlOrigin=eyJpIjoiMmJhNWUwMTM2NDlhNGVkYjg1NzE1ZGNhYWY5YjM2ZWUiLCJwIjoiYyJ9)
+Allows applications/services(microservices) to upload data to the Analytical Platform, so analysts can analyse application data easily, without having to access the applications database itself. Please refer to [data-engineering-data-extractor](https://github.com/ministryofjustice/data-engineering-data-extractor) for detailed instructions.
+The process of moving the data into the Curated S3 bucket where Athena sits on top of it, is controlled by [register-my-data](https://github.com/ministryofjustice/register-my-data).
+
+### [Airflow](airflow)
+A tool for scheduling and monitoring workflows.
 
 ### [Create a Derived Table](create-a-derived-table)
 A tool for creating persistent derived tables in Athena.
@@ -31,7 +35,7 @@ The data engineering team maintain a number of python packages to help with data
 Standard package for querying MoJAP athena databases with useful features including temp table creation.
 
 #### [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser)
-Useful package for ensuring type conformance when reading with arrow or pandas
+Useful package for ensuring type conformance when reading with arrow or pandas.
 
 #### [mojap-metadata](https://github.com/moj-analytical-services/mojap-metadata)
 MoJAP defined metadata that interacts with other packages (inc arrow-pd-parser) for ensuring type conformance as well as a number of schema converters.
@@ -43,7 +47,7 @@ A collection of useful utilities for interacting with AWS
 User friendly way of making small persisting ad hoc databases. In it's alpha release, please report all problems!
 
 #### [mojap-aws-tools-demo](https://github.com/moj-analytical-services/mojap-aws-tools-demo)
-A repo containing some helpful guides on how to use some of the above packages. You can also ask for help with these on #ask-data-engineering
+A repo containing some helpful guides on how to use some of the above packages. You can also ask for help with these on #ask-data-engineering.
 
 ### R packages
 
