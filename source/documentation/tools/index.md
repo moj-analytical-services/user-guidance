@@ -14,12 +14,15 @@ A development environment for writing Python code.
 ### [Data Discovery](../data/curated-databases/data-documentation)
 The data engineering team maintain a number of databases on the Analytical Platform (curated databases). The best way to find out about these is using the data discovery tool.
 
-### [Data Uploader](data-uploader)
-A web application to upload data to the MoJ Analytical Platform in a standardised way.
+### [Upload File Data](data-uploader)
+A web application to upload data (.csv, .json, .jsonl) to the MoJ Analytical Platform in a standardised way.
 
-### [Data Extractor](https://dsdmoj.atlassian.net/wiki/external/4218552361/NjgzYjgzY2Q5ZTQ0NDJlMzg0YTYwYjY5M2Y4YmU5ZTI?atlOrigin=eyJpIjoiMmJhNWUwMTM2NDlhNGVkYjg1NzE1ZGNhYWY5YjM2ZWUiLCJwIjoiYyJ9)
-Allows applications/services(microservices) to upload data to the Analytical Platform, so analysts can analyse application data easily, without having to access the applications database itself. Please refer to [data-engineering-data-extractor](https://github.com/ministryofjustice/data-engineering-data-extractor) for detailed instructions.
-The process of moving the data into the Curated S3 bucket where Athena sits on top of it, is controlled by [register-my-data](https://github.com/ministryofjustice/register-my-data).
+### [Upload Microservices Data](https://dsdmoj.atlassian.net/wiki/external/4218552361/NjgzYjgzY2Q5ZTQ0NDJlMzg0YTYwYjY5M2Y4YmU5ZTI?atlOrigin=eyJpIjoiMmJhNWUwMTM2NDlhNGVkYjg1NzE1ZGNhYWY5YjM2ZWUiLCJwIjoiYyJ9)
+
+Tools for uploading and refreshing data from microservices to the MoJ Analytical Platform in a standardised way:
+
+- [data-engineering-data-extractor](https://github.com/ministryofjustice/data-engineering-data-extractor) extracts data from applications/services/microservices
+- [register-my-data](https://github.com/ministryofjustice/register-my-data) moves the data into the AP [curated databases](../data/curated-databases)
 
 ### [Airflow](airflow)
 A tool for scheduling and monitoring workflows.
