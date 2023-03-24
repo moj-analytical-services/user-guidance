@@ -20,9 +20,9 @@ To make changes to the documentation for the Tech Docs Template website, edit fi
 
 The `.html.md.erb` files control the structure of the guidance. These files support content in:
 
-* Markdown
-* HTML
-* Ruby
+- Markdown
+- HTML
+- Ruby
 
 They are generally of the form:
 
@@ -34,7 +34,6 @@ last_reviewed_on: YYYY-MM-DD
 review_in: 2 years
 show_expiry: true
 ---
-
 <%= partial 'documentation/page-title' %>
 ```
 
@@ -54,39 +53,17 @@ To find out more about how to work with Markdown files, see the [Change your con
 
 When contributing to the user guidance, you should make sure that your changes:
 
-* are consistent with the Government Digital Service (GDS) [style guide][style-guide]
-* meet [government accessibility requirements][accessibility] as far as possible
-* follow the spelling and grammar conventions outlined in the Analytical Platform [A to Z][a-to-z].
+- are consistent with the Government Digital Service (GDS) [style guide][style-guide]
+- meet [government accessibility requirements][accessibility] as far as possible
+- follow the spelling and grammar conventions outlined in the Analytical Platform [A to Z][a-to-z].
 
 ## Preview your changes locally
 
-To preview the guidance locally on an MoJ Digital and Technology MacBook, navigate to your project folder and run:
+You can preview how your changes will looklocally by running `make preview`. You will be able to view the guidance on `http://localhost:4567` in your browser. Any content changes you make to your website will be updated in real time. If you make changes to the `config/tech-docs.yml` configuration file, you will need to restart the Middleman server to see the changes.
 
-```sh
-bundle exec middleman server
-```
+You can use `make check` to compile the site to html and check the URLs are valid.
 
-or alternatively:
-
-```sh
-make preview
-```
-
-You can view the guidance on `http://localhost:4567` in your browser. Any content changes you make to your website will be updated in real time.
-
-To shut down the Middleman instance running on your machine, select ⌘+C.
-
-If you make changes to the `config/tech-docs.yml` configuration file, you will need to restart the Middleman server to see the changes.
-
-## Build
-
-To build the HTML pages from content in your `source` folder, run:
-
-```sh
-bundle exec middleman build
-```
-
-Every time you run this command, the `build` folder gets generated from scratch. This means any changes to the `build` folder that are not part of the build command will get overwritten.
+For more details see the [tech-docs-github-pages-publisher](https://github.com/ministryofjustice/tech-docs-github-pages-publisher) repository.
 
 ## Update dependencies
 
@@ -113,8 +90,8 @@ This covers both the codebase and any sample code in the documentation.
 The documentation is [© Crown copyright][copyright] and available under the terms of the [Open Government 3.0][ogl] licence.
 
 [mit]: LICENCE
-[copyright]: http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/
-[ogl]: http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+[copyright]: https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/
+[ogl]: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 [mmt]: https://middlemanapp.com/advanced/project_templates/
 [tdt-docs]: https://tdt-documentation.london.cloudapps.digital
 [config]: https://tdt-documentation.london.cloudapps.digital/configuration-options.html#configuration-options
