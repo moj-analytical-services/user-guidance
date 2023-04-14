@@ -210,6 +210,11 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+To install the lint libraries, run:
+```
+pip install -r requirements-lint.txt
+```
+
 Set the following environment variable in your Bash profile:
 
 ```
