@@ -1,80 +1,62 @@
 ---
-# Adapted from https://github.com/ministryofjustice/tech-docs-github-pages-publisher#how-to-use-tool-in-gh-action
-name: Publish gh-pages
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - "main"
-    paths-ignore:
-      - "docs/**"
-
-# GITHUB_TOKEN permissions to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    container:
-      image: ministryofjustice/tech-docs-github-pages-publisher:v3
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-
-      - name: Compile Markdown to HTML and create artifact
-        id: compile
-        run: /scripts/deploy.sh
-
-      - name: Upload artifact to be published
-        id: upload_artifact
-        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
-        with:
-          name: github-pages
-          path: artifact.tar
-          retention-days: 1
-
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: [build]
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy_github_pages.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup Pages
-        id: configure_github_pages
-        uses: actions/configure-pages@7110e9e03ffb4a421945e5d0607007b8e9f1f52b # v3.0.5
-
-      - name: Deploy to GitHub Pages
-        id: deploy_github_pages
-        uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015 # v2.0.0
-
-  url-check:
-    if: github.ref == 'refs/heads/main'
-    needs: [deploy]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download a Build Artifact from build
-        id: download_artifact
-        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
-        with:
-          name: github-pages
-          path: github-pages
-
-      - name: Unpack files and check URL links
-        id: check_links
-        run: |
-          cd github-pages
-          tar -xvf artifact.tar
-          npm install linkinator
-          npx linkinator . --recurse --markdown
+  name: Publish to Github Pages
+  
+  on: # yamllint disable-line rule:truthy
+    pull_request:
+      branches:
+        - main
+    push:
+      branches:
+        - main
+    workflow_dispatch:
+  
+  permissions: read-all
+  
+  concurrency:
+    group: pages
+    cancel-in-progress: true
+  
+  jobs:
+    build:
+      name: Build
+      runs-on: ubuntu-latest
+      container:
+        image: ministryofjustice/tech-docs-github-pages-publisher:data-platform
+      defaults:
+        run:
+          working-directory: docs
+      steps:
+        - name: Checkout
+          id: checkout
+          uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+  
+        - name: Compile Markdown to HTML
+          id: compile
+          run: /scripts/deploy.sh
+  
+        - name: Upload artifact
+          id: upload_artifact
+          uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
+          with:
+            name: github-pages
+            path: docs/artifact.tar
+            retention-days: 1
+  
+    deploy:
+      needs: [build]
+      name: Deploy
+      runs-on: ubuntu-latest
+      environment:
+        name: github-pages
+        url: ${{ steps.deploy_github_pages.outputs.page_url }}
+      permissions:
+        pages: write
+        id-token: write
+      steps:
+        - name: Configure GitHub Pages
+          id: configure_github_pages
+          uses: actions/configure-pages@7110e9e03ffb4a421945e5d0607007b8e9f1f52b # v3.0.5
+  
+        - name: Deploy to GitHub Pages
+          id: deploy_github_pages
+          uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015 # v2.0.0
