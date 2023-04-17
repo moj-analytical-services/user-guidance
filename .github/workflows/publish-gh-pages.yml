@@ -22,9 +22,6 @@
       runs-on: ubuntu-latest
       container:
         image: ministryofjustice/tech-docs-github-pages-publisher:data-platform
-      defaults:
-        run:
-          working-directory: docs
       steps:
         - name: Checkout
           id: checkout
@@ -39,7 +36,7 @@
           uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
           with:
             name: github-pages
-            path: docs/artifact.tar
+            path: artifact.tar
             retention-days: 1
   
     deploy:
