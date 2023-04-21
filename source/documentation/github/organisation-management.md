@@ -39,7 +39,7 @@ To add an outside collaborator to the GitHub organisation, you can either submit
 
 ## Automation
 
-All automated processes are managed in the [moj-analytical-services/operations-engineering](https://github.com/moj-analytical-services/operations-engineering) repository.
+The automated processes reside in the [moj-analytical-services/operations-engineering](https://github.com/moj-analytical-services/operations-engineering) repository with a plan to move them to the [ministryofjustice/operations-engineering](https://github.com/ministryofjustice/operations-engineering) repository.
 
 ### Archiving GitHub repositories
 
@@ -51,9 +51,13 @@ If you still need a repository that has been archived, [contact](#contact) the O
 
 Any members that only have direct access to a repository will be moved to a new team with the same level of access. For example, a member with write access to the `airflow` repository would be added to a team called `airflow-write-team`.
 
-If a member has both direct access to a repository and access via a team, they will only retain access via the team. If the level of access provided by the team is less than the level of direct access, their level of access will be reduced. For example, if a member has direct admin access to a repository and read access via a team, they will only retain read access via the team.
+If a member has both direct access to a repository and access via a team, they will only retain access via the team. The level of access provided by the team will be the same as the direct access.
 
-By default, members that are moved to teams will not be maintainers. Therefore, they will not be able to manage team permissions, including adding and removing members, and changing the role of members. You can request to be made a maintainer by [contacting](#contact) the Operations Engineering Team.
+A member moved to an empty team will be added as a maintainer. A member moved to a new or existing auto generated admin team will be added as a maintainer. This means the member can manage team permissions, including adding and removing members, and changing the role of members. 
+
+You can request to be made a maintainer by [contacting](#contact) the Operations Engineering Team.
+
+This automation has been moved to the ministryofjustice/operations-engineering repository.
 
 ### Adding members to the everyone team
 
