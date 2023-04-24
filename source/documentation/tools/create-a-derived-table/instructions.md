@@ -135,7 +135,7 @@ Data modelling is hard, so if the considerations about domains, databases, or da
 
 ## Standard database access
 
-The first thing you'll need to work with Create a Derived Table is an [Analytical Platform account](https://user-guidance.services.alpha.mojanalytics.xyz/get-started.html#2-analytical-platform-account) with standard database access. If you don't have that already, follow the [guidance on how to make changes to the standard database access project file](https://github.com/moj-analytical-services/data-engineering-database-access#standard-database-access) in the Data Engineering Database Access repo.
+The first thing you'll need to work with Create a Derived Table is an [Analytical Platform account](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html#2-analytical-platform-account) with standard database access. If you don't have that already, follow the [guidance on how to make changes to the standard database access project file](https://github.com/moj-analytical-services/data-engineering-database-access#standard-database-access) in the Data Engineering Database Access repo.
 
 ## Your Data Engineering Database Access project access file
 

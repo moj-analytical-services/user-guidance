@@ -10,7 +10,7 @@ The user guidance is built and deployed using CircleCI.
 
 When you create a PR, CircleCI will check that your changes build correctly.
 
-When you merge a PR into `main`, CircleCI will build the user guidance and deploy the output files to a bucket in Amazon S3. The user guidance is then served at [user-guidance.services.alpha.mojanalytics.xyz][url] through a content delivey network (CDN) provided by Amazon CloudFront.
+When you merge a PR into `main`, CircleCI will build the user guidance and deploy the output files to a bucket in Amazon S3. The user guidance is then served at [user-guidance.analytical-platform.service.justice.gov.uk][url] through a content delivey network (CDN) provided by Amazon CloudFront.
 
 ## Contribute to the guidance
 
@@ -130,4 +130,4 @@ The documentation is [© Crown copyright][copyright] and available under the ter
 [style-guide]: https://www.gov.uk/guidance/style-guide/a-to-z-of-gov-uk-style
 [accessibility]: https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction#meeting-government-accessibility-requirements
 [a-to-z]: https://github.com/moj-analytical-services/user-guidance/blob/master/a-to-z.md
-[url]: https://user-guidance.services.alpha.mojanalytics.xyz
+[url]: https://user-guidance.analytical-platform.service.justice.gov.uk

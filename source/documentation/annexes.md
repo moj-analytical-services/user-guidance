@@ -138,5 +138,5 @@ Once you're entered your platform 2FA code in the interface above, you should no
 3. Once we do that, when you log in again to the AP, you will see the following message: ‘You are now eligible to upgrade. Please click here’
 4. The URL link for the AP will change, so as soon as you upgrade make sure you save the link
 5. The Control Panel is not changing at all, so once you are on the Tools page just choose what version of Tool you want to deploy
-6.Once you deploy the tool, you will have to reconnect to Github by setting up your SSH keys again for each tool, following the [user guidance](https://user-guidance.services.alpha.mojanalytics.xyz/github.html#content)
+6.Once you deploy the tool, you will have to reconnect to Github by setting up your SSH keys again for each tool, following the [user guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/github.html#content)
 7. You are now done

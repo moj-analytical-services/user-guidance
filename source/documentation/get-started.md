@@ -12,7 +12,7 @@ To do this, complete the following steps.
 
 ### Read the acceptable use policy and coding standards
 
-Use of the Analytical Platform is subject to our [acceptable use policy](https://user-guidance.services.alpha.mojanalytics.xyz/aup.html). You should ensure that you have read and understood this before using the Analytical Platform.
+Use of the Analytical Platform is subject to our [acceptable use policy](https://user-guidance.analytical-platform.service.justice.gov.uk/aup.html). You should ensure that you have read and understood this before using the Analytical Platform.
 
 You should also follow our [coding standards](https://github.com/moj-analytical-services/our-coding-standards) when working on the Analytical Platform. These set out principles that you should follow when writing and reviewing code.
 
