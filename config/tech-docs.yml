@@ -1,10 +1,10 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: https://user-guidance.services.alpha.mojanalytics.xyz
+host: https://user-guidance.analytical-platform.service.justice.gov.uk
 
 # Header-related options
 show_govuk_logo: false
 service_name: Analytical Platform User Guide
-service_link: https://user-guidance.services.alpha.mojanalytics.xyz
+service_link: https://user-guidance.analytical-platform.service.justice.gov.uk
 phase:
 
 # Links to show on right-hand-side of header

@@ -8,7 +8,7 @@ code that uses `s3tools`.
 
 This guidance assumes you have experience with `renv`. If you require a recap
 or guidance, please see either the
-[renv documentation from the platform guidance](https://user-guidance.services.alpha.mojanalytics.xyz/tools/package-management.html#renv) or the
+[renv documentation from the platform guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/package-management.html#renv) or the
 [official renv documentation](https://rstudio.github.io/renv/articles/renv.html).
 
 > As an alternative to trying Botor, you can also try [Rs3tools](https://github.com/moj-analytical-services/Rs3tools),

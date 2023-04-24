@@ -96,7 +96,7 @@ https://github.com/moj-analytical-services/data-engineering-database-access/blob
 |data file is very much larger than 5 GB|Uploader tool is currently impractical; upload via AWS console. Future Uploader may allow multi-part upload to 5 TB. |
 |data is not in one of the 3 supported formats (.csv, .json, .jsonl)|convert it; for example if is .xlsx you can easily convert to .csv |
 |uploading data violates [data governance ](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/)requirements|**STOP!** you may not upload these data|
-|do not have access to Analytical Platform|work through the steps to get an account [here](https://user-guidance.services.alpha.mojanalytics.xyz/get-started.html#get-started)|
+|do not have access to Analytical Platform|work through the steps to get an account [here](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html#get-started)|
 |do not have access to the required database|request access [here](https://github.com/moj-analytical-services/data-engineering-database-access)|
 |I want to replace existing data on the Analytical Platform|this is not possible with the Uploader. Consider this action may conflict with reproducibility principles.|
 |database is not listed in the drop down menu|only databases created via the Uploader will be accessible and a newly created database may take up to 24 hours to appear|
