@@ -58,7 +58,7 @@ This will show a couple of types of job:
 
 To see the results of a run, click through to it and view the logs. The builds are split into multiple subsections, so you will be able to see what has succeeded or failed:
 
-[Screenshot of Github Actions build step failure](actions-overview.jpg)
+![Screenshot of Github Actions build step failure](images/apps/actions-overview.jpg)
 
 [Screenshot of Github Actions log error](actions-log.jpg)
 
