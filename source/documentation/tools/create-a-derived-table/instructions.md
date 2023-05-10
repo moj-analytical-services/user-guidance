@@ -420,6 +420,9 @@ Configurations are prioritised in order of specificity, which is generally the i
 ### Sources
 
 Sources are descriptions of the databases and tables already in Analytical Platform. With those tables defined as sources in dbt, it is then possible to select from source tables in your models using the [`source()`](https://docs.getdbt.com/reference/dbt-jinja-functions/source) function which helps define the lineage of your data. To see which sources have been defined, look in the [`./mojap_derived_tables/models/sources/`](./mojap_derived_tables/models/sources/) directory. 
+#### Adding a new source
+
+If a database hasn't been defined as a source it will need to be added. Please follow the instructions below:
 
 - Create a new branch off `main`.
 - Add source database name exactly as it appears in Athena to the source_database_name.txt file in scripts folder.
