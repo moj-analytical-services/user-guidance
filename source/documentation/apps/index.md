@@ -49,7 +49,7 @@ The production workflow behaves in the exact same way, containing the same steps
 
 Usage is simple: create a new branch in your repository, push it to Github, open a Pull Request into main, and then view the "Actions" tab on Github. You'll see a list of jobs appear:
 
-[Screenshot of Github Actions with some passing and some failing jobs](actions.jpg)
+![Screenshot of Github Actions with some passing and some failing jobs](images/apps/actions.jpg)
 
 This will show a couple of types of job:
 
