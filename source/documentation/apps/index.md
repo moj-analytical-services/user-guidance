@@ -60,7 +60,7 @@ To see the results of a run, click through to it and view the logs. The builds a
 
 ![Screenshot of Github Actions build step failure](images/apps/actions-overview.jpg)
 
-[Screenshot of Github Actions log error](actions-log.jpg)
+![Screenshot of Github Actions log error](images/apps/actions-log.jpg)
 
 ## Glossary. 
 
