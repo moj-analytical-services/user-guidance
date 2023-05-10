@@ -48,7 +48,7 @@ The flow looks something like this:
 
 The rationale behind this change is to:
 
-- Facilitate testing - including working develeopment app version and build artifacts like docker containers - before deploying to production
+- Facilitate testing - including a working development app version and build artifacts like docker containers - before deploying to production
 - Give teams more control over their workflows
 - Restore the ability to deploy without the Analytical Platform team's intervention
 
