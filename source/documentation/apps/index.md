@@ -21,7 +21,7 @@ In brief, the workflow builds and deploys your code as a docker container, and t
 
 The flow looks something like this:
 
-[High level visual overview of post-migration apps' deployment pipeline using Github Actions](./overview.svg)
+![High level visual overview of post-migration apps' deployment pipeline using Github Actions](images/apps/overview.svg)
 
 The rationale behind this change is to:
 
