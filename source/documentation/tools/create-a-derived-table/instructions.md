@@ -428,7 +428,7 @@ If a database hasn't been defined as a source it will need to be added. Please f
 - Add the source database name exactly as it appears in AWS Athena to the list in `scripts/source_database_name.txt`. Ensure it is in alphabetical order for ease of use.
 - Commit and push the changes, then raise a pull request.
 
-Sources are set to refresh every Sunday & this includes addition of new source databases or updates in existing source databases (like addition or deletion of tables). Please contact data modelling team at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) in case any queries.
+The `update-source` workflow is scheduled to run weekly. When run it will add any new source databases and refresh all existing source databases. Please contact the Data Modelling team at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) if you have any queries.
 
 Below is an example of using the `source()` function to select from the `contact` table in the `delius_prod` database:
 
