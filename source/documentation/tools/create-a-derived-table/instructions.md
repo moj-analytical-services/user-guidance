@@ -426,7 +426,7 @@ If a database hasn't been defined as a source it will need to be added. Please f
 
 - Create a new branch off `main`.
 - Add the source database name exactly as it appears in AWS Athena to the list in `scripts/source_database_name.txt`. Ensure it is in alphabetical order for ease of use.
-- Commit and push the changes & create a PR.
+- Commit and push the changes, then raise a pull request.
 
 Sources are set to refresh every Sunday & this includes addition of new source databases or updates in existing source databases (like addition or deletion of tables). Please contact data modelling team at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) in case any queries.
 
