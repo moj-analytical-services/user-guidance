@@ -1,12 +1,106 @@
-# Deploying an R Shiny app
+# R Shiny app publishing
+
+Once you've built your Shiny app, you can make it available to users through the Analytical Platform.
+We have guidance for:
+
+- [Deploying your app](#app-deployment)
+- [Accessing your deployed app](#accessing-the-deployed-app)
+- [Managing your app users](#manage-app-users)
+
+as well as common issues faced during these stages of publishing your app.
+
+> **&#x26a0;&#xfe0f; Note on deployment &#x26a0;&#xfe0f;**
+
+> It is not currently possible to deploy new apps on the Analytical Platform, though we are working to make this functionality available again as soon as possible.
+
+> In the meantime, you can still [access](#access-the-app) and [manage](#manage-app-users) existing apps.
+
+> If you have an existing app that requires urgent redeployment, please submit a [request](https://github.com/moj-analytical-services/analytical-platform-applications/issues/new?assignees=EO510%2C+YvanMOJdigital&labels=redeploy&template=redeploy-app-request.md&title=%5BREDEPLOY%5D) via GitHub.
+> We normally redeploy apps each Wednesday, where we have recevied a request by the Friday before.
+
+## App deployment
+
+### New apps
 
 It is not currently possible to deploy new apps on the Analytical Platform, though we are working to make this functionality available again as soon as possible.
 
-In the meantime, you can still [access](#access-the-app) and [manage](#manage-app-users) existing apps.
+### Existing apps
 
-If you have an existing app that requires urgent redeployment, please submit a [request](https://github.com/moj-analytical-services/analytical-platform-applications/issues/new?assignees=EO510%2C+YvanMOJdigital&labels=redeploy&template=redeploy-app-request.md&title=%5BREDEPLOY%5D) via GitHub. We normally redeploy apps each Wednesday, where we have recevied a request by the Friday before.
+#### Your post-migration app and you
 
-## Manage existing apps
+As part of the migration path from the Analytical Platform's hosting to the Cloud Platform there are some changes to how environments work.
+Previously, only applications whose owners had specifically created a separate dev environment had a means of testing deployments before production.
+Post-migration, all applications will have a live-like development environment, complete with continuous integration.
+This section provides an overview of that new setup.
+
+##### Overview
+
+Your new environment is made up of two key elements:
+
+- A GitHub workflow
+- A Cloud Platform namespace
+
+In brief, the workflow builds and deploys your code as a docker container, and then deploys it to Cloud Platform's kubernetes cluster, in your application's namespace.
+
+The flow looks something like this:
+
+![High level visual overview of post-migration apps' deployment pipeline using GitHub Actions](images/apps/overview.svg)
+
+The rationale behind this change is to:
+
+- Facilitate testing - including a working development app version and build artifacts like docker containers - before deploying to production
+- Give teams more control over their workflows
+- Restore the ability to deploy without the Analytical Platform team's intervention
+
+##### Apps hosted on Cloud Platform
+
+After the move to Cloud Platform hosting for Analytical Platform apps, you’ll have two active deployments of your apps at all times.
+These are your 'dev' (development) and 'prod' (production) deployments.
+
+Your code repository within the [ministryofjustice organisation](https://github.com/ministryofjustice/) was built from the [data-platform-app-template repo](https://github.com/ministryofjustice/data-platform-app-template), and has inherited the continuous integration and continuous delivery (CI/CD) pipelines (GitHub Action workflows) from that repo.
+These workflows will automatically build your docker images, push them to a remote image store, and then deploy the application based on how you’ve made your code changes:
+
+- **Deploying your application to your development environment** is done through the `-dev` workflow, which will build-push-deploy when any pull request is made in the repo (e.g. `feature-branch` into `main`, or `feature-branch` into `develop-branch`).
+  The workflow can also be manually triggered, though this will only build and push the app, it <u>will not deploy</u> it: repo homepage > Actions (tab) > Run workflow (right hand side of the page).
+
+  - Opening any pull request will trigger a dev deployment.
+    Any subsequent pushes to that branch (or to any other open branches) will trigger dev deployments too.
+    If you’re working on multiple PRs at once in the repo that you will need to coordinate pushes to your PRs so you can track your deployments.
+    You can always cancel workflow runs and rerun deployments from the Actions page in the repo.
+
+- **Deploying your application to your production environment** is done through the `-prod` workflow, which will build-push-deploy either:
+  - after a pull request is merged into main
+  - upon publishing a release
+
+You can view the status of your deployments either by checking the workflow runs in the Actions tab (repo-url/actions), or by checking out the deployments page (repo-url/deployments).
+
+The above describes how CI/CD will be set up by default in the ministryofjustice repo.
+Once you have ownership of the repo, you'll have the ownership of the `.github/workflow/` files too so you will be able to amend the processes and triggers so that they meet your needs.
+
+##### Your new deployment pipeline
+
+Concourse was decomissioned in 2022: its replacement is GitHub's CI system, GitHub Actions.
+
+GitHub Actions has workflow definitions located in your repository under `.github/workflows/`.
+
+By default, you will be provided with two workflows.
+The dev environment workflow is triggered when you _open_ or _contribute to_ a Pull Request from any branch (for example, into your `main` branch).
+Its steps are:
+
+- Check out the repository
+- Authenticate to AWS
+- Build a docker container from your development branch
+- If the build is successful, push this container to a container registry
+- Run `helm` against the development environment namespace.
+
+The production workflow behaves in the exact same way, containing the same steps, but will be triggered when a Pull Request is _merged_ into `main`, and will deploy to the production namespace instead
+
+##### Pre-migration urgent redeployment
+
+If you have an existing app that requires urgent redeployment, please [submit a request via GitHub issues](https://github.com/moj-analytical-services/analytical-platform-applications/issues/new?assignees=EO510%2C+YvanMOJdigital&labels=redeploy&template=redeploy-app-request.md&title=%5BREDEPLOY%5D).
+We normally redeploy apps each Wednesday, where we have recevied a request by the Friday before.
+
+## Managing published apps
 
 ### Manage app users
 
@@ -14,7 +108,7 @@ If authentication is enabled, access to your app will be controlled by email add
 
 To manage the users of your app:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+1.  Go to the [Analytical Platform control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 2.  Select the **Webapps** tab.
 3.  Select the name of the app you want to manage or select **Manage app**.
 
@@ -25,17 +119,34 @@ To add app users:
 
 To remove an app user, select **Remove customer** next to the email address of the customer you want to remove.
 
-You can ask the Analytical Platform team to add or remove users to the access list on the [#analytical-platform-support](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ) Slack channel or by email to[analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
+You can ask the Analytical Platform team to add or remove users to the access list on the [#analytical-platform-support](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ) Slack channel or by email to [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
 
-### Access the app
+### Accessing the deployed app
+
+#### Apps hosted on Cloud Platform
+
+Your deployed app can be accessed at two URLs:
+
+- `prod` is at: `repository-name.apps.live.cloud-platform.service.justice.gov.uk`
+- `dev` is at: `repository-name-dev.apps.live.cloud-platform.service.justice.gov.uk`
+
+(where `repository-name` is the name of the relevant GitHub repository)
+
+By default, your user list will not have access to the `dev` deployed app.
+
+#### Pre-migration apps
 
 Your deployed app can be accessed at `repository-name.apps.alpha.mojanalytics.xyz`, where `repository-name` is the name of the relevant GitHub repository.
 
 If the repository name contains underscores, these will be converted to dashes in the app URL. For example, an app with a repository called `repository_name` would have the URL `repository-name.apps.alpha.mojanalytics.xyz`.
 
-When accessing an app, you can choose whether to sign in using an email link (default) or a one-time passcode. To sign in with a one-time passcode, add `/login?method=code` to the end of the app's URL, for example, `https://kpi-s3-proxy.apps.alpha.mojanalytics.xyz/login?method=code`. This requires the app to have been deployed since the auth-proxy [release on 30/01/19](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.8).
+#### Authenticating to your app
 
-#### Troubleshooting app sign-in
+When accessing an app, you can choose whether to sign in using an email link (default) or a one-time passcode.
+To sign in with a one-time passcode, add `/login?method=code` to the end of the app's URL, for example, `https://kpi-s3-proxy.apps.alpha.mojanalytics.xyz/login?method=code`.
+This requires the app to have been deployed since the [auth-proxy release on 30th Jan 2019](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.8).
+
+#### **Troubleshooting app sign-in**
 
 ##### "That email address is not authorized for this app (or possibly another error occurred)" error, after entering email address
 
@@ -51,7 +162,8 @@ When accessing an app, you can choose whether to sign in using an email link (de
 1. Check that the user is not trying to use the same link to access the app multiple times – links expire after the first user and a new one must be requested.
 2. Check that the user is trying to access the app using Chrome or Firefox – if links automatically open in Internet Explorer, they may need to copy and paste the link without clicking it into Chrome or Firefox.
 
-Sometimes the link doesn't work because it gets accessed by a system such as anti-virus software, spam filters or the email client's 'link previewer' (e.g. to display the web page when you hover over the link). In this case, you should sign in using a one-time passcode, as described above in [access the app](#access-the-app) section.
+Sometimes the link doesn't work because it gets accessed by a system such as anti-virus software, spam filters or the email client's 'link previewer' (e.g. to display the web page when you hover over the link).
+In this case, you should sign in using a one-time passcode, as described above in [access the app](#access-the-app) section.
 
 ##### "IP x.x.x.x is not whitelisted"
 
@@ -60,7 +172,7 @@ Check that the user is trying to access the app from one of the trusted networks
 ##### Other troubleshooting tips
 
 - Check that they are trying to access the app using a URL beginning with `https://` not `http://`.
-- Look for similar issues log in the [`analytics-platform`](https://github.com/ministryofjustice/analytics-platform/issues) repository.
+- Look for similar issues log in the [`analytics-platform` repository](https://github.com/ministryofjustice/analytics-platform/issues).
 - Try asking the user to clear their cookies by visiting https://alpha-analytics-moj.eu.auth0.com/logout and try again.
 
 In addition the AP team can:
@@ -80,15 +192,18 @@ If your app uses packages that have additional system dependencies, you will nee
 
 A `Dockerfile` reference can be found in the [Docker documentation](https://docs.docker.com/engine/reference/builder/).
 
-### Getting the current user of the app
+### Getting details of current users of the app
 
-An RShiny app can find out who is using it. This can be useful to log an audit trail of significant events. Specifically, it can determine the email address that the user logged into the app with. This is sensitive data, so you must ensure that you are following all relevant information governance processes.
+An RShiny app can find out who is using it.
+This can be useful to log an audit trail of significant events.
+Specifically, it can determine the email address that the user logged into the app with.
+This is sensitive data, so you must ensure that you are following all relevant information governance processes.
 
 The [shiny-headers-demo](https://github.com/moj-analytical-services/shiny-headers-demo) repository contains an example of how to do this.
 
 These features require you to be using the Analytical Platform version of `shiny-server`.
 
-#### Email address
+#### Finding current users' email addresses
 
 You can obtain the logged in user's email address by using the following code in the `server` function of your app:
 
@@ -99,7 +214,7 @@ get("HTTP_USER_EMAIL", envir=session$request)
 [This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L58)
 in `shiny-headers-demo` shows the code in context.
 
-#### Full user profile
+#### Finding current users' user profiles
 
 You can access the full user profile by making a request directly from the RShiny app to the auth-proxy's `/userinfo` endpoint using the following code inside your `server` function.
 
@@ -141,7 +256,7 @@ shows the code in context.
 }
 ```
 
-## Troubleshooting
+## Troubleshooting and monitoring
 
 ### Kibana
 
@@ -163,15 +278,19 @@ To view the logs for a specific app:
 
 Log messages are displayed in the **message** column.
 
-By default, Kibana only shows logs for the last 15 minutes. If no logs are available for that time range, you will receive the warning 'No results match your search criteria'.
+By default, Kibana only shows logs for the last 15 minutes.
+If no logs are available for that time range, you will receive the warning 'No results match your search criteria'.
 
-To change the time range, select the clock icon in the menu bar. There are several presets or you can define a custom time range.
+To change the time range, select the clock icon in the menu bar.
+There are several presets or you can define a custom time range.
 
-Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches. To enable these features, select **Options\_** from within the search bar, then toggle **Turn on query features**.
+Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches.
+To enable these features, select **Options\_** from within the search bar, then toggle **Turn on query features**.
 
 ### Deploying locally
 
-If you have a MacBook, you can use Docker locally to test and troubleshoot your RShiny app. You can download Docker Desktop for Mac from the [Docker website](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
+If you have a MacBook, you can use Docker locally to test and troubleshoot your RShiny app.
+You can download Docker Desktop for Mac from the [Docker website](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
 
 To build and run your R Shiny app locally, follow the steps below:
 
