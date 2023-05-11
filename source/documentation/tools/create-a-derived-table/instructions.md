@@ -427,6 +427,7 @@ Below is an example of using the `source()` function to select from the `contact
 ```
 select * from {{ source("delius_prod", "contact") }} limit 10
 ```
+
 #### Adding a new source
 
 If a database hasn't been defined as a source it will need to be added. Please follow the instructions below:
