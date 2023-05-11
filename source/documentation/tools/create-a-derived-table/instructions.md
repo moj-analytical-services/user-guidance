@@ -420,6 +420,13 @@ Configurations are prioritised in order of specificity, which is generally the i
 ### Sources
 
 Sources are descriptions of the databases and tables already in Analytical Platform. With those tables defined as sources in dbt, it is then possible to select from source tables in your models using the [`source()`](https://docs.getdbt.com/reference/dbt-jinja-functions/source) function which helps define the lineage of your data. To see which sources have been defined, look in the [`./mojap_derived_tables/models/sources/`](./mojap_derived_tables/models/sources/) directory. 
+Below is an example of using the `source()` function to select from the `contact` table in the `delius_prod` database:
+
+`model_a.sql`
+
+```
+select * from {{ source("delius_prod", "contact") }} limit 10
+```
 #### Adding a new source
 
 If a database hasn't been defined as a source it will need to be added. Please follow the instructions below:
@@ -429,14 +436,6 @@ If a database hasn't been defined as a source it will need to be added. Please f
 - Commit and push the changes, then raise a pull request.
 
 The `update-source` workflow is scheduled to run weekly. When run it will add any new source databases and refresh all existing source databases. Please contact the Data Modelling team at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) if you have any queries.
-
-Below is an example of using the `source()` function to select from the `contact` table in the `delius_prod` database:
-
-`model_a.sql`
-
-```
-select * from {{ source("delius_prod", "contact") }} limit 10
-```
 
 ### The ref function
 
