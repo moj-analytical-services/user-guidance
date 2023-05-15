@@ -85,7 +85,7 @@ You can configure whether your app needs extra protection from internet environm
 
 ### Self-defined secrets or environment vars
 
-If the app has own setting and the value of setting depends on which deployment environment the app run,  you can create secret (senstive value e.g., credentail or api-key) or environment variable (non-sensitive value) through app-detail page. 
+If the app has its own settings and the value of the setting depends on which deployment environment the app is running in, you can create secret (sensitive value e.g., credential or api-key) or environment variable (non-sensitive value) through the app-detail page. 
 
 ### Other Github secrets and environment vars
 
