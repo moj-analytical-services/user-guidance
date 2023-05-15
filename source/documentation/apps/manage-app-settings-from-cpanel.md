@@ -86,7 +86,7 @@ You can configure whether your app needs extra protection from internet environm
 
 If the app has own setting and the value of setting depends on which deployment environment the app run,  you can create secret (senstive value e.g., credentail or api-key) or environment variable (non-sensitive value) through app-detail page. 
 
-### other github secrets and environment vars
+### Other Github secrets and environment vars
 
 Other secrets and vars which are not mentioned in the section, if they are not the ones you defined, e.g. having `ECR` or `KUBE` or `AWS` as part of the name,  then they are created during the process of initialising the infrastructure resources on CP and are required by the deployment workflows too.  They are maintained or updated usually through the terraforms of CP.
 
