@@ -98,7 +98,7 @@ If the flag was on (`True` for `AUTHENTICATION_REQUIRED`) and you swtich it off,
 
 ## Can I make changes(add/remove/update) the secrets/vars on github repo directly?
 
-As the deployment settings are stored as github repo not in Control panel,  any changes made on github repo will be reflected back on Control panel,
+As the deployment settings are stored in the Github repo and not in Control panel,  any changes made on the Github repo will be reflected back in Control panel.
 
 DO NOT change the value of the settings mentioned in this section on github repo directly, feel free to change self-defined settings.
 
