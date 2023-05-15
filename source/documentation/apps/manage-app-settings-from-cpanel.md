@@ -23,7 +23,7 @@ You can have multiple deployment environments for an app for different purposes,
 Environments contain the following parts:
 - A namepace with other required resources on CP's cluster e.g. ECR repo for storing app's docker images
 - An environment on github repo
-- Set of [deployment settings](#introduction-to-the-settings) under each github environment and can be managed through Control panel
+- [Deployment settings](#introduction-to-the-settings) under each github environment and can be managed through Control panel
 - An ingress (app URL) for you to access the deployed app in each environment 
 The docker image of app will be built and pushed into app's ECR, then be deployed with deployment settings on its namespace via github workflow and can be accessed via the app's URL. 
 
