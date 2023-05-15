@@ -4,7 +4,7 @@ After you complete the process of registering an app through Control panel and [
 
 The settings are stored as github secrets or environment variables depending on whether the setting contains sensitive information or not. 
 
-This section is to explain each setting and how the value of setting affect the app.
+This section is to explain each setting and how the value of the setting affect the app.
 
 ## Permission required
 
