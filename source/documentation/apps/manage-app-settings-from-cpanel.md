@@ -71,7 +71,7 @@ The credentail of the auth0-client with other related settings need to be availa
 
 If you choose to use `email` (`passwordless` flow),  then you can manage the app's customers for each deployment environment through clicking `Manage customers` button on [app-list page](https://controlpanel.services.analytical-platform.service.justice.gov.uk/webapp-data/). 
 
-Right now we only provide customer management for `email` login option,  if you choose other options like `nomis` or `github` etc, then it means you apps will open to any users who have nomis credential or who has github account and has joined `moj-analytical-services` github org,  further user management and control is required under app-level if the default scope of users is wider than the target audience of the app.
+Right now we only provide customer management for `email` login option. If you choose other options like `nomis` or `github` etc, then it means your app will be open to any users who have nomis credential or who has a Github account and has joined the `moj-analytical-services` Github org.  Further user management and control is required under app-level if the default scope of users is wider than the target audience of the app.
 
 ### IP whitelist
 
