@@ -49,7 +49,7 @@ First,  the following flag can be used for switching on/off the user-access-cont
 
 If the value of flag is `True`, then an auth0 client is required which can be created by clicking the button 
 `Create auth0 client` under the deployment environment you choose. The auth0-client is responsible for providing the integration with different login options e.g. 
-- passwordless flow: allow user to gain access by one-time magic link. more detail is [here](https://auth0.com/docs/authenticate/passwordless/authentication-methods/email-magic-link). This approach allow external users to be able to access app via their email. This flow appears as `email` in the `AUTH0_CONNECTIONS` field.
+- passwordless flow: allow user to gain access by one-time magic link. more detail is [here](https://auth0.com/docs/authenticate/passwordless/authentication-methods/email-magic-link). This approach allows external users to be able to access app via their email. This flow appears as `email` in the `AUTH0_CONNECTIONS` field.
 - github 
 - nomis login (HMPPS Auth): allow the user login with their NOMIS credentials, the guide about how to set it up will be provided soon.
 
