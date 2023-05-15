@@ -26,7 +26,7 @@ it contains the following parts
 - A endpoint (app URL) for you to access the deployed app under each environment 
 The docker image of app will be built and pushed into app's ECR, then be deployed with deployment settings on its namespace via github workflow and can be accessed via the app's URL. 
 
-By default,  2 deployment enviroments are provided :-
+By default,  2 deployment environments are provided :-
 |- `dev` environment:  the environment you can use for testing the changes of your app and can be used as the staging env before releasing a new version to the prod environment.
 |-- namespace: `data-platform-app-<repo-name>-dev`
 |-- `dev` enviroment on github repo
