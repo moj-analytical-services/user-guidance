@@ -102,6 +102,6 @@ As the deployment settings are stored as github repo not in Control panel,  any 
 
 DO NOT change the value of the settings mentioned in this section on github repo directly, feel free to change self-defined settings.
 
-## When the changes made on Control panel will be applied to the deployment pipeline?
+## When will the changes made on Control panel will be applied to the deployment pipeline?
 
 The changes will be applied when the next deployment workflow is triggered. 
