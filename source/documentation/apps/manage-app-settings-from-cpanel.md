@@ -27,7 +27,7 @@ it contains the following parts
 The docker image of app will be built and pushed into app's ECR, then be deployed with deployment settings on its namespace via github workflow and can be accessed via the app's URL. 
 
 By default,  2 deployment enviroments are provided :-
-|- `dev` environment:  the environment you can use for testing the changes of your app and can be used as the staging env before releasing new version to the live.
+|- `dev` environment:  the environment you can use for testing the changes of your app and can be used as the staging env before releasing a new version to the prod environment.
 |-- namespace: `data-platform-app-<repo-name>-dev`
 |-- `dev` enviroment on github repo
 |-- app URL: `<repo_name>-dev.apps.live.cloud-platform.service.justice.gov.uk`
