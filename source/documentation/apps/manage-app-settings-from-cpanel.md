@@ -104,4 +104,4 @@ DO NOT change the value of the settings mentioned in this section on github repo
 
 ## When the changes made on Control panel will be applied to the deployment pipeline?
 
-The changes will be appled when the next deployment workflow is triggered. 
+The changes will be applied when the next deployment workflow is triggered. 
