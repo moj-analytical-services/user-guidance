@@ -19,7 +19,8 @@ If you do not satisfy the above requirements, ask someone in your team who has a
 You can have multiple deployment environments for an app for different purposes, minumum is the production environment, then you can have extra ones, e.g. one for testing purpose. 
 
 **What is an application environment?**
-it contains the following parts
+
+Environments contain the following parts:
 - A namepace with other required resources on CP's cluster e.g. ECR repo for storing app's docker images
 - An environment on github repo
 - Set of [deployment settings](#introduction-to-the-settings) under each github environment and can be managed through Control panel
