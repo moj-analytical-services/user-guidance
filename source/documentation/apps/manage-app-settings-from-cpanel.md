@@ -2,7 +2,7 @@
 
 After you complete the process of registering an app through Control panel and [initialise the infrastructure resource under Cloud platform](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#functions), you can start to manage the deployment settings through the [Control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 
-The settings are stored as github secrets or environment variables depending on whether the setting contains sensitive information or not. 
+The settings are stored as Github secrets or environment variables depending on whether the setting contains sensitive information or not. 
 
 This section is to explain each setting and how the value of the setting affect the app.
 
