@@ -94,7 +94,7 @@ Other secrets and vars which are not mentioned in the section, if they are not t
 
 If the flag was off (`False` for `AUTHENTICATION_REQUIRED`) and you switch it on,  then an auth0-client is required to be created by clicking `Create auth0 client` on app-detail page on Control panel. If the client is missing,  a red warning flag will be displayed on the page to remind you
 
-If the flag was on (`True` for `AUTHENTICATION_REQUIRED`) and you swtich it off,  then existing auth0-client becomes redundant and please do remove it by clicking the `Remove the auth0 client` to saving the resource on auth0 platform. 
+If the flag was on (`True` for `AUTHENTICATION_REQUIRED`) and you swtich it off,  then existing auth0-client becomes redundant and please do remove it by clicking the `Remove the auth0 client` to save resource on auth0 platform. 
 
 ## Can I make changes(add/remove/update) the secrets/vars on github repo directly?
 
