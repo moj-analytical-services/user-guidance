@@ -75,7 +75,7 @@ Right now we only provide customer management for `email` login option. If you c
 
 ### IP whitelist
 
-You can configure whether your app needs extra protection from internet environment by setting the allowed IP_RANGES (the list VPN managed in MoJ). Even your app is public facing (`AUTHENTICATION_REQUIRED` is `False`), you can still set up this options
+You can configure whether your app needs extra protection from internet environment by setting the allowed IP_RANGES (the list VPN managed in MoJ). You can set up this option even if your app is public facing (`AUTHENTICATION_REQUIRED` is `False`)
 
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 | Command | Format | Description |
