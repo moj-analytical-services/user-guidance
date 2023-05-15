@@ -29,7 +29,7 @@ The docker image of app will be built and pushed into app's ECR, then be deploye
 By default,  2 deployment environments are provided :-
 |- `dev` environment:  the environment you can use for testing the changes of your app and can be used as the staging env before releasing a new version to the prod environment.
 |-- namespace: `data-platform-app-<repo-name>-dev`
-|-- `dev` enviroment on github repo
+|-- `dev` environment on Github repo
 |-- app URL: `<repo_name>-dev.apps.live.cloud-platform.service.justice.gov.uk`
 |- `prod` environment:  the production environment where the live app sits 
 |-- namespace: `data-platform-app-<repo-name>-prod`
