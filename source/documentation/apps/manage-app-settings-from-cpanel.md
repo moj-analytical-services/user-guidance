@@ -54,7 +54,7 @@ If the value of flag is `True`, then an auth0 client is required which can be cr
 - github 
 - nomis login (HMPPS Auth): allow the user login with their NOMIS credentials, the guide about how to set it up will be provided soon.
 
-The credentail of the auth0-client with other related settings need to be available in app's deployment environment and be stored as github secrets and environment vars which is explained in the [following section](#authentication-related-settings)
+The credentials of the auth0-client with other related settings need to be available in the app's deployment environment and be stored as Github secrets and environment vars which is explained in the [following section](#authentication-related-settings)
 
 ### Authentication related settings
 
