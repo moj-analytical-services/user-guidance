@@ -12,7 +12,7 @@ The user :-
 - Has been granted as the app's admin on Control panel
 - Has been the memember of github admin team
 
-If you do not satisfy above requirements, ask someone in your team who has the admin permission on Control panel and github to grant you the permissions.
+If you do not satisfy the above requirements, ask someone in your team who has admin permissions on Control panel and Github to grant you the permissions.
 
 ## Context 
 
