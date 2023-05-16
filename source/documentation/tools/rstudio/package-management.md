@@ -46,7 +46,7 @@ Basic commands to follow to install packages for renv are:
 
 ```r
 # install renv (if not already installed)
-install.packages(“renv”)
+install.packages("renv")
 
 # If you are starting a fresh repository, run this:
 renv::init(bare = TRUE)
