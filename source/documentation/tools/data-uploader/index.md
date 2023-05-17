@@ -83,7 +83,7 @@ If you are using the dev version of the Uploader, then your data is accessible t
 If your `alpha_username` is not already listed in `standard_database_access.yaml`, clone the [repo](https://github.com/moj-analytical-services/data-engineering-database-access), create a branch, add your alpha_username and raise a PR. Once approved, you will have access.
 
 ### Prod example 
-Data uploaded via the uploader to prod are inacessible by default. To gain access, a database file and project access file are needed.
+Data uploaded via the uploader to prod are inacessible by default. To gain access, a database file and project access file are needed. When creating a database file, include a README.md file to describe the provenance of the data and list any governance around it.
 
 Here is an example [database file](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/cjs_dashboard) and [project access file](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/cjs_dashboard.yaml) for the cjs dashboard:
 
