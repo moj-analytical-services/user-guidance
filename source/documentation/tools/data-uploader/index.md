@@ -12,7 +12,7 @@ Quickstart link to the production deployment [Uploader](https://data-eng-uploade
 - [Step 3 of 4: Choose table](#step-3-of-4-choose-table)
 - [Step 4 of 4: Check your inputs before uploading your data](#step-4-of-4-check-your-inputs-before-uploading-your-data)
 - [Upload complete](#upload-complete)
-- [Getting access to uploaded data](#Getting-access-to-uploaded-data)
+- [Getting access to uploaded data](#getting-access-to-uploaded-data)
 - [Troubleshooting](#troubleshooting)
 - [Limitations and awareness](#limitations-and-awareness)
 
@@ -79,14 +79,13 @@ All Data that has been uploaded is subsequently moved to the AP at 1am every day
 
 ### Dev example
 
-If you are using the dev version of the Uploader then your data is accessible to all users listed in the [Standard Database Access project](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml). If your `alpha_username` is not already listed clone the [repo](https://github.com/moj-analytical-services/data-engineering-database-access), create a branch, add you alpha_username and raise a PR. One approved you will have access.
+If you are using the dev version of the Uploader, then your data is accessible to all users listed in the [Standard Database Access project](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml). 
+If your `alpha_username` is not already listed in `standard_database_access.yaml`, clone the [repo](https://github.com/moj-analytical-services/data-engineering-database-access), create a branch, add your alpha_username and raise a PR. Once approved, you will have access.
 
 ### Prod example 
-Data uploaded via the uploader to prod are inacessible by default. To gain access, a database file and project access file need to be created in https://github.com/moj-analytical-services/data-engineering-database-access.
+Data uploaded via the uploader to prod are inacessible by default. To gain access, a database file and project access file are needed.
 
-Here is an example for the cjs dashboard:
-https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/cjs_dashboard
-https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/cjs_dashboard.yaml
+Here is an example [database file](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/cjs_dashboard) and [project access file](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/cjs_dashboard.yaml) for the cjs dashboard:
 
 ### Troubleshooting
 
