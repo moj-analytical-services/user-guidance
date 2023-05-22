@@ -130,7 +130,7 @@ Slack is a collaboration tool that helps teams work more effectively together. Y
 
 ### Access Slack
 
-Send a request to join the ASD Slack workspace [here](https://asdslack.slack.com), once you are part of the workspace you can access the channels within it. To create an account, you will need an email address ending in one of the following:
+Send a request to join the Data and Analysis (ASD) Slack workspace [here](https://asdslack.slack.com), once you are part of the workspace you can access the channels within it. To create an account, you will need an email address ending in one of the following:
 
 * @justice.gsi.gov.uk
 * @digital.justice.gov.uk
@@ -144,7 +144,7 @@ It is not mandatory to join or use Slack (although we highly recommend it) so yo
 
 You may have to access Slack differently depending on the IT system you use:
 
-* if you use DOM1, you can access Slack from a browser or using the mobile app on your personal or work phone
+* if you use DOM1, you can access Slack from a desktop app (via the software center app), browser or using the mobile app on your personal or work phone
 * if you use an MoJ Digital and Technology MacBook, you can access Slack from a browser or using the desktop app. You can also access Slack using the mobile app on your personal or work phone
 * if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use the mobile app on your personal or work phone
 
