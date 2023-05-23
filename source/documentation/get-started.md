@@ -34,8 +34,8 @@ To sign up for a GitHub account, go to GitHub's [join page](https://github.com/j
 * When signing up, you must use your work email address. If you already have an existing GitHub account, that's fine to use, but your work email address must be in your [your account's emails](https://github.com/settings/emails).
 * When instructed to choose your subscription, you should select the free plan.
 * It is good practice to choose a username that does not contain upper-case characters.
-* You should use a secure password following best [practice guidelines](https://github.com/ministryofjustice/itpolicycontent/blob/master/content/security/framework/password-standard.md).
-* We recommend that you use a password manager, such as [LastPass](https://www.lastpass.com/), to generate and store strong passwords.
+* You should use a secure password following best [practice guidelines](https://security-guidance.service.justice.gov.uk/passwords/#passwords).
+* We recommend that you use a password manager, such as [1Password](https://security-guidance.service.justice.gov.uk/using-1password/#using-1password), to generate and store strong passwords.
 
 ### Verify your email address for GitHub
 
@@ -49,14 +49,14 @@ If you do not verify your email address at this stage, you can do it later by fo
 
 To get access to the Analytical Platform, you must first configure two-factor authentication (2FA) for GitHub using a mobile app (on your personal or work phone) or via text message. To configure 2FA for GitHub, follow the instructions [here](https://help.github.com/en/articles/configuring-two-factor-authentication).
 
-We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used.
+We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used. See MoJ guidance [here](https://security-guidance.service.justice.gov.uk/multi-factor-authentication-mfa-guide/#mfa)
 
 For Android:
 - [Google Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
 - [Microsoft Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator)
 
 For iPhone:
-- [‎Google Authenticator on the Apple App Store](https://apps.apple.com/us/app/google-authenticator/id388497605)
+- [Google Authenticator on the Apple App Store](https://apps.apple.com/us/app/google-authenticator/id388497605)
 - [Microsoft Authenticator on the Apple App Store](https://apps.apple.com/gb/app/microsoft-authenticator/id983156458)
 
 During the setup process for any 2FA application, we recommend disabling any “Dark” Mode, Extension or Settings (including themes) in your preferred browser.
