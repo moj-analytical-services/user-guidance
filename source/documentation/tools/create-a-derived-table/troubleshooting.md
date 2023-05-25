@@ -37,6 +37,9 @@ NB: You may not have permission to access AWS Glue and action steps 1 and 2, if 
 
 ## Troubleshooting list
 
+### CSV file won't upload to GitHub from RStudio
+You have uploaded a CSV file into your local directory within RStudio on the Analytical Platform and pushed changes to the remote on GitHub, then you notice that the CSV file is not there. This is due to Analytical Platform RStudio settings designed to prevent accidental data exposure. [Override instructions](https://user-guidance.analytical-platform.service.justice.gov.uk/github/security-in-github.html#security-in-github).
+
 ### Can't find profiles.yml error
 - Check you are in the `mojap_derived_tables` directory before running any `dbt` command. 
 

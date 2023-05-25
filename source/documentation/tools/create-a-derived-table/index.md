@@ -4,6 +4,7 @@
 
 Create a Derived Table is a tool for creating persistent derived tables in Athena.
 
+
 ## Contents
 
 - [Create a Derived Table Instructions](/tools/create-a-derived-table/instructions): Step by step detailed instructions on how to use Create a Derived Table.
