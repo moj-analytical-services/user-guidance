@@ -69,55 +69,7 @@ You can re-enable your “Dark” Mode, Extension or Settings once this process 
 
 We use GitHub to store code and collborate on it with others. You should read more about how to work with [git and GitHub](github) on the Analytical Platform. You will need to complete some additional steps before you can start working with it with RStudio or JupyterLab.
 
-## 2. Analytical Platform Account
-
-### What is the Analytical Platform?
-
-The Analytical Platform (often referred to as 'AP') is a data analysis environment, providing modern tools and key datasets for MoJ analysts.
-
-It offers:
-
-* modern data tools and services
-* centralised data
-* reproducible analysis
-* secure and well-engineered environment
-
-See [about the Analytical Platform](/about.html).
-
-The steps required to access the platform (and its resources) are as follows:
-
-1. [Request an account](#request-an-account-from-the-analytical-platform-team)
-2. [Wait for invite to our GitHub organisation, then accept](#accept-your-invitation-to-the-moj-analytical-services-github-organisation)
-3. [Sign in to the Analytical Platform for the first time](#sign-in-to-the-analytical-platform-for-the-first-time)
-
-### Request an account from the Analytical Platform team
-
-To request an account for the Analytical Platform, you should send an email with your GitHub username to the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk). Please provide details of your role and team, and why you need an account on the platform.  The team will then invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
-
-The invitation to join MoJ Analytical Services will usually be sent within 24 hours of your request.
-If you haven't received your invitation following that time period, you can follow up in the [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ) Slack channel (see [below](#3-slack-account) for joining details).
-
-### Accept your invitation to the MoJ Analytical Services GitHub organisation
-
-When you are invited to join the MoJ Analytical Services GitHub organisation, you will receive an email with a link to accept the invitation.
-
-You can also accept your invitation by signing in to GitHub and visiting the [organisation page](https://github.com/moj-analytical-services).
-
-### Sign in to the Analytical Platform for the first time
-
-The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
-
-When you sign in to the Control Panel for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
-
-If you are a new member of the organisation, are using the platform for the first time, you will need to log in at least once to be able to get access permissions for data within the platform.
-
-You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
-
-As described above, please disable any “Dark” Mode, Extension or Settings (including themes) in your preferred browser, during the 2FA setup process.
-
-**NOTE:** If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
-
-## 3. Slack Account
+## 2. Slack Account
 
 ### What is Slack?
 
@@ -144,9 +96,58 @@ It is not mandatory to join or use Slack (although we highly recommend it) so yo
 
 You may have to access Slack differently depending on the IT system you use:
 
-* if you use DOM1, you can access Slack from a browser or using the mobile app on your personal or work phone
+* if you use DOM1, you can access Slack from a browser or on your desktop by downloading Slack app from the [Company Portal](companyportal:ApplicationId=5b3a3776-9335-4994-b940-edb324794764), or using the mobile app on your work phone (note that slack is blocked on personal devices)
 * if you use an MoJ Digital and Technology MacBook, you can access Slack from a browser or using the desktop app. You can also access Slack using the mobile app on your personal or work phone
-* if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use the mobile app on your personal or work phone
+* if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use it via a browser, mobile app on your personal or work phone
+
+## 3. Analytical Platform Account
+
+### What is the Analytical Platform?
+
+The Analytical Platform (often referred to as 'AP') is a data analysis environment, providing modern tools and key datasets for MoJ analysts.
+
+It offers:
+
+* modern data tools and services
+* centralised data
+* reproducible analysis
+* secure and well-engineered environment
+
+See [about the Analytical Platform](/about.html).
+
+The steps required to access the platform (and its resources) are as follows:
+
+1. [Request an account](#request-an-account-from-the-analytical-platform-team)
+2. [Wait for invite to our GitHub organisation, then accept](#accept-your-invitation-to-the-moj-analytical-services-github-organisation)
+3. [Sign in to the Analytical Platform for the first time](#sign-in-to-the-analytical-platform-for-the-first-time)
+
+### Request an account from the Analytical Platform team
+
+To request an account for the Analytical Platform, please head over to the [#ask-operations-engineering](https://asdslack.slack.com/archives/C01BUKJSZD4) slack channel. Provide your GitHub username and that you want to join the Analytical Services. The [Operations Engineering Team](https://operations-engineering.service.justice.gov.uk/) will invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
+
+> **Note**
+> If you are having problems with gaining access to Slack then please contact us via [email](analytical_platform@digital.justice.gov.uk)
+
+### Accept your invitation to the MoJ Analytical Services GitHub organisation
+
+When you are invited to join the MoJ Analytical Services GitHub organisation, you will receive an email with a link to accept the invitation.
+
+You can also accept your invitation by signing in to GitHub and visiting the [organisation page](https://github.com/moj-analytical-services).
+
+### Sign in to the Analytical Platform for the first time
+
+The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+
+When you sign in to the Control Panel for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
+
+If you are a new member of the organisation, are using the platform for the first time, you will need to log in at least once to be able to get access permissions for data within the platform.
+
+You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
+
+As described above, please disable any “Dark” Mode, Extension or Settings (including themes) in your preferred browser, during the 2FA setup process.
+
+> **Note**
+> If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
 
 ## 4. Training
 
