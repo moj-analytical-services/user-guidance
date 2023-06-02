@@ -36,7 +36,7 @@ The Analytical Platform team is responsible for supporting problems with the Ana
 
 This **does not** include any problems which occur as a result of the limitations or incorrect use of software by users on the platform. If issues occur whilst running code or using version control please see the sections below. Remember the first port of call for using the platform should always be this user document.
 
-The MoJ Digitech team have a [Slack channel](https://app.slack.com/client/T1PU1AP6D/C4PF7QAJZ) where you can post questions and a GitHub page where you can raise a formal [issue ticket](https://GitHub.com/ministryofjustice/analytics-platform/issues).
+The MoJ Digitech team have a [Slack channel](https://app.slack.com/client/T1PU1AP6D/C4PF7QAJZ) where you can post questions and a GitHub page where you can raise a formal [issue ticket](https://github.com/ministryofjustice/data-platform-support/issues/new/choose).
 
 For only those users who cannot access Slack or GitHub (i.e. some non DOM1 users) there is a direct email address which can be used: analytical_platform@digital.justice.gov.uk - but this will be monitored for emails from non DOM1 users.
 
@@ -81,7 +81,6 @@ Details on how to produce a good reproducible example can be found here:
 
 ## Raising issues
 
-Rather than posting questions on Slack you could also visit the analytical platform [GitHub page](https://GitHub.com/ministryofjustice/analytics-platform/issues) and raise a formal issue ticket. This will then flag your issue directly to the MoJ Digitech team who will respond through the issue log on GitHub. There is a fixed format for raising issues which should be followed to ensure the team can help:
-https://GitHub.com/ministryofjustice/analytics-platform/blob/master/.GitHub/ISSUE_TEMPLATE.md
+Rather than posting questions on Slack you could also visit the analytical platform [issues](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) and raise Analytical Platform Support Request. This will raise a message in the [Analytical Platform Support](https://mojdt.slack.com/archives/C4PF7QAJZ) slack channel for the team to pick up.
 
 This approach of raising issues also applies to any package, model or project that has a GitHub page. These issue logs are the most common method for highlighting problems in open source project, many R packages for example have a GitHub page where you can raise issues with the developer or search to see whether your problem has already been raised.

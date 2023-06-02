@@ -34,8 +34,8 @@ To sign up for a GitHub account, go to GitHub's [join page](https://github.com/j
 * When signing up, you must use your work email address. If you already have an existing GitHub account, that's fine to use, but your work email address must be in your [your account's emails](https://github.com/settings/emails).
 * When instructed to choose your subscription, you should select the free plan.
 * It is good practice to choose a username that does not contain upper-case characters.
-* You should use a secure password following best [practice guidelines](https://github.com/ministryofjustice/itpolicycontent/blob/master/content/security/framework/password-standard.md).
-* We recommend that you use a password manager, such as [LastPass](https://www.lastpass.com/), to generate and store strong passwords.
+* You should use a secure password following best [practice guidelines](https://security-guidance.service.justice.gov.uk/passwords/#passwords).
+* We recommend that you use a password manager, such as [1Password](https://security-guidance.service.justice.gov.uk/using-1password/#using-1password), to generate and store strong passwords.
 
 ### Verify your email address for GitHub
 
@@ -49,14 +49,14 @@ If you do not verify your email address at this stage, you can do it later by fo
 
 To get access to the Analytical Platform, you must first configure two-factor authentication (2FA) for GitHub using a mobile app (on your personal or work phone) or via text message. To configure 2FA for GitHub, follow the instructions [here](https://help.github.com/en/articles/configuring-two-factor-authentication).
 
-We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used.
+We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used. See MoJ guidance [here](https://security-guidance.service.justice.gov.uk/multi-factor-authentication-mfa-guide/#mfa)
 
 For Android:
 - [Google Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
 - [Microsoft Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator)
 
 For iPhone:
-- [‎Google Authenticator on the Apple App Store](https://apps.apple.com/us/app/google-authenticator/id388497605)
+- [Google Authenticator on the Apple App Store](https://apps.apple.com/us/app/google-authenticator/id388497605)
 - [Microsoft Authenticator on the Apple App Store](https://apps.apple.com/gb/app/microsoft-authenticator/id983156458)
 
 During the setup process for any 2FA application, we recommend disabling any “Dark” Mode, Extension or Settings (including themes) in your preferred browser.
@@ -69,7 +69,38 @@ You can re-enable your “Dark” Mode, Extension or Settings once this process 
 
 We use GitHub to store code and collborate on it with others. You should read more about how to work with [git and GitHub](github) on the Analytical Platform. You will need to complete some additional steps before you can start working with it with RStudio or JupyterLab.
 
-## 2. Analytical Platform Account
+## 2. Slack Account
+
+### What is Slack?
+
+Slack is a collaboration tool that helps teams work more effectively together. You can use Slack in several ways:
+
+* to get technical support for the Analytical Platform and analytical tools, such as R, Python and Git
+* to submit admin requests relating to apps and data sources on the Analytical Platform
+* to share knowledge, expertise and best practice
+* to communicate quickly with other Analytical Platform users as an alternative to email
+
+### Access Slack
+
+Send a request to join the ASD Slack workspace [here](https://asdslack.slack.com), once you are part of the workspace you can access the channels within it. To create an account, you will need an email address ending in one of the following:
+
+* @justice.gsi.gov.uk
+* @digital.justice.gov.uk
+* @cjs.gsi.gov.uk
+* @noms.gsi.gov.uk
+* @legalaid.gsi.gov.uk
+* @justice.gov.uk
+* @judiciary.uk
+
+It is not mandatory to join or use Slack (although we highly recommend it) so you shouldn’t use it to make any important announcements and should ensure that you are not excluding anyone from the discussion.
+
+You may have to access Slack differently depending on the IT system you use:
+
+* if you use DOM1, you can access Slack from a browser or on your desktop by downloading Slack app from the [Company Portal](companyportal:ApplicationId=5b3a3776-9335-4994-b940-edb324794764), or using the mobile app on your work phone (note that slack is blocked on personal devices)
+* if you use an MoJ Digital and Technology MacBook, you can access Slack from a browser or using the desktop app. You can also access Slack using the mobile app on your personal or work phone
+* if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use it via a browser, mobile app on your personal or work phone
+
+## 3. Analytical Platform Account
 
 ### What is the Analytical Platform?
 
@@ -92,10 +123,10 @@ The steps required to access the platform (and its resources) are as follows:
 
 ### Request an account from the Analytical Platform team
 
-To request an account for the Analytical Platform, you should send an email with your GitHub username to the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk). Please provide details of your role and team, and why you need an account on the platform.  The team will then invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
+To request an account for the Analytical Platform, please head over to the [#ask-operations-engineering](https://asdslack.slack.com/archives/C01BUKJSZD4) slack channel. Provide your GitHub username and that you want to join the Analytical Services. The [Operations Engineering Team](https://operations-engineering.service.justice.gov.uk/) will invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
 
-The invitation to join MoJ Analytical Services will usually be sent within 24 hours of your request.
-If you haven't received your invitation following that time period, you can follow up in the [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ) Slack channel (see [below](#3-slack-account) for joining details).
+> **Note**
+> If you are having problems with gaining access to Slack then please contact us via [email](analytical_platform@digital.justice.gov.uk)
 
 ### Accept your invitation to the MoJ Analytical Services GitHub organisation
 
@@ -115,7 +146,9 @@ You must configure 2FA for the Analytical Platform using a mobile app (on your p
 
 As described above, please disable any “Dark” Mode, Extension or Settings (including themes) in your preferred browser, during the 2FA setup process.
 
-**NOTE:** If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
+> **Note**
+> If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
+
 
 ## 3. Slack Account
 
@@ -147,6 +180,7 @@ You may have to access Slack differently depending on the IT system you use:
 * if you use DOM1, you can access Slack from a desktop app (via the software center app), browser or using the mobile app on your personal or work phone
 * if you use an MoJ Digital and Technology MacBook, you can access Slack from a browser or using the desktop app. You can also access Slack using the mobile app on your personal or work phone
 * if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use the mobile app on your personal or work phone
+
 
 ## 4. Training
 
