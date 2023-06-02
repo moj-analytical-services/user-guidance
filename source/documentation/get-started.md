@@ -149,6 +149,39 @@ As described above, please disable any “Dark” Mode, Extension or Settings (i
 > **Note**
 > If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
 
+
+## 3. Slack Account
+
+### What is Slack?
+
+Slack is a collaboration tool that helps teams work more effectively together. You can use Slack in several ways:
+
+* to get technical support for the Analytical Platform and analytical tools, such as R, Python and Git
+* to submit admin requests relating to apps and data sources on the Analytical Platform
+* to share knowledge, expertise and best practice
+* to communicate quickly with other Analytical Platform users as an alternative to email
+
+### Access Slack
+
+Send a request to join the Data and Analysis (ASD) Slack workspace [here](https://asdslack.slack.com), once you are part of the workspace you can access the channels within it. To create an account, you will need an email address ending in one of the following:
+
+* @justice.gsi.gov.uk
+* @digital.justice.gov.uk
+* @cjs.gsi.gov.uk
+* @noms.gsi.gov.uk
+* @legalaid.gsi.gov.uk
+* @justice.gov.uk
+* @judiciary.uk
+
+It is not mandatory to join or use Slack (although we highly recommend it) so you shouldn’t use it to make any important announcements and should ensure that you are not excluding anyone from the discussion.
+
+You may have to access Slack differently depending on the IT system you use:
+
+* if you use DOM1, you can access Slack from a desktop app (via the software center app), browser or using the mobile app on your personal or work phone
+* if you use an MoJ Digital and Technology MacBook, you can access Slack from a browser or using the desktop app. You can also access Slack using the mobile app on your personal or work phone
+* if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use the mobile app on your personal or work phone
+
+
 ## 4. Training
 
 You can find details on courses and training [here](https://moj-analytical-services.github.io/ap-tools-training/). Upcoming courses are also advertised on The Hive (see Data & Analysis email and Teams communications).
