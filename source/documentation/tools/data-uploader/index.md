@@ -41,7 +41,7 @@ Automated validation is applied to the data pre upload to check the basics - the
 
 ## Login page
 
-Go to the [Uploader login page ](https://data-eng-uploader-prod.apps.live.cloud-platform.service.justice.gov.uk/). Ensure you have set up an account to access the Uploader as in the [Authentication and accounts](#authentication-and-accounts) section above. Click **Login**, enter the email address used for your Datauploader account and follow instructions.
+Go to the [Uploader login page ](https://data-eng-uploader-prod.apps.live.cloud-platform.service.justice.gov.uk/). Ensure you have set up an account to access the Uploader as in the [Data Uploader pre-requisites](#data-uploader-pre-requisites) section above. Click **Login**, enter the email address used for your Datauploader account and follow instructions.
 
 ## Front page
 Ensure your data meets the **Before you start** criteria and then click on **Start now**.
