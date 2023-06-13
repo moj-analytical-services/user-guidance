@@ -9,8 +9,6 @@ We are in the process of migrating from our in-house maintained fork of the `dbt
 - [Test `dev` models](#test-dev-models)
 - [Insert external_location](#insert-external-location)
 - [Updating your branch with DMT-236/dbt-athena-upgrade-main](#updating-your-branch-with-dmt-236dbt-athena-upgrade-main)
-- [Change in creating models](#change-in-creating-models)
-    - [New config block for .sql files](#new-config-block-for-sql-files)
 - [What changed for seeds?](#what-changed-for-seeds)
 - [Helpful commands](#helpful-commands)
 - [Resources](#resources)
