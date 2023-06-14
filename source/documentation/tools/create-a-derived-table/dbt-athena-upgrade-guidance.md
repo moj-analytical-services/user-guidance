@@ -15,7 +15,7 @@ We are in the process of migrating from our in-house maintained fork of the `dbt
 - [License](#license)
 
 
-## Test set up
+## Test set up
 
 We have created a branch called [`DMT-236/dbt-athena-upgrade-main`](https://github.com/moj-analytical-services/create-a-derived-table/tree/DMT-236/dbt-athena-upgrade-main) which contains all the latest models, sources, seeds, macros from the `main` branch (that is everything that exists in `prod`) and all the required upgrades. The main upgrades which you need to be aware of are:
 
