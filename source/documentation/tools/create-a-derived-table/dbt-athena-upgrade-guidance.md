@@ -221,7 +221,7 @@ The __new__ directory structure has a single `seeds` directory at the same level
       ...
 ```
 
-The changes to the S3 location should not have any impact on users, unless they have specifically referenced a `seed` by its S3 location. References in `create-a-derived-table` using the `ref` function will be unaffected as this uses   Athena `<database_name.table_name>`pointers (which are unchanged) and not the S3 location.
+The changes to the S3 location should not have any impact on users, unless they have specifically referenced a `seed` by its S3 location. References in `create-a-derived-table` using the `ref` function will be unaffected as this uses   Athena to reference the Glue Catalogue Registration, in the form `<database_name.table_name>`. The catalogue registrations will be updated with the new S3 locations automatically.
 
 ## License
 
