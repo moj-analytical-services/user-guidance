@@ -8,10 +8,8 @@ We are in the process of migrating from our in-house maintained fork of the `dbt
 - [Test `prod` models](#test-prod-models)
 - [Test `dev` models](#test-dev-models)
 - [Insert external_location](#insert-external-location)
-- [Updating your branch with DMT-236/dbt-athena-upgrade-main](#updating-your-branch-with-dmt-236dbt-athena-upgrade-main)
-- [What changed for seeds?](#what-changed-for-seeds)
-- [Helpful commands](#helpful-commands)
-- [Resources](#resources)
+- [Update your branch with the `dbt-athena` upgrade](#update-your-branch-with-the-dbt-athena-upgrade)
+- [S3 location change for `seeds`](#s3-location-change-for-seeds)
 - [License](#license)
 
 
@@ -23,6 +21,7 @@ We have created a branch called [`DMT-236/dbt-athena-upgrade-main`](https://gith
 - `dbt-core` 1.5.0.
 - macro `generate_s3_location.sql` to support our S3 file path Hive style naming convention.
 - script `scripts/insert_external_location_config.py` to insert the required `external_location` configuration at the top of every model `.sql` file.
+- `seeds` S3 location has changed (this does not effect any references to `seeds`)
 
 To set up for testing you will need to checkout this branch, uninstall the old adapater and rerun the requirements files to update your local `venv` with the correct versions. In Terminal (with your `venv` active) in the root directory run the following to pull the latest from `main`, switch to `DMT-236/dbt-athena-upgrade-main` and update your `venv`:
 
@@ -162,9 +161,9 @@ mojap_derived_tables/models/<domain_name>/<database_name>/<database_name__table_
 
 ```
 
-## Updating your branch with `DMT-236/dbt-athena-upgrade-main`
+## Update your branch with the `dbt-athena` upgrade
 
-While we are testing we may make changes to the `DMT-236/dbt-athena-upgrade-main` branch which you will need to merge into your branches. Whilst on the branch you want to update with the latest from `DMT-236/dbt-athena-upgrade-main` run:
+As mentioned anbove we have created a branch containing all the upgrades called `DMT-236/dbt-athena-upgrade-main`. While we are testing we may make changes to the `DMT-236/dbt-athena-upgrade-main` branch which you will then need to merge into your branches. Whilst on the branch you want to update with the latest from `DMT-236/dbt-athena-upgrade-main` run:
 
 ```
 git fetch origin DMT-236/dbt-athena-upgrade-main
@@ -176,82 +175,53 @@ git merge origin/DMT-236/dbt-athena-upgrade-main
 At this point you may have merge conflicts that need to be resolved; please see [GitHub resolve merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github). If required, ask for help on the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) slack channel.
 
 
+## S3 location change for `seeds`
 
+Previously the `seed` S3 location was split between the `dev` and `prod` environments and followed the same Hive style path naming convention as for models. It was not straightforward to preserve this feature with the `dbt-athena-community` adapter and since `seeds` change little it was not a priority. 
 
-## What changed for seeds?
-
-Seeds are lookup tables easily created from a `.csv` file. Put the `.csv` in the [`./mojap_derived_tables/seeds/`](./mojap_derived_tables/seeds/) directory and follow the same directory structure requirements and naming conventions as for models. As with marts models, your seeds should have property files that have the same filename as the seed. Seeds can be accessed by anyone with standard database access and so must not contain sensitive data. Generally, seeds shouldn't contain more than 1000 rows, they don't contain complex data types, and they don't change very often. You can deploy a seed with more than 1000 rows, but it's not reccomended and it will take quite a long time to build.
-
-⚠️ Seeds must not contain sensitive data. ⚠️
-
-Note- with dbt-athena community adapter seeds get created in mojap-derived-tables/seeds/domain_<env_dbt>/table_name/ s3 location instead of Dev/Prod split s3 path. So there is no Dev or prod folder based segregaion anymore for seeds.
-
-There is no change for Data modelling team as this change is only related to how new adapter writes seeds in s3 location.
-<br />
-
-## Helpful commands
-
-As previously mentioned, the `mojap_derived_tables` dbt project is a shared space and so when deploying your models and other resources you'll want to make use of the [_node selection syntax_](https://docs.getdbt.com/reference/node-selection/syntax) so you don't end up running everyone else's. Don't worry if you do, it will just take a long time to run and then the deployed resources will eventually be deleted. You should cancel the execution with `ctrl+c` or `ctrl+z` and save yourself some time.
-
-To select a single model or seed, add the following to your dbt command:
+The __old__ directory structure for the `mojap-derived-tables` bucket is as below, with the `seed` directory appearing under both `prod` and `dev` directories. Note the database name is suffixed with `_dev_dbt` under the `dev` directory:
 
 ```
---select database_name__model_name
+├── mojap_derived_tables
+  ├── dev/
+      ├── models/
+      ├── run_artefacts/
+      └── seeds/
+          ├── domain_name=domain_one/
+              ├── database_name=db_one_dev_dbt/
+                  ├── table_name=tb_one
+                  ...
+              ...
+          ...
+  ├── prod/
+      ├── models/
+      ├── run_artefacts/
+      └── seeds/
+          ├── domain_name=domain_one/
+              ├── database_name=db_one/
+                  ├── table_name=tb_one
+                  ...
+              ...
+          ...
 ```
 
-or a number of models by running:
+The __new__ directory structure has a single `seeds` directory at the same level as the `prod` and `dev` directories. A `seed` created on a `dev` run will appear under its database name suffixed with `_dev_dbt`, as before, but the Hive path naming convention is not upheld. Instead we use the naming option `schema_table` profvided by `dbt-athena-community` which is simply `<database_name>/<table_name>`
 
 ```
---select database_name__model_1_name database_name__model_2_name
+├── mojap_derived_tables
+  ├── dev/
+  ├── prod/
+  └── seeds/
+      ├── database_one_dev_dbt/
+          ├── table_one/
+          ...
+      ├── database_one/
+          ├── table_one/
+          ...
+      ...
 ```
 
-To select a full directory of models, add the following to your dbt command:
-
-```
---select models/.../path/to/my/models/
-```
-
-As you develop and run your models you'll generate a lot of logs and run artefacts. This can become unwieldy and messy so it's helpful to clear them out from time to time. To remove run artefacts from previous invocations of dbt, run:
-
-```
-dbt clean
-```
-
-To check your SQL and YAML is syntactically correct, run:
-
-```
-dbt compile --select models/.../path/to/my/models/
-```
-
-To deploy your models, run:
-
-```
-dbt run --select models/.../path/to/my/models/
-```
-
-To deploy your seeds, run:
-
-```
-dbt seed --select seeds/.../path/to/my/seeds/
-```
-
-Don't forget that if your models depend on your seeds, you'll need to deploy your seeds before your models.
-
-To run tests on models with tests defined, run:
-
-```
-dbt test --select models/.../path/to/my/models/
-```
-
-## Resources
-
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
-
-<br />
+The changes to the S3 location should not have any impact on users, unless they have specifically referenced a `seed` by its S3 location. References in `create-a-derived-table` using the `ref` function will be unaffected as this uses   Athena `<database_name.table_name>`pointers (which are unchanged) and not the S3 location.
 
 ## License
 
