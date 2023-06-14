@@ -24,24 +24,37 @@ We have created a branch called [`DMT-236/dbt-athena-upgrade-main`](https://gith
 - macro `generate_s3_location.sql` to support our S3 file path Hive style naming convention.
 - script `scripts/insert_external_location_config.py` to insert the required `external_location` configuration at the top of every model `.sql` file.
 
-To set up for testing you will need to checkout this branch and rerun all the requirements files to update your local `venv` with the correct versions. In Terminal in the root directory run the following to pull the latest from `main`, switch to `DMT-236/dbt-athena-upgrade-main` and install requirements:
+To set up for testing you will need to checkout this branch, uninstall the old adapater and rerun the requirements files to update your local `venv` with the correct versions. In Terminal (with your `venv` active) in the root directory run the following to pull the latest from `main`, switch to `DMT-236/dbt-athena-upgrade-main` and update your `venv`:
 
 ```
 git switch main
 git fetch
 git pull
 git switch DMT-236/dbt-athena-upgrade-main
+```
+
+At this point you can refresh the Git tab in the RStudio Environments panel (top right) to check you have switched to this branch. Next uninstall the old adapter:
+
+```
 pip install --upgrade pip
+pip uninstall dbt-athena-adapter
+```
+
+Here you will be asked to type "Y" to proceed with the uninstall; do so and continue to install requirements:
+
+```
 pip install -r requirements.txt
 pip install -r requirements-lint.txt
 ```
 
-After running `git switch DMT-236/dbt-athena-upgrade-main` you should get the following output, which informs you that a new local copy has been created which is tracking the remote copy. 
+To check you have the correct set up list your local environment packages with
 
 ```
-branch 'DMT-236/dbt-athena-upgrade-main' set up to track 'origin/DMT-236/dbt-athena-upgrade-main'.
-Switched to a new branch 'DMT-236/dbt-athena-upgrade-main'
+pip list --local
 ```
+
+and check the list output for `dbt-core 1.5.0`, `dbt-athena-community 1.5.0` and __not__ `dbt-athena-adapter 1.0.1` (or any other version of it). If you still have the latter try to uninstall it again; if both old and new adapters are installed there will be conflicts.
+
 
 [Full evironment set up guidance here.](/tools/create-a-derived-table/instructions/#setting-up-a-python-virtual-environment)
 
@@ -58,7 +71,7 @@ git checkout -b <new-branch-name> DMT-236/dbt-athena-upgrade-main
 
 Now cd into the `mojap_derived_tables` directory to run `dbt` commands as usual. 
 
-All your `prod` models will have had the `external_location` parameter inserted into a config block at the top of each `.sql` file and will look similar to this:
+All your `prod` models will have had the `external_location` parameter inserted into a config block at the top of each `.sql` file which will look similar to this, but may include additional parameters:
 
 ```
 {{ config(
@@ -101,7 +114,7 @@ In Terminal, in the root directory run
 python scripts/insert_external_location_config.py
 ```
 
-You will be prompted to enter the path to the directory containing the files you wish to apply the script to. Type your input starting with the domain directory name and continuing to whichever subdirectory you require and hit `Enter`:
+You will be prompted to enter the path to the directory containing the files you wish to apply the script to. Type your input starting with the domain directory name and continuing to whichever subdirectory you require (note there is no tab auto complete available) and hit `Enter`:
 
 ```
 Enter path to directory, starting with domain directory: <domain_name>/<database_name>
@@ -109,7 +122,7 @@ Enter path to directory, starting with domain directory: <domain_name>/<database
 
 If you are copy/pasting be careful not to introduce leading or trailing spaces. 
 
-The next prompt shows the full file path you have selected and asks you to confirm by typing "Y":
+The next prompt shows the full file path you have selected and asks you to confirm by typing "Y" (any other input will exit the program):
 
 ```
 Path selected: 'mojap_derived_tables/models/<domain_name>/<database_name>'
