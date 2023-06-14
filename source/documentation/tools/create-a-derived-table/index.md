@@ -11,10 +11,11 @@ Create a Derived Table is a tool for creating persistent derived tables in Athen
 
 - [Data Modelling Concepts](/tools/create-a-derived-table/concepts): Explanation of some of the basic data modelling concepts to keep in mind when using Create a Derived Table, and brief outline of the Data Modelling team goals.
 
-- [Quick Reference](/tools/create-a-derived-table/quick_reference): A quick reference, intended to give those who have read the detailed instructions a memory refresh. 
+- [Quick Reference](/tools/create-a-derived-table/quick-reference): A quick reference, intended to give those who have read the detailed instructions a memory refresh. 
 
 - [Troubleshooting](/tools/create-a-derived-table/troubleshooting): Common pitfalls, solutions and guidance.
 
+- [dbt-athena Upgrade Guidance](/tools/create-a-derived-table/dbt-athena-upgrade-guidance): Guidance on how to test your models with the new dbt-athena-community adapter.
 ## Useful links
 
 - [dbt](https://docs.getdbt.com/docs/introduction)
