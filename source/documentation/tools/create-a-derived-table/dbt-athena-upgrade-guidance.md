@@ -62,7 +62,7 @@ and check the list output for `dbt-core 1.5.0`, `dbt-athena-community 1.5.0` and
 
 ## Test `prod` models
 
-To test your `prod` models you need to create your own branch off the `DMT-236/dbt-athena-upgrade-main` branch, deploy your models in `dev` and run your `dbt` tests. You can also run equality tests in Athena to compare tables from `prod` created using the old `dbt-athena` adapter to the tables you have just created in `dev` using `dbt-athena-community` adapter. 
+To test your `prod` models you need to create your own branch off the `DMT-236/dbt-athena-upgrade-main` branch, deploy your models in `dev`, run your `dbt` tests and lint. You can also manually run equality tests in Athena to compare tables from `prod` created using the old `dbt-athena` adapter to the tables you have just created in `dev` using `dbt-athena-community` adapter. 
 
 To explicitly create a new branch off `DMT-236/dbt-athena-upgrade-main` run the following:
 
@@ -70,29 +70,22 @@ To explicitly create a new branch off `DMT-236/dbt-athena-upgrade-main` run the 
 git checkout -b <new-branch-name> DMT-236/dbt-athena-upgrade-main
 ```
 
-Now cd into the `mojap_derived_tables` directory to run `dbt` commands as usual. Once you have deployed your models run tests and lint. 
+All your `prod` models have the `external_location` parameter inserted into a config block at the top of each `.sql` file (see the [Insert external_location](#insert-external-location) section for more details).
+
+As a consequence all `prod` models are already deployed into `dev` by the `deploy-dev` workflow. However, for robustness, we would still like you to test your `prod` models by deploying them yourselves; `cd` into the `mojap_derived_tables` directory to run `dbt` commands as usual. 
+
+If you have any issues due to redeploying please delete your `dev` models and try again, see [Delete dev models instructions](/tools/create-a-derived-table/troubleshooting#delete-dev-models-instructions).
+
+Once you have deployed your models please run your tests and lint.
 
 ⚠️ See the section below on [SQLFluff linting changes](#sqlfluff-linting-changes) ⚠️
 
-All your `prod` models will have had the `external_location` parameter inserted into a config block at the top of each `.sql` file which will look similar to this, but may include additional parameters:
-
-```
-{{ config(
-  external_location=generate_s3_location()
-) }}
-```
-The `external_location` parameter is set by the macro `generate_s3_location()` which is invoked at run time. This combines information from the schema name with the names from the repo directory structure to create the desired S3 location in the form:
-
-```
-s3://<bucket_name>/<env_name>/<table_type>/domain_name=<domain_name>/database_name=db_name/table_name=<tb_name>
-```
-
-Once we are happy that `prod` models are deploying as expected using the upgrades we will merge the branch `DMT-236/dbt-athena-upgrade-main` in to `main`.
+Please keep us up to date with your progress in the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel. When all users are happy that `prod` models are deploying as expected using the upgrades we will merge the branch `DMT-236/dbt-athena-upgrade-main` into `main`.
 
 
 ## Test `dev` models
 
-Once you have completed testing of your `prod` models you may wish to continue testing with your `dev` models. To do this you will need to create another branch off `DMT-236/dbt-athena-upgrade-main` (see instructions above) and then merge into this from your feature branch. For example, I have some `dev` models on a branch called `my-feature-branch` so:
+Once you have completed testing of your `prod` models you may wish to continue testing with your `dev` models. To do this you will need to create another branch off `DMT-236/dbt-athena-upgrade-main` ([see instructions above](#test-prod-models)) and then merge into this from your feature branch. For example, I have some `dev` models on a branch called `my-feature-branch` so:
 
 ```
 git checkout -b new-test-branch DMT-236/dbt-athena-upgrade-main
@@ -109,6 +102,12 @@ Your `dev` models will not have the `external_location` parameter set, which is 
 
 
 ## Insert `external_location`
+
+The `external_location` parameter is set by the macro `generate_s3_location` which is invoked at run time. This combines information from the schema name with the names from the repo directory structure to create the desired S3 location in the form:
+
+```
+s3://<bucket_name>/<env_name>/<table_type>/domain_name=<domain_name>/database_name=db_name/table_name=<tb_name>
+```
 
 To make this as painless as possible we have prepared a script `insert_external_location_config.py` which you can run locally to automatically insert the required line or full config into your `.sql` files. The script must be run from the root directory and requires user input to determine the path to the files that you wish to run it on.
 
@@ -165,7 +164,16 @@ External location set correctly in config block - nothing to do for file:
 mojap_derived_tables/models/<domain_name>/<database_name>/<database_name__table_name_3>.sql
 ```
 
-Note that files are automatically saved once the changes have been made.
+Once inserted the config block will look similar to this, but may include additional parameters that you have set previously:
+
+```
+{{ config(
+  external_location=generate_s3_location()
+) }}
+```
+
+Note that if there was no existing config block it is inserted at the top of the file, displacing (but not overwriting) any existing comments or code. Files are automatically saved once the changes are applied.
+
 
 ## SQLFluff linting changes
 
