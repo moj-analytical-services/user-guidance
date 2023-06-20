@@ -122,7 +122,7 @@ Some of the responsibilities are shared between users and the Analytical Platfor
 
 | Responsibility                                             | Analytical Platform | User  | Other MoJ Team | Notes                                                                                                                                                                                                                                         |
 | :---------------------------------------------------------- | :-------------------: | :-----: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Learning how to use Analytical Platform tools and services |                |  | ✅           | The Analytical Platform provides some training documentation for how to use its tools in the context of the platform.<br><br>Users are responsible for completing these and learning how to use third-party tools. |
+| Learning how to use Analytical Platform tools and services |                | ✅ |            | The Analytical Platform provides some training documentation for how to use its tools in the context of the platform.<br><br>Users are responsible for completing these and learning how to use third-party tools. |
 
 ### User applications
 
