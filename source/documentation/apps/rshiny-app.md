@@ -365,7 +365,7 @@ Note: Kubernetes defines Limits as the maximum amount of a resource to be used b
 Within Kubernetes a namespace provides a mechanism for isolating groups of resources within a single cluster, it can be thought of as a virtual cluster within the cluster. Your Application is deployed into its own namespace, this restricts access to your team and enables the setting of resource limits. Within the namespace are the various Kubernetes components:
   
 
-- Pods he smallest deployable units of computing that you can create and manage in Kubernetes, usually one pod per function of your application ie web server, db server.
+- Pods the smallest deployable units of computing that you can create and manage in Kubernetes, usually one pod per function of your application ie web server, db server.
 
 - Service is a method for exposing a network application that is running as one or more Pods in your cluster, basically simplifying the connections within your namespace.
 
