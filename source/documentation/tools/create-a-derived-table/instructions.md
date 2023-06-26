@@ -192,6 +192,8 @@ git clone git@github.com:moj-analytical-services/create-a-derived-table.git
 
 ## Setting up a Python virtual environment
 
+Python versions 3.7, 3.8, 3.9, 3.10 and 3.11 are compatible with dbt-core v1.5.0.
+
 In the terminal, `cd` into the root of the repository (`create-a-derived-table`). You can check you're in the correct directory by runnnig `pwd`. Once you've done that run:
 
 ```
