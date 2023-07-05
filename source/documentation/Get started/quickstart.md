@@ -1,10 +1,10 @@
 # Quickstart guide
 
-This guide provides the instructions to set up the main accounts and services you need to use the Analytical Platform. Once you complete it, you can: 
+This guide provides the instructions to set up the main accounts and services you need to use the Analytical Platform (AP). Once you complete it, you can: 
 
 - access the Analytical Platform Control Panel
 - explore data on the Analytical Platform
-- begin developing your application in either JupyterLab or RStudio
+- begin developing your code in either JupyterLab or RStudio
 - contribute to the Analytical Platform User Guidance
 
 ## Before you begin
@@ -52,7 +52,8 @@ Join the following Slack channels in the **ASD workspace**:
 - **#r** and **#intro_r**: for discussing R programming with the wider Ministry of Justice community; #intro_r is aimed at new users
 
 Additionally, in the Justice Digital **workspace** join the following:
-- **#ask-operations-engineering**: for requesting support with GitHub; you can use this channel to request access to the Analytical Platform later in this guide
+- [**#analytical-platform-support**](https://mojdt.slack.com/archives/C4PF7QAJZ): for tracking [support queries raised by users of the Analytical Platform on GitHub Issues](https://github.com/ministryofjustice/data-platform-support/issues)
+- [**#ask-operations-engineering**](https://mojdt.slack.com/archives/C01BUKJSZD4): for requesting support with GitHub; you can use this channel to request access to the Analytical Platform later in this guide
 
 ## 3. Create GitHub account
 
@@ -67,21 +68,24 @@ Using your work email address (ending either **justice.gov.uk** or **digital.jus
 
 ## 4. Access the Analytical Platform
 
-Once you have your GitHub account, there are two more steps to complete before you can access the Analytical Platform: joining the MoJ Analytical Services GitHub organisation and signing in to the Analytical Platform's Control Panel.
+Once you have your GitHub account, there are **two more steps** to complete before you can access the Analytical Platform: 
+
+- joining the MoJ Analytical Services GitHub organisation 
+- signing in to the Analytical Platform's Control Panel
 
 ### Join MoJ Analytical Services
 
 After configuring your GitHub account you can request access to the Analytical Platform.
 
-Navigate to the [MoJ Analytical Services organisation](https://github.com/moj-analytical-services) and request to join it. The Operations Engineering team will review request. If they approve your request, you will receive an email with a link to accept the invite.
+Navigate to the [MoJ Analytical Services organisation](https://github.com/moj-analytical-services) and request to join it. The Operations Engineering team will review the request. If they approve your request, you will receive an email with a link to accept the invite.
 
-If you do not receive a response within 24 hours, request access in either the **#ask-operations-engineering** Slack channel or email **operations-engineering@digital.justice.gov.uk**, providing your GitHub username in your message.
+If you do not receive a response within 24 hours, request access in either the [**#ask-operations-engineering**](https://mojdt.slack.com/archives/C01BUKJSZD4) Slack channel or email **operations-engineering@digital.justice.gov.uk**, providing your GitHub username in your message.
 
 ### Sign in to the Control Panel
 
 The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From there, you configure core tools such as JupyterLab and RStudio.
 
-When you access the Control Panel first time, a prompt will appear, requiring you to configure 2FA using your mobile device. Note that while you use your GitHub account to access the Control Panel, this 2FA is separate from the one you use to log in to GitHub. You may need to disable browser extensions such as Dark Mode during the 2FA setup process.
+When you access the Control Panel for the first time, a prompt will appear requiring you to configure 2FA using your mobile device. Note that while you use your GitHub account to access the Control Panel, **this 2FA is separate from the one you use to log in to GitHub**. You may need to disable browser extensions such as Dark Mode during the 2FA setup process.
 
 After you log in to the Control Panel for the first time, you can begin requesting access to data on the platform.
 
