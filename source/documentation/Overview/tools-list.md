@@ -1,8 +1,8 @@
 # Tools and services
 
-The Analytical (AP) provides a range of tools, services and packages. This page describes the core tools and services that comprise the platform, as well as additional packages you can use to perform data analysis.
+The Analytical Platform (AP) provides a range of tools, services and packages. This page describes the core tools and services that comprise the platform, as well as additional packages you can use to perform data analysis.
 
-Note that we only provides support for third-party tools and services for features directly involving the Analytical Platform, such as bespoke configurations. For any other support with third-party tools and services, see the vendor's documentation; we have provided links where possible.
+Note that the AP team only provides support for third-party tools and services for features directly involving the Analytical Platform, such as bespoke configurations. For any other support with third-party tools and services, see the vendor's documentation; we have provided links where possible.
 
 ## Core tools and services
 
