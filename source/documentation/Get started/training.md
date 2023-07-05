@@ -1,10 +1,10 @@
-# Training
+# Training Resources
 
 This page provides links to training resources you can use to familiarise yourself with the Analytical Platform and the tools comprising it. Note that unless otherwise stated, the Analytical Platform team are not responsible for these resources.
 
 ## Analytical Platform
 
-- [MoJ Analytical IT Tools Strateg](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/): describes best practice for using the Analytical Platform tools
+- [MoJ Analytical IT Tools Strategy](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/): describes best practice for using the Analytical Platform tools
 
 ## Git and GitHub
 

@@ -207,4 +207,4 @@ To create an SSH key in RStudio:
 
 You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
 
-Now you have completed this guide you are ready to begin using the Analytical Platform. See [training](training.md) for examples of different tasks you can perform.
+Now you have completed this guide you are ready to begin using the Analytical Platform. See the [Training Resources](training.md) for examples of using coding tools on the Analytical Platform.
