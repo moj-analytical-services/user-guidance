@@ -1,195 +1,146 @@
-# Get started
+# Quickstart guide
 
-## Introduction
+This guide provides the instructions to set up the main accounts and services you need to use the Analytical Platform. Once you complete it, you can: 
 
-You need 3 different accounts to use the Analytical Platform:
+- access the Analytical Platform Control Panel
+- explore data on the Analytical Platform
+- begin developing your application in either JupyterLab or RStudio
+- contribute to the Analytical Platform User Guidance
 
-* Github Account
-* Analytical Platform Account
-* Slack Account (recommended)
+## Before you begin
 
-To do this, complete the following steps.
+To use this guide, you need the following:
 
-### Read the acceptable use policy and coding standards
+- a Ministry of Justice-issued Office 365 account
+- a Ministry of Justice-issued laptop you can install apps on
+- a mobile device you can install apps on
+- access to the **Justice Digital workspace** on Slack
 
-Use of the Analytical Platform is subject to our [acceptable use policy](https://user-guidance.analytical-platform.service.justice.gov.uk/aup.html). You should ensure that you have read and understood this before using the Analytical Platform.
+Complete this guide in order, following each step closely. If you encounter issues, [raise a ticket on GitHub issues](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) or email **analytical_platform@digital.justice.gov.uk**. A member of the Analytical Platform team will contact you.
 
-You should also follow our [coding standards](https://github.com/moj-analytical-services/our-coding-standards) when working on the Analytical Platform. These set out principles that you should follow when writing and reviewing code.
+## 1. Read Terms of Use
 
-## 1. Github Account
+For Analytical Platform best practice, you need to follow certain guidelines. Bookmark the following pages and ensure you follow them before you begin using the platform:
 
-### What is Github?
+- [Acceptable use policy](aup.md): covers the way you should use the Analytical Platform and its associated tools and services
+- [Data and Analytical Services Directorate's (DASD) coding standards](https://moj-analytical-services.github.io/our-coding-standards/): principles outlining how you should write and review code
+- [MoJ Analytical IT Tools Strategy](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/): describes recommended ways of working on the Analytical Platform
 
-GitHub is a website and cloud-based service that helps developers store and manage their code, as well as track and control changes to their code. To understand exactly what GitHub is, you need to know two connected principles:
+## 2. Create Slack account
 
-* Version control
-* Git
+We use Slack to communicate status updates, such as scheduled maintenance for the Analytical Platform. You can also use it to communicate with our support team and the Analytical Platform user community. 
 
-for more info see [An Introduction to GitHub](https://digital.gov/resources/an-introduction-github/)
+There are two workspaces we recommend joining: [Justice Digital](https://mojdt.slack.com/) and [ASD](https://asdslack.slack.com/). To join, while signed in to your work email, navigate to each workspace and request to join. Note that workspace moderators only consider users from the following email addresses:
 
-### Sign up for a GitHub account
+- @justice.gsi.gov.uk
+- @digital.justice.gov.uk
+- @cjs.gsi.gov.uk
+- @noms.gsi.gov.uk
+- @legalaid.gsi.gov.uk
+- @justice.gov.uk
+- @judiciary.uk
 
-To sign up for a GitHub account, go to GitHub's [join page](https://github.com/join) and follow the instructions.
+> **Note**: You can only access the Justice Digital and ASD workspaces using DOM1 and MoJ Digital and Technology MacBooks. If you use Quantum, you will need to access Slack using a mobile device instead.
 
-* When signing up, you must use your work email address. If you already have an existing GitHub account, that's fine to use, but your work email address must be in your [your account's emails](https://github.com/settings/emails).
-* When instructed to choose your subscription, you should select the free plan.
-* It is good practice to choose a username that does not contain upper-case characters.
-* You should use a secure password following best [practice guidelines](https://security-guidance.service.justice.gov.uk/passwords/#passwords).
-* We recommend that you use a password manager, such as [1Password](https://security-guidance.service.justice.gov.uk/using-1password/#using-1password), to generate and store strong passwords.
+### Join Slack channels
 
-### Verify your email address for GitHub
+Join the following Slack channels in the **ASD workspace**:
+- **#ask-data-engineering**: for discussing data engineering and making technical queries to the Data Engineering team regarding Airflow
+- **#data_science**: for discussing data science tools and techniques with the Ministry of Justice's Data Science community
+- **#git**: for discussing Git tooling with the wider Ministry of Justice community
+- **#python**: for discussing Python programming with the wider Ministry of Justice community
+- **#r** and **#intro_r**: for discussing R programming with the wider Ministry of Justice community; #intro_r is aimed at new users
 
-Verifying your email address for GitHub ensures that your account is secure and gives you access to all of GitHub's features. Verifying your email address is also required to sign in to the Analytical Platform.
+Additionally, in the Justice Digital **workspace** join the following:
+- **#ask-operations-engineering**: for requesting support with GitHub; you can use this channel to request access to the Analytical Platform later in this guide
 
-During sign up, GitHub will send you an email with a link to verify your email address.
+## 3. Create GitHub account
 
-If you do not verify your email address at this stage, you can do it later by following the instructions [here](https://help.github.com/en/articles/verifying-your-email-address).
+Using your work email address (ending either **justice.gov.uk** or **digital.justice.gov.uk**), [sign up for a GitHub account](https://github.com/join). See the [GitHub documentation](https://docs.github.com/en/get-started/signing-up-for-github/signing-up-for-a-new-github-account) for instructions. Ensure that:
 
-### Configure two-factor authentication for GitHub
+- your account uses the free plan subscription
+- you choose a username that does not contain upper-case characters (for good practice)
+- you set your username to associate with your Git commits for every repository; see the [GitHub documentation](https://docs.github.com/en/get-started/getting-started-with-git/setting-your-username-in-git) for instructions
+- you follow the [Ministry of Justice's best practice guidelines](https://security-guidance.service.justice.gov.uk/passwords/#passwords) when setting your password
+- you [configure two-factor authentication (2FA)](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication) on your mobile device; we recommend using either Google Authenticator or Microsoft Authenticator for 2FA
+    - For more information on 2FA within the Ministry of Justice, see the [MoJ's Security Guidance](https://security-guidance.service.justice.gov.uk/multi-factor-authentication-mfa-guide/#multi-factor-authentication-mfa-guide)
 
-To get access to the Analytical Platform, you must first configure two-factor authentication (2FA) for GitHub using a mobile app (on your personal or work phone) or via text message. To configure 2FA for GitHub, follow the instructions [here](https://help.github.com/en/articles/configuring-two-factor-authentication).
+## 4. Access the Analytical Platform
 
-We recommend that you configure 2FA using a mobile app. In particular, we recommend that you use Google Authenticator or Microsoft Authenticator as they are both widely used. See MoJ guidance [here](https://security-guidance.service.justice.gov.uk/multi-factor-authentication-mfa-guide/#mfa)
+Once you have your GitHub account, there are two more steps to complete before you can access the Analytical Platform: joining the MoJ Analytical Services GitHub organisation and signing in to the Analytical Platform's Control Panel.
 
-For Android:
-- [Google Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
-- [Microsoft Authenticator on Google Play](https://play.google.com/store/apps/details?id=com.azure.authenticator)
+### Join MoJ Analytical Services
 
-For iPhone:
-- [Google Authenticator on the Apple App Store](https://apps.apple.com/us/app/google-authenticator/id388497605)
-- [Microsoft Authenticator on the Apple App Store](https://apps.apple.com/gb/app/microsoft-authenticator/id983156458)
+After configuring your GitHub account you can request access to the Analytical Platform.
 
-During the setup process for any 2FA application, we recommend disabling any “Dark” Mode, Extension or Settings (including themes) in your preferred browser.
+Navigate to the [MoJ Analytical Services organisation](https://github.com/moj-analytical-services) and request to join it. The Operations Engineering team will review request. If they approve your request, you will receive an email with a link to accept the invite.
 
-Some 2FA applications and QR scanners are unable to scan the QR code generated on a black background. Therefore, these applications and scanners work best, when a QR code is generated, on a white background.
+If you do not receive a response within 24 hours, request access in either the **#ask-operations-engineering** Slack channel or email **operations-engineering@digital.justice.gov.uk**, providing your GitHub username in your message.
 
-You can re-enable your “Dark” Mode, Extension or Settings once this process has been completed.
+### Sign in to the Control Panel
 
-### Read more about working with GitHub in MoJ
+The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From there, you configure core tools such as JupyterLab and RStudio.
 
-We use GitHub to store code and collborate on it with others. You should read more about how to work with [git and GitHub](github) on the Analytical Platform. You will need to complete some additional steps before you can start working with it with RStudio or JupyterLab.
+When you access the Control Panel first time, a prompt will appear, requiring you to configure 2FA using your mobile device. Note that while you use your GitHub account to access the Control Panel, this 2FA is separate from the one you use to log in to GitHub. You may need to disable browser extensions such as Dark Mode during the 2FA setup process.
 
-## 2. Slack Account
+After you log in to the Control Panel for the first time, you can begin requesting access to data on the platform.
 
-### What is Slack?
+## 5. Set up JupyterLab
 
-Slack is a collaboration tool that helps teams work more effectively together. You can use Slack in several ways:
+>**Note**: Only follow this step if you want to use the Analytical Platform as a Python-based user. If you want to use R instead, proceed to step 6 to configure RStudio instead.
 
-* to get technical support for the Analytical Platform and analytical tools, such as R, Python and Git
-* to submit admin requests relating to apps and data sources on the Analytical Platform
-* to share knowledge, expertise and best practice
-* to communicate quickly with other Analytical Platform users as an alternative to email
+If you want to build and deploy applications on the Analytical Platform using Python, you need to set up JupyterLab, the Python-based IDE (Integrated Development Environment) the Analytical Platform provides. 
 
-### Access Slack
+To set up JupyterLab, navigate to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/tools/). Under **Jupyter Lab Data Science [Git extension]**, use the drop-down menu to select the version of JupyterLab you want to deploy. Unless you need to use a specific version, we recommend selecting the first option in the list. This will deploy JupyterLab on a virtual machine in your browser, with all of the required components it requires to run.
 
-Send a request to join the ASD Slack workspace [here](https://asdslack.slack.com), once you are part of the workspace you can access the channels within it. To create an account, you will need an email address ending in one of the following:
+### Create and add JupyterLab SSH key to GitHub
 
-* @justice.gsi.gov.uk
-* @digital.justice.gov.uk
-* @cjs.gsi.gov.uk
-* @noms.gsi.gov.uk
-* @legalaid.gsi.gov.uk
-* @justice.gov.uk
-* @judiciary.uk
+So you can access GitHub repositories from JupyterLab, you need an SSH key to connect the two. Do not try to use an existing SSH key; each tool you use requires a unique key.
 
-It is not mandatory to join or use Slack (although we highly recommend it) so you shouldn’t use it to make any important announcements and should ensure that you are not excluding anyone from the discussion.
+To create an SSH key in JupyterLab:
 
-You may have to access Slack differently depending on the IT system you use:
+1. Open JupyerLab from the Analytical Platform Control Panel
+2. Select the **+** icon in the file browser to open a new **Launcher** tab
+3. Navigate to the **Other** section and select **Terminal**
+4. Run the following command in your terminal, replacing **your_email@example.com** with the email address you used to sign up for GitHub:
 
-* if you use DOM1, you can access Slack from a browser or on your desktop by downloading Slack app from the Company Portal (find this by using Windows Search), or using the mobile app on your work phone (note that slack is blocked on personal devices)
-* if you use an MoJ Digital and Technology MacBook, you can access Slack from a browser or using the desktop app. You can also access Slack using the mobile app on your personal or work phone
-* if you use Quantum, you will not currently be able to access Slack from your computer, however, you can use it via a browser, mobile app on your personal or work phone
+```
+$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
 
-## 3. Analytical Platform Account
+5. The response will ask you to choose a directory to save the key in; press Enter to accept the default location
+6. The response will also ask you to set a passphrase; press Enter to not set a passphrase.
+7. To view the SSH key, run:
 
-### What is the Analytical Platform?
+```
+$ cat /home/jovyan/.ssh/id_rsa.pub
+```
 
-The Analytical Platform (often referred to as 'AP') is a data analysis environment, providing modern tools and key datasets for MoJ analysts.
+8. Copy the SSH key to your clipboard
 
-It offers:
+You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
 
-* modern data tools and services
-* centralised data
-* reproducible analysis
-* secure and well-engineered environment
+## 6. Set up RStudio
 
-See [about the Analytical Platform](/about.html).
+>**Note**: Only follow this step if you want to use the Analytical Platform as an R-based user. If you want to use Python and configured JupyterLab in the previous step, proceed to step 7.
 
-The steps required to access the platform (and its resources) are as follows:
+If you want to build and deploy applications on the Analytical Platform using R, you need to set up RStudio, the R-based IDE (Integrated Development Environment) the Analytical Platform provides.
 
-1. [Request invitation to the Analytical Services GitHub Organisation](#request-invitation-to-analytical-services-github-organisation)
-2. [Accept invitation to the AP Org](#accept-your-invitation-to-the-moj-analytical-services-github-organisation)
-3. [Sign in to the Analytical Platform for the first time](#sign-in-to-the-analytical-platform-for-the-first-time)
+To set up RStudio, navigate to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/tools/). Under **RStudio**, use the drop-down menu to select the version of RStudio you want to deploy. Unless you need to use a specific version, we recommend selecting the first option in the list. This will deploy RStudio on a virtual machine in your browser, with all of the required components it requires to run.
 
-### Request invitation to analytical services GitHub Organisation
+### Create and add RStudio SSH key to GitHub
 
-To request an invitation Analytical Platform GitHub Organisation, please head over to the [#ask-operations-engineering](https://asdslack.slack.com/archives/C01BUKJSZD4) slack channel. Ask to be added to the analytical-services GitHub Organisation by providing your GitHub username in the message. The [Operations Engineering Team](https://operations-engineering.service.justice.gov.uk/) will invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
+So you can access GitHub repositories from RStudio, you need an SSH key to connect the two. Do not try to use an existing SSH key; each tool you use requires a unique key.
 
-> **Example**
-> 👋 Could I please be added to the Analytical Services GitHub Org, my github name is `github user name` thank you.
+To create an SSH key in RStudio:
 
-> **Note**
-> If you are having problems with gaining access to Slack then please contact us via [email](analytical_platform@digital.justice.gov.uk)
+1. Open RStudio from the Analytical Platform Control Panel
+2. Navigate to **Tools>Global Options**
+3. In the **Options** window, select **Git/SVN** in the navigation menu
+4. Select Create RSA key and then Create
+5. When the **Information** window appears, select **Close**
+6. Select **View public key** and copy the SSH key to your clipboard
 
-### Accept your invitation to the MoJ Analytical Services GitHub organisation
+You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
 
-When you are invited to join the MoJ Analytical Services GitHub organisation, you will receive an email with a link to accept the invitation.
-
-You can also accept your invitation by signing in to GitHub and visiting the [organisation page](https://github.com/moj-analytical-services).
-
-### Sign in to the Analytical Platform for the first time
-
-The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
-
-When you sign in to the Control Panel with your GitHub account for the first time, you will be prompted to configure additional two-factor authentication (2FA) for the Analytical Platform itself.
-
-If you are a new member of the organisation, are using the platform for the first time, you will need to log in at least once to be able to get access permissions for data within the platform.
-
-You must configure 2FA for the Analytical Platform using a mobile app (on your personal or work phone). As described above, we recommend Google Authenticator or Microsoft Authenticator as they are both widely used.
-
-As described above, please disable any “Dark” Mode, Extension or Settings (including themes) in your preferred browser, during the 2FA setup process.
-
-> **Note**
-> If you are inside an MOJ office you may not be prompted for the additional two-factor authentication (2FA) for the Analytical Platform.
-
-## 4. Training
-
-You can find details on courses and training [here](https://moj-analytical-services.github.io/ap-tools-training/). Upcoming courses are also advertised on The Hive (see Data & Analysis email and Teams communications).
-
-### Channels
-
-Conversations in Slack are organised into channels, which each have a specific topic. After getting access to Slack workspace you need to separately join channels. Channels can be:
-
-* public (all users can join) or
-* private (users can only join by invitation) or
-* be created based on teams, projects, locations, tools and techniques among others.
-
- There are several public channels that are widely used and may be useful to join:
-
-* the [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ) channel is used for general discussion of the Analytical Platform -- it is also monitored by the Analytical Platform team, who can help out with any technical queries or requests. Also used to request new or existing apps and app data sources
-* the [#ask-data-engineering](https://asdslack.slack.com/archives/C8X3PP1TN) channel is used for general discussion of data engineering and for getting in touch with the data engineering team with any technical queries or requests (such as airflow DAG reviews, database access, data discovery tool, etc).
-* the [#git](https://asdslack.slack.com/archives/C4VF9PRLK), [#r](https://asdslack.slack.com/archives/C1PUCG719) and [#python](https://asdslack.slack.com/archives/C1Q09V86S) channels can be used to get support from other users with any technical queries or questions -- the #[intro_r channel](https://asdslack.slack.com/archives/CGKSJV9HN) is aimed specifically at new users of R
-* the [#data_science](https://asdslack.slack.com/archives/C1Z8Q18LS) channel is used for general discussion of data science tools and techniques
-* the [#general](https://asdslack.slack.com/archives/C1PTUTC3F) channel is used for any discussions that don’t fit anywhere else
-* the [#10sc](https://asdslack.slack.com/archives/CC43ZT8AH) channel can be used to get in touch with other people working at 10SC and to ask any questions about the building
-
-There are lots of other channels you can join or you can set up a new one if you think something is missing. You may also wish to set up private channels to discuss specific projects and can direct message individual users.
-
-### Further information
-
-You can find out more about Slack and how to use it in the [Slack Help Centre](https://get.slack.help/hc/en-gb/).
-
-
-## 5. Using the Analytical Platform
-
-The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
-
-This allows you to access the various [Analytical Platform tools](tools)
-
-## 6. Best Practice
-
-- See [MoJ Analytical IT Tools Strategy](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/) for recommended tools and ways of working
-
-## 7. Contact us
-
-To get support, you can raise an issue directly [here](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) or [reply in a thread](https://slack.com/intl/en-gb/help/articles/115000769927-Use-threads-to-organise-discussions-#start-or-reply-to-a-thread) to the daily Slack support message in the  [#analytical-platform-support](https://mojdt.slack.com/archives/C4PF7QAJZ) channel or by [email](mailto:analytical_platform@digital.justice.gov.uk).
+Now that you have completed this guide you are ready to begin using the Analytical Platform. See [training](training.md) for a list of different resources to help you begin using the platform.
