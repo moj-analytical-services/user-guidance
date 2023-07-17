@@ -2,9 +2,10 @@
 
 These instructions show you how to use the use the template github repos to build a Python or R image and save to the Data Engineering ECR.
 
-1.  Create a new Github repo using:
+1.  Create a new GitHub repo using:
   * [template-airflow-python](https://github.com/moj-analytical-services/template-airflow-python) if creating a python codebase
   * [template-airflow-R](https://github.com/moj-analytical-services/template-airflow-R) if creating an R codebase
+While creating your own repo using the template of your choice, please ensure `moj-analytical-services` is designated as the owner of the repo. If your own GitHub account is left as owner, then the GitHub Action used to publish your image **will** fail when trying to run.
 
 2. The image will have the same name as the repo name so make sure it is appropriate and reflects the pipeline you intend to run. If you are creating an example pipeline call it `airflow-{username}-example`
     
