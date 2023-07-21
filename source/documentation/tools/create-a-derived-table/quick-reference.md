@@ -7,6 +7,11 @@ This page is intended to give users who have read through the detailed [create-a
 ## Contents
 - [Glossary](#glossary)
 - [Set up](#set-up)
+- [Setting Up IDE to working on create-a-derived-table](#setting-up-any-ide-integrated-development-environment-to-working-on-create-a-derived-table)
+- [Brief commands to collaborating with Git](#brief-commands-to-collaborating-with-git)
+- [Important dbt commands](#important-dbt-commands)
+- [yamllint commands](#yamllint-commands)
+- [Command for formatting SQL files](#command-for-formatting-sql-files)
 - [Tips](#tips)
 
 
@@ -62,9 +67,11 @@ This list comprises everything you need to do and consider to get set up and rea
 
 You are now ready to start building models collaboratively with `create-a-derived-tbale`. If you have any problems please check [Troubleshooting](/tools/create-a-derived-table/troubleshooting), or ask at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) providing context and links if appropriate.
 
-## Seting Up any IDE (Integrated Development nvironment) to working on create-a-derived-table
+## Setting Up any IDE (Integrated Development Environment) to working on create-a-derived-table
+
 - Clone Git repository: <code>git clone git@github.com: moj-analytical-services/create-a-derived-table.git</code>
-- Setting up a Python virtual environment:
+
+-Setting up a Python virtual environment:
 <ul>
   <li><code>python3 -m venv venv</code></li>
   <li><code>source venv/bin/activate</code></li>
@@ -76,14 +83,14 @@ You are now ready to start building models collaboratively with `create-a-derive
   <li><code>pip install -r requirements-lint.txt</code></li>
   <li><code>pip install -r requirements-dev.txt</code></li>
 </ul>
-- Seting up the Bash profile:
+- Setting up the Bash profile:
 <ul>
   <li><code>echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bash_profile</code></li>
-  <li>s<code>ource ~/.bash_profile</code></li>
+  <li><code>source ~/.bash_profile</code></li>
 </ul>
-- Seting up dbt
+- Setting up dbt
 <ul>
-    <li><code>d mojap_derived_tables</code></li>
+    <li><code>cd mojap_derived_tables</code></li>
     <li><code>dbt debug</code></li>
     <li><code>dbt deps</code></li>
 </ul>
@@ -94,16 +101,16 @@ You are now ready to start building models collaboratively with `create-a-derive
     <li><code>git status</code>, if it's not main</li>
     <li><code>git checkout main</code></li>
     <li><code>git pull</code>, download content from the remote repository and immediately update the local repository</li>
-    <li><code>git checkout -b <project-name-main></code>, create your own branch</li>
+    <li><code>git checkout -b project_name</code>, create your own branch</li>
     <li><code>git add file_name</code>, to add a change in the working directory to the staging area</li>
     <li><code>git commit -m "messages"</code>, to save your changes to the local repository</li>
     <li><code>git fetch</code>, to see the changes happened in the remote branch</li>
     <li><code>git pull</code>, update your local branch, if any changes in the remote repository </li>
-    <li><code>git switch <your_branch></code>, moving to your own branch </li>
-    <li><code>git merge main -m "messages" </code>, update to the main branch </li>
+    <li><code>git switch your_branch_name</code>, moving to your own branch </li>
+    <li><code>git merge main -m "messages"</code>, update to the main branch </li>
 </ul> 
 
-## Importent dbt commands
+## Important dbt commands
 <ul>
     <li><code>dbt clean</code> to remove run artefacts from previous invocations of dbt</li>
     <li><code>dbt compile --select models/.../path/to/my/models/</code>, to check your SQL and YAML is syntactically correct</li>
@@ -125,7 +132,7 @@ You are now ready to start building models collaboratively with `create-a-derive
     <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of YAML files</li>
 </ul>
 
-## Formatting SQL files
+## Command for formatting SQL files
 - To format SQL files using SQLFluff
 <ul>
     <li><code>sqlfluff lint .../path/to/sql/file.sql</code>, to lint a single SQL file</li>
