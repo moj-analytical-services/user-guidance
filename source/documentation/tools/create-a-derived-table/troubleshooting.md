@@ -9,6 +9,9 @@ This page is intended to help users self-diagnose errors. Please check here firs
 - [Delete dev models instructions](#delete-dev-models-instructions)
 - [Troubleshooting list](#troubleshooting-list)
 
+## dbt artefacts
+
+When dbt runs it generates artefacts. The most useful of these to you will be the logs in the `./mojap_derived_tables/logs/` directory and compiled SQL in the `./mojap_derived_tables/target/` directory. Compiled SQL can be useful when debugging errors as error messages will often refer to the line number in the compiled SQL and not that in your model file.
 
 ## General troubleshooting tips
 - When you deploy `dev` models via the MoJ Analytical Platform logs are created locally in `mojap_derived_tables/logs/dbt.log`. This file details each step of the run and is useful for debugging.
