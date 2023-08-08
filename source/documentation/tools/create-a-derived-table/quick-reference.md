@@ -12,6 +12,7 @@ This page is intended to give users who have read through the detailed [create-a
 - [Important dbt commands](#important-dbt-commands)
 - [yamllint commands](#yamllint-commands)
 - [sqlfluff commands](#sqlfluff-commands)
+- [Essential checklist for moving a model from Dev to Prod:](#essential-checklist-for-moving-a-model-from-dev-to-prod)
 - [Tips](#tips)
 
 
@@ -133,6 +134,16 @@ You are now ready to start building models collaboratively with `create-a-derive
     <li><code>sqlfluff lint .../path/to/sql/file.sql</code>, to lint a single SQL file</li>
     <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of SQL files</li>
 </ul>
+
+##  Essential checklist for moving a model from Dev to Prod:
+Here is a recommended checklist to follow when you intend to submit a pull request for your models and subsequently merge it into the main repository:
+<ul>
+<li>  The development models must successfully pass through the deploy-dev workflow. This ensures that the model complies with linting and other essential checks.</li>
+<li>Before progressing to production, ensure that the development models are accompanied by sufficient tests. It is crucial to confirm the successful completion of these tests.</li>
+<li>The models should be prepared for use by data consumers without the risk of introducing breaking changes.</li>
+<li>Utilize the <code>dbt_project.yml</code> to schedule the model database.</li>
+</ul>
+
 
 ## Tips
 - You can test out how your SQL model files look once rendered by running `dbt compile --select <path_to_file(s)>`. This saves on running and deploying your tables if you want to test your sql. The compiled model files will be saved in the `mojap_derived_tables/target/compiled` folder.
