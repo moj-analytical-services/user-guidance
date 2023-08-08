@@ -7,11 +7,11 @@ This page is intended to give users who have read through the detailed [create-a
 ## Contents
 - [Glossary](#glossary)
 - [Set up](#set-up)
-- [Setting Up IDE to working on create-a-derived-table](#setting-up-any-ide-integrated-development-environment-to-working-on-create-a-derived-table)
+- [Set Up IDE](#set-up-ide)
 - [Brief commands to collaborating with Git](#brief-commands-to-collaborating-with-git)
 - [Important dbt commands](#important-dbt-commands)
 - [yamllint commands](#yamllint-commands)
-- [Command for formatting SQL files](#command-for-formatting-sql-files)
+- [sqlfluff commands](#sqlfluff-commands)
 - [Tips](#tips)
 
 
@@ -67,11 +67,11 @@ This list comprises everything you need to do and consider to get set up and rea
 
 You are now ready to start building models collaboratively with `create-a-derived-tbale`. If you have any problems please check [Troubleshooting](/tools/create-a-derived-table/troubleshooting), or ask at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) providing context and links if appropriate.
 
-## Setting Up any IDE (Integrated Development Environment) to working on create-a-derived-table
+##  Set up IDE
 
 - Clone Git repository: <code>git clone git@github.com: moj-analytical-services/create-a-derived-table.git</code>
 
--Setting up a Python virtual environment:
+- Set up a Python virtual environment:
 <ul>
   <li><code>python3 -m venv venv</code></li>
   <li><code>source venv/bin/activate</code></li>
@@ -81,14 +81,13 @@ You are now ready to start building models collaboratively with `create-a-derive
 <ul>
   <li><code>pip install -r requirements.txt</code></li>
   <li><code>pip install -r requirements-lint.txt</code></li>
-  <li><code>pip install -r requirements-dev.txt</code></li>
 </ul>
-- Setting up the Bash profile:
+- Set up the Bash profile:
 <ul>
   <li><code>echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bash_profile</code></li>
   <li><code>source ~/.bash_profile</code></li>
 </ul>
-- Setting up dbt
+- Set up dbt
 <ul>
     <li><code>cd mojap_derived_tables</code></li>
     <li><code>dbt debug</code></li>
@@ -117,10 +116,6 @@ You are now ready to start building models collaboratively with `create-a-derive
     <li><code>dbt run --select models/.../path/to/my/models/</code>, to deploy your models</li>
     <li><code>dbt seed --select seeds/.../path/to/my/seeds/</code>, to deploy your seeds</li>
     <li><code>dbt test --select models/.../path/to/my/models/</code>, to run tests on models with tests defined</li>
-    <li><code>dbt seed --target prod --select seeds/domain_name/seed_filename</code>, to manually deploy a specific seed to <code>prod</code></li>
-    <li><code>dbt run --target prod --select models/domain_name/model_filename</code>, to manually deploy a specific model to <code>prod</code></li>
-    <li><code>dbt run --target prod --full-refresh --select models/domain_name/model_filename</code>, to manually deploy a specific incremental model to prod and apply full refresh</li>
-    <li><code>dbt seed --target sandpit --select seeds/.../path/to/my/seeds/</code>, to manually deploy a specific model to sandpit </li>
     <li><code>dbt docs generate</code>, to generating your project's documentation </li>
     <li><code>dbt docs serve </code>, to serve your documentation locally </li>
 </ul> 
@@ -132,7 +127,7 @@ You are now ready to start building models collaboratively with `create-a-derive
     <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of YAML files</li>
 </ul>
 
-## Command for formatting SQL files
+## sqlfluff commands
 - To format SQL files using SQLFluff
 <ul>
     <li><code>sqlfluff lint .../path/to/sql/file.sql</code>, to lint a single SQL file</li>
