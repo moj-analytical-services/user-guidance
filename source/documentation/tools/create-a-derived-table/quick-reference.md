@@ -12,7 +12,7 @@ This page is intended to give users who have read through the detailed [create-a
 - [Important dbt commands](#important-dbt-commands)
 - [yamllint commands](#yamllint-commands)
 - [sqlfluff commands](#sqlfluff-commands)
-- [Essential checklist for moving a model from Dev to Prod:](#essential-checklist-for-moving-a-model-from-dev-to-prod)
+- [Moving the model to Prod](#moving-the-model-to-prod)
 - [Tips](#tips)
 
 
@@ -142,14 +142,15 @@ Linting is the automated checking of your code for programmatic and stylistic er
     <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of SQL files</li>
 </ul>
 
-##  Essential checklist for moving a model from Dev to Prod:
-Here is a recommended checklist to follow when you intend to submit a pull request for your models and subsequently merge it into the main repository:
-<ul>
-<li>  The development models must successfully pass through the deploy-dev workflow. This ensures that the model complies with linting and other essential checks.</li>
-<li>Before progressing to production, ensure that the development models are accompanied by sufficient tests. It is crucial to confirm the successful completion of these tests.</li>
-<li>The models should be prepared for use by data consumers without the risk of introducing breaking changes.</li>
-<li>Utilize the <code>dbt_project.yml</code> to schedule the model database.</li>
-</ul>
+##  Moving the model to Prod:
+If you're planning to submit a pull request for your models and subsequently merge them into the main repository, follow this recommended checklist:
+
+<ol type="1">
+  <li><b>Successful Deployment in Development: </b>Ensure that the development models successfully pass through the deploy-dev workflow. This step is crucial to guarantee that the model complies with linting and undergoes other essential checks.</li>
+  <li><b>Comprehensive Testing:</b> Before moving forward to the production stage, ensure that the development models are accompanied by sufficient tests. Confirm the successful completion of these tests; it's a critical validation process.</li>
+  <li><b>Seamless User Experience: </b>Prepare the models for use by data consumers without introducing the risk of breaking changes. The user experience should remain smooth and uninterrupted.</li>
+  <li><b>Model Scheduling: </b>To ensure the proper scheduling of the model, utilize the <a href="https://github.com/moj-analytical-services/create-a-derived-table/blob/main/mojap_derived_tables/dbt_project.yml">dbt_project.yml</a> . If the scheduling is not set properly, the deployment of the prod model won't happen, which means no model for consumers.</li>
+</ol>
 
 
 ## Tips
