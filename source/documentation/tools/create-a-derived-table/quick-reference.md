@@ -8,7 +8,7 @@ This page is intended to give users who have read through the detailed [create-a
 - [Glossary](#glossary)
 - [Set up](#set-up)
 - [Set Up IDE](#set-up-ide)
-- [Brief commands to collaborating with Git](#brief-commands-to-collaborating-with-git)
+- [Collaborating with Git](#collaborating-with-git)
 - [Important dbt commands](#important-dbt-commands)
 - [yamllint commands](#yamllint-commands)
 - [sqlfluff commands](#sqlfluff-commands)
@@ -95,20 +95,27 @@ You are now ready to start building models collaboratively with `create-a-derive
     <li><code>dbt deps</code></li>
 </ul>
 
-## Brief commands to collaborating with Git
+## Collaborating with Git
+
 <ul>
-    <li>use <code>cd</code> command to get in the root/main of repository (create-a-derived-table)</li>
-    <li><code>git status</code>, if it's not main</li>
-    <li><code>git checkout main</code></li>
-    <li><code>git pull</code>, download content from the remote repository and immediately update the local repository</li>
-    <li><code>git checkout -b project_name</code>, create your own branch</li>
-    <li><code>git add file_name</code>, to add a change in the working directory to the staging area</li>
-    <li><code>git commit -m "messages"</code>, to save your changes to the local repository</li>
-    <li><code>git fetch</code>, to see the changes happened in the remote branch</li>
-    <li><code>git pull</code>, update your local branch, if any changes in the remote repository </li>
-    <li><code>git switch your_branch_name</code>, moving to your own branch </li>
-    <li><code>git merge main -m "messages"</code>, update to the main branch </li>
-</ul> 
+<li>Use the <code>cd</code>  command to navigate to the root/main directory of the repository (create-a-derived-table).</li>
+
+<li>Check the status of the repository with <code>git status</code>; if it's not on the main branch, switch to it using <code>git checkout main</code>.</li>
+
+<li>Pull the latest content from the remote repository and update your local repository immediately with <code>git pull</code>.</li>
+
+<li>To create your own branch, use the command <code>git checkout -b project_name</code>.
+<li>Add changes from the working directory to the staging area with <code>git add file_name</code>.</li>
+<li>Save your changes to the local repository by using <code>git commit -m "messages"</code>.</li>
+
+<li>To see the changes that have occurred in the remote branch, perform a <code>git fetch</code>.</li>
+
+<li>If there are any changes in the remote repository, update your local branch by executing <code>git pull</code>.</li>
+
+<li>Switch to your own branch with the command <code>git switch your_branch_name</code>.</li>
+
+<li>Update the main branch by merging your changes into it using <code>git merge main -m "messages"</code>.</li>
+</ul>
 
 ## Important dbt commands
 <ul>
@@ -122,7 +129,7 @@ You are now ready to start building models collaboratively with `create-a-derive
 </ul> 
 
 ## yamllint commands
-- Linting is the automated checking of your code for programmatic and stylistic errors performed by running a &lsquo;linter&rsquo;
+Linting is the automated checking of your code for programmatic and stylistic errors performed by running a &lsquo;linter&rsquo;
 <ul>
     <li><code>yamllint .../path/to/yaml/file.yaml</code>, to lint a single YAML file</li>
     <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of YAML files</li>
