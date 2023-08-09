@@ -7,12 +7,12 @@ This page is intended to give users who have read through the detailed [create-a
 ## Contents
 - [Glossary](#glossary)
 - [Set up](#set-up)
-- [Set Up IDE](#set-up-ide)
+- [Set up IDE](#set-up-ide)
 - [Collaborating with Git](#collaborating-with-git)
 - [Important dbt commands](#important-dbt-commands)
 - [yamllint commands](#yamllint-commands)
 - [sqlfluff commands](#sqlfluff-commands)
-- [Moving the model to Prod](#moving-the-model-to-prod)
+- [Moving the model to production](#moving-the-model-to-production)
 - [Tips](#tips)
 
 
@@ -142,8 +142,8 @@ Linting is the automated checking of your code for programmatic and stylistic er
     <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of SQL files</li>
 </ul>
 
-##  Moving the model to Prod:
-If you're planning to submit a pull request for your models and subsequently merge them into the main repository, follow this recommended checklist:
+##  Moving the model to production:
+When you are ready to submit a pull request to merge your models into the `main` branch, please check you have done the following:
 
 <ol type="1">
   <li><b>Seamless User Experience:  </b>Prepare the models for use by data consumers without introducing the risk of breaking changes. Consider the following factors to enhance the user experience in terms of how models are presented:</li>
@@ -151,7 +151,7 @@ If you're planning to submit a pull request for your models and subsequently mer
   <li>Should the models remain visible in the same database, or be moved to the staging database? </li>
   <li> Are the names of databases/tables/columns clear to users?</li>
   <li>How will the model appear in dbt docs?</li>
-You can find more information about data modelling concepts <a href="https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/data-modelling-concepts/">here</a>.
+You can find more information about data modelling concepts <a href="/tools/create-a-derived-table/data-modelling-concepts">here</a>.
   
   </ul>
   <li><b>Comprehensive Testing:</b> Before moving forward to the production stage, ensure that the development models are accompanied by sufficient tests. Confirm the successful completion of these tests; it's a critical validation process. You will find more details about testing <a href= "https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/tests/">here</a>.</li>
