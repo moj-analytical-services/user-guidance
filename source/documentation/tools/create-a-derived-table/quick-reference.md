@@ -2,17 +2,17 @@
 
 ⚠️ This service is in beta ⚠️
 
-This page is intended to give users who have read through the detailed [create-a-derived-table instructions](/tools/create-a-derived-table) a quick reference to refresh their memory. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
+This page is intended to give users who have read through the detailed sections of the [create-a-derived-table](/tools/create-a-derived-table) user guidance a quick reference to refresh their memory. Please post suggestions for improvements in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit this document and raise a pull request.
 
 ## Contents
 - [Glossary](#glossary)
 - [Set up](#set-up)
-- [Set up IDE](#set-up-ide)
-- [Collaborating with Git](#collaborating-with-git)
-- [Important dbt commands](#important-dbt-commands)
+- [Virtual environment set up](#virtual-environment-set-up)
+- [Git commands](#git-commands)
+- [dbt commands](#dbt-commands)
 - [yamllint commands](#yamllint-commands)
 - [sqlfluff commands](#sqlfluff-commands)
-- [Moving the model to production](#moving-the-model-to-production)
+- [Moving models to production](#moving-models-to-production)
 - [Tips](#tips)
 
 
@@ -34,133 +34,181 @@ Glossary of key words in the context of `create-a-derived-table` / `dbt`.
 
 
 ## Set up
-This list comprises everything you need to do and consider to get set up and ready to start building models collaboratively. It is intended as a quick check or reference list and assumes you have read the detailed [create-a-derived-table instructions](/tools/create-a-derived-table). See [Troubleshooting](/tools/create-a-derived-table/troubleshooting) if you have any problems.
+This list comprises everything you need to do and consider to get set up and ready to start building models collaboratively. It is intended as a quick check or reference list and assumes you have read the detailed instructions in each section of the [create-a-derived-table](/tools/create-a-derived-table) user guidance. See [Troubleshooting](/tools/create-a-derived-table/troubleshooting) if you have any problems.
 
-1. Read the detailed [create-a-derived-table instructions](/tools/create-a-derived-table).
+1. Read the detailed [create-a-derived-table](/tools/create-a-derived-table) user guidance.
 
 2. Check your use case is appropriate; you may contact the Data Modelling team for advice at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9).
 
-3. Decide an appropriate domain within `create-a-derived-table` for your project.
+3. Decide an appropriate [domain](/tools/create-a-derived-table/project-structure/#domains) within `create-a-derived-table` for your project.
 
 4. Decide on naming conventions for your `models` in the form `database_name__table_name`, note separation using `__` ("dunder"). Database name must be unique within MoJ.
 
 5. Set up an [MoJ Analytical Platform account](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html#2-analytical-platform-account).
 
-6. Add yourself to [standard_database_access](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml) and raise a PR to gain access to the `create_a_derived_table/basic` resource, which includes access to`seeds` and `run_artefacts`.
+6. Add your `alpha_user` name to [standard_database_access](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard_database_access.yaml) and raise a PR. This grants access to the `create_a_derived_table/basic` resource, which includes access to the `general` domain, `seeds` and `run_artefacts`.
 
 7. Create a project access file for your project in [data-engineering-database-access/project_access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/project_access). 
 
-8. In the project access file under `Resources` include the `create-a-derived-table` domains required to write models *to*, as well as the source databases you will be buildung models *from*. 
+8. In the project access file under `Resources` include the `create-a-derived-table` domains required to write models *to*, as well as the source databases you will be buildung models *from*. Full instructions [here](/tools/create-a-derived-table/database-access#your-data-engineering-database-access-project-access-file).
 
-9. If an MoJ Analytical Platform database is not listed as a source under [mojap_derived_tables/models/sources](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/sources) then it will need to be added, see [CONTRIBUTING](https://github.com/moj-analytical-services/create-a-derived-table/blob/main/CONTRIBUTING.md#updating-dbt-source-files).
+9. If an MoJ Analytical Platform database is not listed as a source in [source_database_names.txt](https://github.com/moj-analytical-services/create-a-derived-table/blob/main/scripts/source_database_names.txt) then you can add it, see [Adding a new source](/tools/create-a-derived-table/source-and-ref-functions#adding-a-new-source).
 
-10. Set up RStudio IDE; set up a project and clone the repo into it. See [Set up the RStudio working environment](/tools/create-a-derived-table#set-up-the-rstudio-working-environment) for GUI instructions. Using Terminal navigate to where you want the `create-a-derived-table` project to sit and run `git clone git@github.com:moj-analytical-services/create-a-derived-table.git`.
+10. Set up the RStudio IDE; set up a project and clone the repo into it. See [Set up the RStudio working environment](/tools/create-a-derived-table/rstudio-set-up) for GUI instructions. Using Terminal navigate to where you want the `create-a-derived-table` project to sit and run `git clone git@github.com:moj-analytical-services/create-a-derived-table.git`.
 
-11. Navigate to the root of your `create-a-derived-table` directory in Terminal and set up a Python virtual environment; activate it, upgrade pip, and install requirements. See [Setting up a Python virtual environment](/tools/create-a-derived-table#setting-up-a-python-virtual-environment).
+11. Navigate to the `create-a-derived-table` directory in Terminal and set up a Python virtual environment; activate it, upgrade pip, and install requirements. See [Setting up a Python virtual environment](/tools/create-a-derived-table/rstudio-set-up#setting-up-a-python-virtual-environment) and [Virtual environment set up](#virtual-environment-set-up).
 
-    1. Set the environment variable `DBT_PROFILES_DIR` in your Bash profile and source it.
 
-    2. Navigate to the `mojap_derived_tables` directory in Terminal to run `dbt` commands. Check you have an active connection, `dbt debug`
-
-    3. Install `dbt` packages with `dbt deps`.
-
-12. Use Github Workflow method to collaborate on a project. Branch off `main` and create a main branch for your project, `project-name-main`; all subsequent developers should branch off `project-name-main` to create feature branches for this project. When raising a PR ensure you merge into this branch, before merging into `main`; the PR summary should read something like "`github-user` wants to merge *X* commits into `project-name-main` from `project-name-feature-branch`". See also [Collaborating with Git](/tools/create-a-derived-table#collaborating-with-git).
+12. Use Github Workflow method to collaborate on a project. Branch off `main` and create a main branch for your project, `project-name-main`; all subsequent developers should branch off `project-name-main` to create feature branches for this project. When raising a PR ensure you merge into this branch, before merging into `main`; the PR summary should read something like "`github-user` wants to merge *X* commits into `project-name-main` from `project-name-feature-branch`". See also [Collaborating with Git](/tools/create-a-derived-table/collaborating-with-git#collaborating-with-git) and [Git commands](#git-commands).
 
 You are now ready to start building models collaboratively with `create-a-derived-tbale`. If you have any problems please check [Troubleshooting](/tools/create-a-derived-table/troubleshooting), or ask at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) providing context and links if appropriate.
 
-##  Set up IDE
+##  Virtual environment set up
 
-- Clone Git repository: <code>git clone git@github.com: moj-analytical-services/create-a-derived-table.git</code>
+Clone the `create-a-derived-table` repository
 
-- Set up a Python virtual environment:
-<ul>
-  <li><code>python3 -m venv venv</code></li>
-  <li><code>source venv/bin/activate</code></li>
-  <li><code>pip install --upgrade pip</code></li>
-</ul>
-- Install requirements:
-<ul>
-  <li><code>pip install -r requirements.txt</code></li>
-  <li><code>pip install -r requirements-lint.txt</code></li>
-</ul>
-- Set up the Bash profile:
-<ul>
-  <li><code>echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bash_profile</code></li>
-  <li><code>source ~/.bash_profile</code></li>
-</ul>
-- Set up dbt
-<ul>
-    <li><code>cd mojap_derived_tables</code></li>
-    <li><code>dbt debug</code></li>
-    <li><code>dbt deps</code></li>
-</ul>
+```
+git clone git@github.com: moj-analytical-services/create-a-derived-table.git
+```
 
-## Collaborating with Git
+Ensure you are in the root directory `create-a-derived-table`.
 
-<ul>
-<li>Use the <code>cd</code>  command to navigate to the root/main directory of the repository (create-a-derived-table).</li>
+Set up and activate a Python virtual environment
 
-<li>Check the status of the repository with <code>git status</code>; if it's not on the main branch, switch to it using <code>git checkout main</code>.</li>
+```
+python3 -m venv venv
+source venv/bin/activate
+```
 
-<li>Pull the latest content from the remote repository and update your local repository immediately with <code>git pull</code>.</li>
+Install requirements:
 
-<li>To create your own branch, use the command <code>git checkout -b project_name</code>.
-<li>Add changes from the working directory to the staging area with <code>git add file_name</code>.</li>
-<li>Save your changes to the local repository by using <code>git commit -m "messages"</code>.</li>
+```
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install -r requirements-lint.txt
+```
 
-<li>To see the changes that have occurred in the remote branch, perform a <code>git fetch</code>.</li>
+Set up and source the Bash profile
 
-<li>If there are any changes in the remote repository, update your local branch by executing <code>git pull</code>.</li>
+```
+echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bash_profile
+source ~/.bash_profile
+```
 
-<li>Switch to your own branch with the command <code>git switch your_branch_name</code>.</li>
+Set up dbt
 
-<li>Update the main branch by merging your changes into it using <code>git merge main -m "messages"</code>.</li>
-</ul>
+```
+cd mojap_derived_tables
+dbt debug
+dbt deps
+```
 
-## Important dbt commands
-<ul>
-    <li><code>dbt clean</code> to remove run artefacts from previous invocations of dbt</li>
-    <li><code>dbt compile --select models/.../path/to/my/models/</code>, to check your SQL and YAML is syntactically correct</li>
-    <li><code>dbt run --select models/.../path/to/my/models/</code>, to deploy your models</li>
-    <li><code>dbt seed --select seeds/.../path/to/my/seeds/</code>, to deploy your seeds</li>
-    <li><code>dbt test --select models/.../path/to/my/models/</code>, to run tests on models with tests defined</li>
-    <li><code>dbt docs generate</code>, to generating your project's documentation </li>
-    <li><code>dbt docs serve </code>, to serve your documentation locally </li>
-</ul> 
 
-## yamllint commands
-Linting is the automated checking of your code for programmatic and stylistic errors performed by running a &lsquo;linter&rsquo;
-<ul>
-    <li><code>yamllint .../path/to/yaml/file.yaml</code>, to lint a single YAML file</li>
-    <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of YAML files</li>
-</ul>
+## `Git` commands
 
-## sqlfluff commands
-- To format SQL files using SQLFluff
-<ul>
-    <li><code>sqlfluff lint .../path/to/sql/file.sql</code>, to lint a single SQL file</li>
-    <li><code>yamllint .../path/to/yaml/directory/</code>, to lint a whole directory of SQL files</li>
-</ul>
+Some useful `bash` and `git` commands.
 
-##  Moving the model to production:
-When you are ready to submit a pull request to merge your models into the `main` branch, please check you have done the following:
+|||
+|--------------|--------------|
+|`cd path/to/root`|navigate to the `create-a-derived-table` (root) directory of the repository|
+|`cd ..`|go up one directory|
+|`cd ~`|go to the top level directory (this may be `create-a-derived-table`)|
+|`ls`|list directory contents|
+|`git clone git@github.com:moj-analytical-services/create-a-derived-table.git`|clone the repo|
+|`git branch`|check which of your local branches you are on|
+|`git branch -a`|list all local and remote branches|
+|`git switch main`|switch to the `main` branch|
+|`git fetch`|fetch the latest content from the remote branch (view only)|
+|`git pull`|pull the latest content from the remote, updating the local copy|
+|`git checkout -b <new-branch>`|create a new branch off the current branch|
+|`git checkout -b <new-branch> <from-branch>`|create a new branch off a specific branch|
+|`git add path/to/files/`|add a direcrtory of files to the staging area|
+|`git status`|check status of current branch and see what files are staged|
+|`git commit -m "<descriptive message>"`|save changes to local repo with a descriptive message|
+|`git push origin <new-branch>`|push local changes to the remote, if the branch doesn't exist it is created, else it is updated|
+|`git fetch origin <other-branch>`|fetch latest content from a specific branch|
+|`git pull origin <other-branch>`|pull latest content from a specific branch into current branch|
+|`git merge origin/<other-branch>`|merge changes from specific branch into current branch|
+
+
+
+## `dbt` commands
+
+Remove run artefacts from previous invocations of dbt:
+
+```
+dbt clean
+```
+
+Compile model code which checks SQL and YAML is syntactically correct. The compiled model files will be saved in the corresponding directory under `mojap_derived_tables/target/compiled/`:
+
+
+```
+dbt compile --select models/.../path/to/my/models/
+```
+
+
+Deploy seeds, models and run tests (note models must be deployed before tests can run successfully):
+
+```
+dbt run --select models/.../path/to/my/models/
+dbt seed --select seeds/.../path/to/my/seeds/
+dbt test --select models/.../path/to/my/models
+```
+
+Build and open a local copy of the `dbt docs`:
+
+```
+dbt docs generate
+dbt docs serve
+```
+
+## `yamllint` commands
+
+To lint a single YAML file or a directory of YAML files navigate to the root directory and run:
+
+```
+yamllint .../path/to/yaml/file.yaml
+yamllint .../path/to/yaml/directory/
+```
+
+Validate and reformat YAML using the online [YAML Validator](https://www.yamllint.com/) tool. Copy/paste code into it and click `Go` to validate. Note that to pass the YAML linter settings all YAML files must contain a final empty line which may not copy across from the online tool.
+
+## `sqlfluff` commands
+
+To lint a single SQL file or a directory of SQL files navigate to the root directory and run:
+
+```
+sqlfluff lint .../path/to/sql/file.sql
+sqlfluff lint .../path/to/sql/directory/
+```
+
+To lint and fix a single SQL file or a directory of SQL files run:
+
+```
+sqlfluff fix .../path/to/sql/file.sql
+sqlfluff fix .../path/to/sql/directory/
+```
+
+You are asked to confirm before proceding with the `fix` as it edits your files.
+
+##  Moving models to production:
+When you are ready to submit a pull request to merge models into the `main` branch, please check against the following list:
 
 <ol type="1">
-  <li><b>Seamless User Experience:  </b>Prepare the models for use by data consumers without introducing the risk of breaking changes. Consider the following factors to enhance the user experience in terms of how models are presented:</li>
+  <li><b>Seamless User Experience:  </b>Prepare the models following data modelling good practise, more information <a href="/tools/create-a-derived-table/data-modelling-concepts">here</a>. Consider the following factors to enhance the user experience in terms of how models are presented:</li>
   <ul>
-  <li>Should the models remain visible in the same database, or be moved to the staging database? </li>
-  <li> Are the names of databases/tables/columns clear to users?</li>
-  <li>How will the model appear in dbt docs?</li>
-You can find more information about data modelling concepts <a href="/tools/create-a-derived-table/data-modelling-concepts">here</a>.
-  
+  <li>Should a model be visible in the same database, or be moved to a staging database?</li>
+  <li>Are the names of databases/tables/columns clear to users?</li>
+  <li>How does the model appear in <code>dbt docs</code>?</li>
   </ul>
-  <li><b>Comprehensive Testing:</b> Before moving forward to the production stage, ensure that the development models are accompanied by sufficient tests. Confirm the successful completion of these tests; it's a critical validation process. You will find more details about testing <a href= "https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/tests/">here</a>.</li>
-  <li><b>Successful Deployment in Development: </b>Ensure that models are working and linted locally before committing the changes and raising the PR. After raising the PR, you need to check that model successfully passes through the deploy-dev workflow. It is also recommended to check and ensure that the branch is up to date with the main branch and that any conflicts are resolved.</li>
-  <li><b>Model Scheduling: </b>It is necessary to consider the most appropriate scheduling for the models while aligning with upstream pipelines. For example, if the upstream sources are only updated weekly, daily updates might be unnecessary. Linked to scheduling is the decision of whether the models should be incremental or not, which involves appending new data versus fully overwriting each run. The scheduling is managed using <a href="https://github.com/moj-analytical-services/create-a-derived-table/blob/main/mojap_derived_tables/dbt_project.yml">dbt_project.yml</a>. Additional scheduling information is provided <a href="https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/scheduling-to-prod/">here</a>.</li>
+  <li><b>Readability: </b>Ensure linting checks pass locally on SQL and YAML code so that code layout meets organisation standards for ease of human readability.</li>
+  <li><b>Comprehensive Testing:</b> Ensure that the development models are accompanied by sufficient tests. There are many tests availble at column and table level, as well as the option to create user defined tests, more information <a href= "/tools/create-a-derived-table/tests">here</a>. Confirm these tests pass consistently. This is a critical validation step to provide model quality assurance to consumers.</li>
+  <li><b>Successful Deployment in Development: </b>Upon raising a pull request the <code>deploy-dev</code> workflow is triggered. This must complete successfully before any code can be merged into <code>main</code>. You may need to update your branch with the latest from <code>main</code> and resolve any conflicts.</li>
+  <li><b>Model Scheduling: </b>Determine the most appropriate scheduling for the model deployment that aligns to upstream deployment pipelines. For example, if the upstream sources are only updated weekly, a daily schedule may be unnecessary. Update the <a href="https://github.com/moj-analytical-services/create-a-derived-table/blob/main/mojap_derived_tables/dbt_project.yml">dbt_project.yml</a> using the corresponding schedule <code>tag</code>, more information <a href="/tools/create-a-derived-table/scheduling-to-prod">here</a>. Please note, <i>only</i> models with a declared schedule <code>tag</code> are deployed to production.</li>
 </ol>
 
 
 ## Tips
-- You can test out how your SQL model files look once rendered by running `dbt compile --select <path_to_file(s)>`. This saves on running and deploying your tables if you want to test your sql. The compiled model files will be saved in the `mojap_derived_tables/target/compiled` folder.
-- Make sure you deploy your seeds with `dbt seed --select <path_to_seeds>` if your models depend on them.
+
 - If you define any variables to inject into your model sql files using `{{ var(...) }}`, they need to be in the `dbt_project.yml` file.
