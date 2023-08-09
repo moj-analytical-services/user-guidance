@@ -146,10 +146,17 @@ Linting is the automated checking of your code for programmatic and stylistic er
 If you're planning to submit a pull request for your models and subsequently merge them into the main repository, follow this recommended checklist:
 
 <ol type="1">
-  <li><b>Successful Deployment in Development: </b>Ensure that the development models successfully pass through the deploy-dev workflow. This step is crucial to guarantee that the model complies with linting and undergoes other essential checks.</li>
-  <li><b>Comprehensive Testing:</b> Before moving forward to the production stage, ensure that the development models are accompanied by sufficient tests. Confirm the successful completion of these tests; it's a critical validation process.</li>
-  <li><b>Seamless User Experience: </b>Prepare the models for use by data consumers without introducing the risk of breaking changes. The user experience should remain smooth and uninterrupted.</li>
-  <li><b>Model Scheduling: </b>To ensure the proper scheduling of the model, utilize the <a href="https://github.com/moj-analytical-services/create-a-derived-table/blob/main/mojap_derived_tables/dbt_project.yml">dbt_project.yml</a> . If the scheduling is not set properly, the deployment of the prod model won't happen, which means no model for consumers.</li>
+  <li><b>Seamless User Experience:  </b>Prepare the models for use by data consumers without introducing the risk of breaking changes. Consider the following factors to enhance the user experience in terms of how models are presented:</li>
+  <ul>
+  <li>Should the models remain visible in the same database, or be moved to the staging database? </li>
+  <li> Are the names of databases/tables/columns clear to users?</li>
+  <li>How will the model appear in dbt docs?</li>
+You can find more information about data modelling concepts <a href="https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/data-modelling-concepts/">here</a>.
+  
+  </ul>
+  <li><b>Comprehensive Testing:</b> Before moving forward to the production stage, ensure that the development models are accompanied by sufficient tests. Confirm the successful completion of these tests; it's a critical validation process. You will find more details about testing <a href= "https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/tests/">here</a>.</li>
+  <li><b>Successful Deployment in Development: </b>Ensure that models are working and linted locally before committing the changes and raising the PR. After raising the PR, you need to check that model successfully passes through the deploy-dev workflow. It is also recommended to check and ensure that the branch is up to date with the main branch and that any conflicts are resolved.</li>
+  <li><b>Model Scheduling: </b>It is necessary to consider the most appropriate scheduling for the models while aligning with upstream pipelines. For example, if the upstream sources are only updated weekly, daily updates might be unnecessary. Linked to scheduling is the decision of whether the models should be incremental or not, which involves appending new data versus fully overwriting each run. The scheduling is managed using <a href="https://github.com/moj-analytical-services/create-a-derived-table/blob/main/mojap_derived_tables/dbt_project.yml">dbt_project.yml</a>. Additional scheduling information is provided <a href="https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/scheduling-to-prod/">here</a>.</li>
 </ol>
 
 
