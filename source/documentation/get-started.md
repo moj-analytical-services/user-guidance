@@ -97,7 +97,7 @@ After you log in to the Control Panel for the first time, you can begin requesti
 
 >**Note**: Only follow this step if you want to use the Analytical Platform as a Python-based user. If you want to use R instead, proceed to step 6 to configure RStudio instead.
 
-If you want to build and deploy applications on the Analytical Platform using Python, you need to set up JupyterLab, the Python-based IDE (Integrated Development Environment) the Analytical Platform provides. 
+If you want to build and deploy applications on the Analytical Platform using Python, you need to set up JupyterLab, the Python-based IDE (Integrated Development Environment) on the Analytical Platform. 
 
 To set up JupyterLab, navigate to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/tools/). Under **Jupyter Lab Data Science [Git extension]**, use the drop-down menu to select the version of JupyterLab you want to deploy. Unless you need to use a specific version, we recommend selecting the first option in the list. This will deploy JupyterLab on a virtual machine in your browser, with all of the required components it requires to run.
 
