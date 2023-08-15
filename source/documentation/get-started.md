@@ -103,7 +103,8 @@ To set up JupyterLab, navigate to the [Control Panel](https://controlpanel.servi
 
 ### Create and add JupyterLab SSH key to GitHub
 
-So you can access GitHub repositories from JupyterLab, you need an SSH key to connect the two. Do not try to use an existing SSH key; each tool you use requires a unique key.
+To access GitHub repositories from JupyterLab, you need an SSH key to enable secure communication and authentication between the two services. 
+Do not try to use an existing SSH key; each tool you use requires a unique key.
 
 To create an SSH key in JupyterLab:
 
