@@ -60,7 +60,11 @@ Additionally, in the Justice Digital **workspace** join the following:
 
 ## 3. Create GitHub account
 
-Using your work email address (ending either **justice.gov.uk** or **digital.justice.gov.uk**), [sign up for a GitHub account](https://github.com/join). See the [GitHub documentation](https://docs.github.com/en/get-started/signing-up-for-github/signing-up-for-a-new-github-account) for instructions. Ensure that:
+Using your work email address (ending either **justice.gov.uk** or **digital.justice.gov.uk**), [sign up for a GitHub account](https://github.com/join). See the [GitHub documentation](https://docs.github.com/en/get-started/signing-up-for-github/signing-up-for-a-new-github-account) for instructions. 
+
+If you already have a GitHub account that you wish to use for work within the Ministry of Justice, you can use it provided you associate your work email address with the account in your user settings.
+
+Ensure that:
 
 - your account uses the free plan subscription
 - you choose a username that does not contain upper-case characters (for good practice)
