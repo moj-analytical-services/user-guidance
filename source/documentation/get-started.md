@@ -16,7 +16,10 @@ To use this guide, you need the following:
 - a mobile device you can install apps on
 - access to the **Justice Digital workspace** on Slack
 
-Complete this guide in order, following each step closely. If you encounter issues, [raise a ticket on GitHub issues](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) or email **analytical_platform@digital.justice.gov.uk**. A member of the Analytical Platform team will contact you.
+Complete this guide in order, following each step closely. 
+If you encounter issues, preferably [raise a ticket on GitHub issues](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) 
+or email [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk). 
+A member of the Analytical Platform team will contact you.
 
 ## 1. Read Terms of Use
 
