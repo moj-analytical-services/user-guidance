@@ -126,7 +126,7 @@ You then need to add the SSH key to GitHub; see the [GitHub documentation](https
 
 ## 6. Set up RStudio
 
->**Note**: Only follow this step if you want to use the Analytical Platform as an R-based user. If you want to use Python and configured JupyterLab in the previous step, proceed to step 7.
+>**Note**: Only follow this step if you want to use the Analytical Platform as an R-based user. RStudio supports Python, but we recommend using JupyterLab for Python instead. If you configured JupyterLab in the previous step, proceed to step 7.
 
 If you want to build and deploy applications on the Analytical Platform using R, you need to set up RStudio, the R-based IDE (Integrated Development Environment) the Analytical Platform provides.
 
