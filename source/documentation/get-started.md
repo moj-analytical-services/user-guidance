@@ -55,6 +55,7 @@ Join the following Slack channels in the **ASD workspace**:
 - **#r** and **#intro_r**: for discussing R programming with the wider Ministry of Justice community; #intro_r is aimed at new users
 
 Additionally, in the Justice Digital **workspace** join the following:
+- **#analytical-platform-support**: for tracking support queries that Analytical Platform users raise on [GitHub Issues](https://github.com/ministryofjustice/data-platform-support/issues)
 - **#ask-operations-engineering**: for requesting support with GitHub; you can use this channel to request access to the Analytical Platform later in this guide
 
 ## 3. Create GitHub account
