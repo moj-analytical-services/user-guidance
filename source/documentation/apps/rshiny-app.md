@@ -150,8 +150,7 @@ This requires the app to have been deployed since the [auth-proxy release on 30t
 
 #### Authenticating to your app
 
-For the dashboard apps using passwordless flow (email login), when accessing an app, you can choose whether to sign in using 
-a one-time passcode (default) or an email magic link.
+For the dashboard apps using passwordless flow (email login), when accessing an app, you can choose whether to sign in using a one-time passcode (default) or an email magic link.
 To sign in with an email magic link, add `/login?method=link` to the end of the app's URL, for example,
 `https://apps.live.cloud-platform.service.justice.gov.uk/login?method=code`.
 
@@ -383,7 +382,9 @@ Further technical details can be found in the [Cloud Platform's Monitoring secti
 
 You can access your applications logs in Cloud platform by following the the CP guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs.html#accessing-application-log-data)
 
-There are some extra notes below to get you work with kibana service on Cloud platform seasier 
+#### Kibana on Cloud Platform 
+
+Below are some notes to aid you in working with the Kibana service, on Cloud Platform.
 
 All logs from deployed apps can be viewed in [Kibana](https://kibana.cloud-platform.service.justice.gov.uk/_plugin/kibana/app/discove).
 
@@ -459,14 +460,13 @@ If required you can access the Cloud platform via AWS, please follow the guidanc
 
 #### Adding cron job to your application
 
-A cronjob for restarting your application can be setup easier by adding the following line in to your app's dev or prod github workflow 
+A cronjob for restarting your application can be setup easier by adding the following line in to your app's development or production GitHub workflow:
 
 ```
 --set Cron.schedule="0 6 * * *"
 ```
 
-You can use the following website for setting up and testing the schedule 
-https://crontab.guru/
+[crontab.guru](https://crontab.guru/) can be used to setup the schedule.
 
 If you need to a cron job for the other jobs, more guides are available on the Cloud Platform [kubernetes cronjobs](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/other-topics/Cronjobs.html#kubernetes-cronjobs)
 
@@ -515,17 +515,13 @@ To change the resources  insert at  the end of the file just before the $custom_
 
 Once the changes are pushed/merged to the repository the values will be applied to your Kubernetes namespace. 
 
-
 #### Changing the number of instances (pods) on name space
 
-The number of app instances running on dev/prod is 1 by default, if the time the user has to wait to get reponse from the app is long, 
-apart from trying to improving the performance through the codes (which is the key), you can increase the number of instances to reduce the wating time
-on dev/prod github workflows, for example :-
+The number of app instances running on `dev`/`prod` is 1 by default, if users experience long response times from the application (apart from trying to improving the performance through the code itself) you can increase the number of instances to reduce the wating time on `dev`/`prod` GitHub workflows, for example :-
 
 ```
 --set ReplicaCount=3
 ```
-
 
 #### Remember: “With great power comes great responsibility”  Your application’s namespace will be one of a number hosted on the same cluster, setting the values too high could crash the cluster!
 
