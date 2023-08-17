@@ -8,7 +8,7 @@ This page is intended to give users a brief introduction to Dimensional Modellin
 
 Data modelling is the process of creating a structured representation of data. There are several approaches to creating a data model but the data modelling team tends to use and endorse the dimensional modelling approach introduced by Ralph Kimball. If you have hear the term data modelling used by members of the team then it is likely they are referring to dimensional modelling. 
 
-This section contains several important concepts related to dimensional modelling and the explanations are heavily influenced by explanations given in the following book 'The Data Warehouse Toolkit, 3rd Edition' by Ralph Kimball and Margy Ross. This book as well as 'Kimball Dimensional Modeling Techniques' [PDF LINK TO ADD] are great places to start if you want to dive deeper into dimensional modelling.
+This section contains several important concepts related to dimensional modelling and the explanations are heavily influenced by explanations given in the following book 'The Data Warehouse Toolkit, 3rd Edition' by Ralph Kimball and Margy Ross. This book as well as ['Kimball Dimensional Modeling Techniques'](http://www.kimballgroup.com/wp-content/uploads/2013/08/2013.09-Kimball-Dimensional-Modeling-Techniques11.pdf) are great places to start if you want to dive deeper into dimensional modelling.
 
 ### What is Dimensional Modelling
 
