@@ -105,13 +105,15 @@ We normally redeploy apps each Wednesday, where we have recevied a request by th
 
 ### Manage app users
 
-If authentication is enabled, access to your app will be controlled by email address.
+If authentication is enabled and you choose to use email as the login option, user access management to app can be done through Control panel.
 
 To manage the users of your app:
 
-1.  Go to the [Analytical Platform control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
-2.  Select the **Webapps** tab.
-3.  Select the name of the app you want to manage or select **Manage app**.
+1. Login Control panel as app admin
+2. Go to the [Analytical Platform control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+3. Select the **Webapps** tab.
+4. Select the name of the app you want to manage or select **Manage customers**.
+5. Select the environment where app is deployed (`dev/prod`)
 
 To add app users:
 
@@ -119,8 +121,6 @@ To add app users:
 2.  Select **Add customer**.
 
 To remove an app user, select **Remove customer** next to the email address of the customer you want to remove.
-
-You can ask the Analytical Platform team to add or remove users to the access list on the [#analytical-platform-support](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ) Slack channel or by email to [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
 
 ### Accessing the deployed app
 
@@ -141,11 +141,19 @@ Your deployed app can be accessed at `repository-name.apps.alpha.mojanalytics.xy
 
 If the repository name contains underscores, these will be converted to dashes in the app URL. For example, an app with a repository called `repository_name` would have the URL `repository-name.apps.alpha.mojanalytics.xyz`.
 
-#### Authenticating to your app
+#### Authenticating to your pre-migration apps
 
 When accessing an app, you can choose whether to sign in using an email link (default) or a one-time passcode.
 To sign in with a one-time passcode, add `/login?method=code` to the end of the app's URL, for example, `https://kpi-s3-proxy.apps.alpha.mojanalytics.xyz/login?method=code`.
 This requires the app to have been deployed since the [auth-proxy release on 30th Jan 2019](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.8).
+
+
+#### Authenticating to your app
+
+For the dashboard apps using passwordless flow (email login), when accessing an app, you can choose whether to sign in using a one-time passcode (default) or an email magic link.
+To sign in with an email magic link, add `/login?method=link` to the end of the app's URL, for example,
+`https://apps.live.cloud-platform.service.justice.gov.uk/login?method=code`.
+
 
 #### **Troubleshooting app sign-in**
 
@@ -154,26 +162,25 @@ This requires the app to have been deployed since the [auth-proxy release on 30t
 1. Check that the user is authorised to access the app:
    1. Log in to the [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
    2. Navigate to the app detail page.
-   3. Check if the user's email address is listed under 'App customers'.
-   4. If it is not, refer them to the app owner to obtain access.
+   3. Choose the right deployment environment (dev/prod)
+   4. Check if the user's email address is listed under 'App customers'.
+   5. If it is not, refer them to the app owner to obtain access.
 2. Check that the user is using the correct email address – there is sometimes confusion between @justice and @digital.justice email addresses.
 
-##### "Access denied" error, having entered email address and clicked link
+##### "Access denied" error, having entered email address and copied the one-time passcode into the login page
 
-1. Check that the user is not trying to use the same link to access the app multiple times – links expire after the first user and a new one must be requested.
-2. Check that the user is trying to access the app using Chrome or Firefox – if links automatically open in Internet Explorer, they may need to copy and paste the link without clicking it into Chrome or Firefox.
-
-Sometimes the link doesn't work because it gets accessed by a system such as anti-virus software, spam filters or the email client's 'link previewer' (e.g. to display the web page when you hover over the link).
-In this case, you should sign in using a one-time passcode, as described above in [access the app](#access-the-app) section.
+Please follow the same steps above to check whether the user is in the customer list of the app.
 
 ##### "IP x.x.x.x is not whitelisted"
 
-Check that the user is trying to access the app from one of the trusted networks specified in `deploy.json`.
+Check that the user is trying to access the app from one of the trusted networks listed on app's app-detail from Control panel
+
+The app admin can modify the IP_Ranges on the app's app-detail detail page. 
 
 ##### Other troubleshooting tips
 
 - Check that they are trying to access the app using a URL beginning with `https://` not `http://`.
-- Look for similar issues log in the [`analytics-platform` repository](https://github.com/ministryofjustice/analytics-platform/issues).
+- Look for similar issues log in the [`data-platform-support` repository](https://github.com/ministryofjustice/data-platform-support/issues).
 - Try asking the user to clear their cookies by visiting https://alpha-analytics-moj.eu.auth0.com/logout and try again.
 
 In addition the AP team can:
@@ -258,35 +265,6 @@ shows the code in context.
 ```
 
 ## Troubleshooting and monitoring
-
-### Kibana
-
-All logs from deployed apps can be viewed in [Kibana](https://kibana.services.analytical-platform.service.justice.gov.uk).
-
-To view all app logs:
-
-1.  Select **Discover** from the left sidebar.
-2.  Select **Open** from the menu bar.
-3.  Select **Application logs (alpha)** from the saved searches.
-
-To view the logs for a specific app:
-
-1.  Select **Add a filter**.
-2.  Select **app_name** as the field.
-3.  Select **is** as the operator.
-4.  Insert the app name followed by '-webapp' as the value.
-5.  Select **Save**.
-
-Log messages are displayed in the **message** column.
-
-By default, Kibana only shows logs for the last 15 minutes.
-If no logs are available for that time range, you will receive the warning 'No results match your search criteria'.
-
-To change the time range, select the clock icon in the menu bar.
-There are several presets or you can define a custom time range.
-
-Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches.
-To enable these features, select **Options\_** from within the search bar, then toggle **Turn on query features**.
 
 ### Deploying locally
 
@@ -404,6 +382,34 @@ Further technical details can be found in the [Cloud Platform's Monitoring secti
 
 You can access your applications logs in Cloud platform by following the the CP guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs.html#accessing-application-log-data)
 
+#### Kibana on Cloud Platform 
+
+Below are some notes to aid you in working with the Kibana service, on Cloud Platform.
+
+All logs from deployed apps can be viewed in [Kibana](https://kibana.cloud-platform.service.justice.gov.uk/_plugin/kibana/app/discove).
+
+To view the logs for a specific app: 
+
+1.  Select **live_kubernetes_cluster** from the `CHANGE INDEX PATTERN` dropdown list.
+2.  Select **Add a filter**.
+3.  Select **kubernetes.namespace_name**.
+4.  Select **is** as the operator.
+5.  Insert the app's name space by following the pattern `data-platform-app-<app_name>-<dev/prod>`.
+6.  In order to filter out all the logs related health-check, you can put `NOT log:  "/healthz"` in the `KQL` field.
+5.  Select **Save**.
+
+Log messages are displayed in the **message** column.
+
+By default, Kibana only shows logs for the last 15 minutes.
+If no logs are available for that time range, you will receive the warning 'No results match your search criteria'.
+
+To change the time range, select the clock icon in the menu bar.
+There are several presets or you can define a custom time range.
+
+Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches.
+To enable these features, select **Options\_** from within the search bar, then toggle **Turn on query features**.
+
+
 ### Managing Deployments
 
 Cloud platform  allows teams to connect to the Kubernetes cluster and manage their applications, using  ```kubectl```, the command line tool for Kubernetes.
@@ -454,7 +460,16 @@ If required you can access the Cloud platform via AWS, please follow the guidanc
 
 #### Adding cron job to your application
 
-If you need to a a cron job for a restart of you application the Cloud Platform [kubernetes cronjobs](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/other-topics/Cronjobs.html#kubernetes-cronjobs)
+A cronjob for restarting your application can be setup easier by adding the following line in to your app's development or production GitHub workflow:
+
+```
+--set Cron.schedule="0 6 * * *"
+```
+
+[crontab.guru](https://crontab.guru/) can be used to setup the schedule.
+
+If you need to a cron job for the other jobs, more guides are available on the Cloud Platform [kubernetes cronjobs](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/other-topics/Cronjobs.html#kubernetes-cronjobs)
+
 
 #### Changing the resources available to the application
 
@@ -499,6 +514,14 @@ To change the resources  insert at  the end of the file just before the $custom_
           
 
 Once the changes are pushed/merged to the repository the values will be applied to your Kubernetes namespace. 
+
+#### Changing the number of instances (pods) on name space
+
+The number of app instances running on `dev`/`prod` is 1 by default, if users experience long response times from the application (apart from trying to improving the performance through the code itself) you can increase the number of instances to reduce the wating time on `dev`/`prod` GitHub workflows, for example :-
+
+```
+--set ReplicaCount=3
+```
 
 #### Remember: “With great power comes great responsibility”  Your application’s namespace will be one of a number hosted on the same cluster, setting the values too high could crash the cluster!
 
