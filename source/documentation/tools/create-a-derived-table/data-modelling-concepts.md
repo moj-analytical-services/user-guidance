@@ -94,3 +94,5 @@ There are several key benefits of using dbt for creating data models.
 * **Data Lineage**: dbt provides a data lineage graph showing how different datasets and models are connected. This is valuable for understanding the impact of changes, identifying potential bottlenecks, and troubleshooting issues.
 
 * **Community and Ecosystem**: dbt has a strong user communityallowing us to benefit from shared knowledge, best practices, and resources. The ecosystem includes plugins, integrations, and extensions that can enhance our data transformation capabilities.
+
+
