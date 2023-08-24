@@ -58,6 +58,8 @@ The rationale behind this change is to:
 After the move to Cloud Platform hosting for Analytical Platform apps, you’ll have two active deployments of your apps at all times.
 These are your 'dev' (development) and 'prod' (production) deployments.
 
+Be aware that both production and dev currently point to the same data.
+
 Your code repository within the [ministryofjustice organisation](https://github.com/ministryofjustice/) was built from the [data-platform-app-template repo](https://github.com/ministryofjustice/data-platform-app-template), and has inherited the continuous integration and continuous delivery (CI/CD) pipelines (GitHub Action workflows) from that repo.
 These workflows will automatically build your docker images, push them to a remote image store, and then deploy the application based on how you’ve made your code changes:
 
@@ -133,7 +135,7 @@ Your deployed app can be accessed at two URLs:
 
 (where `repository-name` is the name of the relevant GitHub repository)
 
-By default, your user list will not have access to the `dev` deployed app.
+By default, the user list on  `dev`  empty and you will need to add any users requiring access via control panel.
 
 #### Pre-migration apps
 
