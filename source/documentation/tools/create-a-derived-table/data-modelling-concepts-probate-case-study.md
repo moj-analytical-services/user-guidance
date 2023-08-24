@@ -68,5 +68,7 @@ After various discussion We have omitted the cavatorAddress and deceasedAddress 
 
 By looking at cd fact table you are probably questioning why there are some ce variables there and the reason is that these variables are consistent throughout the case and they are not affected by a change in event and as our goal is to keep tables as simple and consistent as possible we decided to move them under the cd fact table. You may also decide that some of these variables are not even needed for the analysis so we can omit them completely.
 
+ <img src="../../../images/create-a-derived-table/caveate_table.png" alt="Probate Caveat Star Schema" width="400"/>
+
 ## Closure
 That concludes our explanation of the end-to-end process for building the probate dimensional model based on the provided JSON code. By following this process and leveraging the star schema, we can easily analyze and gain valuable insights from our data. 
