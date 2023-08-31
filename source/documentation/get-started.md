@@ -48,6 +48,7 @@ There are two workspaces we recommend joining: [Justice Digital](https://mojdt.s
 ### Join Slack channels
 
 Join the following Slack channels in the **ASD workspace**:
+
 - **#ask-data-engineering**: for discussing data engineering and making technical queries to the Data Engineering team regarding Airflow
 - **#data_science**: for discussing data science tools and techniques with the Ministry of Justice's Data Science community
 - **#git**: for discussing Git tooling with the wider Ministry of Justice community
@@ -55,6 +56,7 @@ Join the following Slack channels in the **ASD workspace**:
 - **#r** and **#intro_r**: for discussing R programming with the wider Ministry of Justice community; #intro_r is aimed at new users
 
 Additionally, in the Justice Digital **workspace** join the following:
+
 - **#analytical-platform-support**: for tracking support queries that Analytical Platform users raise on [GitHub Issues](https://github.com/ministryofjustice/data-platform-support/issues)
 - **#ask-operations-engineering**: for requesting support with GitHub; you can use this channel to request access to the Analytical Platform later in this guide
 
