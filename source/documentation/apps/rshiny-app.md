@@ -6,7 +6,7 @@ We have guidance for:
 - [Deploying your app](#app-deployment)
 - [Accessing your deployed app](#accessing-the-deployed-app)
 - [Managing your app users](#manage-app-users)
-- [Managing and Monitoring Deployments](http://localhost:4567/apps/rshiny-app.html#managing-and-monitoring-deployments)
+- [Managing and Monitoring Deployments](#managing-and-monitoring-deployments)
 
 as well as common issues faced during these stages of publishing your app.
 
@@ -388,7 +388,7 @@ You can access your applications logs in Cloud platform by following the the CP 
 
 Below are some notes to aid you in working with the Kibana service, on Cloud Platform.
 
-All logs from deployed apps can be viewed in [Kibana](https://kibana.cloud-platform.service.justice.gov.uk/_plugin/kibana/app/discove).
+All logs from deployed apps can be viewed in [Kibana](https://kibana.cloud-platform.service.justice.gov.uk/_plugin/kibana/app/discover).
 
 To view the logs for a specific app: 
 
@@ -398,7 +398,8 @@ To view the logs for a specific app:
 4.  Select **is** as the operator.
 5.  Insert the app's name space by following the pattern `data-platform-app-<app_name>-<dev/prod>`.
 6.  In order to filter out all the logs related health-check, you can put `NOT log:  "/healthz"` in the `KQL` field.
-5.  Select **Save**.
+7.  Select **Save**.
+8.  (Optional) - you can select to view only the log output by adding it from the **Available Fields** list in the left hand pane using the (+) button revealed on mouse hover
 
 Log messages are displayed in the **message** column.
 
