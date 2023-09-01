@@ -6,7 +6,7 @@ We have guidance for:
 - [Deploying your app](#app-deployment)
 - [Accessing your deployed app](#accessing-the-deployed-app)
 - [Managing your app users](#manage-app-users)
-- [Managing and Monitoring Deployments](http://localhost:4567/apps/rshiny-app.html#managing-and-monitoring-deployments)
+- [Managing and Monitoring Deployments](#managing-and-monitoring-deployments)
 
 as well as common issues faced during these stages of publishing your app.
 
