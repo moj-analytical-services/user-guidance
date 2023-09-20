@@ -1,3 +1,5 @@
+# Data Modelling Probate Case Study
+
 ## Overview
 
 A “probate caveat” is a legal notice to the court that a person has or may have an interest in a decedent’s estate, and they want to be notified before the court takes certain actions, like granting probate to a will. The primary purpose of filing a caveat is to prevent the probate of a will, at least temporarily, so that concerns or objections about the validity of the will or the appointment of a particular personal representative can be addressed.
