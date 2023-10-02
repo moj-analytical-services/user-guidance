@@ -32,10 +32,6 @@ Use the following terms to refer to specific types of app:
 * R Shiny app
 * static web app
 
-## Concourse
-
-Upper case.
-
 ## conda
 
 Lower case.
