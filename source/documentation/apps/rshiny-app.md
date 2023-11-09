@@ -618,7 +618,7 @@ ADD . .
 USER 998
 ```
 
-If you switch to open source server from the DPAT own one, the key changes you need to make are 
+If you switch to the open source server from the AP shiny server, the key changes you need to make are:
 - Switching to use new base docker image 
 ```
 FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
