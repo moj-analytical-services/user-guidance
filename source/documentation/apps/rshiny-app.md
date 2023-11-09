@@ -547,7 +547,7 @@ Guidance on  managing Auth and Secrets through the Control Panel can be found [M
 
 ## Shiny server
 
-There are a few choices for running a rshiny app on Cloud platform, the team for developing and maintaining the dashboard app has the full control to choose the best way and practices to run the app by building their own Dockfile. Since the shiny-framework uses `websocket` as the primary communication protocal between frontend and backend, no matter which choice you are going to choose, the minimum capabilities required are:- 
+There are a few choices for running a rshiny app on Cloud Platform. The team responsible for developing and maintaining the dashboard app has full control to choose the best way and practices to run the app by building their own Dockerfile. Since the shiny-framework uses `websocket` as the primary communication protocol between frontend and backend, no matter which choice you decide, the minimum capabilities required are:- 
 - Keeping the connection live as long as possible e.g. implementing heart-beat mechanism.
 - Being able to handle the lifecyle of session 
 - Providing a method for reconnecting when the websocket drops
