@@ -575,7 +575,7 @@ It offers more features than the AP shiny server and supports
   - Reconnect and load existing session rather than creating a new session automatically 
   - If reconnection continues to fail, the manual reconnection pop-up will trigger an app reload rather than re-triggering the same reconnection behaviour
 - Better session management:
-  - The session will be closed when session is idle for certain period of time.
+  - The session will be closed when the session is idle for a certain period of time
 
 which can 
 - Session data (reactive values) is retained even after a reconnection happens
