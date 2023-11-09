@@ -560,7 +560,7 @@ The AP team offers two shiny-server solutions.
 We developed a mini version of shiny-sever in nodejs,  it provides the simply function to support the above minimum capabilities
 - User sockjs which supports heart-beat
 - Create a new session for each new websocket conneciton 
-- Will try to reconnect to the shiny app automatically when websocket connect drops. If keeping failling and reaching the maximum of attemps, a window will be appeared to ask user to trigger reconnect manually.
+- Will try to reconnect to the shiny app automatically when the websocket connection drops. If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect.
 
 Majority of the shiny apps hosted on CP are using this version,  the current tag for this docker image is 
 `593291632749.dkr.ecr.eu-west-1.amazonaws.com/rshiny:r4.1.3-shiny0.0.6`
