@@ -629,7 +629,7 @@ ENV PATH="/opt/shiny-server/bin:/opt/shiny-server/ext/node/bin:${PATH}"
 ENV SHINY_APP=/srv/shiny-server
 ENV NODE_ENV=production
 
-
+RUN chown shiny:shiny /srv/shiny-server
 CMD analytics-platform-shiny-server
 EXPOSE 9999
 ```
