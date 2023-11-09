@@ -583,7 +583,7 @@ This behaviour can result in:
 
 It also provides more [configuration options (non-Pro ones)](https://docs.posit.co/shiny-server/)
 
-#### Planning to use open source shiny server 
+#### Instructions for using the open source shiny server image
 
 ##### Dockerfile
 
