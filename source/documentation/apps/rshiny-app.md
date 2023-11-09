@@ -577,7 +577,7 @@ It offers more features than the AP shiny server and supports
 - Better session management:
   - The session will be closed when the session is idle for a certain period of time
 
-which can 
+This behaviour can result in:
 - Session data (reactive values) is retained even after a reconnection happens
 - Release the resources e.g., memory linked to the session whhich avoid potential memory leaking
 
