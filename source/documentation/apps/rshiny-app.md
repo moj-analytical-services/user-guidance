@@ -553,7 +553,7 @@ There are a few choices for running a rshiny app on Cloud platform, the team for
 - Providing a method for reconnecting when the websocket drops
 - Working with auth-proxy, the DPAT componenet responsible for controling user's acces,  unless the app is public facing or application can handle it itself.
 
-DPAT team offers two shiny-server solutions.
+The AP team offers two shiny-server solutions.
 
 ### AP version of shiny-server
 
