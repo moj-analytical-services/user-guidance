@@ -635,7 +635,7 @@ EXPOSE 9999
 ```
 
 ##### GitHub work flows
-Assume the app uses the GitHub flow from DPAT, the following parameters for helm installtion are required
+Assuming the app uses the GitHub workflows from AP, the following parameters for helm installation are required in both the `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` github action workflow files:
 
 ```
 WebApp.AlternativeHealthCheck.enabled="true"
