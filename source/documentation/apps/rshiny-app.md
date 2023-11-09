@@ -547,7 +547,10 @@ Guidance on  managing Auth and Secrets through the Control Panel can be found [M
 
 ## Shiny server
 
-There are a few choices for running a rshiny app on Cloud Platform. The team responsible for developing and maintaining the dashboard app has full control to choose the best way and practices to run the app by building their own Dockerfile. Since the shiny-framework uses `websocket` as the primary communication protocol between frontend and backend, no matter which choice you decide, the minimum capabilities required are:- 
+There are a few choices for running a rshiny app on Cloud Platform. The team responsible for developing and maintaining the dashboard app has full control to choose the best way and practices to run the app by building their own Dockerfile.
+
+Since the shiny-framework uses `websocket` as the primary communication protocol between frontend and backend, no matter which choice you decide, the minimum capabilities required are:
+
 - Keeping the connection live as long as possible e.g. implementing heart-beat mechanism.
 - Being able to handle the lifecyle of session 
 - Providing a method for reconnecting when the websocket drops
@@ -558,11 +561,14 @@ The AP team offers two shiny-server solutions.
 ### AP version of shiny-server
 
 We developed a mini version of shiny-sever in nodejs, it provides a minimal implementation to support the required capabilities:
+
 - Uses sockjs which supports heart-beat
 - Create a new session for each new websocket conneciton 
-- Will try to reconnect to the shiny app automatically when the websocket connection drops. If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect.
+- Will try to reconnect to the shiny app automatically when the websocket connection drops
+- If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect
 
-The majority of the shiny apps hosted on Cloud Platform use this version. The current tag for this docker image is 
+The majority of the shiny apps hosted on Cloud Platform use this version. The current tag for this docker image is:
+
 `593291632749.dkr.ecr.eu-west-1.amazonaws.com/rshiny:r4.1.3-shiny0.0.6`
 
 
@@ -570,7 +576,8 @@ The majority of the shiny apps hosted on Cloud Platform use this version. The cu
 
 We also provide a solution for using the [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support `USER_EMAIL` and `COOKIE` headers.  The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
 
-It offers more features than the AP shiny server and supports 
+It offers more features than the AP shiny server and supports:
+
 - Better reconnection behaviour:
   - Reconnect and load existing session rather than creating a new session automatically 
   - If reconnection continues to fail, the manual reconnection pop-up will trigger an app reload rather than re-triggering the same reconnection behaviour
@@ -583,11 +590,12 @@ This behaviour can result in:
 
 It also provides more [configuration options as outlined here](https://docs.posit.co/shiny-server/). Note: options marked as "pro" are not available
 
-#### Instructions for using the open source shiny server image
+### Instructions for using the open source shiny server image
 
-##### Dockerfile
+#### Example Dockerfile
 
-The following example can be used as the starting point for making your own Dockerfile
+The following example can be used as the starting point when making your own Dockerfile
+
 ```
 # The base docker image
 FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
@@ -618,12 +626,18 @@ ADD . .
 USER 998
 ```
 
-If you switch to the open source server from the AP shiny server, the key changes you need to make are:
-- Switching to use new base docker image 
+### Instructions for switching from the AP shiny server to the open-source server
+
+If you already use the AP shiny server, and would like to switch to the open source server, the key changes you need to make are:
+
+- Change the base docker image in yout Dockerfile:
+
 ```
 FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
 ```
-- Removing the following redundant parts from your Dockerfile 
+
+- If present, ensure the following redundant parts of your Dockerfile are removed:
+
 ```
 ENV PATH="/opt/shiny-server/bin:/opt/shiny-server/ext/node/bin:${PATH}"
 ENV SHINY_APP=/srv/shiny-server
@@ -634,8 +648,9 @@ CMD analytics-platform-shiny-server
 EXPOSE 9999
 ```
 
-##### GitHub work flows
-Assuming the app uses the GitHub workflows from AP, the following parameters for helm installation are required in both the `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` github action workflow files:
+#### Update GitHub actions work flows
+
+Assuming the app uses the GitHub actions workflows from AP, the following parameters for helm installation are required in both the `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` github action workflow files:
 
 ```
 WebApp.AlternativeHealthCheck.enabled="true"

@@ -20,5 +20,6 @@
 
 Staticfile.auth
 
-#ignore vscode files
+#ignore editor files
 .vscode
+.idea
