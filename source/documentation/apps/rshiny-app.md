@@ -641,7 +641,7 @@ Assume the app uses the GitHub flow from DPAT, the following parameters for helm
 WebApp.AlternativeHealthCheck.enabled="true"
 WebApp.AlternativeHealthCheck.port=9999
 ```
-An completed example for installing the helm chart in the workflow
+A complete example for installing the helm chart in the workflow below. These changes will need to be made in both:
 
 
 ```
