@@ -666,4 +666,4 @@ An completed example for installing the helm chart in the workflow
           $custom_variables
 ```
 
-The full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
+A full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
