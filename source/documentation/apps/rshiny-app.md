@@ -557,7 +557,7 @@ The AP team offers two shiny-server solutions.
 
 ### AP version of shiny-server
 
-We developed a mini version of shiny-sever in nodejs,  it provides the simply function to support the above minimum capabilities
+We developed a mini version of shiny-sever in nodejs, it provides a minimal implementation to support the required capabilities:
 - Uses sockjs which supports heart-beat
 - Create a new session for each new websocket conneciton 
 - Will try to reconnect to the shiny app automatically when the websocket connection drops. If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect.
