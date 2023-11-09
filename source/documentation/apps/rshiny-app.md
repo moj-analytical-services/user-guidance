@@ -630,7 +630,7 @@ USER 998
 
 If you already use the AP shiny server, and would like to switch to the open source server, the key changes you need to make are:
 
-- Change the base docker image in yout Dockerfile:
+- Change the base docker image in your Dockerfile:
 
 ```
 FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
@@ -660,25 +660,25 @@ A complete example for installing the helm chart in the workflow below. These ch
 
 
 ```
-          helm upgrade --install --wait --timeout 10m0s --namespace $KUBE_NAMESPACE $RELEASE_NAME mojanalytics/webapp-cp \
-          --set AuthProxy.Env.Auth0Domain=$AUTH0_DOMAIN \
-          --set AuthProxy.Env.Auth0Passwordless=$AUTH0_PASSWORDLESS \
-          --set AuthProxy.Env.Auth0TokenAlg=$AUTH0_TOKEN_ALG \
-          --set AuthProxy.Env.AuthenticationRequired=$AUTHENTICATION_REQUIRED \
-          --set AuthProxy.Env.IPRanges=$process_ip_range \
-          --set AuthProxy.Image.Repository=$ECR_REPO_AUTH0 \
-          --set AuthProxy.Image.Tag="latest" \
-          --set Namespace=$KUBE_NAMESPACE \
-          --set WebApp.AlternativeHealthCheck.enabled="true" \
-          --set WebApp.AlternativeHealthCheck.port=9999 \
-          --set Secrets.Auth0.ClientId=$AUTH0_CLIENT_ID \
-          --set Secrets.Auth0.ClientSecret=$AUTH0_CLIENT_SECRET \
-          --set Secrets.Auth0.CookieSecret=$COOKIE_SECRET \
-          --set ServiceAccount.RoleARN=$APP_ROLE_ARN \
-          --set WebApp.Image.Repository=$ECR_REPO_WEBAPP \
-          --set WebApp.Image.Tag=$NEW_TAG_V \
-          --set WebApp.Name=$KUBE_NAMESPACE \
-          $custom_variables
+  helm upgrade --install --wait --timeout 10m0s --namespace $KUBE_NAMESPACE $RELEASE_NAME mojanalytics/webapp-cp \
+  --set AuthProxy.Env.Auth0Domain=$AUTH0_DOMAIN \
+  --set AuthProxy.Env.Auth0Passwordless=$AUTH0_PASSWORDLESS \
+  --set AuthProxy.Env.Auth0TokenAlg=$AUTH0_TOKEN_ALG \
+  --set AuthProxy.Env.AuthenticationRequired=$AUTHENTICATION_REQUIRED \
+  --set AuthProxy.Env.IPRanges=$process_ip_range \
+  --set AuthProxy.Image.Repository=$ECR_REPO_AUTH0 \
+  --set AuthProxy.Image.Tag="latest" \
+  --set Namespace=$KUBE_NAMESPACE \
+  --set WebApp.AlternativeHealthCheck.enabled="true" \
+  --set WebApp.AlternativeHealthCheck.port=9999 \
+  --set Secrets.Auth0.ClientId=$AUTH0_CLIENT_ID \
+  --set Secrets.Auth0.ClientSecret=$AUTH0_CLIENT_SECRET \
+  --set Secrets.Auth0.CookieSecret=$COOKIE_SECRET \
+  --set ServiceAccount.RoleARN=$APP_ROLE_ARN \
+  --set WebApp.Image.Repository=$ECR_REPO_WEBAPP \
+  --set WebApp.Image.Tag=$NEW_TAG_V \
+  --set WebApp.Name=$KUBE_NAMESPACE \
+  $custom_variables
 ```
 
 A full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
