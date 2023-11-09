@@ -555,7 +555,7 @@ There are a few choices for running a rshiny app on Cloud platform, the team for
 
 DPAT team offers two shiny-server solutions.
 
-### DPAT version of shiny-server
+### AP version of shiny-server
 
 We developed a mini version of shiny-sever in nodejs,  it provides the simply function to support the above minimum capabilities
 - User sockjs which supports heart-beat
