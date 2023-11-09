@@ -551,7 +551,7 @@ There are a few choices for running a rshiny app on Cloud platform, the team for
 - Keeping the connection live as long as possible e.g. implementing heart-beat mechanism.
 - Being able to handle the lifecyle of session 
 - Providing a method for reconnecting when the websocket drops
-- Working with auth-proxy, the DPAT componenet responsible for controling user's acces,  unless the app is public facing or application can handle it itself.
+- Working with auth-proxy, the AP component responsible for controlling user's access,  unless the app is public facing or application handles authentication itself.
 
 The AP team offers two shiny-server solutions.
 
