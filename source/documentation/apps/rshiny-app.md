@@ -573,7 +573,7 @@ We also provide a solution for using the [open source Shiny Server](https://gith
 It offers more features than the AP shiny server and supports 
 - Better reconnection behaviour:
   - Reconnect and load existing session rather than creating a new session automatically 
-  - If failed to reconnect eventually, the window popped up for manual-reconnection will reload the app rather than retriggering same reconneciton behaviour
+  - If reconnection continues to fail, the manual reconnection pop-up will trigger an app reload rather than re-triggering the same reconnection behaviour
 - Better session management:
   - The session will be closed when session is idle for certain period of time.
 
