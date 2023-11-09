@@ -623,7 +623,7 @@ If you switch to open source server from the DPAT own one, the key changes you n
 ```
 FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
 ```
-- Removing the followingr reduncant parts from Dockerfile 
+- Removing the following redundant parts from your Dockerfile 
 ```
 ENV PATH="/opt/shiny-server/bin:/opt/shiny-server/ext/node/bin:${PATH}"
 ENV SHINY_APP=/srv/shiny-server
