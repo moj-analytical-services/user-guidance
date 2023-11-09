@@ -578,7 +578,7 @@ It offers more features than the AP shiny server and supports
   - The session will be closed when session is idle for certain period of time.
 
 which can 
-- Keep the session data(reactive values) even reconnection happens
+- Session data (reactive values) is retained even after a reconnection happens
 - Release the resources e.g., memory linked to the session whhich avoid potential memory leaking
 
 It also provides more [configuration options (non-Pro ones)](https://docs.posit.co/shiny-server/)
