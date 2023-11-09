@@ -562,7 +562,7 @@ We developed a mini version of shiny-sever in nodejs, it provides a minimal impl
 - Create a new session for each new websocket conneciton 
 - Will try to reconnect to the shiny app automatically when the websocket connection drops. If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect.
 
-Majority of the shiny apps hosted on CP are using this version,  the current tag for this docker image is 
+The majority of the shiny apps hosted on Cloud Platform use this version. The current tag for this docker image is 
 `593291632749.dkr.ecr.eu-west-1.amazonaws.com/rshiny:r4.1.3-shiny0.0.6`
 
 
