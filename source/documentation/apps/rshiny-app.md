@@ -496,7 +496,7 @@ helm upgrade --install --wait --timeout 10m0s --namespace $KUBE_NAMESPACE $KUBE_
 --set AuthProxy.Env.AuthenticationRequired=$AUTHENTICATION_REQUIRED \
 --set AuthProxy.Env.IPRanges=$process_ip_range \
 --set AuthProxy.Image.Repository=$ECR_REPO_AUTH0 \
---set AuthProxy.Image.Tag="v5.3.3" \
+--set AuthProxy.Image.Tag="latest" \
 --set Namespace=$KUBE_NAMESPACE \
 --set Secrets.Auth0.ClientId=$AUTH0_CLIENT_ID \
 --set Secrets.Auth0.ClientSecret=$AUTH0_CLIENT_SECRET \
@@ -544,3 +544,126 @@ As the application is now hosted in Cloud Platform and GitHub workflow has been 
 
 Guidance on  managing Auth and Secrets through the Control Panel can be found [Manage deployment settings of an app on Control panel.](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/manage-app-settings-from-cpanel.html#manage-deployment-settings-of-an-app-on-control-panel)
 
+
+## Shiny server
+
+There are a few choices for running a rshiny app on Cloud Platform. The team responsible for developing and maintaining the dashboard app has full control to choose the best way and practices to run the app by building their own Dockerfile. Since the shiny-framework uses `websocket` as the primary communication protocol between frontend and backend, no matter which choice you decide, the minimum capabilities required are:- 
+- Keeping the connection live as long as possible e.g. implementing heart-beat mechanism.
+- Being able to handle the lifecyle of session 
+- Providing a method for reconnecting when the websocket drops
+- Working with auth-proxy, the AP component responsible for controlling user's access,  unless the app is public facing or application handles authentication itself.
+
+The AP team offers two shiny-server solutions.
+
+### AP version of shiny-server
+
+We developed a mini version of shiny-sever in nodejs, it provides a minimal implementation to support the required capabilities:
+- Uses sockjs which supports heart-beat
+- Create a new session for each new websocket conneciton 
+- Will try to reconnect to the shiny app automatically when the websocket connection drops. If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect.
+
+The majority of the shiny apps hosted on Cloud Platform use this version. The current tag for this docker image is 
+`593291632749.dkr.ecr.eu-west-1.amazonaws.com/rshiny:r4.1.3-shiny0.0.6`
+
+
+### Open source shiny-server
+
+We also provide a solution for using the [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support `USER_EMAIL` and `COOKIE` headers.  The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
+
+It offers more features than the AP shiny server and supports 
+- Better reconnection behaviour:
+  - Reconnect and load existing session rather than creating a new session automatically 
+  - If reconnection continues to fail, the manual reconnection pop-up will trigger an app reload rather than re-triggering the same reconnection behaviour
+- Better session management:
+  - The session will be closed when the session is idle for a certain period of time
+
+This behaviour can result in:
+- Session data (reactive values) is retained even after a reconnection happens
+- Release resources e.g. memory linked to the session which avoids potential memory leaking
+
+It also provides more [configuration options as outlined here](https://docs.posit.co/shiny-server/). Note: options marked as "pro" are not available
+
+#### Instructions for using the open source shiny server image
+
+##### Dockerfile
+
+The following example can be used as the starting point for making your own Dockerfile
+```
+# The base docker image
+FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
+
+# ** Optional step: only if some of R pakcages requires the system libraries which are not covered by base image
+#   the one in the example below has been provided in base image.
+# RUN apt-get update \
+#   && apt-get install -y --no-install-recommends \
+#     libglpk-dev
+
+
+# use renv for packages
+ADD renv.lock renv.lock
+
+# Install R packages
+RUN R -e "install.packages('renv'); renv::restore()"
+
+# ** Optional step: only if the app requires python packages
+# Make sure reticulate uses the system Python
+# ENV RETICULATE_PYTHON="/usr/bin/python3"
+# ensure requirements.txt exists (created automatically when making a venv in renv)
+# COPY requirements.txt requirements.txt
+# RUN python3 -m pip install -r requirements.txt
+
+# Add shiny app code
+ADD . .
+
+USER 998
+```
+
+If you switch to the open source server from the AP shiny server, the key changes you need to make are:
+- Switching to use new base docker image 
+```
+FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
+```
+- Removing the following redundant parts from your Dockerfile 
+```
+ENV PATH="/opt/shiny-server/bin:/opt/shiny-server/ext/node/bin:${PATH}"
+ENV SHINY_APP=/srv/shiny-server
+ENV NODE_ENV=production
+
+RUN chown shiny:shiny /srv/shiny-server
+CMD analytics-platform-shiny-server
+EXPOSE 9999
+```
+
+##### GitHub work flows
+Assuming the app uses the GitHub workflows from AP, the following parameters for helm installation are required in both the `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` github action workflow files:
+
+```
+WebApp.AlternativeHealthCheck.enabled="true"
+WebApp.AlternativeHealthCheck.port=9999
+```
+A complete example for installing the helm chart in the workflow below. These changes will need to be made in both:
+
+
+```
+          helm upgrade --install --wait --timeout 10m0s --namespace $KUBE_NAMESPACE $RELEASE_NAME mojanalytics/webapp-cp \
+          --set AuthProxy.Env.Auth0Domain=$AUTH0_DOMAIN \
+          --set AuthProxy.Env.Auth0Passwordless=$AUTH0_PASSWORDLESS \
+          --set AuthProxy.Env.Auth0TokenAlg=$AUTH0_TOKEN_ALG \
+          --set AuthProxy.Env.AuthenticationRequired=$AUTHENTICATION_REQUIRED \
+          --set AuthProxy.Env.IPRanges=$process_ip_range \
+          --set AuthProxy.Image.Repository=$ECR_REPO_AUTH0 \
+          --set AuthProxy.Image.Tag="latest" \
+          --set Namespace=$KUBE_NAMESPACE \
+          --set WebApp.AlternativeHealthCheck.enabled="true" \
+          --set WebApp.AlternativeHealthCheck.port=9999 \
+          --set Secrets.Auth0.ClientId=$AUTH0_CLIENT_ID \
+          --set Secrets.Auth0.ClientSecret=$AUTH0_CLIENT_SECRET \
+          --set Secrets.Auth0.CookieSecret=$COOKIE_SECRET \
+          --set ServiceAccount.RoleARN=$APP_ROLE_ARN \
+          --set WebApp.Image.Repository=$ECR_REPO_WEBAPP \
+          --set WebApp.Image.Tag=$NEW_TAG_V \
+          --set WebApp.Name=$KUBE_NAMESPACE \
+          $custom_variables
+```
+
+A full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
