@@ -570,7 +570,7 @@ The majority of the shiny apps hosted on Cloud Platform use this version. The cu
 
 We also provide a solution for using the [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support `USER_EMAIL` and `COOKIE` headers.  The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
 
-It offers more features than the DPAT own one and supports 
+It offers more features than the AP shiny server and supports 
 - Better reconnection behaviour:
   - Reconnect and load existing session rather than creating a new session automatically 
   - If failed to reconnect eventually, the window popped up for manual-reconnection will reload the app rather than retriggering same reconneciton behaviour
