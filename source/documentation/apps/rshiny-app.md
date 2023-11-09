@@ -568,7 +568,7 @@ Majority of the shiny apps hosted on CP are using this version,  the current tag
 
 ### Open source shiny-server
 
-We also provide the solution of using [open source one](https://github.com/rstudio/shiny-server) with a few minor tweaks to support `USER_EMAIL`and `COOKIE` headers.  The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, current is `1.5.20.1002`.
+We also provide a solution for using the [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support `USER_EMAIL` and `COOKIE` headers.  The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
 
 It offers more features than the DPAT own one and supports 
 - Better reconnection behaviour:
