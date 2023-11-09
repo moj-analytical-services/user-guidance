@@ -579,7 +579,7 @@ It offers more features than the AP shiny server and supports
 
 This behaviour can result in:
 - Session data (reactive values) is retained even after a reconnection happens
-- Release the resources e.g., memory linked to the session whhich avoid potential memory leaking
+- Release resources e.g. memory linked to the session which avoids potential memory leaking
 
 It also provides more [configuration options as outlined here](https://docs.posit.co/shiny-server/). Note: options marked as "pro" are not available
 
