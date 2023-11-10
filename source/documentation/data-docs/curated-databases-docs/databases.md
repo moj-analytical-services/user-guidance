@@ -35,7 +35,7 @@ In this way, as records are edited in the source database, they are recorded on 
 Otherwise you will duplicate records. For Platform curated data sources the unique key of a record becomes `{source_db_uk AND (mojap_start_datetime OR mojap_end_datetime)}`. In almost all cases, you should use a specific timestamp in a filter of the form:
 
     ... mojap_start_datetime <= timestamp'YYYY-MM-DD'
-    AND mojap_start_datetime > timestamp'YYYY-MM-DD'
+    AND mojap_end_datetime > timestamp'YYYY-MM-DD'
 
 Don't be tempted to use the SQL `BETWEEN` construct - it is inclusive of both timestamps and therefore could fail to return the correct results.
 
