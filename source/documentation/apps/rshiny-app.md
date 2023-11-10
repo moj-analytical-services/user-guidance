@@ -211,7 +211,7 @@ This is sensitive data, so you must ensure that you are following all relevant i
 
 The [shiny-headers-demo](https://github.com/moj-analytical-services/shiny-headers-demo) repository contains an example of how to do this.
 
-These features require you to be using the Analytical Platform version of `shiny-server`.
+These features are only available in the Analytical Platform version of `shiny-server` and the open source `shiny server` image provided by AP ([see details of both options below](#shiny-server)).
 
 #### Finding current users' email addresses
 
@@ -223,6 +223,17 @@ get("HTTP_USER_EMAIL", envir=session$request)
 
 [This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L58)
 in `shiny-headers-demo` shows the code in context.
+
+**NOTE**: Ensure the latest `AuthProxy` image is being used or the user email header will not be accessible. This is defined in the `helm upgrade` command in the GitHub actions files that handle deployments - `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml`.
+
+Check these files for `AuthProxy.Image.Tag` and set it to `latest` as the example below:
+
+```
+--set AuthProxy.Image.Tag="latest" \
+```
+
+A full example in a working deployed app can be found [here](https://github.com/ministryofjustice/ap-rshiny-notesbook/blob/main/.github/workflows/build-push-deploy-dev.yml#L167C11-L167C47).
+
 
 #### Finding current users' user profiles
 
@@ -563,7 +574,7 @@ The AP team offers two shiny-server solutions.
 We developed a mini version of shiny-sever in nodejs, it provides a minimal implementation to support the required capabilities:
 
 - Uses sockjs which supports heart-beat
-- Create a new session for each new websocket conneciton 
+- Create a new session for each new websocket connection
 - Will try to reconnect to the shiny app automatically when the websocket connection drops
 - If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect
 
