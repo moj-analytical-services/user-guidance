@@ -693,3 +693,21 @@ A complete example for installing the helm chart in the workflow below. These ch
 ```
 
 A full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
+
+#### Enabling Web Application Firewall (WAF) for Data Platform Apps 
+
+There are two flags that need to be set to enable WAF for your application, Ingress.ModSec.enabled and GithubTeam
+
+To do this by adding the following lines in to your app's  `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files:
+
+To change the resources insert at  the end of the file just before the $custom_variables the following as appropriate, remembering to use the line
+continuation “\” on the existing last line.
+
+> --set Ingress.ModSec.enabled="true"
+> --set GithubTeam="your github team"
+
+The changes  will be will be applied to your Kubernetes namespace following a push/merge to the repository and the running of the workflow
+
+To disable 
+
+> --set Ingress.ModSec.enabled="false"
