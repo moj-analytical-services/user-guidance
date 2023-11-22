@@ -698,10 +698,7 @@ A full working example is available [here](https://github.com/ministryofjustice/
 
 There are two flags that need to be set to enable WAF for your application, Ingress.ModSec.enabled and GithubTeam
 
-To do this by adding the following lines in to your app's  `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files:
-
-To change the resources insert at  the end of the file just before the $custom_variables the following as appropriate, remembering to use the line
-continuation “\” on the existing last line.
+To do this modify your app's  `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files as follows:
 
 ```
  --set WebApp.Image.Tag=$NEW_TAG_V \
