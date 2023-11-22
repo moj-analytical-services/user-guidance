@@ -703,8 +703,13 @@ To do this by adding the following lines in to your app's  `build-push-deploy-de
 To change the resources insert at  the end of the file just before the $custom_variables the following as appropriate, remembering to use the line
 continuation “\” on the existing last line.
 
-> --set Ingress.ModSec.enabled="true"
-> --set GithubTeam="your github team"
+```
+ --set WebApp.Image.Tag=$NEW_TAG_V \
+ --set WebApp.Name=$KUBE_NAMESPACE \
+ --set Ingress.ModSec.enabled="true" \
+ --set GithubTeam="your github team" \
+$custom_variables
+```
 
 The changes  will be will be applied to your Kubernetes namespace following a push/merge to the repository and the running of the workflow
 
