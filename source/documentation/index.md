@@ -13,7 +13,7 @@ Primarily intended for Data Analysts in the Data and Analytical Services Directo
 - Legal Aid Agency (LAA)
 - Office of the Public Guardian (OPG)
 
-We can also host other MoJ organisations. [Contact us][contact] to discuss your options.
+If you would like to use the Analytical Platform please contact us via the relevant (support)[https://github.com/ministryofjustice/data-platform-support/issues/new/choose] route. 
 
 ### Knowledge requirements
 
@@ -24,7 +24,7 @@ The Analytical Platform incorporates a variety of technical tools and concepts. 
 - Python or R - to develop Analytical Platformplications on the Analytical Platform
 - SQL - to query and transform data
 
-## Benefits
+## Benefits of Using the Analytical Platform 
 
 In additional to Python and R compatibility, benefits of using the Analytical Platform include:
 
@@ -62,5 +62,3 @@ The Analytical Platform in hosted in a cloud-based ecosystem that is easy to acc
 - real-time data; however, the Airflow tool can schedule data processing as frequently as every few minutes
 - pure data archival: Amazon S3, which the Analytical Platform uses for data storage, does not offer index or search facilities
 - we can set up a custom bucket policy to archive data to S3-IA or Glacier but recommend exploring SaaS alternatives, such as SharePoint or Google Drive
-
-[contact]: mailto:analytical_platform@digital.justice.gov.uk
