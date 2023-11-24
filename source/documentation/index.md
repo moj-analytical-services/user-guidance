@@ -65,4 +65,4 @@ The Analytical Platform does not _currently_ provide the following:
 - pure data archival: Amazon S3, which the Analytical Platform uses for data storage, does not offer index or search facilities
 - we can set up a custom bucket policy to archive data to S3-IA or Glacier but recommend exploring SaaS alternatives, such as SharePoint or Google Drive
 
-A feature request can be raised via our (support)[https://github.com/ministryofjustice/data-platform-support/issues/new/choose] routes.
+If you would like to raise a feature request this can be done (here)[https://github.com/ministryofjustice/data-platform/issues/new/choose].
