@@ -56,9 +56,13 @@ The Analytical Platform in hosted in a cloud-based ecosystem that is easy to acc
 - multiple isolation levels between users and system components
 - resilience and high availability to provide optimal performance and uptime
 
-> **Note**: The Analytical Platform does not currently provide the following:
+### Out of Scope Offerings of the Analytical Platform 
+
+The Analytical Platform does not _currently_ provide the following:
 - production Analytical Platforms at scale
 - management information
 - real-time data; however, the Airflow tool can schedule data processing as frequently as every few minutes
 - pure data archival: Amazon S3, which the Analytical Platform uses for data storage, does not offer index or search facilities
 - we can set up a custom bucket policy to archive data to S3-IA or Glacier but recommend exploring SaaS alternatives, such as SharePoint or Google Drive
+
+A feature request can be raised via our defined (support)[https://github.com/ministryofjustice/data-platform-support/issues/new/choose] routes.
