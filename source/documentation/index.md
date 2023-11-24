@@ -6,7 +6,7 @@ This site provides instructions on how to configure and use the Analytical Platf
 
 ## Intended users
 
-Primarily intended for Data Analysts in the Data and Analytical Services Directorate, the Analytical Platform also hosts users from:
+Primarily intended for Data Analysts, in the Data and Analytical Services Directorate, the Analytical Platform also hosts users from:
 - Criminal Injury Claims (CICA)
 - HM Courts & Tribunals Service (HMCTS)
 - HM Prison and Probation Service (HMPPS)
@@ -20,8 +20,8 @@ If you would like to use the Analytical Platform please contact us via the relev
 The Analytical Platform incorporates a variety of technical tools and concepts. To use the platform, as a minimum we recommend you have a working knowledge of the following:
 
 - Amazon Athena and S3 - to create, manipulate and query data
-- GitHub and GitHub Actions - to manage your Analytical Platformplication code
-- Python or R - to develop Analytical Platformplications on the Analytical Platform
+- GitHub and GitHub Actions - to manage your application code
+- Python or R - to develop applications on the Analytical Platform
 - SQL - to query and transform data
 
 ## Benefits of Using the Analytical Platform 
@@ -31,7 +31,7 @@ In additional to Python and R compatibility, benefits of using the Analytical Pl
 ### Modern Data Tools and Services
 
 - the ability to freely install packages from CRAN and PyPI to perform advanced analytical techniques, such as text mining, predictive analytics and data visualisation
-- compatibility with current cloud data services, such as Amazon Athena, Glue and Redshift, offering scalability and a managed service at commodity pay-as-you-go prices
+- compatibility with current cloud data services, such as Amazon Athena, Glue and Redshift, offering scalability and a managed service
 
 ### Centralised Data
 
