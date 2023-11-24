@@ -1,6 +1,6 @@
 # Overview
 
-The Analytical Platform (Analytical Platform) is a data analysis platform made up of tools, packages and datasets for creating applications that utilise data within the Ministry of Justice (MoJ). The Analytical Platform provides development environments in both Python (JupyterLab) and R (RStudio), allowing you multiple ways to query, analyse and model data.
+The Analytical Platform (AP) is a data analysis platform made up of tools, packages and datasets for creating applications that utilise data within the Ministry of Justice (MoJ). The Analytical Platform provides development environments in both Python (JupyterLab) and R (RStudio), allowing you multiple ways to query, analyse and model data.
 
 This site provides instructions on how to configure and use the Analytical Platform.
 
