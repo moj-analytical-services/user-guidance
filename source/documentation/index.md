@@ -57,7 +57,7 @@ The Analytical Platform in hosted in a cloud-based ecosystem that is easy to acc
 - resilience and high availability to provide optimal performance and uptime
 
 > **Note**: The Analytical Platform does not currently provide the following:
-- production Analytical Platformps at scale
+- production Analytical Platforms at scale
 - management information
 - real-time data; however, the Airflow tool can schedule data processing as frequently as every few minutes
 - pure data archival: Amazon S3, which the Analytical Platform uses for data storage, does not offer index or search facilities
