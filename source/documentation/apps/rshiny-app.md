@@ -244,7 +244,7 @@ shows the code in context.
 
 Due to the [auth0 rate limit](https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/authentication-api-endpoint-rate-limits#limits-for-production-tenants-of-paying-customers) for `/userinfo`, the user-profile will be 
 cached for 10 minutes on auth-proxy. If somehow your app receives an exception, for example, token-expired, from the above call, you can add `/userinfo?force=true`
-to refresh the user-profle by force, 
+to refresh the user-profle by force.
 
 
 ## Troubleshooting and monitoring
