@@ -27,16 +27,10 @@ It is not currently possible to deploy new apps on the Analytical Platform, thou
 
 ### Existing apps
 
-#### Your post-migration app and you
-
-As part of the migration path from the Analytical Platform's hosting to the Cloud Platform there are some changes to how environments work.
-Previously, only applications whose owners had specifically created a separate dev environment had a means of testing deployments before production.
-Post-migration, all applications will have a live-like development environment, complete with continuous integration.
-This section provides an overview of that new setup.
 
 ##### Overview
 
-Your new environment is made up of two key elements:
+Your app environment is made up of two key elements:
 
 - A GitHub workflow
 - A Cloud Platform namespace
@@ -45,7 +39,7 @@ In brief, the workflow builds and deploys your code as a docker container, and t
 
 The flow looks something like this:
 
-![High level visual overview of post-migration apps' deployment pipeline using GitHub Actions](images/apps/overview.svg)
+![High level visual overview of apps' deployment pipeline using GitHub Actions](images/apps/overview.svg)
 
 The rationale behind this change is to:
 
@@ -80,9 +74,7 @@ You can view the status of your deployments either by checking the workflow runs
 The above describes how CI/CD will be set up by default in the ministryofjustice repo.
 Once you have ownership of the repo, you'll have the ownership of the `.github/workflow/` files too so you will be able to amend the processes and triggers so that they meet your needs.
 
-##### Your new deployment pipeline
-
-Concourse was decomissioned in 2022: its replacement is GitHub's CI system, GitHub Actions.
+##### Your app deployment pipeline
 
 GitHub Actions has workflow definitions located in your repository under `.github/workflows/`.
 
@@ -97,11 +89,6 @@ Its steps are:
 - Run `helm` against the development environment namespace.
 
 The production workflow behaves in the exact same way, containing the same steps, but will be triggered when a Pull Request is _merged_ into `main`, and will deploy to the production namespace instead
-
-##### Pre-migration urgent redeployment
-
-If you have an existing app that requires urgent redeployment, please [submit a request via GitHub issues](https://github.com/moj-analytical-services/analytical-platform-applications/issues/new?assignees=EO510%2C+YvanMOJdigital&labels=redeploy&template=redeploy-app-request.md&title=%5BREDEPLOY%5D).
-We normally redeploy apps each Wednesday, where we have recevied a request by the Friday before.
 
 ## Managing published apps
 
@@ -136,18 +123,6 @@ Your deployed app can be accessed at two URLs:
 (where `repository-name` is the name of the relevant GitHub repository)
 
 By default, the user list on  `dev`  empty and you will need to add any users requiring access via control panel.
-
-#### Pre-migration apps
-
-Your deployed app can be accessed at `repository-name.apps.alpha.mojanalytics.xyz`, where `repository-name` is the name of the relevant GitHub repository.
-
-If the repository name contains underscores, these will be converted to dashes in the app URL. For example, an app with a repository called `repository_name` would have the URL `repository-name.apps.alpha.mojanalytics.xyz`.
-
-#### Authenticating to your pre-migration apps
-
-When accessing an app, you can choose whether to sign in using an email link (default) or a one-time passcode.
-To sign in with a one-time passcode, add `/login?method=code` to the end of the app's URL, for example, `https://kpi-s3-proxy.apps.alpha.mojanalytics.xyz/login?method=code`.
-This requires the app to have been deployed since the [auth-proxy release on 30th Jan 2019](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.8).
 
 
 #### Authenticating to your app
@@ -276,6 +251,12 @@ shows the code in context.
   "guardian_authenticators": []
 }
 ```
+##### user-profile caching 
+
+Due to the [auth0 rate limit](https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/authentication-api-endpoint-rate-limits#limits-for-production-tenants-of-paying-customers) for `/userinfo`, the user-profile will be 
+cached for 10 minutes on auth-proxy. If somehow your app receives an exception, for example, token-expired, from the above call, you can add `/userinfo?force=true`
+to refresh the user-profle by force.
+
 
 ## Troubleshooting and monitoring
 
