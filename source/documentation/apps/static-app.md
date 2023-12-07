@@ -15,8 +15,8 @@ To grant access to someone, in the [Control Panel wepapps tab](https://controlpa
 ## Access the app
 
 The URL for the app will be 
-- dev deployment environment: the `respository-name` followed by `apps.live.cloud-platform.service.justice.gov.uk`.
-- prod deployment environment:  `<respository-name>-dev` followed by `apps.live.cloud-platform.service.justice.gov.uk`.
+- dev deployment environment: the `<respository-name>-dev` followed by `apps.live.cloud-platform.service.justice.gov.uk`.
+- prod deployment environment:  `<respository-name>` followed by `apps.live.cloud-platform.service.justice.gov.uk`.
 
 So for the example project above "static-web-deploy", the deployment URL will be 
 - dev: `https://static-web-deploy-dev.apps.live.cloud-platform.service.justice.gov.uk`
