@@ -145,7 +145,7 @@ team. It is intended for testing while developing an application.
 
 ## Troubleshooting
 
-This feature has been introduced in the v0.6.5 jupyer-lab helm chart. If following
+This feature has been introduced in the v0.6.5 jupyter-lab helm chart. If following
 this guide doesn't work for you it is likely that you're on an older version.
 Contact us on the [#analytical-platform-support](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ) Slack channel. Alternatively, contact us by [email](mailto:analytical_platform@digital.justice.gov.uk)
 to request an upgrade.
