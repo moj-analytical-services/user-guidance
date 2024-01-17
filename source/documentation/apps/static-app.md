@@ -4,6 +4,15 @@
 
 Create a repository for your app from the [Data Platfrom App Template](https://github.com/ministryofjustice/data-platform-app-template). By using the template repository, you will be set up with GitHub Actions files that will deploy a `dev` and `prod` environment of your app.
 
+### Overview
+
+1. Create your repository
+    - [From the template](#create-a-repository-from-the-template)
+    - [Or use an existing repository](#using-an-existing-repository)
+2. [Update the repository teams](#update-repository-teams)
+3. [Check your environmnets](#environments)
+3. [Next steps](#next-steps)
+
 ### Create a repository from the template
 
 1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser
@@ -12,6 +21,14 @@ Create a repository for your app from the [Data Platfrom App Template](https://g
 4. Enter a repository name of your choosing. NOTE: the name of the repository will later be used to create your Cloud Platform namespace, and will be used in the URL to access your deployed app.
 5. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository
 6. Click the "Create repository" button and wait for your repository to be created
+
+### Using an existing repository
+
+If you already have a repository and do not wish to create a new one with the `ministryofjustice/data-platform-app-template` you will need to manually copy the contents of the [`.github/workflows`](https://github.com/ministryofjustice/data-platform-app-template/tree/main/.github/workflows) directory into your existing repository. These files are required to deploy the application. 
+
+You will need to create a pull request adding the files and merge to your `main` branch. The CI will fail at this point, but merging will ensure that the `dev` and `prod` repository environments are created.
+
+[Click here for further information about deployments](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#overview).
 
 ### Update repository teams
 
@@ -22,14 +39,6 @@ The `analytics-hq` team must be added as a repository admin. This change is requ
 3. Click the "Add teams" button
 4. Search for `ministryofjustice/analytics-hq`, choose "Admin" access and submit the form
 5. Repeat this process for any other GitHub teams that need access
-
-### Using an existing repository
-
-If you already have a repository and do not wish to create a new one with the `ministryofjustice/data-platform-app-template` you will need to manually copy the contents of the [`.github/workflows`](https://github.com/ministryofjustice/data-platform-app-template/tree/main/.github/workflows) directory into your existing repository. These files are required to deploy the application. 
-
-You will need to create a pull request adding the files and merge to your `main` branch. The CI will fail at this point, but merging will ensure that the `dev` and `prod` repository environments are created.
-
-[Click here for further information about deployments](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#overview).
 
 ### Environments
 
