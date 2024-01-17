@@ -1,10 +1,25 @@
 # Deploying a static webapp
 
-It is not currently possible to deploy new apps on the Analytical Platform, though we are working to make this functionality available again as soon as possible.
+## Github repository
 
-In the meantime, you can still [access](#access-the-app) and [manage](#manage-app-users) existing apps. 
+Create a repository for you app from the [Data Platfrom App Template](https://github.com/ministryofjustice/data-platform-app-template). By using the template repository, you will be set up with Github Actions files that will deploy a dev and prod environment of your app.
 
-If you have an existing app that requires urgent redeployment, please submit a [request](https://github.com/moj-analytical-services/analytical-platform-applications/issues/new?assignees=EO510%2C+YvanMOJdigital&labels=redeploy&template=redeploy-app-request.md&title=%5BREDEPLOY%5D) via GitHub. We normally redeploy apps each Wednesday, where we have recevied a request by the Friday before.
+To create your rep:
+
+1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser
+2. Click the "Use this template" button in the top right corner
+3. On the "Create a new repository" form , ensure the `ministryofjustice/data-platform-app-template` template is selected
+4. Enter a repository name of your choosing. NOTE: the name of the repository will later be used to create your Cloud Platform namespace, and will be used in the url to access your deployed app.
+5. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository.
+6. Click the "Create repository" button and wait for your repository to be created.
+7. You will redirected to your new repository. You now need to edit the repository settings to add the `analytics-hq` team as an admin. This change is required or your app will later fail to deploy. Follow these steps:
+    1. From the main page of your repo, click the "Settings" tab on the nav bar underneath your repo name
+    2. Under the "Access" subheading, click "Collaborators and teams" from the left hand menu
+    3. Click the "Add teams" button
+    4. Search for `ministryofjustice/analytics-hq`, choose "Admin" access and submit the form
+    5. Repeat this process for any other github teams that need access
+
+Now that you have your repository, you can [clone it to your local machine](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and start creating your application, or copy existing code to [push](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository) to the repository.
 
 ## Manage existing apps
 
