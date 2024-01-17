@@ -11,7 +11,7 @@ Create a repository for your app from the [Data Platfrom App Template](https://g
     - [Or use an existing repository](#using-an-existing-repository)
 2. [Update the repository teams](#update-repository-teams)
 3. [Check your environmnets](#environments)
-3. [Next steps](#next-steps)
+4. [Next steps](#next-steps)
 
 ### Create a repository from the template
 
