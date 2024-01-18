@@ -42,11 +42,10 @@ All the deployment settings linked to each deployment environment will be displa
 ## Introduction to the settings 
 
 First, the following flag can be used for switching on/off the user-access-control to the app
-<div style="height:0px;font-size:0px;">&nbsp;</div>
+
 | Setting | Format | Description |
 |---------|---------|---------------------------------------------|
 | `AUTHENTICATION_REQUIRED` | GitHub environment var | True/False indicate whether your app needs user-access-control, editable|
-<div style="height:0px;font-size:0px;">&nbsp;</div>
 
 If the value of flag is `True`, then an auth0 client is required which can be created by clicking the button 
 `Create auth0 client` under the deployment environment you choose. 
@@ -59,7 +58,6 @@ The credentials of the auth0-client with other related settings need to be avail
 
 ### Authentication related settings
 
-<div style="height:0px;font-size:0px;">&nbsp;</div>
 | Command | Format | Description |
 |---------|---------|---------------------------------------------|
 | `AUTH0_DOMAIN`   |  GitHub environment var | The domain of the auth0 tenant, not editable  |
@@ -67,7 +65,6 @@ The credentials of the auth0-client with other related settings need to be avail
 | `AUTH0_CLIENT_SECRET`  | GitHub secret | The client_secret of the auth0-client, not editable |
 | `AUTH0_CONNECTIONS`  | stored in auth0 platform | The list of login opions the app can choose, only superuser can edit it|
 | `AUTH0_PASSWORDLESS`  | GitHub environment var | only True if `email` is choosen from `AUTH0_CONNECTIONS`, not editable|
-<div style="height:0px;font-size:0px;">&nbsp;</div>
 
 If you choose to use `email` (`passwordless` flow),  then you can manage the app's customers for each deployment environment through clicking `Manage customers` button on [app-list page](https://controlpanel.services.analytical-platform.service.justice.gov.uk/webapp-data/). 
 
@@ -77,11 +74,9 @@ Right now we only provide customer management for `email` login option. If you c
 
 You can configure whether your app needs extra protection from internet environment by setting the allowed IP_RANGES (the list VPN managed in MoJ). You can set up this option even if your app is public facing (`AUTHENTICATION_REQUIRED` is `False`)
 
-<div style="height:0px;font-size:0px;">&nbsp;</div>
 | Command | Format | Description |
 |---------|---------|---------------------------------------------|
 | `IP_RANGES`      | GitHub secret | The list of MoJ VPNS being allowed to this app, editable|
-<div style="height:0px;font-size:0px;">&nbsp;</div>
 
 ### Self-defined secrets or environment vars
 
