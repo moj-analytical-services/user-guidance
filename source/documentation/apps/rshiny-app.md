@@ -520,6 +520,27 @@ The number of app instances running on `dev`/`prod` is 1 by default, if users ex
 
 #### Remember: “With great power comes great responsibility”  Your application’s namespace will be one of a number hosted on the same cluster, setting the values too high could crash the cluster!
 
+
+#### Enabling Web Application Firewall (WAF) for Data Platform Apps
+
+There are two flags that need to be set to enable WAF for your application, Ingress.ModSec.enabled and GithubTeam
+
+To do this modify your app's  `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files as follows:
+
+```
+ --set WebApp.Image.Tag=$NEW_TAG_V \
+ --set WebApp.Name=$KUBE_NAMESPACE \
+ --set Ingress.ModSec.enabled="true" \
+ --set GithubTeam="your github team" \
+$custom_variables
+```
+
+The changes  will be will be applied to your Kubernetes namespace following a push/merge to the repository and the running of the workflow
+
+To disable:
+
+> --set Ingress.ModSec.enabled="false"
+
 #### Storage guidance
 
 Guidance on storage within Cloud Platform can be found here [Cloud platform storage](https://user-guide.cloud-platform.service.justice.gov.uk/#storage-other-topics) 
@@ -674,23 +695,3 @@ A complete example for installing the helm chart in the workflow below. These ch
 ```
 
 A full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
-
-#### Enabling Web Application Firewall (WAF) for Data Platform Apps 
-
-There are two flags that need to be set to enable WAF for your application, Ingress.ModSec.enabled and GithubTeam
-
-To do this modify your app's  `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files as follows:
-
-```
- --set WebApp.Image.Tag=$NEW_TAG_V \
- --set WebApp.Name=$KUBE_NAMESPACE \
- --set Ingress.ModSec.enabled="true" \
- --set GithubTeam="your github team" \
-$custom_variables
-```
-
-The changes  will be will be applied to your Kubernetes namespace following a push/merge to the repository and the running of the workflow
-
-To disable 
-
-> --set Ingress.ModSec.enabled="false"
