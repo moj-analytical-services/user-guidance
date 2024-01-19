@@ -69,6 +69,132 @@ When ready to deploy, you can move on to:
 1. Create Cloud Platform namespace(s) for your environments
 2. Register the app within Control Panel
 
+
+## Cloud platform environments
+
+Repeat the following process for each of the environments (dev, prod) that you require.
+
+You can follow the instructions for each step individually, with a pull request for each, or complete all steps and include all the files in a single pull request. All pull requests need to be posted in the `#ask-cloud-platform` slack channel.
+
+### Overview
+
+1. Create a namespace
+2. Create a ECR repository
+3. Create a service account
+
+### Creating a namespace
+
+[Follow the "Creating a Cloud Platform environment" instructions](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/env-create.html#creating-a-cloud-platform-environment) to create your namespace. Please note, your namespace name **must** follow the format of:
+
+```data-platform-app-<repo-name>-<env>```
+
+The `<repo-name>` should be the name of the repository you set up in the [previous step](#create-a-repository-from-the-template), not the full url.
+
+The `<env>` should be `dev` or `prod` based on which environment you are setting up. E.g.
+
+```
+data-platform-app-my-github-repo-dev
+data-platform-app-app-my-github-repo-prod
+```
+
+In addition, you will need to update the generated `01-rbac.yaml` file in your namespace directory to add the `analytics-hq` team. Open the file, and under the `subjects` section, add the following below the existing entry:
+
+```
+- kind: Group
+  name: "github:analytics-hq"
+  apiGroup: rbac.authorization.k8s.io
+```
+
+### Create a Container Repository
+
+[Follow the instructions in the Cloud Platform user guidance to add a container repository](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#adding-a-container-repository-to-your-namespace).
+
+If you set up your namespace correctly there should be manual changes required.
+
+### Create a service account
+
+[Follow the instructions in the Cloud Platform user guidance to create a service account](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#add-a-service-account-to-your-namespace). You will need to amend the generated `resources/serviceaccount.tf` file:
+
+- Uncomment the `github_repositories` line
+- On a new line, add `github_environments = ["<env>"]` where `<env>` is `dev` or `prod`, depending on which environment you are setting up
+- On a new line, copy and paste the following variable in its entirety:
+
+```
+  serviceaccount_rules = [
+    {
+      api_groups = [""]
+      resources = [
+        "pods/portforward",
+        "deployment",
+        "secrets",
+        "services",
+        "pods",
+        "serviceaccounts",
+        "configmaps",
+        "persistentvolumeclaims",
+
+      ]
+      verbs = [
+        "update",
+        "patch",
+        "get",
+        "create",
+        "delete",
+        "list",
+        "watch",
+      ]
+    },
+    {
+      api_groups = [
+        "extensions",
+        "apps",
+        "batch",
+        "networking.k8s.io",
+        "rbac.authorization.k8s.io",
+        "policy",
+      ]
+      resources = [
+        "deployments",
+        "ingresses",
+        "cronjobs",
+        "jobs",
+        "replicasets",
+        "statefulsets",
+        "networkpolicies",
+        "servicemonitors",
+        "roles",
+        "rolebindings",
+        "poddisruptionbudgets",
+      ]
+      verbs = [
+        "get",
+        "update",
+        "delete",
+        "create",
+        "patch",
+        "list",
+        "watch",
+      ]
+    },
+    {
+      api_groups = [
+        "monitoring.coreos.com",
+      ]
+      resources = [
+        "prometheusrules",
+      ]
+      verbs = [
+        "*",
+      ]
+    },
+  ]
+
+```
+
+### For reference
+
+You can see a [full example of a namespace directory]((https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev)) used to host an AP app here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes.
+
 ## Manage existing apps
 
 ### Manage app users
