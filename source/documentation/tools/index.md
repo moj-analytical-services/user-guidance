@@ -61,6 +61,9 @@ Defined metadata that interacts with other packages (including arrow-pd-parser) 
 ### [pydbtools](https://github.com/moj-analytical-services/pydbtools)
 Queries MoJAP athena databases with features such as temp table creation.
 
+### [splink](https://github.com/moj-analytical-services/splink)
+Provides the ability to link datasets at scale. Splink is the matching engine behind the linked data on the Analytical Platform. This package is maintained by the Internal Data Linking team, support is offered via the **#ask-data-linking** Slack channel.
+
 ## R packages
 
 The following native R packages remove the need for using Python in R projects.
