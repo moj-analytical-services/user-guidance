@@ -6,4 +6,5 @@ This is guidance contains information on using curated databases on the Analytic
 * [Amazon Athena](amazon-athena/)
 * [Querying Athena from the AP](dbtools/)
 * [Databases](databases/)
+* [Data Linking](data_linking/)
 * [Data Discovery Tool](data-documentation/)
