@@ -141,6 +141,7 @@ renv::use_python()
 |     Upgrade all packages to latest    |   Run `renv::update()` or `renv::update("packagename")` for specific package. Always check that upgrading packages does not break your code before pushing to github for other users. |
 |     Update renv itself    |     `renv::upgrade()`. Useful if renv gains new functionality that you want to use.    |
 |     _Error in file(filename, "r", encoding = encoding) : cannot open the connection_    |     Oops, you've accidentally installed renv in your home directory 🏠 ! Delete [all of the files created by renv](https://rstudio.github.io/renv/articles/renv.html#infrastructure) from your home directory and retry.    |
+|     _cannot open file 'renv/activate.R': No such file or directory_    |     Renv was installed incorrectly in the project. If you go to Tools > Project Options > Environments and tick use renv with this project that will force it to install renv, which will hopefully fix the problems.    |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
 ## Conda
