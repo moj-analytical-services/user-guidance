@@ -10,7 +10,7 @@ Create a repository for your application from the [Data Platfrom App Template](h
     - [From the template](#create-a-repository-from-the-template)
     - [Or use an existing repository](#using-an-existing-repository)
 1. [Update the repository teams](#update-repository-teams)
-1. [Check your environmnets](#environments)
+1. [Check your environments](#environments)
 1. [Next steps](#next-steps)
 
 ### Create a Repository from the Template
@@ -194,6 +194,40 @@ If you set up your namespace correctly there should be manual changes required.
 ### Reference
 
 You can see a [full example of a namespace directory]((https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev)) used to host an Analytical Platform application here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes.
+
+## Register the Application in Control Panel
+
+> [!IMPORTANT]
+> You will need to have setup your GitHub repository to complete ths step
+
+1. Login to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk)
+1. Click the "Webapps" link in the main navigation, and click the "Register app" button at the bottom of the page
+1. Enter the full URL of your GitHub repository
+1. Choose to create a new webapp data source (S3 bucket), connect an existing data source, or choose to do this later.
+> [!NOTE]
+> If you choose "Do this later" you will be able to create a Webapp data source by clicking the "Webapp data" button in the main navigation after registering your app. You will then need to come back to the "Manage app" page to link it to your Application.
+
+### Manage the Application
+
+After registering the Application, you will be redirected to a page where you can choose to "Manage Customers" or "Manage app". You will need to make some initial changes before you can add customers for your site, so click the "Manage app" button.
+
+> [!NOTE]
+> By default, `AUTHENTICATION_REQUIRED` is true. If this is not the case, you can chagne update this setting and skip the next steps.
+
+Before you can start adding users allowed to access the site, you will need to create an Auth0 client, which is used to manage user access to your Application. 
+
+1. For each environment, click the "Create auth0 client" button. This will:
+    - Create an Auth0 client and user group for specific to the Application environment
+    - Store the `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` as environment secrets in your GitHub repository
+1. You can now use the "Manage customers" button from the previous screen to add users for your Application. [See the section below for more details.](#manage-application-users).
+
+> [!IMPORTANT]
+> Any settings changes made via the "Manage app" page in Control Panel require the application to be redeployed before coming into effect
+
+The `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` that have been added will be used the next time you deploy your Application. In order to deploy a new version of the Application, you will need to create a pull request in your repository. The GitHub actions jobs will redeploy the dev environment when the PR is opened. The prod environment is deployed when the PR has been merged.
+
+[Click here for further information about deployments](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#overview).
+
 
 ## Manage Existing Applications
 
