@@ -74,7 +74,11 @@ When ready to deploy, you can move on to:
 
 Repeat the following process for each of the environments (`dev`, `prod`) that you require.
 
-You can follow the instructions for each step individually, with a pull request for each, or complete all steps and include all the files in a single pull request. All pull requests need to be posted in the `#ask-cloud-platform` slack channel.
+You can follow the instructions for each step individually, with a pull request for each, or complete all steps and include all the files in a single pull request.
+
+> [!NOTE]
+> Wait for CI checks to pass before requesting a review on your pull requests.
+> Request a review by sending a message including a link to your PR in the `#ask-cloud-platform` slack channel.
 
 ### Overview
 
@@ -109,13 +113,20 @@ In addition, you will need to update the generated `01-rbac.yaml` file in your n
 
 [Follow the instructions in the Cloud Platform user guidance to add a container repository](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#adding-a-container-repository-to-your-namespace).
 
-If you set up your namespace correctly there should be manual changes required.
+> [!IMPORTANT]
+> Amend the created `ecr.tf` file to add the following settings.
+
+1. `github_repositories` should include the name of your repository e.g. `github_repositories = ["<repo-name>]
+1. `github_environments` should include the name of the environment you are setting up e.g. `github_environments = ["dev"]`
+1. `github_actions_prefix` is set to the environment you are setting up e.g. `github_actions_prefix = "dev"`
+
+You can find further details about these settings [in the Cloud Platform documentation](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/deploying-an-app/container-repositories/create.html#namespace-configuration).
 
 ### Create a Service Account
 
 [Follow the instructions in the Cloud Platform user guidance to create a service account](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#add-a-service-account-to-your-namespace). You will need to amend the generated `resources/serviceaccount.tf` file:
 
-- Uncomment the `github_repositories` line
+- Uncomment the `github_repositories` setting and check the repository name is correct.
 - On a new line, add `github_environments = ["<env>"]` where `<env>` is `dev` or `prod`, depending on which environment you are setting up
 - On a new line, copy and paste the following variable in its entirety:
 
@@ -191,9 +202,12 @@ If you set up your namespace correctly there should be manual changes required.
 
 ```
 
+Further details about these settings can be found in the [Cloud Platform documentation](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#github-actions-secrets).
+
+
 ### Reference
 
-You can see a [full example of a namespace directory]((https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev)) used to host an Analytical Platform application here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes.
+You can see a [full example of a namespace directory](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev) used to host an Analytical Platform application here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes.
 
 ## Register the Application in Control Panel
 
@@ -209,20 +223,17 @@ You can see a [full example of a namespace directory]((https://github.com/minist
 
 ### Manage the Application
 
-After registering the Application, you will be redirected to a page where you can choose to "Manage Customers" or "Manage app". You will need to make some initial changes before you can add customers for your site, so click the "Manage app" button.
-
-> [!NOTE]
-> By default, `AUTHENTICATION_REQUIRED` is true. If this is not the case, you can chagne update this setting and skip the next steps.
-
-Before you can start adding users allowed to access the site, you will need to create an Auth0 client, which is used to manage user access to your Application. 
-
-1. For each environment, click the "Create auth0 client" button. This will:
-    - Create an Auth0 client and user group for specific to the Application environment
-    - Store the `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` as environment secrets in your GitHub repository
-1. You can now use the "Manage customers" button from the previous screen to add users for your Application. [See the section below for more details.](#manage-application-users).
+After registering the Application, you will be redirected to the "Manage app" page where you will find details about your app and can update deployment settings.
 
 > [!IMPORTANT]
 > Any settings changes made via the "Manage app" page in Control Panel require the application to be redeployed before coming into effect
+
+You will need to create an Auth0 client to handle authentication for each environment that you setup.
+
+1. For each environment, click the "Create auth0 client" button underneath the deployment settings. This will:
+    - Create an Auth0 client and user group for specific to the Application environment
+    - Store the `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` as environment secrets in your GitHub repository
+1. You can now use the "Manage customers" button from the previous screen to add users for your Application. [See the section below for more details.](#manage-application-users).
 
 The `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` that have been added will be used the next time you deploy your Application. In order to deploy a new version of the Application, you will need to create a pull request in your repository. The GitHub actions jobs will redeploy the dev environment when the PR is opened. The prod environment is deployed when the PR has been merged.
 
