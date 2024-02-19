@@ -2,11 +2,15 @@
 
 ## GitHub Repository
 
-Create a repository for your application from the [Data Platfrom App Template](https://github.com/ministryofjustice/data-platform-app-template). By using the template repository, you will be set up with GitHub Actions files that will deploy a `dev` and `prod` environment of your application.
+The code for your Application needs to live in a GitHub repository within the [Ministry of Justice organisation](https://github.com/ministryofjustice/).
 
-### Overview
+If you don't already have a repository, create one from the [Data Platfrom App Template](https://github.com/ministryofjustice/data-platform-app-template) following the steps below. By using the template you will be set up with GitHub Actions files that will deploy a `dev` and `prod` environment of your application.
 
-1. Create your repository
+If you already have a repository you will need to copy these files manually.
+
+### Overview of steps
+
+1. Setup your repository
     - [From the template](#create-a-repository-from-the-template)
     - [Or use an existing repository](#using-an-existing-repository)
 1. [Update the repository teams](#update-repository-teams)
@@ -42,11 +46,11 @@ The `analytics-hq` team must be added as a repository admin. This change is requ
 
 ### Environments
 
-By default, your repository is configured to have `dev` and `prod` [environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment). These will be used to store environment variables and secrets used in the deployment workflows.
+By default, your repository is configured to deploy a `dev` and `prod` [environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment). These will be used to store environment variables and secrets used in the deployment workflows.
 
 The environments are created on the initial run of the `.github/workflows/build-push-deploy-dev.yml` and `.github/workflows/build-push-deploy-prod.yml` workflows. The `dev` workflow is set to run when a PR is created. The `prod` workflow will run when changes are published to the `main` branch.
 
-You can check your environments in your repository [settings](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment):
+Check your environments in your [repository settings](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment):
 
 1. From the main page of your repo, click the "Settings" tab on the nav bar underneath your repo name
 1. Under the "Code and automation" subheading, click "Environments" from the left-hand menu
@@ -62,7 +66,7 @@ Follow these steps to delete an environment:
 
 Once you have your repository, you can [clone it to your local machine](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and start writing your application, or copy existing code to [push](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository) to the repository.
 
-You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, or make use of one of two shiny-server base images that AP offer. [Click here to see further documentation about these](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#shiny-server).
+You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, however we recommend you use the open-source Shiny Server image managed by the Analytical Platform. [Click here to see further documentation about this, including an example Dockerfile](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#open-source-shiny-server).
 
 When ready to deploy, you can move on to:
 
