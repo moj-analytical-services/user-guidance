@@ -520,12 +520,11 @@ The number of app instances running on `dev`/`prod` is 1 by default, if users ex
 
 #### Remember: “With great power comes great responsibility”  Your application’s namespace will be one of a number hosted on the same cluster, setting the values too high could crash the cluster!
 
-
 #### Enabling Web Application Firewall (WAF) for Data Platform Apps
 
 There are two flags that need to be set to enable WAF for your application, Ingress.ModSec.enabled and GithubTeam
 
-To do this modify your app's  `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files as follows:
+To do this modify your app's `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files as follows:
 
 ```
  --set WebApp.Image.Tag=$NEW_TAG_V \
@@ -540,6 +539,20 @@ The changes  will be will be applied to your Kubernetes namespace following a pu
 To disable:
 
 > --set Ingress.ModSec.enabled="false"
+
+#### Adding Extra Annotations to an Ingress
+
+The Data Platform Apps template includes a default set of annotations ([link](https://github.com/ministryofjustice/analytics-platform-helm-charts/blob/222f9b70c51d026dd7c54610ebf7cfcd003064d7/charts/webapp-cp/templates/ingress.yaml#L12-L17)) for the ingress. To include extra annotations, modify your app's `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files as follows:
+
+```
+--set 'Ingress.ExtraAnnotations.nginx\.ingress\.kubernetes\.io/key=value'
+```
+
+To add multiple, use a comma separated string
+
+```
+--set 'Ingress.ExtraAnnotations.nginx\.ingress\.kubernetes\.io/key=value,Ingress.ExtraAnnotations.nginx\.ingress\.kubernetes\.io/another-key=value'
+```
 
 #### Storage guidance
 
