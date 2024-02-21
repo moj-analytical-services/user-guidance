@@ -16,22 +16,22 @@ We are in the process of migrating from our in-house maintained fork of the `dbt
 
 ## Test set up
 
-We have created a branch called [`DMT-236/dbt-athena-upgrade-main`](https://github.com/moj-analytical-services/create-a-derived-table/tree/DMT-236/dbt-athena-upgrade-main) which contains all the latest models, sources, seeds, macros from the `main` branch (that is everything that exists in `prod`) and all the required upgrades. The main upgrades which you need to be aware of are:
+We have created a branch called [`dbt-athena-update`](https://github.com/moj-analytical-services/create-a-derived-table/tree/dbt-athena-update) which contains all the latest models, sources, seeds, macros from the `main` branch (that is everything that exists in `prod`) and all the required upgrades. The main upgrades which you need to be aware of are:
 
-- `dbt-athena-community` 1.5.0.
-- `dbt-core` 1.5.0.
+- `dbt-athena-community` 1.7.2.
+- `dbt-core` 1.7.7.
 - macro `generate_s3_location.sql` to support our S3 file path Hive style naming convention.
 - script `scripts/insert_external_location_config.py` to insert the required `external_location` configuration at the top of every model `.sql` file.
 - running `sqlfluff` with the `--ignore=templating` option.
 - `seeds` S3 location has changed (this does not effect any references to `seeds`)
 
-To set up for testing you will need to checkout this branch, uninstall the old adapater and rerun the requirements files to update your local `venv` with the correct versions. In Terminal (with your `venv` active) in the root directory run the following to pull the latest from `main`, switch to `DMT-236/dbt-athena-upgrade-main` and update your `venv`:
+To set up for testing you will need to checkout this branch, uninstall the old adapater and rerun the requirements files to update your local `venv` with the correct versions. In Terminal (with your `venv` active) in the root directory run the following to pull the latest from `main`, switch to `dbt-athena-update` and update your `venv`:
 
 ```
 git switch main
 git fetch
 git pull
-git switch DMT-236/dbt-athena-upgrade-main
+git switch dbt-athena-update
 ```
 
 At this point you can refresh the Git tab in the RStudio Environments panel (top right) to check you have switched to this branch. Next uninstall the old adapter:
@@ -54,7 +54,7 @@ To check you have the correct set up list your local environment packages with
 pip list --local
 ```
 
-and check the list output for `dbt-core 1.5.0`, `dbt-athena-community 1.5.0` and __not__ `dbt-athena-adapter 1.0.1` (or any other version of it). If you still have the latter try to uninstall it again; if both old and new adapters are installed there will be conflicts.
+and check the list output for `dbt-core 1.7.7`, `dbt-athena-community 1.7.2` and __not__ `dbt-athena-adapter 1.0.1` (or any other version of it). If you still have the latter try to uninstall it again; if both old and new adapters are installed there will be conflicts.
 
 
 [Full evironment set up guidance here.](/tools/create-a-derived-table/instructions/#setting-up-a-python-virtual-environment)
@@ -62,12 +62,12 @@ and check the list output for `dbt-core 1.5.0`, `dbt-athena-community 1.5.0` and
 
 ## Test `prod` models
 
-To test your `prod` models you need to create your own branch off the `DMT-236/dbt-athena-upgrade-main` branch, deploy your models in `dev`, run your `dbt` tests and lint. You can also manually run equality tests in Athena to compare tables from `prod` created using the old `dbt-athena` adapter to the tables you have just created in `dev` using `dbt-athena-community` adapter. 
+To test your `prod` models you need to create your own branch off the `dbt-athena-update` branch, deploy your models in `dev`, run your `dbt` tests and lint. You can also manually run equality tests in Athena to compare tables from `prod` created using the old `dbt-athena` adapter to the tables you have just created in `dev` using `dbt-athena-community` adapter. 
 
-To explicitly create a new branch off `DMT-236/dbt-athena-upgrade-main` run the following:
+To explicitly create a new branch off `dbt-athena-update` run the following:
 
 ```
-git checkout -b <new-branch-name> DMT-236/dbt-athena-upgrade-main
+git checkout -b <new-branch-name> dbt-athena-update
 ```
 
 All your `prod` models have the `external_location` parameter inserted into a config block at the top of each `.sql` file (see the [Insert external_location](#insert-external-location) section for more details).
@@ -80,21 +80,21 @@ Once you have deployed your models please run your tests and lint.
 
 ⚠️ See the section below on [SQLFluff linting changes](#sqlfluff-linting-changes) ⚠️
 
-Please keep us up to date with your progress in the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel. When all users are happy that `prod` models are deploying as expected using the upgrades we will merge the branch `DMT-236/dbt-athena-upgrade-main` into `main`.
+Please keep us up to date with your progress in the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel. When all users are happy that `prod` models are deploying as expected using the upgrades we will merge the branch `dbt-athena-update` into `main`.
 
 
 ## Test `dev` models
 
-Once you have completed testing of your `prod` models you may wish to continue testing with your `dev` models. To do this you will need to create another branch off `DMT-236/dbt-athena-upgrade-main` ([see instructions above](#test-prod-models)) and then merge into this from your feature branch. For example, I have some `dev` models on a branch called `my-feature-branch` so:
+Once you have completed testing of your `prod` models you may wish to continue testing with your `dev` models. To do this you will need to create another branch off `dbt-athena-update` ([see instructions above](#test-prod-models)) and then merge into this from your feature branch. For example, I have some `dev` models on a branch called `my-feature-branch` so:
 
 ```
-git checkout -b new-test-branch DMT-236/dbt-athena-upgrade-main
+git checkout -b new-test-branch dbt-athena-update
 git fetch origin my-feature-branch
 git pull origin my-feature-branch
 git merge origin/my-feature-branch
 ```
 
-This creates a new branch `new-test-branch` off `DMT-236/dbt-athena-upgrade-main` branch and then collects the changes from `my-feature-branch` and merges these in to `new-test-branch`. After the first command check you are on the `new-test-branch` before proceeding.
+This creates a new branch `new-test-branch` off `dbt-athena-update` branch and then collects the changes from `my-feature-branch` and merges these in to `new-test-branch`. After the first command check you are on the `new-test-branch` before proceeding.
 
 ⚠️ __WARNING__ ⚠️
 
@@ -189,12 +189,12 @@ sqlfluff fix --ignore=templating path/to/files/to/lint/and/fix
 
 ## Update your branch with the `dbt-athena` upgrade
 
-As mentioned above we have created a branch containing all the upgrades called `DMT-236/dbt-athena-upgrade-main`. While we are testing we may make changes to the `DMT-236/dbt-athena-upgrade-main` branch which you will then need to merge into your branches. Whilst on the branch you want to update with the latest from `DMT-236/dbt-athena-upgrade-main` run:
+As mentioned above we have created a branch containing all the upgrades called `dbt-athena-update`. While we are testing we may make changes to the `dbt-athena-update` branch which you will then need to merge into your branches. Whilst on the branch you want to update with the latest from `dbt-athena-update` run:
 
 ```
-git fetch origin DMT-236/dbt-athena-upgrade-main
-git pull origin DMT-236/dbt-athena-upgrade-main
-git merge origin/DMT-236/dbt-athena-upgrade-main
+git fetch origin dbt-athena-update
+git pull origin dbt-athena-update
+git merge origin/dbt-athena-update
 ```
 
 
