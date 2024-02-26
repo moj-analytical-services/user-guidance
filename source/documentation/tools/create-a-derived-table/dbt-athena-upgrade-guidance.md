@@ -25,7 +25,7 @@ We have created a branch called [`dbt-athena-update`](https://github.com/moj-ana
 - running `sqlfluff` with the `--ignore=templating` option.
 - `seeds` S3 location has changed (this does not effect any references to `seeds`)
 
-To set up for testing you will need to checkout this branch, uninstall the old adapater and rerun the requirements files to update your local `venv` with the correct versions. In Terminal (with your `venv` active) in the root directory run the following to pull the latest from `main`, switch to `dbt-athena-update` and update your `venv`:
+To set up for testing you will need to checkout this branch, uninstall the old adapter and rerun the requirements files to update your local `venv` with the correct versions. In Terminal (with your `venv` active) in the root directory run the following to pull the latest from `main`, switch to `dbt-athena-update` and update your `venv`:
 
 ```
 git switch main
