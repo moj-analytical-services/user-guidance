@@ -95,7 +95,7 @@ If you do not receive a response within 24 hours, request access in either the *
 
 ### Sign in to the Control Panel
 
-The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From there, you configure core tools such as JupyterLab and RStudio.
+The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From there, you configure core tools such as JupyterLab, RStudio and Visual Studio Code.
 
 When you access the Control Panel first time, a prompt will appear, requiring you to configure 2FA using your mobile device. Note that while you use your GitHub account to access the Control Panel, this 2FA is separate from the one you use to log in to GitHub. You may need to disable browser extensions such as Dark Mode during the 2FA setup process.
 
@@ -161,3 +161,35 @@ To create an SSH key in RStudio:
 You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
 
 Now that you have completed this guide you are ready to begin using the Analytical Platform. See [training](training.md) for a list of different resources to help you begin using the platform.
+
+## 7. Set up Visual Studio Code
+
+>**Note**: Visual Studio Code is a general purpose code editor, therefore it might not have all the capabilities you'd expect from JupyterLab or RStudio.
+
+To set up Visual Studio Code, navigate to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/tools/). Under **Visual Studio Code**, use the drop-down menu to select the version of Visual Studio Code you want to deploy. Currently there is only one release.
+
+### Create and add Visual Studio Code SSH key to GitHub
+
+To access GitHub repositories from Visual Studio Code, you need an SSH key to enable secure communication and authentication between the two services.
+Do not try to use an existing SSH key; each tool you use requires a unique key.
+
+To create an SSH key in Visual Studio Code:
+
+1. Open Visual Studio Code from the Analytical Platform Control Panel
+2. Open a new terminal, and run the following commands
+
+```
+$ ssh-keygen -t ed25519 -C "<your email address>"
+```
+
+5. The response will ask you to choose a directory to save the key in; press Enter to accept the default location
+6. The response will also ask you to set a passphrase; press Enter to not set a passphrase.
+7. To view the SSH key, run:
+
+```
+$ cat ~/.ssh/id_ed25519.pub
+```
+
+8. Copy the SSH key to your clipboard
+
+You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.

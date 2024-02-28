@@ -1,4 +1,4 @@
-# Control panel
+# Control Panel
 
 The Analytical Platform [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/) is the main entry point to the Analytical Platform. You can access different resources by clicking on the different tabs.
 
