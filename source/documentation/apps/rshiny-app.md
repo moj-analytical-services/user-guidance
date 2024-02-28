@@ -94,11 +94,11 @@ The production workflow behaves in the exact same way, containing the same steps
 
 ### Manage app users
 
-If authentication is enabled and you choose to use email as the login option, user access management to app can be done through Control panel.
+If authentication is enabled and you choose to use email as the login option, user access management to app can be done through Control Panel.
 
 To manage the users of your app:
 
-1. Login Control panel as app admin
+1. Login Control Panel as app admin
 2. Go to the [Analytical Platform control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 3. Select the **Webapps** tab.
 4. Select the name of the app you want to manage or select **Manage customers**.
@@ -150,7 +150,7 @@ Please follow the same steps above to check whether the user is in the customer 
 
 ##### "IP x.x.x.x is not whitelisted"
 
-Check that the user is trying to access the app from one of the trusted networks listed on app's app-detail from Control panel
+Check that the user is trying to access the app from one of the trusted networks listed on app's app-detail from Control Panel
 
 The app admin can modify the IP_Ranges on the app's app-detail detail page. 
 
@@ -568,7 +568,7 @@ As the application is now hosted in Cloud Platform and GitHub workflow has been 
 
 #### Other guidance 
 
-Guidance on  managing Auth and Secrets through the Control Panel can be found [Manage deployment settings of an app on Control panel.](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/manage-app-settings-from-cpanel.html#manage-deployment-settings-of-an-app-on-control-panel)
+Guidance on  managing Auth and Secrets through the Control Panel can be found [Manage deployment settings of an app on Control Panel.](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/manage-app-settings-from-cpanel.html#manage-deployment-settings-of-an-app-on-control-panel)
 
 
 ## Shiny server

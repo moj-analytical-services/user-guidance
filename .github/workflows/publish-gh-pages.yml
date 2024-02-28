@@ -1,69 +1,60 @@
 ---
-  name: Publish to Github Pages
-  
-  on: # yamllint disable-line rule:truthy
-    pull_request:
-      branches:
-        - main
-    push:
-      branches:
-        - main
-  
-  permissions: read-all
-  
-  concurrency:
-    group: pages
-    cancel-in-progress: true
-  
-  jobs:
-    build:
-      name: Build
-      runs-on: ubuntu-latest
-      container:
-        image: ministryofjustice/tech-docs-github-pages-publisher:data-platform
-      steps:
-        - name: Checkout
-          id: checkout
-          uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-  
-        - name: Compile Markdown to HTML
-          id: compile
-          # Using script content without htmlproofer
-          # run: /scripts/deploy.sh
-          run: |
-            cp /stashed-files/* .
-            
-            # Compile source markdown files into HTML in the `/docs` directory
-            bundle exec middleman build --build-dir docs --relative-links --verbose
-            
-            touch docs/.nojekyll
-            
-            tar --dereference --directory docs -cvf artifact.tar --exclude=.git --exclude=.github .
-  
-        - name: Upload artifact
-          id: upload_artifact
-          uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
-          with:
-            name: github-pages
-            path: artifact.tar
-            retention-days: 1
-  
-    deploy:
-      if: github.ref == 'refs/heads/main'
-      needs: [build]
-      name: Deploy
-      runs-on: ubuntu-latest
-      environment:
-        name: github-pages
-        url: ${{ steps.deploy_github_pages.outputs.page_url }}
-      permissions:
-        pages: write
-        id-token: write
-      steps:
-        - name: Configure GitHub Pages
-          id: configure_github_pages
-          uses: actions/configure-pages@7110e9e03ffb4a421945e5d0607007b8e9f1f52b # v3.0.5
-  
-        - name: Deploy to GitHub Pages
-          id: deploy_github_pages
-          uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015 # v2.0.0
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/ministryofjustice/tech-docs-github-pages-publisher@sha256:cd3513beca3fcaf5dd34cbe81a33b3ff30337d8ada5869b40a6454c21d6f7684 # v4.0.0
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Build
+        id: build
+        run: |
+          /usr/local/bin/package
+
+      - name: Upload Artifact
+        id: upload_artifact
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
+        with:
+          name: github-pages
+          path: artifact.tar
+          retention-days: 1
+          overwrite: true
+
+  publish:
+    needs: build
+    name: Publish
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.configure_pages.outputs.base_url }}
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+    steps:
+      - name: Configure Pages
+        id: configure_pages
+        uses: actions/configure-pages@1f0c5cde4bc74cd7e1254d0cb4de8d49e9068c7d # v4.0.0
+
+      - name: Deploy to GitHub Pages
+        id: deploy_pages
+        uses: actions/deploy-pages@decdde0ac072f6dcbe43649d82d9c635fff5b4e4 # v4.0.4

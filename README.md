@@ -1,4 +1,4 @@
-# Analytical Platform user guidance
+# Analytical Platform User Guidance
 
 [![CircleCI](https://circleci.com/gh/moj-analytical-services/user-guidance.svg?style=svg)](https://circleci.com/gh/moj-analytical-services/user-guidance)
 
@@ -62,16 +62,10 @@ When contributing to the user guidance, you should make sure that your changes:
 
 ## Preview your changes locally
 
-To preview the guidance locally on an MoJ Digital and Technology MacBook, navigate to your project folder and run:
+To preview the guidance locally on an MoJ Digital and Technology MacBook, you will need Docker, and then you can run:
 
 ```sh
-bundle exec middleman server
-```
-
-or alternatively:
-
-```sh
-make preview
+bash scripts/local.sh
 ```
 
 You can view the guidance on `http://localhost:4567` in your browser. Any content changes you make to your website will be updated in real time.
@@ -79,33 +73,6 @@ You can view the guidance on `http://localhost:4567` in your browser. Any conten
 To shut down the Middleman instance running on your machine, select ⌘+C.
 
 If you make changes to the `config/tech-docs.yml` configuration file, you will need to restart the Middleman server to see the changes.
-
-## Build
-
-To build the HTML pages from content in your `source` folder, run:
-
-```sh
-bundle exec middleman build
-```
-
-Every time you run this command, the `build` folder gets generated from scratch. This means any changes to the `build` folder that are not part of the build command will get overwritten.
-
-## Update dependencies
-
-To update this repo's Ruby dependencies, run:
-
-```sh
-bundle update
-bundle exec middleman server  # and quickly test it in your browser
-```
-
-Now commit the updated `Gemfile.lock` in a PR, as usual.
-
-## Troubleshooting
-
-Run `bundle update` to make sure you're using the most recent Ruby gem versions.
-
-Run `bundle exec middleman build --verbose` to get detailed error messages to help with finding the problem.
 
 ## Licence
 

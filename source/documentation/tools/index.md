@@ -9,7 +9,7 @@ Note that we only provides support for third-party tools and services for featur
 ### [Airflow](airflow)
 A tool for scheduling and monitoring workflows.
 
-### [Control panel](control-panel.html)
+### [Control Panel](control-panel.html)
 Main entry point to the Analytical Platform. Allows you to configure tools and view their status.
 
 ### [Create a Derived Table](create-a-derived-table)
@@ -20,6 +20,9 @@ Development environment for writing R code and R Shiny apps. For more informatio
 
 ### [JupyterLab](jupyterlab)
 Development environment for writing Python code. For more information, see the [JupyterLab documentation](https://jupyterlab.readthedocs.io/en/latest/).
+
+### [Visual Studio Code](visual-studio-code)
+General purpose code editor. For more information, see the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
 
 ### [Data Discovery](../data/curated-databases/data-documentation)
 Allows you to browse the databases that are available on the Analytical Platform.
