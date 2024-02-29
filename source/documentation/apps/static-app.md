@@ -238,7 +238,7 @@ You will need to create an Auth0 client to handle authentication for each enviro
 1. For each environment, click the "Create auth0 client" button underneath the deployment settings. This will:
     - Create an Auth0 client and user group for specific to the Application environment
     - Store the `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` as environment secrets in your GitHub repository
-1. You can now use the "Manage customers" button from the previous screen to add users for your Application. [See the section below for more details.](#manage-application-users).
+1. By default authentication is enabled, with passwordless login by email via [Auth0](https://auth0.com/docs/authenticate/passwordless/authentication-methods/email-otp). You can now use the "Manage customers" button from the previous screen to add users for your Application. [See the section below for more details.](#manage-application-users).
 
 The `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` that have been added will be used the next time you deploy your Application. In order to deploy a new version of the Application, you will need to create a pull request in your repository. The GitHub actions jobs will redeploy the dev environment when the PR is opened. The prod environment is deployed when the PR has been merged.
 
@@ -250,6 +250,9 @@ The `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` that have been added will be use
 ### Manage Application Users
 
 To grant access to someone, in the [Control Panel wepapps tab](https://controlpanel.services.analytical-platform.service.justice.gov.uk/webapps) find your App and click "Manage App". In the 'App customers' section you can let people view your app by putting one or more email addresses in the text box and clicking "Add customer".
+
+> [!IMPORTANT]
+> The "Manage Customers" page is only applicable to apps that use the "email" authentication process for login, which is enabled by default.
 
 ## Accessing the Application
 
