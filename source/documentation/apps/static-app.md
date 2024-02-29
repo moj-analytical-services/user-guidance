@@ -55,6 +55,7 @@ Check your environments in your [repository settings](https://docs.github.com/en
 1. From the main page of your repo, click the "Settings" tab on the nav bar underneath your repo name
 1. Under the "Code and automation" subheading, click "Environments" from the left-hand menu
 1. If the `dev` or `prod` environments are missing, create them using the "New Environment" button
+1. There are no further changes required, but you can configure settings such as "Deployment protection rules" as required by your team
 
 If you do not require one of the environments, you should delete it before proceeding to register your application with Control Panel and creating your Cloud Platform namespace.
 
