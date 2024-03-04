@@ -84,6 +84,3 @@ Allows you to access AWS S3 from the Analytical Platform, which is mainly compat
 
 ### [Data Science Asset Register](https://github.com/moj-analytical-services/data-science-assets)
 Process for managing deployed data science assets. The register itself can be found [here](https://justiceuk-my.sharepoint.com/:u:/r/personal/william_miller1_justice_gov_uk/Documents/Data%20Science%20Asset%20Register/asset_register.html?csf=1&web=1&e=k9GzSK).
-
-
-
