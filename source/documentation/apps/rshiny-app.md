@@ -573,7 +573,7 @@ Guidance on  managing Auth and Secrets through the Control Panel can be found [M
 
 ## Shiny server
 
-There are a few choices for running a rshiny app on Cloud Platform. The team responsible for developing and maintaining the dashboard app has full control to choose the best way and practices to run the app by building their own Dockerfile.
+There are a few choices for running a RShiny app on Cloud Platform. The team responsible for developing and maintaining the dashboard app has full control to choose the best way and practices to run the app by building their own Dockerfile.
 
 Since the shiny-framework uses `websocket` as the primary communication protocol between frontend and backend, no matter which choice you decide, the minimum capabilities required are:
 
@@ -582,27 +582,11 @@ Since the shiny-framework uses `websocket` as the primary communication protocol
 - Providing a method for reconnecting when the websocket drops
 - Working with auth-proxy, the AP component responsible for controlling user's access,  unless the app is public facing or application handles authentication itself.
 
-The AP team offers two shiny-server solutions.
-
-### AP version of shiny-server
-
-We developed a mini version of shiny-sever in nodejs, it provides a minimal implementation to support the required capabilities:
-
-- Uses sockjs which supports heart-beat
-- Create a new session for each new websocket connection
-- Will try to reconnect to the shiny app automatically when the websocket connection drops
-- If reconnection repeatedly fails and reaches the maximum number of attempts, a window will be appear asking the user to trigger a manual reconnect
-
-The majority of the shiny apps hosted on Cloud Platform use this version. The current tag for this docker image is:
-
-`593291632749.dkr.ecr.eu-west-1.amazonaws.com/rshiny:r4.1.3-shiny0.0.6`
-
-
 ### Open source shiny-server
 
-We also provide a solution for using the [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support `USER_EMAIL` and `COOKIE` headers.  The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
+We provide a solution for using the [open source Shiny Server] [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support the `USER_EMAIL` and `COOKIE` headers. The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
 
-It offers more features than the AP shiny server and supports:
+It offers more features than the previous AP shiny server and supports:
 
 - Better reconnection behaviour:
   - Reconnect and load existing session rather than creating a new session automatically 
@@ -614,13 +598,16 @@ This behaviour can result in:
 - Session data (reactive values) is retained even after a reconnection happens
 - Release resources e.g. memory linked to the session which avoids potential memory leaking
 
-It also provides more [configuration options as outlined here](https://docs.posit.co/shiny-server/). Note: options marked as "pro" are not available
+It also provides more [configuration options as outlined here](https://docs.posit.co/shiny-server/).
+
+> [!NOTE]
+> Options marked as "pro" are not available
 
 ### Instructions for using the open source shiny server image
 
 #### Example Dockerfile
 
-The following example can be used as the starting point when making your own Dockerfile
+The following example can be used as the starting point when making your own Dockerfile. You may need to make adjustments specific to your app.
 
 ```
 # The base docker image
@@ -654,7 +641,7 @@ USER 998
 
 ### Instructions for switching from the AP shiny server to the open-source server
 
-If you already use the AP shiny server, and would like to switch to the open source server, the key changes you need to make are:
+If you already use the legacy AP shiny server image, and would like to switch to the open source server, the key changes you need to make are:
 
 - Change the base docker image in your Dockerfile:
 
