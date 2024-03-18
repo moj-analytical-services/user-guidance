@@ -264,7 +264,7 @@ URLs for respective environments are as follows:
 
 ### Example URLs
 
-For the example project above "static-web-deploy", the respective deployment URLs would be:
+For an example project with a repo called "static-web-deploy", the respective deployment URLs would be:
 - Development: `https://static-web-deploy-dev.apps.live.cloud-platform.service.justice.gov.uk`
 - Production: `https://static-web-deploy.apps.live.cloud-platform.service.justice.gov.uk`
 
