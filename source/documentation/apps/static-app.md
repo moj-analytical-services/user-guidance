@@ -81,7 +81,7 @@ Repeat the following process for each of the environments (`dev`, `prod`) that y
 
 You can follow the instructions for each step individually, with a pull request for each, or complete all steps and include all the files in a single pull request.
 
-> [!NOTE]
+> **NOTE:**
 > Wait for CI checks to pass before requesting a review on your pull requests.
 > Request a review by sending a message including a link to your PR in the `#ask-cloud-platform` slack channel.
 
@@ -118,7 +118,7 @@ In addition, you will need to update the generated `01-rbac.yaml` file in your n
 
 [Follow the instructions in the Cloud Platform user guidance to add a container repository](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#adding-a-container-repository-to-your-namespace).
 
-> [!IMPORTANT]
+> **IMPORTANT:**
 > Amend the created `ecr.tf` file to add the following settings.
 
 1. `github_repositories` should include the name of your repository e.g. `github_repositories = ["<repo-name>]
@@ -216,21 +216,21 @@ You can see a [full example of a namespace directory](https://github.com/ministr
 
 ## Register the Application in Control Panel
 
-> [!IMPORTANT]
+> **IMPORTANT:**
 > You will need to have setup your GitHub repository to complete ths step
 
 1. Login to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk)
 1. Click the "Webapps" link in the main navigation, and click the "Register app" button at the bottom of the page
 1. Enter the full URL of your GitHub repository
 1. Choose to create a new webapp data source (S3 bucket), connect an existing data source, or choose to do this later.
-> [!NOTE]
+> **NOTE:**
 > If you choose "Do this later" you will be able to create a Webapp data source by clicking the "Webapp data" button in the main navigation after registering your app. You will then need to come back to the "Manage app" page to link it to your Application.
 
 ### Manage the Application
 
 After registering the Application, you will be redirected to the "Manage app" page where you will find details about your app and can update deployment settings.
 
-> [!IMPORTANT]
+> **IMPORTANT:**
 > Any settings changes made via the "Manage app" page in Control Panel require the application to be redeployed before coming into effect
 
 You will need to create an Auth0 client to handle authentication for each environment that you setup.
@@ -251,7 +251,7 @@ The `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` that have been added will be use
 
 To grant access to someone, in the [Control Panel wepapps tab](https://controlpanel.services.analytical-platform.service.justice.gov.uk/webapps) find your App and click "Manage App". In the 'App customers' section you can let people view your app by putting one or more email addresses in the text box and clicking "Add customer".
 
-> [!IMPORTANT]
+> **IMPORTANT:**
 > The "Manage Customers" page is only applicable to apps that use the "email" authentication process for login, which is enabled by default.
 
 ## Accessing the Application
@@ -259,7 +259,8 @@ To grant access to someone, in the [Control Panel wepapps tab](https://controlpa
 URLs for respective environments are as follows:
 - Development: `<repository-name>-dev.apps.live.cloud-platform.service.justice.gov.uk`.
 - Production: `<repository-name>.apps.live.cloud-platform.service.justice.gov.uk`.
-> [!NOTE]  
+
+> **NOTE:**
 > The environment is not explicitly stated in the production URL.
 
 ### Example URLs

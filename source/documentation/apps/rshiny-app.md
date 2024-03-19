@@ -10,20 +10,11 @@ We have guidance for:
 
 as well as common issues faced during these stages of publishing your app.
 
-> **&#x26a0;&#xfe0f; Note on deployment &#x26a0;&#xfe0f;**
-
-> It is not currently possible to deploy new apps on the Analytical Platform, though we are working to make this functionality available again as soon as possible.
-
-> In the meantime, you can still [access](#access-the-app) and [manage](#manage-app-users) existing apps.
-
-> If you have an existing app that requires urgent redeployment, please submit a [request](https://github.com/moj-analytical-services/analytical-platform-applications/issues/new?assignees=EO510%2C+YvanMOJdigital&labels=redeploy&template=redeploy-app-request.md&title=%5BREDEPLOY%5D) via GitHub.
-> We normally redeploy apps each Wednesday, where we have recevied a request by the Friday before.
-
 ## App deployment
 
 ### New apps
 
-It is not currently possible to deploy new apps on the Analytical Platform, though we are working to make this functionality available again as soon as possible.
+Please follow the steps in in the [Deploying a Static Webapp section](/apps/static-app.html)
 
 ### Existing apps
 
@@ -600,7 +591,7 @@ This behaviour can result in:
 
 It also provides more [configuration options as outlined here](https://docs.posit.co/shiny-server/).
 
-> [!NOTE]
+> **NOTE:**
 > Options marked as "pro" are not available
 
 ### Instructions for using the open source shiny server image
