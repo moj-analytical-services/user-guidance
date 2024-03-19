@@ -7,6 +7,7 @@ We have guidance for:
 - [Accessing your deployed app](#accessing-the-deployed-app)
 - [Managing your app users](#manage-app-users)
 - [Managing and Monitoring Deployments](#managing-and-monitoring-deployments)
+- [Using Shiny Server](#shiny-server)
 
 as well as common issues faced during these stages of publishing your app.
 
@@ -14,7 +15,7 @@ as well as common issues faced during these stages of publishing your app.
 
 ### New apps
 
-Please follow the steps in in the [Deploying a Static Webapp section](/apps/static-app.html)
+Please follow the steps in in the [Deploying a Webapp section](/apps/static-app.html)
 
 ### Existing apps
 
