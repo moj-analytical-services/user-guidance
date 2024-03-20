@@ -10,6 +10,8 @@
 
 * [Python 3.10](https://www.python.org/downloads/release/python-3100/)
 
+* [Ollama](/tools/visual-studio-code/ollama)
+
 ## Known Issues
 
 * Like JupyterLab and RStudio, Visual Studio Code runs on Analytical Platform's Kubernetes infrastructure, therefore we cannot provide access to Docker.
