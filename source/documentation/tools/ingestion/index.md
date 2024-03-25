@@ -1,0 +1,50 @@
+# Ingestion
+
+> Ingestion on the Analytical Platform is currently a beta feature.
+
+This guidance refers to the Analytical Platform Ingestion service, which is described [here]().
+
+## Service Requirements
+
+### Information to be provided to Analytical Platform
+
+To use the Ingestion feature on the Analytical Platform, users must provide the following information to the team via the approved process:
+
+- User: First and Last name
+- The IP address from which the user will be accessing the service i.e. their public IP address.
+- The public key file of the SSH key that the user(s) will be using.
+
+This information will then be merged into the requisite repository. Examples of this information can be found [here](https://github.com/ministryofjustice/modernisation-platform-environments/blob/main/terraform/environments/analytical-platform-ingestion/transfer-user.tf).
+
+### User Action Required
+
+The user's S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
+
+For a given S3 bucket `<supplier-bucket-name>` include the following statement 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        ...
+        {
+            "Sid": "AllowInboundUploads",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::471112983409:role/transfer"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<supplier-bucket-name>",
+                "arn:aws:s3:::<supplier-bucket-name>/*"
+            ]
+        }
+        ...
+    ]
+}
+
+```
