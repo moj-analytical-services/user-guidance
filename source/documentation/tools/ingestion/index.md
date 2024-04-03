@@ -24,16 +24,16 @@ The user's S3 bucket must have the correct permisssions to allow the final `tran
 
 For a given S3 bucket `<supplier-bucket-name>` include the following statement 
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
         ...
         {
-            "Sid": "AllowInboundUploads",
+            "Sid": "AllowAnalyticalPlatformIngestionService",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::<AWS-Account-ID>>:role/transfer"
+                "AWS": "arn:aws:iam::<ingestion-account-ID>:role/transfer"
             },
             "Action": [
                 "s3:GetObject",
@@ -49,7 +49,5 @@ For a given S3 bucket `<supplier-bucket-name>` include the following statement
         ...
     ]
 }
-
-```
 
 The `AWS-Account-ID` should be `471112983409` when connections are being made by the `transfer` lambda function in `analytical-platform-ingestion-production` and `730335344807` when connections are being made from `analytical-platform-ingestion-development`.
