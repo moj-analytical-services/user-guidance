@@ -2,8 +2,6 @@
 
 > Ingestion on the Analytical Platform is currently a beta feature.
 
-This guidance refers to the Analytical Platform Ingestion service, which is described [here]().
-
 ## Service Requirements
 
 ### Information to be provided to Analytical Platform
@@ -46,8 +44,8 @@ For a given S3 bucket `<supplier-bucket-name>` include the following statement
                 "arn:aws:s3:::<supplier-bucket-name>/*"
             ]
         }
-        ...
     ]
 }
+```
 
 The `ingestion-account-ID` should be `471112983409` when connections are being made by the `transfer` lambda function in `analytical-platform-ingestion-production` and `730335344807` when connections are being made from `analytical-platform-ingestion-development`.
