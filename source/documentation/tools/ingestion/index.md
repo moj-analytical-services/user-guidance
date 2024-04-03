@@ -31,12 +31,13 @@ For a given S3 bucket `<supplier-bucket-name>` include the following statement
             "Sid": "AllowInboundUploads",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::471112983409:role/transfer"
+                "AWS": "arn:aws:iam::<AWS-Account-ID>>:role/transfer"
             },
             "Action": [
                 "s3:GetObject",
                 "s3:PutObject",
-                "s3:DeleteObject"
+                "s3:DeleteObject",
+                "s3:PutObjectTagging"
             ],
             "Resource": [
                 "arn:aws:s3:::<supplier-bucket-name>",
@@ -48,3 +49,5 @@ For a given S3 bucket `<supplier-bucket-name>` include the following statement
 }
 
 ```
+
+The `AWS-Account-ID` should be `471112983409` when connections are being made by the `transfer` lambda function in `analytical-platform-ingestion-production` and `730335344807` when connections are being made from `analytical-platform-ingestion-development`.
