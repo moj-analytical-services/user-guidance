@@ -19,7 +19,7 @@ We are in the process of migrating from our in-house maintained fork of the `dbt
 We have created a branch called [`dbt-athena-update`](https://github.com/moj-analytical-services/create-a-derived-table/tree/dbt-athena-update) which contains all the latest models, sources, seeds, macros from the `main` branch (that is everything that exists in `prod`) and all the required upgrades. The main upgrades which you need to be aware of are:
 
 - `dbt-athena-community` 1.7.2.
-- `dbt-core` 1.7.7.
+- `dbt-core` 1.7.10.
 - macro `generate_s3_location.sql` to support our S3 file path Hive style naming convention.
 - script `scripts/insert_external_location_config.py` to insert the required `external_location` configuration at the top of every model `.sql` file.
 - running `sqlfluff` with the `--ignore=templating` option.
@@ -54,7 +54,7 @@ To check you have the correct set up list your local environment packages with
 pip list --local
 ```
 
-and check the list output for `dbt-core 1.7.7`, `dbt-athena-community 1.7.2` and __not__ `dbt-athena-adapter 1.0.1` (or any other version of it). If you still have the latter try to uninstall it again; if both old and new adapters are installed there will be conflicts.
+and check the list output for `dbt-core 1.7.10`, `dbt-athena-community 1.7.2` and __not__ `dbt-athena-adapter 1.0.1` (or any other version of it). If you still have the latter try to uninstall it again; if both old and new adapters are installed there will be conflicts.
 
 
 [Full evironment set up guidance here.](/tools/create-a-derived-table/instructions/#setting-up-a-python-virtual-environment)
