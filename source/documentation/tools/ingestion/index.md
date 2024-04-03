@@ -10,9 +10,11 @@ This guidance refers to the Analytical Platform Ingestion service, which is desc
 
 To use the Ingestion feature, data owners must provide the following information to the team via the approved process:
 
-- User: First and Last name
-- The IP address from which the user will be accessing the service i.e. their public IP address.
-- The public key file of the SSH key that the user(s) will be using.
+- Supplier's name
+- Supplier's email
+- Supplier's IP address(es)
+- Supplier's SSH public key
+- Target location on Analytical Platform (e.g. `s3://${TARGET_BUCKET}/${OPTIONAL_PREFIX}`)
 
 This information will then be merged into the requisite repository. Examples of this information can be found [here](https://github.com/ministryofjustice/modernisation-platform-environments/blob/main/terraform/environments/analytical-platform-ingestion/transfer-user.tf).
 
