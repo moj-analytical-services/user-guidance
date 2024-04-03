@@ -8,7 +8,7 @@ This guidance refers to the Analytical Platform Ingestion service, which is desc
 
 ### Information to be provided to Analytical Platform
 
-To use the Ingestion feature on the Analytical Platform, users must provide the following information to the team via the approved process:
+To use the Ingestion feature, data owners must provide the following information to the team via the approved process:
 
 - User: First and Last name
 - The IP address from which the user will be accessing the service i.e. their public IP address.
