@@ -43,7 +43,7 @@ Online hosting platform for git. Git is a distributed version control system tha
 Moves data from microservices into the Analytical Platform's [curated databases](../data/curated-databases) in a standardised way.
 
 ### [Ingestion](ingestion)
-An SFTP based services that allows users to ingest data into their AWS environments. Additionally scans files using ClamAV.
+An SFTP based service that allows users to ingest data into their Analytical Platform data warehouse.
 
 ## Python packages
 
