@@ -4,6 +4,8 @@
 
 * [AWS Command Line Interface](https://docs.aws.amazon.com/cli/)
 
+* [Amazon Corretto](https://aws.amazon.com/corretto)
+
 * [Miniconda](https://docs.anaconda.com/free/miniconda/index.html)
 
 * [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk)
