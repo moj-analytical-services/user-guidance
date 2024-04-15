@@ -19,3 +19,5 @@
 * Like JupyterLab and RStudio, Visual Studio Code runs on Analytical Platform's Kubernetes infrastructure, therefore we cannot provide access to Docker.
 
 * [Visual Studio Code's port forwarding](https://code.visualstudio.com/docs/editor/port-forwarding) functionality doesn't work, which means you cannot run Dash or Streamlit applications, you will need to continue to [use JupyterLab](https://user-guidance.analytical-platform.service.justice.gov.uk/appendix/dash.html#running-your-app-within-jupyter)
+
+* Due to how Analytical Platform automatically scales tooling up and down depending on user activity, session persistence is not available in Visual Studio Code's extensions, for example [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github).
