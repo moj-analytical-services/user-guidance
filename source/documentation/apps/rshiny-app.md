@@ -576,7 +576,7 @@ Since the shiny-framework uses `websocket` as the primary communication protocol
 
 ### Open source shiny-server
 
-We provide a solution for using the [open source Shiny Server] [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support the `USER_EMAIL` and `COOKIE` headers. The base docker image is defined [here](https://github.com/ministryofjustice/data-platform/blob/main/containers/rshiny-open-source-base/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
+We provide a solution for using the [open source Shiny Server] [open source Shiny Server](https://github.com/rstudio/shiny-server) with a few minor tweaks to support the `USER_EMAIL` and `COOKIE` headers. The base docker image is defined [here](https://github.com/ministryofjustice/analytical-platform-rshiny-open-source-base/blob/main/Dockerfile). The version of open source shiny server is defined by `SHINY_SERVER_VERSION`, currently set to `1.5.20.1002`.
 
 It offers more features than the previous AP shiny server and supports:
 
@@ -603,7 +603,7 @@ The following example can be used as the starting point when making your own Doc
 
 ```
 # The base docker image
-FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.2.0
 
 # ** Optional step: only if some of R pakcages requires the system libraries which are not covered by base image
 #   the one in the example below has been provided in base image.
@@ -638,7 +638,7 @@ If you already use the legacy AP shiny server image, and would like to switch to
 - Change the base docker image in your Dockerfile:
 
 ```
-FROM ghcr.io/ministryofjustice/data-platform-rshiny-open-source-base:1.0.3
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.2.0
 ```
 
 - If present, ensure the following redundant parts of your Dockerfile are removed:
