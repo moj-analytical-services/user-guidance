@@ -45,18 +45,17 @@ A DAG is defined in a Python script. An example of a DAG script is provided belo
 ### DAG example
 
 > [!Note]
-> Please add a DAG Description. This will allow users to better find your DAG. It is especially useful if your DAG contains more advanced uses of Airflow compared to the default shown below.
+> Please add DAG and/or Task documentation as shown below. This will allow users to better find your DAG using GitHub search, and also provide better documentation on the Airflow UI. It is especially useful if your DAG contains more advanced uses of Airflow compared to standard pipeline below.
 
 ``` python
 from datetime import datetime
 from airflow.models import DAG
 from mojap_airflow_tools.operators import BasicKubernetesPodOperator
 
-'''
-DAG Description
----
-Here is where you describe what the DAG is doing.
-'''
+dag_doc = """
+Here is where you describe what the DAG is doing (see below for describing inidividual tasks).
+It will be rendered in Markdown, so feel free to use Markdown syntax.
+"""
 
 # Replace <<username>> with your username
 username = <<username>>
@@ -100,7 +99,9 @@ dag = DAG(
     # will only run when manually triggered.
     schedule_interval=None,
 )
- 
+# This renders your DAG documentation at the top
+dag.doc_md = dag_doc 
+
 # Environmental variables for passing to the docker container
 env_vars = {
     "RUN": "write",
@@ -114,6 +115,12 @@ because it is used for both the name and task_id parameters.
 You should also only use alpha numerical characters and dashes (-)
 for the task_id value.
 """
+
+task_doc = """
+Here is where you describe what the Task is doing. It will be rendered in Markdown,
+so feel free to use Markdown syntax.
+"""
+
 task_id = "task-1"
 task = BasicKubernetesPodOperator(
     dag=dag,
@@ -122,7 +129,9 @@ task = BasicKubernetesPodOperator(
     release=IMAGE_TAG,
     role=ROLE,
     task_id=task_id,
-    env_vars=env_vars
+    env_vars=env_vars,
+    # This renders your Task documentation from task_doc above
+    doc_md=task_doc
 )
 task
 ```
