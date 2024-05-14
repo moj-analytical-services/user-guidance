@@ -2,14 +2,11 @@
 
 ## How to use Ollama on Visual Studio Code
 
-1. Start a terminal session and then execute:
+1. Start a terminal session and then execute the following command to start Ollama:
 
 `ollama serve`
 
 ![ollama serve](/images/ollama/ollama-serve.png)
-
-
-This will start the Ollama service, in the foreground.
 
 2. Start a second terminal session (in Visual Studio Code click the `+` symbol at the top right of the terminal) and then execute:
 
@@ -23,4 +20,4 @@ Now you can interact with the model in the terminal in a chat-like fashion as de
 
 ![ollama query](/images/ollama/ollama-query.png)
 
-For a list of all models view the [Ollama Library](https://ollama.com/library)
+This example uses `llama3` but other models are available in the [Ollama Library](https://ollama.com/library).
