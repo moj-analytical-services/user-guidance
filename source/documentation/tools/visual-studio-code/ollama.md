@@ -20,4 +20,6 @@ Now you can interact with the model in the terminal in a chat-like fashion as de
 
 ![ollama query](/images/ollama/ollama-query.png)
 
+To query the model, input text after the `>>>` characters and hit enter. 
+
 This example uses `llama3` but other models are available in the [Ollama Library](https://ollama.com/library).
