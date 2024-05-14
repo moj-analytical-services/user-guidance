@@ -44,10 +44,19 @@ A DAG is defined in a Python script. An example of a DAG script is provided belo
 
 ### DAG example
 
+> [!Note]
+> Please add a DAG Description. This will allow users to better find your DAG. It is especially useful if your DAG contains more advanced uses of Airflow compared to the default shown below.
+
 ``` python
 from datetime import datetime
 from airflow.models import DAG
 from mojap_airflow_tools.operators import BasicKubernetesPodOperator
+
+'''
+DAG Description
+---
+Here is where you describe what the DAG is doing.
+'''
 
 # Replace <<username>> with your username
 username = <<username>>
