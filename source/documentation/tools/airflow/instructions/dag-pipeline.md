@@ -45,7 +45,7 @@ A DAG is defined in a Python script. An example of a DAG script is provided belo
 ### DAG example
 
 > [!Note]
-> Please add DAG and/or Task documentation as shown below. This will allow users to better find your DAG using GitHub search, and also provide better documentation on the Airflow UI. It is especially useful if your DAG contains more advanced uses of Airflow compared to standard pipeline below.
+> Please add [DAG and/or Task documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#dag-task-documentation) as shown below. This will allow users to better find your DAG using GitHub search, and also provide better documentation on the Airflow UI. It is especially useful if your DAG contains more advanced uses of Airflow compared to standard pipeline below.
 
 ``` python
 from datetime import datetime
