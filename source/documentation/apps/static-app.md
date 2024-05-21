@@ -22,7 +22,7 @@ If you already have a repository you will need to copy these files manually.
 1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser
 1. Click the "Use this template" button in the top right corner
 1. On the "Create a new repository" form, ensure the `ministryofjustice/data-platform-app-template` template is selected
-1. Enter a repository name of your choosing. NOTE: the name of the repository will later be used to create your Cloud Platform namespace, and will be used in the URL to access your deployed app.
+1. Enter a repository name of your choosing make sure to use hypens and not underscores. NOTE: the name of the repository will later be used to create your Cloud Platform namespace, and will be used in the URL to access your deployed app. 
 1. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository
 1. Click the "Create repository" button and wait for your repository to be created
 
@@ -55,7 +55,7 @@ Check your environments in your [repository settings](https://docs.github.com/en
 1. From the main page of your repo, click the "Settings" tab on the nav bar underneath your repo name
 1. Under the "Code and automation" subheading, click "Environments" from the left-hand menu
 1. If the `dev` or `prod` environments are missing, create them using the "New Environment" button
-1. There are no further changes required, but you can configure settings such as "Deployment protection rules" as required by your team
+1. There are no further changes required (i.e. you do not need to add any variables or secrets), but you can configure settings such as "Deployment protection rules" as required by your team
 
 If you do not require one of the environments, you should delete it before proceeding to register your application with Control Panel and creating your Cloud Platform namespace.
 
@@ -67,7 +67,7 @@ Follow these steps to delete an environment:
 
 Once you have your repository, you can [clone it to your local machine](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and start writing your application, or copy existing code to [push](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository) to the repository.
 
-You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, however we recommend you use the open-source Shiny Server image managed by the Analytical Platform. [Click here to see further documentation about this, including an example Dockerfile](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#open-source-shiny-server).
+You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, however we recommend you use the open-source Shiny Server image managed by the Analytical Platform. [Click here to see further documentation about this, including an example Dockerfile](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#open-source-shiny-server). The [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples) may contain applications build using other languages and frameworks too.
 
 When ready to deploy, you can move on to:
 
@@ -93,6 +93,8 @@ You can follow the instructions for each step individually, with a pull request 
 
 ### Creating a Namespace
 
+> Note: It is important you create the namespace with the correct name to begin with. Changing the namespace afterwards will likely cause breaking changes on deployment.
+
 [Follow the "Creating a Cloud Platform environment" instructions](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/env-create.html#creating-a-cloud-platform-environment) to create your namespace. Please note, your namespace name **must** follow the format of:
 
 ```data-platform-app-<repo-name>-<env>```
@@ -115,6 +117,8 @@ In addition, you will need to update the generated `01-rbac.yaml` file in your n
 ```
 
 ### Create a Container Repository
+
+> Note: It is important you create the ecr.tf correctly to begin with. Changing the anything afterwards will likely cause breaking changes on deployment, and you may need to remove the variables and secrets from your code repository.
 
 [Follow the instructions in the Cloud Platform user guidance to add a container repository](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#adding-a-container-repository-to-your-namespace).
 
@@ -148,7 +152,6 @@ You can find further details about these settings [in the Cloud Platform documen
         "serviceaccounts",
         "configmaps",
         "persistentvolumeclaims",
-
       ]
       verbs = [
         "update",
@@ -204,7 +207,6 @@ You can find further details about these settings [in the Cloud Platform documen
       ]
     },
   ]
-
 ```
 
 Further details about these settings can be found in the [Cloud Platform documentation](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/cloud-platform-cli.html#github-actions-secrets).
@@ -212,7 +214,7 @@ Further details about these settings can be found in the [Cloud Platform documen
 
 ### Reference
 
-You can see a [full example of a namespace directory](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev) used to host an Analytical Platform application here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes.
+You can see a [full example of a namespace directory](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev) used to host an Analytical Platform application here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes. For a list of deployed applications you may also view the [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples).
 
 ## Register the Application in Control Panel
 
@@ -243,7 +245,6 @@ You will need to create an Auth0 client to handle authentication for each enviro
 The `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` that have been added will be used the next time you deploy your Application. In order to deploy a new version of the Application, you will need to create a pull request in your repository. The GitHub actions jobs will redeploy the dev environment when the PR is opened. The prod environment is deployed when the PR has been merged.
 
 [Click here for further information about deployments](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#overview).
-
 
 
 ## Accessing the Application
