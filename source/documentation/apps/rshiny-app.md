@@ -603,7 +603,7 @@ The following example can be used as the starting point when making your own Doc
 
 ```
 # The base docker image
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.2.0
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.3.0
 
 # ** Optional step: only if some of R pakcages requires the system libraries which are not covered by base image
 #   the one in the example below has been provided in base image.
@@ -638,7 +638,7 @@ If you already use the legacy AP shiny server image, and would like to switch to
 - Change the base docker image in your Dockerfile:
 
 ```
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.2.0
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.3.0
 ```
 
 - If present, ensure the following redundant parts of your Dockerfile are removed:
