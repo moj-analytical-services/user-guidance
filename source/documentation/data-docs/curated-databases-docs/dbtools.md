@@ -12,4 +12,4 @@ Allows you to access Athena databases from the Analytical Platform using an exte
 
 ## Python - pydbtools
 
-Queries MoJAP athena databases with features such as temp table creation. The [README](https://github.com/moj-analytical-services/pydbtools/blob/master/README.md) in the [pydbtools](https://github.com/moj-analytical-services/pydbtools/) repository gives details on how to install and use the package with Python. This package is maintained by the data engineering team.
+Allows you to access Athena databases from the Analytical Platform using the [awswrangler](https://aws-sdk-pandas.readthedocs.io/en/stable/index.html#) python package, and adding features such as temp table creation. The [README](https://github.com/moj-analytical-services/pydbtools/blob/master/README.md) in the [pydbtools](https://github.com/moj-analytical-services/pydbtools/) repository gives details on how to install and use the package with Python. This package is maintained by the data engineering team.
