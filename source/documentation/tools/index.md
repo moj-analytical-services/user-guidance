@@ -72,16 +72,16 @@ Provides the ability to link datasets at scale. Splink is the matching engine be
 
 ## R packages
 
-The following native R packages remove the need for using Python in R projects.
+The following R packages are maintained the AP community
 
 ### [dbtools](https://github.com/moj-analytical-services/dbtools)
-Allows you to access databases from the Analytical Platform. The Data Engineering team maintains this package.
+Allows you to access Athena databases from the Analytical Platform using a [reticulate](https://rstudio.github.io/reticulate/articles/package.html) wrapper around pydbtools.
 
 ### [Rdbtools](https://github.com/moj-analytical-services/Rdbtools)
-Allows you to access Athena databases from the Analytical Platform. The Analytical Platform community maintain this package.
+Allows you to access Athena databases from the Analytical Platform using an extension of the [noctua](https://github.com/DyfanJones/noctua) R package.
 
 ### [Rs3tools](https://github.com/moj-analytical-services/Rs3tools)
-Allows you to access AWS S3 from the Analytical Platform, which is mainly compatible with the legacy package [s3tools](https://github.com/moj-analytical-services/s3tools). The Analytical Platform community maintain this package.
+Allows you to access AWS S3 from the Analytical Platform, which is mainly compatible with the legacy package [s3tools](https://github.com/moj-analytical-services/s3tools).
 
 ## Data science tools
 
