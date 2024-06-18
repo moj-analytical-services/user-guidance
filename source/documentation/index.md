@@ -7,13 +7,14 @@ This site provides instructions on how to configure and use the Analytical Platf
 ## Intended users
 
 Primarily intended for Data Analysts, in the Data and Analytical Services Directorate, the Analytical Platform also hosts users from:
+
 - Criminal Injury Claims (CICA)
 - HM Courts & Tribunals Service (HMCTS)
 - HM Prison and Probation Service (HMPPS)
 - Legal Aid Agency (LAA)
 - Office of the Public Guardian (OPG)
 
-If you would like to use the Analytical Platform please contact us via the relevant (support)[https://github.com/ministryofjustice/data-platform-support/issues/new/choose] route. 
+If you would like to use the Analytical Platform please contact us via the relevant [support](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) route. 
 
 ### Knowledge requirements
 
@@ -37,11 +38,12 @@ In additional to Python and R compatibility, benefits of using the Analytical Pl
 
 - our Data Engineering team converts raw data from operational systems into structures and excerpts
 - we hold data files in Amazon S3 for ease of use, to load into your code or run SQL queries directly using Amazon Athena
-- users can also upload data to the Analytial Platform from other sources and share them with granular access controls, subject to normal data protection processes; for more information, see [Information governance][information-governance.md]
+- users can also upload data to the Analytical Platform from other sources and share them with granular access controls, subject to normal data protection processes; for more information, see [Information governance](information-governance.md)
 
 ### Reproducible Analysis
 
-The Analytical Platform provides tools to develop reproducible analytical pipelines (RAnalytical Platforms) to automate time–consuming and repetitive tasks, allowing you to focus on interpreting the results with the following elements:
+The Analytical Platform provides tools to develop reproducible analytical pipelines (RAPs) to automate time–consuming and repetitive tasks, allowing you to focus on interpreting the results with the following elements:
+
 - when datasets are imported into the Analytical Platform, snapshots of them are taken and versioned
 - standardised system libraries in GitHub
 - a standardised virtual machine that can run RStudio or Jupyter, or code running in an explicitly defined Dockerfile
@@ -49,6 +51,7 @@ The Analytical Platform provides tools to develop reproducible analytical pipeli
 ### Secure Environments
 
 The Analytical Platform in hosted in a cloud-based ecosystem that is easy to access remotely from all MoJ IT systems. Designed for data at security classifications OFFICIAL and OFFICIAL-SENSITIVE, we follow NCSC Cloud Security Principles, implementing features such as:
+
 - two-factor authentication
 - data encryption at rest and in transit
 - granular access control
@@ -59,10 +62,11 @@ The Analytical Platform in hosted in a cloud-based ecosystem that is easy to acc
 ### Out of Scope Offerings of the Analytical Platform 
 
 The Analytical Platform does not _currently_ provide the following:
+
 - production Analytical Platforms at scale
 - management information
 - real-time data; however, the Airflow tool can schedule data processing as frequently as every few minutes
 - pure data archival: Amazon S3, which the Analytical Platform uses for data storage, does not offer index or search facilities
 - we can set up a custom bucket policy to archive data to S3-IA or Glacier but recommend exploring SaaS alternatives, such as SharePoint or Google Drive
 
-If you would like to raise a feature request this can be done (here)[https://github.com/ministryofjustice/data-platform/issues/new/choose].
+If you would like to raise a feature request this can be done [here](https://github.com/ministryofjustice/data-platform/issues/new/choose).
