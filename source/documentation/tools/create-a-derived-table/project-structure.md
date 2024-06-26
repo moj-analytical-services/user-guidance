@@ -2,7 +2,7 @@
 
 ## 1-guide-overview
 Projects in create-a-derived-table are structured slightly differently to how dbt recommends, we have also noticed that DBT's guidence changes over time. We have therefore taken their guidance from there website [here]
-(https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) and we have adapted it where appropriate. 
+(https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) and we have adapted it where appropriate. You will find that the guidance below will be mostly the same as that in the DBT repo, however this allows us to maintain our own style and structure guide.
 
 Below is how we want projects structured. This is an overview of how the whole create-a-derived-table projet should look and in the following sections we will break down each layer.
 
@@ -29,7 +29,8 @@ Below is how we want projects structured. This is an overview of how the whole c
       │
       ├── prison  # domain
       │   ├── prison_intermediate # database
-      │   │
+      │   │      ├──intermediate_models
+      │   │      ...
       │   ├── prison_dimensional_layer
       │   │
       │   ├── prison_mart
@@ -71,7 +72,7 @@ models/staging
   - ❌ **Subdirectories based on loader.** Some people attempt to group by how the data is loaded (Fivetran, Stitch, custom syncs), but this is too broad to be useful on a project of any real size.
   - ✅ **Subdirectories based on business grouping.** Dbt recommends against this practice, however crate-a-derved-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data egineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from Dbt guidance.
 - **File names.** Creating a consistent pattern of file naming is [crucial in dbt](https://docs.getdbt.com/blog/on-the-importance-of-naming). File names must be unique and correspond to the name of the model when selected and created in the warehouse. We recommend putting as much clear information into the file name as possible, including a prefix for the layer the model exists in, important grouping information, and specific information about the entity or transformation in the model.
-  - ✅ `stg_[source]__[entity]s.sql` - the double underscore between source system and entity helps visually distinguish the separate parts in the case of a source name having multiple words. For instance, `google_analytics__campaigns` is always understandable, whereas to somebody unfamiliar `google_analytics_campaigns` could be `analytics_campaigns` from the `google` source system as easily as `campaigns` from the `google_analytics` source system. Think of it like an [oxford comma](https://www.youtube.com/watch?v=P_i1xk07o4g), the extra clarity is very much worth the extra punctuation.
+  - ❌ `stg_[source]__[entity]s.sql` - ALthough it is recommended by DBT to follow this convenstion, where a double underscore is used between source system and entity, this will not work with create-a-derived-table. The naming convensions in create-a-derived-table uses the double underscore to distiguish between database and model names. Therefore, **you cannot use double underscores anywhere else in the name of a model**, this will result in an error when running the model. 
   - ❌ `stg_[entity].sql` - might be specific enough at first, but will break down in time. Adding the source system into the file name aids in discoverability, and allows understanding where a component model came from even if you aren't looking at the file tree.
   - ✅ **Plural.** SQL, and particularly SQL in dbt, should read as much like prose as we can achieve. We want to lean into the broad clarity and declarative nature of SQL when possible. As such, unless there’s a single order in your `orders` table, plural is the correct way to describe what is in a table with multiple rows.
 
@@ -79,9 +80,58 @@ models/staging
 
 Now that we’ve got a feel for how the files and folders fit together, let’s look inside one of these files and dig into what makes for a well-structured staging model.
 
-Below, is an example of a standard staging model (from our `stg_stripe__payments` model) that illustrates the common patterns within the staging layer. We’ve organized our model into two <Term id='cte'>CTEs</Term>: one pulling in a source table via the [source macro](https://docs.getdbt.com/docs/build/sources#selecting-from-a-source) and the other applying our transformations.
+Below, is an example of a standard staging model from one of our models (from `stg_stripe__payments` model) that illustrates the common patterns within the staging layer. We’ve organized our model into two <Term id='cte'>CTEs</Term>: one pulling in a source table via the [source macro](https://docs.getdbt.com/docs/build/sources#selecting-from-a-source) and the other applying our transformations.
 
-While our later layers of transformation will vary greatly from model to model, every one of our staging models will follow this exact same pattern. As such, we need to make sure the pattern we’ve established is rock solid and consistent.
+Below we have chosen to order our fields in a way that is meaningful to the data that the models represents, the key here is that it is well organised. DBT recommends following the same order of variables for every model (something like ids, strings, numerics, boleans, dates and timesptamps), we have agreed that this does not alway work for how we work with the data. We therefore dont have a suggested order, only that we recommend there be some order to the feilds that is logical. We do recommend that your primary and foreign keys make up the first fields, then after that it is for you to decide.
+
+```sql
+-- stg_stripe__payments.sql
+
+with
+
+source as (
+
+    select * from {{ source('common_platform_curated','payment') }}
+
+),
+
+renamed as (
+
+    select
+        -- ids
+        id as payment_id,
+        orderid as order_id,
+
+        -- strings
+        paymentmethod as payment_method,
+        case
+            when payment_method in ('stripe', 'paypal', 'credit_card', 'gift_card') then 'credit'
+            else 'cash'
+        end as payment_type,
+        status,
+
+        -- numerics
+        amount as amount_cents,
+        amount / 100.0 as amount,
+
+        -- booleans
+        case
+            when status = 'successful' then true
+            else false
+        end as is_completed_payment,
+
+        -- dates
+        date_trunc('day', created) as created_date,
+
+        -- timestamps
+        created::timestamp_ltz as created_at
+
+    from source
+
+)
+
+select * from renamed
+```
 
 ```sql
 -- stg_stripe__payments.sql
@@ -146,13 +196,15 @@ select * from renamed
 
     ```yaml
     # dbt_project.yml
-
-    models:
-      jaffle_shop:
-        staging:
-          +materialized: view
+    mojap_derived_talbes:
+      models:
+          staging:
+            +materialized: view
     ```
 
+:::tip During development of a data model, it may be useful to materialise all you models as tables. This will allow you to easier debug issues. When you are ready to merge your work with main then you can change the materialisation back to view.
+:::
+ 
 - Staging models are the only place we'll use the [`source` macro](/docs/build/sources), and our staging models should have a 1-to-1 relationship to our source tables. That means for each source system table we’ll have a single staging model referencing it, acting as its entry point — _staging_ it — for use downstream.
 
 :::tip Don’t Repeat Yourself.
