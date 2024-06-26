@@ -1,10 +1,10 @@
 # Project Structure
 
 ## 1-guide-overview
-Projects in create-a-derived-table are structured slightly differently to how dbt recommends, we have also noticed that DBT's guidence changes over time. We have therefore taken their guidance from there website [here]
-(https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) and we have adapted it where appropriate. You will find that the guidance below will be mostly the same as that in the DBT repo, however this allows us to maintain our own style and structure guide.
+Projects in create-a-derived-table are structured slightly differently to how dbt recommends, we have also noticed that DBT's guidance changes over time. We have therefore taken their guidance from there website [here]
+(https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) and we have adapted it where appropriate. You will find that the guidance below will be mostly the same as that in the DBT repo, however there are some key difference so do read through this guide. 
 
-Below is how we want projects structured. This is an overview of how the whole create-a-derived-table projet should look and in the following sections we will break down each layer.
+Below is an overview of the whole create-a-derived-ttable folder structure. In the following sections we will go through each layer in detail, outlining how we want it structured with an explaination of why we have made those structure choices.
 
 ```shell
 ├── mojap_derived_tables
@@ -26,6 +26,10 @@ Below is how we want projects structured. This is an overview of how the whole c
       │   └── stg_xhibit
       │          ├── stg_xhibit__models.yml
       │          └── stg_xhibit__court.sql
+      ├── courts
+      │   ├── court_intermediate
+      │   │
+      │   ├── court_dimensional_layer
       │
       ├── prison  # domain
       │   ├── prison_intermediate # database
@@ -80,18 +84,18 @@ models/staging
 
 Now that we’ve got a feel for how the files and folders fit together, let’s look inside one of these files and dig into what makes for a well-structured staging model.
 
-Below, is an example of a standard staging model from one of our models (from `stg_stripe__payments` model) that illustrates the common patterns within the staging layer. We’ve organized our model into two <Term id='cte'>CTEs</Term>: one pulling in a source table via the [source macro](https://docs.getdbt.com/docs/build/sources#selecting-from-a-source) and the other applying our transformations.
+Below, is an example of a standard staging model from one of our models (from `stg_common_platform_curated__results` model) that illustrates the common patterns within the staging layer. We’ve organized our model into two <Term id='cte'>CTEs</Term>: one pulling in a source table via the [source macro](https://docs.getdbt.com/docs/build/sources#selecting-from-a-source) and the other applying our transformations.
 
 Below we have chosen to order our fields in a way that is meaningful to the data that the models represents, the key here is that it is well organised. DBT recommends following the same order of variables for every model (something like ids, strings, numerics, boleans, dates and timesptamps), we have agreed that this does not alway work for how we work with the data. We therefore dont have a suggested order, only that we recommend there be some order to the feilds that is logical. We do recommend that your primary and foreign keys make up the first fields, then after that it is for you to decide.
 
 ```sql
--- stg_stripe__payments.sql
+-- stg_common_platform_curated__results.sql
 
 with
 
 source as (
 
-    select * from {{ source('common_platform_curated','payment') }}
+    select * from {{ source('','') }}
 
 ),
 
@@ -99,81 +103,17 @@ renamed as (
 
     select
         -- ids
-        id as payment_id,
-        orderid as order_id,
 
         -- strings
-        paymentmethod as payment_method,
-        case
-            when payment_method in ('stripe', 'paypal', 'credit_card', 'gift_card') then 'credit'
-            else 'cash'
-        end as payment_type,
-        status,
 
         -- numerics
-        amount as amount_cents,
-        amount / 100.0 as amount,
 
         -- booleans
-        case
-            when status = 'successful' then true
-            else false
-        end as is_completed_payment,
 
         -- dates
-        date_trunc('day', created) as created_date,
 
         -- timestamps
-        created::timestamp_ltz as created_at
 
-    from source
-
-)
-
-select * from renamed
-```
-
-```sql
--- stg_stripe__payments.sql
-
-with
-
-source as (
-
-    select * from {{ source('stripe','payment') }}
-
-),
-
-renamed as (
-
-    select
-        -- ids
-        id as payment_id,
-        orderid as order_id,
-
-        -- strings
-        paymentmethod as payment_method,
-        case
-            when payment_method in ('stripe', 'paypal', 'credit_card', 'gift_card') then 'credit'
-            else 'cash'
-        end as payment_type,
-        status,
-
-        -- numerics
-        amount as amount_cents,
-        amount / 100.0 as amount,
-
-        -- booleans
-        case
-            when status = 'successful' then true
-            else false
-        end as is_completed_payment,
-
-        -- dates
-        date_trunc('day', created) as created_date,
-
-        -- timestamps
-        created::timestamp_ltz as created_at
 
     from source
 
@@ -220,22 +160,23 @@ This is a welcome change for many of us who have become used to applying the sam
   - ✅ **Joining in separate delete tables**. Sometimes a source system might store deletes in a separate table. Typically we’ll want to make sure we can mark or filter out deleted records for all our component models, so we’ll need to join these delete records up to any of our entities that follow this pattern. This is the example shown below to illustrate.
 
     ```sql
-    -- base_jaffle_shop__customers.sql
+    -- base_xhibit_curated__defendant.sql
 
     with
 
     source as (
 
-        select * from {{ source('jaffle_shop','customers') }}
+        select * from {{ source('xhibit_curated','defendant') }}
 
     ),
 
     customers as (
 
         select
-            id as customer_id,
+            id as defendant_id,
             first_name,
-            last_name
+            last_name,
+            dob as date_of_birth
 
         from source
 
@@ -245,62 +186,62 @@ This is a welcome change for many of us who have become used to applying the sam
     ```
 
     ```sql
-    -- base_jaffle_shop__deleted_customers.sql
+    -- base_xhibit_curated__deleted_defndants.sql
 
     with
 
     source as (
 
-        select * from {{ source('jaffle_shop','customer_deletes') }}
+        select * from {{ source('xhibit_curated','deleted_defendant') }}
 
     ),
 
-    deleted_customers as (
+    deleted_defendants as (
 
         select
-            id as customer_id,
+            id as defendant_id,
             deleted as deleted_at
 
         from source
 
     )
 
-    select * from deleted_customers
+    select * from deleted_defendants
     ```
 
     ```sql
-    -- stg_jaffle_shop__customers.sql
+    -- stg_xhibit_curated__defendants.sql
 
     with
 
     customers as (
 
-        select * from {{ ref('base_jaffle_shop__customers') }}
+        select * from {{ ref('base_xhibit_curated__defendant') }}
 
     ),
 
     deleted_customers as (
 
-        select * from {{ ref('base_jaffle_shop__deleted_customers') }}
+        select * from {{ ref('base_xhibit_curated__deleted_defndants') }}
 
     ),
 
-    join_and_mark_deleted_customers as (
+    join_and_mark_deleted_defendants as (
 
         select
-            customers.*,
+            defendants.*,
             case
-                when deleted_customers.deleted_at is not null then true
+                when deleted_defendants.deleted_at is not null then true
                 else false
             end as is_deleted
 
-        from customers
+        from defendants
 
-        left join deleted_customers on customers.customer_id = deleted_customers.customer_id
+        left join deleted_defendants on defendants.defendants_id = deleted_defendants.defendants_id
 
     )
 
-    select * from join_and_mark_deleted_customers
+    select * from join_and_mark_deleted_defendants
     ```
 
   - ✅ **Unioning disparate but symmetrical sources**. A typical example here would be if you operate multiple ecommerce platforms in various territories via a SaaS platform like Shopify. You would have perfectly identical schemas, but all loaded separately into your warehouse. In this case, it’s easier to reason about our orders if _all_ of our shops are unioned together, so we’d want to handle the unioning in a base model before we carry on with our usual staging model transformations on the (now complete) set — you can dig into [more detail on this use case here](https://discourse.getdbt.com/t/unioning-identically-structured-data-sources/921).
