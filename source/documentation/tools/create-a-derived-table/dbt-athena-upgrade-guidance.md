@@ -1,6 +1,6 @@
 # dbt-athena Upgrade Guidance
 
-We have now fully migrated to using [dbt-athena](https://pypi.org/project/dbt-athena-community/) [recommended by dbt](https://docs.getdbt.com/reference/warehouse-setups/athena-setup) as our interface with AWS. The guidance below details how you can test your models using during software updates to the `dbt-athena-community` adapter. If you have any issues please get in touch via the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
+We have now fully migrated to using [dbt-athena](https://pypi.org/project/dbt-athena-community/) [recommended by dbt](https://docs.getdbt.com/reference/warehouse-setups/athena-setup) as our interface with AWS. The guidance below details how you can properly test your models during software updates to the `dbt-athena-community` adapter. If you have any issues please get in touch via the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
 
 ## Table of contents
 
