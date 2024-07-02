@@ -95,11 +95,9 @@ If you do not receive a response within 24 hours, request access in either the *
 
 ### Sign in to the Control Panel
 
-The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From there, you configure core tools such as JupyterLab, RStudio and Visual Studio Code.
+The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From there, you configure core tools such as JupyterLab, RStudio and Visual Studio Code. You log in to the Control Panel using your GitHub account.
 
-When you access the Control Panel first time, a prompt will appear, requiring you to configure 2FA using your mobile device. Note that while you use your GitHub account to access the Control Panel, this 2FA is separate from the one you use to log in to GitHub. You may need to disable browser extensions such as Dark Mode during the 2FA setup process.
-
-After you log in to the Control Panel for the first time, you can begin requesting access to data on the platform.
+When accessing the Control Panel for the first time you will be prompted to authenticate with your Justice account. You only need to do this once, and will not see this on subsequent logins.
 
 ## 5. Set up JupyterLab
 
