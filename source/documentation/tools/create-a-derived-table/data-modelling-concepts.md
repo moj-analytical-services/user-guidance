@@ -5,10 +5,10 @@
 This page is intended to give users a brief introduction to Data Modelling concepts and why we are using `dbt` as the backend for `create-a-derived-table`. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
 
 
----
-title: How we style our dbt projects
-id: 0-how-we-style-our-dbt-projects
----
+
+# How we style our dbt projects
+
+
 
 ## Why does style matter?
 
@@ -109,11 +109,8 @@ renamed as (
 select * from renamed
 ```
 
+# How we style our SQL
 
----
-title: How we style our SQL
-id: 2-how-we-style-our-sql
----
 
 ## Basics
 
