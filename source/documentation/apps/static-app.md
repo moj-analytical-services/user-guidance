@@ -95,18 +95,8 @@ You can follow the instructions for each step individually, with a pull request 
 
 > Note: It is important you create the namespace with the correct name to begin with. Changing the namespace afterwards will likely cause breaking changes on deployment.
 
-[Follow the "Creating a Cloud Platform environment" instructions](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/env-create.html#creating-a-cloud-platform-environment) to create your namespace. Please note, your namespace name **must** follow the format of:
+[Follow the "Creating a Cloud Platform environment" instructions](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/env-create.html#creating-a-cloud-platform-environment) to create your namespace. Your namespace must meet the Ministry of Justice’s guidance on [naming things](https://technical-guidance.service.justice.gov.uk/documentation/standards/naming-things.html).
 
-```data-platform-app-<repo-name>-<env>```
-
-The `<repo-name>` should be the name of the repository you set up in the [previous step](#create-a-repository-from-the-template), not the full url.
-
-The `<env>` should be `dev` or `prod` based on which environment you are setting up. E.g.
-
-```
-data-platform-app-my-github-repo-dev
-data-platform-app-app-my-github-repo-prod
-```
 
 In addition, you will need to update the generated `01-rbac.yaml` file in your namespace directory to add the `analytics-hq` team. Open the file, and under the `subjects` section, add the following below the existing entry:
 
@@ -224,6 +214,7 @@ You can see a [full example of a namespace directory](https://github.com/ministr
 1. Login to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk)
 1. Click the "Webapps" link in the main navigation, and click the "Register app" button at the bottom of the page
 1. Enter the full URL of your GitHub repository
+1. Enter your Cloud Platform namespace, without any env suffix
 1. Choose to create a new webapp data source (S3 bucket), connect an existing data source, or choose to do this later.
 > **NOTE:**
 > If you choose "Do this later" you will be able to create a Webapp data source by clicking the "Webapp data" button in the main navigation after registering your app. You will then need to come back to the "Manage app" page to link it to your Application.
