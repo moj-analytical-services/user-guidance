@@ -27,32 +27,29 @@ Once you've established a clear style, stay consistent. This is the most importa
 
 ## How should I style?
 
-You should style the project in a way you and your teammates or collaborators agree on. The most important thing is that you have a style guide and stick to it. This guide is just a suggestion to get you started and to give you a sense of what a style guide might look like. It covers various areas you may want to consider, with suggested rules. It emphasizes lots of whitespace, clarity, clear naming, and comments.
-
-We believe one of the strengths of SQL is that it reads like English, so we lean into that declarative nature throughout our projects. Even within dbt Labs, though, there are differing opinions on how to style, even a small but passionate contingent of leading comma enthusiasts! Again, the important thing is not to follow this style guide; it's to make _your_ style guide and follow it. Lastly, be sure to include rules, tools, _and_ examples in your style guide to make it as easy as possible for your team to follow.
+In Analytics Engineering we have spent several months going through dbts style guide and discussing what aspects we agree and disagree on. We have taken their style guide and changed it to suit our needs. The below is that guide. Please read through and make sure you are familiar with our style guide before starting projects in create-a-derived-table.
 
 ## Automation
 
-Use formatters and linters as much as possible. We're all human, we make mistakes. Not only that, but we all have different preferences and opinions while writing code. Automation is a great way to ensure that your project is styled consistently and correctly and that people can write in a way that's quick and comfortable for them, while still getting perfectly consistent output.
+As part of our review of a dbt style guide and putting together our own, we have also worked on our own formatters and linters to help standardise our code and make it as easy as possible to follow the rules we have set out. Find the guide to using those [here](need to write a guide to using linter)
 
 
----
-title: How we style our dbt models
-id: 1-how-we-style-our-dbt-models
----
+
+# How we style our dbt models
 
 ## Fields and model names
 
-- 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. ALthough this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
-- 🔑 Each model should have a primary key.
+- 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Alhough this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
+- 🔑 Each model should have a primary key and that primary key should be the first field in the table.
 - 🔑 The primary key of a model should be named `<object>_id`, for example, `account_id`. This makes it easier to know what `id` is being referenced in downstream joined models.
-- Use underscores for naming dbt models; avoid dots.
+- Use underscores for naming dbt models; avoid dots or camel case.
   - ✅  `models_without_dots`
   - ❌ `models.with.dots`
+  - ❌ `CamelCaseModels`
   - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting) as well as the risk of issues in certain parts of dbt Cloud. For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
-- 🔑 Keys should be string data types. Additionally we adives using a hash function to create unique keys.
+- 🔑 Keys should be string data types. Additionally we adives using a hash function to create unique keys, see [here]() for a guide. This ensures there is a unique id for each row as well as making the ids uniform in length. 
 - 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'.
-- ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. Again, in AE we accept that in some cases this may not be possible. We want to prioritise readability, however, if this is not practical then do not lose sleep over it.
+- ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. Again, in AE we accept that in some cases this may not be possible. We want to prioritise readability, so try your best to be as descriptive as possible, however, if this is not practical then do not lose sleep over it.
 - ❌ Avoid reserved words as column names.
     - create-a-derived-table resered words:
         -
@@ -60,20 +57,22 @@ id: 1-how-we-style-our-dbt-models
 - 🕰️ Timestamp columns should be named `<event>_at`(for example, `created_at`) and should be in UTC. If a different timezone is used, this should be indicated with a suffix (`created_at_pt`).
 - 📆 Dates should be named `<event>_date`. For example, `created_date.`
 - 🔙 DBT suggests event dates and times should be past tense, we do not beleive this is necessary for create-a-derived-table as there are many examples of fields that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
-- 💱 Price/revenue fields should be in decimal currency (`19.99` for $19.99; many app databases store prices as integers in cents). If a non-decimal currency is used, indicate this with a suffix (`price_in_cents`).
+- 💱 Price/revenue fields should be in decimal currency (`19.99` for £19.99; many app databases shop prices as integers in pence). If a non-decimal currency is used, indicate this with a suffix (`price_in_pence`).
 - 🐍 Schema, table and column names should be in `snake_case`.
 - 🏦 Use names based on the _business_ terminology, rather than the source terminology. For example, if the source database uses `user_id` but the business calls them `customer_id`, use `customer_id` in the model.
 - 🔢 Versions of models should use the suffix `_v1`, `_v2`, etc for consistency (`customers_v1` and `customers_v2`).
-- 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group fields based on their relevance to eachother, say a flag and the field it is refering to. We therefore advise that some consistent groupings is followed but it does not necessarily need to be based on field type. Where possible ids should be the first fields in a model and we expect the primary key to be **the first** field.
+- 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group fields based on their relevance to eachother, say a flag and the field it is referring to. We therefore advise that a consistent grouping is followed but it does not necessarily need to be based on field type. Where possible ids should be the first fields in a model and we expect the primary key to be **the first** field.
 
 ## Example model
+
+Below is an example finance model, this follows the dbt style of grouping by field type, we will also include an example of a model where this is not the case
 
 ```sql
 with
 
 source as (
 
-    select * from {{ source('ecom', 'raw_orders') }}
+    select * from {{ source('sop_finance_stg', 'base_hmpps_general_ledger_gl01') }}
 
 ),
 
@@ -82,25 +81,25 @@ renamed as (
     select
 
         ----------  ids
-        id as order_id,
-        store_id as location_id,
-        customer as customer_id,
+        id as cost_centre_id, -- primary key
+        a_id as analysis_code_id,
+        objective as cobjective_code_id,
 
         ---------- strings
-        status as order_status,
+        version
 
         ---------- numerics
-        (order_total / 100.0)::float as order_total,
-        (tax_paid / 100.0)::float as tax_paid,
-
+        cast(debit_amount / 100.0) as float) as debit_amount,
+        cast(credit_amount / 100.0) as float) as credit_amount,
+        cast(total_amount / 100.0) as float) as total_amount,
         ---------- booleans
-        is_fulfilled,
+        is_recoverable,
 
         ---------- dates
-        date(order_date) as ordered_date,
+        date(paid_date) as paid_date,
 
         ---------- timestamps
-        ordered_at
+        transction_at
 
     from source
 
@@ -108,27 +107,38 @@ renamed as (
 
 select * from renamed
 ```
-
+```SQL
+Another example
+```
 # How we style our SQL
 
 
 ## Basics
 
-- ☁️ Use [SQLFluff](https://sqlfluff.com/) to maintain these style rules automatically.
-  - Customize `.sqlfluff` configuration files to your needs.
-  - Refer to our [SQLFluff config file](https://github.com/dbt-labs/jaffle-shop-template/blob/main/.sqlfluff) for the rules we use in our own projects. 
-
-  - Exclude files and directories by using a standard `.sqlfluffignore` file. Learn more about the syntax in the [.sqlfluffignore syntax docs](https://docs.sqlfluff.com/en/stable/configuration.html#id2).
-- 👻 Use Jinja comments (`{# #}`) for comments that should not be included in the compiled SQL.
-- ⏭️ Use trailing commas.
+- 👻 Use Jinja comments (`{# #}`) for comments that should not be included in the compiled SQL. When dbt compiles your code it will include code using SQL comments like `/* */` and `--`
+- ⏭️ Use trailing commas in lists. e.g.
+```SQL
+select
+    defendant_id,
+    court_id,
+    disposal_date,
+    ho_offence_code
+    ...
+```
+rather than
+```SQL
+select
+    defendant_id
+    , court_id
+    , disposal_date
+    , ho_offence_code
+    ...
+```
 - 4️⃣ Indents should be four spaces.
-- 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks) to mark where 80 characters is. 
+- 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks. See [here](https://stackoverflow.com/questions/29968499/how-can-i-have-multiple-vertical-rulers-in-vs-code) for a guide) to mark where 80 characters is. 
 - ⬇️ Field names, keywords, and function names should all be lowercase.
 - 🫧 The `as` keyword should be used explicitly when aliasing a field or table.
 
-:::info
-☁️ dbt Cloud users can use the built-in [SQLFluff Cloud IDE integration](https://docs.getdbt.com/docs/cloud/dbt-cloud-ide/lint-format) to automatically lint and format their SQL. The default style sheet is based on dbt Labs style as outlined in this guide, but you can customize this to fit your needs. No need to setup any external tools, just hit `Lint`! Also, the more opinionated [sqlfmt](http://sqlfmt.com/) formatter is also available if you prefer that style.
-:::
 
 ## Fields, aggregations, and grouping
 
@@ -136,6 +146,33 @@ select * from renamed
 - 🤏🏻 Aggregations should be executed as early as possible (on the smallest data set possible) before joining to another table to improve performance.
 - 🔢 Grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see [this classic rant](https://www.getdbt.com/blog/write-better-sql-a-defense-of-group-by-1) for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design.
 - 🔢 Column names should be written out explicitly with the column names in order statements to avoid ambiguity. 
+```SQL
+select
+    defendant_on_case_id,
+    result_priority,
+    custodial_period_days,
+    monetary,
+    final_offence_ho_code_priority,
+    final_offence_ho_code,
+    defendant_on_offence_id,
+    disposal2_id,
+    row_number()
+        over (
+            partition by
+                defendant_on_case_id
+            order by
+                result_priority asc nulls last,
+                custodial_period_days desc nulls last,
+                monetary desc nulls last,
+                final_offence_ho_code_priority asc nulls last,
+                final_offence_ho_code asc nulls last,
+                defendant_on_offence_id asc nulls last,
+                disposal2_id asc nulls last
+        ) as most_serious_disposal_rank,
+from disposals
+group by 1, 2, 3, 4, 5, 6, 7, 8
+order by defendant_on_case_id
+```
 
 ## Joins
 
@@ -156,12 +193,77 @@ select * from renamed
 ```sql
 with
 
-hyperion_metrics as (
+requirments as (
+    select * from {{ ref("derived_delius_stg__base_rqmnt") }}
+),
 
-    select * from {{ ref('finance_derived__int_hyperion_year_metrics') }}
-    where financial_year = '2023'
+reference_1 as (
+    select * from {{ ref("derived_delius_stg__stg_standard_reference_1") }} 
+    where code_set_name = 'REQUIREMENT SUB CATEGORY'
+),
 
+reference_2 as (
+    select * from {{ ref("derived_delius_stg__stg_standard_reference_2") }}
+    where code_set_name = 'ADDITIONAL REQUIREMENT SUB CATEGORY'
+),
+
+reference_3 as (
+    select * from {{ ref("derived_delius_stg__stg_standard_reference_3") }}
+    where code_set_name = 'REQUIREMENT TERMINATION REASON'
+),
+
+reference_4 as (
+    select * from {{ ref("derived_delius_stg__stg_standard_reference_4") }}
+    where code_set_name = 'UNITS'  
+),
+
+joined as (
+
+    select
+    requirments.rqmnt_id,
+    requirments.disposal_id,
+    requirments.start_date,
+    requirments.length,
+    requirments.rqmnt_notes,
+    requirments.commencement_date,
+    requirments.termination_date,
+    requirments.partition_area_id,
+    requirments.expected_start_date,
+    requirments.soft_deleted,
+    requirments.expected_end_date,
+
+    -- For rqmnt main type sub-cat
+    reference_1.code_value as rqmnt_type_sub_category_code,
+    reference_1.code_description as rqmnt_type_sub_category_desc,
+
+    -- For rqmnt main type sub-cat
+    reference_2.code_value as ad_rqmnt_type_sub_category_code,
+    reference_2.code_description as ad_rqmnt_type_sub_category_desc,
+
+    -- For terminations
+    reference_3.code_value as rqmnt_termination_reason_code,
+    reference_3.code_description as rqmnt_termination_reason_desc,
+
+    -- For units, bring code_value and code_description from standard_reference_list_id
+    reference_4.code_value as rqmnt_type_main_units_code,
+    reference_4.code_description as rqmnt_type_main_units_desc
+
+    from requirments
+
+    left join reference_1
+        on requirments.rqmnt_type_sub_category_id = reference_1.standard_reference_list_id
+
+    left join reference_2
+        on requirments.ad_rqmnt_type_sub_category_id = reference_2.standard_reference_list_id
+
+    left join reference_3
+        on requirments.rqmnt_termination_reason_id = reference_3.standard_reference_list_id
+
+    left join reference_4
+        on requirments.units_id = reference_4.standard_reference_list_id
 )
+
+select * from joined
 ```
 
 ## 'Functional' CTEs
@@ -170,7 +272,7 @@ hyperion_metrics as (
 - 👭🏻 Where possible joins should be done separately to calculations. This is to make the code neater, we expect the table each columns comes from to be referenced and therefore can make calculations overly complicated if a join is also being performed. (see example at the end of the section)
 - 📖 CTE names should be as verbose as needed to convey what they do e.g. `events_joined_to_users` instead of `user_events` (this could be a good model name, but does not describe a specific function or transformation).
 - 🌉 CTEs that are duplicated across models should be pulled out into their own intermediate models. Look out for chunks of repeated logic that should be refactored into their own model.
-- 🔚 The last line of a model should be a `select *` from your final output CTE. This makes it easy to materialize and audit the output from different steps in the model as you're developing it. You just change the CTE referenced in the `select` statement to see the output from that step.
+- 🔚 The last line of a model should be a `select *` from your final output CTE. This makes it easy to materialise and audit the output from different steps in the model as you're developing it. You just change the CTE referenced in the `select` statement to see the output from that step.
 
 ## Model configuration
 
