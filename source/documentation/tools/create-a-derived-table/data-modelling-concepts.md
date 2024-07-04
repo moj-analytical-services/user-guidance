@@ -4,11 +4,7 @@
 
 This page is intended to give users a brief introduction to Data Modelling concepts and why we are using `dbt` as the backend for `create-a-derived-table`. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
 
-
-
 # How we style our dbt projects
-
-
 
 ## Why does style matter?
 
@@ -50,9 +46,8 @@ As part of our review of a dbt style guide and putting together our own, we have
 - 🔑 Keys should be string data types. Additionally we adives using a hash function to create unique keys, see [here]() for a guide. This ensures there is a unique id for each row as well as making the ids uniform in length. 
 - 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'.
 - ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. Again, in AE we accept that in some cases this may not be possible. We want to prioritise readability, so try your best to be as descriptive as possible, however, if this is not practical then do not lose sleep over it.
-- ❌ Avoid reserved words as column names.
-    - create-a-derived-table reserved words:
-        - xhibit
+- ❌ Avoid reserved words as column names. create-a-derived-table reserved words:
+    - xhibit
 - ➕ Booleans should be prefixed with `is_` or `has_`.
 - 🕰️ Timestamp columns should be named `<event>_at`(for example, `created_at`) and should be in UTC. If a different timezone is used, this should be indicated with a suffix (`created_at_pt`).
 - 📆 Dates should be named `<event>_date`. For example, `created_date.`
@@ -110,8 +105,8 @@ select * from renamed
 ```SQL
 Another example
 ```
-# How we style our SQL
 
+# How we style our SQL
 
 ## Basics
 
@@ -136,8 +131,8 @@ select
 ```
 - 4️⃣ Indents should be four spaces.
 - 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks. See [here](https://stackoverflow.com/questions/29968499/how-can-i-have-multiple-vertical-rulers-in-vs-code) for a guide) to mark where 80 characters is. 
-- ⬇️ Field names, keywords, and function names should all be lowercase.
-- 🫧 The `as` keyword should be used explicitly when aliasing a field or table.
+- ⬇️ Field names, keywords, and function names (`select`, `as`, `group by`, etc...) should all be lowercase.
+- 🫧 The `as` keyword should be used explicitly when aliasing a field or table. e.g. `id as defendnat_id` not `id defendant_id`
 
 
 ## Fields, aggregations, and grouping
@@ -146,6 +141,7 @@ select
 - 🤏🏻 Aggregations should be executed as early as possible (on the smallest data set possible) before joining to another table to improve performance.
 - 🔢 Grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see [this classic rant](https://www.getdbt.com/blog/write-better-sql-a-defense-of-group-by-1) for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design.
 - 🔢 Column names should be written out explicitly with the column names in order statements to avoid ambiguity. 
+Example:
 ```SQL
 select
     defendant_on_case_id,

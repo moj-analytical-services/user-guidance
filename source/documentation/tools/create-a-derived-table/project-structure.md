@@ -30,15 +30,15 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
   ├── dbt_project.yml
   └── models
       ├── sources # source domain
-      │   ├── nomis.yaml
+      │   ├── nomis.yaml # model
       │   ├── oasys_prod.yaml
       │   ├── delius_prod.yaml
       │   ├── xhibit_v1.yaml
       │   ...
       │ 
       ├── staging  # staging domain
-      │   ├── stg_nomis
-      │   │      ├── stg_nomis__docs.md
+      │   ├── stg_nomis # database
+      │   │      ├── stg_nomis__docs.md # model
       │   │      ├── stg_nomis__models.yml
       │   │      ├── stg_nomis__offender.sql
       │   │      └── stg_nomis__prison.sql
@@ -52,7 +52,7 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
       │
       ├── prison  # domain
       │   ├── prison_intermediate # database
-      │   │      ├──intermediate_models
+      │   │      ├──intermediate_models # model
       │   │      ...
       │   ├── prison_dimensional_layer
       │   │
