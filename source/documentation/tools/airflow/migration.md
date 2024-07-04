@@ -3,14 +3,14 @@
 The Analytical Platform team are making changes to how and where Airflow DAGs are run, these changes are:
 
 -   Scheduling DAGs on Analytical Platform’s new compute environment
--   Replacing Kube2IAM with IRSA (IAM Roles for Service Accounts)
+-   Migrating to an AWS-recommended approach to managing access to resources
 
 >   **Note:** Airflow DAGs identified in the migration discovery that utilise internal networking (Modernisation Platform and HMCTS SDP) are not included in this initial migration phase as the networking is not ready yet.
 
 
 ### Steps to migrate Airflow DAGs to run on the new Analytical Platform Compute EKS clusters:
 
-*   Release a new version of your DAG image (e.g. *airflow-cjs-dashboard-data*), this doesn’t need any changes, just increment the version number and generate release notes.  
+*   Release a new version of your container image (e.g. *airflow-cjs-dashboard-data*), this doesn’t need any changes, just increment the version number and generate release notes.  
     *  **Note:** You do not need to use this new version in your DAG, it is just to update the ECR repository policy.
 
 In your DAG file in the airflow repo (e.g. *r_validation.py*), make the following changes:
