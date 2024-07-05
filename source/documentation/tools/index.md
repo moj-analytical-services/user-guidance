@@ -45,6 +45,9 @@ Moves data from microservices into the Analytical Platform's [curated databases]
 ### [Ingestion](ingestion)
 An SFTP based service that allows users to ingest data into their Analytical Platform data warehouse.
 
+### [MLFlow Tracking Server](mlflow-tracking-server)
+A user interface for [MLFlow Tracking Server](https://mlflow.org/docs/latest/tracking/server.html) that allows users to track their model experiments.
+
 ## Python packages
 
 The Data Engineering team maintain Python packages that help with data manipulation. The following are the packages we consider the most useful for doing so:
