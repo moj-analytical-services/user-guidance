@@ -20,8 +20,13 @@ In your DAG file in the airflow repo (e.g. *r_validation.py*), make the followin
         -   **Note:** `ROLE` should contain the airflow role name used by your DAG
     -   `environment="dev"` for Development environment 
     -   `environment="prod"` for Production environment
+    -   Remove `annotations={"iam.amazonaws.com/role": ROLE}` from the arguments list. 
+        -   **Note:** If you are using other annotations than the standard role one, simply remove `"iam.amazonaws.com/role": ROLE` from the list of annotations.
 -   If your DAG uses the `KubernetesPodOperator`, add the following arguments:
     -   `service_account_name=ROLE.replace("_", "-")`
     -   update `cluster_context` argument to `"analytical-platform-compute-test"` for Development environment
     -   update `cluster_context` argument to `"analytical-platform-compute-production"` for Production environment
+    -   Remove `annotations={"iam.amazonaws.com/role": ROLE}` from the arguments list.
 -   Merge the changes in a pull request in the airflow repo as normal.
+
+An example of what an updated DAG should look like is the [examples.use_kubernetes_pod_operators](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_kubernetes_pod_operators.py) DAG.
