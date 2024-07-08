@@ -29,4 +29,4 @@ In your DAG file in the airflow repo (e.g. *r_validation.py*), make the followin
     -   Remove `annotations={"iam.amazonaws.com/role": ROLE}` from the arguments list.
 -   Merge the changes in a pull request in the airflow repo as normal.
 
-An example of what an updated DAG should look like is the [examples.use_kubernetes_pod_operators](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_kubernetes_pod_operators.py) DAG.
+An example of what an updated DAG should look like is the [examples.use_kubernetes_pod_operators](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_kubernetes_pod_operators.py) DAG. This DAG demonstrates for the `dev` environment both an updated `BasicKubernetesPodOperator` and `KubernetesPodOperator`.
