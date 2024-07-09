@@ -18,13 +18,16 @@ _In the old system there was support for a range of ports, so it is possible you
 
 See [Coffee and Coding session on Building webapps in Python using Plotly Dash](https://github.com/moj-analytical-services/Coffee-and-Coding/tree/master/2020-04-14%20Python%20webapps%20using%20Plotly%20Dash)
 
+### Jupyter Lab Version
+Dash is known to work with `JupyterLab: 3.1.13, Python 3.9 - Git ext`. You may run into issues attempting to run Dash with other versions of JupyterLab. 
+
 ### Install dependencies
 
 In the terminal, install the Dash dependencies:
 
 ```bash
-pip install --user dash==0.39.0  # The core dash backend
-pip install --user dash-daq==0.1.0  # DAQ components (newly open-sourced!)
+pip install --user dash==2.17.1  # The core dash backend
+pip install --user dash-daq==0.5.0  # DAQ components (newly open-sourced!)
 ```
 
 The demo code in this document is known to work with these versions but you can
@@ -45,23 +48,31 @@ N.B. You will need to have pandas installed for this code to work.
 ```python
 import dash
 from dash.dependencies import Input, Output
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 
 import flask
 import pandas as pd
 import time
 import os
 
+
 server = flask.Flask('app')
 server.secret_key = os.environ.get('secret_key', 'secret')
 
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/hello-world-stock.csv')
 
-app = dash.Dash('app', server=server, url_base_pathname='/\_tunnel\_/8050/')
+external_scripts = [
+    'https://cdn.plot.ly/plotly-basic-latest.min.js'
+]
+
+
+app = dash.Dash('app', server=server, url_base_pathname='/_tunnel_/8050/', external_scripts=external_scripts)
+
 
 app.scripts.config.serve_locally = False
-dcc._js_dist[0]['external_url'] = 'https://cdn.plot.ly/plotly-basic-latest.min.js'
+
 
 app.layout = html.Div([
     html.H1('Stock Tickers'),
@@ -77,10 +88,13 @@ app.layout = html.Div([
     dcc.Graph(id='my-graph')
 ], className="container")
 
+
 @app.callback(Output('my-graph', 'figure'),
               [Input('my-dropdown', 'value')])
 
+
 def update_graph(selected_dropdown_value):
+    print("test")
     dff = df[df['Stock'] == selected_dropdown_value]
     return {
         'data': [{
@@ -101,8 +115,10 @@ def update_graph(selected_dropdown_value):
         }
     }
 
-if `__name__` == '\_\_main\_\_':
+
+if __name__ == '__main__':
     app.run_server(host='0.0.0.0')
+
 
 ```
 
