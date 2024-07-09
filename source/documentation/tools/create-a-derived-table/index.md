@@ -2,7 +2,7 @@
 
 ⚠️ This service is in beta ⚠️
 
-Create a Derived Table is a tool for creating persistent derived tables in Athena. Read on to find out more or get in touch at the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
+Create a Derived Table is a tool for creating persistent tables in Athena. Read on to find out more or get in touch at the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel.
 
 ## Overview
 
@@ -16,7 +16,7 @@ Create a Derived Table is a tool for creating persistent derived tables in Athen
 
 ## Planning Models
 
-- [Data Modelling Concepts](/tools/create-a-derived-table/data-modelling-concepts)
+- [Data Modelling Concepts for Derived tables](/tools/create-a-derived-table/data-modelling-concepts)
 - [Project Structure](/tools/create-a-derived-table/project-structure)
 
 ## Creating Models
@@ -42,6 +42,7 @@ Create a Derived Table is a tool for creating persistent derived tables in Athen
 - [Troubleshooting](/tools/create-a-derived-table/troubleshooting)
 - [Quick Reference](/tools/create-a-derived-table/quick-reference)
 - [dbt-athena Upgrade Guidance](/tools/create-a-derived-table/dbt-athena-upgrade-guidance)
+- [Tools for Data Processing Pipelines](/tools/tools-for-processing-data)
 
 ## Resources
 

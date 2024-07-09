@@ -6,14 +6,14 @@ Note that we only provides support for third-party tools and services for featur
 
 ## Core tools and services
 
-### [Airflow](airflow)
-A tool for scheduling and monitoring workflows.
-
 ### [Control Panel](control-panel.html)
 Main entry point to the Analytical Platform. Allows you to configure tools and view their status.
 
+### [Airflow](airflow)
+A tool for scheduling and monitoring workflows.
+
 ### [Create a Derived Table](create-a-derived-table)
-A tool for creating persistent derived tables in Athena.
+A tool for creating persistent tables in Athena.
 
 ### [RStudio](rstudio)
 Development environment for writing R code and R Shiny apps. For more information, see the [RStudio documentation](https://docs.posit.co/ide/user/).
@@ -24,6 +24,9 @@ Development environment for writing Python code. For more information, see the [
 ### [Visual Studio Code](visual-studio-code)
 General purpose code editor. For more information, see the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
 
+### [Tools for Data Processing Pipelines](tools-for-processing-data)
+A small guide on whether to use [RStudio](rstudio), [JupyterLab](jupyterlab), [Visual Studio Code](visual-studio-code), the Athena workbench, [Airflow](airflow) or [Create a Derived Table](create-a-derived-table) for processing data.
+
 ### [Data Discovery](../data/curated-databases/data-documentation)
 Allows you to browse the databases that are available on the Analytical Platform.
 
@@ -31,15 +34,12 @@ Allows you to browse the databases that are available on the Analytical Platform
 Web application for uploading data (.csv, .json, .jsonl) to the Analytical Platform in a standardised way.
 
 ### [Data Extractor](https://github.com/ministryofjustice/data-engineering-data-extractor)
-
 Extracts data from applications, services or microservices to the Analytical Platform in a standardised way.
 
 ### [GitHub](https://github.com/)
-
 Online hosting platform for git. Git is a distributed version control system that allows you to track changes in files, while GitHub hosts the Analytical Platform's code.
 
 ### [Register my data](https://github.com/ministryofjustice/register-my-data)
-
 Moves data from microservices into the Analytical Platform's [curated databases](../data/curated-databases) in a standardised way.
 
 ### [Ingestion](ingestion)
