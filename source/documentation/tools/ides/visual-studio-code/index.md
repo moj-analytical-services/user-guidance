@@ -1,5 +1,7 @@
 # Visual Studio Code
 
+If you are new to using Visual Studio Code then the [official tips and tricks ](https://code.visualstudio.com/docs/getstarted/tips-and-tricks) guide is a good starting place as well as these series of [Introductory Videos](https://code.visualstudio.com/docs/getstarted/introvideos).
+
 ## Packaged Tools
 
 * [AWS Command Line Interface](https://docs.aws.amazon.com/cli/)
