@@ -50,39 +50,13 @@ Usually this doesn't cause anything to crash. You just need to wait for the curr
 
 One example of when this can happen is if you attempt to save a file whilst a long-running script is running. R Studio has to wait until the script has finished running to attempt to save the file. However, sometimes the wait is too long, causing a timeout. In this case, you just need to wait for the code to finish running, and then press save again.
 
-### Too many redirects error in browser
-
-Auth0, which provides the 2FA, can misremembering logins, giving an issue of "too many redirects". One solution is to clear your cookies. Another solution, to not lose all your cookies, is to go to [https://alpha-analytics-moj.eu.auth0.com/v2/logout](https://alpha-analytics-moj.eu.auth0.com/v2/logout) to properly log out so you can log back in again.
-
 ### Two-factor authentication problems
 
 Two-factor authentication (2FA) is critical to the security of the platform. We have opted to use smartphone-based authentication apps as hardware tokens, like the RSA device you use to log in to DOM1, are expensive and SMS codes are susceptible to interception.
 
-Note that there are two layers of 2FA in action on the platform:
+There is now only one layer of 2FA:
 
 - Your GitHub account must have 2FA enabled. When you log in to GitHub, your session will stay active for a month before you need to re-enter your 2FA code. Your GitHub username identifies you to the platform, and we use this identity to control access to data and other resources once you've logged into the platform. You therefore must be logged into GitHub to use the platform.
-
-- Your Analytical Platform account has a separate 2FA step. You will be prompted to set this up the first time you access the platform and on subsequent uses, depending on the machine you use and the network it's connected to:
-
-  - From a corporate-networked machine (DOM1 or QUANTUM) or corporate wifi (e.g. MoJDigital) then you will not be challenged for this.
-
-  - Otherwise (e.g. working from home on a non-corporate-networked machine) you'll be challenged to provide the 2FA code during every sign-in to access each part the platform: Control Panel, R Studio, Grafana etc.
-
-This security step lets you log into the platform and use it.
-
-Whilst you may be prompted to enter your platform 2FA frequently (e.g. when working from home), but you will not need to enter your GitHub 2FA because this is remembered for a month.
-
-However, if you have not logged into the platform for more than a month, you will first have to login to GitHub (and enter your GitHub 2FA code), and you will then also be prompted to enter your platform 2FA code.
-
-### I've lost my platform 2FA
-
-If you've lost your platform 2FA code because e.g. you've broken or lost your phone, please contact the Analytical Platform team and we will reset it for you.
-
-### I have entered my 2FA code, but the platform will not accept it
-
-Smartphone based 2FA apps require the phone's clock (the time) to be up to date. If your phone's clock is out of sync by more than 30 seconds or so, this can cause the 2FA codes to be out of sync.
-
-Most phones syncronise their time with the network provider, so this is not a problem. If your time is out of sync, you need to navigate to your clock settings in your phone, and enable the option to sync the time. See e.g. [here](https://android.stackexchange.com/questions/114644/how-to-force-a-time-date-update-in-my-phone)
 
 ### I'm having problems deploying a Shiny app
 
