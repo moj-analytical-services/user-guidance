@@ -8,7 +8,7 @@ To set up GitHub for use with git in RStudio or JupyterLab, you'll need to:
 
 ### Create an SSH key
 
-You can create an SSH key in RStudio or JupyterLab. You must create a separate SSH key for each tool that you use.
+You can create an SSH key in RStudio, JupyterLab or Visual Studio Code. You must create a separate SSH key for each tool that you use.
 
 #### RStudio
 
@@ -44,17 +44,39 @@ To create an SSH key in JupyterLab, follow the steps below:
 
 8.  Select the SSH key and copy it to the clipboard by pressing Ctrl+C on windows or ⌘C on Mac.
 
+#### Visual Studio Code
+
+To create an SSH key in Visual Studio Code, follow the steps below:
+
+1.  Open Visual Studio Code from the Analytical Platform control panel.
+2.  The **Terminal** should automatically open. Otherwise click the hamburger icon **≡** in the top right and click **Terminal** then **New Terminal**.
+3.  Create an SSH key by running:
+
+          ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+    Here, you should substitute the email address you used to sign up to GitHub.
+
+4.  When prompted to enter a file in which to save the key, press Enter to accept the default location.
+5.  When prompted to enter a passphrase, press Enter to not set a passphrase.
+6.  View the SSH key by running:
+
+         cat ~/.ssh/id_rsa.pub
+
+7.  Select the SSH key and copy it to the clipboard by pressing Ctrl+C on windows or ⌘C on Mac.
+
 ### Add the SSH key to GitHub
 
 To add the SSH key to GitHub, you should follow the [guidance from GitHub](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account).
 
 ### Configure your username and email in git on the Analytical Platform
 
-To configure your username and email in git on the Analytical Platform using RStudio or JupyterLab, follow the steps below:
+To configure your username and email in git on the Analytical Platform using RStudio, JupyterLab or Visual Studio Code, follow the steps below:
 
 1.  Open a new terminal:
     - In RStudio, select **Tools** in the menu bar and then **Shell...**
-    - In JupyterLap, select the **+** icon in the file browser and then select **Terminal** from the **Other** section in the new Launcher tab.
+    - In JupyterLab, select the **+** icon in the file browser and then select **Terminal** from the **Other** section in the new Launcher tab.
+    - In Visual Studio Code, select the **≡** icon in the top right and click **Terminal** then **New Terminal**.
+
 2.  Configure your username by running:
 
           git config --global user.name 'Your Name'
