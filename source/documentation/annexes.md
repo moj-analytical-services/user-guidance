@@ -91,23 +91,7 @@ For more information on RAPs, please see the following: [RAP Manual](https://moj
 
 To engage further with the MoJ RAP community, please contact Aidan Mews to join the RAP publication group team on MS Teams, or join the [#rap](https://app.slack.com/client/T1PU1AP6D/C02DSC3Q4P6) channel on Slack.
 
-## Step by step guide to setup Two Factor Authentication
-
-Two factor authentication (2FA) is critical to the security of the platform.  We have opted to use smartphone based 2FA apps due to the expense of giving out hardware tokens like the RSA device you use to log into DOM1.
-
-Note that there are two layers of two factor authentication (2FA) in action on the platform:
-
-* *Github Account 2FA* Your Github account must have 2FA enabled.  When you log in to Github, your session will stay active for a month before you need to re-enter your 2FA code.  Your Github username identifies you to the platform, and we use this identity to control access to data and other resources once you've logged into the platform.  You therefore must be logged into Github to use the platform.
-
-* *Analytical Platform 2FA* Your Analytical Platform account has a separate 2FA step.  You will be prompted to set this up the first time you access the platform.  This code must be entered once a day.  This security step lets you log into the platform and use it.
-
-Usually, when you log into the platform, you will be prompted to enter your platform 2FA, but you will not need to enter your Github 2FA because this is remembered for a month.
-
-However, if you have not logged into the platform for more than a month, you will first have to login to Github (and enter your Github 2FA code), and you will then also be prompted to enter your platform 2FA code.
-
 ### Step by step - logging into the platform for the first time
-
-The first time you log into the Analytical Platform, you will be asked to set up 2FA.
 
 Your welcome email will direct you to the platform [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 
@@ -117,19 +101,7 @@ Your welcome email will direct you to the platform [Control Panel](https://contr
 
 If you're already logged into Github, you will not see the 'Sign in to GitHub to continue to Analytics platform' screen.
 
-#### Step 2: Set up your Platform 2FA using your smartphone
-
-In this step, you set up the second layer of 2FA, your Platform 2FA.
-
-Scan the code using your smartphone app, and enter the code that comes up on your smartphone.
-
-Note: If you get the error 'Wrong or expired code', you need to make sure that your phone's clock is accurate.  See [here](../errors.html#i-have-entered-my-2fa-code-but-the-platform-will-not-accept-it)
-
-![](images/2fa/platform_2fa.png)
-
 #### You're now done
-
-Once you're entered your platform 2FA code in the interface above, you should now have access to the platform.  You will need to enter your platform 2FA code around once a day as you use the platform.
 
 ## Infrastructure Migration - step by step instructions
 
