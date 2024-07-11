@@ -13,6 +13,14 @@ The Analytical Platform team are making changes to how and where Airflow DAGs ar
 *   Release a new version of your container image (e.g. *airflow-cjs-dashboard-data*), this doesn’t need any changes, just increment the version number and generate release notes.  
     *  **Note:** You do not need to use this new version in your DAG, it is just to update the ECR repository policy.
 
+# Important Note
+
+If your R packages in renv.lock or your Python packages in requirements.txt are not locked to a version, you will potentially encounter issues if newer versions of those packages are downloaded and installed. This can also occur even if all your packages are at pinned versions, as those packages themselves may have partially unpinned requirements.
+
+While we are unable to assist in resolving dependency issues, our other users have gotten great assistance in our slack [#R](https://moj.enterprise.slack.com/archives/C1PUCG719) and [#python](https://moj.enterprise.slack.com/archives/C1Q09V86S) channels.
+
+ 
+
 In your DAG file in the airflow repo (e.g. *r_validation.py*), make the following changes:
 
 -   If your DAG uses the `BasicKubernetesPodOperator`, add the following arguments:
