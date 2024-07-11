@@ -67,7 +67,8 @@ Follow these steps to delete an environment:
 
 Once you have your repository, you can [clone it to your local machine](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and start writing your application, or copy existing code to [push](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository) to the repository.
 
-You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, however we recommend you use the open-source Shiny Server image managed by the Analytical Platform. [Click here to see further documentation about this, including an example Dockerfile](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#open-source-shiny-server). The [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples) may contain applications build using other languages and frameworks too.
+You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, however we recommend you use the open-source Shiny Server image managed by the Analytical Platform. [Click here to see further documentation about this, including an example Dockerfile](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#open-source-shiny-server). The [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples) may contain applications built using other languages and frameworks too.
+> Note: The healthcheck and other endpoints are sent to port 9999 your application will need this set to work.
 
 When ready to deploy, you can move on to:
 
