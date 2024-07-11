@@ -686,4 +686,23 @@ A complete example for installing the helm chart in the workflow below. These ch
   $custom_variables
 ```
 
-A full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
+You can view a full working example of an app [here](https://github.com/ministryofjustice/ap-rshiny-notesbook). This app uses:
+- The AP provided open source RShiny base Docker image. For reference, see the [Dockerfile here](https://github.com/ministryofjustice/ap-rshiny-notesbook/blob/main/Dockerfile)
+- The AP provided GitHub action file to deploy a development environment. For reference, see the [GitHub action file)](https://github.com/ministryofjustice/ap-rshiny-notesbook/blob/main/.github/workflows/build-push-deploy-dev.yml)
+- A Cloud Platform namespace to host the app. For reference, the environment configuration for this app can be [viewed here](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev)
+
+
+##### Troubleshooting
+
+If you see an error in the `Upgrade the Helm chart` step of a deployment action like the below:
+
+```
+Error: "helm upgrade" requires 2 arguments
+
+Usage:  helm upgrade [RELEASE] [CHART] [flags]
+Error: Process completed with exit code 1.
+```
+
+This indictates there is something wrong with your GitHub action file. Check that it looks exactly as described above, and that all secrets/variables referenced exist within your environment.
+
+Pay **particular attention** to the `helm upgrade` command itself - something as minor as additional whitespace on a line within this section of your file can cause a failure with the above error.
