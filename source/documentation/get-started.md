@@ -119,17 +119,17 @@ To create an SSH key in JupyterLab:
 3. Navigate to the **Other** section and select **Terminal**
 4. Run the following command in your terminal, replacing **your_email@example.com** with the email address you used to sign up for GitHub:
 
-```
-$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
+    ```
+    $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    ```
 
 5. The response will ask you to choose a directory to save the key in; press Enter to accept the default location
 6. The response will also ask you to set a passphrase; press Enter to not set a passphrase.
 7. To view the SSH key, run:
 
-```
-$ cat /home/jovyan/.ssh/id_rsa.pub
-```
+    ```
+    $ cat /home/jovyan/.ssh/id_rsa.pub
+    ```
 
 8. Copy the SSH key to your clipboard
 
@@ -176,18 +176,18 @@ To create an SSH key in Visual Studio Code:
 1. Open Visual Studio Code from the Analytical Platform Control Panel
 2. Open a new terminal, and run the following commands
 
-```
-$ ssh-keygen -t ed25519 -C "<your email address>"
-```
+    ```
+    $ ssh-keygen -t ed25519 -C "<your email address>"
+    ```
 
-5. The response will ask you to choose a directory to save the key in; press Enter to accept the default location
-6. The response will also ask you to set a passphrase; press Enter to not set a passphrase.
-7. To view the SSH key, run:
+3. The response will ask you to choose a directory to save the key in; press Enter to accept the default location
+4. The response will also ask you to set a passphrase; press Enter to not set a passphrase.
+5. To view the SSH key, run:
 
-```
-$ cat ~/.ssh/id_ed25519.pub
-```
+    ```
+    $ cat ~/.ssh/id_ed25519.pub
+    ```
 
-8. Copy the SSH key to your clipboard
+6. Copy the SSH key to your clipboard
 
 You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
