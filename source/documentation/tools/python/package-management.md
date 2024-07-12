@@ -94,18 +94,20 @@ If you come across any conflicts or warnings when installing your libraries usin
 
 ## Conda
 
+> Note: the default location conda installs to will likely not be persistent. Therefore you should use the `--prefix` option in `conda create` to set the install location of the conda environment to either `/home/analyticalplatform/conda` for Visual Studio Code or `/home/jovyan/conda` for JupyterLab.
+
 Conda is an open-source package management and environment management system. It allows you to create isolated environments with specific versions of Python and other packages. The ability to specify the version of Python may be useful if you are working in both JupyterLab (which uses Python `3.9`) and Visual Studio Code (which uses Python `3.12` currently), otherwise you may get library conflicts and dependency errors.
 
 ### Create a new conda environment
 
-To create a new Conda environment, use the conda create command followed by the name of the environment and the desired Python version.
+To create a new Conda environment, use the conda create command followed by the name of the environment, the desired Python version and the install path.
 
 ```
 sh
-conda create --name myenv python=3.9
+conda create --name myenv python=3.9 --prefix /path/to/install
 ```
 
-Replace `myenv` with your desired environment name and `3.9` with the Python version you need.
+Replace `myenv` with your desired environment name, `3.9` with the Python version you need, and `/path/to/install` with either `/home/analyticalplatform/conda` for Visual Studio Code or `/home/jovyan/conda` for JupyterLab
 
 ### Activating and Deactivating Environments
 
