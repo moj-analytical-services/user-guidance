@@ -100,14 +100,14 @@ Conda is an open-source package management and environment management system. It
 
 ### Create a new conda environment
 
-To create a new Conda environment, use the conda create command followed by the name of the environment, the desired Python version and the install path.
+To create a new Conda environment, use the conda create command followed by the desired Python version and the install path (note, you cannot use `--name` when using `--prefix`).
 
 ```
 sh
-conda create --name myenv python=3.9 --prefix /path/to/install
+conda create python=3.9 --prefix /path/to/install
 ```
 
-Replace `myenv` with your desired environment name, `3.9` with the Python version you need, and `/path/to/install` with either `/home/analyticalplatform/conda` for Visual Studio Code or `/home/jovyan/conda` for JupyterLab
+Replace `3.9` with the Python version you need, and `/path/to/install` with either `/home/analyticalplatform/conda` for Visual Studio Code or `/home/jovyan/conda` for JupyterLab
 
 ### Activating and Deactivating Environments
 
