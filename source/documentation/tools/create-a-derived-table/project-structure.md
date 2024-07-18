@@ -411,6 +411,8 @@ If you have ideas about how you would like to structure your data model, please 
       │   │       └── prison_safety_and_security__nomis_mod_stg.yaml  # table property file
 ```
 
+Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help you out.
+
 ## Pull-request check list
 
 EVery pull reqwuest to merge a branch with the main branch in create-a-derived-table requires a review by someone in the analytics engineering team and in some cases, when the changes affect project files, like `dbt_project.yml`, then a data engineer's reveiew is also needed. These reviews are to ensure that the code entering the codebase is inline with best practice and our guidance, as wel as ensuring it wont disrupt the scheduled runs.
@@ -446,6 +448,8 @@ electronic_monitoring:
           - daily
           - dc_display_in_catalogue
 ```
+
+
 
 ### Style
 
