@@ -5,12 +5,12 @@
 Data on the Analytical Platform can largely be split into four categories:
 - `Raw`: data that has been uploaded to the Analytical Platform without any changes made to it
 - `Curated`: data that has been validated, organised, cleaned and transformed by the Data Engineers ready to be used by Analytical Platform users
-- `Derived`: data that has been transformed, aggegregated, reduce and turned into a data model to fit specific needs of Analytical Platform users
+- `Derived`: data that has been transformed, aggregated, reduce and turned into a data model to fit specific needs of Analytical Platform users
 - `Processed`: data that has been processed by Analytical Platform users to fit their own needs
 
 ## Where do I find out what data is already on the Platform?
 
-> Note: in the future the Data Catalog will be developed and provide a useful resource for finding data
+> 🚩 Note: in the future the Data Catalog will be developed and provide a useful resource for finding data
 
 The Data Engineering and Modelling Team (DMET) maintain a number of databases on the Platform (*curated* and *derived* databases). The best way to find out about *curated* and *derived* databases is using the [data discovery tool](https://data-discovery-tool.analytical-platform.service.justice.gov.uk/) (access to the tool is now governed via GitHub; Analytical Platform users have access by default). The data discovery tool can be updated by anyone, so if you find something out about the data that isn't already documented, please do add to it. *Derived* tables can also be found by visiting the [create-a-derived-table repository](https://github.com/moj-analytical-services/create-a-derived-table). For more information about *curated* databases please visit [#ask-data-engineering](https://moj.enterprise.slack.com/archives/C8X3PP1TN) and for *derived* databases please visit [#ask-data-modelling](https://moj.enterprise.slack.com/archives/C03J21VFHQ9).
 
@@ -24,13 +24,15 @@ If you are looking for access to a user created bucket, then the admin of that b
 
 ## Where should I store my own data?
 
+> ⚠️ We can only hold 1,000 S3 buckets on the Analytical Platform. Before you create a new bucket, please check whether you can re-use an existing one, or create a domain-level S3 bucket and use folders and [path specific access](https://user-guidance.analytical-platform.service.justice.gov.uk/data/amazon-s3/#path-specific-access) for project level access.
+
 Data should be stored in an S3 bucket. You can create a new S3 bucket in the [AP Control Panel](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/control-panel.html). Data can be uploaded manually via the AWS console (which can be accessed through the control panel) or you can write it from RStudio, Visual Studio Code or JupyterLab.
 
 If your data contains anything that could be considered personal information, you must follow guidance from the data protection team which can be found on the [intranet](https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/).
 
 ## How do I read/write data from an s3 bucket?
 
-**Python**: You can read/write directly from S3 using pandas. However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
+**Python**: You can read/write directly from S3 using a variety of tools such as pandas, boto3, aws wrangler. However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
 
 **R**: Whilst initially the recommended package was [botor](https://github.com/daroczig/botor),
 you are also encouraged to try out [Rs3tools](https://github.com/moj-analytical-services/Rs3tools) a community
