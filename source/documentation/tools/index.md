@@ -13,7 +13,7 @@ Main entry point to the Analytical Platform. Allows you to configure tools and v
 A tool for scheduling and monitoring workflows.
 
 ### [Create a Derived Table](create-a-derived-table)
-A tool for creating persistent tables in Athena.
+A tool for creating persistent derived tables in Athena.
 
 ### [RStudio](rstudio)
 Development environment for writing R code and R Shiny apps. For more information, see the [RStudio documentation](https://docs.posit.co/ide/user/).

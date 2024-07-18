@@ -1,4 +1,4 @@
-# Data Modelling Concepts for Derived tables - placeholder
+# Data Modelling Concepts - placeholder
 
 ⚠️ This service is in beta ⚠️
 

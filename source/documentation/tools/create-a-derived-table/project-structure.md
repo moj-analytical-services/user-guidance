@@ -12,7 +12,7 @@ The secondary consideration is whether the tables you are creating belong in an 
 
 ## Standard directory structure and naming conventions
 
-The following is an example of how to adhere to the standard dbt project directory structure required to work with Create a Derived Table. The Prison Safety and Security team have created a database called `prison_safety_and_security` in the `security` domain.
+The following is an example of how a team might build a data model whilst adhearing to the standard dbt project directory structure required to work with Create a Derived Table. The Prison Safety and Security team have created a database called `prison_safety_and_security` in the `security` domain.
 
 - From the `mojap_derived_tables` dbt project, the hierarchy of directories must follow `models` -> `domain` -> `database`. The directory structure after this is arbitrary and can be chosen to suit your needs. However, we do recommend that you arrange your models into data marts and suffix your models with descriptions (this will be discussed in more detail).
 - Directory and file names should only use snake case, as in, `no-hyphens-like-this`, `just_underscores_like_this`.
@@ -61,6 +61,6 @@ If you have ideas about how you would like to structure your data model, please 
 
 ## Data modelling
 
-Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear, reach out at [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help you out.
+Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help you out.
 
 <br />
