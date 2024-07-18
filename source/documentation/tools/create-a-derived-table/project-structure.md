@@ -1,11 +1,14 @@
 # Project Structure
 
+to do 
+- guide on the difference between staging and base modesl
+- general differences between staging, intermediate and marts (do we want to add something on a dimensional layer? are dimensional layers marts?) 
 ## 1-guide-overview
 
-The create-a-derived-table service should be used for creating tables with well defined use cases, like to serve a performance metric, publication, or MI report. This is because the _dbt project_ (`mojap_derived_tables`) is a shared space and so knowing where to put your work in the broader structure of the project is key. That's not to say you can't explore and experiment with dbt within the dbt project, there's a development envionment where you can try things out without having to worry about making a mess of things. More on that later. In keeping with that, Analytics Engineers maintain the create-a-derived-table code base and therefore have therefore put together this guide to help you adhere to our best practices for projet stucture and project style. All pull requests to add code the the `main` branch will require at least a reveiew from an Analytics Engineer and may require a Data Engineer if the code changes the project files (add a description as to what these are?). When reviewing a pull request we check the following [things](link to pull request list) and will make sure that your project adheres to our project structure 
+The create-a-derived-table service should be used for creating tables with well defined use cases, like to serve a performance metric, publication, or MI report. This is because the _dbt project_ (`mojap_derived_tables`) is a shared space and so knowing where to put your work in the broader structure of the project is key. That's not to say you can't explore and experiment with dbt within the dbt project, there's a development envionment where you can try things out without having to worry about making a mess of things. More on that later. In keeping with that, Analytics Engineers maintain the create-a-derived-table code base and therefore have therefore put together this guide to help you adhere to our best practices for projet stucture and project style. All pull requests to add code to the `main` branch will require at least a reveiew from an Analytics Engineer and may require a Data Engineer if the code changes the project files (e.g. `dbt_project.yml`). When reviewing a pull request we check the following [things](link to pull request list) and will make sure that your project adheres to our project structure and style.
 
 Projects in create-a-derived-table are structured slightly differently to how dbt recommends, we have also noticed that dbt's guidance changes over time. We have therefore taken their guidance from there website [here]
-(https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) and we have adapted it where appropriate. You will find that the guidance below will be mostly the same as that in the sbt repo, however, there are some key difference so do read through this guide. 
+(https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) and we have adapted it where appropriate. You will find that the guidance below will be mostly the same as that in the dbt repo, however, there are some key difference so do read through this guide. 
 
 ## Domains
 
@@ -120,7 +123,7 @@ renamed as (
         objective as cobjective_code_id,
 
         ---------- strings
-        version
+        extract_version
 
         ---------- numerics
         cast(debit_amount / 100.0) as float) as debit_amount,
@@ -285,13 +288,14 @@ Let’s take a look at the intermediate layer of our project to understand the p
 
 ```shell
 models/intermediate
-└── finance
-    ├── _int_finance__models.yml
-    └── int_payments_pivoted_to_orders.sql
+└── courts
+    └── courts_intermediate
+        ├── courts_intermidiate_properties.yml
+        └── int_int_xhibit_and_common_platform_receipts_unioned.sql
 ```
 
 - **Folders**
-  - ✅ **Subdirectories based on business groupings.** Much like the staging layer, we’ll house this layer of models inside their own `intermediate` subfolder. Unlike the staging layer, here we shift towards being business-conformed, splitting our models up into subdirectories not by their source system, but by their area of business concern.
+  - ✅ **Subdirectories based on business groupings.** Much like the staging layer, we’ll house this layer of models inside their own `intermediate` database. Unlike the staging layer, here we shift towards being business-conformed, splitting our models up into subdirectories not by their source system, but by their area of business concern.
 - **File names**
   - `✅ int_[entity]s_[verb]s.sql` - the variety of transformations that can happen inside of the intermediate layer makes it harder to dictate strictly how to name them. The best guiding principle is to think about _verbs_ (e.g. `pivoted`, `aggregated_to_user`, `joined`, `fanned_out_by_quantity`, `funnel_created`, etc.) in the intermediate layer. In our example project, we use an intermediate model to pivot payments out to the order grain, so we name our model `int_payments_pivoted_to_orders`. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know [SQL](https://mode.com/sql-tutorial/). That clarity is worth the long file name. It’s important to note that we’ve dropped the double underscores at this layer. In moving towards business-conformed concepts, we no longer need to separate a system and an entity and simply reference the unified entity if possible. In cases where you need intermediate models to operate at the source system level (e.g. `int_shopify__orders_summed`, `int_core__orders_summed` which you would later union), you’d preserve the double underscores. Some people like to separate the entity and verbs with double underscores as well. That’s a matter of preference, but in our experience, there is often an intrinsic connection between entities and verbs in this layer that make that difficult to maintain.
 
@@ -407,8 +411,48 @@ If you have ideas about how you would like to structure your data model, please 
       │   │       └── prison_safety_and_security__nomis_mod_stg.yaml  # table property file
 ```
 
-## Data modelling
+## Pull-request check list
 
+EVery pull reqwuest to merge a branch with the main branch in create-a-derived-table requires a review by someone in the analytics engineering team and in some cases, when the changes affect project files, like `dbt_project.yml`, then a data engineer's reveiew is also needed. These reviews are to ensure that the code entering the codebase is inline with best practice and our guidance, as wel as ensuring it wont disrupt the scheduled runs.
+
+This guide will provide details on what exactly will be checked and what you need to do to ensure you project passes these checks. Below is the checklist we use to review any pull request
+
+## Analytics engineering pull request reveiw
+
+### Schedulling
+
+For any new project you will need to make sure that you have explicitly stated the desired scheduling of your project in the `dbt_project.yml` file. For any existing project you will already have scheduling, but you should still ensure that this is still the dired schedule. Guidance [here]()
+
+Extract from the create-a-derived-table `dbt_project.yml`:
+```yaml
+electronic_monitoring:
+      +meta:
+        dc_owner: matthew.price2
+      ems_stg:
+        +tags: em
+      ems_int:
+        +tags: em
+    finance:
+      +meta:
+        dc_owner: holly.furniss
+      hyperion_finance_stg:
+        +tags: monthly
+      sop_finance_stg:
+        +tags: monthly
+      lookup_finance_stg:
+        +tags: monthly
+      finance_derived:
+        +tags:
+          - daily
+          - dc_display_in_catalogue
+```
+
+### Style
+
+### Structure
+
+
+## Data engineering pull request review
 
 
 <br />

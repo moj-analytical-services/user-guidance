@@ -1,10 +1,11 @@
-# Data Modelling Concepts - placeholder
+# Data Modelling Concepts
 
-⚠️ This service is in beta ⚠️
+This style guide uses the 
 
-This page is intended to give users a brief introduction to Data Modelling concepts and why we are using `dbt` as the backend for `create-a-derived-table`. Please post suggestions to improve this document in our slack channel [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9), or edit and raise a PR.
+last updated: 
+date: 
 
-# How we style our dbt projects
+# How we style our create-a-derived-table projects
 
 ## Why does style matter?
 
@@ -43,7 +44,7 @@ As part of our review of a dbt style guide and putting together our own, we have
   - ❌ `models.with.dots`
   - ❌ `CamelCaseModels`
   - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting) as well as the risk of issues in certain parts of dbt Cloud. For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
-- 🔑 Keys should be string data types. Additionally we adives using a hash function to create unique keys, see [here]() for a guide. This ensures there is a unique id for each row as well as making the ids uniform in length. 
+- 🔑 Keys should be string data types. Additionally we adives using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys. This ensures there is a unique id for each row as well as making the ids uniform in length. 
 - 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'.
 - ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. Again, in AE we accept that in some cases this may not be possible. We want to prioritise readability, so try your best to be as descriptive as possible, however, if this is not practical then do not lose sleep over it.
 - ❌ Avoid reserved words as column names. create-a-derived-table reserved words:
@@ -183,7 +184,7 @@ order by defendant_on_case_id
 - 🔝 All `{{ ref('...') }}` statements should be placed in CTEs at the top of the file.
 - 📦 'Import' CTEs should be named after the table they are referencing.
 - 'Import' CTEs should be short and concise to make it easy to read what tables are being read in. Try not to have lots of fields in your select statement as it makes reading the CTEs harder, `select *` should be sufficient in most cases.
-- You can use a `where` clasue to filter the data down.
+- You can use a `where` clasue to filter out undeeded data.
 - For example:
 
 ```sql
