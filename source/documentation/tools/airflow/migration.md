@@ -39,7 +39,7 @@ In your DAG file in the airflow repo (e.g. *r_validation.py*), make the followin
 
 An example of what an updated DAG should look like is the [examples.use_kubernetes_pod_operators](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_kubernetes_pod_operators.py) DAG. This DAG demonstrates for the `dev` environment both an updated `BasicKubernetesPodOperator` and `KubernetesPodOperator`.
 
-## Important Notes - Change in default region
+## Important Notes - Change in Default Region
 
 The new compute cluster exists in eu-west-2 (London). This change will not affect the majority of customers, as they were either doing operations that were region agnostic, or they were explicitly stating what region they wanted work to be carried out in as part of their image. However, in cases where the region is NOT explictly specified, jobs may fail after migration due to the change in default region. Examples of errors that may be caused by this are:
 
