@@ -80,7 +80,7 @@ Provides the ability to link datasets at scale. Splink is the matching engine be
 
 ## R Packages
 
-The following R packages are maintained the AP community
+The following R packages are maintained by the AP community
 
 ### [dbtools](https://github.com/moj-analytical-services/dbtools)
 Allows you to access Athena databases from the Analytical Platform using a [reticulate](https://rstudio.github.io/reticulate/articles/package.html) wrapper around pydbtools.
