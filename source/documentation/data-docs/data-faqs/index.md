@@ -50,7 +50,7 @@ If you get `assumed-role/... is not authorized to perform: glue:GetDatabases`, [
 
 **Python**: To run queries and/or read data into a pandas DataFrame, use `pydbtools`. More details are [here](https://github.com/moj-analytical-services/pydbtools). Remember to install the latest version!
 
-**R**: There is currently no single recommended package for querying databases in R. There is [dbtools](https://github.com/moj-analytical-services/dbtools) which should work on the "old" platform. [Rdbtools](https://github.com/moj-analytical-services/Rdbtools) should work on the "new" platform, but is not officially supported so should be used with caution.
+**R**: There is currently no single recommended package for querying databases in R. There is [dbtools](https://github.com/moj-analytical-services/dbtools) which should work on the "old" platform. [Rdbtools](https://github.com/moj-analytical-services/Rdbtools) should work on the "new" platform. This package is maintained by the analytical platform user community.
 
 ## I am running into memory issues using Python/R, what should I do?
 
