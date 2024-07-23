@@ -52,6 +52,10 @@ If you get `assumed-role/... is not authorized to perform: glue:GetDatabases`, [
 
 **R**: There is currently no single recommended package for querying databases in R. There is [dbtools](https://github.com/moj-analytical-services/dbtools) which should work on the "old" platform. [Rdbtools](https://github.com/moj-analytical-services/Rdbtools) should work on the "new" platform. This package is maintained by the analytical platform user community.
 
+## What should I use to process my data?
+
+Please refer to [tools for processing my data](#link)
+
 ## I am running into memory issues using Python/R, what should I do?
 
 You should do as much data manipulation in Athena/SQL as you possibly can, before reading into your analytical tool of choice. You should consider filtering out unnecessary rows or columns, or aggregating results if appropriate. The function `create_temp_table` in `pydbtools` is particularly useful for helping with this.
