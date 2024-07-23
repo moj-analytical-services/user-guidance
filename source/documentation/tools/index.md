@@ -15,7 +15,7 @@ Allows you to browse the databases that are available on the Analytical Platform
 ### [GitHub](https://github.com/)
 Online hosting platform for git. Git is a distributed version control system that allows you to track changes in files, while GitHub hosts the Analytical Platform's code.
 
-## Data Ingest, Curation and Sharing
+## Data Ingest
 
 ### [Data Extractor](https://github.com/ministryofjustice/data-engineering-data-extractor)
 Extracts data from applications, services or microservices to the Analytical Platform in a standardised way.
