@@ -64,7 +64,7 @@ Apache [Airflow](https://user-guidance.analytical-platform.service.justice.gov.u
 > * Setup even for simple tasks can be complex
 
 ### Create a Derived Table
-[Create a Derived Table](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/) is an in-house developed service that brings dbt, Git, and data access controls together to allow you to deploy derived and processed tables from data available on the Analytical Platform; straight to Athena, in a reproducible way, and with scheduled table updates.
+[Create a Derived Table](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/) also allows you to run scheduled table updates.
 
 > ✅ Pros
 > * Processing can be triggered when underlying ‘source’ data has been updated
