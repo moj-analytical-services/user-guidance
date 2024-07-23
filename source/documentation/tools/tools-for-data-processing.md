@@ -43,7 +43,8 @@ Another option is to use the [Athena Console](https://user-guidance.analytical-p
 > * SQL only - limiting how complex your processing can be
 > * No proper version control, makes it hard for others to replicate
 > * Data has to be in an Athena database already 
- 
+ ### Create-a-derived-table
+Create-a-derived-table is an in-house developed service that brings  [dbt](https://docs.getdbt.com/docs/introduction), Git, and data access controls together to allow you to deploy derived and processed tables from data available on the Analytical Platform. This extends SQL with features commonly associated with programming languages, enabling more flexible, scalable, and maintainable code. dbt can also assure the quality of your transformations through [data tests](https://docs.getdbt.com/docs/build/data-tests), for example to check whether columns contain null values.
 ## Processing data using an automated pipeline
 
 ### Airflow
