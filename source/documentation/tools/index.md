@@ -29,7 +29,7 @@ An SFTP based service that allows users to ingest data into their Analytical Pla
 ### [Register my data](https://github.com/ministryofjustice/register-my-data)
 Moves data from microservices into the Analytical Platform's [curated databases](../data/curated-databases) in a standardised way.
 
-## Integrated Development Environment (IDE)
+## Integrated Development Environments (IDE)
 
 ### [Amazon Athena Console](https://user-guidance.analytical-platform.service.justice.gov.uk/data/curated-databases/amazon-athena/#amazon-athena)
 Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. See  [Athena documentation](https://user-guidance.analytical-platform.service.justice.gov.uk/data/curated-databases/amazon-athena/#amazon-athena) for more information.
