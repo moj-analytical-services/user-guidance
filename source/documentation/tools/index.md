@@ -15,13 +15,19 @@ Main entry point to the Analytical Platform. Allows you to configure tools and v
 ### [Create a Derived Table](create-a-derived-table)
 A tool for creating persistent derived tables in Athena.
 
-### [RStudio](rstudio)
+### [r](r)
+R programming language primarily used in [rstudio](ides/rstudio) or [Visual Studio Code](visual-studio-code).
+
+### [rstudio](ides/rstudio)
 Development environment for writing R code and R Shiny apps. For more information, see the [RStudio documentation](https://docs.posit.co/ide/user/).
 
-### [JupyterLab](jupyterlab)
+### [Python](python)
+Python programming language primarily used in [JupyterLab](ides/jupyterlab) or [Visual Studio Code](visual-studio-code).
+
+### [JupyterLab](ides/jupyterlab)
 Development environment for writing Python code. For more information, see the [JupyterLab documentation](https://jupyterlab.readthedocs.io/en/latest/).
 
-### [Visual Studio Code](visual-studio-code)
+### [Visual Studio Code](ides/visual-studio-code)
 General purpose code editor. For more information, see the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
 
 ### [Data Discovery](../data/curated-databases/data-documentation)

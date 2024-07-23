@@ -1,10 +1,9 @@
 # R package management
 
-There are multiple package managers available for RStudio depending on the version you are using:
+There are multiple package managers available for R depending on the version you are using:
 
 - renv
 - Conda
-- packrat
 
 ## Why use a package manager?
 
@@ -16,7 +15,7 @@ For Rstudio there is the added imperative to use a package manager (usually renv
 
 ## Renv
 
-[Renv](https://rstudio.github.io/renv/articles/renv.html) is the current standard for Rstudio on the Analytical Platform as it provides simpler package management than Conda or packrat which were previously recommended.
+[Renv](https://rstudio.github.io/renv/articles/renv.html) is the current standard for Rstudio on the Analytical Platform as it provides simpler package management than Conda.
 
 The basic renv commands are:
 
@@ -38,7 +37,7 @@ If you are using version 4 or greater of R on the analytical platform then renv 
 The only other things to note if you've not used renv before are:
 
  + The first time you use renv, you may be asked to consent to some changes it makes to the way packages are installed - please select yes to this.
- + If you previously used a different package management system (like Conda or packrat) remove any configuration files for these systems from your R files first.
+ + If you previously used a different package management system (like Conda) remove any configuration files for these systems from your R files first.
 
 ### Starting a new project with renv or adding renv to an existing project
 
@@ -152,7 +151,7 @@ When exploring this section, you may also find the [slides](https://github.com/m
 
 Conda is a unified package management system that supports managing both Python and R dependencies in a single `environment`. It can make sure all of these libraries are compatible with each other. Conda is available for both RStudio and JupyterLab on the Analytical Platform, though note that RStudio and JupyterLab have separate environments so dependencies won't be shared between the applications.
 
-A key example within Analytical Services where conda is useful: both `dbtools` and `s3tools` rely on Python packages through the `reticulate` R-to-Python bridge. `packrat` only handles R dependencies; this means that `packrat` is not enough to reproducibly and reliably manage all of your application's dependencies.
+A key example within Analytical Services where conda is useful: both `dbtools` and `s3tools` rely on Python packages through the `reticulate` R-to-Python bridge.
 
 ### Installing Packages
 
@@ -203,7 +202,7 @@ You can also use conda to install Python packages, for use in R through the `ret
 
 ### Operating System Packages
 
-Even if you want to continue using `packrat` or `renv` to manage your R packages,  some packages have operating system-level dependencies, which can't be handled by `packrat`/`renv` themselves. You can use conda to resolve these operating system dependencies, such as libxml2.
+Even if you want to continue using `renv` to manage your R packages,  some packages have operating system-level dependencies, which can't be handled by `renv` themselves. You can use conda to resolve these operating system dependencies, such as libxml2.
 
 #### Examples
 
@@ -249,7 +248,7 @@ It can be useful to do this if you have tried to [reset your conda environment t
 
 #### Exporting your _Environment_
 
-This is similar to making a `packrat.lock` file, it catalogues all of the
+This catalogues all of the
 dependencies installed in your environment so that another user can restore a
 working environment for your application. Check this `environment.yml` file into
 your git repository.
@@ -313,28 +312,6 @@ conda env export -n base| grep -v "^prefix: " > /tmp/base.yml && conda env updat
 # reinstall packages
 conda env update -f environment.yml --prune
 ```
-
-
-
-## Packrat
-
-**NB Use of `packrat` is deprecated on the Analytical Platform - the guidance below is for information only because legacy projects may still use `packrat`.**
-
-Packrat is the most well-known package management tool for R. There's more information about it here: <https://rstudio.github.io/packrat/>
-
-It has some significant downsides. It can be quite temperamental, and difficult to debug when things go wrong - in the earlier days of the Analytical Platform, the majority of support issues related to getting Packrat working.
-
-Furthermore, the Analytical Platform version of RStudio runs on a Linux virtual machine, and CRAN mirrors do not provide Linux compiled binaries for packages. This means that packages need to be compiled on the Analytical Platform every time they're installed, which can take a long time. This means a long wait when doing `install.packages` both in an RStudio session, and when running a Docker build for an RShiny application.
-
-### Packrat usage
-
-To use packrat, ensure that it is enabled for your project in RStudio: select __Tools__ > __Project Options...__ > __Packrat__ > __Use packrat with this project__.
-
-When packrat is enabled, run `packrat::snapshot()` to generate a list of packages used in the project, their sources and their current versions.
-
-You may also wish to run `packrat::clean()` to remove unused packages from the list.
-
-The list is stored in a file called `packrat/packrat.lock`. You must ensure that you have committed this file to GitHub before deploying your app.
 
 ## R's install.packages()
 
