@@ -1,14 +1,18 @@
 # Project Structure
 
-to do 
-- guide on the difference between staging and base modesl
-- general differences between staging, intermediate and marts (do we want to add something on a dimensional layer? are dimensional layers marts?) 
+last updated: 23/07/2024
+dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
+
+# How we structure our create-a-derived-table projects
+
 ## 1-guide-overview
 
-The create-a-derived-table service should be used for creating tables with well defined use cases, like to serve a performance metric, publication, or MI report. This is because the _dbt project_ (`mojap_derived_tables`) is a shared space and so knowing where to put your work in the broader structure of the project is key. That's not to say you can't explore and experiment with dbt within the dbt project, there's a development envionment where you can try things out without having to worry about making a mess of things. More on that later. In keeping with that, Analytics Engineers maintain the create-a-derived-table code base and therefore have therefore put together this guide to help you adhere to our best practices for projet stucture and project style. All pull requests to add code to the `main` branch will require at least a reveiew from an Analytics Engineer and may require a Data Engineer if the code changes the project files (e.g. `dbt_project.yml`). When reviewing a pull request we check the following [things](link to pull request list) and will make sure that your project adheres to our project structure and style.
+This guide aims to provide consistency in how our projects in create-a-derived-table are structured - in terms of folders, files and naming - all of which are related to how we structure our transformations.
 
-Projects in create-a-derived-table are structured slightly differently to how dbt recommends, we have also noticed that dbt's guidance changes over time. We have therefore taken their guidance from there website [here]
-(https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) and we have adapted it where appropriate. You will find that the guidance below will be mostly the same as that in the dbt repo, however, there are some key difference so do read through this guide. 
+As a group of Analytics Engineers, we have thoroughly reviewed guidance published by dbt (the technology behind create-a-derived-table) and adapted it to suit our needs in this guide.
+
+Please take the time to familiarise yourself with this project structure guide, and our style guidance [add link], before starting projects in create-a-derived-table.
+
 
 ## Domains
 
@@ -62,9 +66,9 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
       │   ├── prison_mart
 ```
 
-Given create-a-derived-table is continually being worked on and improved, the guidance can change to incorporate the updates. This is the case now and will be the case in the future, so make sure to keep up to date with discussions [here](). As a result of the evolving nature of create-a-derived-table there will continue to be reminants of previous best practices, over time these will be brought in-line with the current guidance.
+Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear - if you're unsure, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help.
 
-Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help you out.
+Please note that the use of create-a-derived-table has evolved over time, and best practices change, the reality of our project may be out of sync with the best practices stated here. 
 
 ## 2-staging
 
