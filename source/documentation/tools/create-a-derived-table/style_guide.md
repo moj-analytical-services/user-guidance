@@ -35,7 +35,7 @@ Once you've established a clear style, stay consistent. This is the most importa
   - ✅ `models_without_dots`
   - ❌ `models.with.dots`
   - ❌ `CamelCaseModels`
-  - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting) as well as the risk of issues in certain parts of dbt Cloud. For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
+  - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting). For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
 - 🔑 Keys should be string data types. We advise using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys - this ensures there is a unique id for each row, as well as making the ids uniform in length. 
 - 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'.
 - ❌ Avoid reserved words as column names. create-a-derived-table reserved words, for example `order`.
