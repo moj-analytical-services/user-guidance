@@ -1,15 +1,16 @@
-# Data Modelling Concepts
+# Data Modelling Style Guide
 
-This style guide uses the 
-
-last updated: 
-date: 
+last updated: 23/07/2024
 
 # How we style our create-a-derived-table projects
 
 ## Why does style matter?
 
-Style might seem like a trivial, surface-level issue, but it's a deeply material aspect of a well-built project. A consistent, clear style enhances readability and makes your project easier to understand and maintain. Highly readable code helps build clear mental models making it easier to debug and extend your project. It's not just a favor to yourself, though; equally importantly, it makes it less effort for others to understand and contribute to your project, which is essential for peer collaboration, open-source work, and onboarding new team members. [A style guide lets you focus on what matters](https://mtlynch.io/human-code-reviews-1/#settle-style-arguments-with-a-style-guide), the logic and impact of your project, rather than the superficialities of how it's written. This brings harmony and pace to your team's work, and makes reviews more enjoyable and valuable.
+Style might seem like a trivial, surface-level issue, but it's an important aspect of a well-built project. A consistent, clear style enhances readability and makes your project easier to understand and maintain. Highly readable code helps build clear mental models making it easier to debug and extend your project. It's not just a favor to yourself, though; equally importantly, it makes it less effort for others to understand and contribute to your project, which is essential for peer collaboration, open-source work, and onboarding new team members. [A style guide lets you focus on what matters](https://mtlynch.io/human-code-reviews-1/#settle-style-arguments-with-a-style-guide), the logic and impact of your project, rather than the superficialities of how it's written. This brings harmony and pace to your team's work, and makes reviews more enjoyable and valuable.
+
+As a group of Analytics Engineers, we have thoroughly reviewed [guidance published by dbt](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) (the technology behind create-a-derived-table) and adapted it to suit our needs in this style guide.
+
+Please take the time to familiarise yourself with this style guide, and our guidance on project structure [add link], before starting projects in create-a-derived-table.
 
 ## What's important about style?
 
@@ -21,16 +22,6 @@ There are two crucial tenets of code style:
 Style your code in such a way that you can quickly read and understand it. It's also important to consider code review and git diffs. If you're making a change to a model, you want reviewers to see just the material changes you're making clearly.
 
 Once you've established a clear style, stay consistent. This is the most important thing. Everybody on your team needs to have a unified style, which is why having a style guide is so crucial. If you're writing a model, you should be able to look at other models in the project that your teammates have written and read in the same style. If you're writing a macro or a test, you should see the same style as your models. Consistency is key.
-
-## How should I style?
-
-In Analytics Engineering we have spent several months going through dbts style guide and discussing what aspects we agree and disagree on. We have taken their style guide and changed it to suit our needs. The below is that guide. Please read through and make sure you are familiar with our style guide before starting projects in create-a-derived-table.
-
-## Automation
-
-As part of our review of a dbt style guide and putting together our own, we have also worked on our own formatters and linters to help standardise our code and make it as easy as possible to follow the rules we have set out. Find the guide to using those [here](need to write a guide to using linter)
-
-
 
 # How we style our dbt models
 
