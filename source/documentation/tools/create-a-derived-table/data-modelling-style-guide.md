@@ -1,6 +1,7 @@
 # Data Modelling Style Guide
 
 last updated: 23/07/2024
+dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) 
 
 # How we style our create-a-derived-table projects
 
@@ -8,7 +9,7 @@ last updated: 23/07/2024
 
 Style might seem like a trivial, surface-level issue, but it's an important aspect of a well-built project. A consistent, clear style enhances readability and makes your project easier to understand and maintain. Highly readable code helps build clear mental models making it easier to debug and extend your project. It's not just a favor to yourself, though; equally importantly, it makes it less effort for others to understand and contribute to your project, which is essential for peer collaboration, open-source work, and onboarding new team members. [A style guide lets you focus on what matters](https://mtlynch.io/human-code-reviews-1/#settle-style-arguments-with-a-style-guide), the logic and impact of your project, rather than the superficialities of how it's written. This brings harmony and pace to your team's work, and makes reviews more enjoyable and valuable.
 
-As a group of Analytics Engineers, we have thoroughly reviewed [guidance published by dbt](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) (the technology behind create-a-derived-table) and adapted it to suit our needs in this style guide.
+As a group of Analytics Engineers, we have thoroughly reviewed guidance published by dbt (the technology behind create-a-derived-table) and adapted it to suit our needs in this style guide.
 
 Please take the time to familiarise yourself with this style guide, and our guidance on project structure [add link], before starting projects in create-a-derived-table.
 
