@@ -1,7 +1,7 @@
 # Data Modelling Style Guide
 
-- last updated: 23/07/2024
-- dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) 
+- **last updated:** 23/07/2024
+- based on dbt best practices version [v1.7](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) 
 
 # How we style our create-a-derived-table projects
 
