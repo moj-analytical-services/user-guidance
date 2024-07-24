@@ -97,7 +97,7 @@ models/staging
   - ❌ **Subdirectories based on loader.** Some people attempt to group by how the data is loaded (Fivetran, Stitch, custom syncs), but this is too broad to be useful on a project of any real size.
   - ✅ **Subdirectories based on business grouping.** Dbt recommends against this practice, however crate-a-derved-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data egineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from Dbt guidance.
 - **File names.** Creating a consistent pattern of file naming is [crucial in dbt](https://docs.getdbt.com/blog/on-the-importance-of-naming). File names must be unique and correspond to the name of the model when selected and created in the warehouse. We recommend putting as much clear information into the file name as possible, including a prefix for the layer the model exists in, important grouping information, and specific information about the entity or transformation in the model.
-  - ❌ `stg_[source]__[entity]s.sql` - ALthough it is recommended by DBT to follow this convention, where a double underscore is used between source system and entity, this will not work with create-a-derived-table. The naming convension in create-a-derived-table relies on the double underscore to distiguish between database and model names. Therefore, **you cannot use double underscores anywhere else in the name of a model**, this will result in an error when running the model. 
+  - ❌ `stg_[source]__[entity]s.sql` - Although it is recommended by DBT to follow this convention, where a double underscore is used between source system and entity, this will not work with create-a-derived-table. The naming convention in create-a-derived-table relies on the double underscore to distiguish between database and model names. Therefore, **you cannot use double underscores anywhere else in the name of a model**, this will result in an error when running the model. 
   - ❌ `stg_[entity].sql` - might be specific enough at first, but will break down in time. Adding the source system into the file name aids in discoverability, and allows understanding where a component model came from even if you aren't looking at the file tree.
   - ✅ **Plural.** SQL, and particularly SQL in dbt, should read as much like prose as we can achieve. We want to lean into the broad clarity and declarative nature of SQL when possible. As such, unless there’s a single order in your `orders` table, plural is the correct way to describe what is in a table with multiple rows.
 
@@ -380,8 +380,6 @@ Until we get to the marts layer and start building our various outputs, we ideal
 --------------
 
 
-
-
 If you have ideas about how you would like to structure your data model, please get in touch as we'd love to hear from you to help guide best practice principles.
 
 ```
@@ -415,17 +413,15 @@ If you have ideas about how you would like to structure your data model, please 
       │   │       └── prison_safety_and_security__nomis_mod_stg.yaml  # table property file
 ```
 
-Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help you out.
-
 ## Pull-request check list
 
-EVery pull reqwuest to merge a branch with the main branch in create-a-derived-table requires a review by someone in the analytics engineering team and in some cases, when the changes affect project files, like `dbt_project.yml`, then a data engineer's reveiew is also needed. These reviews are to ensure that the code entering the codebase is inline with best practice and our guidance, as wel as ensuring it wont disrupt the scheduled runs.
+Every pull request to merge a branch with the main branch in create-a-derived-table requires a review by someone in the analytics engineering team and in some cases, when the changes affect project files, like `dbt_project.yml`, then a data engineer's reveiew is also needed. These reviews are to ensure that the code entering the codebase is inline with best practice and our guidance, as well as ensuring it wont disrupt the scheduled runs.
 
 This guide will provide details on what exactly will be checked and what you need to do to ensure you project passes these checks. Below is the checklist we use to review any pull request
 
 ## Analytics engineering pull request reveiw
 
-### Schedulling
+### Scheduling
 
 For any new project you will need to make sure that you have explicitly stated the desired scheduling of your project in the `dbt_project.yml` file. For any existing project you will already have scheduling, but you should still ensure that this is still the dired schedule. Guidance [here]()
 
