@@ -28,32 +28,34 @@ Once you've established a clear style, stay consistent. This is the most importa
 
 ## Fields and model names
 
-- 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Alhough this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
+### Essential styling
 - 🔑 Each model should have a primary key and that primary key should be the first field in the table.
 - 🔑 The primary key of a model should be named `<object>_id`, for example, `account_id`. This makes it easier to know what `id` is being referenced in downstream joined models.
 - Use underscores for naming dbt models; avoid dots or camel case.
-  - ✅  `models_without_dots`
+  - ✅ `models_without_dots`
   - ❌ `models.with.dots`
   - ❌ `CamelCaseModels`
   - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting) as well as the risk of issues in certain parts of dbt Cloud. For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
-- 🔑 Keys should be string data types. Additionally we adives using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys. This ensures there is a unique id for each row as well as making the ids uniform in length. 
+- 🔑 Keys should be string data types. We advise using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys - this ensures there is a unique id for each row, as well as making the ids uniform in length. 
 - 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'.
-- ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. Again, in AE we accept that in some cases this may not be possible. We want to prioritise readability, so try your best to be as descriptive as possible, however, if this is not practical then do not lose sleep over it.
-- ❌ Avoid reserved words as column names. create-a-derived-table reserved words:
-    - something...
+- ❌ Avoid reserved words as column names. create-a-derived-table reserved words, for example `order`.
 - ➕ Booleans should be prefixed with `is_` or `has_`.
 - 🕰️ Timestamp columns should be named `<event>_at`(for example, `created_at`) and should be in UTC. If a different timezone is used, this should be indicated with a suffix (`created_at_pt`).
 - 📆 Dates should be named `<event>_date`. For example, `created_date.`
-- 🔙 DBT suggests event dates and times should be past tense, we do not beleive this is necessary for create-a-derived-table as there are many examples of fields that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
 - 💱 Price/revenue fields should be in decimal currency (`19.99` for £19.99; many app databases shop prices as integers in pence). If a non-decimal currency is used, indicate this with a suffix (`price_in_pence`).
 - 🐍 Schema, table and column names should be in `snake_case`.
 - 🏦 Use names based on the _business_ terminology, rather than the source terminology. For example, if the source database uses `user_id` but the business calls them `customer_id`, use `customer_id` in the model.
 - 🔢 Versions of models should use the suffix `_v1`, `_v2`, etc for consistency (`customers_v1` and `customers_v2`).
+
+### Optional styling
+- 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Alhough this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
+- ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. We accept that in rare cases this may not be possible - if you're not sure, ask for guidance in #ask-data-modelling.
+- 🔙 DBT suggests event dates and times should be past tense. We don't believe this is necessary in our projects, as there are many examples of fields that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
 - 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group fields based on their relevance to eachother, say a flag and the field it is referring to. We therefore advise that a consistent grouping is followed but it does not necessarily need to be based on field type. Where possible ids should be the first fields in a model and we expect the primary key to be **the first** field.
 
 ## Example model
 
-Below is an example finance model, this follows the dbt style of grouping by field type, we will also include an example of a model where this is not the case
+Below is an example finance model, following the dbt style of grouping by field type.
 
 ```sql
 with
@@ -95,9 +97,6 @@ renamed as (
 
 select * from renamed
 ```
-```SQL
-Another example
-```
 
 # How we style our SQL
 
@@ -125,7 +124,7 @@ select
 - 4️⃣ Indents should be four spaces.
 - 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks. See [here](https://stackoverflow.com/questions/29968499/how-can-i-have-multiple-vertical-rulers-in-vs-code) for a guide) to mark where 80 characters is. 
 - ⬇️ Field names, keywords, and function names (`select`, `as`, `group by`, etc...) should all be lowercase.
-- 🫧 The `as` keyword should be used explicitly when aliasing a field or table. e.g. `id as defendnat_id` not `id defendant_id`
+- 🫧 The `as` keyword should be used explicitly when aliasing a field or table. e.g. `id as defendant_id` not `id defendant_id`
 
 
 ## Fields, aggregations, and grouping
@@ -176,13 +175,13 @@ order by defendant_on_case_id
 - 🔝 All `{{ ref('...') }}` statements should be placed in CTEs at the top of the file.
 - 📦 'Import' CTEs should be named after the table they are referencing.
 - 'Import' CTEs should be short and concise to make it easy to read what tables are being read in. Try not to have lots of fields in your select statement as it makes reading the CTEs harder, `select *` should be sufficient in most cases.
-- You can use a `where` clasue to filter out undeeded data.
+- You can use a `where` clause to filter out any data you don't need.
 - For example:
 
 ```sql
 with
 
-requirments as (
+requirements as (
     select * from {{ ref("derived_delius_stg__base_rqmnt") }}
 ),
 
@@ -209,17 +208,17 @@ reference_4 as (
 joined as (
 
     select
-    requirments.rqmnt_id,
-    requirments.disposal_id,
-    requirments.start_date,
-    requirments.length,
-    requirments.rqmnt_notes,
-    requirments.commencement_date,
-    requirments.termination_date,
-    requirments.partition_area_id,
-    requirments.expected_start_date,
-    requirments.soft_deleted,
-    requirments.expected_end_date,
+    requirements.rqmnt_id,
+    requirements.disposal_id,
+    requirements.start_date,
+    requirements.length,
+    requirements.rqmnt_notes,
+    requirements.commencement_date,
+    requirements.termination_date,
+    requirements.partition_area_id,
+    requirements.expected_start_date,
+    requirements.soft_deleted,
+    requirements.expected_end_date,
 
     -- For rqmnt main type sub-cat
     reference_1.code_value as rqmnt_type_sub_category_code,
@@ -237,19 +236,19 @@ joined as (
     reference_4.code_value as rqmnt_type_main_units_code,
     reference_4.code_description as rqmnt_type_main_units_desc
 
-    from requirments
+    from requirements
 
     left join reference_1
-        on requirments.rqmnt_type_sub_category_id = reference_1.standard_reference_list_id
+        on requirements.rqmnt_type_sub_category_id = reference_1.standard_reference_list_id
 
     left join reference_2
-        on requirments.ad_rqmnt_type_sub_category_id = reference_2.standard_reference_list_id
+        on requirements.ad_rqmnt_type_sub_category_id = reference_2.standard_reference_list_id
 
     left join reference_3
-        on requirments.rqmnt_termination_reason_id = reference_3.standard_reference_list_id
+        on requirements.rqmnt_termination_reason_id = reference_3.standard_reference_list_id
 
     left join reference_4
-        on requirments.units_id = reference_4.standard_reference_list_id
+        on requirements.units_id = reference_4.standard_reference_list_id
 )
 
 select * from joined
@@ -265,7 +264,7 @@ select * from joined
 
 ## Model configuration
 
-- 📝 Model-specific attributes (like sort/dist keys) should be specified in the model.
+- 📝 Model-specific attributes (like sort/dist keys) should be specified in the model (this is only relevant if sort/dist keys are used in the model)
 - 📂 If a particular configuration applies to all models in a directory, it should be specified in the `dbt_project.yml` file.
 - 👓 In-model configurations should be specified like this for maximum readability:
 
@@ -280,27 +279,6 @@ select * from joined
 ```
 
 ## Example SQL
-
-```sql
-with
-
-events as (
-
-    ...
-
-),
-
-{# CTE comments go here #}
-filtered_events as (
-
-    ...
-
-)
-
-select * from filtered_events
-```
-
-### Example SQL
 
 ```sql
 with
@@ -379,4 +357,61 @@ joined as (
 )
 
 select * from joined
+```
+
+# How we style our Jinja
+
+## Basics
+
+- 🫧 When using Jinja delimiters, use spaces on the inside of your delimiter, like {{ this }} instead of {{this}}
+- 🆕 Use newlines to visually indicate logical blocks of Jinja.
+- 4️⃣ Indent 4 spaces into a Jinja block to indicate visually that the code inside is wrapped by that block.
+- ❌ Don't worry (too much) about Jinja whitespace control, focus on your project code being readable. The time you save by not worrying about whitespace control will far outweigh the time you spend in your compiled code where it might not be perfect.
+
+## Example Jinja
+
+```jinja
+{% macro make_cool(uncool_id) %}
+
+    do_cool_thing({{ uncool_id }})
+
+{% endmacro %}
+```
+
+# How we style our YAML
+
+## Basics
+
+- 2️⃣ Indents should be two spaces
+- ➡️ List items should be indented
+- 🆕 Use a new line to separate list items that are dictionaries where appropriate
+- 📏 Lines of YAML should be no longer than 80 characters.
+- 🛠️ Use the dbt JSON schema with any compatible IDE and a YAML formatter (we recommend Prettier) to validate your YAML files and format them automatically.
+
+## Example YAML
+
+```yaml
+version: 2
+
+models:
+  - name: events
+    columns:
+      - name: event_id
+        description: This is a unique identifier for the event
+        tests:
+          - unique
+          - not_null
+
+      - name: event_time
+        description: "When the event occurred in UTC (eg. 2018-01-01 12:00:00)"
+        tests:
+          - not_null
+
+      - name: user_id
+        description: The ID of the user who recorded the event
+        tests:
+          - not_null
+          - relationships:
+              to: ref('users')
+              field: id
 ```
