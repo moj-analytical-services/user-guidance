@@ -67,7 +67,7 @@ Once you have deployed your models please run your tests and lint.
 
 Please keep us up to date with your progress in the [#ask-data-modelling](https://asdslack.slack.com/archives/C03J21VFHQ9) channel. When all users are happy that `prod` models are deploying as expected using the upgrades we will merge the branch `dbt-athena-upgrade-182` into `main`.
 
-## Test `dev` models
+## Test `dev` models
 
 Once you have completed testing of your `prod` models you may wish to continue testing with your `dev` models. To do this you will need to create another branch off `dbt-athena-upgrade-182` ([see instructions above](#test-prod-models)) and then merge into this from your feature branch. For example, I have some `dev` models on a branch called `my-feature-branch` so:
 
