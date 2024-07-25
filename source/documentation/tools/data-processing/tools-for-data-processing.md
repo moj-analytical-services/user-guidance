@@ -21,29 +21,37 @@ Below are the Analytical Platform tools typically used to manually undertake dat
 Typically, data users on the Analytical Platform will use [JupyterLab](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/jupyterlab/index.html), [RStudio](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/rstudio/index.html), or [Visual Studio Code](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/visual-studio-code/index.html) to interact with and process data. There are several R or Python (or any other language using VSCode) packages you can use for this, and these tools integrate well with GitHub authentication for the Analytical Platform. So all you need to do is make sure you have access to the data itself (see [database access](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/database-access/) and [S3 warehouse data](https://user-guidance.analytical-platform.service.justice.gov.uk/data/amazon-s3/)).
 
 > ✅ Pros
-> *   [Version control through GitHub](https://user-guidance.analytical-platform.service.justice.gov.uk/github/) 
-> *   Data can be both structured (databases), and unstructured
->*   Access to many packages, extensions and coding languages (especially if using Visual Studio Code)
-> *   Debugging through an Integrated Development Environment (IDE) such as Visual Studio Code
-> *   Easier to migrate code to [Airflow](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/airflow/) (see below) or send to others to run if they have access to same tools
+>
+> * [Version control through GitHub](https://user-guidance.analytical-platform.service.justice.gov.uk/github/) 
+> * Data can be both structured (databases), and unstructured
+> * Access to many packages, extensions and coding languages (especially if using Visual Studio Code)
+> * Debugging through an Integrated Development Environment (IDE) such as Visual Studio Code
+> * Easier to migrate code to [Airflow](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/airflow/) (see below) or send to others to run if they have access to same tools
+
+<br>
 
 > ❌ Cons
-> *   Initial setup time of projects is time-consuming
-> *   Code to run simple SQL is more complex than required on Athena workbench   
+>  
+> * Initial setup time of projects is time-consuming
+> * Code to run simple SQL is more complex than required on Athena workbench   
 
 ### Amazon Athena Console
 
 Another option is to use the [Athena Console](https://user-guidance.analytical-platform.service.justice.gov.uk/data/curated-databases/amazon-athena/) directly on AWS through the Analytical Platform Control Panel. The Athena Console allows you to write and run SQL code directly. This is very handy when exploring data that is already in an Athena database and table.
 
 > ✅ Pros
+> 
 > * Quick to get started as you don’t need to install anything
 > * Creates modular SQL script thinking needed for [Create a Derived Table](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/) (see below)
 
+<br>
+
 > ❌ Cons
+>
 > * SQL only - limiting how complex your processing can be
 > * No proper version control, makes it hard for others to replicate
 
- ### Create-a-derived-table
+### Create-a-derived-table
 Create-a-derived-table is an in-house developed service that brings  [dbt](https://docs.getdbt.com/docs/introduction), Git, and data access controls together to allow you to deploy derived and processed tables from data available on the Analytical Platform. This extends SQL with features commonly associated with programming languages, enabling more flexible, scalable, and maintainable code. dbt can also assure the quality of your transformations through [data tests](https://docs.getdbt.com/docs/build/data-tests), for example to check whether columns contain null values.
 ## Processing data using an automated pipeline
 
@@ -52,11 +60,15 @@ Create-a-derived-table is an in-house developed service that brings  [dbt](https
 Apache [Airflow](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/airflow/) is an open-source platform used to programmatically author, schedule, and monitor complex workflows and pipelines. It can be used to run scripts written in R, Python, or any other coding language. Airflow jobs are created using the [airflow repository](https://github.com/moj-analytical-services/airflow). See the [user guidance page on Airflow](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/airflow/) for more information.
 
 > ✅ Pros
+> 
 > * Well-established and good community support from AP users and wider (used in many organisations)
 > * Highly flexible, such as the ability to use GPUs if needed
 > * Data can be both structured, and unstructured
 
+<br>
+
 > ❌ Cons
+> 
 > * Have to set up Dockerfile and DAG
 > * Have to describe task order in DAG manually
 > * Difficult to trigger run only when underlying data has been updated - usually have to hard-code a start time
@@ -67,6 +79,7 @@ Apache [Airflow](https://user-guidance.analytical-platform.service.justice.gov.u
 [Create a Derived Table](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/) also allows you to run scheduled table updates.
 
 > ✅ Pros
+> 
 > * Processing can be triggered when underlying ‘source’ data has been updated
 > * Need to only know SQL and some Jinja templating
 > * Encourages modular, reusable SQL transformations, which promotes maintainable and scalable codebases
@@ -74,7 +87,10 @@ Apache [Airflow](https://user-guidance.analytical-platform.service.justice.gov.u
 > * Built-in testing
 > * Creates documentation and data lineage graphs, aiding in understanding and maintaining data pipelines.
 
+<br>
+
 > ❌ Cons
+> 
 > * [dbt](https://www.getdbt.com/product/what-is-dbt) is new(ish) tool that people may not be familiar with and need to learn syntax
 > * Designed for SQL transformations, which can be limiting for complex logic that might require other programming languages added as macros
 > * Data needs to be in an Athena table already (or manually added to GitHub repo as a seed)
