@@ -1,4 +1,4 @@
-## Enabling alerting
+# Enabling alerting
 
 To enable alerting on your application: 
 - Navigate to your application repository

@@ -1,8 +1,8 @@
-## Managing and Monitoring Deployments 
+# Managing and Monitoring Deployments 
 
-### Monitoring Deployments
+## Monitoring Deployments
 
-By default all applications deployed into Cloud platform have a basic level of monitoring which can be accessed on the following link [Cloud Platform grafana namespace monitoring](https://grafana.live.cloud-platform.service.justice.gov.uk/d/k8s_views_ns/kubernetes-views-namespaces?orgId=1&refresh=30s&var-datasource=Prometheus&var-namespace=All&var-resolution=30s). Grafana dashboards are accessed using single-sign-on (SSO) via your GitHub account.
+By default, all applications deployed into Cloud platform have a basic level of monitoring which can be accessed on the following link [Cloud Platform grafana namespace monitoring](https://grafana.live.cloud-platform.service.justice.gov.uk/d/k8s_views_ns/kubernetes-views-namespaces?orgId=1&refresh=30s&var-datasource=Prometheus&var-namespace=All&var-resolution=30s). Grafana dashboards are accessed using single-sign-on (SSO) via your GitHub account.
 
 This page shows all namespaces and can be refined by typing the name of your namespace in namespace drop down and selecting as needed.
 
@@ -10,7 +10,7 @@ This page shows all namespaces and can be refined by typing the name of your nam
 
 Note: Kubernetes defines Limits as the maximum amount of a resource to be used by a container. This means that the container can never consume more than the memory amount or CPU amount indicated. Requests, on the other hand, are the minimum guaranteed amount of a resource that is reserved for a container.
 
-#### A brief overview of namespaces
+### A brief overview of namespaces
 
 Within Kubernetes a namespace provides a mechanism for isolating groups of resources within a single cluster, it can be thought of as a virtual cluster within the cluster. Your Application is deployed into its own namespace, this restricts access to your team and enables the setting of resource limits. Within the namespace are the various Kubernetes components:
   
@@ -23,7 +23,7 @@ Within Kubernetes a namespace provides a mechanism for isolating groups of resou
 
 - ReplicaSet's their purpose is to maintain a stable set of replica Pods running at any given time. As such, it is often used to guarantee the availability of a specified number of identical Pods.
 
-#### What information is displayed on the Grafana namespace chart:
+### What information is displayed on the Grafana namespace chart:
 
 - Namespace(s) usage on total cluster CPU in % - This is the total usage by all namespaces on the cluster
 
@@ -50,11 +50,11 @@ Within Kubernetes a namespace provides a mechanism for isolating groups of resou
 
 Further technical details can be found in the [Cloud Platform's Monitoring section of the user guidance](https://user-guide.cloud-platform.service.justice.gov.uk/#monitoring) and [Configuring a dashboard using Grafana UI documentation](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/monitoring-an-app/prometheus.html#configure-a-dashboard-using-the-grafana-ui)
 
-#### Accessing logs
+### Accessing logs
 
 You can access your applications logs in Cloud platform by following the the CP guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs.html#accessing-application-log-data)
 
-#### Kibana on Cloud Platform 
+#### Kibana on Cloud Platform 
 
 Below are some notes to aid you in working with the Kibana service, on Cloud Platform.
 
@@ -82,8 +82,7 @@ There are several presets or you can define a custom time range.
 Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches.
 To enable these features, select **Options\_** from within the search bar, then toggle **Turn on query features**.
 
-
-### Managing Deployments
+## Managing Deployments
 
 Cloud platform  allows teams to connect to the Kubernetes cluster and manage their applications, using  ```kubectl```, the command line tool for Kubernetes.
 
@@ -97,7 +96,7 @@ To do this you will need to setup access through JupyterLab as follows:
 
 - '> Terminal
 
-#### Installing Kubectl
+### Installing Kubectl
 
 In the terminal session install `kubectl`
 
@@ -115,7 +114,7 @@ In the terminal session install `kubectl`
 
 You should only need to carry out the above steps once.
 
-#### Setup Cloud Platform Access
+### Setup Cloud Platform Access
 
 Follow the steps in [CP's Generating a Kubeconfig file documentation](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/kubectl-config.html#generating-a-kubeconfig-file). As we are accessing via Jupyter Labs  step 7 “Move the config file to the location expected by kubectl” has to be carried out slightly differently.
 
@@ -127,11 +126,11 @@ Follow the steps in [CP's Generating a Kubeconfig file documentation](https://us
 
 Then continue with the remaining steps in CP’s documentation
 
-#### Accessing the AWS console 
+### Accessing the AWS console 
 
 If required you can access the Cloud platform via AWS, please follow the guidance in [Accessing the AWS console (read-only)](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/accessing-the-cloud-console.html)
 
-#### Adding cron job to your application
+### Adding cron job to your application
 
 A cronjob for restarting your application can be setup easier by adding the following line in to your app's development or production GitHub workflow:
 
@@ -143,8 +142,7 @@ A cronjob for restarting your application can be setup easier by adding the foll
 
 If you need to a cron job for the other jobs, more guides are available on the Cloud Platform [kubernetes cronjobs](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/other-topics/Cronjobs.html#kubernetes-cronjobs)
 
-
-#### Changing the resources available to the application
+### Changing the resources available to the application
 
 When you deploy an update to the application the Kubernetes resources are built from a standard Helm chart with the following default memory/cpu resources:
 
@@ -188,7 +186,7 @@ To change the resources  insert at  the end of the file just before the $custom_
 
 Once the changes are pushed/merged to the repository the values will be applied to your Kubernetes namespace. 
 
-#### Changing the number of instances (pods) on name space
+### Changing the number of instances (pods) on name space
 
 The number of app instances running on `dev`/`prod` is 1 by default, if users experience long response times from the application (apart from trying to improving the performance through the code itself) you can increase the number of instances to reduce the wating time on `dev`/`prod` GitHub workflows, for example :-
 
@@ -196,9 +194,9 @@ The number of app instances running on `dev`/`prod` is 1 by default, if users ex
 --set ReplicaCount=3
 ```
 
-#### Remember: “With great power comes great responsibility”  Your application’s namespace will be one of a number hosted on the same cluster, setting the values too high could crash the cluster!
+### Remember: “With great power comes great responsibility”  Your application’s namespace will be one of a number hosted on the same cluster, setting the values too high could crash the cluster!
 
-#### Enabling Web Application Firewall (WAF) for Data Platform Apps
+### Enabling Web Application Firewall (WAF) for Data Platform Apps
 
 There are two flags that need to be set to enable WAF for your application, Ingress.ModSec.enabled and GithubTeam
 
@@ -212,13 +210,13 @@ To do this modify your app's `build-push-deploy-dev.yml` and `build-push-deploy-
 $custom_variables
 ```
 
-The changes  will be will be applied to your Kubernetes namespace following a push/merge to the repository and the running of the workflow
+The changes will be applied to your Kubernetes namespace following a push/merge to the repository and the running of the workflow
 
 To disable:
 
 > --set Ingress.ModSec.enabled="false"
 
-#### Adding Extra Annotations to an Ingress
+### Adding Extra Annotations to an Ingress
 
 The Data Platform Apps template includes a default set of annotations ([link](https://github.com/ministryofjustice/analytics-platform-helm-charts/blob/222f9b70c51d026dd7c54610ebf7cfcd003064d7/charts/webapp-cp/templates/ingress.yaml#L12-L17)) for the ingress. To include extra annotations, modify your app's `build-push-deploy-dev.yml` and `build-push-deploy-prod.yml` GitHub action workflow files as follows:
 
@@ -232,19 +230,19 @@ To add multiple, use a comma separated string
 --set 'Ingress.ExtraAnnotations.nginx\.ingress\.kubernetes\.io/key=value,Ingress.ExtraAnnotations.nginx\.ingress\.kubernetes\.io/another-key=value'
 ```
 
-#### Storage guidance
+### Storage guidance
 
 Guidance on storage within Cloud Platform can be found here [Cloud platform storage](https://user-guide.cloud-platform.service.justice.gov.uk/#storage-other-topics) 
 
-#### Continuous Deployment
+### Continuous Deployment
 
 Within Cloud platform your application is already automatically deployed by Github workflows but further guidance on continuous deployment within  CP can be found here [Cloud Platform continuous deployment.](https://user-guide.cloud-platform.service.justice.gov.uk/#continuous-deployment) 
 
-#### Deploying Updates to the Application
+### Deploying Updates to the Application
 
 As the application is now hosted in Cloud Platform and GitHub workflow has been implemented, you will now be able to apply update to your application, full guidance can be found here  [Application deployment.](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#app-deployment)
 
-#### Other guidance 
+### Other guidance 
 
 Guidance on  managing Auth and Secrets through the Control Panel can be found [Manage deployment settings of an app on Control Panel.](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/manage-app-settings-from-cpanel.html#manage-deployment-settings-of-an-app-on-control-panel)
 

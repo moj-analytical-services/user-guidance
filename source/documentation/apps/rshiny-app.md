@@ -1,4 +1,4 @@
-## Deploying an R Shiny app
+# Deploying an R Shiny app
 
 Once you've built your Shiny app, you can make it available to users through the Analytical Platform.
 We have guidance for:
@@ -11,15 +11,15 @@ We have guidance for:
 
 as well as common issues faced during these stages of publishing your app.
 
-### App deployment
+## App deployment
 
-#### New apps
+### New apps
 
-Please follow the steps in in the [Deploying a Webapp section](/apps/webapp-app.html)
+Please follow the steps in the [Deploying a Webapp section](/apps/webapp-app.html)
 
-#### Existing apps
+### Existing apps
 
-##### Overview
+#### Overview
 
 Your app environment is made up of two key elements:
 
@@ -38,7 +38,7 @@ The rationale behind this change is to:
 - Give teams more control over their workflows
 - Restore the ability to deploy without the Analytical Platform team's intervention
 
-##### Apps hosted on Cloud Platform
+#### Apps hosted on Cloud Platform
 
 After the move to Cloud Platform hosting for Analytical Platform apps, you’ll have two active deployments of your apps at all times.
 These are your 'dev' (development) and 'prod' (production) deployments.
@@ -65,7 +65,7 @@ You can view the status of your deployments either by checking the workflow runs
 The above describes how CI/CD will be set up by default in the ministryofjustice repo.
 Once you have ownership of the repo, you'll have the ownership of the `.github/workflow/` files too so you will be able to amend the processes and triggers so that they meet your needs.
 
-##### Your app deployment pipeline
+#### Your app deployment pipeline
 
 GitHub Actions has workflow definitions located in your repository under `.github/workflows/`.
 
@@ -83,22 +83,23 @@ The production workflow behaves in the exact same way, containing the same steps
 
 ### Managing published apps settings
 
-Please follow the steps in in the [Managing App settings section](/apps/manage-app-settings-from-cpanel.html)
+Please follow the steps in the [Managing App settings section](/apps/manage-app-settings-from-cpanel.html)
 
 ### Managing published app users
 
-Please follow the steps in in the [Managing App users section](/apps/managing-app-users.html)
+Please follow the steps in the [Managing App users section](/apps/managing-app-users.html)
 
-#### Accessing the deployed app
+### Managing published app data access
 
-Please follow the steps in in the [Accessing your App section](/apps/accessing-app.html)
+Please follow the steps in the [Managing App data access section](/apps/managing-app-data-access.html)
 
-#### **Troubleshooting app sign-in**
+### Accessing the deployed app
 
+Please follow the steps in the [Accessing your App section](/apps/accessing-app.html)
 
-### Advanced
+## Advanced
 
-#### Editing the Dockerfile
+### Editing the Dockerfile
 
 A `Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image.
 
@@ -108,7 +109,7 @@ If your app uses packages that have additional system dependencies, you will nee
 
 A `Dockerfile` reference can be found in the [Docker documentation](https://docs.docker.com/engine/reference/builder/).
 
-#### Getting details of current users of the RShiny app
+### Getting details of current users of the RShiny app
 
 An RShiny app can find out who is using it.
 This can be useful to log an audit trail of significant events.
@@ -119,7 +120,7 @@ The [shiny-headers-demo](https://github.com/moj-analytical-services/shiny-header
 
 These features are only available in the Analytical Platform version of `shiny-server` and the open source `shiny server` image provided by AP ([see details of both options below](#shiny-server)).
 
-#### Finding current users' email addresses
+### Finding current users' email addresses
 
 You can obtain the logged in user's email address by using the following code in the `server` function of your app:
 
@@ -141,7 +142,7 @@ Check these files for `AuthProxy.Image.Tag` and set it to `latest` as the exampl
 A full example in a working deployed app can be found [here](https://github.com/ministryofjustice/ap-rshiny-notesbook/blob/main/.github/workflows/build-push-deploy-dev.yml#L167C11-L167C47).
 
 
-#### Finding current users' user profiles
+### Finding current users' user profiles
 
 You can access the full user profile by making a request directly from the RShiny app to the auth-proxy's `/userinfo` endpoint using the following code inside your `server` function.
 
@@ -155,7 +156,7 @@ profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(co
 [This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L61)
 shows the code in context.
 
-##### Example response
+#### Example response
 
 ```json
 {
@@ -182,16 +183,16 @@ shows the code in context.
   "guardian_authenticators": []
 }
 ```
-##### user-profile caching 
+#### user-profile caching 
 
 Due to the [auth0 rate limit](https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/authentication-api-endpoint-rate-limits#limits-for-production-tenants-of-paying-customers) for `/userinfo`, the user-profile will be 
 cached for 10 minutes on auth-proxy. If somehow your app receives an exception, for example, token-expired, from the above call, you can add `/userinfo?force=true`
 to refresh the user-profle by force.
 
 
-### Troubleshooting and monitoring
+## Troubleshooting and monitoring
 
-#### Deploying locally
+### Deploying locally
 
 If you have a MacBook, you can use Docker locally to test and troubleshoot your RShiny app.
 You can download Docker Desktop for Mac from the [Docker website](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
