@@ -11,7 +11,7 @@ To enable alerting on your application:
 
 You can find the current configured alerts below once enabled all these alerts will become active provided you have the required resources to alert on.
 
-## Alert config
+### Alert config
 ------------
 | config          | default                                      | description     |
 | --------------- | -------------------------------------------- | --------------- |
@@ -21,7 +21,7 @@ You can find the current configured alerts below once enabled all these alerts w
 | Alerts.memoryUsage | `"80"` | Trigger alert if Pod memory exceeds the specified value of the resource limit (%) |
 | Alerts.pvcUsage | `"90"` | Trigger alert if PVC storage exceeds the specified value (%) |
 
-## Current configured alerts
+### Current configured alerts
 
   - `5xxingress` - The ingress for the namespace is returning a high average of 500 error codes over a 1 minute period.
   - `OOMKiller` - Pod killed due to OOM issues

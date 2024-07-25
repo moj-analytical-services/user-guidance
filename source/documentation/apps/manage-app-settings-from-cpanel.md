@@ -6,22 +6,22 @@ The settings are stored as GitHub secrets or environment variables depending on 
 
 This section is to explain each setting and how the value of the setting affect the app.
 
-## Permission required
+### Permission required
 
 The user:
 - Has been granted as the app's admin on Control Panel
-- Has been the memember of GitHub admin team
+- Has been the member of GitHub admin team
 
 If you do not satisfy the above requirements, ask someone in your team who has admin permissions on Control Panel and GitHub to grant you the permissions.
 
-## Context 
+### Context 
 
 You can have multiple deployment environments for an app for different purposes, minumum is the production environment, then you can have extra ones, e.g. one for testing purpose. 
 
 **What is an application environment?**
 
 Environments contain the following parts:
-- A namepace with other required resources on Cloud Platform's cluster, e.g. an ECR repo for storing your app's docker images
+- A namespace with other required resources on Cloud Platform's cluster, e.g. an ECR repo for storing your app's docker images
 - An environment on GitHub repo
 - [Deployment settings](#introduction-to-the-settings) under each GitHub environment and can be managed through Control Panel
 - An ingress (app URL) for you to access the deployed app in each environment 
@@ -52,11 +52,11 @@ If the value of flag is `True`, then an auth0 client is required which can be cr
 The auth0-client is responsible for providing the integration with different login options, for example below:
 - passwordless flow: allow user to gain access by one-time magic link. more detail is [here](https://auth0.com/docs/authenticate/passwordless/authentication-methods/email-magic-link). This approach allows external users to be able to access app via their email. This flow appears as `email` in the `AUTH0_CONNECTIONS` field.
 - GitHub 
-- nomis login (HMPPS Auth): allow the user login with their NOMIS credentials, the guide about how to set it up will be provided soon.
+- NOMIS login (HMPPS Auth): allow the user login with their NOMIS credentials, the guide about how to set it up will be provided soon.
 
 The credentials of the auth0-client with other related settings need to be available in the app's deployment environment and be stored as GitHub secrets and environment vars which is explained in the [following section](#authentication-related-settings)
 
-### Authentication related settings
+## Authentication related settings
 
 | Command | Format | Description |
 |---------|---------|---------------------------------------------|
@@ -70,7 +70,7 @@ If you choose to use `email` (`passwordless` flow),  then you can manage the app
 
 Right now we only provide customer management for `email` login option. If you choose other options like `nomis` or `github` etc, then it means your app will be open to any users who have nomis credential or who has a GitHub account and has joined the `moj-analytical-services` GitHub org.  Further user management and control is required under app-level if the default scope of users is wider than the target audience of the app.
 
-### IP whitelist
+## IP whitelist
 
 You can configure whether your app needs extra protection from internet environment by setting the allowed IP_RANGES (the list VPN managed in MoJ). You can set up this option even if your app is public facing (`AUTHENTICATION_REQUIRED` is `False`)
 
@@ -78,7 +78,7 @@ You can configure whether your app needs extra protection from internet environm
 |---------|---------|---------------------------------------------|
 | `IP_RANGES`      | GitHub secret | The list of MoJ VPNS being allowed to this app, editable|
 
-### Self-defined secrets or environment vars
+## Self-defined secrets or environment vars
 
 If the app has its own settings and the value of the setting depends on which deployment environment the app is running in, you can create secret (sensitive value e.g., credential or api-key) or environment variable (non-sensitive value) through the app-detail page. 
 
@@ -89,23 +89,24 @@ We strongly recommend to define one environment variable for indicating which de
 for example, naming the variable as `ENV`,  then give it a string value of `dev` on dev environment,  a string value of `prod` on prod environment.
 In your application code,  retrieve the value of `ENV` by using `Sys.getenv('ENV')` for R,  `os.environ.get('ENV')` for python.
 
-
-### Other Github secrets and environment vars
+## Other Github secrets and environment vars
 
 Other secrets and vars which are not mentioned in the section, if they are not the ones you defined, e.g. having `ECR` or `KUBE` or `AWS` as part of the name,  then they are created during the process of initialising the infrastructure resources on CP and are required by the deployment workflows too.  They are maintained or updated usually through the terraforms of CP.
 
-## Want to make change to `AUTHENTICATION_REQUIRED` flag?
+## FAQs
+
+### Want to make change to `AUTHENTICATION_REQUIRED` flag?
 
 If the flag was off (`False` for `AUTHENTICATION_REQUIRED`) and you switch it on,  then an auth0-client is required to be created by clicking `Create auth0 client` on app-detail page on Control Panel. If the client is missing,  a red warning flag will be displayed on the page to remind you
 
 If the flag was on (`True` for `AUTHENTICATION_REQUIRED`) and you swtich it off,  then existing auth0-client becomes redundant and please do remove it by clicking the `Remove the auth0 client` to save resource on auth0 platform. 
 
-## Can I make changes(add/remove/update) the secrets/vars on GitHub repo directly?
+### Can I make changes(add/remove/update) the secrets/vars on GitHub repo directly?
 
 As the deployment settings are stored in the GitHub repo and not in Control Panel,  any changes made on the GitHub repo will be reflected back in Control Panel.
 
 DO NOT change the value of the settings mentioned in this section on GitHub repo directly, feel free to change self-defined settings.
 
-## When will the changes made on Control Panel will be applied to the deployment pipeline?
+### When will the changes made on Control Panel will be applied to the deployment pipeline?
 
 The changes will be applied when the next deployment workflow is triggered. 
