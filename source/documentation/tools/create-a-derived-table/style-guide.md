@@ -29,8 +29,8 @@ Once you've established a clear style, stay consistent. This is the most importa
 ## Fields and model names
 
 ### Essential styling
--🔑 Each model should have a primary key and that primary key should be the first field in the table.
--🔑 The primary key of a model should be named `<object>_id`, for example, `account_id`. This makes it easier to know what `id` is being referenced in downstream joined models.
+- 🔑 Each model should have a primary key and that primary key should be the first field in the table.
+- 🔑 The primary key of a model should be named `<object>_id`, for example, `account_id`. This makes it easier to know what `id` is being referenced in downstream joined models.
 - Use underscores for naming dbt models; avoid dots or camel case.
   - ✅ `models_without_dots`
   - ❌ `models.with.dots`
@@ -48,7 +48,7 @@ Once you've established a clear style, stay consistent. This is the most importa
 - 🔢 Versions of models should use the suffix `_v1`, `_v2`, etc for consistency (`customers_v1` and `customers_v2`).
 
 ### Optional styling
-- 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Alhough this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
+- 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Although this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
 - ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. We accept that in rare cases this may not be possible - if you're not sure, ask for guidance in #ask-data-modelling.
 - 🔙 DBT suggests event dates and times should be past tense. We don't believe this is necessary in our projects, as there are many examples of fields that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
 - 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group fields based on their relevance to eachother, say a flag and the field it is referring to. We therefore advise that a consistent grouping is followed but it does not necessarily need to be based on field type. Where possible ids should be the first fields in a model and we expect the primary key to be **the first** field.
