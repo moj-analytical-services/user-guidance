@@ -49,18 +49,17 @@ To install the lint libraries, run:
 pip install -r requirements-lint.txt
 ```
 
-Set the following environment variable in your Bash profile:
+Set the following environment variable in your .bashrc script.
 
 ```
-echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bash_profile
+echo "export DBT_PROFILES_DIR=../.dbt/" >> ~/.bashrc
 ```
 
-Then source your Bash profile by running:
+Then source your .bashrc script by running:
 
 ```
-source ~/.bash_profile
+source ~/.bashrc
 ```
-
 You'll need to be in the dbt project to run dbt commands. This is the `mojap_derived_tables` directory:
 
 ```

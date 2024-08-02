@@ -12,6 +12,7 @@ Create a Derived Table is a tool for creating persistent derived tables in Athen
 
 - [Database Access](/tools/create-a-derived-table/database-access)
 - [RStudio Set Up](/tools/create-a-derived-table/rstudio-set-up)
+- [Visual Studio Code Set Up](/tools/create-a-derived-table/vscode-set-up)
 - [Collaborating with Git](/tools/create-a-derived-table/collaborating-with-git)
 
 ## Planning Models
