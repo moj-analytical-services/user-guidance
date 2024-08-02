@@ -29,13 +29,9 @@ conda activate venv
 
 You need to set up the VSCode Python extension to use your new virtual environment. You can use the Python Environment Manager extension.
 
-On the left hand side of the screen, click Extensions.
+On the left hand toolbar, click Extensions > Search for "Python Environment Manager" and click install.
 
-Search for Python Environment Manager and install.
-
-You should now see a Python symbol on the left hand side of the screen - click this.
-
-Under conda, select your new `venv` environment and click the star to activate this environment in the VSCode terminal.
+You should now see a Python symbol on the toolbar. Click Python > Global Environments > Conda > venv to select your new `venv` environment and click the star to activate this environment in the VSCode terminal.
 
 
 ## Install requirements
