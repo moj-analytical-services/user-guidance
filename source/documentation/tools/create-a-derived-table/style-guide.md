@@ -372,7 +372,9 @@ select * from joined
 
 ```jinja
 {% macro make_cool(uncool_id) %}
+
     do_cool_thing({{ uncool_id }})
+
 {% endmacro %}
 ```
 
