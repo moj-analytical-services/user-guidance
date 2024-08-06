@@ -38,7 +38,7 @@ Once you've established a clear style, stay consistent. This is the most importa
   - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting). For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
 - 🔑 Keys should be string data types. We advise using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys - this ensures there is a unique id for each row, as well as making the ids uniform in length. Some advice (for example Kimball) suggests integer data type instead of string, but we feel this is outdated.
 - 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'. This helps users to understand how tables can be joined together.
-- ❌ Avoid reserved words as column names. create-a-derived-table reserved words, for example `order`.
+- ❌ Avoid reserved words as column names. create-a-derived-table reserved words, for example `order` (full list [here](https://docs.aws.amazon.com/athena/latest/ug/reserved-words.html)). 
 - ➕ Booleans should be prefixed with `is_` or `has_`.
 - 🕰️ Timestamp columns should be named `<event>_at`(for example, `created_at`) and should be in UTC. If a different timezone is used, this should be indicated with a suffix (`created_at_pt`).
 - 📆 Dates should be named `<event>_date`. For example, `created_date.`
@@ -49,7 +49,7 @@ Once you've established a clear style, stay consistent. This is the most importa
 
 ### Optional styling
 - 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Although this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
-- ❌ Do not use abbreviations or aliases. Emphasize readability over brevity. For example, do not use `cust` for `customer` or `o` for `orders`. We accept that in rare cases this may not be possible - if you're not sure, ask for guidance in #ask-data-modelling.
+- ❌ Do not use abbreviations or aliases. Emphasize readability over brevity, even if this means your column or model names are long. For example, do not use `cust` for `customer` or `o` for `orders`. We accept that in rare cases this may not be possible - if you're not sure, ask for guidance in #ask-data-modelling.
 - 🔙 DBT suggests event dates and times should be past tense. We don't believe this is necessary in our projects, as there are many examples of fields that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
 - 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group fields based on their relevance to eachother, say a flag and the field it is referring to. We therefore advise that a consistent grouping is followed but it does not necessarily need to be based on field type. Where possible ids should be the first fields in a model and we expect the primary key to be **the first** field.
 
