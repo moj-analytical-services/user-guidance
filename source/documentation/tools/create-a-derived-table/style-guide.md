@@ -103,7 +103,7 @@ select * from renamed
 ## Basics
 
 - 👻 Use Jinja comments (`{# #}`) for comments that should not be included in the compiled SQL. When dbt compiles your code it will include code using SQL comments like `/* */` and `--`
-- ⏭️ Use trailing commas in lists. e.g.
+- ⏭️ Use trailing commas in lists for readability. e.g.
 ```SQL
 select
     defendant_id,
@@ -130,7 +130,7 @@ select
 
 ## Fields, aggregations, and grouping
 
-- 🔙 Fields should be stated before aggregates and window functions.
+- 🔙 Fields should be stated before aggregates and window functions (i.e. those using over()).
 - 🤏🏻 Aggregations should be executed as early as possible (on the smallest data set possible) before joining to another table to improve performance.
 - 🔢 Grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see [this classic rant](https://www.getdbt.com/blog/write-better-sql-a-defense-of-group-by-1) for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design.
 - 🔢 Column names should be written out explicitly with the column names in order statements to avoid ambiguity. 
