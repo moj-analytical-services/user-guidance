@@ -26,12 +26,12 @@ Once you've established a clear style, stay consistent. This is the most importa
 
 # How we style our dbt models
 
-## Fields and model names
+## Column and model names
 
 ### Essential styling
-- 🔑 Each model should have a primary key and that primary key should be the first field in the table.
+- 🔑 Each model should have a primary key and that primary key should be the first column in the table.
 - 🔑 The primary key of a model should be named `<object>_id`, for example, `account_id`. This makes it easier to know what `id` is being referenced in downstream joined models.
-- 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'. This helps users to understand how tables can be joined together.
+- 🔑 Consistency is key! Use the same column names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'. This helps users to understand how tables can be joined together.
 - Use underscores (i.e. snake case) for naming dbt models; avoid dots or camel case.
   - ✅ `models_without_dots`
   - ❌ `models.with.dots`
@@ -42,7 +42,7 @@ Once you've established a clear style, stay consistent. This is the most importa
 - ➕ Booleans should be prefixed with `is_` or `has_`.
 - 🕰️ Timestamp columns should be named `<event>_at`(for example, `created_at`) and should be in UTC. If a different timezone is used, this should be indicated with a suffix (`created_at_pt`).
 - 📆 Dates should be named `<event>_date`. For example, `created_date.`
-- 💱 Price/revenue fields should be in decimal currency (`19.99` for £19.99; many app databases shop prices as integers in pence). If a non-decimal currency is used, indicate this with a suffix (`price_in_pence`).
+- 💱 Price/revenue columns should be in decimal currency (`19.99` for £19.99; many app databases shop prices as integers in pence). If a non-decimal currency is used, indicate this with a suffix (`price_in_pence`).
 - 🐍 Schema, table and column names should be in `snake_case`.
 - 🏦 Use names based on the _business_ terminology, rather than the source terminology. For example, if the source database uses `user_id` but the business calls them `customer_id`, use `customer_id` in the model.
 - 🔢 Versions of models should use the suffix `_v1`, `_v2`, etc for consistency (`customers_v1` and `customers_v2`).
@@ -50,12 +50,12 @@ Once you've established a clear style, stay consistent. This is the most importa
 ### Optional styling
 - 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Although this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
 - ❌ Do not use abbreviations or aliases. Emphasize readability over brevity, even if this means your column or model names are long. For example, do not use `cust` for `customer` or `o` for `orders`. We accept that in rare cases this may not be possible - if you're not sure, ask for guidance in #ask-data-modelling.
-- 🔙 DBT suggests event dates and times should be past tense. We don't believe this is necessary in our projects, as there are many examples of fields that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
-- 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group fields based on their relevance to eachother, say a flag and the field it is referring to. We therefore advise that a consistent grouping is followed but it does not necessarily need to be based on field type. Where possible ids should be the first fields in a model and we expect the primary key to be **the first** field.
+- 🔙 DBT suggests event dates and times should be past tense. We don't believe this is necessary in our projects, as there are many examples of columns that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
+- 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group columns based on their relevance to eachother, say a flag and the column it is referring to. We therefore advise that a consistent grouping is followed but it does not necessarily need to be based on column type. Where possible ids should be the first columns in a model and we expect the primary key to be **the first** column.
 
 ## Example model
 
-Below is an example finance model, following the dbt style of grouping by field type.
+Below is an example finance model, following the dbt style of grouping by column type.
 
 ```sql
 with
@@ -122,15 +122,15 @@ select
     ...
 ```
 
-- ⬇️ Field names, keywords, and function names (`select`, `as`, `group by`, etc...) should all be lowercase.
+- ⬇️ Column names, keywords, and function names (`select`, `as`, `group by`, etc...) should all be lowercase.
 - 4️⃣ Indents should be four spaces.
 - 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks. See [here](https://stackoverflow.com/questions/29968499/how-can-i-have-multiple-vertical-rulers-in-vs-code) for a guide) to mark where 80 characters is. 
-- 🫧 The `as` keyword should be used explicitly when aliasing a field or table. e.g. `id as defendant_id` not `id defendant_id`
+- 🫧 The `as` keyword should be used explicitly when aliasing a column or table. e.g. `id as defendant_id` not `id defendant_id`
 
 
-## Fields, aggregations, and grouping
+## Columns, aggregations, and grouping
 
-- 🔙 Fields should be stated before aggregates and window functions (i.e. those using over()).
+- 🔙 Columns should be stated before aggregates and window functions (i.e. those using over()).
 - 🤏🏻 Aggregations should be executed as early as possible (on the smallest data set possible) before joining to another table to improve performance.
 - 🔢 Grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see [this classic rant](https://www.getdbt.com/blog/write-better-sql-a-defense-of-group-by-1) for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design.
 - 🔢 Column names should be written out explicitly with the column names in order statements to avoid ambiguity. 
@@ -177,7 +177,7 @@ For information on what CTEs are, see the [dbt docs](https://docs.getdbt.com/ter
 
 - 🔝 All `{{ ref('...') }}` statements should be placed in CTEs at the top of the file.
 - 📦 'Import' CTEs should be named after the table they are referencing.
-- 'Import' CTEs should be short and concise to make it easy to read what tables are being read in. Try not to have lots of fields in your select statement as it makes reading the CTEs harder, `select *` should be sufficient in most cases.
+- 'Import' CTEs should be short and concise to make it easy to read what tables are being read in. Try not to have lots of columns in your select statement as it makes reading the CTEs harder, `select *` should be sufficient in most cases.
 - You can use a `where` clause to filter out any data you don't need.
 - For example:
 
@@ -289,9 +289,9 @@ with
 my_data as (
 
     select
-        field_1,
-        field_2,
-        field_3,
+        column_1,
+        column_2,
+        column_3,
         cancellation_date,
         expiration_date,
         start_date
@@ -304,8 +304,8 @@ some_cte as (
 
     select
         id,
-        field_4,
-        field_5
+        column_4,
+        column_5
 
     from {{ ref('some_cte') }}
 
@@ -315,8 +315,8 @@ some_cte_agg as (
 
     select
         id,
-        sum(field_4) as total_field_4,
-        max(field_5) as max_field_5
+        sum(column_4) as total_column_4,
+        max(column_5) as max_column_5
 
     from some_cte
 
@@ -327,9 +327,9 @@ some_cte_agg as (
 joined as (
 
     select
-        my_data.field_1,
-        my_data.field_2,
-        my_data.field_3,
+        my_data.column_1,
+        my_data.column_2,
+        my_data.column_3,
 
         -- use line breaks to visually separate calculations into blocks
         case
@@ -341,18 +341,18 @@ joined as (
             else my_data.cancellation_date
         end as cancellation_date,
 
-        some_cte_agg.total_field_4,
-        some_cte_agg.max_field_5
+        some_cte_agg.total_column_4,
+        some_cte_agg.max_column_5
 
     from my_data
 
     left join some_cte_agg
         on my_data.id = some_cte_agg.id
 
-    where my_data.field_1 = 'abc' and
+    where my_data.column_1 = 'abc' and
         (
-            my_data.field_2 = 'def' or
-            my_data.field_2 = 'ghi'
+            my_data.column_2 = 'def' or
+            my_data.column_2 = 'ghi'
         )
 
     having count(*) > 1
