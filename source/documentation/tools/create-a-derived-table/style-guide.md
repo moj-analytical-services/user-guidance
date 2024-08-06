@@ -169,7 +169,7 @@ order by defendant_on_case_id
 - 👭🏻 If joining two or more tables, _always_ prefix your column names with the table name where that column is coming from. If only selecting from one table, prefixes are not needed.
 - 👭🏻 Be explicit about your join type (i.e. write `inner join` instead of `join`).
 - 🥸 Avoid table aliases in join conditions (especially initialisms) — it's harder to understand what the table called "c" is as compared to "customers".
-- ➡️ Always move left to right to make joins easy to reason about - `right joins` often indicate that you should change which table you select `from` and which one you `join` to.
+- ➡️ Always move left to right - `right joins` often indicate that you should change which table you select `from` and which one you `join` to.
 
 ## 'Import' CTEs
 
