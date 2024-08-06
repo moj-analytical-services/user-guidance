@@ -121,9 +121,10 @@ select
     , ho_offence_code
     ...
 ```
+
+- ⬇️ Field names, keywords, and function names (`select`, `as`, `group by`, etc...) should all be lowercase.
 - 4️⃣ Indents should be four spaces.
 - 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks. See [here](https://stackoverflow.com/questions/29968499/how-can-i-have-multiple-vertical-rulers-in-vs-code) for a guide) to mark where 80 characters is. 
-- ⬇️ Field names, keywords, and function names (`select`, `as`, `group by`, etc...) should all be lowercase.
 - 🫧 The `as` keyword should be used explicitly when aliasing a field or table. e.g. `id as defendant_id` not `id defendant_id`
 
 
