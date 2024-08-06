@@ -16,7 +16,7 @@ Create a Derived Table is a tool for creating persistent derived tables in Athen
 
 ## Planning Models
 
-- [Data Modelling Concepts](/tools/create-a-derived-table/data-modelling-concepts)
+- [Style Guide](/tools/create-a-derived-table/style-guide)
 - [Project Structure](/tools/create-a-derived-table/project-structure)
 
 ## Creating Models
