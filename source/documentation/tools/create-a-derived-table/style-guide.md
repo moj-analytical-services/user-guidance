@@ -31,13 +31,13 @@ Once you've established a clear style, stay consistent. This is the most importa
 ### Essential styling
 - 🔑 Each model should have a primary key and that primary key should be the first field in the table.
 - 🔑 The primary key of a model should be named `<object>_id`, for example, `account_id`. This makes it easier to know what `id` is being referenced in downstream joined models.
-- Use underscores for naming dbt models; avoid dots or camel case.
+- Use underscores (i.e. snake case) for naming dbt models; avoid dots or camel case.
   - ✅ `models_without_dots`
   - ❌ `models.with.dots`
   - ❌ `CamelCaseModels`
   - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting). For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
-- 🔑 Keys should be string data types. We advise using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys - this ensures there is a unique id for each row, as well as making the ids uniform in length. 
-- 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'.
+- 🔑 Keys should be string data types. We advise using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys - this ensures there is a unique id for each row, as well as making the ids uniform in length. Some advice (for example Kimball) suggests integer data type instead of string, but we feel this is outdated.
+- 🔑 Consistency is key! Use the same field names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'. This helps users to understand how tables can be joined together.
 - ❌ Avoid reserved words as column names. create-a-derived-table reserved words, for example `order`.
 - ➕ Booleans should be prefixed with `is_` or `has_`.
 - 🕰️ Timestamp columns should be named `<event>_at`(for example, `created_at`) and should be in UTC. If a different timezone is used, this should be indicated with a suffix (`created_at_pt`).
