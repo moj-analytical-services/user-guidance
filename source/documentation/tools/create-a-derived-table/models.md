@@ -78,7 +78,9 @@ If for some reason it is not possible or reasonable to apply a configuration in 
 
 Configurations are prioritised in order of specificity, which is generally the inverse of the order above: an in-file `config()` block takes precedence over properties defied in a `.yaml` property file, which takes precedence over a configuration defined in the `dbt_project.yml` file. (Note that generic tests work a little differently when it comes to specificity. See dbt's documentation on [test configs](https://docs.getdbt.com/reference/test-configs).)
 
+## What documents need to be updated
 
+For good practice, the model owner should update the README file of the domain with a brief explanation. This will help users understand what the model is all about.
 ## Materialisations
 
 Materialisations are strategies for persisting dbt models in a warehouse. There are four types of materializations built into dbt. They are:
