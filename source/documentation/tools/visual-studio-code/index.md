@@ -10,7 +10,7 @@
 
 * [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk)
 
-* [Python 3.10](https://www.python.org/downloads/release/python-3100/)
+* [Python 3.12](https://www.python.org/downloads/release/python-3123/)
 
 * [Ollama](/tools/visual-studio-code/ollama)
 
@@ -21,3 +21,5 @@
 * [Visual Studio Code's port forwarding](https://code.visualstudio.com/docs/editor/port-forwarding) functionality doesn't work, which means you cannot run Dash or Streamlit applications, you will need to continue to [use JupyterLab](https://user-guidance.analytical-platform.service.justice.gov.uk/appendix/dash.html#running-your-app-within-jupyter)
 
 * Due to how Analytical Platform automatically scales tooling up and down depending on user activity, session persistence is not available in Visual Studio Code's extensions, for example [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github).
+
+* Connecting to Microsoft Azure is possible, however you will need to change the setting `mssql.azureActiveDirectory` to `DeviceCode`, as per this [comment](https://github.com/ministryofjustice/analytical-platform/issues/4246#issuecomment-2088316112)
