@@ -1,11 +1,11 @@
 # Data Modelling Style Guide
 
-- **last updated:** 23/07/2024
+- **last updated:** 19/08/2024
 - based on dbt best practices version [v1.7](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) 
 
-# How we style our create-a-derived-table projects
+## How we style our create-a-derived-table projects
 
-## Why does style matter?
+### Why does style matter?
 
 Style might seem like a trivial, surface-level issue, but it's an important aspect of a well-built project. A consistent, clear style enhances readability and makes your project easier to understand and maintain. Highly readable code helps build clear mental models making it easier to debug and extend your project. It's not just a favor to yourself, though; equally importantly, it makes it less effort for others to understand and contribute to your project, which is essential for peer collaboration, open-source work, and onboarding new team members. [A style guide lets you focus on what matters](https://mtlynch.io/human-code-reviews-1/#settle-style-arguments-with-a-style-guide), the logic and impact of your project, rather than the superficialities of how it's written. This brings harmony and pace to your team's work, and makes reviews more enjoyable and valuable.
 
@@ -13,7 +13,7 @@ As a group of Analytics Engineers, we have thoroughly reviewed guidance publishe
 
 Please take the time to familiarise yourself with this style guide before starting projects in create-a-derived-table.
 
-## What's important about style?
+### What's important about style?
 
 There are two crucial tenets of code style:
 
@@ -24,11 +24,11 @@ Style your code in such a way that you can quickly read and understand it. It's 
 
 Once you've established a clear style, stay consistent. This is the most important thing. Everybody on your team needs to have a unified style, which is why having a style guide is so crucial. If you're writing a model, you should be able to look at other models in the project that your teammates have written and read in the same style. If you're writing a macro or a test, you should see the same style as your models. Consistency is key.
 
-# How we style our dbt models
+## How we style our dbt models
 
-## Column and model names
+### Column and model names
 
-### Essential styling
+#### Essential styling
 - 🔑 Each model should have a primary key and that primary key should be the first column in the table.
 - 🔑 The primary key of a model should be named `<object>_id`, for example, `account_id`. This makes it easier to know what `id` is being referenced in downstream joined models.
 - 🔑 Consistency is key! Use the same column names across models where possible. For example, a key to the `customers` table should be named `customer_id` rather than `user_id` or 'id'. This helps users to understand how tables can be joined together.
@@ -46,13 +46,13 @@ Once you've established a clear style, stay consistent. This is the most importa
 - 🐍 Schema, table and column names should be in `snake_case`.
 - 🏦 Use names based on the _business_ terminology, rather than the source terminology. For example, if the source database uses `user_id` but the business calls them `customer_id`, use `customer_id` in the model.
 
-### Optional styling
+#### Optional styling
 - 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Although this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
 - ❌ Do not use abbreviations or aliases. Emphasize readability over brevity, even if this means your column or model names are long. For example, do not use `cust` for `customer` or `o` for `orders`. We accept that in rare cases this may not be possible - if you're not sure, ask for guidance in #ask-data-modelling.
 - 🔙 DBT suggests event dates and times should be past tense. We don't believe this is necessary in our projects, as there are many examples of columns that are well established and changing them would cause confusion. We do however suggest following this for meta data like &mdash; `created`, `updated`, or `deleted`.
 - 🗄️ DBT suggest a consistant ordering of data types in your models, for our use case we do not see this as advantageous as it can be helpful to group columns based on their relevance to eachother, say a flag and the column it is referring to. We therefore advise that a consistent grouping is followed but it does not necessarily need to be based on column type. Where possible ids should be the first columns in a model and we expect the primary key to be **the first** column.
 
-## Example model
+### Example model
 
 Below is an example finance model, following the dbt style of grouping by column type.
 
@@ -97,9 +97,9 @@ renamed as (
 select * from renamed
 ```
 
-# How we style our SQL
+## How we style our SQL
 
-## Basics
+### Basics
 
 - 👻 Use Jinja comments (`{# #}`) for comments that should not be included in the compiled SQL. When dbt compiles your code it will include code using SQL comments like `/* */` and `--`
 - ⏭️ Use trailing commas in lists for readability. e.g.
@@ -127,7 +127,7 @@ select
 - 🫧 The `as` keyword should be used explicitly when aliasing a column or table. e.g. `id as defendant_id` not `id defendant_id`
 
 
-## Columns, aggregations, and grouping
+### Columns, aggregations, and grouping
 
 - 🔙 Columns should be stated before aggregates and window functions (i.e. those using over()).
 - 🤏🏻 Aggregations should be executed as early as possible (on the smallest data set possible) before joining to another table to improve performance.
@@ -162,7 +162,7 @@ group by 1, 2, 3, 4, 5, 6, 7, 8
 order by defendant_on_case_id
 ```
 
-## Joins
+### Joins
 
 - 👭🏻 Prefer `union all` to `union` unless you explicitly want to remove duplicates.
 - 👭🏻 If joining two or more tables, _always_ prefix your column names with the table name where that column is coming from. If only selecting from one table, prefixes are not needed.
@@ -170,7 +170,7 @@ order by defendant_on_case_id
 - 🥸 Avoid table aliases in join conditions (especially initialisms) — it's harder to understand what the table called "c" is as compared to "customers".
 - ➡️ Always move left to right (i.e. use `left joins`) - `right joins` often indicate that you should change which table you select `from` and which one you `join` to.
 
-## 'Import' CTEs (Common Table Expressions)
+### 'Import' CTEs (Common Table Expressions)
 
 'Import' CTEs are used at the start of each model, to introduce the building blocks required for the model. 
 
@@ -258,7 +258,7 @@ joined as (
 select * from joined
 ```
 
-## 'Functional' CTEs
+### 'Functional' CTEs
 
 'Functional' or 'logical' CTEs contain unique transformations used to generate the final product.
 
@@ -268,7 +268,7 @@ select * from joined
 - 🌉 CTEs that are duplicated across models should be pulled out into their own intermediate models. Look out for chunks of repeated logic that should be refactored into their own model.
 - 🔚 The last line of a model should be a `select *` from your final output CTE. This makes it easy to materialise and audit the output from different steps in the model as you're developing it. You just change the CTE referenced in the `select` statement to see the output from that step.
 
-## Model configuration
+### Model configuration
 
 - 📝 Model-specific attributes (like sort/dist keys) should be specified in the model (this is only relevant if sort/dist keys are used in the model)
 - 📂 If a particular configuration applies to all models in a directory, it should be specified in the `dbt_project.yml` file.
@@ -284,7 +284,7 @@ select * from joined
 }}
 ```
 
-## Example SQL
+### Example SQL
 
 ```sql
 with
@@ -365,16 +365,16 @@ joined as (
 select * from joined
 ```
 
-# How we style our Jinja
+## How we style our Jinja
 
-## Basics
+### Basics
 
 - 🫧 When using Jinja delimiters, use spaces on the inside of your delimiter, like {{ this }} instead of {{this}}
 - 🆕 Use newlines to visually indicate logical blocks of Jinja.
 - 4️⃣ Indent 4 spaces into a Jinja block to indicate visually that the code inside is wrapped by that block.
 - ❌ Don't worry (too much) about Jinja whitespace control, focus on your project code being readable. The time you save by not worrying about whitespace control will far outweigh the time you spend in your compiled code where it might not be perfect.
 
-## Example Jinja
+### Example Jinja
 
 ```jinja
 {% macro make_cool(uncool_id) %}
@@ -384,9 +384,9 @@ select * from joined
 {% endmacro %}
 ```
 
-# How we style our YAML
+## How we style our YAML
 
-## Basics
+### Basics
 
 - 2️⃣ Indents should be two spaces
 - ➡️ List items should be indented
@@ -394,7 +394,7 @@ select * from joined
 - 📏 Lines of YAML should be no longer than 80 characters.
 - 🛠️ Use the dbt JSON schema with any compatible IDE and a YAML formatter (we recommend Prettier) to validate your YAML files and format them automatically.
 
-## Example YAML
+### Example YAML
 
 ```yaml
 version: 2
