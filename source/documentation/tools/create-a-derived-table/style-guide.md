@@ -171,9 +171,11 @@ order by defendant_on_case_id
 - 🥸 Avoid table aliases in join conditions (especially initialisms) — it's harder to understand what the table called "c" is as compared to "customers".
 - ➡️ Always move left to right (i.e. use `left joins`) - `right joins` often indicate that you should change which table you select `from` and which one you `join` to.
 
-## 'Import' CTEs
+## 'Import' CTEs (Common Table Expressions)
 
-For information on what CTEs are, see the [dbt docs](https://docs.getdbt.com/terms/cte).
+'Import' CTEs are used at the start of each model, to introduce the building blocks required for the model. 
+
+For more information on CTEs (Common Table Expressions), see the [dbt docs](https://docs.getdbt.com/terms/cte).
 
 - 🔝 All `{{ ref('...') }}` statements should be placed in CTEs at the top of the file.
 - 📦 'Import' CTEs should be named after the table they are referencing.
@@ -258,6 +260,8 @@ select * from joined
 ```
 
 ## 'Functional' CTEs
+
+'Functional' or 'logical' CTEs contain unique transformations used to generate the final product.
 
 - ☝🏻 Where performance permits, CTEs should perform a single, logical unit of work.
 - 👭🏻 Where possible joins should be done separately to calculations. This is to make the code neater, we expect the table each columns comes from to be referenced and therefore can make calculations overly complicated if a join is also being performed. (see example at the end of the section)
