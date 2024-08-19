@@ -45,7 +45,6 @@ Once you've established a clear style, stay consistent. This is the most importa
 - 💱 Price/revenue columns should be in decimal currency (`19.99` for £19.99; many app databases shop prices as integers in pence). If a non-decimal currency is used, indicate this with a suffix (`price_in_pence`).
 - 🐍 Schema, table and column names should be in `snake_case`.
 - 🏦 Use names based on the _business_ terminology, rather than the source terminology. For example, if the source database uses `user_id` but the business calls them `customer_id`, use `customer_id` in the model.
-- 🔢 Versions of models should use the suffix `_v1`, `_v2`, etc for consistency (`customers_v1` and `customers_v2`).
 
 ### Optional styling
 - 👥 Models should be pluralized, for example, `customers`, `orders`, `products`. Although this is a good best practice, we accept that this may not work with the projects you are working on, so if you cannot keep to it then that is fine.
