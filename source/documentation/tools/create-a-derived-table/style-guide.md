@@ -1,4 +1,4 @@
-# Data Modelling Style Guide
+# Project and Model Style Guide
 
 - **last updated:** 19/08/2024
 - based on dbt best practices version [v1.7](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) 
