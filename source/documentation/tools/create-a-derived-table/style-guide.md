@@ -132,8 +132,9 @@ select
 - 🔙 Columns should be stated before aggregates and window functions (i.e. those using over()).
 - 🤏🏻 Aggregations should be executed as early as possible (on the smallest data set possible) before joining to another table to improve performance.
 - 🔢 Grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see [this classic rant](https://www.getdbt.com/blog/write-better-sql-a-defense-of-group-by-1) for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design.
-- 🔢 Column names should be written out explicitly with the column names in order statements to avoid ambiguity. 
+- 🔢 Column names should be written out explicitly in order statements to avoid ambiguity. 
 Example:
+
 ```SQL
 select
     defendant_on_case_id,
