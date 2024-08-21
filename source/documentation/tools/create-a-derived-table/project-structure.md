@@ -291,12 +291,11 @@ Once we’ve got our atoms ready to work with, we’ll set about bringing them t
 Let’s take a look at the intermediate layer of our project to understand the purpose of this stage more concretely.
 
 ```shell
-models/intermediate
+models
 └── courts
     └── courts_intermediate
-        ├── courts_intermidiate_properties.yml
-        └── int_int_xhibit_and_common_platform_receipts_unioned.sql
-```
+        ├── courts_intermediate__properties.yml
+        └── courts_intermediate__int_xhibit_and_common_platform_receipts_unioned.sql
 
 - **Folders**
   - ✅ **Subdirectories based on business groupings.** Much like the staging layer, we’ll house this layer of models inside their own `intermediate` database. Unlike the staging layer, here we shift towards being business-conformed, splitting our models up into subdirectories not by their source system, but by their area of business concern.
