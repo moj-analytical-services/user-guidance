@@ -12,21 +12,19 @@ Data stored in Amazon S3 can be seamlessly integrated with other AWS services su
 
 ### Types of buckets
 
-Amazon S3 buckets are separated into two categories on the Analytical Platform.
+Amazon S3 buckets are separated into three main categories on the Analytical Platform.
 
-#### Warehouse data sources
+#### Warehouse data source bucket
 
-Warehouse data sources are used to store data that is accessed by code you run yourself, for example, in RStudio or JupyterLab. You can create warehouse data sources yourself and can provide access to other users you need to collaborate with.
+Warehouse data sources are used to store data that is accessed by code you run yourself, for example, in `RStudio`, `VS Code` or `JupyterLab`. You can create warehouse data sources yourself through the Control Panel and can provide access to other users you need to collaborate with. Buckets created through the Control panel will have the prefix `alpha-` automatically assigned to them. You can view the data sources you have access to in the control panel.
 
-#### Webapp data sources
+#### Webapp data source bucket
 
-Webapp data sources are used to store data that is accessed by code run by the Analytical Platform, for example by deployed apps or by Airflow pipelines. You cannot create webapp data sources yourself – you must ask the Analytical Platform team to create one on your behalf.
+Webapp data sources are used to store data that is accessed by code run by the Analytical Platform, for example by deployed apps. You can create webapp data sources yourself through the Control Panel and can provide access to other users you need to collaborate with. Buckets created through the Control panel will have the prefix `alpha-` automatically assigned to them. You can view the data sources you have access to in the control panel.
 
-If you request that a webapp data source is created when setting up a new app, the app will automatically be given read-only access. You will also be given admin access to the bucket and can provide access to other users you need to collaborate with.
+#### Other data source bucket
 
 The Data Engineering team also manage some buckets that are not shown in the control panel and that are not available to standard users. These buckets are used to store incoming raw data, which may be processed or fed into curated data pipelines. For more information, contact the Data Engineering team on the [#ask-data-engineering](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel.
-
-You can view the data sources you have access to in the control panel.
 
 ### Create a new warehouse data source
 
@@ -50,7 +48,7 @@ Every bucket has three data access levels:
 *   Read/write
 *   Admin -- this provides read/write access and allows the user to add and remove other users from the bucket's data access group
 
-### Path specific access
+#### Path specific access
 
 As well as choosing an access level, you can also restrict a user's access to specific paths in a bucket by entering each path on a new line in the 'Paths' textarea field when adding the user to a data access group, taking care not to leave an empty new line after the last path. For example:
 
@@ -60,6 +58,16 @@ As well as choosing an access level, you can also restrict a user's access to sp
 This would give the user access to only `/folder-one` and `/folder-two` in the bucket and nothing else. 
 
 If you leave this field blank, the user will be able to access everything in the bucket. 
+
+### Create a new webapp data source
+
+To create a new webapp data source:
+
+1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/.
+2.  Select the __Webapp data__ tab.
+3.  Select __Create new webapp data source__.
+4.  Enter a name for the webapp data source -- this must be prefixed with 'alpha-'.
+5.  Select __Create data source__.
 
 ### Request access to a bucket
 
@@ -73,7 +81,7 @@ If all bucket admins are unavailable (e.g. have left the MoJ), the  Analytical P
 
 When requesting access to a bucket, you should specify the name of the bucket and the level of access you require. You should only request access to data that you have a genuine business need to access and should only request the lowest level of access required for you to complete your work. You may be required to demonstrate the business need for you to access a bucket if requested by a bucket admin or an information asset owner (IAO).
 
-### Manage access to a bucket
+### Manage user access to a bucket
 
 Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). You cannot manage access to buckets directly in the Amazon S3 console.
 
@@ -102,6 +110,10 @@ To remove a user from the data access group:
 
 1.  Select __Edit access level__ next to the name of the user.
 2.  Select __Revoke access__.
+
+### Manage app access to a bucket
+
+Please visit [Managing App data access section](/apps/managing-app-data-access.html) for more information as this depends if your data is in a warerhouse or webapp data source.
 
 ## Interacting with Amazon S3 via the Analytical Platform
 
@@ -173,7 +185,6 @@ Downloading a file using the Amazon S3 Console follows a similar process:
 3.  Select __Download__ or __Download as__ as appropriate.
 
 You can also directly navigate to a bucket in the AWS S3 Console by selecting __Open on AWS__ in the Analytical Platform Control Panel.
-
 
 #### RStudio
 
