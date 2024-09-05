@@ -91,7 +91,7 @@ To request an invitation Analytical Platform GitHub Organisation, please head ov
 > **Example**
 > 👋 Could I please be added to the Analytical Services GitHub Org, my github name is `github user name` thank you.
 
-If you do not receive a response within 24 hours, request access in either the **#ask-operations-engineering** Slack channel or email [here](operations-engineering@digital.justice.gov.uk), providing your GitHub username in your message.
+If you do not receive a response within 24 hours, request access in either the **#ask-operations-engineering** Slack channel or email `operations-engineering@digital.justice.gov.uk`, providing your GitHub username in your message.
 
 ### Sign in to the Control Panel
 
