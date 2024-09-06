@@ -86,12 +86,7 @@ Once you have your GitHub account, there are two more steps to complete before y
 
 ### Join MoJ Analytical Services
 
-To request an invitation Analytical Platform GitHub Organisation, please head over to the [#ask-operations-engineering](https://asdslack.slack.com/archives/C01BUKJSZD4) slack channel. Ask to be added to the analytical-services GitHub Organisation by providing your GitHub username in the message. The [Operations Engineering Team](https://operations-engineering.service.justice.gov.uk/) will invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
-
-> **Example**
-> 👋 Could I please be added to the Analytical Services GitHub Org, my github name is `github user name` thank you.
-
-If you do not receive a response within 24 hours, request access in either the **#ask-operations-engineering** Slack channel or email `operations-engineering@digital.justice.gov.uk`, providing your GitHub username in your message.
+To request an invitation Analytical Platform GitHub Organisation, please use the [Join GitHub](https://join-github.service.justice.gov.uk/) service to get your GitHub account added to the Analytical Platform GitHub Organisation.
 
 ### Sign in to the Control Panel
 
