@@ -1,7 +1,5 @@
 # Analytical Platform User Guidance
 
-[![CircleCI](https://circleci.com/gh/moj-analytical-services/user-guidance.svg?style=svg)](https://circleci.com/gh/moj-analytical-services/user-guidance)
-
 The Analytical Platform user guidance uses the [Tech Docs Template][template]. To find out more about how to use this template, see the [Tech Docs Template documentation][tdt-docs].
 
 ## Build and deployment process
