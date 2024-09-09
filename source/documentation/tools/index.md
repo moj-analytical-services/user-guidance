@@ -94,7 +94,7 @@ Allows you to access AWS S3 from the Analytical Platform, which is mainly compat
 ## Data Science Tools and Services
 
 ### [Data Science Asset Register](https://github.com/moj-analytical-services/data-science-assets)
-Process for managing deployed data science assets. The register itself can be found [here](https://justiceuk-my.sharepoint.com/:u:/r/personal/william_miller1_justice_gov_uk/Documents/Data%20Science%20Asset%20Register/asset_register.html?csf=1&web=1&e=k9GzSK).
+Process for managing deployed data science assets. The register itself can be found [here](https://justiceuk-my.sharepoint.com/:u:/g/personal/william_miller1_justice_gov_uk/EWokLTI_xJlHnQxfQ-tDoAMBX5Ek3TpL256M4jhXeqBMxQ?e=OMNW3i).
 
 ### [MLFlow Tracking Server](mlflow-tracking-server)
 A user interface for [MLFlow Tracking Server](https://mlflow.org/docs/latest/tracking/server.html) that allows users to track their model experiments.
