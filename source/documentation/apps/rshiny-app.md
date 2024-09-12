@@ -213,6 +213,20 @@ You can access the full user profile by making a request directly from the RShin
 profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(cookie=get("HTTP_COOKIE", envir=session$request))), "text"))
 ```
 
+If you are using an R-Shiny base image that is at v1.3.0 or greater, use the example below to get the user data: 
+
+```r
+# library(httr)
+# library(jsonlite)
+
+cookie=get("HTTP_COOKIE", envir=session$request)
+headers <- c(
+  "App-Cookie" = cookie
+)
+
+profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(.headers = headers)), "text"))
+```
+
 [This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L61)
 shows the code in context.
 
