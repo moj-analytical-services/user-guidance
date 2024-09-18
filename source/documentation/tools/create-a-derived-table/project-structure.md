@@ -24,11 +24,11 @@ The secondary consideration is whether the tables you are creating belong in an 
 
 ## Standard directory structure and naming conventions
 
-The following is an example of how a team might build a data model whilst adhearing to the standard dbt project directory structure required to work with create-a-derived-table. The Prison Safety and Security team have created a database called `prison_safety_and_security` in the `security` domain.
+The following is an example of how a team might build a data model whilst adhering to the standard dbt project directory structure required to work with create-a-derived-table. The Prison Safety and Security team have created a database called `prison_safety_and_security` in the `security` domain.
 
 - From the `mojap_derived_tables` dbt project, the hierarchy of directories must follow `models` -> `domain` -> `database`. The directory structure after this is arbitrary and can be chosen to suit your needs. However, we do recommend that you arrange your models into logical folders to make it easier for users to understand the code.
 - Models (`.sql` files) must be named by the database and table they relate to separated by double underscores, i.e., `<database_name>__<table_name>.sql`. This is because all models in the `models` directory must have a unique name..
-- **All** staging models should live in the `staging` domain regardless of business / service area. This is to maintain visibility of the data being used on create-a-derived-table. Access should be given to databases withing the staging domain, not the domain itself. 
+- **All** staging models should live in the `staging` domain regardless of business / service area. This is to maintain visibility of the data being used on create-a-derived-table. Access should be given to databases within the staging domain, not the domain itself. 
 
 Below is an overview of the whole create-a-derived-table folder structure. In the following sections we will go through each layer, covering in detail how we expect your project structure to look and our reasoning. 
 
@@ -95,11 +95,11 @@ models/staging
 - **Folders.** Folder structure is extremely important in dbt. Not only do we need a consistent structure to find our way around the codebase, as with any software project, but our folder structure is also one of the key interfaces for understanding the knowledge graph encoded in our project (alongside the DAG and the data output into our warehouse). It should reflect how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models. Moreover, we can use our folder structure as a means of selection in dbt [selector syntax](https://docs.getdbt.com/reference/node-selection/syntax). For example, with the above structure, if we got fresh xhibit data loaded and wanted to run all the models that build on our xhibit data, we can easily run `dbt build --select staging/xhibit_stg+` and we’re all set for building more up-to-date reports on payments.
   - ✅ **Subdirectories based on the source system**. Our internal transactional database is one system, the data we get from Stripe's API is another, and lastly the events from our Snowplow instrumentation. We've found this to be the best grouping for most companies, as source systems tend to share similar loading methods and properties between tables, and this allows us to operate on those similar sets easily.
   - ❌ **Subdirectories based on loader.** Some people attempt to group by how the data is loaded (Fivetran, Stitch, custom syncs), but this is too broad to be useful on a project of any real size.
-  - ✅ **Subdirectories based on business grouping.** Dbt recommends against this practice, however crate-a-derved-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data egineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from Dbt guidance.
+  - ✅ **Subdirectories based on business grouping.** dbt recommends against this practice, however crate-a-derived-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data egineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from dbt guidance.
 - **File names.** Creating a consistent pattern of file naming is [crucial in dbt](https://docs.getdbt.com/blog/on-the-importance-of-naming). File names must be unique and correspond to the name of the model when selected and created in the warehouse. We recommend putting as much clear information into the file name as possible, including a prefix for the layer the model exists in, important grouping information, and specific information about the entity or transformation in the model.
-  - ❌ `stg_[source]__[entity]s.sql` - Although it is recommended by DBT to follow this convention, where a double underscore is used between source system and entity, this will not work with create-a-derived-table. The naming convention in create-a-derived-table relies on the double underscore to distiguish between database and model names. Therefore, **you cannot use double underscores anywhere else in the name of a model**, this will result in an error when running the model. 
+  - ❌ `stg_[source]__[entity]s.sql` - Although it is recommended by dbt to follow this convention, where a double underscore is used between source system and entity, this will not work with create-a-derived-table. The naming convention in create-a-derived-table relies on the double underscore to distiguish between database and model names. Therefore, **you cannot use double underscores anywhere else in the name of a model**, this will result in an error when running the model. 
   - ❌ `stg_[entity].sql` - might be specific enough at first, but will break down in time. Adding the source system into the file name aids in discoverability, and allows understanding where a component model came from even if you aren't looking at the file tree.
-  - ✅ **Plural.** SQL, and particularly SQL in dbt, should read as much like prose as we can achieve. We want to lean into the broad clarity and declarative nature of SQL when possible. As such, unless there’s a single order in your `orders` table, plural is the correct way to describe what is in a table with multiple rows.
+  - ❌**Plural.** dbt's stance is that SQL, and particularly SQL in dbt, should read as much like prose as we can achieve. As such, it is suggested that unless there’s a single order in your `orders` table, plural is the correct way to describe what is in a table with multiple rows. While we agree with this approach for analyst-facing models downstream, we believe the value in maintaining the exact naming of source tables for curation purposes outweighs a technical improvement in readability for back-end models.'
 
 ### Staging: Models
 
@@ -107,7 +107,7 @@ Now that we’ve got a feel for how the files and folders fit together, let’s 
 
 Below, is an example of a standard staging model from one of our models (from `sop_finance_stg__hmpps_general_ledger` model) that illustrates the common patterns within the staging layer. We’ve organized our model into two <Term id='cte'>CTEs</Term>: one pulling in a source table via the [source macro](https://docs.getdbt.com/docs/build/sources#selecting-from-a-source) and the other applying our transformations.
 
-Here we have ordered the fields based on their type, however, you may decide to order you columns differently. See our style guide [link](link to our style guide.) for more details on how you should style your models.
+Here we have ordered the fields based on their type, however, you may decide to order your columns differently. See our style guide [link](link to our style guide.) for more details on how you should style your models.
 
 ```sql
 -- sop_finance_stg__hmpps_general_ledger.sql
@@ -122,7 +122,10 @@ renamed as (
     select
 
         ----------  ids
-        id as cost_centre_id, -- primary key
+        {{ dbt_utils.generate_surrogate_key(
+          ['id', 
+          'a_id', ]) }} as unique_id, -- primary key
+        id as cost_centre_id, -- natural key
         a_id as analysis_code_id,
         objective as cobjective_code_id,
 
@@ -154,6 +157,7 @@ select * from renamed
   - ✅ **Type casting**
   - ✅ **Basic computations** (e.g. cents to dollars)
   - ✅ **Categorizing** (using conditional logic to group values into buckets or booleans, such as in the `case when` statements above)
+  - ✅ **Generating keys** Create unique surrogate keys using the dbt utils function `dbt_utils.generate_surrogate_key(`
   - ❌ **Joins** — the goal of staging models is to clean and prepare individual source-conformed concepts for downstream usage. We're creating the most useful version of a source system table, which we can use as a new modular component for our project. In our experience, joins are almost always a bad idea here — they create immediate duplicated computation and confusing relationships that ripple downstream — there are occasionally exceptions though (refer to [base models](#staging-other-considerations) for more info).
   - ❌ **Aggregations** — aggregations entail grouping, and we're not doing that at this stage. Remember - staging models are your place to create the building blocks you’ll use all throughout the rest of your project — if we start changing the grain of our tables by grouping in this layer, we’ll lose access to source data that we’ll likely need at some point. We just want to get our individual concepts cleaned and ready for use, and will handle aggregating values downstream.
 - ✅ **Materialized as views.** Looking at a partial view of our `dbt_project.yml` below, we can see that we’ve configured the entire staging directory to be materialized as <Term id='view'>views</Term>. As they’re not intended to be final artifacts themselves, but rather building blocks for later models, staging models should typically be materialized as views for two key reasons:
@@ -169,10 +173,28 @@ select * from renamed
             +materialized: view
     ```
 
-:::tip During development of a data model, it may be useful to materialise all you models as tables. This will allow you to more easily  debug issues. When you are ready to merge your work with main then you can change the materialisation back to view.
+:::tip During development of a data model, it may be useful to materialise all your models as tables. This will allow you to more easily debug issues. When you are ready to merge your work with main then you can change the materialisation back to view.
 :::
  
 - Staging models are the only place we'll use the [`source` macro](/docs/build/sources), and our staging models should have a 1-to-1 relationship to our source tables. That means for each source system table we’ll have a single staging model referencing it, acting as its entry point — _staging_ it — for use downstream.
+
+- In MOJ many of our source datasets are 'curated tables' materialised by data engineers using Create-A-Derived-Table. This means instead of using the standard source macro to pull data into our staging models, we should employ the transform_table.ref_on_prod macro.
+
+```
+-- stg_delius__address.sql
+
+with
+
+source as (
+
+    select * from {{ transform_table.ref_on_prod('delius__address') }}
+
+)
+
+select * from source
+```
+
+In the dev environment (local runs / PR actions) [ref_on_prod](https://github.com/moj-analytical-services/create-a-derived-table/blob/main/transform_table/macros/utils/ref_on_prod.sql_) macro operates equivalent to sourcing, meaning we don't need to rebuild the whole upstream pipeline to run our dependencies nor define curated models as sources. Conversely - and as the name suggests - in prod the macro [refs](https://docs.getdbt.com/reference/dbt-jinja-functions/ref) the curated model; this allows dbt to build an appropriate dependency graph as part of the production deployment.
 
 :::tip Don’t Repeat Yourself.
 Staging models help us keep our code <Term id='dry'>DRY</Term>. dbt's modular, reusable structure means we can, and should, push any transformations that we’ll always want to use for a given component model as far upstream as possible. This saves us from potentially wasting code, complexity, and compute doing the same transformation more than once. For instance, if we know we always want our monetary values as floats in dollars, but the source system is integers and cents, we want to do the division and type casting as early as possible so that we can reference it rather than redo it repeatedly downstream.
@@ -274,6 +296,7 @@ This is a welcome change for many of us who have become used to applying the sam
     ```
 
   - ✅ **Unioning disparate but symmetrical sources**. A typical example here would be if you operate multiple ecommerce platforms in various territories via a SaaS platform like Shopify. You would have perfectly identical schemas, but all loaded separately into your warehouse. In this case, it’s easier to reason about our orders if _all_ of our shops are unioned together, so we’d want to handle the unioning in a base model before we carry on with our usual staging model transformations on the (now complete) set — you can dig into [more detail on this use case here](https://discourse.getdbt.com/t/unioning-identically-structured-data-sources/921).
+  - ✅ Denormalising source tables of the same grain and concept (e.g. reference tables)
 
 - **[Codegen](https://github.com/dbt-labs/dbt-codegen) to automate staging table generation.** It’s very good practice to learn to write staging models by hand, they’re straightforward and numerous, so they can be an excellent way to absorb the dbt style of writing SQL. Also, we’ll invariably find ourselves needing to add special elements to specific models at times — for instance, in one of the situations above that require base models — so it’s helpful to deeply understand how they work. Once that understanding is established though, because staging models are built largely following the same rote patterns and need to be built 1-to-1 for each source table in a source system, it’s preferable to start automating their creation. For this, we have the [codegen](https://github.com/dbt-labs/dbt-codegen) package. This will let you automatically generate all the source YAML and staging model boilerplate to speed up this step, and we recommend using it in every project.
 - **Utilities folder.** While this is not in the `staging` folder, it’s useful to consider as part of our fundamental building blocks. The `models/utilities` directory is where we can keep any general purpose models that we generate from macros or based on seeds that provide tools to help us do our modeling, rather than data to model itself. The most common use case is a [date spine](https://github.com/dbt-labs/dbt-utils#date_spine-source) generated with [the dbt utils package](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/).
@@ -296,14 +319,16 @@ models
     └── courts_intermediate
         ├── courts_intermediate__properties.yml
         └── courts_intermediate__int_xhibit_and_common_platform_receipts_unioned.sql
+```
 
 - **Folders**
   - ✅ **Subdirectories based on business groupings.** Much like the staging layer, we’ll house this layer of models inside their own `intermediate` database. Unlike the staging layer, here we shift towards being business-conformed, splitting our models up into subdirectories not by their source system, but by their area of business concern.
 - **File names**
-  - `✅ int_[entity]s_[verb]s.sql` - the variety of transformations that can happen inside of the intermediate layer makes it harder to dictate strictly how to name them. The best guiding principle is to think about _verbs_ (e.g. `pivoted`, `aggregated_to_user`, `joined`, `fanned_out_by_quantity`, `funnel_created`, etc.) in the intermediate layer. In our example project, we use an intermediate model to pivot payments out to the order grain, so we name our model `int_payments_pivoted_to_orders`. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know [SQL](https://mode.com/sql-tutorial/). That clarity is worth the long file name. It’s important to note that we’ve dropped the double underscores at this layer. In moving towards business-conformed concepts, we no longer need to separate a system and an entity and simply reference the unified entity if possible. In cases where you need intermediate models to operate at the source system level (e.g. `int_shopify__orders_summed`, `int_core__orders_summed` which you would later union), you’d preserve the double underscores. Some people like to separate the entity and verbs with double underscores as well. That’s a matter of preference, but in our experience, there is often an intrinsic connection between entities and verbs in this layer that make that difficult to maintain.
+  - ✅ `int_[entity]s_[verb]s.sql` - the variety of transformations that can happen inside of the intermediate layer makes it harder to dictate strictly how to name them. The best guiding principle is to think about _verbs_ (e.g. `pivoted`, `aggregated_to_user`, `joined`, `fanned_out_by_quantity`, `funnel_created`, etc.) in the intermediate layer. In our example project, we use an intermediate model to pivot payments out to the order grain, so we name our model `int_payments_pivoted_to_orders`. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know [SQL](https://mode.com/sql-tutorial/). That clarity is worth the long file name. 
+  - ✅ `[database_name]__int_[entity]s_[verb]s.sql` - create-a-derived-table requires us to include the database in all model names, or if `int_[entity]s` is the database name then `int_[entity]s__[verb]s.sql`. Due to this requirement, **you cannot use double underscores anywhere else in your filenames**.
 
 :::tip Don’t over-optimize too early!
-The example project is very simple for illustrative purposes. This level of division in our post-staging layers is probably unnecessary when dealing with these few models. Remember, our goal is a _single_ _source of truth._ We don’t want finance and marketing operating on separate `orders` models, we want to use our dbt project as a means to bring those definitions together! As such, don’t split and optimize too early. If you have less than 10 marts models and aren’t having problems developing and using them, feel free to forego subdirectories completely (except in the staging layer, where you should always implement them as you add new source systems to your project) until the project has grown to really need them. Using dbt is always about bringing simplicity to complexity.
+The example project is very simple for illustrative purposes. This level of division in our post-staging layers is probably unnecessary when dealing with these few models. Remember, our goal is a _single_ _source of truth._ If two teams of analysts both have questions about counts of criminal court cases, we want them to be drawing upon the same data table(s), we want to use our dbt project as a means to bring those definitions together! As such, don’t split and optimize too early. If you have less than 10 marts models and aren’t having problems developing and using them, feel free to forego subdirectories completely (except in the staging layer, where you should always implement them as you add new source systems to your project) until the project has grown to really need them. Using dbt is always about bringing simplicity to complexity.
 :::
 
 ### Intermediate: Models
@@ -363,6 +388,7 @@ There are three interfaces to the organisational knowledge graph we’re encodin
   - ✅ **Structural simplification.** Bringing together a reasonable number (typically 4 to 6) of entities or concepts (staging models, or perhaps other intermediate models) that will be joined with another similarly purposed intermediate model to generate a mart — rather than have 10 joins in our mart, we can join two intermediate models that each house a piece of the complexity, giving us increased readability, flexibility, testing surface area, and insight into our components.
   - ✅ **Re-graining.** Intermediate models are often used to fan out or collapse models to the right composite grain — if we’re building a mart for `order_items` that requires us to fan out our `orders` based on the `quantity` column, creating a new single row for each item, this would be ideal to do in a specific intermediate model to maintain clarity in our mart and more easily view that our grain is correct before we mix it with other components.
   - ✅ **Isolating complex operations.** It’s helpful to move any particularly complex or difficult to understand pieces of logic into their own intermediate models. This not only makes them easier to refine and troubleshoot, but simplifies later models that can reference this concept in a more clearly readable way. For example, in the `quantity` fan out example above, we benefit by isolating this complex piece of logic so we can quickly debug and thoroughly test that transformation, and downstream models can reference `order_items` in a way that’s intuitively easy to grasp.
+  - ✅ **Creating a dbt `Relation` object.** dbt packages such as [dbt-utils](https://github.com/dbt-labs/dbt-utils) often require reference to a dbt [Relation](https://docs.getdbt.com/reference/dbt-classes#relation). Intermediate models can be used to materialise a `Relation` to input specific data into a downstream macro.
 
 :::tip Narrow the DAG, widen the tables.
 Until we get to the marts layer and start building our various outputs, we ideally want our DAG to look like an arrowhead pointed right. As we move from source-conformed to business-conformed, we’re also moving from numerous, narrow, isolated concepts to fewer, wider, joined concepts. We’re bringing our components together into wider, richer concepts, and that creates this shape in our DAG. This way when we get to the marts layer we have a robust set of components that can quickly and easily be put into any configuration to answer a variety of questions and serve specific needs. One rule of thumb to ensure you’re following this pattern on an individual model level is allowing multiple _inputs_ to a model, but **not** multiple _outputs_. Several arrows going _into_ our post-staging models is great and expected, several arrows coming _out_ is a red flag. There are absolutely situations where you need to break this rule, but it’s something to be aware of, careful about, and avoid when possible.
