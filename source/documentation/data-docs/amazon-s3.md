@@ -4,7 +4,7 @@
 
 [Amazon S3](https://aws.amazon.com/s3/) is a web-based cloud storage platform. It is one of the primary file storage locations on the Analytical Platform, alongside individual users' home directories.
 
-When working in [Analytical Platform IDE tools](../tools/index.md#in), you should use your home directory to store working copies of code and analytical outputs. Where possible, you should store all data and final analytical outputs in Amazon S3, and final code in GitHub to facilitate collaboration.
+When working in [Analytical Platform IDE tools](../../tools/#integrated-development-environments-ide), you should use your home directory to store working copies of code and analytical outputs. Where possible, you should store all data and final analytical outputs in Amazon S3, and final code in GitHub to facilitate collaboration.
 
 Data stored in Amazon S3 can be seamlessly integrated with other AWS services such as Amazon Athena and Amazon Glue.
 
@@ -24,17 +24,17 @@ Webapp data sources are used to store data that is accessed by code run by the A
 
 If you request that a webapp data source is created when setting up a new app, the app will automatically be given read-only access. You will also be given admin access to the bucket and can provide access to other users you need to collaborate with.
 
-The Data Engineering team also manage some buckets that are not shown in the control panel and that are not available to standard users. These buckets are used to store incoming raw data, which may be processed or fed into curated data pipelines. For more information, contact the Data Engineering team on the [#ask-data-engineering](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel.
+The Data Engineering team also manage some buckets that are not shown in the Control Panel and that are not available to standard users. These buckets are used to store incoming raw data, which may be processed or fed into curated data pipelines. For more information, contact the Data Engineering team on the [#ask-data-engineering](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel.
 
 You can view the data sources you have access to in the Control Panel **Warehouse data** tab.
 
 ### Create a new warehouse data source
 
-You can only create new warehouse data sources in the Analytical Platform control panel. You cannot create new buckets directly in the Amazon S3 console.
+You can only create new warehouse data sources in the Analytical Platform Control Panel. You cannot create new buckets directly in the Amazon S3 console.
 
 To create a new warehouse data source:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/.
+1.  Go to the Analytical Platform [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/.
 2.  Select the **Warehouse data** tab.
 3.  Select **Create new warehouse data source**.
 4.  Enter a name for the warehouse data source -- this must be prefixed with 'alpha-'.
@@ -75,11 +75,11 @@ When requesting access to a bucket, you should specify the name of the bucket an
 
 ### Manage access to a bucket
 
-Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). You cannot manage access to buckets directly in the Amazon S3 console.
+Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [Control {anel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). You cannot manage access to buckets directly in the Amazon S3 console.
 
 To manage access to a data source:
 
-1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
+1.  Go to the Analytical Platform [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
 2.  Select the **Warehouse data** tab or the **Webapp data** tab, as relevant.
 3.  Select the name of the data source you want to manage.
 
@@ -111,9 +111,9 @@ You can upload files to Amazon S3 from your local computer or download files fro
 - RStudio
 - JupyterLab
 
-When uploading files to Amazon S3, you should ensure that you follow all necessary [information governance](../../information-governance.html) procedures. In particular, you must complete a data movement form when moving any data onto the Analytical Platform.
+When _uploading_ files to Amazon S3, you should ensure that you follow all necessary [information governance](../../information-governance.html) procedures. In particular, **you must complete a data movement form when moving any data onto the Analytical Platform**.
 
-Downloading the data from Amazon S3 to your local machine is also considered as data movement and therefore needs to be managed as such in accordance with the necessary [information governance](../../information-governance.html) procedures, particularly for Personal Identifiable Information.
+_Downloading_ the data from Amazon S3 to your local machine is also considered as data movement and therefore needs to be managed as such in accordance with the necessary [information governance](../../information-governance.html) procedures, particularly for Personal Identifiable Information (PII).
 
 ### Your options
 
@@ -137,11 +137,11 @@ Generally, we recommend using `Rs3tools` unless there is a specific need for the
 
 You may also see mentions of another tool, `s3tools`. `s3tools` is now deprecated and has been replaced by `Rs3tools`.More information is available in this [ADR Record](https://silver-dollop-30c6a355.pages.github.io/documentation/30-architecture/40-architecture-decision-records/104-ADR104-replacing-s3tools.html#adr104-replacing-s3tools-with-botor)
 
-Most of the original functionality is available via `Rs3tools`, so this is a good replacement if you are looking to update older code that relied on the `s3tools` package.If you need the additional functionality available in `botor`, a guide to migration is available [here](https://user-guidance.analytical-platform.service.justice.gov.uk/appendix/botor.html#migrating-to-botor).
+Most of the original functionality is available via `Rs3tools`, so this is a good replacement if you are looking to update older code that relied on the `s3tools` package. If you need the additional functionality available in `botor`, we have published [a guide to migration](../../appendix/botor.html#migrating-to-botor).
 
 In addition, an RStudio plugin, `s3browser` is available if you only want to browse your files.
 
-For further details, see the sections below on [`Rs3tools`](#rs3tools), [`botor`](#botor) and [`s3browser`](#s3browser).
+For further details, see the relevant sections for [`Rs3tools`](#rs3tools), [`botor`](#botor) and [`s3browser`](#s3browser).
 
 #### JupyterLab
 
