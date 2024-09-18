@@ -26,7 +26,7 @@ If you request that a webapp data source is created when setting up a new app, t
 
 The Data Engineering team also manage some buckets that are not shown in the control panel and that are not available to standard users. These buckets are used to store incoming raw data, which may be processed or fed into curated data pipelines. For more information, contact the Data Engineering team on the [#ask-data-engineering](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel.
 
-You can view the data sources you have access to in the Control Panel __Warehouse data__ tab.
+You can view the data sources you have access to in the Control Panel **Warehouse data** tab.
 
 ### Create a new warehouse data source
 
@@ -35,10 +35,10 @@ You can only create new warehouse data sources in the Analytical Platform contro
 To create a new warehouse data source:
 
 1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/.
-2.  Select the __Warehouse data__ tab.
-3.  Select __Create new warehouse data source__.
+2.  Select the **Warehouse data** tab.
+3.  Select **Create new warehouse data source**.
 4.  Enter a name for the warehouse data source -- this must be prefixed with 'alpha-'.
-5.  Select __Create data source__.
+5.  Select **Create data source**.
 
 When you create a new warehouse data source, only you will initially have access. As an admin of the data source, you will be able to add and remove other users from the data access group as required. Further information on managing data access groups can be found [here](#manage-access-to-a-bucket).
 
@@ -46,9 +46,9 @@ When you create a new warehouse data source, only you will initially have access
 
 Every bucket has three data access levels:
 
-*   Read only
-*   Read/write
-*   Admin -- this provides read/write access and allows the user to add and remove other users from the bucket's data access group
+- Read only
+- Read/write
+- Admin -- this provides read/write access and allows the user to add and remove other users from the bucket's data access group
 
 ### Path-specific access
 
@@ -57,9 +57,9 @@ As well as choosing an access level, you can also restrict a user's access to sp
     /folder-one
     /folder-two
 
-This would give the user access to only `/folder-one` and `/folder-two` in the bucket and nothing else. 
+This would give the user access to only `/folder-one` and `/folder-two` in the bucket and nothing else.
 
-If you leave this field blank, the user will be able to access everything in the bucket. 
+If you leave this field blank, the user will be able to access everything in the bucket.
 
 ### Request access to a bucket
 
@@ -69,7 +69,7 @@ If you know an admin of the bucket you require access to, you should ask them to
 
 If you do not know any of the admins of the bucket you require access to, you can find a list of the GitHub usernames of all bucket admins on the Warehouse Data page of Control Panel (scroll down the page), or contact the Analytical Platform team via [Slack](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ), [GitHub](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) or email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
 
-If all bucket admins are unavailable (e.g. have left the MoJ), the  Analytical Platform team will be able to grant you access to the datasource if the request is approved by your line manager.
+If all bucket admins are unavailable (e.g. have left the MoJ), the Analytical Platform team will be able to grant you access to the datasource if the request is approved by your line manager.
 
 When requesting access to a bucket, you should specify the name of the bucket and the level of access you require. You should only request access to data that you have a genuine business need to access and should only request the lowest level of access required for you to complete your work. You may be required to demonstrate the business need for you to access a bucket if requested by a bucket admin or an information asset owner (IAO).
 
@@ -80,28 +80,28 @@ Bucket admins can manage access to warehouse data sources and webapp data source
 To manage access to a data source:
 
 1.  Go to the Analytical Platform [control panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/).
-2.  Select the __Warehouse data__ tab or the __Webapp data__ tab, as relevant.
+2.  Select the **Warehouse data** tab or the **Webapp data** tab, as relevant.
 3.  Select the name of the data source you want to manage.
 
 To add a new user to the data access group:
 
-1.  Type the user's GitHub username into the input field labelled __Grant access to this data to other users__.
+1.  Type the user's GitHub username into the input field labelled **Grant access to this data to other users**.
 2.  Select the user from the drop-down list.
 3.  Select the required data access level.
 4.  Either leave the 'Paths' field blank or enter a list of paths to provide restricted access, as described in the section above.
-5.  Select __Grant access__.
+5.  Select **Grant access**.
 
 To edit the access level of a user:
 
-1.  Select __Edit access level__ next to the name of the user.
+1.  Select **Edit access level** next to the name of the user.
 2.  Select required data access level.
 3.  Either leave the 'Paths' field blank or enter a list of paths to provide restricted access, as described in the section above.
-4.  Select __Save__.
+4.  Select **Save**.
 
 To remove a user from the data access group:
 
-1.  Select __Edit access level__ next to the name of the user.
-2.  Select __Revoke access__.
+1.  Select **Edit access level** next to the name of the user.
+2.  Select **Revoke access**.
 
 ## Interacting with Amazon S3 via the Analytical Platform
 
@@ -147,8 +147,8 @@ For further details, see the sections below on [`Rs3tools`](#rs3tools), [`botor`
 
 The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab are :
 
-- Reading files : ```pandas``` , ```mojap-arrow-pd-parser``` 
-- Downloading / Uploading files : ```boto3```
+- Reading files : `pandas` , `mojap-arrow-pd-parser`
+- Downloading / Uploading files : `boto3`
 
 ### Installation and usage
 
@@ -159,28 +159,26 @@ You can use the Amazon S3 Console to upload/download files from/to your local co
 To upload files using the Amazon S3 Console:
 
 1.  Log in to the [AWS Management Console](https://aws.services.analytical-platform.service.justice.gov.uk) using your Analytical Platform account.
-2.  Select __Services__ from the menu bar.
-3.  Select __S3__ from the drop down menu.
+2.  Select **Services** from the menu bar.
+3.  Select **S3** from the drop down menu.
 4.  Select the bucket and folder you want to upload files to.
-5.  Select __Upload__.
-6.  Select __Add files__ or drag and drop the files you want to upload.
-7.  Select __Upload__.
+5.  Select **Upload**.
+6.  Select **Add files** or drag and drop the files you want to upload.
+7.  Select **Upload**.
 
 Downloading a file using the Amazon S3 Console follows a similar process:
 
 1.  Follow steps 1-3 from the list above.
 2.  Navigate to the bucket and select the file you want to download.
-3.  Select __Download__ or __Download as__ as appropriate.
+3.  Select **Download** or **Download as** as appropriate.
 
-You can also directly navigate to a bucket in the AWS S3 Console by selecting __Open on AWS__ in the Analytical Platform Control Panel.
-
+You can also directly navigate to a bucket in the AWS S3 Console by selecting **Open on AWS** in the Analytical Platform Control Panel.
 
 #### RStudio
 
 ##### Rs3tools
 
 To install `Rs3tools` follow the guidance on their [homepage](https://github.com/moj-analytical-services/Rs3tools#installation).
-
 
 To upload files using `Rs3Tools`
 
@@ -227,6 +225,7 @@ botor contains two functions for downloading or reading files from Amazon S3:
 s3_upload_file
 s3_write
 ```
+
 For example, to write a dataframe to csv, run the following code:
 
 ```r
@@ -240,6 +239,7 @@ To read files, use one of the following:
 s3_download_file
 s3_read
 ```
+
 And use as follows:
 
 ```r
@@ -248,7 +248,6 @@ your_df <- s3_read(read.csv, "s3://your_bucket/your_key.csv")
 ```
 
 You can find out more about how to use these and other functions in the [Migrating to botor](../../appendix/botor.html#migrating-to-botor) appendix, the [botor documentation](https://daroczig.github.io/botor/reference/index.html) or by using the help operator in RStudio (for example, `?botor::s3_write`).
-
 
 #### s3browser
 
@@ -265,9 +264,11 @@ To open the browser, run:
 ```{r run-s3browser, eval=FALSE}
 s3browser::file_explorer_s3()
 ```
+
 You can find out more about how to use `s3browser` on [GitHub](https://github.com/moj-analytical-services/s3browser).
 
 ### JupyterLab
+
 You can read/write directly from s3 using [pandas](https://pandas.pydata.org/docs/user_guide/index.html). However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
 
 #### `mojap-arrow-pd-parser`
@@ -295,7 +296,6 @@ writer.parquet.write(df1)
 ```
 
 `mojap-arrow-pd-parser` infers the file type from the extension, so for example `reader.read("s3://bucket_name/file.parquet")` would read a parquet file without need for specifying the file type.
-
 
 The package also has a lot of other functionality including specifying data types when reading (or writing). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
 
