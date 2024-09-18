@@ -4,19 +4,19 @@
 
 [Amazon S3](https://aws.amazon.com/s3/) is a web-based cloud storage platform. It is one of the primary file storage locations on the Analytical Platform, alongside individual users' home directories.
 
-You should use your home directory to store working copies of code and analytical outputs. Where possible, you should store all data and final analytical outputs in Amazon S3, and final code in GitHub to facilitate collaboration.
+When working in [Analytical Platform IDE tools](../tools/index.md#in), you should use your home directory to store working copies of code and analytical outputs. Where possible, you should store all data and final analytical outputs in Amazon S3, and final code in GitHub to facilitate collaboration.
 
 Data stored in Amazon S3 can be seamlessly integrated with other AWS services such as Amazon Athena and Amazon Glue.
 
 ## Working with Amazon S3 buckets
 
-### Types of buckets
+There are 2 parts to an S3 bucket: the bucket itself, and the bucket keys (similar to a file path). For example, data might be stored in a `moj_ap_project_output` bucket, and the files you are working on are in the `project_output/latest/` 'folder' within the bucket (matching the `/project_output/latest/*` key pattern).
 
 Amazon S3 buckets are separated into two categories on the Analytical Platform.
 
 #### Warehouse data sources
 
-Warehouse data sources are used to store data that is accessed by code you run yourself, for example, in RStudio or JupyterLab. You can create warehouse data sources yourself and can provide access to other users you need to collaborate with.
+Warehouse data sources are used to store data that is accessed by code you run yourself, for example, in RStudio or JupyterLab. You can [create warehouse data sources](#create-a-new-warehouse-data-source) yourself and can provide access to other users you need to collaborate with.
 
 #### Webapp data sources
 
@@ -26,7 +26,7 @@ If you request that a webapp data source is created when setting up a new app, t
 
 The Data Engineering team also manage some buckets that are not shown in the control panel and that are not available to standard users. These buckets are used to store incoming raw data, which may be processed or fed into curated data pipelines. For more information, contact the Data Engineering team on the [#ask-data-engineering](https://app.slack.com/client/T1PU1AP6D/C8X3PP1TN) Slack channel.
 
-You can view the data sources you have access to in the control panel.
+You can view the data sources you have access to in the Control Panel __Warehouse data__ tab.
 
 ### Create a new warehouse data source
 
@@ -50,7 +50,7 @@ Every bucket has three data access levels:
 *   Read/write
 *   Admin -- this provides read/write access and allows the user to add and remove other users from the bucket's data access group
 
-### Path specific access
+### Path-specific access
 
 As well as choosing an access level, you can also restrict a user's access to specific paths in a bucket by entering each path on a new line in the 'Paths' textarea field when adding the user to a data access group, taking care not to leave an empty new line after the last path. For example:
 
