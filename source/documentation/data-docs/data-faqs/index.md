@@ -86,7 +86,7 @@ If the data is stored in your own S3 bucket, you may wish to create your own Ath
 [the intranet]: https://intranet.justice.gov.uk/guidance/knowledge-information/protecting-information/privacy-reform/
 [mojap-arrow-pd-parser]: https://github.com/moj-analytical-services/mojap-arrow-pd-parser
 [botor]: https://github.com/daroczig/botor
-[Rs3tools]: https://github.com/moj-analytical-services/Rs3tools
+[Rs3tools]: https://github.com/moj-analytical-services/Rs3tools?tab=readme-ov-file#rs3tools
 [read more about it]: https://aws.amazon.com/athena/
 [log into the AWS console]: https://aws.services.analytical-platform.service.justice.gov.uk
 [request database access]: https://github.com/moj-analytical-services/data-engineering-database-access#standard-database-access
