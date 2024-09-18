@@ -19,7 +19,7 @@ In addition to this users can create their own S3 buckets which may have _proces
 
 ## How do I gain access to existing data?
 
-Access to databases is granted via the [database access repository]. Have a read through the guidance on there. If you are finding the process a little tricky, please ask for help in [#ask-data-engineering]. A data engineer will happily guide you through things.
+Access to **databases** is granted via the [database access repository]. Have a read through the guidance on there. If you are finding the process a little tricky, please ask for help in [#ask-data-engineering]. A data engineer will happily guide you through things.
 
 If you are looking for access to a **user-created bucket**, then the admin of that bucket should be able to grant you access. If you don't know who the admin is, or they are not able to grant you access, then raise a ticket via the [#analytical-platform-support] Slack channel or via [GitHub]. If the bucket admin is unavailable, the Analytical Platform team will need to receive approval from your line manager before you can be given any access to the bucket.
 
@@ -27,7 +27,7 @@ If you are looking for access to a **user-created bucket**, then the admin of th
 
 > ⚠️ We can only hold 1,000 S3 buckets on the Analytical Platform. Before you [create a new secure data storage folder](../amazon-s3.md#create-a-new-warehouse-data-source), please check whether you can re-use an existing one, or create a domain-level S3 bucket and use folders and [path-specific access](../amazon-s3.md#path-specific-access) for project level access.
 
-Data should be stored in a [Warehouse data source](../amazon-s3.md#warehouse-data-sources) (a folder within an S3 bucket with managed access). You can [create a new secure data storage folder](../amazon-s3.md#create-a-new-warehouse-data-source) through the AP Control Panel 'Warehouse Data' page via the '_Create new warehouse data source_' button. Data can be uploaded manually via the AWS console (which can be accessed through the Control Panel) or you can write to it programmatically using [an integrated development environment (IDE) such as RStudio, Visual Studio Code or JupyterLab](../../tools/index.md#integrated-development-environments-ide) - [see this section](#how-do-i-readwrite-data-from-an-s3-bucket) for more details.
+Data should be stored in a [Warehouse data source](../amazon-s3.md#warehouse-data-sources) (a folder within an S3 bucket with managed access). You can [create a new secure data storage folder](../amazon-s3.md#create-a-new-warehouse-data-source) through the AP Control Panel 'Warehouse Data' page via the '_Create new warehouse data source_' button. Data can be uploaded manually via the AWS console (which can be accessed through the Control Panel) or you can write to it programmatically using [an integrated development environment (IDE) such as RStudio, Visual Studio Code or JupyterLab](../../tools/#integrated-development-environments-ide) - [see this section](#how-do-i-readwrite-data-from-an-s3-bucket) for more details.
 
 If your data contains anything that could be considered personal information, you must follow guidance from the data protection team which can be found on [the intranet].
 
@@ -43,7 +43,7 @@ Databases on the AP use Amazon Athena which allow you to query data using SQL. Y
 
 **The Amazon Athena workbench**: If you [log into the AWS console] and click Services -> Athena, you'll see the Athena workbench. This is good for testing your queries.
 
-**Create a Derived Table**: You can also use [Create a Derived Table] to run SQL statements to query Athena.
+**Create a Derived Table**: You can also use [Create a Derived Table](../../tools/create-a-derived-table/) to run SQL statements to query Athena.
 
 If you get an error like:
 
@@ -59,7 +59,7 @@ you'll need to [request database access].
 
 ## What should I use to process my data?
 
-Please refer to [the tools and services page](../../tools/index.md)
+Please refer to [the tools and services page](../../tools/)
 
 ## I am running into memory issues using Python/R, what should I do?
 
@@ -71,7 +71,7 @@ If the data is stored in your own S3 bucket, you may wish to create your own Ath
 
 **Athena workbench/Python/R**: You can run `CREATE DATABASE` and `CREATE TABLE AS SELECT` (CTAS) queries to create your own database and tables from data you have in S3. There are more details in this guidance or you can use what is provided by [AWS]. When running CTAS queries a key thing to remember is to specify the location (s3 bucket and path) of the data. [here is a nice example of setting up your own database]. The tutorial is in python but the SQL can be ran from any tool on the AP.
 
-**Create a Derived Table**: When you create and run an SQL script with [Create a Derived Table] it will automatically build your database and table. See the user guidance for more information.
+**Create a Derived Table**: When you create and run an SQL script with [Create a Derived Table](../../tools/create-a-derived-table/) it will automatically build your database and table. See the user guidance for more information.
 
 <!-- External links -->
 
@@ -89,7 +89,6 @@ If the data is stored in your own S3 bucket, you may wish to create your own Ath
 [Rs3tools]: https://github.com/moj-analytical-services/Rs3tools
 [read more about it]: https://aws.amazon.com/athena/
 [log into the AWS console]: https://aws.services.analytical-platform.service.justice.gov.uk
-[Create a Derived Table]: https://user-guidance.analytical-platform.service.justice.gov.uk/tools/create-a-derived-table/index.html
 [request database access]: https://github.com/moj-analytical-services/data-engineering-database-access#standard-database-access
 [`pydbtools`]: https://github.com/moj-analytical-services/pydbtools
 [`dbtools`]: https://github.com/moj-analytical-services/dbtools
