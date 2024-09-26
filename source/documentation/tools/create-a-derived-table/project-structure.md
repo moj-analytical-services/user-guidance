@@ -396,7 +396,9 @@ Until we get to the marts layer and start building our various outputs, we ideal
 
 ## 4-marts
 
-This is where everything comes together and we start to arrange all of our atoms (staging models) and molecules (intermediate models) into full-fledged cells that have identity and purpose. Marts are meant to represent a specific entity or concept at its unique grain. For instance, an order, a customer, a territory, a click event, a payment — each of these would be represented with a distinct mart, and each row would represent a discrete instance of these concepts.
+Here is where Analytics Engineers have spent a lot of time discussing how we think projects should be structured in the MoJ. Up until now we have largely stuck to DBT guidance, however at this point the databases we create will be passed on to users and therefore naming convernsions and structure will really help th uptake of the models you have been working on. 
+
+For the MoJ Marts are where everything comes together and we start to arrange all of our atoms (staging models) and molecules (intermediate models) into full-fledged cells that have identity and purpose. Marts are meant to represent a specific entity or concept at its unique grain. For instance, an offence, a offender, a sentence — each of these would be represented with a distinct mart, and each row would represent a discrete instance of these concepts. We envisage 
 
 ### Marts: Files and folders
 
@@ -425,7 +427,7 @@ models/prison
 
 ❌ **Build the same concept differently for different teams.** `finance_orders` and `marketing_orders` is typically considered an anti-pattern. There are, as always, exceptions — a common pattern we see is that, finance may have specific needs, for example reporting revenue to the government in a way that diverges from how the company as a whole measures revenue day-to-day. Just make sure that these are clearly designed and understandable as _separate_ concepts, not departmental views on the same concept: `tax_revenue` and `revenue` not `finance_revenue` and `marketing_revenue`.
 
-### Complete Enterprise Data Warehouse approach using Create a Derived Table
+### Complete Enterprise Data Warehouse approach using create-a-derived-table
 
 ![data-flow-diagram excalidraw](https://github.com/user-attachments/assets/3dfc54d7-e304-4e48-b06d-c0dddad40503)
 
@@ -528,7 +530,7 @@ select * from customers_and_customer_orders_joined
 
 - **Troubleshoot via tables.** While stacking views and ephemeral models up until our marts — only building data into the warehouse at the end of a chain when we have the models we really want end users to work with — is ideal in production, it can present some difficulties in development. Particularly, certain errors may seem to be surfacing in our later models that actually stem from much earlier dependencies in our model chain (ancestor models in our DAG that are built before the model throws the errors). If you’re having trouble pinning down where or what a database error is telling you, it can be helpful to temporarily build a specific chain of models as tables so that the warehouse will throw the error where it’s actually occurring.
 
-## 5-semantic-layer-marts
+## 5-derived-layer
 
 ## 6-the-rest-of-the-project
 
