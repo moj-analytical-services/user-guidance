@@ -59,7 +59,7 @@ models:
       partitioned_by: ['snapshot_date']
       +column_types:
         column_1: varchar(5)
-        column_2: int    
+        column_2: int
 ```
 
 If for some reason it is not possible or reasonable to apply a configuration in a property file, you can use a `config()` Jinja macro within a model or test SQL file. The following example shows how the same configuration above can be applied in a model or test file.
@@ -70,14 +70,26 @@ If for some reason it is not possible or reasonable to apply a configuration in 
       materialized='incremental'
       incremental_strategy='append'
       partitioned_by=['snapshot_date']
+      external_location=generate_s3_location()
   )
 }}
 ```
 
+## Important - Required Config
+
+In order to ensure that data is stored in an orderly manner within the bucket, we enforce a specific naming convention through use of a build in macro to generate the file path your data will be saved in S3 with. This is done through the config block within the SQL definition of the model, and is usually seen as starting the file with the following:
+
+```
+{{ config(
+    external_location=generate_s3_location()
+) }}
+```
+
+Although it is possible to apply further config values by the methods detailed before as an optional feature, the config block itself **must** feature the `external_location=generate_s3_location()` statement at a minimum. Failing to supply this config value will cause the table to attempt to deploy to an incorrect location and then fail with a generic `access denied` error.
+
 ## Config inheritance
 
 Configurations are prioritised in order of specificity, which is generally the inverse of the order above: an in-file `config()` block takes precedence over properties defied in a `.yaml` property file, which takes precedence over a configuration defined in the `dbt_project.yml` file. (Note that generic tests work a little differently when it comes to specificity. See dbt's documentation on [test configs](https://docs.getdbt.com/reference/test-configs).)
-
 
 ## Materialisations
 

@@ -1,5 +1,17 @@
 # Deploying to Dev
 
+## Important Note - Before you deploy
+
+As detailed in the section on [models](/tools/create-a-derived-table/models), you will need to add the standardised **config block** to your model before attempting to deploy. The block is as follows:
+
+```
+{{ config(
+    external_location=generate_s3_location()
+) }}
+```
+
+If you do not include this block, your models will attempt to write to an invalid path in S3, and thusly will fail to deploy. You can include other config values in the block if doing so is useful for your model, but all models **must** include the `external_location=generate_s3_location()` statement to deploy succesfully.
+
 You can run any dbt command in the terminal in RStudio (JupyterLab coming soon) to deploy models and seeds, or to run tests. When you deploy models and seeds from RStudio the database they are built in to will be suffixed with `_dev_dbt` and the underlying data that gets generated will be written to the following S3 path:
 
 ```
@@ -68,8 +80,7 @@ To run tests on models with tests defined, run:
 dbt test --select models/.../path/to/my/models/
 ```
 
-
-## <a id="using-the-plus-prefix"></a>Using the + prefix 
+## <a id="using-the-plus-prefix"></a>Using the + prefix
 
 The `+` prefix is a `dbt` syntax feature which helps disambiguate between resource paths and configurations in the `dbt_project.yml` file. If you see it used in the `dbt_project.yml` file and wonder what it is, read [dbt's guidance on using the `+` prefix](https://docs.getdbt.com/reference/resource-configs/plus-prefix). It is also used to configure properties in a nested dictionary which take a dictionary of values in a model, seed or test config `.yaml`. For example, use `+column_types` rather than `column_types` since what follows are further key and value pairs defining the column names and the required data type. It doesn't hurt to use `+` prefix so it is recommended to always do so.
 
@@ -88,7 +99,6 @@ models:
         column_2: int
         column_3: string
 ```
-
 
 ## How to use the incremental materialisation with the append strategy
 
