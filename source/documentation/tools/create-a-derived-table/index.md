@@ -7,6 +7,7 @@ Create a Derived Table is a tool for creating persistent derived tables in Athen
 ## Overview
 
 - [What is Create a Derived Table](/tools/create-a-derived-table/what-is-create-a-derived-table)
+- [What data is on Create a Derived Table?](/tools/create-a-derived-table/what-data-is-on-create-a-derived-table)
 
 ## Getting Started
 
