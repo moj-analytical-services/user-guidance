@@ -16,18 +16,22 @@ Secrets should **not be stored in code**, even if the GitHub repository is priva
 
 ## About parameters
 
-Parameters are the preferred method of storing secrets in the Analytical Platform, including for apps and Airflow pipelines. Analytical Platform uses [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) to store the parameters in an encrypted form.
+Parameters are the preferred method of storing secrets in the Analytical Platform for Airflow pipelines. Analytical Platform uses [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) to store the parameters in an encrypted form.
 
 ### Storing a parameter
 
-Parameters have their own tab in the control panel.
+Parameters have their own tab in the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/parameters/) where you can view, create and delete your parameters.
+
+When adding a parameter the full name stored in AWS Parameter Store uses the following format: `/alpha/airflow/$IAM_ROLE_NAME/secrets/$KEY`.
+
+The value of the parameter is always stored as a [SecureString type](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html).
 
 #### Role name 
 
-Description: The IAM Role name for the thing that needs access to the secret. 
-Apps are: `alpha_app_APP` Airflow pipelines are: `airflow_PIPELINE`.
+Description: The IAM Role name for the Airflow pipeline that needs access to the secret.
+Airflow pipeline roles follow this pattern: `airflow_$ENV_$PIPELINE`.
 
-Example: `alpha_app_matrixbooking`
+Example: `airflow_prod_example-pipeline`
 
 #### Key 
 
@@ -43,29 +47,20 @@ Example: `zzzzzzzzzzzz`
 
 ### Limitations
 
-Currently a parameter can only be managed by the user that originally created it in control panel. This means that ownership of a parameter cannot be shared with or transferred to another user, for example, when moving to a new project. If you need to transfer the ownership of a parameter to another user, there are two methods:
+Currently a parameter can only be managed by the user that originally created it in Control Panel. This means that ownership of a parameter cannot be shared with or transferred to another user, for example, when moving to a new project. If you need to transfer the ownership of a parameter to another user, there are two methods:
 
 1. Ask the user to create a parameter with the same value in the control panel using a new key and update your code to refer to the new key.
 2. Ask an Analytical Platform administrator to manually change the ownership of the parameter in the control panel database.
 
 ### Accessing a parameter
 
-In an R Shiny app, when the app is deployed the parameters exist as environment variables. The app can retrieve them using the function `Sys.getenv("parameter_key")`.
+In Airflow, parameters are accessed using the AWS API, using the AWS SDK for the language your airflow pipeline uses.
 
-In Airflow, parameters are accessed using the AWS API, using the AWS client library.
+When using Python, you may want to use either:
+- SSM Parameter Store https://github.com/christippett/ssm-parameter-store
+- Boto3 https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 
-### Example: Shiny app uses parameters
-
-The example `trains` R Shiny app will access a remote API. We'll set two parameters in the control panel for the API username and password:
-
-* Key: `api_username` Value: `moj_trains_user` Role_name: `alpha_app_trains`
-* Key: `api_password` Value: `74PWtU-FAKE-G58aq&HF` Role_name: `alpha_app_trains`
-
-To access these parameters in the app, we can use the `Sys.getenv` function:
-
-```r
-results <- trains_api(Sys.getenv("api_username"), Sys.getenv("api_password"))
-```
+When using R we recommend using Paws https://www.paws-r-sdk.com/
 
 ### Example: Airflow uses parameters
 
@@ -80,7 +75,7 @@ Add permissions to access these parameters to the role policy specified in the A
 secrets: true
 ```
 
-The Airflow job will access the parameters like this:
+An Airflow job in Python can access the parameters using [SSM Parameter Store](https://github.com/christippett/ssm-parameter-store). An example code snippet:
 
 ```python
 from ssm_parameter_store import EC2ParameterStore
@@ -88,6 +83,13 @@ store = EC2ParameterStore(region_name='eu-west-1')
 parameters = store.get_parameters_by_path('/alpha/airflow/airflow_prod_flights/secrets/', strip_path=True, recursive=True)
 db_username = parameters['db_username']
 db_password = parameters['db_password']
+```
+
+An Airflow job in R can access the parameters using [Paws](https://www.paws-r-sdk.com/) which has methods to [get individual parameters by name](https://www.paws-r-sdk.com/docs/ssm_get_parameter/) or [all parameters by path](https://www.paws-r-sdk.com/docs/ssm_get_parameters_by_path/). An example code snippet getting parameters by name:
+
+```R
+db_username <- scv$get_parameter(Name = '/alpha/airflow/airflow_prod_flights/secrets/db_username', WithDecryption = TRUE)$Parameter$Value
+db_password <- scv$get_parameter(Name = '/alpha/airflow/airflow_prod_flights/secrets/db_password', WithDecryption = TRUE)$Parameter$Value
 ```
 
 ## S3 bucket
