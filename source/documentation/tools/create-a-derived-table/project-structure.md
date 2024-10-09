@@ -68,6 +68,8 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
 
 ```
 
+The general rule as the what goes into staging, intermediate or datamarts comes down to a few consideration. Staging generally is source specific and doesn't change the grain for the data. Then when you want to combine different sources, or change the grain of the data (or other more complicated transformations) then the models belong in and intermediate database. Then finally the user facing models live in either datamarts or derived databases. The following sections will go into more depth about the categorisations. 
+
 Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear - if you're unsure, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help.
 
 Please note that the use of create-a-derived-table has evolved over time, and best practices change, the reality of our project may be out of sync with the best practices stated here. 
@@ -208,9 +210,60 @@ This is a welcome change for many of us who have become used to applying the sam
 
 ### Staging: Other considerations
 
-- **Base models when joins are necessary to stage concepts.** Sometimes, in order to maintain a clean and <Term id='dry'>DRY</Term> staging layer we do need to implement some joins to create a solid concept for our building blocks. In these cases, we recommend creating a sub-directory in the staging directory for the source system in question and building `base` models. These have all the same properties that would normally be in the staging layer, they will directly source the raw data and do the non-joining transformations, then in the staging models we’ll join the requisite base models. The most common use cases for building a base layer under a staging folder are:
+- **Base models** Generally, the staging layer is very basic, with few models (as many models as there are source tables). Sometimes, in order to maintain a clean and <Term id='dry'>DRY</Term> staging layer we need to implement some more complicated transformations. In these cases, we recommend creating a sub-directory in the staging directory for the source system in question and building `base` models. Base models are the normal non-joining transformations that directly source the raw data, but we have separated them out so that it is then clear where the source data first enters our staging database and they can be used for. Here are some examples of why you might use base models:
 
-  - ✅ **Joining in separate delete tables**. Sometimes a source system might store deletes in a separate table. Typically we’ll want to make sure we can mark or filter out deleted records for all our component models, so we’ll need to join these delete records up to any of our entities that follow this pattern. This is the example shown below to illustrate.
+  - ✅ **First staging model** There is little distinction between a base model and a staging model when no further transofrmations are required in your staging database. So it is preference what you call these models, `base_` or `stg_`. In some domains, data engineers load the data without casting data types and then create a base model for that table in create-a-derived-table that casts and renames variables. Example below for illustration.
+
+```sql
+  with
+
+source as (
+
+    select *
+    , {{ dbt_utils.generate_surrogate_key(['user_s_fullname','employee_number','course_name','completion_status','mojap_file_date']) }} as training_course_activity_id
+    from {{ source("corporate_my_learning", "training__course_activity")}}
+
+),
+
+numbered as (
+
+    select *
+      , row_number() over (partition by training_course_activity_id order by mojap_timestamp desc) as row_num
+    from source
+
+),
+
+deduplicated as (
+
+    select * from numbered where row_num = 1
+    
+),
+
+final as (
+
+    select
+      training_course_activity_id,
+      cast(lower(user_s_fullname) as varchar) as user_full_name,
+      cast(employee_number as varchar) as employee_number,
+      cast(user_s_organisation_name_s_ as varchar) AS user_organisation_name,
+      cast(region as varchar) as region,
+      cast(user_s_position_name_s_ as varchar) as user_position_name,
+      cast(course_name as varchar) as course_name,
+      cast(completion_status as varchar) as completion_status,
+      date(date_parse(the_completion_date, '%d %b %Y')) as course_completion_date,
+      date(date_parse(course_start_date, '%d %b %Y')) as course_start_date,
+      cast(lower(user_s_manager_name_s_) as varchar) as user_manager_name,
+      cast(user_status as varchar) as user_status,
+      cast(mojap_timestamp as timestamp) as mojap_timestamp,
+      cast(mojap_file_date as date) as mojap_file_date
+  from deduplicated
+  
+)
+
+select * from final
+```
+
+  - ✅ **Joining in separate delete tables**. Sometimes a source system might store deletes in a separate table. Typically we’ll want to make sure we can mark or filter out deleted records for all our component models, so we’ll need to join these delete records up to any of our entities that follow this pattern. We will therefore create base models for all the source tables and then use a staging table to remove the deleted record by joining the base models together. Example below for illustration.
 
     ```sql
     -- base_xhibit_curated__defendant.sql
@@ -223,7 +276,7 @@ This is a welcome change for many of us who have become used to applying the sam
 
     ),
 
-    customers as (
+    defendants as (
 
         select
             id as defendant_id,
@@ -235,7 +288,7 @@ This is a welcome change for many of us who have become used to applying the sam
 
     )
 
-    select * from customers
+    select * from defendants
     ```
 
     ```sql
@@ -267,15 +320,15 @@ This is a welcome change for many of us who have become used to applying the sam
 
     with
 
-    customers as (
+    defendants as (
 
         select * from {{ ref('base_xhibit_curated__defendant') }}
 
     ),
 
-    deleted_customers as (
+    deleted_defendants as (
 
-        select * from {{ ref('base_xhibit_curated__deleted_defndants') }}
+        select * from {{ ref('base_xhibit_curated__deleted_defendants') }}
 
     ),
 
@@ -290,7 +343,8 @@ This is a welcome change for many of us who have become used to applying the sam
 
         from defendants
 
-        left join deleted_defendants on defendants.defendants_id = deleted_defendants.defendants_id
+        left join deleted_defendants on 
+          defendants.defendants_id = deleted_defendants.defendants_id
 
     )
 
@@ -398,13 +452,13 @@ Until we get to the marts layer and start building our various outputs, we ideal
 
 ## 4-datamarts
 
-### `_datamarts`]
+### `_datamarts`
 
-Here is where everything comes together, where our atoms and molecules are brought together to make cells with well defined identity and purpose. This is also where, normally, the end user will see the data. For this reason a lot of thought has been put into the naming convensions we want to abide by in the MoJ. This guidance document has come after many years of iterativly chanigng and improving our processes in the Data Modellening and Engineering team, as well as across Data and Analyis. We have therefore put a lot of thought into how we can clearly signify the different kinds of databases that will be and have been developed, and who they have been developed by. In the following two sections (marts and then derived) we will lay out what we expect from a project and how we see the categorisation of these pieces of work.
+Here is where everything comes together, where our atoms and molecules are brought together to make cells with well defined identity and purpose. This is also where, normally, the end user will see the data. For this reason a lot of thought has been put into the naming conventions we want to abide by in the MoJ. This guidance document has come after many years of iteratively changing and improving our processes in the Data Modeling and Engineering team, as well as across Data and Analysis. We have therefore put a lot of thought into how we can clearly signify the different kinds of databases that will be and have been developed, and who they have been developed by. In the following two sections (marts and then derived) we will lay out what we expect from a project and how we see the categorisation of these pieces of work.
 
-This will likely be where we deviate most from dbt as we want to tailor our solution to our business needs. Generally, we see the marts database as the place your customers should come to get the most fundamental builiding blocks of the data. It is the first place the end user will have access to the data and any downstream product or pipeline that wishes to use your data should use these building blocks. In Analytics Engineering we have been following the [Kimball methodology](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/) and have been developing [dimensional models](https://docs.getdbt.com/blog/kimball-dimensional-model) as our marts layer. From the dimensional layer users can either connect directly to it with their dashboards or models, or they can combine the building blocks to more unqiuly satify their needs. 
+This will likely be where we deviate most from dbt as we want to tailor our solution to our business needs. Generally, we see the marts database as the place your customers should come to get the most fundamental building blocks of the data. It is the first place the end user will have access to the data and any downstream product or pipeline that wishes to use your data should use these building blocks. In Analytics Engineering we have been following the [Kimball methodology](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/) and have been developing [dimensional models](https://docs.getdbt.com/blog/kimball-dimensional-model) as our marts layer. From the dimensional layer users can either connect directly to it with their dashboards or models, or they can combine the building blocks to more uniquely satisfy their needs. 
 
-We are taking this approach as we wish their to be one source for any data set and one 'source of truth' allowing for the analysis that comes from it to be consistent and reliable. To acheive this we will treat code and pull requests on create-a-derived-table differently depending on their purpose. It is a requisit for any code being added to create-a-derived-table to be reviewed by an analytics engineer (and a data engineer if it changes and project related files). If you wish for you code to be in the derived layer and therefore be suffixed with `_derived`, then we will do the core review ensuring that the code meets our style standards and the project structure follows this guidance. We will make sure it pasts any PR checks, but we will expect you to have reveiwed and checked the logic and code within your team and will not be checkin git ourselves. If think your work is general enough and requires a datamarts layer then before you start your project, you should contact the Analytics Engineers on slack, where we can set up a meeting and discuss how to go forward. For more on the sort of things we look for in PRs, and what sort of projects go where, go to our PR guidance. 
+We are taking this approach as we wish their to be one source for any data set and one 'source of truth' allowing for the analysis that comes from it to be consistent and reliable. To achieve this we will treat code and pull requests on create-a-derived-table differently depending on their purpose. It is a requisite for any code being added to create-a-derived-table to be reviewed by an analytics engineer (and a data engineer if it changes and project related files). If you wish for you code to be in the derived layer and therefore be suffixed with `_derived`, then we will do the core review ensuring that the code meets our style standards and the project structure follows this guidance. We will make sure it pasts any PR checks, but we will expect you to have reviewed and checked the logic and code within your team and will not be checking it ourselves. If think your work is general enough and requires a datamarts layer then before you start your project, you should contact the Analytics Engineers on slack, where we can set up a meeting and discuss how to go forward. For more on the sort of things we look for in PRs, and what sort of projects go where, go to our PR guidance. 
 
 ### Marts: Files and folders
 
