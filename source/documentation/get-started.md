@@ -94,6 +94,10 @@ The main entry point to the Analytical Platform is the [Control Panel](https://c
 
 When accessing the Control Panel for the first time you will be prompted to authenticate with your Justice account. You only need to do this once, and will not see this on subsequent logins.
 
+### Get Athena Access
+
+Many users of the Analytical Platform wish to query our databases using Amazon Athena. We manage access to our databases via the [Data-Engineering-Database-Access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main) repository. In order to get access to Athena, you will need to have your `alpha_user_` name added to the [Standard Access](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard-database-access.yaml) list. To do this, raise a PR, and post it in #ask-data-engineering on Slack to get it approved by one of our Data Engineers. Once this PR has been merged, your account will be given access to Athena and a selection of non-sensative datasets. For more information, including how to request access to specific databases via `Projects`, please refer to the [README](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/README.md) for Database Access.
+
 ## 5. Set up JupyterLab
 
 >**Note**: Only follow this step if you want to use the Analytical Platform as a Python-based user. If you want to use R instead, proceed to step 6 to configure RStudio instead.
