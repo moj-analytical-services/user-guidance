@@ -75,7 +75,7 @@ When requesting access to a bucket, you should specify the name of the bucket an
 
 ### Manage access to a bucket
 
-Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [Control {anel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). You cannot manage access to buckets directly in the Amazon S3 console.
+Bucket admins can manage access to warehouse data sources and webapp data sources in the Analytical Platform [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). You cannot manage access to buckets directly in the Amazon S3 console.
 
 To manage access to a data source:
 
