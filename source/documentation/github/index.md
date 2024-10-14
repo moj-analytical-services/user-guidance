@@ -17,9 +17,9 @@ You can read more about the [benefits of GitHub](../annexes.html#benefits-of-usi
 
 All code written on the Analytical Platform should be stored in a [git repository](create-project.html) on GitHub in the [MoJ Analytical Services](organisation-management.html) organisation. This includes R scripts, Python scripts and Jupyter notebooks.
 
-### Join GitHub
+### GitHub SSO
 
-To create a GitHub account, please use the [Join Github](https://join-github.service.justice.gov.uk/) service.  If you experience any issues using this service please contact [#ask-operations-engineering](https://mojdt.slack.com/archives/C01BUKJSZD4)
+To create a GitHub account, please use [GitHub SSO](https://github.com/orgs/moj-analytical-services/sso).  If you experience any issues using this service please contact [#ask-operations-engineering](https://mojdt.slack.com/archives/C01BUKJSZD4)
 
 ### Get started
 
