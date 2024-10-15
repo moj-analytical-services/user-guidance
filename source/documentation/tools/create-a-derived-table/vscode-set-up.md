@@ -17,22 +17,17 @@ git clone git@github.com:moj-analytical-services/create-a-derived-table.git
 
 Python versions 3.7, 3.8, 3.9, 3.10 and 3.11 are compatible with dbt-core v1.5.0.
 
-You can use conda to install a virtual environment for Python 3.11 or below
+You can use conda to install a virtual environment for Python 3.11 or below. There is currently a known issue with the Analytical Platform deployment of VScode that means conda environments will not persist between sessions. To ensure your enviroment is properly preserved, use the following command to save your virtual environment to a file:-
 
 ```
-conda create -n venv python=3.10
+conda create python=3.11 --prefix /home/analyticalplatform/conda/venv
 ```
 
+Your new environmment can then be activated with the following command.:-
+
 ```
-conda activate venv
+conda activate /home/analyticalplatform/conda/venv
 ```
-
-You need to set up the VSCode Python extension to use your new virtual environment. You can use the Python Environment Manager extension.
-
-On the left hand toolbar, click Extensions > Search for "Python Environment Manager" and click install.
-
-You should now see a Python symbol on the toolbar. Click Python > Global Environments > Conda > venv to select your new `venv` environment and click the star to activate this environment in the VSCode terminal.
-
 
 ## Install requirements
 
