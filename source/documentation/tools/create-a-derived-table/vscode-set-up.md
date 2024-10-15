@@ -17,17 +17,19 @@ git clone git@github.com:moj-analytical-services/create-a-derived-table.git
 
 Python versions 3.7, 3.8, 3.9, 3.10 and 3.11 are compatible with dbt-core v1.5.0.
 
-You can use conda to install a virtual environment for Python 3.11 or below. There is currently a known issue with the Analytical Platform deployment of VScode that means conda environments will not persist between sessions. To ensure your enviroment is properly preserved, use the following command to save your virtual environment to a file:-
+You can use conda to install a virtual environment for Python 3.11 or below. There is currently a known issue with the Analytical Platform deployment of VScode that means conda environments will not persist between sessions. To ensure your enviroment is properly preserved, use the following command to save your virtual environment to a file (you can save this to any location you want):-
 
 ```
-conda create python=3.11 --prefix /home/analyticalplatform/conda/venv
+conda create python=3.11 --prefix /path/to/file
 ```
 
-Your new environmment can then be activated with the following command.:-
+Your new environmment can then be activated with the following command:-
 
 ```
-conda activate /home/analyticalplatform/conda/venv
+conda activate /path/to/file
 ```
+
+You will then need to run this command at the start of each session to reactivate your environment.
 
 ## Install requirements
 
