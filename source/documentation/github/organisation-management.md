@@ -11,7 +11,7 @@ The MoJ Analytical Services GitHub organisation is managed by the Operations Eng
 To add a member to the organisation, you can either:
 
 1. Follow the [instructions](https://docs.github.com/en/organizations/managing-membership-in-your-organization/inviting-users-to-join-your-organization) in the GitHub documentation. To do this, you must be an organisation owner.
-2. If you are an MoJ employee then use the [Join GitHub](https://join-github.service.justice.gov.uk/)
+2. If you are an MoJ employee then use the [GitHub SSO](https://github.com/orgs/moj-analytical-services/sso)
 
 You do not need to add members to the `everyone` team manually, as this will be done [automatically](#adding-members-to-the-everyone-team).
 

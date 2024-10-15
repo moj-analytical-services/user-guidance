@@ -86,7 +86,7 @@ Once you have your GitHub account, there are two more steps to complete before y
 
 ### Join MoJ Analytical Services
 
-To request an invitation Analytical Platform GitHub Organisation, please use the [Join GitHub](https://join-github.service.justice.gov.uk/) service to get your GitHub account added to the Analytical Platform GitHub Organisation.
+Please sign into the Analytical Platform GitHub Organisation using [SSO](https://github.com/orgs/moj-analytical-services/sso), to get your GitHub account added to the Analytical Platform GitHub Organisation.
 
 ### Sign in to the Control Panel
 
