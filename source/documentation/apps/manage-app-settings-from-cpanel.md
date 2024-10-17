@@ -70,7 +70,7 @@ If you choose to use `email` (`passwordless` flow),  then you can manage the app
 
 Right now we only provide customer management for `email` login option. If you choose other options like `nomis` or `github` etc, then it means your app will be open to any users who have nomis credential or who has a GitHub account and has joined the `moj-analytical-services` GitHub org.  Further user management and control is required under app-level if the default scope of users is wider than the target audience of the app.
 
-### IP whitelist
+### IP allowlist
 
 You can configure whether your app needs extra protection from internet environment by setting the allowed IP_RANGES (the list VPN managed in MoJ). You can set up this option even if your app is public facing (`AUTHENTICATION_REQUIRED` is `False`)
 
