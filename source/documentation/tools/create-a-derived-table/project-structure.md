@@ -117,7 +117,7 @@ Now that we’ve got a feel for how the files and folders fit together, let’s 
 
 Below, is an example of a standard staging model from one of our models (from `sop_finance_stg__hmpps_general_ledger` model) that illustrates the common patterns within the staging layer. We’ve organized our model into two <Term id='cte'>CTEs</Term>: one pulling in a source table via the [source macro](https://docs.getdbt.com/docs/build/sources#selecting-from-a-source) and the other applying our transformations.
 
-Here we have ordered the fields based on their type, however, you may decide to order your columns differently. See our style guide [link](link to our style guide.) for more details on how you should style your models.
+Here we have ordered the fields based on their type, however, you may decide to order your columns differently. See our style guide [link](source/documentation/tools/create-a-derived-table/style-guide.md) for more details on how you should style your models.
 
 ```sql
 -- sop_finance_stg__hmpps_general_ledger.sql
