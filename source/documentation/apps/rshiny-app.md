@@ -154,7 +154,6 @@ The app admin can modify the IP_Ranges on the app's app-detail detail page.
 
 In addition the AP team can:
 
-- Check the Auth0 logs for the app in [Kibana](#kibana)
 - Check the Auth0 logs in the [Auth0 console](https://manage.auth0.com)
 
 ## Advanced
@@ -382,33 +381,30 @@ Further technical details can be found in the [Cloud Platform's Monitoring secti
 
 You can access your applications logs in Cloud platform by following the the CP guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs.html#accessing-application-log-data)
 
-#### Kibana on Cloud Platform 
+#### Opensearch on Cloud Platform 
 
-Below are some notes to aid you in working with the Kibana service, on Cloud Platform.
+Below are some notes to aid you in working with the Opensearch service, on Cloud Platform.
 
-All logs from deployed apps can be viewed in [Kibana](https://kibana.cloud-platform.service.justice.gov.uk/_plugin/kibana/app/discover).
+All logs from deployed apps can be viewed in [Opensearch](https://app-logs.cloud-platform.service.justice.gov.uk/_dashboards/app/data-explorer/discover#).
 
 To view the logs for a specific app: 
 
-1.  Select **live_kubernetes_cluster** from the `CHANGE INDEX PATTERN` dropdown list.
-2.  Select **Add a filter**.
+1.  Select **live_kubernetes_cluster** from the `CHANGE INDEX PATTERN` dropdown in the top left.
+2.  Select **Add filter**.
 3.  Select **kubernetes.namespace_name**.
 4.  Select **is** as the operator.
 5.  Insert the app's name space by following the pattern `data-platform-app-<app_name>-<dev/prod>`.
-6.  In order to filter out all the logs related health-check, you can put `NOT log:  "/healthz"` in the `KQL` field.
+6.  In order to filter out all the logs related health-check, you can put `NOT log:  "/healthz"` in the `DQL` field.
 7.  Select **Save**.
 8.  (Optional) - you can select to view only the log output by adding it from the **Available Fields** list in the left hand pane using the (+) button revealed on mouse hover
 
-Log messages are displayed in the **message** column.
+Log messages are displayed in the **log** column.
 
-By default, Kibana only shows logs for the last 15 minutes.
+By default, Opensearch only shows logs for the last 15 minutes.
 If no logs are available for that time range, you will receive the warning 'No results match your search criteria'.
 
-To change the time range, select the clock icon in the menu bar.
+To change the time range, select the bar next to the calendar icon at the top of the page.
 There are several presets or you can define a custom time range.
-
-Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches.
-To enable these features, select **Options\_** from within the search bar, then toggle **Turn on query features**.
 
 
 ### Managing Deployments
