@@ -379,9 +379,9 @@ Further technical details can be found in the [Cloud Platform's Monitoring secti
 
 #### Accessing logs
 
-You can access your applications logs in Cloud platform by following the the CP guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs.html#accessing-application-log-data)
+You can access your applications logs in Cloud Platform by following their guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs-os.html)
 
-#### Opensearch on Cloud Platform 
+#### OpenSearch on Cloud Platform 
 
 Below are some notes to aid you in working with the Opensearch service, on Cloud Platform.
 
