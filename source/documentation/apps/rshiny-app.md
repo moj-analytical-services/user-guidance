@@ -140,7 +140,7 @@ To sign in with an email magic link, add `/login?method=link` to the end of the 
 
 Please follow the same steps above to check whether the user is in the customer list of the app.
 
-##### "IP x.x.x.x is not whitelisted"
+##### "IP x.x.x.x is not allowlisted"
 
 Check that the user is trying to access the app from one of the trusted networks listed on app's app-detail from Control Panel
 
