@@ -70,9 +70,9 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
 
 ## Models
 
-Finally you will begin designing / making your models. We suggest a medallion architecture that categorises the model you are making into three distinct layers, `staging`, `intermediate`, `datamarts` and `derived`. Where `datamarts` and `derived` are two halves of the same layer. Each layer represents models that do increasing levels of transformation and therefore the data is increasingly well understood, cleaned and standardised. 
+Finally you will begin designing / making your models. We suggest a medallion architecture that categorises the model you are making into three distinct layers, `staging`, `intermediate`, `datamarts` and `derived`. Where `datamarts` and `derived` are two halves of the same layer. Each layer represents data that is increasingly  well understood, cleaned and standardised. 
 
-The general rule as to what goes into each of these layers comes down to a few consideration. Staging generally is source specific and doesn't change the grain of the data. Then when you want to combine different sources, or change the grain of the data (or other more complicated transformations) then the models belongs in an intermediate database. Then finally the user facing models live in either `_datamarts` or `_derived` databases. The following sections will go into more depth about this categorisations as well as what the medallion architecture is. 
+The general rule as to what goes into each of these layers comes down to a few consideration. Staging generally is source specific and doesn't change the grain of the data. Then when you want to combine different sources, or change the grain of the data (or other more complicated transformations) then the models belongs in an intermediate database. Finally, the user facing models live in either `_datamarts` or `_derived` databases. The following sections will go into more depth about this categorisations as well as what the medallion architecture is. 
 
 Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear - if you're unsure, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help.
 
@@ -102,7 +102,7 @@ models/staging
 
 - **Folders.** Folder structure is extremely important in dbt. Not only do we need a consistent structure to find our way around the codebase, as with any software project, but our folder structure is also one of the key interfaces for understanding the knowledge graph encoded in our project (alongside the DAG and the data output into our warehouse). It should reflect how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models. Moreover, we can use our folder structure as a means of selection in dbt [selector syntax](https://docs.getdbt.com/reference/node-selection/syntax). For example, with the above structure, if we got fresh xhibit data loaded and wanted to run all the models that build on our xhibit data, we can easily run `dbt build --select staging/xhibit_stg+` and we’re all set for building more up-to-date reports on Crown Courts.
   - ✅ **Subdirectories based on business grouping.** dbt recommends against this practice, however crate-a-derived-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data egineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from dbt guidance.
-  - ✅ **Subdirectories based on the source system**. Our internal transactional database is one system, the data we get from Stripe's API is another, and lastly the events from our Snowplow instrumentation. We've found this to be the best grouping for most companies, as source systems tend to share similar loading methods and properties between tables, and this allows us to operate on those similar sets easily.
+  - ✅ **Subdirectories based on the source system**. For the MoJ we have a staging domain and each subfolder in the domain will for it's own database. We expect that each database in the staging domain should be source aligned. This allows for future projects to pull on data that is already staged, saving time and reducing the chance of silo-ing data.
   - ❌ **Subdirectories based on loader.** Some people attempt to group by how the data is loaded (Fivetran, Stitch, custom syncs), but this is too broad to be useful on a project of any real size.
 
 - **File names.** Creating a consistent pattern of file naming is [crucial in dbt](https://docs.getdbt.com/blog/on-the-importance-of-naming). File names must be unique and correspond to the name of the model when selected and created in the warehouse. We recommend putting as much clear information into the file name as possible, including a prefix for the layer the model exists in, important grouping information, and specific information about the entity or transformation in the model.
@@ -190,7 +190,7 @@ select * from renamed
 
 - In MOJ many of our source datasets are 'curated tables' materialised by data engineers using Create-A-Derived-Table. This means instead of using the standard source macro to pull data into our staging models, we should employ the transform_table.ref_on_prod macro.
 
-```
+```sql
 -- stg_delius__address.sql
 
 with
@@ -210,13 +210,13 @@ In the dev environment (local runs / PR actions) [ref_on_prod](https://github.co
 Staging models help us keep our code <Term id='dry'>DRY</Term>. dbt's modular, reusable structure means we can, and should, push any transformations that we’ll always want to use for a given component model as far upstream as possible. This saves us from potentially wasting code, complexity, and compute doing the same transformation more than once. For instance, if we know we always want our monetary values as floats in dollars, but the source system is integers and cents, we want to do the division and type casting as early as possible so that we can reference it rather than redo it repeatedly downstream.
 :::
 
-We have decided to split all staging models into their own staging domain for several reasons. First, this creates a clear separation from the source data and the derived downstream models using that data. We do not want to silo the data too early, sources are not always domain aligned, we want to allow for different domains to use the same staging models. This brings us to a key point, all downstream models using data from the same source should use the same staging models. This reduce duplication of work and data stored in the data warehouse. It also ensures that those downstream models that do use the same source data will diverge at the latest possible point and therefore reducing differences in the data.
+We have decided to split all staging models into their own staging domain for several reasons. First, this creates a clear separation from the source data and the derived downstream models using that data. We do not want to silo the data too early, sources are not always domain aligned, we want to allow for different domains to use the same staging models. This brings us to a key point, all downstream models using data from the same source should use the same staging models. This reduces duplication of work and data stored in the data warehouse. It also ensures that those downstream models that do use the same source data will diverge at the latest possible point and therefore reducing differences in the data.
 
 This is a welcome change for many of us who have become used to applying the same sets of SQL transformations in many places out of necessity! For us, the earliest point for these 'always-want' transformations is the staging layer, the initial entry point in our transformation process. The DRY principle is ultimately the litmus test for whether transformations should happen in the staging layer. If we'll want them in every downstream model and they help us eliminate repeated code, they're probably okay.
 
 ### Staging: Other considerations
 
-- **Base models** Generally, the staging layer is very basic, with few models (as many models as there are source tables). Sometimes, in order to maintain a clean and <Term id='dry'>DRY</Term> staging layer we need to implement some more complicated transformations. In these cases, we recommend creating a sub-directory in the staging directory for the source system in question and building `base` models. Base models are the normal non-joining transformations that directly source the raw data, but we have separated them out so that it is then clear where the source data first enters our staging database and they can be used for. Here are some examples of why you might use base models:
+- **Base models** Generally, the staging layer is very basic, with few models (as many models as there are source tables). Sometimes, in order to maintain a clean and <Term id='dry'>DRY</Term> staging layer we need to implement some more complicated transformations. In these cases, we recommend creating a sub-directory in the staging directory for the source system in question and building `base` models. Base models are the normal non-joining transformations that directly source the raw data, but we have separated them out so that it is then clear where the source data first enters our staging database and then they can be used for the more complicated transformations. Here are some examples of why you might use base models:
 
   - ✅ **First staging model** There is little distinction between a base model and a staging model when no further transofrmations are required in your staging database. So it is preference what you call these models, `base_` or `stg_`. In some domains, data engineers load the data without casting data types and then create a base model for that table in create-a-derived-table that casts and renames variables. Example below for illustration.
 
@@ -357,7 +357,7 @@ select * from final
     select * from join_and_mark_deleted_defendants
     ```
 
-  - ✅ **Unioning disparate but symmetrical sources**. A typical example here would be if you operate multiple ecommerce platforms in various territories via a SaaS platform like Shopify. You would have perfectly identical schemas, but all loaded separately into your warehouse. In this case, it’s easier to reason about our orders if _all_ of our shops are unioned together, so we’d want to handle the unioning in a base model before we carry on with our usual staging model transformations on the (now complete) set — you can dig into [more detail on this use case here](https://discourse.getdbt.com/t/unioning-identically-structured-data-sources/921).
+  - ✅ **Unioning disparate but symmetrical sources**. A typical example here would be if you operate multiple ecommerce platforms in various territories via a SaaS platform like Shopify. You would have perfectly identical schemas, but all loaded separately into your warehouse. In this case, it’s easier to reason about our orders if _all_ of our shops are unioned together, so we’d want to handle the unioning in a base model before we carry on with our usual staging model transformations on the (now complete) set. With MoJ data, you may expect to see this, for example, in finance data. Finance data may come from seperate business units (HMCTS, MOJHQ, HMPPS etc). If this source data is structured the same but seprated out into usiness unit specific table and the downstream transformations for each business unit is the same, you may wish to union these in your staging layer — you can dig into [more detail on this use case here](https://discourse.getdbt.com/t/unioning-identically-structured-data-sources/921).
   - ✅ Denormalising source tables of the same grain and concept (e.g. reference tables)
 
 - **[Codegen](https://github.com/dbt-labs/dbt-codegen) to automate staging table generation.** It’s very good practice to learn to write staging models by hand, they’re straightforward and numerous, so they can be an excellent way to absorb the dbt style of writing SQL. Also, we’ll invariably find ourselves needing to add special elements to specific models at times — for instance, in one of the situations above that require base models — so it’s helpful to deeply understand how they work. Once that understanding is established though, because staging models are built largely following the same rote patterns and need to be built 1-to-1 for each source table in a source system, it’s preferable to start automating their creation. For this, we have the [codegen](https://github.com/dbt-labs/dbt-codegen) package. This will let you automatically generate all the source YAML and staging model boilerplate to speed up this step, and we recommend using it in every project.
@@ -377,67 +377,82 @@ Let’s take a look at the intermediate layer of our project to understand the p
 
 ```shell
 models
-└── courts
-    └── courts_intermediate
-        ├── courts_intermediate__properties.yml
-        └── courts_intermediate__int_xhibit_and_common_platform_receipts_unioned.sql
+└── criminal_courts
+    └── criminal_courts_int
+        ├── criminal_courts_int_properties.yml
+        └── criminal_courts_int__int_xhibit_and_common_platform_receipts_unioned.sql
 ```
 
 - **Folders**
-  - ✅ **Subdirectories based on business groupings.** Much like the staging layer, we’ll house this layer of models inside their own `intermediate` database. Unlike the staging layer, here we shift towards being business-conformed, splitting our models up into subdirectories not by their source system, but by their area of business concern.
+  - ✅ **Subdirectories based on business groupings.** Much like the staging layer, we’ll house this layer of models inside their own `_int` database. Unlike the staging layer, here we shift towards being business-conformed, splitting our models up into subdirectories not by their source system, but by their area of business concern.
 - **File names**
-  - ✅ `int_[entity]s_[verb]s.sql` - the variety of transformations that can happen inside of the intermediate layer makes it harder to dictate strictly how to name them. The best guiding principle is to think about _verbs_ (e.g. `pivoted`, `aggregated_to_user`, `joined`, `fanned_out_by_quantity`, `funnel_created`, etc.) in the intermediate layer. In our example project, we use an intermediate model to pivot payments out to the order grain, so we name our model `int_payments_pivoted_to_orders`. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know [SQL](https://mode.com/sql-tutorial/). That clarity is worth the long file name. 
+  - ✅ `int_[entity]s_[verb]s.sql` - the variety of transformations that can happen inside of the intermediate layer makes it harder to dictate strictly how to name them. The best guiding principle is to think about _verbs_ (e.g. `pivoted`, `aggregated_to_user`, `joined`, `fanned_out_by_quantity`, `funnel_created`, etc.) in the intermediate layer. In our example model below, we have financial data that corresponds to specidic extract periods, we want to pivot it so all forecast information for each period is on one row so we cann it `finance_int__int_hyperion_forecast_pivot`. It’s easy for anybody to quickly understand what’s happening in that model, even if they don’t know [SQL](https://mode.com/sql-tutorial/). That clarity is worth the long file name. 
   - ✅ `[database_name]__int_[entity]s_[verb]s.sql` - create-a-derived-table requires us to include the database in all model names, or if `int_[entity]s` is the database name then `int_[entity]s__[verb]s.sql`. Due to this requirement, **you cannot use double underscores anywhere else in your filenames**.
-
-:::tip Don’t over-optimize too early!
-The example project is very simple for illustrative purposes. This level of division in our post-staging layers is probably unnecessary when dealing with these few models. Remember, our goal is a _single_ _source of truth._ If two teams of analysts both have questions about counts of criminal court cases, we want them to be drawing upon the same data table(s), we want to use our dbt project as a means to bring those definitions together! As such, don’t split and optimize too early. If you have less than 10 marts models and aren’t having problems developing and using them, feel free to forego subdirectories completely (except in the staging layer, where you should always implement them as you add new source systems to your project) until the project has grown to really need them. Using dbt is always about bringing simplicity to complexity.
-:::
 
 ### Intermediate: Models
 
-Below is the lone intermediate model from our small example project. This represents an excellent use case per our principles above, serving a clear single purpose: grouping and pivoting a staging model to different grain. It utilizes a bit of Jinja to make the model DRY-er (striving to be DRY applies to the code we write inside a single model in addition to transformations across the codebase), but don’t be intimidated if you’re not quite comfortable with [Jinja](/docs/build/jinja-macros) yet. Looking at the name of the <Term id="cte">CTE</Term>, `pivot_and_aggregate_payments_to_order_grain` we get a very clear idea of what’s happening inside this block. By descriptively labeling the transformations happening inside our CTEs within model, just as we do with our files and folders, even a stakeholder who doesn’t know SQL would be able to grasp the purpose of this section, if not the code. As you begin to write more complex transformations moving out of the staging layer, keep this idea in mind. In the same way our models connect into a DAG and tell the story of our transformations on a macro scale, CTEs can do this on a smaller scale inside our model files.
+Below is a slightly more comlicated model taken from a finance project. This represents an excellent use case per our principles above, serving a clear single purpose: pivoting a staging model to different grain. It utilises a bit of Jinja in the form of a macro to make the model DRY-er (striving to be DRY applies to the code we write inside a single model in addition to transformations across the codebase), but don’t be intimidated if you’re not quite comfortable with [Jinja](/docs/build/jinja-macros) yet. Looking at the name of the <Term id="cte">CTE</Term>, `finance_int__int_hyperion_forecast_pivot` we get a clear idea of what’s happening inside this block. By descriptively labeling the transformations happening inside our CTEs within model, just as we do with our files and folders, even a stakeholder who doesn’t know SQL would be able to grasp the purpose of this section, if not the code. As you begin to write more complex transformations moving out of the staging layer, keep this idea in mind. In the same way our models connect into a DAG and tell the story of our transformations on a macro scale, CTEs can do this on a smaller scale inside our model files.
 
 ```sql
--- int_payments_pivoted_to_orders.sql
+-- finance_int__int_hyperion_forecast_pivot.sql
 
-{%- set payment_methods = ['bank_transfer','credit_card','coupon','gift_card'] -%}
+-- Aim of model
+-- Pivot from one row per code combination, per month, per extract timestamp
+-- to one row per code combination per calender year.
 
-with
+with 
 
-payments as (
+hyperion as (
 
-   select * from {{ ref('stg_stripe__payments') }}
+    select * from {{ ref('finance_int__int_hyperion_metrics_snapshotted') }}
 
 ),
 
-pivot_and_aggregate_payments_to_order_grain as (
+pivot as (
 
-   select
-      order_id,
-      {% for payment_method in payment_methods -%}
+    select 
 
-         sum(
-            case
-               when payment_method = '{{ payment_method }}' and
-                    status = 'success'
-               then amount
-               else 0
-            end
-         ) as {{ payment_method }}_amount,
+        {{ dbt_utils.generate_surrogate_key(
+            ['objective_code', 
+            'cost_centre_code', 
+            'entity_code', 
+            'analysis_code',
+            'account_code',
+            'financial_year',
+            'month']) 
+        }} as forecast_metric_id,
+        objective_code,
+        cost_centre_code,
+        entity_code,
+        analysis_code,
+        account_code,
+        financial_year,
+        month,
+        month_number,
 
-      {%- endfor %}
-      sum(case when status = 'success' then amount end) as total_amount
+        {{ dbt_utils.pivot(
+            'period', 
+            ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12'],
+            suffix = '_forecast',
+            then_value='forecast') 
+        }},
+        {{ dbt_utils.pivot(
+            'period', 
+            ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12'],
+            suffix = '_full_year_forecast',
+            then_value='full_year_forecast') 
+        }}
 
-   from payments
-
-   group by 1
+    from deduplicate
+    where row_n = 1
+    group by 1,2,3,4,5,6,7,8,9
 
 )
 
-select * from pivot_and_aggregate_payments_to_order_grain
+select * from pivot
 ```
 
-- ❌ **Exposed to end users.** Intermediate models should generally not be exposed in the main production schema. They are not intended for output to final targets like dashboards or applications, so it’s best to keep them separated from models that are so you can more easily control data governance and discoverability.
+- ❌ **Exposed to end users.** Intermediate models should generally not be exposed in the main production schema. They are not intended for output to final targets like dashboards or applications, so it’s best to keep them separated from models that are, so you can more easily control data governance and discoverability.
 - ✅ **Materialized ephemerally.** Considering the above, one popular option is to default to intermediate models being materialized [ephemerally](/docs/build/materializations#ephemeral). This is generally the best place to start for simplicity. It will keep unnecessary models out of your warehouse with minimum configuration. Keep in mind though that the simplicity of ephemerals does translate a bit more difficulty in troubleshooting, as they’re interpolated into the models that `ref` them, rather than existing on their own in a way that you can view the output of.
 - ✅ **Materialized as views in a custom schema with special permissions.** A more robust option is to materialize your intermediate models as views in a specific [custom schema](/docs/build/custom-schemas), outside of your main production schema. This gives you added insight into development and easier troubleshooting as the number and complexity of your models grows, while remaining easy to implement and taking up negligible space.
 
@@ -445,7 +460,7 @@ select * from pivot_and_aggregate_payments_to_order_grain
 There are three interfaces to the organisational knowledge graph we’re encoding into dbt: the DAG, the files and folder structure of our codebase, and the output into the warehouse. As such, it’s really important that we consider that output intentionally! Think of the schemas, tables, and views we’re creating in the warehouse as _part of the UX,_ in addition to the dashboards, ML, apps, and other use cases you may be targeting for the data. Ensuring that our output is named and grouped well, and that models not intended for broad use are either not materialised or built into special areas with specific permissions is crucial to achieving this.
 :::
 
-- Intermediate models’ purposes, as these serve to break up complexity from our marts models, can take as many forms as [data transformation](https://www.getdbt.com/analytics-engineering/transformation/) might require. Some of the most common use cases of intermediate models include:
+- Intermediate models’ purposes, as these serve to break up complexity from our datamarts models, can take as many forms as [data transformation](https://www.getdbt.com/analytics-engineering/transformation/) might require. Some of the most common use cases of intermediate models include:
 
   - ✅ **Structural simplification.** Bringing together a reasonable number (typically 4 to 6) of entities or concepts (staging models, or perhaps other intermediate models) that will be joined with another similarly purposed intermediate model to generate a mart — rather than have 10 joins in our mart, we can join two intermediate models that each house a piece of the complexity, giving us increased readability, flexibility, testing surface area, and insight into our components.
   - ✅ **Re-graining.** Intermediate models are often used to fan out or collapse models to the right composite grain — if we’re building a mart for `order_items` that requires us to fan out our `orders` based on the `quantity` column, creating a new single row for each item, this would be ideal to do in a specific intermediate model to maintain clarity in our mart and more easily view that our grain is correct before we mix it with other components.
@@ -460,38 +475,37 @@ Until we get to the marts layer and start building our various outputs, we ideal
 
 ### `_datamarts`
 
-Here is where everything comes together, where our atoms and molecules are brought together to make cells with well defined identity and purpose. This is also where, normally, the end user will see the data. For this reason a lot of thought has been put into the naming conventions we want to abide by in the MoJ. This guidance document has come after many years of iteratively changing and improving our processes in the Data Modeling and Engineering team, as well as across Data and Analysis. We have therefore put a lot of thought into how we can clearly signify the different kinds of databases that will be and have been developed, and who they have been developed by. In the following two sections (marts and then derived) we will lay out what we expect from a project and how we see the categorisation of these pieces of work.
+Here is where everything comes together, where our atoms and molecules are brought together to make cells with well defined identity and purpose. This is also where, normally, the end user will see the data. For this reason a lot of thought has been put into the naming conventions we want to abide by in the MoJ. This guidance document has come after many years of iteratively changing and improving our processes in the Data Modeling and Engineering team, as well as across Data and Analysis. We have therefore put a lot of thought into how we can clearly signify the different kinds of databases that will be and have been developed, and who they have been developed by. In the following two sections (datamarts and then derived) we will lay out what we expect from a project and how we see the categorisation of these pieces of work.
 
-This will likely be where we deviate most from dbt as we want to tailor our solution to our business needs. Generally, we see the marts database as the place your customers should come to get the most fundamental building blocks of the data. It is the first place the end user will have access to the data and any downstream product or pipeline that wishes to use your data should use these building blocks. In Analytics Engineering we have been following the [Kimball methodology](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/) and have been developing [dimensional models](https://docs.getdbt.com/blog/kimball-dimensional-model) as our marts layer. From the dimensional layer users can either connect directly to it with their dashboards or models, or they can combine the building blocks to more uniquely satisfy their needs. 
+This will likely be where we deviate most from dbt as we want to tailor our solution to our business needs. Generally, we see the datamarts database as the place your customers should come to get the most fundamental building blocks of the data. It is the first place the end user will have access to the data and any downstream product or pipeline that wishes to use your data should use these building blocks. In Analytics Engineering we have been following the [Kimball methodology](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/) and have been developing [dimensional models](https://docs.getdbt.com/blog/kimball-dimensional-model) as our datamarts layer. From the datamarts users can either connect directly to it with their dashboards or models, or they can combine the building blocks to more uniquely satisfy their needs (see 5-derived). 
 
-We are taking this approach as we wish their to be one source for any data set and one 'source of truth' allowing for the analysis that comes from it to be consistent and reliable. To achieve this we will treat code and pull requests on create-a-derived-table differently depending on their purpose. It is a requisite for any code being added to create-a-derived-table to be reviewed by an analytics engineer (and a data engineer if it changes and project related files). If you wish for you code to be in the derived layer and therefore be suffixed with `_derived`, then we will do the core review ensuring that the code meets our style standards and the project structure follows this guidance. We will make sure it pasts any PR checks, but we will expect you to have reviewed and checked the logic and code within your team and will not be checking it ourselves. If think your work is general enough and requires a datamarts layer then before you start your project, you should contact the Analytics Engineers on slack, where we can set up a meeting and discuss how to go forward. For more on the sort of things we look for in PRs, and what sort of projects go where, go to our PR guidance. 
+We are taking this approach as we wish there to be one source for any data set and one 'source of truth' allowing for the analysis that comes from it to be consistent and reliable. To achieve this we will treat code and pull requests on create-a-derived-table differently depending on their purpose. It is a requisite for any code being added to create-a-derived-table to be reviewed by an Analytics Engineer (and a Data Engineer if it changes any project related files). If you wish for you code to be in the derived layer and therefore be suffixed with `_derived`, then we will do the core review ensuring that the code meets our style standards and the project structure follows this guidance. We will make sure it passes any PR checks, but we will expect you to have reviewed and checked the logic and code within your team and will not be checking it ourselves. If you think your work is general enough and requires a datamarts layer then before you start your project, you should contact the Analytics Engineers on slack, where we can set up a meeting and discuss how to go forward. For more on the sort of things we look for in PRs, and what sort of projects go where, go to our PR guidance. 
 
-### Marts: Files and folders
+### Datamarts: Files and folders
 
 ```shell
 models/prison
-├── prisons_modelled
-│   ├── _prisons_modelled__models.yml
-│   ├── prisons_modelled__fct_releases.sql
-│   ├── prisons_modelled__dim_offenders.sql
-│   ├── prisons_modelled__dim_prisons.sql
-└── parole_board
-    ├── _parole_board__models.yml
-    └── parole_board__fct_cases.sql
-    └── parole_board__dim_directions.sql
+├── prisons_datamarts
+│   ├── _prisons_datamarts__models.yml
+│   ├── prisons_datamarts__fct_releases.sql
+│   ├── prisons_datamarts__dim_offenders.sql
+│   ├── prisons_datamarts__dim_prisons.sql
+└── parole_board_datamarts
+    ├── _parole_board_datamarts__models.yml
+    └── parole_board_datamarts__fct_cases.sql
+    └── parole_board_datamarts__dim_directions.sql
 ```
 
 ✅ **Facts and dimensions** These are the building blocks developed by or with ovesight by Analytics Engineers that can be used to create any downstream output. They are designed to serve a range of business needs. 
 
-❌ **Flatfiles and denormalised tables** Any product that requires more specific and specialised tables they should not live in the marts layer. They should live in the derived layer, more details can be found in the next section.
+❌ **Flatfiles and denormalised tables** Any product that requires more specific and specialised tables they should not live in the datamarts layer. They should live in the derived layer, more details can be found in the next section.
 
-- **fct_<verb>**: Fact tables are long, narrow tables representing real-world processes that have occurred or are occurring. The heart of these models is usually an immutable event stream: sessions, transactions, orders, stories, votes.
-- **dim_<noun>**: Dimension tables are wide, short tables where each row is a person, place, or thing; the ultimate source of truth when identifying and describing entities of the organisation. They are mutable, though slowly changing: customers, products, candidates, buildings, employees.
-- **derived** tend to be wide, dense tables, the result of joining facts and dimensions into a single table readymade for a particular analysis. In modern data warehousing — where storage is cheap and compute is expensive — we can borrow and add any and all data from dimensional concepts to answer questions about core entities. Building the same data in multiple places is more efficient in this paradigm than having to repeatedly rejoin these concepts in the dimensional layer.
+- **fct_<verb>**: Fact tables are long, narrow tables representing real-world processes that have occurred or are occurring. The heart of these models is usually records of events that once happened do not change, but are superceded by future events. Examples: sessions, transactions, orders, stories, votes.
+- **dim_<noun>**: Dimension tables are wide, short tables where each row is a person, place, or thing; the ultimate source of truth when identifying and describing entities of the organisation. These rows can change over time, though slowly changing: customers, defendants, candidates, buildings, employees, offences. For example a offenders name may change while in prison and be updated, we would want this to be reflected in the data. We want to know what is the most up to date information for a particular row, but also have the ability to see what it was at a given time in the past. 
 
-✅ **Group by domain or area of concern.** If you have fewer than 10 or so marts you may not have much need for subfolders, so as with the intermediate layer, don’t over-optimise too early. If you do find yourself needing to insert more structure and grouping though, use useful business concepts here. We’re no longer worried about source-conformed data, so grouping by domains (criminal courts, finance, etc.) is the most common structure at this stage.
+✅ **Group by domain or area of concern.** On create-a-derived-table datamarts will be organised into domains, these align with genral business areas (criminal courts, finance, prisons, people, etc.). Within each domain the subfolder will represent the database name and should reflect a business area concept (crown court for criminal courts or recruitment for people). We are no longer interested in strictly source aligned conecepts.
 
-✅ **Name by entity.** Use plain English to name the file based on the concept that forms the grain of the mart `sentences`, `offenders`. Note that for pure marts, there should not be a time dimension (`orders_per_day`) here, that is typically best captured via metrics.
+✅ **Name by entity.** Use plain English to name the file based on the concept that forms the grain of the mart `sentences`, `offenders`. Note that for pure daramarts, there should not be a time dimension (`orders_per_day`) here, that is typically best captured via metrics.
 
 ❌ **Build the same concept differently for different teams.** `finance_orders` and `marketing_orders` is typically considered an anti-pattern. There are, as always, exceptions — a common pattern we see is that, finance may have specific needs, for example reporting revenue to the government in a way that diverges from how the company as a whole measures revenue day-to-day. Just make sure that these are clearly designed and understandable as _separate_ concepts, not departmental views on the same concept: `tax_revenue` and `revenue` not `finance_revenue` and `marketing_revenue`.
 
@@ -501,104 +515,52 @@ models/prison
 
 In the above diagram you can see the flow of data through the Data Modelling and Engineering function. This follows a medalion rating system, that corresponds to the level of cleaning, transforming and testing that has been implemented on the data. 
 
-🥉 Bronze databases, signified by a `_raw` suffix, has very minimal transforming, cleaning or testing. The Data Engineers aim at this point is to ensure that the source data has been loaded on to the Analytical Platform in the form that they have received it. 
+🥉 Bronze databases, signified by a `_raw` suffix, has very minimal transforming, cleaning or testing. The Data Engineers aim at this point is to ensure that the source data has been loaded on to the Analytical Platform in the exact form that they have received it. 
 
-🥈 Silver databases, signified by `_curated`, start once the data is successfully loaded to the AP. After this basic transformations are perfomed, things like validations, deduplication and versioning. 
+🥈 Silver databases, signified by `_curated` or maybe `_base` in some instances, start once the data is successfully loaded to the AP. After this basic transformations are perfomed, things like validations, deduplication and versioning. 
 
 🥇 Gold databases, signified by `_datamarts` or `_derived`, are the final stage of the transformations performed by DMET and are also the most involved. We have split the gold level into two parts to distinguish work that has been done by Analytics Engineers or overseen by them, and has followed the Kimball methodolgy. Or, databases that have been developed outside of DMET and serve more specific business needs.
 
-### Marts: Models
+### Datamarts: Models
 
-Finally we’ll take a look at the best practices for models within the marts directory by examining two example marts models. These are the business-conformed — that is, crafted to our vision and needs — entities we’ve been bringing these transformed components together to create.
+Finally we’ll take a look at the best practices for models within the marts directory by examining two example marts models. These are the business-conformed — that is, crafted to our vision and needs — entities we’ve been bringing these transformed components together to create. Models in the datamarts layer can be very simple select statements, or could be slightly more complicated joins:
 
 ```sql
--- fct.sql
+--finance_datamarts__fct_hmpps_hyperion_metrics
 
 with
 
-orders as  (
+full_extract as (
 
-    select * from {{ ref('stg_jaffle_shop__orders' )}}
+    select * from {{ ref('finance_int__int_hyperion_metrics_dashboard_formatting') }}
+    
+),
+
+lookup as (
+
+    select * from {{ ref('lookup_finance_stg__base_cost_centre_codes') }}
 
 ),
 
-order_payments as (
+select_business_area as (
 
-    select * from {{ ref('int_payments_pivoted_to_orders') }}
-
-),
-
-orders_and_order_payments_joined as (
-
-    select
-        orders.order_id,
-        orders.customer_id,
-        orders.order_date,
-        coalesce(order_payments.total_amount, 0) as amount,
-        coalesce(order_payments.gift_card_amount, 0) as gift_card_amount
-
-    from orders
-
-    left join order_payments on orders.order_id = order_payments.order_id
+    select 
+        full_extract.*
+    from full_extract 
+    left join lookup 
+        on full_extract.cost_centre_code = lookup.cost_centre_code
+    where lookup.company = 'NOMS'
 
 )
 
-select * from orders_and_payments_joined
+select * from select_business_area
 ```
 
 ```sql
--- customer_orders.sql
 
-with
-
-customers as (
-
-    select * from {{ ref(‘dim_customers‘)}}
-
-),
-
-orders as (
-
-    select * from {{ ref(‘fct_orders‘)}}
-
-),
-
-customer_orders as (
-
-    select
-        customer_id,
-        min(order_date) as first_order_date,
-        max(order_date) as most_recent_order_date,
-        count(order_id) as number_of_orders,
-        sum(amount) as lifetime_value
-
-    from orders
-
-    group by 1
-
-),
-
-customers_and_customer_orders_joined as (
-
-    select
-        customers.customer_id,
-        customers.first_name,
-        customers.last_name,
-        customer_orders.first_order_date,
-        customer_orders.most_recent_order_date,
-        coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
-        customer_orders.lifetime_value
-
-    from customers
-
-    left join customer_orders on customers.customer_id = customer_orders.customer_id
-
-)
-
-select * from customers_and_customer_orders_joined
 ```
 
-- ✅ **Materialised as tables or incremental models.** Once we reach the marts layer, it’s time to start building not just our logic into the warehouse, but the data itself. This gives end users much faster performance for these later models that are actually designed for their use, and saves us costs recomputing these entire chains of models every time somebody refreshes a dashboard or runs a regression in python. A good general rule of thumb regarding materialisation is to always start with a view (as it takes up essentially no storage and always gives you up-to-date results), once that view takes too long to practically _query_, build it into a table, and finally once that table takes too long to _build_ and is slowing down your runs, [configure it as an incremental model](https://docs.getdbt.com/docs/build/incremental-models/). As always, start simple and only add complexity as necessary. The models with the most data and compute-intensive transformations should absolutely take advantage of dbt’s incremental materialization options, but rushing to make all your marts models incremental by default will introduce superfluous difficulty. We recommend reading this [post on the limits of incremental modelling](https://discourse.getdbt.com/t/on-the-limits-of-incrementality/303).
+- ✅ **Materialised as tables or incremental models.** Once we reach the marts layer, it’s time to start building not just our logic into the warehouse, but the data itself. This gives end users much faster performance for these later models that are actually designed for their use, and saves us costs recomputing these entire chains of models every time somebody refreshes a dashboard or runs a regression in python. A good general rule of thumb regarding materialisation is to always start with a view (as it takes up essentially no storage and always gives you up-to-date results), once that view takes too long to practically _query_, build it into a table, and finally once that table takes too long to _build_ and is slowing down your runs, [configure it as an incremental model](https://docs.getdbt.com/docs/build/incremental-models/). As always, start simple and only add complexity as necessary. The models with the most data and compute-intensive transformations should absolutely take advantage of dbt’s incremental materialisation options, but rushing to make all your marts models incremental by default will introduce superfluous difficulty. We recommend reading this [post on the limits of incremental modelling](https://discourse.getdbt.com/t/on-the-limits-of-incrementality/303).
 - ❌ **Too many joins in one mart.** One good rule of thumb when building dbt transformations is to avoid bringing together too many concepts in a single mart. What constitutes ‘too many’ can vary. If you need to bring 8 staging models together with nothing but simple joins, that might be fine. Conversely, if you have 4 concepts you’re weaving together with some complex and computationally heavy window functions, that could be too much. You need to weigh the number of models you’re joining against the complexity of the logic within the mart, and if it’s too much to read through and build a clear mental model of then look to modularise. While this isn’t a hard rule, if you’re bringing together more than 4 or 5 concepts to create your mart, you may benefit from adding some intermediate models for added clarity. Two intermediate models that bring together three concepts each, and a mart that brings together those two intermediate models, will typically result in a much more readable chain of logic than a single mart with six joins.
 - ✅ **Build on separate marts thoughtfully.** While we strive to preserve a narrowing DAG up to the marts layer, once here things may start to get a little less strict. A common example is passing information between marts at different grains, for example, to aggregate data into the grain of another mart. Now that we’re really ‘spending’ compute and storage by actually building the data in our outputs, it’s sensible to leverage previously built resources to speed up and save costs on outputs that require similar data, versus recomputing the same views and CTEs from scratch. The right approach here is heavily dependent on your unique DAG, models, and goals — it’s just important to note that using a mart in building another, later mart is okay, but requires careful consideration to avoid wasted resources or circular dependencies.
 
@@ -606,9 +568,11 @@ select * from customers_and_customer_orders_joined
 
 - **Troubleshoot via tables.** While stacking views and ephemeral models up until our marts — only building data into the warehouse at the end of a chain when we have the models we really want end users to work with — is ideal in production, it can present some difficulties in development. Particularly, certain errors may seem to be surfacing in our later models that actually stem from much earlier dependencies in our model chain (ancestor models in our DAG that are built before the model throws the errors). If you’re having trouble pinning down where or what a database error is telling you, it can be helpful to temporarily build a specific chain of models as tables so that the warehouse will throw the error where it’s actually occurring.
 
-## 5-derived-layer
+## 5-derived
 
-The final later in the DMET pipeline, as show in the figure in the previous section, the derived layer. Here we expect any data base that has been developed outside of the oversight of analytics engineers. These databases will be more use specific and will therefore have fewer requirements on them to conform to data modelling concepts like those found in the Kimball methodology. We expect the databases here to still pull from the datamarts layer, where possible. 
+The final layer in the DMET pipeline, as show in the figure in the previous section, the derived layer. Here we expect any database that has been developed outside of the oversight of analytics engineers. These databases will be more use specific and will therefore have fewer requirements on them to conform to data modelling concepts like those found in the Kimball methodology. We expect the databases here to still pull from the datamarts layer, where possible. 
+
+- **derived** tend to be wide, dense tables, the result of joining facts and dimensions into a single table readymade for a particular analysis. In modern data warehousing — where storage is cheap and compute is expensive — we can borrow and add any and all data from dimensional concepts to answer questions about core entities. Building the same data in multiple places is more efficient in this paradigm than having to repeatedly rejoin these concepts in the dimensional layer.
 
 ## 6-the-rest-of-the-project
 
@@ -634,10 +598,10 @@ So far we’ve focused on the `models` folder, the primary directory of our dbt 
       │   └── stg_xhibit
       │          ├── stg_xhibit__models.yml
       │          └── stg_xhibit__court.sql
-      ├── courts
-      │   ├── courts_int
+      ├── courts # domain
+      │   ├── criminal_courts_int # database
       │   │
-      │   ├── courst_datamarts
+      │   ├── criminal_courts_datamarts
       │   │
       │   └── criminal_courts_derived
       │
@@ -716,89 +680,3 @@ We’ve focused heavily so far on the primary area of action in our dbt project,
 - ✅ `macros` for DRY-ing up transformations you find yourself doing repeatedly. Like snapshots, a full dive into macros is out-of-scope for this guide and well [covered elsewhere](/docs/build/jinja-macros), but one important structure-related recommendation is to [write documentation for your macros](https://docs.getdbt.com/faqs/docs/documenting-macros). We recommend creating a `_macros.yml` and documenting the purpose and arguments for your macros once they’re ready for use.
 - ✅ `target` although we don't explicitly use the target folder and you should never save anything directly to it, it is s great place to go when debugging code. The target folder is where the 'compiled' models are saved. This is the sql code that is generated by dbt once all the macros have been filled with real code. This means it is a great place to find the actual code dbt is running, you can then copy it into athena and see why your code isn't running properly.
 - ✅ `model_templates` these templates are generic templates created by data engineering for snapshotting and slowly changing dimension models. You can use these in you projects if you have the need for them.
-
-
-
---------------
-
-
-If you have ideas about how you would like to structure your data model, please get in touch as we'd love to hear from you to help guide best practice principles.
-
-```
-├── mojap_derived_tables
-  ├── dbt_project.yml
-  └── models
-      ├── sources
-      │   ├── nomis.yaml
-      │   ├── oasys_prod.yaml
-      │   ├── delius_prod.yaml
-      │   ├── xhibit_v1.yaml
-      │   ...
-      ├── security  # domain
-      │   ├── prison_safety_and_security  # database
-      │   │   ├── marts
-      │   │   │   ├── intermediate
-      │   │   │   │   ├── prison_safety_and_security__inc_ids_grouped.sql  # intermediate table
-      │   │   │   │   ├── prison_safety_and_security__questions_filtered.sql  # intermediate table
-      │   │   │   │   ├── prison_safety_and_security__question_set_joined.sql  # intermediate table
-      │   │   │   │   └── properties.yaml  # intermediate tables property file
-      │   │   │   └── question_answers  # arbitrary grouping
-      │   │   │       ├── prison_safety_and_security__dates_dim.sql  # dimension table
-      │   │   │       ├── prison_safety_and_security__dates_dim.yaml  # table property file
-      │   │   │       ├── prison_safety_and_security__incidents_fct.sql  # fact table
-      │   │   │       ├── prison_safety_and_security__incidents_fct.yaml  # table property file
-      │   │   │       ├── prison_safety_and_security__question_answer_fct.sql  # fact table
-      │   │   │       └── prison_safety_and_security__question_answer_fct.yaml  # table property file
-      │   │   └── staging
-      │   │       ├── prison_safety_and_security__nomis_mod_stg.md  # markdown to be rendered in documentation
-      │   │       ├── prison_safety_and_security__nomis_mod_stg.sql  # staging table
-      │   │       └── prison_safety_and_security__nomis_mod_stg.yaml  # table property file
-```
-
-## Pull-request check list
-
-Every pull request to merge a branch with the main branch in create-a-derived-table requires a review by someone in the analytics engineering team and in some cases, when the changes affect project files, like `dbt_project.yml`, then a data engineer's review is also needed. These reviews are to ensure that the code entering the codebase is inline with best practice and our guidance, as well as ensuring it wont disrupt the scheduled runs.
-
-This guide will provide details on what exactly will be checked and what you need to do to ensure you project passes these checks. Below is the checklist we use to review any pull request
-
-## Analytics engineering pull request review
-
-### Scheduling
-
-For any new project you will need to make sure that you have explicitly stated the desired scheduling of your project in the `dbt_project.yml` file. For any existing project you will already have scheduling, but you should still ensure that this is still the dired schedule. Guidance [here]()
-
-Extract from the create-a-derived-table `dbt_project.yml`:
-```yaml
-    electronic_monitoring:
-      +meta:
-        dc_owner: matthew.price2
-      ems_stg:
-        +tags: em
-      ems_int:
-        +tags: em
-    finance:
-      +meta:
-        dc_owner: holly.furniss
-      hyperion_finance_stg:
-        +tags: monthly
-      sop_finance_stg:
-        +tags: monthly
-      lookup_finance_stg:
-        +tags: monthly
-      finance_derived:
-        +tags:
-          - daily
-          - dc_display_in_catalogue
-```
-
-
-
-### Style
-
-### Structure
-
-
-## Data engineering pull request review
-
-
-<br />
