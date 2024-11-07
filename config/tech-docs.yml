@@ -10,6 +10,8 @@ phase: Alpha
 # Links to show on right-hand-side of header
 header_links:
   Control Panel: https://controlpanel.services.analytical-platform.service.justice.gov.uk/
+  Status: https://status.analytical-platform.service.justice.gov.uk/
+  Support: https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-support.yml
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
