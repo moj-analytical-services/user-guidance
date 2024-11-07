@@ -9,7 +9,9 @@ dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we
 
 ## What is Analytics Engineering?
 
-Analytics Engineering is a relativly new function (as of November 2024) that sits in Data Modeling and Engineering Team (DMET). We are the 'Data Modelling' part, but to create a distinction between a modeller who makes predictions and a modeller who designs databases dbt created a new professions called Analuytics Engineering. MoJ has since adopted that job role and we have even defined it within the Government Digital and Data Profesiion Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
+Analytics Engineering is a relativly new function in the MoJ (as of November 2024) that sits in Data Modeling and Engineering Team (DMET). We are the 'Data Modelling' part! To create a distinction between a modeller who makes predictions and a modeller who designs databases dbt defined a new professions called [Analytics Engineering](https://www.getdbt.com/what-is-analytics-engineering). MoJ has since adopted that job role and we have even defined it within the Government Digital and Data Profesiion Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
+
+(and some further [reading](https://www.getdbt.com/blog/analytics-engineer-vs-data-analyst!)
 
 Add diagram showing where we sit
 
