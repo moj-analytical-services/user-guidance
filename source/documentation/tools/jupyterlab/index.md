@@ -90,3 +90,7 @@ python3 -m ipykernel install --user --name="pipenv-name" --display-name="My proj
 ```
 
 And then select the kernel in Jupyter as [normal](../tools/package-management.html#venv-and-pip).
+
+## Hidden Files
+
+As per [this](https://jupyterlab.readthedocs.io/en/stable/user/files.html#displaying-hidden-files) documentation, to display or hide the hidden files through the menu `View` -> `Show Hidden Files`.
