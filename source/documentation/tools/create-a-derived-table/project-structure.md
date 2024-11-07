@@ -1,11 +1,19 @@
 # Project Structure
 
-last updated: 23/07/2024
+last updated: 07/11/2024
 dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 
 # How we structure our create-a-derived-table projects
 
 ## 1-guide-overview
+
+## What is Analytics Engineering?
+
+Analytics Engineering is a relativly new function (as of November 2024) that sits in Data Modeling and Engineering Team (DMET). We are the 'Data Modelling' part, but to create a distinction between a modeller who makes predictions and a modeller who designs databases dbt created a new professions called Analuytics Engineering. MoJ has since adopted that job role and we have even defined it within the Government Digital and Data Profesiion Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
+
+Add diagram showing where we sit
+
+We sit between Data Engineers and data users, and our role is to take the raw source data and turn it into reich useful 'data models'. The following guidance is how we want users of create-a-derived-table to structure their projects, and simialarly how we structure our databases.
 
 This guide aims to provide consistency in how our projects in create-a-derived-table are structured - in terms of folders, files and naming - all of which are related to how we structure our transformations.
 
@@ -13,16 +21,15 @@ As a group of Analytics Engineers, we have thoroughly reviewed guidance publishe
 
 Please take the time to familiarise yourself with this project structure guide, and our style guidance [add link], before starting projects in create-a-derived-table.
 
-
-## Domains
+### Domains
 
 The primary consideration relating to project structure is understanding which domain the table you want to create belongs to. In create-a-derived-table a domain should correspond to some service area or core business concept and is used to logically group databases. Domains are not mutually exclusive so the same concepts can exist in different domains. A domain may be _'people'_ relating HR and corporate, or _'risk'_ relating to a justice system service user's safety, but it could be more or less granular if appropriate.
 
-## Databases
+### Databases
 
 The secondary consideration is whether the tables you are creating belong in an existing database, if they do, then this step is easy. If you need to create a new database then you'll need to decide which domain to put it in. It's also possible to define a database across multiple domains. For example, a number of tables within your database might sit within 'domain a' while the rest sit in 'domain b'. This approach has the benefit of keeping all tables logically grouped within one database but will result in access to those tables being limited by the domain.
 
-## Standard directory structure and naming conventions
+### Standard directory structure and naming conventions
 
 The following is an example of how a team might build a data model whilst adhering to the standard dbt project directory structure required to work with create-a-derived-table. The Prison Safety and Security team have created a database called `prison_safety_and_security` in the `security` domain.
 
@@ -68,7 +75,7 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
 
 ```
 
-## Models
+### Models
 
 Finally you will begin designing / making your models. We suggest a medallion architecture that categorises the model you are making into three distinct layers, `staging`, `intermediate`, `datamarts` and `derived`. Where `datamarts` and `derived` are two halves of the same layer. Each layer represents data that is increasingly  well understood, cleaned and standardised. 
 
