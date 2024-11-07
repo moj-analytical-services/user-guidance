@@ -2,23 +2,19 @@
 
 ## Packaged Tools
 
-* [AWS Command Line Interface](https://docs.aws.amazon.com/cli/)
+Visual Studio Code uses our Cloud Development Environment Base image, and includes the features highlighted [here](https://github.com/ministryofjustice/analytical-platform-cloud-development-environment-base?tab=readme-ov-file#features).
 
-* [Amazon Corretto](https://aws.amazon.com/corretto)
+## Accessing a Locally Running Application
 
-* [Miniconda](https://docs.anaconda.com/free/miniconda/index.html)
+As Visual Studio Code's [port forwarding](https://code.visualstudio.com/docs/editor/port-forwarding) functionality does not work in our environment, we have enabled similar functionality using [host based routing](https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/).
 
-* [.NET SDK](https://learn.microsoft.com/en-us/dotnet/core/sdk)
+To access an application running locally, it must be running on port `8081`, you can then access it by visiting `https://${USERNAME}-vscode-tunnel.tools.analytical-platform.service.justice.gov.uk`.
 
-* [Python 3.12](https://www.python.org/downloads/release/python-3123/)
-
-* [Ollama](/tools/visual-studio-code/ollama)
+This cannot be accessed by anyone other than yourself as it uses the same authentication method as Visual Studio Code.
 
 ## Known Issues and Limitations
 
 * Like JupyterLab and RStudio, Visual Studio Code runs on Analytical Platform's Kubernetes infrastructure, therefore we cannot provide access to Docker.
-
-* [Visual Studio Code's port forwarding](https://code.visualstudio.com/docs/editor/port-forwarding) functionality doesn't work, which means you cannot run Dash or Streamlit applications, you will need to continue to [use JupyterLab](https://user-guidance.analytical-platform.service.justice.gov.uk/appendix/dash.html#running-your-app-within-jupyter)
 
 * Due to how Analytical Platform automatically scales tooling up and down depending on user activity, session persistence is not available in Visual Studio Code's extensions, for example [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github).
 
