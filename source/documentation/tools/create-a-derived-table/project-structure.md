@@ -7,36 +7,40 @@ dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we
 
 ## 1-guide-overview
 
-## What is Analytics Engineering?
+### What is Analytics Engineering?
 
-Analytics Engineering is a relativly new function in the MoJ (as of November 2024) that sits in Data Modeling and Engineering Team (DMET). We are the 'Data Modelling' part! To create a distinction between a modeller who makes predictions and a modeller who designs databases dbt defined a new professions called [Analytics Engineering](https://www.getdbt.com/what-is-analytics-engineering). MoJ has since adopted that job role and we have even defined it within the Government Digital and Data Profesiion Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
+Analytics Engineering is a relativly new function in the MoJ (as of November 2024). We sit in Data Modeling and Engineering Team (DMET), we are the 'Data Modelling' part! The title, [Analytics Engineer](https://www.getdbt.com/what-is-analytics-engineering) comes from the fact that we sit between Data Engineers on one side, who load the data onto our data warehouse; and Data Analysts (and other data users), who use the data on the other. There is a growing need for clean, standardised data that is consistent across the business and easy to use for any downstream users. That is where the Analytics Engineering function comes in, we aim to provide that data so that Analysts and Modellers (the predicting ones) don't have to self service.
 
-(and some further [reading](https://www.getdbt.com/blog/analytics-engineer-vs-data-analyst!)
+Some links:
+
+Analytics Engineering Government Digital and Data Profesiion Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
+
+[Blog post by dbt](https://www.getdbt.com/blog/analytics-engineer-vs-data-analyst)
 
 Add diagram showing where we sit
 
-We sit between Data Engineers and data users, and our role is to take the raw source data and turn it into reich useful 'data models'. The following guidance is how we want users of create-a-derived-table to structure their projects, and simialarly how we structure our databases.
+### The guide
 
 This guide aims to provide consistency in how our projects in create-a-derived-table are structured - in terms of folders, files and naming - all of which are related to how we structure our transformations.
 
-As a group of Analytics Engineers, we have thoroughly reviewed guidance published by dbt (the technology behind create-a-derived-table) and adapted it to suit our needs in this guide.
+As a group of Analytics Engineers, we have thoroughly reviewed guidance published by dbt (the software behind create-a-derived-table) and adapted it to suit our needs in this guide.
 
 Please take the time to familiarise yourself with this project structure guide, and our style guidance [add link], before starting projects in create-a-derived-table.
 
 ### Domains
 
-The primary consideration relating to project structure is understanding which domain the table you want to create belongs to. In create-a-derived-table a domain should correspond to some service area or core business concept and is used to logically group databases. Domains are not mutually exclusive so the same concepts can exist in different domains. A domain may be _'people'_ relating HR and corporate, or _'risk'_ relating to a justice system service user's safety, but it could be more or less granular if appropriate.
+The primary consideration relating to project structure is understanding which domain the table you want to create belongs to. In create-a-derived-table a domain should correspond to some service area or core business concept and is used to logically group databases. Domains are not mutually exclusive, so the same concepts can exist in different domains (different domains can deploy models to the same database!). A domain may be `people` relating HR and corporate, or `risk` relating to a justice system service user's safety, but it could be more or less granular if appropriate.
 
 ### Databases
 
-The secondary consideration is whether the tables you are creating belong in an existing database, if they do, then this step is easy. If you need to create a new database then you'll need to decide which domain to put it in. It's also possible to define a database across multiple domains. For example, a number of tables within your database might sit within 'domain a' while the rest sit in 'domain b'. This approach has the benefit of keeping all tables logically grouped within one database but will result in access to those tables being limited by the domain.
+The secondary consideration is whether the tables you are creating belong in an existing database, if they do, then this step is easy. If you need to create a new database then you'll need to decide which domain to put it in and what to call it. It's also possible to define a database across multiple domains. For example, a number of tables within your database might sit within 'domain a' while the rest sit in 'domain b'. This approach has the benefit of keeping all tables logically grouped within one database but will result in access to those tables being limited by the domain.
 
 ### Standard directory structure and naming conventions
 
-The following is an example of how a team might build a data model whilst adhering to the standard dbt project directory structure required to work with create-a-derived-table. The Prison Safety and Security team have created a database called `prison_safety_and_security` in the `security` domain.
+Below is a simplified version of how we might expect the project structure of create-a-derived-table to look like. Throughout this guide we will provide examples of models based on real models that have been created for create-a-derived-table. These hopefully provide you with useful contextual examples that will build up an understanding of how we want the project to be structured and how your code should look.
 
 - From the `mojap_derived_tables` dbt project, the hierarchy of directories must follow `models` -> `domain` -> `database`. The directory structure after this is arbitrary and can be chosen to suit your needs. However, we do recommend that you arrange your models into logical folders to make it easier for users to understand the code.
-- Models (`.sql` files) must be named by the database and table they relate to separated by double underscores, i.e., `<database_name>__<table_name>.sql`. This is because all models in the `models` directory must have a unique name..
+- Models (`.sql` files) must be named by the database and table they relate to separated by double underscores, i.e., `[database_name]__[table_name].sql`. This is because all models in the `models` directory must have a unique name.
 - **All** staging models should live in the `staging` domain regardless of business / service area. This is to maintain visibility of the data being used on create-a-derived-table. Access should be given to databases within the staging domain, not the domain itself. 
 
 Below is an overview of the whole create-a-derived-table folder structure. In the following sections we will go through each layer, covering in detail how we expect your project structure to look and our reasoning. 
@@ -79,19 +83,19 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
 
 ### Models
 
-Finally you will begin designing / making your models. We suggest a medallion architecture that categorises the model you are making into three distinct layers, `staging`, `intermediate`, `datamarts` and `derived`. Where `datamarts` and `derived` are two halves of the same layer. Each layer represents data that is increasingly  well understood, cleaned and standardised. 
+Finally you will begin designing / making your models. We suggest a medallion architecture that categorises the model you are making into three distinct layers, `staging`, `intermediate`, `datamarts` and `derived`. Where `datamarts` and `derived` are two halves of the same layer. Each layer represents data that is increasingly well understood, cleaned and standardised. 
 
-The general rule as to what goes into each of these layers comes down to a few consideration. Staging generally is source specific and doesn't change the grain of the data. Then when you want to combine different sources, or change the grain of the data (or other more complicated transformations) then the models belongs in an intermediate database. Finally, the user facing models live in either `_datamarts` or `_derived` databases. The following sections will go into more depth about this categorisations as well as what the medallion architecture is. 
+The general rule as to what goes into each of these layers comes down to a few considerations. Staging generally is source specific and doesn't change the grain of the data. Then when you want to combine different sources, or change the grain of the data (or other more complicated transformations) then the models belongs in an intermediate database. Finally, the user facing models live in either `_datamarts` or `_derived` databases. The following sections will go into more depth about this categorisations as well as what the medallion architecture is. 
 
-Data modelling is hard, so if the considerations about domains, databases, or data model structures aren't clear - if you're unsure, reach out to the [data modelling team](https://asdslack.slack.com/archives/C03J21VFHQ9) and we'll do our best to help.
+These concepts can be confusing, so if you have any further questions or just want to discuss you project use the [#ask-data-modelling](https://moj.enterprise.slack.com/archives/C03J21VFHQ9) slack channel to reach out. We are happy to answer questions or receive feedback about this guide there!
 
-Please note that the use of create-a-derived-table has evolved over time, and best practices change, the reality of our project may be out of sync with the best practices stated here. 
+Finally, it is worth flagging that create-a-derived-table has been evolving since its conception and for that reason project structure guidance, style guidance and best practice have all changed on several occasions. So when you start looking around the code base on create-a-derived-table you may find that code style, project structure or naming conventions don't match the guidance here. It will be a continuos effort from all that use it to slowly conform create-a-derived-table.
 
 ## 2-staging
 
 The staging layer is where our journey begins. This is the foundation of our project, where we bring all the individual components we're going to use to build our more complex and useful models into the project.
 
-dbt likes to use an analogy throughout this guide and we will stick to it as we think it is useful: thinking modularly in terms of atoms, molecules, and more complex outputs like proteins or cells (we apologise in advance to any chemists or biologists for our inevitable overstretching of this metaphor). Within that framework, if our source system data is a soup of raw energy and quarks, then you can think of the staging layer as condensing and refining this material into the individual atoms we’ll later build more intricate and useful structures with.
+dbt likes to use an analogy throughout this guide, and we will stick to it as we think it is useful; thinking modularly in terms of atoms, molecules, and more complex outputs like proteins or cells (we apologise in advance to any chemists or biologists for our inevitable overstretching of this metaphor). Within that framework, if our source system data is a soup of raw energy and quarks, then you can think of the staging layer as condensing and refining this material into the individual atoms we’ll later build more intricate and useful structures with.
 
 ### Staging: Files and folders
 
@@ -109,9 +113,9 @@ models/staging
     └── stg_xhibit__court.sql
 ```
 
-- **Folders.** Folder structure is extremely important in dbt. Not only do we need a consistent structure to find our way around the codebase, as with any software project, but our folder structure is also one of the key interfaces for understanding the knowledge graph encoded in our project (alongside the DAG and the data output into our warehouse). It should reflect how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models. Moreover, we can use our folder structure as a means of selection in dbt [selector syntax](https://docs.getdbt.com/reference/node-selection/syntax). For example, with the above structure, if we got fresh xhibit data loaded and wanted to run all the models that build on our xhibit data, we can easily run `dbt build --select staging/xhibit_stg+` and we’re all set for building more up-to-date reports on Crown Courts.
-  - ✅ **Subdirectories based on business grouping.** dbt recommends against this practice, however crate-a-derived-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data egineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from dbt guidance.
-  - ✅ **Subdirectories based on the source system**. For the MoJ we have a staging domain and each subfolder in the domain will for it's own database. We expect that each database in the staging domain should be source aligned. This allows for future projects to pull on data that is already staged, saving time and reducing the chance of silo-ing data.
+- **Folders.** Folder structure is extremely important in dbt. Not only do we need a consistent structure to find our way around the codebase, as with any software project, but our folder structure is also one of the key interfaces for understanding the knowledge graph encoded in our project (alongside the DAG and the data output into our warehouse). It should reflect how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models. Moreover, we can use our folder structure as a means of selection in dbt [selector syntax](https://docs.getdbt.com/reference/node-selection/syntax). For example, with the above structure, if we got fresh xhibit data loaded and wanted to run all the models that build on our xhibit data, we can easily run `dbt build --select staging/xhibit_stg+`, and we’re all set for building more up-to-date reports on Crown Courts. Additionally, with create-a-derived-table the project structure is how we manage database access. So ensuring you follow this guidance will ensure only those who need to get to see your data
+  - ✅ **Subdirectories based on business grouping.** dbt recommends against this practice, however crate-a-derived-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data engineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from dbt guidance.
+  - ✅ **Subdirectories based on the source system**. For the MoJ we have a staging domain and each subfolder in the domain will for its own database. We expect that each database in the staging domain should be source aligned. This allows for future projects to pull on data that is already staged, saving time and reducing the chance of silo-ing data.
   - ❌ **Subdirectories based on loader.** Some people attempt to group by how the data is loaded (Fivetran, Stitch, custom syncs), but this is too broad to be useful on a project of any real size.
 
 - **File names.** Creating a consistent pattern of file naming is [crucial in dbt](https://docs.getdbt.com/blog/on-the-importance-of-naming). File names must be unique and correspond to the name of the model when selected and created in the warehouse. We recommend putting as much clear information into the file name as possible, including a prefix for the layer the model exists in, important grouping information, and specific information about the entity or transformation in the model.
