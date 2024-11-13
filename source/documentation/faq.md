@@ -20,3 +20,11 @@ Analytical Platform Tools (JupyterLab, RStudio and Visual Studio Code) will use:
 - `analytical_platform.tools.production` for `production`
 
 Analytical Platform Applications hosted on Cloud Platform will use the IP addresses found [here](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/networking/ip-filtering.html#outbound-ip-filtering).
+
+## I have been remove from the GitHub Organisation
+
+You will be notified of this action via an email from GitHub - "[GitHub] You've been removed from the "MoJ Analytical Services" organization".
+
+You were removed due to inactivity, as part of this Operations Engineering’s dormant GitHub user process noted [here](https://runbooks.operations-engineering.service.justice.gov.uk/documentation/services/github/remove-dormant-users.html).
+ 
+To rejoin, you can use this link (https://github.com/orgs/moj-analytical-services/sso).
