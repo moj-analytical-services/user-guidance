@@ -260,3 +260,10 @@ Note that characters that are not compatible with website URLs are converted. Th
 ### Managing your Application
 
 [Further information about managing deployed apps, including managing user access, can be found in the Managing published apps section.](/apps/rshiny-app.html#managing-published-apps)
+
+### Deleting your Webapp 
+
+To delete your Webapp:
+
+1. Raise a support request detailing the name of the webapp via our [support process](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-support.yml). Only Control Panel Administrators can delete webapps from the Control Panel. 
+1. Follow the Cloud Platform's guidance on [removing an unneeded namespace](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/deploying-an-app/cleaning-up.html)
