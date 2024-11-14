@@ -49,3 +49,16 @@ For a given S3 bucket `<supplier-bucket-name>` include the following statement
 ```
 
 The `ingestion-account-ID` should be `471112983409` when connections are being made by the `transfer` lambda function in `analytical-platform-ingestion-production` and `730335344807` when connections are being made from `analytical-platform-ingestion-development`.
+
+Once you receive confirmation from us that you have been onboarded and we have provided you with a username, you will be able to connect to our transfer service using the following commands:
+
+Production:
+
+```bash
+sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.uk
+```
+Development:
+
+```bash
+sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
+```
