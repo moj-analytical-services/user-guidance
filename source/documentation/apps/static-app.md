@@ -265,5 +265,8 @@ Note that characters that are not compatible with website URLs are converted. Th
 
 To delete your Webapp:
 
+> **NOTE:**
+> If your webapp uses [data-engineering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access) to access data on the AP, you will need to **remove all references to the app (alpha_app_*) in any project_access .yaml files and [scripts/db_app_policies.py](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/scripts/db_app_policies.py) before asking for the webapp to be deleted**. Failure to do this may cause breakages to the [data-engineering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access) repository.
+
 1. Raise a support request detailing the name of the webapp via our [support process](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-support.yml). Only Control Panel Administrators can delete webapps from the Control Panel. 
 1. Follow the Cloud Platform's guidance on [removing an unneeded namespace](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/deploying-an-app/cleaning-up.html)
