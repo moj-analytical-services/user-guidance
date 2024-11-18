@@ -9,11 +9,11 @@ dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we
 
 ### What is Analytics Engineering?
 
-Analytics Engineering is a relativly new function in the MoJ (as of November 2024). We sit in Data Modeling and Engineering Team (DMET), we are the 'Data Modelling' part! The title, [Analytics Engineer](https://www.getdbt.com/what-is-analytics-engineering) comes from the fact that we sit between Data Engineers on one side, who load the data onto our data warehouse; and Data Analysts (and other data users), who use the data on the other. There is a growing need for clean, standardised data that is consistent across the business and easy to use for any downstream users. That is where the Analytics Engineering function comes in, we aim to provide that data so that Analysts and Modellers (the predicting ones) don't have to self service.
+Analytics Engineering is a relatively new function in the MoJ (as of November 2024). We sit in Data Modelling and Engineering Team (DMET), we are the 'Data Modelling' part! The title, [Analytics Engineer](https://www.getdbt.com/what-is-analytics-engineering) comes from the fact that we sit between Data Engineers on one side, who load the data onto our data warehouse; and Data Analysts (and other data users), who use the data on the other. There is a growing need for clean, standardised data that is consistent across the business and easy to use for any downstream users. That is where the Analytics Engineering function comes in, we aim to provide that data so that Analysts and Modellers (the predicting ones) don't have to self-service.
 
 Some links:
 
-Analytics Engineering Government Digital and Data Profesiion Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
+Analytics Engineering Government Digital and Data Profession Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
 
 [Blog post by dbt](https://www.getdbt.com/blog/analytics-engineer-vs-data-analyst)
 
@@ -50,7 +50,7 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
   ├── dbt_project.yml
   └── models
       ├── sources # source domain
-      │   ├── nomis.yaml # model
+      │   ├── nomis.yml # model
       │   ├── oasys_prod.yaml
       │   ├── delius_prod.yaml
       │   ├── xhibit_v1.yaml
@@ -68,7 +68,7 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
       ├── courts
       │   ├── courts_int
       │   │
-      │   ├── courst_datamarts
+      │   ├── courts_datamarts
       │   │
       │   └── criminal_courts_derived
       │
@@ -83,9 +83,9 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
 
 ### Models
 
-Finally you will begin designing / making your models. We suggest a medallion architecture that categorises the model you are making into three distinct layers, `staging`, `intermediate`, `datamarts` and `derived`. Where `datamarts` and `derived` are two halves of the same layer. Each layer represents data that is increasingly well understood, cleaned and standardised. 
+Finally, you will begin designing / making your models. We suggest a medallion architecture that categorises the model you are making into three distinct layers, `staging`, `intermediate`, `datamarts` and `derived`. Where `datamarts` and `derived` are two halves of the same layer. Each layer represents data that is increasingly well understood, cleaned and standardised. 
 
-The general rule as to what goes into each of these layers comes down to a few considerations. Staging generally is source specific and doesn't change the grain of the data. Then when you want to combine different sources, or change the grain of the data (or other more complicated transformations) then the models belongs in an intermediate database. Finally, the user facing models live in either `_datamarts` or `_derived` databases. The following sections will go into more depth about this categorisations as well as what the medallion architecture is. 
+The general rule as to what goes into each of these layers comes down to a few considerations. Staging generally is source specific and doesn't change the grain of the data. Then when you want to combine different sources, or change the grain of the data (or other more complicated transformations) then the models belongs in an intermediate database. Finally, the user facing models live in either `_datamarts` or `_derived` databases. The following sections will go into more depth about these categorisations as well as what the medallion architecture is. 
 
 These concepts can be confusing, so if you have any further questions or just want to discuss you project use the [#ask-data-modelling](https://moj.enterprise.slack.com/archives/C03J21VFHQ9) slack channel to reach out. We are happy to answer questions or receive feedback about this guide there!
 
@@ -486,57 +486,73 @@ Until we get to the marts layer and start building our various outputs, we ideal
 
 ## 4-datamarts
 
-### `_datamarts`
+### Introduction
 
-Here is where everything comes together, where our atoms and molecules are brought together to make cells with well defined identity and purpose. This is also where, normally, the end user will see the data. For this reason a lot of thought has been put into the naming conventions we want to abide by in the MoJ. This guidance document has come after many years of iteratively changing and improving our processes in the Data Modeling and Engineering team, as well as across Data and Analysis. We have therefore put a lot of thought into how we can clearly signify the different kinds of databases that will be and have been developed, and who they have been developed by. In the following two sections (datamarts and then derived) we will lay out what we expect from a project and how we see the categorisation of these pieces of work.
+Here is where everything comes together, where our atoms and molecules are brought together to make cells with well-defined identity and purpose. This is also where, normally, the end user will see the data. For this reason a lot of thought has been put into the naming conventions we want to abide by in the MoJ. This guidance document has come after many years of iteratively changing and improving our processes in the Data Modelling and Engineering team, as well as across Data and Analysis. We have therefore put a lot of thought into how we can clearly signify the different kinds of databases that will be and have already been developed, and who they have been developed by. In the following two sections (datamarts and then derived) we will lay out what we expect from a project and how we see the categorisation of these pieces of work.
 
-This will likely be where we deviate most from dbt as we want to tailor our solution to our business needs. Generally, we see the datamarts database as the place your customers should come to get the most fundamental building blocks of the data. It is the first place the end user will have access to the data and any downstream product or pipeline that wishes to use your data should use these building blocks. In Analytics Engineering we have been following the [Kimball methodology](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/) and have been developing [dimensional models](https://docs.getdbt.com/blog/kimball-dimensional-model) as our datamarts layer. From the datamarts users can either connect directly to it with their dashboards or models, or they can combine the building blocks to more uniquely satisfy their needs (see 5-derived). 
+This will likely be where we deviate most from dbt as we want to tailor our solution to our business needs. Generally, we see the datamarts database as the place your customers should come to get the most fundamental building blocks of the data. It is the first place the end user will have access to the data and any downstream product or pipeline that wishes to use your data should use these building blocks. In Analytics Engineering we have been following the [Kimball methodology](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/) and have been developing [dimensional models](https://docs.getdbt.com/blog/kimball-dimensional-model) as our datamarts layer. Users can either connect to the datamarts database directly with their dashboards or models, or they can combine the building blocks to more uniquely satisfy their needs (see 5-derived). 
 
-We are taking this approach as we wish there to be one source for any data set and one 'source of truth' allowing for the analysis that comes from it to be consistent and reliable. To achieve this we will treat code and pull requests on create-a-derived-table differently depending on their purpose. It is a requisite for any code being added to create-a-derived-table to be reviewed by an Analytics Engineer (and a Data Engineer if it changes any project related files). If you wish for you code to be in the derived layer and therefore be suffixed with `_derived`, then we will do the core review ensuring that the code meets our style standards and the project structure follows this guidance. We will make sure it passes any PR checks, but we will expect you to have reviewed and checked the logic and code within your team and will not be checking it ourselves. If you think your work is general enough and requires a datamarts layer then before you start your project, you should contact the Analytics Engineers on slack, where we can set up a meeting and discuss how to go forward. For more on the sort of things we look for in PRs, and what sort of projects go where, go to our PR guidance. 
+We are taking this approach as we wish there to be 'one source of truth', allowing for the analysis that comes from it to be consistent and reliable. To achieve this we will treat code and pull requests on create-a-derived-table differently depending on their purpose. It is a requisite for any code being added to create-a-derived-table to be reviewed by an Analytics Engineer (and a Data Engineer if it changes any project related files). If you wish for you code to be in the derived layer and therefore be suffixed with `_derived`, then we will do the core review ensuring that the code meets our style standards and the project structure follows this guidance. We will make sure it passes any PR checks, but we will expect you to have reviewed and checked the logic and code within your team and will not be checking it ourselves. If you think your work is general enough and requires a datamarts layer then before you start your project, you should contact the Analytics Engineers on slack, where we can set up a meeting and discuss how to go forward. For more on the sort of things we look for in PRs, and what sort of projects goes where, go to our [PR guidance](add link). 
 
 ### Datamarts: Files and folders
 
 ```shell
 models/prison
 ├── prisons_datamarts
-│   ├── _prisons_datamarts__models.yml
+│   ├── prisons_datamarts.yml
 │   ├── prisons_datamarts__fct_releases.sql
 │   ├── prisons_datamarts__dim_offenders.sql
 │   ├── prisons_datamarts__dim_prisons.sql
 └── parole_board_datamarts
-    ├── _parole_board_datamarts__models.yml
+    ├── parole_board_datamarts.yml
     └── parole_board_datamarts__fct_cases.sql
     └── parole_board_datamarts__dim_directions.sql
 ```
 
-✅ **Facts and dimensions** These are the building blocks developed by or with ovesight by Analytics Engineers that can be used to create any downstream output. They are designed to serve a range of business needs. 
+✅ **Facts and dimensions** These are the building blocks developed by or with oversight by Analytics Engineers that can be used to create any downstream output. They are designed to serve a range of business needs. 
 
-❌ **Flatfiles and denormalised tables** Any product that requires more specific and specialised tables they should not live in the datamarts layer. They should live in the derived layer, more details can be found in the next section.
+❌ **Flatfiles and denormalised tables** Any product that requires more specific and specialised tables should not live in the datamarts layer. They should live in the derived layer, more details can be found in the next section.
 
-- **fct_<verb>**: Fact tables are long, narrow tables representing real-world processes that have occurred or are occurring. The heart of these models is usually records of events that once happened do not change, but are superceded by future events. Examples: sessions, transactions, orders, stories, votes.
-- **dim_<noun>**: Dimension tables are wide, short tables where each row is a person, place, or thing; the ultimate source of truth when identifying and describing entities of the organisation. These rows can change over time, though slowly changing: customers, defendants, candidates, buildings, employees, offences. For example a offenders name may change while in prison and be updated, we would want this to be reflected in the data. We want to know what is the most up to date information for a particular row, but also have the ability to see what it was at a given time in the past. 
+- **fct_<verb>**: Fact tables are long, narrow tables representing real-world processes that have occurred or are occurring. The heart of these models is usually records of events that once happened do not change, but are superseded by future events. Examples: sessions, transactions, orders, stories, votes.
+- **dim_<noun>**: Dimension tables are wide, short tables where each row is a person, place, or thing; the ultimate source of truth when identifying and describing entities of the organisation. These rows can change over time, though slowly changing: customers, defendants, candidates, buildings, employees, offences. For example an offenders name may change while in prison and be updated on the source system, we would want this to be reflected in the data. We want to know what the most current information for a particular row is, but also have the ability to see what it was at a given time in the past. 
 
-✅ **Group by domain or area of concern.** On create-a-derived-table datamarts will be organised into domains, these align with genral business areas (criminal courts, finance, prisons, people, etc.). Within each domain the subfolder will represent the database name and should reflect a business area concept (crown court for criminal courts or recruitment for people). We are no longer interested in strictly source aligned conecepts.
+✅ **Group by domain or area of concern.** On create-a-derived-table datamarts will be organised into domains, these align with general business areas (criminal courts, finance, prisons, people, etc.). Within each domain the subfolder will represent the database name and should reflect a business area concept (crown court for criminal courts or recruitment for people). We are no longer interested in strictly source aligned concepts.
 
-✅ **Name by entity.** Use plain English to name the file based on the concept that forms the grain of the mart `sentences`, `offenders`. Note that for pure daramarts, there should not be a time dimension (`orders_per_day`) here, that is typically best captured via metrics.
+✅ **Name by entity.** Use plain English to name the file based on the concept that forms the grain of the mart `sentences`, `offenders`. Note that for pure datamarts, there should not be a time dimension (`orders_per_day`) here, that is typically best captured via metrics.
 
 ❌ **Build the same concept differently for different teams.** `finance_orders` and `marketing_orders` is typically considered an anti-pattern. There are, as always, exceptions — a common pattern we see is that, finance may have specific needs, for example reporting revenue to the government in a way that diverges from how the company as a whole measures revenue day-to-day. Just make sure that these are clearly designed and understandable as _separate_ concepts, not departmental views on the same concept: `tax_revenue` and `revenue` not `finance_revenue` and `marketing_revenue`.
 
 ### Complete Enterprise Data Warehouse approach using create-a-derived-table
 
-![data-flow-diagram excalidraw](https://github.com/user-attachments/assets/3dfc54d7-e304-4e48-b06d-c0dddad40503)
+![data-flow-diagram excalidraw](https://github.com/user-attachments/assets/3dfc54d7-e304-4e48-b06d-c0dddad40503) need a new diagram!!!
 
-In the above diagram you can see the flow of data through the Data Modelling and Engineering function. This follows a medalion rating system, that corresponds to the level of cleaning, transforming and testing that has been implemented on the data. 
+In the above diagram you can see the flow of data through the Data Modelling and Engineering function. This follows a medallion rating system, that corresponds to the level of cleaning, transforming and testing that has been implemented on the data. 
 
 🥉 Bronze databases, signified by a `_raw` suffix, has very minimal transforming, cleaning or testing. The Data Engineers aim at this point is to ensure that the source data has been loaded on to the Analytical Platform in the exact form that they have received it. 
 
-🥈 Silver databases, signified by `_curated` or maybe `_base` in some instances, start once the data is successfully loaded to the AP. After this basic transformations are perfomed, things like validations, deduplication and versioning. 
+🥈 Silver databases, signified by `_curated` or maybe `_base` in some instances, start once the data is successfully loaded to the AP. After this basic transformations are performed, things like validations, deduplication and versioning. 
 
-🥇 Gold databases, signified by `_datamarts` or `_derived`, are the final stage of the transformations performed by DMET and are also the most involved. We have split the gold level into two parts to distinguish work that has been done by Analytics Engineers or overseen by them, and has followed the Kimball methodolgy. Or, databases that have been developed outside of DMET and serve more specific business needs.
+🥇 Gold databases, signified by `_datamarts` or `_derived`, are the final stage of the transformations performed by DMET and are also the most involved. We have split the gold level into two parts to distinguish work that has been done by Analytics Engineers or overseen by them, and has followed the Kimball methodology. Or, databases that have been developed outside DMET and serve more specific business needs.
 
 ### Datamarts: Models
 
-Finally we’ll take a look at the best practices for models within the marts directory by examining two example marts models. These are the business-conformed — that is, crafted to our vision and needs — entities we’ve been bringing these transformed components together to create. Models in the datamarts layer can be very simple select statements, or could be slightly more complicated joins:
+Finally, we’ll take a look at the best practices for models within the marts directory by examining two example marts models. These are the business-conformed — that is, crafted to our vision and needs — entities we’ve been bringing these transformed components together to create. Models in the datamarts layer can be very simple select statements, or could be slightly more complicated joins:
+
+
+```sql
+--finance_datamarts__dim_hmpps_local_cost_centres
+
+with
+
+cost_centres as (
+
+  select * from {{ ref('finance_stg__stg_hmpps_local_cost_centres') }}
+
+)
+
+select * from cost_centres
+```
+
 
 ```sql
 --finance_datamarts__fct_hmpps_hyperion_metrics
@@ -569,11 +585,7 @@ select_business_area as (
 select * from select_business_area
 ```
 
-```sql
-
-```
-
-- ✅ **Materialised as tables or incremental models.** Once we reach the marts layer, it’s time to start building not just our logic into the warehouse, but the data itself. This gives end users much faster performance for these later models that are actually designed for their use, and saves us costs recomputing these entire chains of models every time somebody refreshes a dashboard or runs a regression in python. A good general rule of thumb regarding materialisation is to always start with a view (as it takes up essentially no storage and always gives you up-to-date results), once that view takes too long to practically _query_, build it into a table, and finally once that table takes too long to _build_ and is slowing down your runs, [configure it as an incremental model](https://docs.getdbt.com/docs/build/incremental-models/). As always, start simple and only add complexity as necessary. The models with the most data and compute-intensive transformations should absolutely take advantage of dbt’s incremental materialisation options, but rushing to make all your marts models incremental by default will introduce superfluous difficulty. We recommend reading this [post on the limits of incremental modelling](https://discourse.getdbt.com/t/on-the-limits-of-incrementality/303).
+- ✅ **Materialised as tables or incremental models.** Once we reach the datamarts layer, it’s time to start building not just our logic into the warehouse, but the data itself. This gives end users much faster performance for these later models that are actually designed for their use, and saves us costs recomputing these entire chains of models every time somebody refreshes a dashboard or runs a regression in python. A good general rule of thumb regarding materialisation is to always start with a view (as it takes up essentially no storage and always gives you up-to-date results), once that view takes too long to practically _query_, build it into a table, and finally once that table takes too long to _build_ and is slowing down your runs, [configure it as an incremental model](https://docs.getdbt.com/docs/build/incremental-models/). As always, start simple and only add complexity as necessary. The models with the most data and compute-intensive transformations should absolutely take advantage of dbt’s incremental materialisation options, but rushing to make all your marts models incremental by default will introduce superfluous difficulty. We recommend reading this [post on the limits of incremental modelling](https://discourse.getdbt.com/t/on-the-limits-of-incrementality/303).
 - ❌ **Too many joins in one mart.** One good rule of thumb when building dbt transformations is to avoid bringing together too many concepts in a single mart. What constitutes ‘too many’ can vary. If you need to bring 8 staging models together with nothing but simple joins, that might be fine. Conversely, if you have 4 concepts you’re weaving together with some complex and computationally heavy window functions, that could be too much. You need to weigh the number of models you’re joining against the complexity of the logic within the mart, and if it’s too much to read through and build a clear mental model of then look to modularise. While this isn’t a hard rule, if you’re bringing together more than 4 or 5 concepts to create your mart, you may benefit from adding some intermediate models for added clarity. Two intermediate models that bring together three concepts each, and a mart that brings together those two intermediate models, will typically result in a much more readable chain of logic than a single mart with six joins.
 - ✅ **Build on separate marts thoughtfully.** While we strive to preserve a narrowing DAG up to the marts layer, once here things may start to get a little less strict. A common example is passing information between marts at different grains, for example, to aggregate data into the grain of another mart. Now that we’re really ‘spending’ compute and storage by actually building the data in our outputs, it’s sensible to leverage previously built resources to speed up and save costs on outputs that require similar data, versus recomputing the same views and CTEs from scratch. The right approach here is heavily dependent on your unique DAG, models, and goals — it’s just important to note that using a mart in building another, later mart is okay, but requires careful consideration to avoid wasted resources or circular dependencies.
 
@@ -585,7 +597,7 @@ select * from select_business_area
 
 The final layer in the DMET pipeline, as show in the figure in the previous section, the derived layer. Here we expect any database that has been developed outside of the oversight of analytics engineers. These databases will be more use specific and will therefore have fewer requirements on them to conform to data modelling concepts like those found in the Kimball methodology. We expect the databases here to still pull from the datamarts layer, where possible. 
 
-- **derived** tend to be wide, dense tables, the result of joining facts and dimensions into a single table readymade for a particular analysis. In modern data warehousing — where storage is cheap and compute is expensive — we can borrow and add any and all data from dimensional concepts to answer questions about core entities. Building the same data in multiple places is more efficient in this paradigm than having to repeatedly rejoin these concepts in the dimensional layer.
+- **derived** tend to be wide, dense tables, the result of joining facts and dimensions into a single table ready-made for a particular analysis. In modern data warehousing — where storage is cheap and compute is expensive — we can borrow and add any and all data from dimensional concepts to answer questions about core entities. Building the same data in multiple places is more efficient in this paradigm than having to repeatedly rejoin these concepts in the dimensional layer.
 
 ## 6-the-rest-of-the-project
 
@@ -686,7 +698,7 @@ moj_derived_tables
 
 We’ve focused heavily so far on the primary area of action in our dbt project, the `models` folder. Below we wanted to cover the use of these folders and some considerations when working in them.
 
-- ✅ `seeds` for lookup tables. The most common use case for seeds is loading lookup tables that are helpful for modeling but don’t exist in any source systems — think mapping zip codes to states, or UTM parameters to marketing campaigns. In this example project we have a small seed that maps our employees to their `customer_id`s, so that we can handle their purchases with special logic.
+- ✅ `seeds` for lookup tables. The most common use case for seeds is loading lookup tables that are helpful for modelling but don’t exist in any source systems — think mapping zip codes to states, or UTM parameters to marketing campaigns. In this example project we have a small seed that maps our employees to their `customer_id`s, so that we can handle their purchases with special logic.
 - ❌ `seeds` for loading source data. Do not use seeds to load data from a source system into your warehouse. If it exists in a system you have access to, you should be loading it with a proper EL tool into the raw data area of your warehouse. dbt is designed to operate on data in the warehouse, not as a data-loading tool.
 - ✅ `tests` for testing multiple specific tables simultaneously. As dbt tests have evolved, writing singular tests has become less and less necessary. It's extremely useful for work-shopping test logic, but more often than not you'll find yourself either migrating that logic into your own custom generic tests or discovering a pre-built test that meets your needs from the ever-expanding universe of dbt packages (between the extra tests in [`dbt-utils`](https://github.com/dbt-labs/dbt-utils) and [`dbt-expectations`](https://github.com/calogica/dbt-expectations) almost any situation is covered). One area where singular tests still shine though is flexibly testing things that require a variety of specific models. If you're familiar with the difference between [unit tests](https://en.wikipedia.org/wiki/Unit_testing) [and](https://www.testim.io/blog/unit-test-vs-integration-test/) [integration](https://www.codecademy.com/resources/blog/what-is-integration-testing/) [tests](https://en.wikipedia.org/wiki/Integration_testing) in software engineering, you can think of generic and singular tests in a similar way. If you need to test the results of how several specific models interact or relate to each other, a singular test will likely be the quickest way to nail down your logic.
 - ✅ `snapshots` for creating [Type 2 slowly changing dimension](https://en.wikipedia.org/wiki/Slowly_changing_dimension#Type_2:_add_new_row) records from [Type 1](https://en.wikipedia.org/wiki/Slowly_changing_dimension#Type_1:_overwrite) (destructively updated) source data. This is [covered thoroughly in the dbt Docs](/docs/build/snapshots), unlike these other folders has a more defined purpose, and is out-of-scope for this guide, but mentioned for completion.
