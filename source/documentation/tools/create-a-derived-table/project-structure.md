@@ -606,51 +606,57 @@ So far we’ve focused on the `models` folder, the primary directory of our dbt 
 ```shell
 ├── mojap_derived_tables
   ├── dbt_project.yml
-  └── models
-      ├── sources # source domain
-      │   ├── nomis.yaml # model
-      │   ├── oasys_prod.yaml
-      │   ├── delius_prod.yaml
-      │   ├── xhibit_v1.yaml
-      │   ...
-      │ 
-      ├── staging  # staging domain
-      │   ├── stg_nomis # database
-      │   │      ├── stg_nomis__docs.md # model
-      │   │      ├── stg_nomis__models.yml
-      │   │      ├── stg_nomis__offender.sql
-      │   │      └── stg_nomis__prison.sql
-      │   └── stg_xhibit
-      │          ├── stg_xhibit__models.yml
-      │          └── stg_xhibit__court.sql
-      ├── courts # domain
-      │   ├── criminal_courts_int # database
-      │   │
-      │   ├── criminal_courts_datamarts
-      │   │
-      │   └── criminal_courts_derived
-      │
-      ├── prison  # domain
-      │   ├── prison_int # database
-      │   │      ├──prison_int__int_models.sql # model
-      │   │      ...
-      │   ├── prison_datamarts
-      │   │
-
+  ├── models
+  │   ├── sources # source domain
+  │   │   ├── nomis.yaml # model
+  │   │   ├── oasys_prod.yaml
+  │   │   ├── delius_prod.yaml
+  │   │   ├── xhibit_v1.yaml
+  │   │   ...
+  │   │ 
+  │   ├── staging  # staging domain
+  │   │   ├── stg_nomis # database
+  │   │   │      ├── stg_nomis__docs.md # model
+  │   │   │      ├── stg_nomis__models.yml
+  │   │   │      ├── stg_nomis__offender.sql
+  │   │   │      └── stg_nomis__prison.sql
+  │   │   └── stg_xhibit
+  │   │          ├── stg_xhibit__models.yml
+  │   │          └── stg_xhibit__court.sql
+  │   ├── courts # domain
+  │   │   ├── criminal_courts_int # database
+  │   │   │
+  │   │   ├── criminal_courts_datamarts
+  │   │   │
+  │   │   └── criminal_courts_derived
+  │   │
+  │   ├── prison  # domain
+  │   │   ├── prison_int # database
+  │   │   │      ├──prison_int__int_models.sql # model
+  │   │   │      ...
+  │   │   ├── prison_datamarts
+  │   │   │
+  │  ...
+  ├── macros
+  ├── model_templates
+  ├── seeds
+  ├── snapshots
+  ├── target
+  └── tests
 ```
 
 ### YAML in-depth
 
-When structuring your YAML configuration files in a dbt project, you want to balance centralization and file size to make specific configs as easy to find as possible. It’s important to note that while the top-level YAML files (`dbt_project.yml`, `packages.yml`) need to be specifically named and in specific locations, the files containing your `sources` and `models` dictionaries can be named, located, and organied however you want. It’s the internal contents that matter here. As such, we’ll lay out our primary recommendation, as well as the pros and cons of a popular alternative. Like many other aspects of structuring your dbt project, what’s most important here is consistency, clear intention, and thorough documentation on how and why you do what you do.
+When structuring your YAML configuration files in a dbt project, you want to balance centralization and file size to make specific configs as easy to find as possible. It’s important to note that while the top-level YAML files (`dbt_project.yml`, `packages.yml`) need to be specifically named and in specific locations, the files containing your `sources` and `models` dictionaries can be named, located, and organised however you want. It’s the internal contents that matter here. As such, we’ll lay out our primary recommendation, as well as the pros and cons of a popular alternative. Like many other aspects of structuring your dbt project, what’s most important here is consistency, clear intention, and thorough documentation on how and why you do what you do.
 
 - ✅ **Config per folder.** As in the example above, create a `_[directory]__models.yml` per directory in your models folder that configures all the models in that directory.
   - The leading underscore ensures your YAML files will be sorted to the top of every folder to make them easy to separate from your models.
   - YAML files don’t need unique names in the way that SQL model files do, but including the directory (instead of simply `_sources.yml` in each folder), means you can fuzzy find the right file more quickly.
-  - We’ve recommended several different naming conventions over the years, most recently calling these `schema.yml` files. We’ve simplified to recommend that these simply be labelled based on the YAML dictionary that they contain.
+  - dbt has recommended several naming conventions over the years, most recently calling these `schema.yml` files. They have now simplified to recommend that these simply be labelled based on the YAML dictionary that they contain.
   - If you utilise [doc blocks](https://docs.getdbt.com/docs/build/documentation#using-docs-blocks) in your project, we recommend following the same pattern, and creating a `_[directory]__docs.md` markdown file per directory containing all your doc blocks for that folder of models.
 - ❌ **Config per project.** Some people put _all_ of their source and model YAML into one file. While you can technically do this, and while it certainly simplifies knowing what file the config you’re looking for will be in (as there is only one file), it makes it much harder to find specific configurations within that file. We recommend balancing those two concerns.
 - ⚠️ **Config per model.** On the other end of the spectrum, some people prefer to create one YAML file per model. This presents less of an issue than a single monolith file, as you can quickly search for files, know exactly where specific configurations exist, spot models without configs (and thus without tests) by looking at the file tree, and various other advantages. In our opinion, the extra files, tabs, and windows this requires creating, copying from, pasting to, closing, opening, and managing creates a somewhat slower development experience that outweighs the benefits. Defining config per directory is the most balanced approach for most projects, but if you have compelling reasons to use config per model, there are definitely some great projects that follow this paradigm.
-- ✅ **Cascade configs.** Leverage your `dbt_project.yml` to set default configurations at the directory level. Use the well-organized folder structure we’ve created thus far to define the baseline schemas and materializations, and use dbt’s cascading scope priority to define variations to this. For example, as below, define your marts to be materialized as tables by default, define separate schemas for our separate subfolders, and any models that need to use incremental materialisation can be defined at the model level.
+- ✅ **Cascade configs.** Leverage your `dbt_project.yml` to set default configurations at the directory level. Use the well-organised folder structure we’ve created thus far to define the baseline schemas and materialisations, and use dbt’s cascading scope priority to define variations to this. For example, as below, define your marts to be materialised as tables by default, define separate schemas for our separate subfolders, and any models that need to use incremental materialisation can be defined at the model level.
 
 ```yaml
 -- dbt_project.yml
@@ -678,7 +684,7 @@ When structuring your YAML configuration files in a dbt project, you want to bal
 ```
 
 :::tip Define your defaults.
-One of the many benefits this consistent approach to project structure confers to us is this ability to cascade default behaviour. Carefully organizing our folders and defining configuration at that level whenever possible frees us from configuring things like schema and materialisation in every single model (not very DRY!) — we only need to configure exceptions to our general rules. Tagging is another area this principle comes into play. Many people new to dbt will rely on tags rather than a rigorous folder structure, and quickly find themselves in a place where every model _requires_ a tag. This creates unnecessary complexity. We want to lean on our folders as our primary selectors and grouping mechanism, and use tags to define groups that are _exceptions._ A folder-based selection like \*\*`dbt build --select marts.marketing` is much simpler than trying to tag every marketing-related model, hoping all developers remember to add that tag for new models, and using `dbt build --select tag:marketing`.
+One of the many benefits this consistent approach to project structure confers to us is this ability to cascade default behaviour. Carefully organising our folders and defining configuration at that level whenever possible frees us from configuring things like schema and materialisation in every single model (not very DRY!) — we only need to configure exceptions to our general rules. Tagging is another area this principle comes into play. Many people new to dbt will rely on tags rather than a rigorous folder structure, and quickly find themselves in a place where every model _requires_ a tag. This creates unnecessary complexity. We want to lean on our folders as our primary selectors and grouping mechanism, and use tags to define groups that are _exceptions._ A folder-based selection like \*\*`dbt build --select marts.marketing` is much simpler than trying to tag every marketing-related model, hoping all developers remember to add that tag for new models, and using `dbt build --select tag:marketing`.
 :::
 
 ### How we use the other folders
@@ -703,5 +709,5 @@ We’ve focused heavily so far on the primary area of action in our dbt project,
 - ✅ `tests` for testing multiple specific tables simultaneously. As dbt tests have evolved, writing singular tests has become less and less necessary. It's extremely useful for work-shopping test logic, but more often than not you'll find yourself either migrating that logic into your own custom generic tests or discovering a pre-built test that meets your needs from the ever-expanding universe of dbt packages (between the extra tests in [`dbt-utils`](https://github.com/dbt-labs/dbt-utils) and [`dbt-expectations`](https://github.com/calogica/dbt-expectations) almost any situation is covered). One area where singular tests still shine though is flexibly testing things that require a variety of specific models. If you're familiar with the difference between [unit tests](https://en.wikipedia.org/wiki/Unit_testing) [and](https://www.testim.io/blog/unit-test-vs-integration-test/) [integration](https://www.codecademy.com/resources/blog/what-is-integration-testing/) [tests](https://en.wikipedia.org/wiki/Integration_testing) in software engineering, you can think of generic and singular tests in a similar way. If you need to test the results of how several specific models interact or relate to each other, a singular test will likely be the quickest way to nail down your logic.
 - ✅ `snapshots` for creating [Type 2 slowly changing dimension](https://en.wikipedia.org/wiki/Slowly_changing_dimension#Type_2:_add_new_row) records from [Type 1](https://en.wikipedia.org/wiki/Slowly_changing_dimension#Type_1:_overwrite) (destructively updated) source data. This is [covered thoroughly in the dbt Docs](/docs/build/snapshots), unlike these other folders has a more defined purpose, and is out-of-scope for this guide, but mentioned for completion.
 - ✅ `macros` for DRY-ing up transformations you find yourself doing repeatedly. Like snapshots, a full dive into macros is out-of-scope for this guide and well [covered elsewhere](/docs/build/jinja-macros), but one important structure-related recommendation is to [write documentation for your macros](https://docs.getdbt.com/faqs/docs/documenting-macros). We recommend creating a `_macros.yml` and documenting the purpose and arguments for your macros once they’re ready for use.
-- ✅ `target` although we don't explicitly use the target folder and you should never save anything directly to it, it is s great place to go when debugging code. The target folder is where the 'compiled' models are saved. This is the sql code that is generated by dbt once all the macros have been filled with real code. This means it is a great place to find the actual code dbt is running, you can then copy it into athena and see why your code isn't running properly.
+- ✅ `target` although we don't explicitly use the target folder and you should never save anything directly to it, it is a great place to go when debugging code. The target folder is where the 'compiled' models are saved. This is the sql code that is generated by dbt once all the macros have been filled with real code. This means it is a great place to find the actual code dbt is running, you can then copy it into athena and see why your code isn't running properly.
 - ✅ `model_templates` these templates are generic templates created by data engineering for snapshotting and slowly changing dimension models. You can use these in you projects if you have the need for them.
