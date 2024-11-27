@@ -231,7 +231,7 @@ shows the code in context.
 
 You can also access `userinfo` in a similar manner from a Python based application. You will need to access the raw cookie string and pass it as a header in the request to the `userinfo` endpoint.
 
-For example in a Flask application, where you have access to a `request` object, you can retreive the raw cookie string from the header as below:
+For example in a Flask application, where you have access to a `request` object, you can retrieve the raw cookie string from the header as below:
 
 ```python
 cookie = request.headers.get("Cookie")
