@@ -237,12 +237,12 @@ cookie = request.headers.get("Cookie")
 ```
 
 You can then use the [`requests` library](https://requests.readthedocs.io/en/latest/) to call the `userinfo` endpoint, passing the cookie as a `"App-Cookie"` header as below:
+
 ```python
 requests.get(
     "http://localhost:3001/userinfo",
     headers={"App-Cookie": cookie},
 )
-```
 
 ##### Example response
 
