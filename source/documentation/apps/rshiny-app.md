@@ -235,6 +235,7 @@ For example in a Flask application, where you have access to a `request` object,
 
 ```python
 cookie = request.headers.get("Cookie")
+```
 
 You can then use the [`requests` library](https://requests.readthedocs.io/en/latest/) to call the `userinfo` endpoint, passing the cookie as a `"App-Cookie"` header as below:
 
