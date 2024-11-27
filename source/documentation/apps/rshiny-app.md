@@ -243,6 +243,7 @@ requests.get(
     "http://localhost:3001/userinfo",
     headers={"App-Cookie": cookie},
 )
+```
 
 ##### Example response
 
