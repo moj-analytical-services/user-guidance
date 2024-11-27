@@ -229,7 +229,7 @@ profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(.h
 [This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L61)
 shows the code in context.
 
-You can also access the userinfo in a similar manner from a python based application. You will need to access the raw cookie string and pass it as a header in the request to the `userinfo` endpoint.
+You can also access `userinfo` in a similar manner from a Python based application. You will need to access the raw cookie string and pass it as a header in the request to the `userinfo` endpoint.
 
 For example in a Flask application, where you have access to a `request` object, you can retreive the raw cookie string from the header as below:
 ```python
