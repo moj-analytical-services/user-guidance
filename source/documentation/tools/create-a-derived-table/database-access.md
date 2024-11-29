@@ -1,5 +1,10 @@
 # Database Access
 
+To get access to AP data, users must use the [data-engineering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access) service. [Database resources](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access) define access for databases, and these are assigned to users via [project files](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/project_access).
+
+Some standard assets, like lookups, are accessible to all users. [There is a list of standard assets.](https://github.com/moj-analytical-services/data-engineering-database-access/blob/f4f433c5363a8a2d591c53913ee3bbdfe70b6f99/project_access/standard-database-access.yaml)
+For example, to gain access to [nomis addresses](https://github.com/moj-analytical-services/data-engineering-database-access/tree/f4f433c5363a8a2d591c53913ee3bbdfe70b6f99/database_access/nomis/addresses), a user should be assigned it [via a project](https://github.com/moj-analytical-services/data-engineering-database-access/blob/f4f433c5363a8a2d591c53913ee3bbdfe70b6f99/project_access/nomis_dbt.yaml#L18)
+
 ## Standard database access
 
 The first thing you'll need to work with Create a Derived Table is an [Analytical Platform account](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html#2-analytical-platform-account) with standard database access. If you don't have that already, follow the [guidance on how to make changes to the standard database access project file](https://github.com/moj-analytical-services/data-engineering-database-access#standard-database-access) in the Data Engineering Database Access repo.
