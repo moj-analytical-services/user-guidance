@@ -17,7 +17,7 @@ To make use of this, you will need to do the following:
     ```yaml
     ---
     issuer: https://token.actions.githubusercontent.com
-    subject: repo:moj-analytical-services/airflow-create-a-pipeline:.*
+    subject_pattern: repo:moj-analytical-services/airflow-create-a-pipeline:.*
 
     permissions:
       contents: read
