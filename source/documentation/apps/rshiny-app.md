@@ -733,3 +733,13 @@ Error: Process completed with exit code 1.
 This indictates there is something wrong with your GitHub action file. Check that it looks exactly as described above, and that all secrets/variables referenced exist within your environment.
 
 Pay **particular attention** to the `helm upgrade` command itself - something as minor as additional whitespace on a line within this section of your file can cause a failure with the above error.
+
+## Cloud Platform IAM Role
+
+If you wish to integrate with AWS services hosted in Cloud Platform's account, such as Amazon DynamoDB, Amazon OpenSearch or Amazon RDS, you will need to run your web application using your Cloud Platform created IAM role.
+
+If you use our [application template](https://github.com/ministryofjustice/data-platform-app-template), you will need to update the following flag in [`build-push-deploy-dev.yml`](https://github.com/ministryofjustice/data-platform-app-template/blob/main/.github/workflows/build-push-deploy-dev.yml) and [`build-push-deploy-dev.yml`](https://github.com/ministryofjustice/data-platform-app-template/blob/main/.github/workflows/build-push-deploy-prod.yml);
+
+```bash
+--set ServiceAccount.RoleARN="< ARN of your Cloud Platform IRSA role >"
+```
