@@ -63,7 +63,7 @@ When contributing to the user guidance, you should make sure that your changes:
 To preview the guidance locally on an MoJ Digital and Technology MacBook, you will need Docker, and then you can run:
 
 ```sh
-bash scripts/local.sh
+make preview
 ```
 
 You can view the guidance on `http://localhost:4567` in your browser. Any content changes you make to your website will be updated in real time.
