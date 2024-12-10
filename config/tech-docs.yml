@@ -5,7 +5,6 @@ host: https://user-guidance.analytical-platform.service.justice.gov.uk
 show_govuk_logo: false
 service_name: Analytical Platform User Guidance
 service_link: https://user-guidance.analytical-platform.service.justice.gov.uk
-phase: Alpha
 
 # Links to show on right-hand-side of header
 header_links:
