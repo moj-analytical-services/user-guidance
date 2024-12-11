@@ -15,6 +15,10 @@ Allows you to browse the databases that are available on the Analytical Platform
 ### [GitHub](https://github.com/)
 Online hosting platform for git. Git is a distributed version control system that allows you to track changes in files, while GitHub hosts the Analytical Platform's code.
 
+## Data Visualisation
+### [QuickSight](quicksight)
+Business Intelligence (BI/MI) tool for visualising / dashboarding data.
+
 ## Data Ingest
 
 ### [Data Extractor](https://github.com/ministryofjustice/data-engineering-data-extractor)
