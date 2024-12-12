@@ -140,7 +140,7 @@ To sign in with an email magic link, add `/login?method=link` to the end of the 
 
 Please follow the same steps above to check whether the user is in the customer list of the app.
 
-##### "IP x.x.x.x is not whitelisted"
+##### "IP x.x.x.x is not allowlisted"
 
 Check that the user is trying to access the app from one of the trusted networks listed on app's app-detail from Control Panel
 
@@ -154,7 +154,6 @@ The app admin can modify the IP_Ranges on the app's app-detail detail page.
 
 In addition the AP team can:
 
-- Check the Auth0 logs for the app in [Kibana](#kibana)
 - Check the Auth0 logs in the [Auth0 console](https://manage.auth0.com)
 
 ## Advanced
@@ -213,8 +212,39 @@ You can access the full user profile by making a request directly from the RShin
 profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(cookie=get("HTTP_COOKIE", envir=session$request))), "text"))
 ```
 
+If you are using an R-Shiny base image that is at v1.3.0 or greater, use the example below to get the user data: 
+
+```r
+# library(httr)
+# library(jsonlite)
+
+cookie=get("HTTP_COOKIE", envir=session$request)
+headers <- c(
+  "App-Cookie" = cookie
+)
+
+profile <- fromJSON(content(GET("http://localhost:3001/userinfo", add_headers(.headers = headers)), "text"))
+```
+
 [This line](https://github.com/moj-analytical-services/shiny-headers-demo/blob/c274d864e5ee020d3a41497b347b299c07305271/app.R#L61)
 shows the code in context.
+
+You can also access `userinfo` in a similar manner from a Python based application. You will need to access the raw cookie string and pass it as a header in the request to the `userinfo` endpoint.
+
+For example in a Flask application, where you have access to a `request` object, you can retrieve the raw cookie string from the header as below:
+
+```python
+cookie = request.headers.get("Cookie")
+```
+
+You can then use the [`requests` library](https://requests.readthedocs.io/en/latest/) to call the `userinfo` endpoint, passing the cookie as a `"App-Cookie"` header as below:
+
+```python
+requests.get(
+    "http://localhost:3001/userinfo",
+    headers={"App-Cookie": cookie},
+)
+```
 
 ##### Example response
 
@@ -366,35 +396,32 @@ Further technical details can be found in the [Cloud Platform's Monitoring secti
 
 #### Accessing logs
 
-You can access your applications logs in Cloud platform by following the the CP guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs.html#accessing-application-log-data)
+You can access your applications logs in Cloud Platform by following their guidance [Accessing Application Log Data](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/logging-an-app/access-logs-os.html)
 
-#### Kibana on Cloud Platform 
+#### OpenSearch on Cloud Platform 
 
-Below are some notes to aid you in working with the Kibana service, on Cloud Platform.
+Below are some notes to aid you in working with the Opensearch service, on Cloud Platform.
 
-All logs from deployed apps can be viewed in [Kibana](https://kibana.cloud-platform.service.justice.gov.uk/_plugin/kibana/app/discover).
+All logs from deployed apps can be viewed in [Opensearch](https://app-logs.cloud-platform.service.justice.gov.uk/_dashboards/app/data-explorer/discover#).
 
 To view the logs for a specific app: 
 
-1.  Select **live_kubernetes_cluster** from the `CHANGE INDEX PATTERN` dropdown list.
-2.  Select **Add a filter**.
+1.  Select **live_kubernetes_cluster** from the `CHANGE INDEX PATTERN` dropdown in the top left.
+2.  Select **Add filter**.
 3.  Select **kubernetes.namespace_name**.
 4.  Select **is** as the operator.
 5.  Insert the app's name space by following the pattern `data-platform-app-<app_name>-<dev/prod>`.
-6.  In order to filter out all the logs related health-check, you can put `NOT log:  "/healthz"` in the `KQL` field.
+6.  In order to filter out all the logs related health-check, you can put `NOT log:  "/healthz"` in the `DQL` field.
 7.  Select **Save**.
 8.  (Optional) - you can select to view only the log output by adding it from the **Available Fields** list in the left hand pane using the (+) button revealed on mouse hover
 
-Log messages are displayed in the **message** column.
+Log messages are displayed in the **log** column.
 
-By default, Kibana only shows logs for the last 15 minutes.
+By default, Opensearch only shows logs for the last 15 minutes.
 If no logs are available for that time range, you will receive the warning 'No results match your search criteria'.
 
-To change the time range, select the clock icon in the menu bar.
+To change the time range, select the bar next to the calendar icon at the top of the page.
 There are several presets or you can define a custom time range.
-
-Kibana also has experimental autocomplete and simple syntax tools that you can use to build custom searches.
-To enable these features, select **Options\_** from within the search bar, then toggle **Turn on query features**.
 
 
 ### Managing Deployments
@@ -686,4 +713,33 @@ A complete example for installing the helm chart in the workflow below. These ch
   $custom_variables
 ```
 
-A full working example is available [here](https://github.com/ministryofjustice/ap-rshiny-notesbook)
+You can view a full working example of an app [here](https://github.com/ministryofjustice/ap-rshiny-notesbook). This app uses:
+- The AP provided open source RShiny base Docker image. For reference, see the [Dockerfile here](https://github.com/ministryofjustice/ap-rshiny-notesbook/blob/main/Dockerfile)
+- The AP provided GitHub action file to deploy a development environment. For reference, see the [GitHub action file)](https://github.com/ministryofjustice/ap-rshiny-notesbook/blob/main/.github/workflows/build-push-deploy-dev.yml)
+- A Cloud Platform namespace to host the app. For reference, the environment configuration for this app can be [viewed here](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev)
+
+
+##### Troubleshooting
+
+If you see an error in the `Upgrade the Helm chart` step of a deployment action like the below:
+
+```
+Error: "helm upgrade" requires 2 arguments
+
+Usage:  helm upgrade [RELEASE] [CHART] [flags]
+Error: Process completed with exit code 1.
+```
+
+This indictates there is something wrong with your GitHub action file. Check that it looks exactly as described above, and that all secrets/variables referenced exist within your environment.
+
+Pay **particular attention** to the `helm upgrade` command itself - something as minor as additional whitespace on a line within this section of your file can cause a failure with the above error.
+
+## Cloud Platform IAM Role
+
+If you wish to integrate with AWS services hosted in Cloud Platform's account, such as Amazon DynamoDB, Amazon OpenSearch or Amazon RDS, you will need to run your web application using your Cloud Platform created IAM role.
+
+If you use our [application template](https://github.com/ministryofjustice/data-platform-app-template), you will need to update the following flag in [`build-push-deploy-dev.yml`](https://github.com/ministryofjustice/data-platform-app-template/blob/main/.github/workflows/build-push-deploy-dev.yml) and [`build-push-deploy-dev.yml`](https://github.com/ministryofjustice/data-platform-app-template/blob/main/.github/workflows/build-push-deploy-prod.yml);
+
+```bash
+--set ServiceAccount.RoleARN="< ARN of your Cloud Platform IRSA role >"
+```

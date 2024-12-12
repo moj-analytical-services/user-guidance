@@ -67,7 +67,8 @@ Follow these steps to delete an environment:
 
 Once you have your repository, you can [clone it to your local machine](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and start writing your application, or copy existing code to [push](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository) to the repository.
 
-You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, however we recommend you use the open-source Shiny Server image managed by the Analytical Platform. [Click here to see further documentation about this, including an example Dockerfile](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#open-source-shiny-server). The [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples) may contain applications build using other languages and frameworks too.
+You will need to create a `Dockerfile` that builds and runs your application. You can define this yourself entirely, however we recommend you use the open-source Shiny Server image managed by the Analytical Platform. [Click here to see further documentation about this, including an example Dockerfile](https://user-guidance.analytical-platform.service.justice.gov.uk/apps/rshiny-app.html#open-source-shiny-server). The [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples) may contain applications built using other languages and frameworks too.
+> Note: The healthcheck and other endpoints are sent to port 9999 your application will need this set to work.
 
 When ready to deploy, you can move on to:
 
@@ -95,18 +96,8 @@ You can follow the instructions for each step individually, with a pull request 
 
 > Note: It is important you create the namespace with the correct name to begin with. Changing the namespace afterwards will likely cause breaking changes on deployment.
 
-[Follow the "Creating a Cloud Platform environment" instructions](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/env-create.html#creating-a-cloud-platform-environment) to create your namespace. Please note, your namespace name **must** follow the format of:
+[Follow the "Creating a Cloud Platform environment" instructions](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/getting-started/env-create.html#creating-a-cloud-platform-environment) to create your namespace. Your namespace must meet the Ministry of Justice’s guidance on [naming things](https://technical-guidance.service.justice.gov.uk/documentation/standards/naming-things.html).
 
-```data-platform-app-<repo-name>-<env>```
-
-The `<repo-name>` should be the name of the repository you set up in the [previous step](#create-a-repository-from-the-template), not the full url.
-
-The `<env>` should be `dev` or `prod` based on which environment you are setting up. E.g.
-
-```
-data-platform-app-my-github-repo-dev
-data-platform-app-app-my-github-repo-prod
-```
 
 In addition, you will need to update the generated `01-rbac.yaml` file in your namespace directory to add the `analytics-hq` team. Open the file, and under the `subjects` section, add the following below the existing entry:
 
@@ -224,6 +215,7 @@ You can see a [full example of a namespace directory](https://github.com/ministr
 1. Login to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk)
 1. Click the "Webapps" link in the main navigation, and click the "Register app" button at the bottom of the page
 1. Enter the full URL of your GitHub repository
+1. Enter your Cloud Platform namespace, without any env suffix
 1. Choose to create a new webapp data source (S3 bucket), connect an existing data source, or choose to do this later.
 > **NOTE:**
 > If you choose "Do this later" you will be able to create a Webapp data source by clicking the "Webapp data" button in the main navigation after registering your app. You will then need to come back to the "Manage app" page to link it to your Application.
@@ -268,3 +260,13 @@ Note that characters that are not compatible with website URLs are converted. Th
 ### Managing your Application
 
 [Further information about managing deployed apps, including managing user access, can be found in the Managing published apps section.](/apps/rshiny-app.html#managing-published-apps)
+
+### Deleting your Webapp 
+
+To delete your Webapp:
+
+> **NOTE:**
+> If your webapp uses [data-engineering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access) to access data on the AP, you will need to **remove all references to the app (alpha_app_*) in any project_access .yaml files and [scripts/db_app_policies.py](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/scripts/db_app_policies.py) before asking for the webapp to be deleted**. Failure to do this may cause breakages to the [data-engineering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access) repository.
+
+1. Raise a support request detailing the name of the webapp via our [support process](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-support.yml). Only Control Panel Administrators can delete webapps from the Control Panel. 
+1. Follow the Cloud Platform's guidance on [removing an unneeded namespace](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/deploying-an-app/cleaning-up.html)

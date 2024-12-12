@@ -18,13 +18,16 @@ _In the old system there was support for a range of ports, so it is possible you
 
 See [Coffee and Coding session on Building webapps in Python using Plotly Dash](https://github.com/moj-analytical-services/Coffee-and-Coding/tree/master/2020-04-14%20Python%20webapps%20using%20Plotly%20Dash)
 
+### Jupyter Lab Version
+Dash is known to work with `JupyterLab: 3.1.13, Python 3.9 - Git ext`. You may run into issues attempting to run Dash with other versions of JupyterLab. 
+
 ### Install dependencies
 
 In the terminal, install the Dash dependencies:
 
 ```bash
-pip install --user dash==0.39.0  # The core dash backend
-pip install --user dash-daq==0.1.0  # DAQ components (newly open-sourced!)
+pip install --user dash==2.17.1  # The core dash backend
+pip install --user dash-daq==0.5.0  # DAQ components (newly open-sourced!)
 ```
 
 The demo code in this document is known to work with these versions but you can
@@ -45,23 +48,31 @@ N.B. You will need to have pandas installed for this code to work.
 ```python
 import dash
 from dash.dependencies import Input, Output
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 
 import flask
 import pandas as pd
 import time
 import os
 
+
 server = flask.Flask('app')
 server.secret_key = os.environ.get('secret_key', 'secret')
 
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/hello-world-stock.csv')
 
-app = dash.Dash('app', server=server, url_base_pathname='/\_tunnel\_/8050/')
+external_scripts = [
+    'https://cdn.plot.ly/plotly-basic-latest.min.js'
+]
+
+
+app = dash.Dash('app', server=server, url_base_pathname='/_tunnel_/8050/', external_scripts=external_scripts)
+
 
 app.scripts.config.serve_locally = False
-dcc._js_dist[0]['external_url'] = 'https://cdn.plot.ly/plotly-basic-latest.min.js'
+
 
 app.layout = html.Div([
     html.H1('Stock Tickers'),
@@ -77,10 +88,13 @@ app.layout = html.Div([
     dcc.Graph(id='my-graph')
 ], className="container")
 
+
 @app.callback(Output('my-graph', 'figure'),
               [Input('my-dropdown', 'value')])
 
+
 def update_graph(selected_dropdown_value):
+    print("test")
     dff = df[df['Stock'] == selected_dropdown_value]
     return {
         'data': [{
@@ -101,8 +115,10 @@ def update_graph(selected_dropdown_value):
         }
     }
 
-if `__name__` == '\_\_main\_\_':
+
+if __name__ == '__main__':
     app.run_server(host='0.0.0.0')
+
 
 ```
 
@@ -129,12 +145,114 @@ $ python3 app.py
  \* Running on http://0.0.0.0:8050/ (Press CTRL+C to quit)
 ```
 
+## Running [streamlit] apps
+
+Similar to [Dash] apps, [streamlit] apps can also be developed on JupyterLab and accessed via the `/\_tunnel\_/` endpoint.
+
+### Jupyter Lab Version
+Streamlit is known to work with `JupyterLab: 3.1.13, Python 3.9 - add Streamlit (installed)`. You may run into issues attempting to run streamlit with other versions of JupyterLab. 
+
+### Install dependencies
+
+In the terminal, install the streamlit dependencies:
+
+```bash
+pip install --user streamlit==1.36.0  # The streamlit package
+```
+
+Try `streamlit hello` in your terminal, if you get error like `TypeError: bases must be types`, then run the following commands to fix it:
+
+```
+pip uninstall protobuf
+pip install protobuf==3.20.1
+```
+
+Next, set the following environment variables:
+
+```
+export STREAMLIT_SERVER_PORT=8050
+export STREAMLIT_SERVER_ADDRESS=0.0.0.0
+export STREAMLIT_SERVER_BASE_URL_PATH=/_tunnel_/8050/
+export STREAMLIT_LOGGER_LEVEL=debug
+```
+
+You can use a [config.toml](https://docs.streamlit.io/develop/api-reference/configuration/config.toml) file to set variables at runtime if you wish. 
+
+1. First create the `.streamlit/config.toml` in your project root directory if it doesn't already exist
+2. Next add the following to the file:
+
+    ```toml
+    [server]
+    address = '0.0.0.0'
+    port = 8050
+    baseUrlPath = '/_tunnel_/8050/'
+    ```
+
+### Example code
+
+The following code comes from [streamlits own website](https://docs.streamlit.io/get-started/tutorials/create-an-app).
+
+N.B. You will need to have pandas and numpy installed for this code to work.
+
+Create a file called `app.py` and add the following code:
+
+```python
+import streamlit as st
+import pandas as pd
+import numpy as np
+
+st.title('Uber pickups in NYC')
+
+DATE_COLUMN = 'date/time'
+DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
+            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
+
+@st.cache_data
+def load_data(nrows):
+    data = pd.read_csv(DATA_URL, nrows=nrows)
+    lowercase = lambda x: str(x).lower()
+    data.rename(lowercase, axis='columns', inplace=True)
+    data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
+    return data
+
+data_load_state = st.text('Loading data...')
+data = load_data(10000)
+data_load_state.text("Done! (using st.cache_data)")
+
+if st.checkbox('Show raw data'):
+    st.subheader('Raw data')
+    st.write(data)
+
+st.subheader('Number of pickups by hour')
+hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
+st.bar_chart(hist_values)
+
+# Some number in the range 0-23
+hour_to_filter = st.slider('hour', 0, 23, 17)
+filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
+
+st.subheader('Map of all pickups at %s:00' % hour_to_filter)
+st.map(filtered_data)
+
+```
+
+### Run server from the terminal
+
+```
+$ streamlit run app.py
+```
+## Accessing your app
+
 ### Access via `\_tunnel\_` URL
 
-Copy your `jupyter` URL and append `/\_tunnel\_/8050/` to access your running Dash
-app. If your `jupyter` URL is `https://r4vi-jupyter-lab.tools.alpha.mojanalytics.xyz/lab?`,
-then your Dash app will be available at
-`https://r4vi-jupyter-lab.tools.alpha.mojanalytics.xyz/\_tunnel\_/8050/`.
+Copy your `jupyter` URL and append `/\_tunnel\_/8050/` to access your running
+app. 
+- If your `jupyter` URL is `https://r4vi-jupyter-lab.tools.alpha.mojanalytics.xyz/lab?`,
+then your app will be available at
+`https://r4vi-jupyter-lab.tools.alpha.mojanalytics.xyz/\_tunnel\_/8050/`. 
+- If your jupyter URL
+is `https://[GITHUB USERNAME]-jupyter-lab.tools.analytical-platform.service.justice.gov.uk` then your
+app will be available at `https://[GITHUB USERNAME]-jupyter-lab.tools.analytical-platform.service.justice.gov.uk/_tunnel_/8050/`
 
 ![](images/dash/visit_url.gif)
 
@@ -151,3 +269,4 @@ Contact us on the [#analytical-platform-support](https://app.slack.com/client/T0
 to request an upgrade.
 
 [dash]: https://dash.plot.ly/
+[streamlit]: https://streamlit.io/

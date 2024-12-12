@@ -72,7 +72,7 @@ Upper case.
 
 Upper case. No space or hyphen.
 
-## Kibana
+## Opensearch
 
 Upper case.
 

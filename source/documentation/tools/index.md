@@ -4,48 +4,56 @@ The Analytical (AP) provides a range of tools, services and packages. This page 
 
 Note that we only provides support for third-party tools and services for features directly involving the Analytical Platform, such as bespoke configurations. For any other support with third-party tools and services, see the vendor's documentation; we have provided links where possible.
 
-## Core tools and services
-
-### [Airflow](airflow)
-A tool for scheduling and monitoring workflows.
+## Core Tools and Services
 
 ### [Control Panel](control-panel.html)
 Main entry point to the Analytical Platform. Allows you to configure tools and view their status.
 
-### [Create a Derived Table](create-a-derived-table)
-A tool for creating persistent derived tables in Athena.
-
-### [RStudio](rstudio)
-Development environment for writing R code and R Shiny apps. For more information, see the [RStudio documentation](https://docs.posit.co/ide/user/).
-
-### [JupyterLab](jupyterlab)
-Development environment for writing Python code. For more information, see the [JupyterLab documentation](https://jupyterlab.readthedocs.io/en/latest/).
-
-### [Visual Studio Code](visual-studio-code)
-General purpose code editor. For more information, see the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
-
 ### [Data Discovery](../data/curated-databases/data-documentation)
 Allows you to browse the databases that are available on the Analytical Platform.
+
+### [GitHub](https://github.com/)
+Online hosting platform for git. Git is a distributed version control system that allows you to track changes in files, while GitHub hosts the Analytical Platform's code.
+
+## Data Ingest
+
+### [Data Extractor](https://github.com/ministryofjustice/data-engineering-data-extractor)
+Extracts data from applications, services or microservices to the Analytical Platform in a standardised way.
 
 ### [Data Uploader](data-uploader)
 Web application for uploading data (.csv, .json, .jsonl) to the Analytical Platform in a standardised way.
 
-### [Data Extractor](https://github.com/ministryofjustice/data-engineering-data-extractor)
-
-Extracts data from applications, services or microservices to the Analytical Platform in a standardised way.
-
-### [GitHub](https://github.com/)
-
-Online hosting platform for git. Git is a distributed version control system that allows you to track changes in files, while GitHub hosts the Analytical Platform's code.
-
-### [Register my data](https://github.com/ministryofjustice/register-my-data)
-
-Moves data from microservices into the Analytical Platform's [curated databases](../data/curated-databases) in a standardised way.
-
-### [Ingestion](ingestion)
+### [Ingestion](ingestion)
 An SFTP based service that allows users to ingest data into their Analytical Platform data warehouse.
 
-## Python packages
+### [Register my data](https://github.com/ministryofjustice/register-my-data)
+Moves data from microservices into the Analytical Platform's [curated databases](../data/curated-databases) in a standardised way.
+
+## Integrated Development Environments (IDE)
+
+### [Amazon Athena Console](https://user-guidance.analytical-platform.service.justice.gov.uk/data/curated-databases/amazon-athena/#amazon-athena)
+Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. See  [Athena documentation](https://user-guidance.analytical-platform.service.justice.gov.uk/data/curated-databases/amazon-athena/#amazon-athena) for more information.
+
+### [JupyterLab](jupyterlab)
+Development environment for writing Python code. For more information, see the [JupyterLab documentation](https://jupyterlab.readthedocs.io/en/latest/).
+
+### [RStudio](rstudio)
+Development environment for writing R code and R Shiny apps. For more information, see the [RStudio documentation](https://docs.posit.co/ide/user/).
+
+### [Visual Studio Code](visual-studio-code)
+General purpose code editor. For more information, see the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
+
+## Orchestration
+
+### [Airflow](airflow)
+A tool for scheduling and monitoring workflows.
+
+### [Create a Derived Table](create-a-derived-table)
+A tool for creating persistent derived tables in Athena.
+
+> 💡 For guidance on which tools to use when doing data transformation please refer to [tools for data transformation](tools-for-data-transformation).
+
+## Python Packages
 
 The Data Engineering team maintain Python packages that help with data manipulation. The following are the packages we consider the most useful for doing so:
 
@@ -70,9 +78,9 @@ Queries MoJAP athena databases with features such as temp table creation.
 ### [splink](https://github.com/moj-analytical-services/splink)
 Provides the ability to link datasets at scale. Splink is the matching engine behind the linked data on the Analytical Platform. This package is maintained by the Internal Data Linking team, support is offered via the **#ask-data-linking** Slack channel.
 
-## R packages
+## R Packages
 
-The following R packages are maintained the AP community
+The following R packages are maintained by the AP community
 
 ### [dbtools](https://github.com/moj-analytical-services/dbtools)
 Allows you to access Athena databases from the Analytical Platform using a [reticulate](https://rstudio.github.io/reticulate/articles/package.html) wrapper around pydbtools.
@@ -83,7 +91,10 @@ Allows you to access Athena databases from the Analytical Platform using an exte
 ### [Rs3tools](https://github.com/moj-analytical-services/Rs3tools)
 Allows you to access AWS S3 from the Analytical Platform, which is mainly compatible with the legacy package [s3tools](https://github.com/moj-analytical-services/s3tools).
 
-## Data science tools
+## Data Science Tools and Services
 
-### [Data Science Asset Register](https://github.com/moj-analytical-services/data-science-assets)
-Process for managing deployed data science assets. The register itself can be found [here](https://justiceuk-my.sharepoint.com/:u:/r/personal/william_miller1_justice_gov_uk/Documents/Data%20Science%20Asset%20Register/asset_register.html?csf=1&web=1&e=k9GzSK).
+### [Data Science Asset Register](https://data-science-asset-register-dev.apps.live.cloud-platform.service.justice.gov.uk/)
+Register of deployed data science assets. The repository for managing and updating the register can be found [here](https://github.com/moj-analytical-services/data-science-assets).
+
+### [MLFlow Tracking Server](mlflow-tracking-server)
+A user interface for [MLFlow Tracking Server](https://mlflow.org/docs/latest/tracking/server.html) that allows users to track their model experiments.
