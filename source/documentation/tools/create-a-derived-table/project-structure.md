@@ -14,15 +14,14 @@ Analytics Engineering is a relatively new function in the MoJ (as of November 20
 - Analysts working in different parts of the organisation have consistent experiences when using data models
 - Apparent discrepancies among numbers reported between different analytical teams is minimised
 
-Some links:
+Here are some useful links if you want to do some further reading around Analytics Engineering:
 
-Analytics Engineering Government Digital and Data Profession Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
+- Analytics Engineering Government Digital and Data Profession Capability Framework ([GDD](https://ddat-capability-framework.service.gov.uk/role/analytics-engineer)). 
 
-[Blog post by dbt](https://www.getdbt.com/blog/analytics-engineer-vs-data-analyst)
+- [Blog post by dbt](https://www.getdbt.com/blog/analytics-engineer-vs-data-analyst)
 
-Add diagram showing where we sit
-
-### The guide
+![Data Journey](/Users/alex.pavlopoulos/Documents/Code/user-guidance/source/images/create-a-derived-table/data-journey.png)
+### The guide
 
 This guide aims to provide consistency in how our projects in create-a-derived-table are structured - in terms of folders, files and naming - all of which are related to how we structure our transformations.
 
@@ -240,7 +239,7 @@ This is a welcome change for many of us who have become used to applying the sam
   - ✅ **First staging model** There is little distinction between a base model and a staging model when no further transformations are required in your staging database. So it is preference what you call these models, `base_` or `stg_`. In some domains, data engineers load the data without casting data types and then create a base model for that table in create-a-derived-table that casts and renames variables. Example below for illustration.
 
 ```sql
-  with
+with
 
 source as (
 
@@ -530,7 +529,7 @@ models/prison
 
 ### Complete Enterprise Data Warehouse approach using create-a-derived-table
 
-![data-flow-diagram excalidraw](https://github.com/user-attachments/assets/3dfc54d7-e304-4e48-b06d-c0dddad40503) need a new diagram!!!
+![Analytics Engineering Medallion Achitecture](/Users/alex.pavlopoulos/Documents/Code/user-guidance/source/images/create-a-derived-table/analytics-engineering-medallion-architecture.png)
 
 In the above diagram you can see the flow of data through the Data Modelling and Engineering function. This follows a medallion rating system, that corresponds to the level of cleaning, transforming and testing that has been implemented on the data. 
 
@@ -601,13 +600,13 @@ select * from select_business_area
 
 ## 5-derived
 
-## Introduction
+### Introduction
 
 The final layer in the DMET pipeline, as shown in the figure in the previous section, is the derived layer. This should include all databases downstream of the datamarts databases and will usually represent a specific business need that flattens dimensions and facts into fewer use specific tables. We also intend this to be home to any database that has been developed outside the direct oversight of Analytics Engineers. Given these databases will be more specialised to specific use cases we will therefore have fewer requirements on them to conform to data modelling concepts like those found in the Kimball methodology. Where possible the datamarts databases should be the source for these databases.
 
 **Derived** tend to be wide, dense tables, the result of joining facts and dimensions into a single table ready-made for a particular analysis. In modern data warehousing — where storage is cheap and compute is expensive — we can borrow and add any and all data from dimensional concepts to answer questions about core entities. Building the same data in multiple places is more efficient in this paradigm than having to repeatedly rejoin these concepts in the dimensional layer.
 
-## Derived database types
+### Derived database types
 
 The two types of derived databases:
 - **Analytics Engineering Managed:** These databases will be suffixed with `_derived' and will be named after relevant domains / sub-domain (i.e. probation, finance, recruitment, etc.). These databases will either be developed by, or with oversight from, Analytics Engineers. They will be considered gold standard in the medallion architecture. 
@@ -616,7 +615,7 @@ The two types of derived databases:
   - It passes the standard PR checks and has been reviewed by an Analytics Engineer (and a Data Engineer if necessary). This may mean that you are asked to make changes to you project if someone in DMET thinks that your project could interfere with existing work.
   - You do your best to branch of current data products at the latest possible point in the data pipeline. This is to reduce divergence and ensures that we are all working from the same 'one source of truth'.
 
-## Database Access
+### Database Access
 
 Access to derived table will likely need to be granted on a database level, rather than on a domain level. This will require relevant configs in Database Access to be set up. For further detail go to [#ask-data-modelling](https://moj.enterprise.slack.com/archives/C03J21VFHQ9) to get advise on how to get access or set up access.
 
