@@ -9,7 +9,10 @@ dbt best practices version: [v1.7](https://docs.getdbt.com/best-practices/how-we
 
 ### What is Analytics Engineering?
 
-Analytics Engineering is a relatively new function in the MoJ (as of November 2024). We sit in Data Modelling and Engineering Team (DMET), we are the 'Data Modelling' part! The title, [Analytics Engineer](https://www.getdbt.com/what-is-analytics-engineering) comes from the fact that we sit between Data Engineers on one side, who load the data onto our data warehouse; and Data Analysts (and other data users), who use the data on the other. There is a growing need for clean, standardised data that is consistent across the business and easy to use for any downstream users. That is where the Analytics Engineering function comes in, we aim to provide that data so that Analysts and Modellers (the predicting ones) don't have to self-service.
+Analytics Engineering is a relatively new function in the MoJ (as of November 2024). We sit in Data Modelling and Engineering Team (DMET), we are the 'Data Modelling' part! The title, [Analytics Engineer](https://www.getdbt.com/what-is-analytics-engineering) comes from the fact that we sit between Data Engineers on one side, who load the data onto our data warehouse; and Data Analysts (and other data users), who use the data on the other. There is a growing need for clean, standardised data that is consistent across the business and easy to use for any downstream users. That is where the Analytics Engineering function comes in. We aim to provide consistent, reusable data models conformed to common standards so that: 
+- Analysts and Modellers (the predicting ones) don't have to self-service and can focus on their analytical work.
+- Analysts working in different parts of the organisation have consistent experiences when using data models
+- Apparent discrepancies among numbers reported between different analytical teams is minimised
 
 Some links:
 
@@ -58,13 +61,14 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
       │ 
       ├── staging  # staging domain
       │   ├── stg_nomis # database
-      │   │      ├── stg_nomis__docs.md # model
-      │   │      ├── stg_nomis__models.yml
-      │   │      ├── stg_nomis__offender.sql
-      │   │      └── stg_nomis__prison.sql
+      │   │      ├── stg_nomis__stg_docs.md # model
+      │   │      ├── stg_nomis__stg_models.yml
+      │   │      ├── stg_nomis__stg_offender.sql
+      │   │      └── stg_nomis__stg_prison.sql
       │   └── stg_xhibit
-      │          ├── stg_xhibit__models.yml
-      │          └── stg_xhibit__court.sql
+      │          ├── _stg_xhibit.yml
+      │          ├── stg_xhibit__stg_<model_names>.sql
+      │          └── stg_xhibit__stg_court.sql
       ├── courts
       │   ├── courts_int
       │   │
@@ -74,7 +78,7 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
       │
       ├── prison  # domain
       │   ├── prison_int # database
-      │   │      ├──prison_int__int_models.sql # model
+      │   │      ├──prison_int__int_<model_names>.sql # model
       │   │      ...
       │   ├── prison_datamarts
       │   │
@@ -95,7 +99,7 @@ Finally, it is worth flagging that create-a-derived-table has been evolving sinc
 
 The staging layer is where our journey begins. This is the foundation of our project, where we bring all the individual components we're going to use to build our more complex and useful models into the project.
 
-dbt likes to use an analogy throughout this guide, and we will stick to it as we think it is useful; thinking modularly in terms of atoms, molecules, and more complex outputs like proteins or cells (we apologise in advance to any chemists or biologists for our inevitable overstretching of this metaphor). Within that framework, if our source system data is a soup of raw energy and quarks, then you can think of the staging layer as condensing and refining this material into the individual atoms we’ll later build more intricate and useful structures with.
+Dbt likes to use an analogy throughout this guide, and we will stick to it as we think it is useful; thinking modularly in terms of atoms, molecules, and more complex outputs like proteins or cells (we apologise in advance to any chemists or biologists for our inevitable overstretching of this metaphor). Within that framework, if our source system data is a soup of raw energy and quarks, then you can think of the staging layer as condensing and refining this material into the individual atoms we’ll later build more intricate and useful structures with.
 
 ### Staging: Files and folders
 
@@ -113,7 +117,7 @@ models/staging
     └── stg_xhibit__court.sql
 ```
 
-- **Folders.** Folder structure is extremely important in dbt. Not only do we need a consistent structure to find our way around the codebase, as with any software project, but our folder structure is also one of the key interfaces for understanding the knowledge graph encoded in our project (alongside the DAG and the data output into our warehouse). It should reflect how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models. Moreover, we can use our folder structure as a means of selection in dbt [selector syntax](https://docs.getdbt.com/reference/node-selection/syntax). For example, with the above structure, if we got fresh xhibit data loaded and wanted to run all the models that build on our xhibit data, we can easily run `dbt build --select models/staging/xhibit_stg+`, and we’re all set for building more up-to-date reports on Crown Courts. Additionally, with create-a-derived-table the project structure is how we manage database access. So following this guidance will ensure only those who need to get to see your data get to see it.
+- **Folders.** Folder structure is extremely important in dbt. Not only do we need a consistent structure to find our way around the codebase, as with any software project, but our folder structure is also one of the key interfaces for understanding the knowledge graph encoded in our project (alongside the [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph) and the data output into our warehouse). It should reflect how the data flows, step-by-step, from a wide variety of source-conformed models into fewer, richer business-conformed models. Moreover, we can use our folder structure as a means of selection in dbt [selector syntax](https://docs.getdbt.com/reference/node-selection/syntax). For example, with the above structure, if we got fresh xhibit data loaded and wanted to run all the models that build on our xhibit data, we can easily run `dbt build --select models/staging/xhibit_stg+`, and we’re all set for building more up-to-date reports on Crown Courts. Additionally, with create-a-derived-table the project structure is how we manage database access. So following this guidance will ensure only those who need to get to see your data get to see it.
   - ✅ **Subdirectories based on business grouping.** dbt recommends against this practice, however crate-a-derived-table has been built in a way that necessitates domains as subdirectories so that we can control access through [data engineering database access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main/database_access/create_a_derived_table). This is a key deviation from dbt guidance.
   - ✅ **Subdirectories based on the source system**. For the MoJ we have a staging domain and each subfolder in the domain will form its own database. We expect that each database in the staging domain should be source aligned. This allows for future projects to pull on data that is already staged, saving time and reducing the chance of silo-ing data.
   - ❌ **Subdirectories based on loader.** Some people attempt to group by how the data is loaded (Fivetran, Stitch, custom syncs), but this is too broad to be useful on a project of any real size.
@@ -183,7 +187,7 @@ select * from renamed
   - ✅ **Generating keys** Create unique surrogate keys using the dbt utils function `dbt_utils.generate_surrogate_key(`
   - ❌ **Joins** — the goal of staging models is to clean and prepare individual source-conformed concepts for downstream usage. We're creating the most useful version of a source system table, which we can use as a new modular component for our project. In our experience, joins are almost always a bad idea here — they create immediate duplicated computation and confusing relationships that ripple downstream — there are occasionally exceptions though.
   - ❌ **Aggregations** — aggregations entail grouping, and we're not doing that at this stage. Remember - staging models are your place to create the building blocks you’ll use all throughout the rest of your project — if we start changing the grain of our tables by grouping in this layer, we’ll lose access to source data that we’ll likely need at some point. We just want to get our individual concepts cleaned and ready for use, and will handle aggregating values downstream.
-- ✅ **Materialized as views.** Looking at a partial view of our `dbt_project.yml` below, we can see that we’ve configured the entire staging directory to be materialized as <Term id='view'>views</Term>. As they’re not intended to be final artifacts themselves, but rather building blocks for later models, staging models should typically be materialized as views for two key reasons:
+- ✅ **Materialised as views.** Looking at a partial view of our `dbt_project.yml` below, we can see that we’ve configured the entire staging directory to be materialised as <Term id='view'>views</Term>. As they’re not intended to be final artifacts themselves, but rather building blocks for later models, staging models should typically be materialised as views for two key reasons:
 
   - Any downstream model (discussed more in [marts](/best-practices/how-we-structure/4-marts)) referencing our staging models will always get the freshest data possible from all the component views it’s pulling together and materialising
   - It avoids wasting space in the warehouse on models that are not intended to be queried by data consumers, and thus do not need to perform as quickly or efficiently
@@ -193,7 +197,7 @@ select * from renamed
     mojap_derived_talbes:
       models:
           staging:
-            +materialized: view
+            +materialised: view
     ```
 
 :::tip During development of a data model, it may be useful to materialise all your models as tables. This will allow you to more easily debug issues. When you are ready to merge your work with main then you can change the materialisation back to view.
@@ -201,7 +205,7 @@ select * from renamed
  
 - Staging models are the only place we'll use the [`source` macro](/docs/build/sources), and our staging models should have a 1-to-1 relationship to our source tables. That means for each source system table we’ll have a single staging model referencing it, acting as its entry point — _staging_ it — for use downstream.
 
-- In MOJ many of our source datasets are 'curated tables' materialised by data engineers using create-a-derived-table. This means instead of using the standard source macro to pull data into our staging models, we should employ the transform_table.ref_on_prod macro.
+- In MoJ many of our source datasets are 'curated tables' materialised by data engineers using create-a-derived-table. This means instead of using the standard source macro to pull data into our staging models, we should employ the transform_table.ref_on_prod macro.
 
 ```sql
 -- stg_delius__address.sql
@@ -223,7 +227,7 @@ In the dev environment (local runs / PR actions) [ref_on_prod](https://github.co
 Staging models help us keep our code <Term id='dry'>DRY</Term>. dbt's modular, reusable structure means we can, and should, push any transformations that we’ll always want to use for a given component model as far upstream as possible. This saves us from potentially wasting code, complexity, and compute doing the same transformation more than once. For instance, if we know we always want our monetary values as floats in dollars, but the source system is integers and cents, we want to do the division and type casting as early as possible so that we can reference it rather than redo it repeatedly downstream.
 :::
 
-We have decided to split all staging models into their own staging domain for several reasons. First, this creates a clear separation from the source data and the derived downstream models using that data. We do not want to silo the data too early, sources are not always domain aligned, we want to allow for different domains to use the same staging models. This brings us to a key point, all downstream models using data from the same source should use the same staging models. This reduces duplication of work and data stored in the data warehouse. It also ensures that those downstream models that do use the same source data will diverge at the latest possible point and therefore reducing differences in the data.
+We have decided to split all staging models into a single staging domain for several reasons. First, this creates a clear separation from the source data and the derived downstream models using that data. We do not want to silo the data too early, sources are not always domain aligned, we want to allow for different domains to use the same staging models. This brings us to a key point, all downstream models using data from the same source should use the same staging models. This reduces duplication of work and data stored in the data warehouse. It also ensures that those downstream models that do use the same source data will diverge at the latest possible point and therefore reducing differences in the data.
 
 This is a welcome change for many of us who have become used to applying the same sets of SQL transformations in many places out of necessity! For us, the earliest point for these 'always-want' transformations is the staging layer, the initial entry point in our transformation process. The DRY principle is ultimately the litmus test for whether transformations should happen in the staging layer. If we'll want them in every downstream model, and they help us eliminate repeated code, they're probably okay.
 
@@ -370,7 +374,7 @@ select * from final
     select * from join_and_mark_deleted_defendants
     ```
 
-  - ✅ **Unioning disparate but symmetrical sources**. A typical example here would be if you operate multiple ecommerce platforms in various territories via a SaaS platform like Shopify. You would have perfectly identical schemas, but all loaded separately into your warehouse. In this case, it’s easier to reason about our orders if _all_ of our shops are unioned together, so we’d want to handle the unioning in a base model before we carry on with our usual staging model transformations on the (now complete) set. With MoJ data, you may expect to see this, for example, in finance data. Finance data may come from seperate business units (HMCTS, MOJHQ, HMPPS etc). If this source data is structured the same but separated out into business unit specific table and the downstream transformations for each business unit is the same, you may wish to union these in your staging layer — you can dig into [more detail on this use case here](https://discourse.getdbt.com/t/unioning-identically-structured-data-sources/921).
+  - ✅ **Unioning disparate but symmetrical sources**. A typical example here would be if you operate multiple ecommerce platforms in various territories via a SaaS platform like Shopify. You would have perfectly identical schemas, but all loaded separately into your warehouse. In this case, it’s easier to reason about our orders if _all_ of our shops are unioned together, so we’d want to handle the unioning in a base model before we carry on with our usual staging model transformations on the (now complete) set. With MoJ data, you may expect to see this, for example, in finance data. Finance data may come from separate business units (HMCTS, MOJHQ, HMPPS etc). If this source data is structured the same but separated out into business unit specific table and the downstream transformations for each business unit is the same, you may wish to union these in your staging layer — you can dig into [more detail on this use case here](https://discourse.getdbt.com/t/unioning-identically-structured-data-sources/921).
   - ✅ Denormalising source tables of the same grain and concept (e.g. reference tables)
 
 - **[Codegen](https://github.com/dbt-labs/dbt-codegen) to automate staging table generation.** It’s very good practice to learn to write staging models by hand, they’re straightforward and numerous, so they can be an excellent way to absorb the dbt style of writing SQL. Also, we’ll invariably find ourselves needing to add special elements to specific models at times — for instance, in one of the situations above that require base models — so it’s helpful to deeply understand how they work. Once that understanding is established though, because staging models are built largely following the same rote patterns and need to be built 1-to-1 for each source table in a source system, it’s preferable to start automating their creation. For this, we have the [codegen](https://github.com/dbt-labs/dbt-codegen) package. This will let you automatically generate all the source YAML and staging model boilerplate to speed up this step, and we recommend using it in every project.
@@ -466,8 +470,8 @@ select * from pivot
 ```
 
 - ❌ **Exposed to end users.** Intermediate models should generally not be exposed in the main production schema. They are not intended for output to final targets like dashboards or applications, so it’s best to keep them separated from models that are, so you can more easily control data governance and discoverability.
-- ✅ **Materialized ephemerally.** Considering the above, one popular option is to default to intermediate models being materialised [ephemerally](/docs/build/materializations#ephemeral). This is generally the best place to start for simplicity. It will keep unnecessary models out of your warehouse with minimum configuration. Keep in mind though that the simplicity of ephemerals does translate a bit more difficulty in troubleshooting, as they’re interpolated into the models that `ref` them, rather than existing on their own in a way that you can view the output of.
-- ✅ **Materialized as views in a custom schema with special permissions.** A more robust option is to materialise your intermediate models as views in a specific [custom schema](/docs/build/custom-schemas), outside of your main production schema. This gives you added insight into development and easier troubleshooting as the number and complexity of your models grows, while remaining easy to implement and taking up negligible space.
+- ✅ **Materialised ephemerally.** Considering the above, one popular option is to default to intermediate models being materialised [ephemerally](/docs/build/materializations#ephemeral). This is generally the best place to start for simplicity. It will keep unnecessary models out of your warehouse with minimum configuration. Keep in mind though that the simplicity of ephemerals does translate a bit more difficulty in troubleshooting, as they’re interpolated into the models that `ref` them, rather than existing on their own in a way that you can view the output of.
+- ✅ **Materialised as views in a custom schema with special permissions.** A more robust option is to materialise your intermediate models as views in a specific [custom schema](/docs/build/custom-schemas), outside of your main production schema. This gives you added insight into development and easier troubleshooting as the number and complexity of your models grows, while remaining easy to implement and taking up negligible space.
 
 :::tip Keep your warehouse tidy!
 There are three interfaces to the organisational knowledge graph we’re encoding into dbt: the DAG, the files and folder structure of our codebase, and the output into the warehouse. As such, it’s really important that we consider that output intentionally! Think of the schemas, tables, and views we’re creating in the warehouse as _part of the UX,_ in addition to the dashboards, ML, apps, and other use cases you may be targeting for the data. Ensuring that our output is named and grouped well, and that models not intended for broad use are either not materialised or built into special areas with specific permissions is crucial to achieving this.
@@ -595,9 +599,24 @@ select * from select_business_area
 
 ## 5-derived
 
-The final layer in the DMET pipeline, as n in the figure in the previous section, is the derived layer. Here we expect any database that has been developed outside the direct oversight of Analytics Engineers. These databases will be more specialised to specific use cases and will therefore have fewer requirements on them to conform to data modelling concepts like those found in the Kimball methodology. We expect the databases here to still pull from the datamarts layer, where possible. 
+## Introduction
 
-- **derived** tend to be wide, dense tables, the result of joining facts and dimensions into a single table ready-made for a particular analysis. In modern data warehousing — where storage is cheap and compute is expensive — we can borrow and add any and all data from dimensional concepts to answer questions about core entities. Building the same data in multiple places is more efficient in this paradigm than having to repeatedly rejoin these concepts in the dimensional layer.
+The final layer in the DMET pipeline, as shown in the figure in the previous section, is the derived layer. This should include all databases downstream of the datamarts databases and will usually represent a specific business need that flattens dimensions and facts into fewer use specific tables. We also intend this to be home to any database that has been developed outside the direct oversight of Analytics Engineers. Given these databases will be more specialised to specific use cases we will therefore have fewer requirements on them to conform to data modelling concepts like those found in the Kimball methodology. Where possible the datamarts databases should be the source for these databases.
+
+**Derived** tend to be wide, dense tables, the result of joining facts and dimensions into a single table ready-made for a particular analysis. In modern data warehousing — where storage is cheap and compute is expensive — we can borrow and add any and all data from dimensional concepts to answer questions about core entities. Building the same data in multiple places is more efficient in this paradigm than having to repeatedly rejoin these concepts in the dimensional layer.
+
+## Derived database types
+
+The two types of derived databases:
+- **Analytics Engineering Managed:** These databases will be suffixed with `_derived' and will be named after relevant domains / sub-domain (i.e. probation, finance, recruitment, etc.). These databases will either be developed by, or with oversight from, Analytics Engineers. They will be considered gold standard in the medallion architecture. 
+- **All other tables databases:** Create-a-derived-table is designed to be used by anyone who wants to use it. The previous few chapters have outlined how we expect projects to be structured, however, it can be used by anyone to create products that are useful to them, providing they meet some core rules:
+  - It doesn't duplicate work already done.
+  - It passes the standard PR checks and has been reviewed by an Analytics Engineer (and a Data Engineer if necessary). This may mean that you are asked to make changes to you project if someone in DMET thinks that your project could interfere with existing work.
+  - You do your best to branch of current data products at the latest possible point in the data pipeline. This is to reduce divergence and ensures that we are all working from the same 'one source of truth'.
+
+## Database Access
+
+Access to derived table will likely need to be granted on a database level, rather than on a domain level. This will require relevant configs in Database Access to be set up. For further detail go to [#ask-data-modelling](https://moj.enterprise.slack.com/archives/C03J21VFHQ9) to get advise on how to get access or set up access.
 
 ## 6-the-rest-of-the-project
 
