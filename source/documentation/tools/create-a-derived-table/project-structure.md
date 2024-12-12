@@ -40,6 +40,7 @@ The secondary consideration is whether the tables you are creating belong in an 
 
 ### Standard directory structure and naming conventions
 
+
 Below is a simplified version of how we might expect the project structure of create-a-derived-table to look like. Throughout this guide we will provide examples of models based on real models that have been created for create-a-derived-table. These hopefully provide you with useful contextual examples that will build up an understanding of how we want the project to be structured and how your code should look.
 
 - From the `mojap_derived_tables` dbt project, the hierarchy of directories must follow `models` -> `domain` -> `database`. The directory structure after this is arbitrary and can be chosen to suit your needs. However, we do recommend that you arrange your models into logical folders to make it easier for users to understand the code.
@@ -133,6 +134,7 @@ models/staging
 Now that we’ve got a feel for how the files and folders fit together, let’s look inside one of these files and dig into what makes for a well-structured staging model.
 
 Below, is an example of a standard staging model from one of our projects (from `sop_finance_stg__hmpps_general_ledger` model) that illustrates the common patterns within the staging layer. We’ve organised our model into two <Term id='cte'>CTEs</Term>: one pulling in a source table via the [source macro](https://docs.getdbt.com/docs/build/sources#selecting-from-a-source) and the other applying our transformations.
+
 
 Here we have ordered the fields based on their type, however, you may decide to order your columns differently. See our style guide [link](source/documentation/tools/create-a-derived-table/style-guide.md) for more details on how you should style your models.
 
