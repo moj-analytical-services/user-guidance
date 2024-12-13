@@ -10,7 +10,7 @@
 ### What is Analytics Engineering?
 
 Analytics Engineering is a relatively new function in the MoJ (as of November 2024). We sit in Data Modelling and Engineering Team (DMET), we are the 'Data Modelling' part! The title, [Analytics Engineer](https://www.getdbt.com/what-is-analytics-engineering) comes from the fact that we sit between Data Engineers on one side, who load the data onto our data warehouse; and Data Analysts (and other data users), who use the data on the other. There is a growing need for clean, standardised data that is consistent across the business and easy to use for any downstream users. That is where the Analytics Engineering function comes in. We aim to provide consistent, reusable data models conformed to common standards so that: 
-- Analysts and Modellers (the predicting ones) don't have to self-service and can focus on their analytical work.
+- Analytical users (including Analysts, Statisticians and Data Scientists) can focus on analytical work instead of building their own pipelines
 - Analysts working in different parts of the organisation have consistent experiences when using data models
 - Apparent discrepancies among numbers reported between different analytical teams is minimised
 
