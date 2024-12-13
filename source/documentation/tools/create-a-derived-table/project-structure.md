@@ -71,9 +71,9 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
       │          ├── stg_xhibit__stg_<model_names>.sql
       │          └── stg_xhibit__stg_court.sql
       ├── courts
-      │   ├── courts_int
+      │   ├── criminal_courts_int
       │   │
-      │   ├── courts_datamarts
+      │   ├── criminal_courts_datamarts
       │   │
       │   └── criminal_courts_derived
       │
@@ -83,7 +83,7 @@ Below is an overview of the whole create-a-derived-table folder structure. In th
       │   │      ...
       │   ├── prison_datamarts
       │   │
-
+      │   ├── prison_derived
 ```
 
 ### Models
@@ -96,7 +96,7 @@ These concepts can be confusing, so if you have any further questions or just wa
 
 Finally, it is worth flagging that create-a-derived-table has been evolving since its conception and for that reason project structure guidance, style guidance and best practice have all changed on several occasions. So when you start looking around the code base on create-a-derived-table you may find that code style, project structure or naming conventions don't match the guidance here. It will be a continuos effort from all that use it to slowly conform create-a-derived-table.
 
-## 2-staging
+## 2-Staging
 
 The staging layer is where our journey begins. This is the foundation of our project, where we bring all the individual components we're going to use to build our more complex and useful models into the project.
 
@@ -139,7 +139,7 @@ Below, is an example of a standard staging model from one of our projects (from 
 Here we have ordered the fields based on their type, however, you may decide to order your columns differently. See our [style guide](/tools/create-a-derived-table/style-guide) for more details on how you should style your models.
 
 ```sql
--- sop_finance_stg__hmpps_general_ledger.sql
+-- sop_finance_stg__base_hmpps_general_ledger.sql
 source as (
 
     select * from {{ source('sop_finance_stg', 'hmpps_general_ledger') }}
@@ -153,10 +153,10 @@ renamed as (
         ----------  ids
         {{ dbt_utils.generate_surrogate_key(
           ['id', 
-          'a_id', ]) }} as unique_id, -- primary key
+          'a_id', ]) }} as cost_centre_analysis_code_id, -- primary key
         id as cost_centre_id, -- natural key
         a_id as analysis_code_id,
-        objective as cobjective_code_id,
+        objective as objective_code_id,
 
         ---------- strings
         extract_version
@@ -172,7 +172,7 @@ renamed as (
         date(paid_date) as paid_date,
 
         ---------- timestamps
-        transction_at
+        transction_created_at
 
     from source
 
