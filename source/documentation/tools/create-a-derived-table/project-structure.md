@@ -100,7 +100,7 @@ Finally, it is worth flagging that create-a-derived-table has been evolving sinc
 
 The staging layer is where our journey begins. This is the foundation of our project, where we bring all the individual components we're going to use to build our more complex and useful models into the project.
 
-Dbt likes to use an analogy throughout this guide, and we will stick to it as we think it is useful; thinking modularly in terms of atoms, molecules, and more complex outputs like proteins or cells (we apologise in advance to any chemists or biologists for our inevitable overstretching of this metaphor). Within that framework, if our source system data is a soup of raw energy and quarks, then you can think of the staging layer as condensing and refining this material into the individual atoms we’ll later build more intricate and useful structures with.
+While dbt likes to use the analogy of quarks, molecules and atoms, we prefer to look at this like the stages of preparing a meal. We will use this throughout this guide as an aid in understanding what we are talking about. Within that framework, if our source system data are our raw ingredients, then you can think of the staging layer as the initial preparation of our meal, say chopping some vegetables. Later, we will come to combining the prepared raw ingredient (intermediate) and then bringing them together for different final meals (matamarts and derived).
 
 ### Staging: Files and folders
 
