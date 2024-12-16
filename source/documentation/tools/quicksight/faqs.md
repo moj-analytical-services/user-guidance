@@ -1,6 +1,6 @@
 # Frequently Asked Questions
 
-## How do I know if I should be able to see a particular table/database/domain in QuickSight?  
+## How do I know if I should be able to see a particular table/database/domain in QuickSight?
 
 Databases and Tables should be available via the `Athena` data source in QuickSight provided that:
 
