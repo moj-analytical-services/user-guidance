@@ -22,9 +22,8 @@ We currently have each of the [domains/business areas](/tools/create-a-derived-t
 ## [Working with QuickSight](/tools/quicksight/working-with-quicksight.html)
 
 - [Finding datasets](/tools/quicksight/working-with-quicksight.html#finding-datasets)
-- [External QuickSight resources](/tools/quicksight/working-with-quicksight.html)
-- [Publishing dashboards](/tools/quicksight/working-with-quicksight.html)
-- [Sharing dashboards](/tools/quicksight/working-with-quicksight.html)
+- [Publishing dashboards](/tools/quicksight/working-with-quicksight.html#publishing-dashboards)
+- [Sharing dashboards](/tools/quicksight/working-with-quicksight.html#sharing-dashboards)
 
 ## [FAQs](/tools/quicksight/faqs.html)
 

@@ -1,7 +1,5 @@
 # Common Issues and Troubleshooting
 
-## Common Issues
-
 ### Issue: Unable to see a dataset in QuickSight
 
 - Ensure you have the necessary permissions to access the dataset.

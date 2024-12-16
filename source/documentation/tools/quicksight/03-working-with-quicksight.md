@@ -28,14 +28,26 @@ This imports the data into memory, rather than querying the data where it lives 
 - how likely users are to drill down into the dashboards
 - user tolerance for load times while making changes to dashboards
 
-## External QuickSight resources
-
-- [AWS resources]
-- [AWS example analysis] (_dataset requires file upload_)
-
 ## Publishing Dashboards
 
+- To create a dashboard, you'll need to publish it from an analysis. 
+[The AWS QuickSight documentation] has details around the publishing flow.
+
 ## Sharing Dashboards
+
+>**⚠️ Important ⚠️**
+> 
+>Users who have access to the dashboard can also see the data used in the associated analysis.
+
+[Published dashboards](#publishing-dashboards) can be shared with anyone who already has a QuickSight user. 
+Dashoards can be shared as-is, or they can be shared on a schedule via email, as an attachment or a link to the dashboard.
+
+From [the AWS documentation on sharing dashboards]:
+
+"By default, dashboards in Amazon QuickSight aren't shared with anyone and are only accessible to the owner.
+However, after you publish a dashboard, you can share it with other users or groups in your QuickSight account. 
+You can also choose to share the dashboard with everyone in your QuickSight account and make the dashboard visible on the QuickSight homepage for all users in your account. 
+Additionally, you can copy a link to the dashboard to share with others who have access to it."
 
 <!-- External links -->
 
@@ -43,3 +55,5 @@ This imports the data into memory, rather than querying the data where it lives 
 [SPICE]: https://docs.aws.amazon.com/quicksight/latest/user/managing-spice-capacity.html
 [AWS resources]: https://aws.amazon.com/quicksight/resources/
 [AWS example analysis]: https://docs.aws.amazon.com/quicksight/latest/user/example-analysis.html
+[The AWS QuickSight documentation]: https://docs.aws.amazon.com/quicksight/latest/user/creating-a-dashboard.html
+[the AWS documentation on sharing dashboards]: https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html

@@ -9,19 +9,20 @@ Databases and Tables should be available via the `Athena` data source in QuickSi
 
 ## Can I share the dashboards that I create?
 
-### For consumers
+See [Sharing dashboards](/tools/quicksight/working-with-quicksight.html#sharing-dashboards) for information on sharing published dashboards.
 
-### For collaborators / editor
+Be aware that [users who have access to the dashboard can also see the data used in the associated analysis].
 
 ## I’m already a user of another version of QuickSight on the AP, what should I do if:
 
 ### I can do all of my work on the new QuickSight (all of my tables are create-a-derived-table tables)
 
-Export dashboards from other versions of QuickSight
-
-Import dashboards into QuickSight via Control Panel
+It is possible to export dashboards from other instances of QuickSight using [Asset Bundle export].
+If your previous dashboard is sufficiently complex that recreation in this QuickSight would be a significant issue, [raise a support request] and the Analytical Platform team may be able to help you migrate the dashboard.
 
 ### I can’t do all of my work on the new QuickSight (some / all of my tables are outside create-a-derived-table)
+
+We will keep you updated as new data becomes available to QuickSight via the Control Panel.
 
 ## When should I use SPICE?
 
@@ -44,5 +45,7 @@ Check [the Troubleshooting guide](/tools/quicksight/troubleshooting), and [raise
 
 [the `mojap-derived-table` domains]: https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models
 [the data-engineering-database-access GitHub repository]: https://github.com/moj-analytical-services/data-engineering-database-access/?tab=readme-ov-file#access-to-curated-databases
+[users who have access to the dashboard can also see the data used in the associated analysis]: https://docs.aws.amazon.com/quicksight/latest/user/creating-a-dashboard.html
+[Asset Bundle export]: https://docs.aws.amazon.com/quicksight/latest/developerguide/assetbundle-export.html
 [SPICE]: https://docs.aws.amazon.com/quicksight/latest/user/managing-spice-capacity.html
-[Raise a support request]: https://github.com/ministryofjustice/data-platform-support/issues/new/choose
+[raise a support request]: https://github.com/ministryofjustice/data-platform-support/issues/new/choose
