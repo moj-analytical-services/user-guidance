@@ -9,19 +9,15 @@ The Analytical Platform team are making changes to how and where Airflow DAGs ar
 
 
 ### Steps to migrate Airflow DAGs to run on the new Analytical Platform Compute EKS clusters:
+You must take the following two steps to migrate your Airflow DAG:
 
-*   Release a new version of your container image (e.g. *airflow-cjs-dashboard-data*), this doesn’t need any changes, just increment the version number and generate release notes.  
+#### Step 1. Release a new version of your container image
+Release a new version of your container image (e.g. *airflow-cjs-dashboard-data*). This doesn’t need any changes, just increment the version number and generate release notes.  
     *  **Note:** You do not need to use this new version in your DAG, it is just to update the ECR repository policy.
 
-## Important Notes - Package Versioning in Images
+#### Step 2. Modify your DAG
 
-If your R packages in renv.lock or your Python packages in requirements.txt are not locked to a version, you will potentially encounter issues if newer versions of those packages are downloaded and installed. This can also occur even if all your packages are at pinned versions, as those packages themselves may have partially unpinned requirements.
-
-While we are unable to assist in resolving dependency issues, our other users have gotten great assistance in our slack [#R](https://moj.enterprise.slack.com/archives/C1PUCG719) and [#python](https://moj.enterprise.slack.com/archives/C1Q09V86S) channels.
-
- 
-
-In your DAG file in the airflow repo (e.g. *r_validation.py*), make the following changes:
+In your DAG file in the [airflow repo](https://github.com/moj-analytical-services/airflow) (e.g. *r_validation.py*), make the following changes:
 
 -   If your DAG uses the `BasicKubernetesPodOperator`, add the following arguments:
     -   `service_account_name=ROLE.replace("_", "-")` 
@@ -38,6 +34,12 @@ In your DAG file in the airflow repo (e.g. *r_validation.py*), make the followin
 -   Merge the changes in a pull request in the airflow repo as normal.
 
 An example of what an updated DAG should look like is the [examples.use_kubernetes_pod_operators](https://github.com/moj-analytical-services/airflow/blob/main/environments/dev/dags/examples/use_kubernetes_pod_operators.py) DAG. This DAG demonstrates for the `dev` environment both an updated `BasicKubernetesPodOperator` and `KubernetesPodOperator`.
+
+## Important Notes - Package Versioning in Images
+
+If your R packages in renv.lock or your Python packages in requirements.txt are not locked to a version, you will potentially encounter issues if newer versions of those packages are downloaded and installed. This can also occur even if all your packages are at pinned versions, as those packages themselves may have partially unpinned requirements.
+
+While we are unable to assist in resolving dependency issues, our other users have gotten great assistance in our slack [#R](https://moj.enterprise.slack.com/archives/C1PUCG719) and [#python](https://moj.enterprise.slack.com/archives/C1Q09V86S) channels.
 
 ## Important Notes - Change in Default Region
 

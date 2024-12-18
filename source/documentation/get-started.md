@@ -86,18 +86,17 @@ Once you have your GitHub account, there are two more steps to complete before y
 
 ### Join MoJ Analytical Services
 
-To request an invitation Analytical Platform GitHub Organisation, please head over to the [#ask-operations-engineering](https://asdslack.slack.com/archives/C01BUKJSZD4) slack channel. Ask to be added to the analytical-services GitHub Organisation by providing your GitHub username in the message. The [Operations Engineering Team](https://operations-engineering.service.justice.gov.uk/) will invite you to join the [MoJ Analytical Services](https://github.com/moj-analytical-services) GitHub organisation.
-
-> **Example**
-> 👋 Could I please be added to the Analytical Services GitHub Org, my github name is `github user name` thank you.
-
-If you do not receive a response within 24 hours, request access in either the **#ask-operations-engineering** Slack channel or email [here](operations-engineering@digital.justice.gov.uk), providing your GitHub username in your message.
+Please sign into the Analytical Platform GitHub Organisation using [SSO](https://github.com/orgs/moj-analytical-services/sso), to get your GitHub account added to the Analytical Platform GitHub Organisation.
 
 ### Sign in to the Control Panel
 
 The main entry point to the Analytical Platform is the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk/). From there, you configure core tools such as JupyterLab, RStudio and Visual Studio Code. You log in to the Control Panel using your GitHub account.
 
 When accessing the Control Panel for the first time you will be prompted to authenticate with your Justice account. You only need to do this once, and will not see this on subsequent logins.
+
+### Get Athena Access
+
+Many users of the Analytical Platform wish to query our databases using Amazon Athena. We manage access to our databases via the [Data-Engineering-Database-Access](https://github.com/moj-analytical-services/data-engineering-database-access/tree/main) repository. In order to get access to Athena, you will need to have your `alpha_user_` name added to the [Standard Access](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/standard-database-access.yaml) list. To do this, raise a PR, and post it in #ask-data-engineering on Slack to get it approved by one of our Data Engineers. Once this PR has been merged, your account will be given access to Athena and a selection of non-sensative datasets. For more information, including how to request access to specific databases via `Projects`, please refer to the [README](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/README.md) for Database Access.
 
 ## 5. Set up JupyterLab
 
@@ -135,6 +134,8 @@ $ cat /home/jovyan/.ssh/id_rsa.pub
 
 You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
 
+You also need to authorise your SSH key for use with the MoJ-Analytical-Services organisation before you can use it; see [GitHub: Authorizing an SSH key](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on#authorizing-an-ssh-key) for instructions.
+
 ## 6. Set up RStudio
 
 >**Note**: Only follow this step if you want to use the Analytical Platform as an R-based user. RStudio supports Python, but we recommend using JupyterLab for Python instead. If you configured JupyterLab in the previous step, proceed to step 7.
@@ -156,7 +157,9 @@ To create an SSH key in RStudio:
 5. When the **Information** window appears, select **Close**
 6. Select **View public key** and copy the SSH key to your clipboard
 
-You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
+7. You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
+
+8. You also need to authorise your SSH key for use with the MoJ-Analytical-Services organisation before you can use it; see [GitHub: Authorizing an SSH key](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on#authorizing-an-ssh-key) for instructions.
 
 Now that you have completed this guide you are ready to begin using the Analytical Platform. See [training](training.md) for a list of different resources to help you begin using the platform.
 
@@ -191,3 +194,5 @@ $ cat ~/.ssh/id_ed25519.pub
 8. Copy the SSH key to your clipboard
 
 You then need to add the SSH key to GitHub; see the [GitHub documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions.
+
+You also need to authorise your SSH key for use with the MoJ-Analytical-Services organisation before you can use it; see [GitHub: Authorizing an SSH key](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on#authorizing-an-ssh-key) for instructions.
