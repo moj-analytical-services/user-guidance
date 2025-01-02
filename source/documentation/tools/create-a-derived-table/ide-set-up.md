@@ -1,6 +1,8 @@
-# Rstudio Set Up
+# Interactive Development Environment (IDE) Set Up
 
-You'll need an interactive development environment (IDE) to interact with the repository and write your SQL and YAML code, and a Python virtual environment for dbt to run in. The following sections will show you how to set that up. It's worth noting at this point that you'll just be using RStudio as an IDE to interact with the repository (and git), write SQL and YAML code, and to run dbt commands from the terminal in a Python virtual environment. There is no R programming going on. We're currently not planning to get Create a Derived Table up and running with JupyterLab, as the RStudio IDE is sufficient.
+You'll need an interactive development environment (IDE) to interact with the repository and write your SQL and YAML code, and a Python virtual environment for dbt to run in. The following sections will show you how to set that up in RStudio or Visual Studio Code.
+
+It's worth noting at this point that you'll just be using RStudio or Visual Studio Code as an IDE to interact with the repository (and git), write SQL and YAML code, and to run dbt commands from the terminal in a Python virtual environment. There is no R programming going on. We're currently not planning to get Create a Derived Table up and running with JupyterLab, as the RStudio and Visual Studio Code IDEs are sufficient.
 
 
 ## Clone the repository using the RStudio GUI
