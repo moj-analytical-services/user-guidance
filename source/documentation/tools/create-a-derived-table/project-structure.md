@@ -5,7 +5,7 @@
 
 # How we structure our create-a-derived-table projects
 
-## 1-Guide-overview
+## 1-guide-overview
 
 ### What is Analytics Engineering?
 
@@ -96,7 +96,7 @@ These concepts can be confusing, so if you have any further questions or just wa
 
 Finally, it is worth flagging that create-a-derived-table has been evolving since its conception and for that reason project structure guidance, style guidance and best practice have all changed on several occasions. So when you start looking around the code base on create-a-derived-table you may find that code style, project structure or naming conventions don't match the guidance here. It will be a continuos effort from all that use it to slowly conform create-a-derived-table.
 
-## 2-Staging
+## 2-staging
 
 The staging layer is where our journey begins. This is the foundation of our project, where we bring all the individual components we're going to use to build our more complex and useful models into the project.
 
@@ -484,7 +484,7 @@ select * from pivot
 >**💡 TIP**  
 >Narrow the DAG, widen the tables. Until we get to the marts layer and start building our various outputs, we ideally want our DAG to look like an arrowhead pointed right. As we move from source-conformed to business-conformed, we’re also moving from numerous, narrow, isolated concepts to fewer, wider, joined concepts. We’re bringing our components together into wider, richer concepts, and that creates this shape in our DAG. This way when we get to the marts layer we have a robust set of components that can quickly and easily be put into any configuration to answer a variety of questions and serve specific needs. One rule of thumb to ensure you’re following this pattern on an individual model level is allowing multiple _inputs_ to a model, but **not** multiple _outputs_. Several arrows going _into_ our post-staging models is great and expected, several arrows coming _out_ is a red flag. There are absolutely situations where you need to break this rule, but it’s something to be aware of, careful about, and avoid when possible.
 
-## 4-Datamarts
+## 4-datamarts
 
 ### Datamarts: Introduction
 
@@ -593,7 +593,7 @@ select * from select_business_area
 
 - **Troubleshoot via tables.** While stacking views and ephemeral models up until our marts — only building data into the warehouse at the end of a chain when we have the models we really want end users to work with — is ideal in production, it can present some difficulties in development. Particularly, certain errors may seem to be surfacing in our later models that actually stem from much earlier dependencies in our model chain (ancestor models in our DAG that are built before the model throws the errors). If you’re having trouble pinning down where or what a database error is telling you, it can be helpful to temporarily build a specific chain of models as tables so that the warehouse will throw the error where it’s actually occurring.
 
-## 5-Derived
+## 5-derived
 
 ### Derived: Introduction
 
