@@ -4,7 +4,7 @@ This guide provides the instructions to set up the main accounts and services yo
 
 - access the Analytical Platform Control Panel
 - explore data on the Analytical Platform
-- begin developing your application in either JupyterLab or RStudio
+- begin developing your application in JupyterLab, RStudio or Visual Studio Code
 - contribute to the Analytical Platform User Guidance
 
 ## Before you begin
