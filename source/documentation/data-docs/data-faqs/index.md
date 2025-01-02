@@ -6,8 +6,8 @@ Data on the Analytical Platform can largely be split into four categories:
 
 - `Raw`: data that has been uploaded to the Analytical Platform without any changes made to it
 - `Curated`: data that has been validated, deduplicated and versioned by the Data Engineers ready to be used by Analytical Platform users
-- `Derived`: data that has been [denormalized], aggregated, and turned into a data model to fit specific needs of Analytical Platform users
-- `Processed`: data that has been processed by Analytical Platform users to fit their own needs
+- `Derived`: data that has been [denormalized] and turned into a data model to fit the general needs of a wide range of Analytical Platform users
+- `Processed`: data that has been processed by Analytical Platform users to fit their specific needs
 
 ## Where do I find out what data is already on the Platform?
 
