@@ -1,8 +1,8 @@
 # Work with git on the command line
 
-The command line is the text interface to your Analytical Platform tools. When googling, it may also be referred to as the shell, terminal, or console (and perhaps other names). In Jupyter, you can get the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of JupyterLab). You can also use all these commands in RStudio by going to Tools -> Terminal -> New Terminal.
+The command line is the text interface to your Analytical Platform tools. When googling, it may also be referred to as the shell, terminal, or console (and perhaps other names). In Jupyter, you can get the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of JupyterLab). You can also use all these commands in RStudio by going to Tools -> Terminal -> New Terminal. In Visual Studio Code, it's Terminal -> New Terminal.
 
-Once you are comfortable using the Terminal (in either R Studio or Jupyter) you can run all Git commands from the command line. If you are quite new to the command line, there are a few commands you may find useful to know, in addition to the git commands described later in this section:
+Once you are comfortable using the Terminal (in RStudio, Visual Studio Code or Jupyter) you can run all Git commands from the command line. If you are quite new to the command line, there are a few commands you may find useful to know, in addition to the git commands described later in this section:
 
 - `mkdir`: create a new directory/folder
 - `cd`: change directory
