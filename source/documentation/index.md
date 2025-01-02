@@ -8,14 +8,14 @@ This site provides instructions on how to configure and use the Analytical Platf
 
 ## Intended users
 
-Primarily intended for Data Analysts and Data Scientists in the Data & Analysis Directorates, the Analytical Platform also hosts users from:
+Primarily intended for Data Analysts and Data Scientists in the Data and Analysis Directorates, the Analytical Platform also hosts users from:
 - Criminal Injury Claims (CICA)
 - HM Courts & Tribunals Service (HMCTS)
 - HM Prison and Probation Service (HMPPS)
 - Legal Aid Agency (LAA)
 - Office of the Public Guardian (OPG)
 
-If you would like to use the Analytical Platform please contact us via the relevant (support)[https://github.com/ministryofjustice/data-platform-support/issues/new/choose] route. 
+If you would like to use the Analytical Platform please contact us via the relevant [support](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) route. 
 
 ### Knowledge requirements
 
