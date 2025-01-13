@@ -4,7 +4,7 @@ This guide provides the instructions to set up the main accounts and services yo
 
 - access the Analytical Platform Control Panel
 - explore data on the Analytical Platform
-- begin developing your application in either JupyterLab or RStudio
+- begin developing your application in JupyterLab, RStudio or Visual Studio Code
 - contribute to the Analytical Platform User Guidance
 
 ## Before you begin
@@ -26,7 +26,7 @@ A member of the Analytical Platform team will contact you.
 For Analytical Platform best practice, you need to follow certain guidelines. Bookmark the following pages and ensure you follow them before you begin using the platform:
 
 - [Acceptable use policy](aup.html): covers the way you should use the Analytical Platform and its associated tools and services
-- [Data and Analytical Services Directorate's (DASD) coding standards](https://moj-analytical-services.github.io/our-coding-standards/): principles outlining how you should write and review code
+- [Data and Analysis Directorates' coding standards](https://moj-analytical-services.github.io/our-coding-standards/): principles outlining how you should write and review code
 - [MoJ Analytical IT Tools Strategy](https://moj-analytical-services.github.io/moj-analytical-it-tools-strategy/): describes recommended ways of working on the Analytical Platform
 
 ## 2. Create Slack account
@@ -57,6 +57,7 @@ Conversations in Slack are organised into channels, which each have a specific t
 
 - the [#analytical-platform-support](https://asdslack.slack.com/archives/C4PF7QAJZ) channel is used for general discussion of the Analytical Platform -- it is also monitored by the Analytical Platform team, who can help out with any technical queries or requests. Also used to request new or existing apps and app data sources
 - the [#ask-data-engineering](https://asdslack.slack.com/archives/C8X3PP1TN) channel is used for general discussion of data engineering and for getting in touch with the data engineering team with any technical queries or requests (such as airflow DAG reviews, database access, data discovery tool, etc).
+- the [#ask-data-modelling](https://moj.enterprise.slack.com/archives/C03J21VFHQ9) channel is used for general discussion of data modelling and for getting in touch with the analytics engineering team with any technical queries or requests (such as create-a-derived-table model reviews).
 - the [#git](https://asdslack.slack.com/archives/C4VF9PRLK), [#r](https://asdslack.slack.com/archives/C1PUCG719) and [#python](https://asdslack.slack.com/archives/C1Q09V86S) channels can be used to get support from other users with any technical queries or questions -- the #[intro_r channel](https://asdslack.slack.com/archives/CGKSJV9HN) is aimed specifically at new users of R
 - the [#data_science](https://asdslack.slack.com/archives/C1Z8Q18LS) channel is used for general discussion of data science tools and techniques
 - the [#general](https://asdslack.slack.com/archives/C1PTUTC3F) channel is used for any discussions that don’t fit anywhere else
