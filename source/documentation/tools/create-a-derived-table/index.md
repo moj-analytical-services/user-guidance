@@ -12,7 +12,7 @@ Create a Derived Table is a tool for creating persistent derived tables in Athen
 ## Getting Started
 
 - [Database Access](/tools/create-a-derived-table/database-access)
-- [RStudio Set Up](/tools/create-a-derived-table/ide-set-up)
+- [RStudio Set Up](/tools/create-a-derived-table/rstudio-set-up)
 - [Collaborating with Git](/tools/create-a-derived-table/collaborating-with-git)
 
 ## Planning Models
