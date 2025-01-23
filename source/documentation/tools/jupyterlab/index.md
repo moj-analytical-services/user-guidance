@@ -91,6 +91,27 @@ python3 -m ipykernel install --user --name="pipenv-name" --display-name="My proj
 
 And then select the kernel in Jupyter as [normal](../tools/package-management.html#venv-and-pip).
 
+## Accessing a Locally Running Application
+
+As of version JupyterLab v3.6.3/4.1.0, to access an application running locally (such as Dash or Streamlit), it *must* be running on port `8081`. You can then access it by visiting `https://${USERNAME}-jupyter-lab-tunnel.tools.analytical-platform.service.justice.gov.uk`. As apps are only accessible on port 8081, you can only run one app at a time.
+
+This cannot be accessed by anyone other than yourself as it uses the same authentication method as your tooling.
+
+There is no longer a requirement to run your app (e.g. Dash or Steamlit) on a base url path e.g. `/_tunnel_/8050/`. This is only required for older versions of JupyterLab that are now deprecated.
+
+### Hints and tips
+- To run a Dash app on port `8081` use the `port` arg when using the `app.run` command in your code e.g.:
+    ```
+    if __name__ == '__main__':
+        app.run(port=8081)
+    ```
+- To run a Streamlit app on port `8081` you can use the `--server.port` flag when running the app e.g.
+   ```
+   streamlit run app.py --server.port 8081
+   ```
+    Alternatively, set the server port environment variable in your terminal session before running your app `export STREAMLIT_SERVER_PORT=8081`
+
+
 ## Hidden Files
 
 As per [this](https://jupyterlab.readthedocs.io/en/stable/user/files.html#displaying-hidden-files) documentation, to display or hide the hidden files through the menu `View` -> `Show Hidden Files`.

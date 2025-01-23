@@ -1,3 +1,8 @@
+> **IMPORTANT:**
+> These instructions are for older versions of JupyterLab earlier than v3.6.3/4.1.0.
+> [You can find the latest documentation on running an application locally here](https://user-guidance.analytical-platform.service.justice.gov.uk/tools/jupyterlab/index/html#accessing-a-locally-running-application).
+
+
 # Running your app within Jupyter
 
 It is likely that you will want to preview and test your app before you deploy it.
