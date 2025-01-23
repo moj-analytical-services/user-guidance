@@ -48,7 +48,8 @@ Every bucket has three data access levels:
 
 - Read only
 - Read/write
-- Admin -- this provides read/write access and allows the user to add and remove other users from the bucket's data access group
+- Admin 
+   - this provides read/write access and allows the user to add and remove other users from the bucket's data access group
 
 ### Path-specific access
 
@@ -83,7 +84,7 @@ To manage access to a data source:
 2.  Select the **Warehouse data** tab or the **Webapp data** tab, as relevant.
 3.  Select the name of the data source you want to manage.
 
-To add a new user to the data access group:
+To add a new user to the data access group (users must already be members of the Analytical Platform):
 
 1.  Type the user's GitHub username into the input field labelled **Grant access to this data to other users**.
 2.  Select the user from the drop-down list.
@@ -143,12 +144,12 @@ In addition, an RStudio plugin, `s3browser` is available if you only want to bro
 
 For further details, see the relevant sections for [`Rs3tools`](#rs3tools), [`botor`](#botor) and [`s3browser`](#s3browser).
 
-#### JupyterLab
+#### JupyterLab / VSCode
 
-The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab are :
+The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab and VSCode are :
 
-- Reading files : `pandas` , `mojap-arrow-pd-parser`
-- Downloading / Uploading files : `boto3`
+- Reading files : [`polars`](https://docs.pola.rs/), [`pandas`](https://pandas.pydata.org/docs/) , [`awswrangler`](https://pypi.org/project/awswrangler/), [`mojap-arrow-pd-parser`](https://github.com/moj-analytical-services/mojap-arrow-pd-parser?tab=readme-ov-file#mojap-arrow-pd-parser)
+- Downloading / Uploading files : [`awswrangler`](https://pypi.org/project/awswrangler/), [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 
 ### Installation and usage
 
@@ -158,7 +159,7 @@ You can use the Amazon S3 Console to upload/download files from/to your local co
 
 To upload files using the Amazon S3 Console:
 
-1.  Log in to the [AWS Management Console](https://aws.services.analytical-platform.service.justice.gov.uk) using your Analytical Platform account.
+1.  Log in to the AWS Management Console using your Analytical Platform account via the link at the bottom of the [Analytical Platform Control Panel Tools page](https://controlpanel.services.analytical-platform.service.justice.gov.uk/tools/)
 2.  Select **Services** from the menu bar.
 3.  Select **S3** from the drop down menu.
 4.  Select the bucket and folder you want to upload files to.
