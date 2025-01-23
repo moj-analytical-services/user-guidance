@@ -93,7 +93,7 @@ And then select the kernel in Jupyter as [normal](../tools/package-management.ht
 
 ## Accessing a Locally Running Application
 
-As of version JupyterLab v3.6.3/4.1.0, to access an application running locally (such as Dash or Streamlit), it *must* be running on port `8081`. You can then access it by visiting `https://${USERNAME}-jupyter-lab-tunnel.tools.analytical-platform.service.justice.gov.uk`. As apps are only accessible on port 8081, you can only run one app at a time.
+As of version JupyterLab v3.6.3-4.1.0, to access an application running locally (such as Dash or Streamlit), it *must* be running on port `8081`. You can then access it by visiting `https://${USERNAME}-jupyter-lab-tunnel.tools.analytical-platform.service.justice.gov.uk`. As apps are only accessible on port 8081, you can only run one app at a time.
 
 This cannot be accessed by anyone other than yourself as it uses the same authentication method as your tooling.
 
