@@ -66,6 +66,12 @@ To preview the guidance locally on an MoJ Digital and Technology MacBook, you wi
 make preview
 ```
 
+If this method does not work, try running the below as an alternative:
+
+```
+bash scripts/local.sh
+```
+
 You can view the guidance on `http://localhost:4567` in your browser. Any content changes you make to your website will be updated in real time.
 
 To shut down the Middleman instance running on your machine, select ⌘+C.
