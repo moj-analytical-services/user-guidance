@@ -48,7 +48,8 @@ Every bucket has three data access levels:
 
 - Read only
 - Read/write
-- Admin -- this provides read/write access and allows the user to add and remove other users from the bucket's data access group
+- Admin
+  - this provides read/write access and allows the user to add and remove other users from the bucket's data access group
 
 ### Path-specific access
 
@@ -83,7 +84,7 @@ To manage access to a data source:
 2.  Select the **Warehouse data** tab or the **Webapp data** tab, as relevant.
 3.  Select the name of the data source you want to manage.
 
-To add a new user to the data access group:
+To add a new user to the data access group (users must already be members of the Analytical Platform):
 
 1.  Type the user's GitHub username into the input field labelled **Grant access to this data to other users**.
 2.  Select the user from the drop-down list.
@@ -143,12 +144,16 @@ In addition, an RStudio plugin, `s3browser` is available if you only want to bro
 
 For further details, see the relevant sections for [`Rs3tools`](#rs3tools), [`botor`](#botor) and [`s3browser`](#s3browser).
 
-#### JupyterLab
+#### JupyterLab / VSCode
 
-The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab are :
+The main options for interacting with files stored in AWS S3 buckets on the Analytical Platform via JupyterLab and VSCode include:
 
-- Reading files : `pandas` , `mojap-arrow-pd-parser`
-- Downloading / Uploading files : `boto3`
+- [`polars`](https://docs.pola.rs/)
+- [`pandas`](https://pandas.pydata.org/docs/)
+- [`awswrangler`](https://pypi.org/project/awswrangler/)
+- [`mojap-arrow-pd-parser`](https://github.com/moj-analytical-services/mojap-arrow-pd-parser?tab=readme-ov-file#mojap-arrow-pd-parser)
+[`awswrangler`](https://pypi.org/project/awswrangler/)
+- [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 
 ### Installation and usage
 
@@ -158,7 +163,7 @@ You can use the Amazon S3 Console to upload/download files from/to your local co
 
 To upload files using the Amazon S3 Console:
 
-1.  Log in to the [AWS Management Console](https://aws.services.analytical-platform.service.justice.gov.uk) using your Analytical Platform account.
+1.  Log in to the AWS Management Console using your Analytical Platform account via the link at the bottom of the [Analytical Platform Control Panel Tools page](https://controlpanel.services.analytical-platform.service.justice.gov.uk/tools/)
 2.  Select **Services** from the menu bar.
 3.  Select **S3** from the drop down menu.
 4.  Select the bucket and folder you want to upload files to.
@@ -267,9 +272,122 @@ s3browser::file_explorer_s3()
 
 You can find out more about how to use `s3browser` on [GitHub](https://github.com/moj-analytical-services/s3browser).
 
-### JupyterLab
+### JupyterLab and VSCode (python)
 
-You can read/write directly from s3 using [pandas](https://pandas.pydata.org/docs/user_guide/index.html). However, to get the best representation of the column types in the resulting Pandas dataframe(s), you may wish to use [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser).
+You can read/write directly from s3 using a variety of tools: [awswrangler](https://pypi.org/project/awswrangler/#quick-start), [polars](https://docs.pola.rs/), [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html), [pandas](https://pandas.pydata.org/docs/user_guide/index.html), or [mojap-arrow-pd-parser](https://github.com/moj-analytical-services/mojap-arrow-pd-parser?tab=readme-ov-file#mojap-arrow-pd-parser)
+
+#### `AWS Data Wrangler`
+
+You can also use [`awswrangler`](https://pypi.org/project/awswrangler/#quick-start) to work with data stored in Amazon S3.
+
+To install AWS Wrangler, run the following code in a terminal:
+
+```sh
+python -m pip install awswrangler
+```
+
+To read a CSV file from S3 using AWS Wrangler:
+
+```py
+import awswrangler as wr
+
+# Retrieving the data directly from Amazon S3
+df = wr.s3.read_csv("s3://bucket/dataset/", dataset=True)
+```
+
+More information can be found in the [product documentation](https://aws-data-wrangler.readthedocs.io/en/stable/tutorials/003%20-%20Amazon%20S3.html).
+
+#### `boto3`
+
+You can also download or read objects using the [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html) package.
+
+You can install `boto3` by running the following code in a terminal:
+
+```bash
+python -m pip install boto3
+```
+
+To [download a file from Amazon S3](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-download-file.html#downloading-files), you should use the following code:
+
+```python
+import boto3
+
+s3_client = boto3.client('s3')
+s3_client.download_file('bucket_name', 'key', 'local_path')
+```
+
+If you receive an `ImportError`, try restarting your kernel, so that Python recognises your `boto3` installation.
+
+Here, you should substitute `'bucket_name'` with the name of the bucket, `'key'` with the path of the object in Amazon S3 and `local_path` with the local path where you would like to save the downloaded file.
+
+To upload a file to Amazon S3, you should use the following code:
+
+```python
+#Upload sample contents to s3
+s3_client = boto3.client('s3')
+
+data = b'This is the content of the file uploaded from python boto3'
+file_name = 'your_file_name.txt'
+
+response = s3_client.put_object(Bucket=your_bucket_name, Body=data, Key=file_name)
+print(f"AWS response code for uploading file is {(response['ResponseMetadata']['HTTPStatusCode'])}")
+```
+
+You can find more information in the [package documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Object.download_file).
+
+#### `polars`
+
+[`polars`](https://docs.pola.rs/) is a fast DataFrame library implemented in Rust and can be used to read/write data from/to Amazon S3. To install polars and s3fs, run the following code in a terminal:
+
+```bash
+python -m pip install polars s3fs
+```
+
+To read a CSV file from S3 using polars (see [reading from Cloud storage](https://docs.pola.rs/user-guide/io/cloud-storage/) in the docs):
+
+```py
+import polars as pl
+
+source = "s3://bucket/*.csv"
+
+df = pl.read_csv(source)
+```
+
+To [write a DataFrame to S3](https://docs.pola.rs/user-guide/io/cloud-storage/#writing-to-cloud-storage#writing-to-cloud-storage):
+
+```py
+import polars as pl
+import s3fs
+
+df = pl.DataFrame({
+    "foo": ["a", "b", "c", "d", "d"],
+    "bar": [1, 2, 3, 4, 5],
+})
+
+fs = s3fs.S3FileSystem()
+destination = "s3://bucket/my_file.parquet"
+
+# write parquet
+with fs.open(destination, mode='wb') as f:
+    df.write_parquet(f)
+```
+
+#### `pandas`
+
+You can use any of the `pandas` read functions (for example, `read_csv` or `read_json`) to download data directly from Amazon S3. This requires that you have installed the `pandas` and `s3fs` packages. To install these, run the following code in a terminal:
+
+```bash
+python -m pip install pandas s3fs
+```
+
+As an example, to read a CSV, you should run the following code:
+
+```py
+import pandas as pd
+pd.read_csv('s3://bucket_name/key')
+```
+
+Here, you should substitute `bucket_name` with the name of the bucket and `key` with the path of the object in Amazon S3.
 
 #### `mojap-arrow-pd-parser`
 
@@ -298,62 +416,3 @@ writer.parquet.write(df1)
 `mojap-arrow-pd-parser` infers the file type from the extension, so for example `reader.read("s3://bucket_name/file.parquet")` would read a parquet file without need for specifying the file type.
 
 The package also has a lot of other functionality including specifying data types when reading (or writing). More details can be found in the package [README](https://github.com/moj-analytical-services/mojap-arrow-pd-parser#mojap-arrow-pd-parser).
-
-#### `pandas`
-
-You can use any of the `pandas` read functions (for example, `read_csv` or `read_json`) to download data directly from Amazon S3. This requires that you have installed the `pandas` and `s3fs` packages. To install these, run the following code in a terminal:
-
-```
-python -m pip install pandas s3fs
-```
-
-As an example, to read a CSV, you should run the following code:
-
-```
-import pandas as pd
-pd.read_csv('s3://bucket_name/key')
-```
-
-Here, you should substitute `bucket_name` with the name of the bucket and `key` with the path of the object in Amazon S3.
-
-#### `boto3`
-
-You can also download or read objects using the `boto3` package.
-
-You can install `boto3` by running the following code in a terminal:
-
-```
-pip install boto3
-```
-
-To download a file from Amazon S3, you should use the following code:
-
-```python
-import boto3
-
-s3 = boto3.resource('s3')
-s3.Object('bucket_name', 'key').download_file('local_path')
-```
-
-If you receive an `ImportError`, try restarting your kernel, so that Python recognises your `boto3` installation.
-
-Here, you should substitute `'bucket_name'` with the name of the bucket, `'key'` with the path of the object in Amazon S3 and `local_path` with the local path where you would like to save the downloaded file.
-
-To upload a file to Amazon S3, you should use the following code:
-
-```python
-#Upload sample contents to s3
-s3 = boto3.client('s3')
-data = b'This is the content of the file uploaded from python boto3'
-file_name='your_file_name.txt'
-response =s3.put_object(Bucket= your_bucket_name,Body= data,Key= file_name)
-print('AWS response code for uploading file is '+str(response['ResponseMetadata']['HTTPStatusCode']))
-```
-
-You can find more information in the [package documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Object.download_file).
-
-#### `AWS Data Wrangler`
-
-You can also use `AWS Wrangler` to work with data stored in Amazon S3.
-
-More information can be found in the [product documentation](https://aws-data-wrangler.readthedocs.io/en/stable/tutorials/003%20-%20Amazon%20S3.html).
