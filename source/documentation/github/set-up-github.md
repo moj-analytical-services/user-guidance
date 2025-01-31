@@ -48,6 +48,8 @@ To create an SSH key in JupyterLab, follow the steps below:
 
 To add the SSH key to GitHub, you should follow the [guidance from GitHub](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account).
 
+You also need to authorise your SSH key for use with the MoJ-Analytical-Services organisation before you can use it; see [GitHub: Authorizing an SSH key](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on#authorizing-an-ssh-key) for instructions.
+
 ### Configure your username and email in git on the Analytical Platform
 
 To configure your username and email in git on the Analytical Platform using RStudio or JupyterLab, follow the steps below:
