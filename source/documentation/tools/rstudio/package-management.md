@@ -144,6 +144,43 @@ renv::use_python()
 |     _cannot open file 'renv/activate.R': No such file or directory_    |     Renv was installed incorrectly in the project. If you go to Tools > Project Options > Environments and tick use renv with this project that will force it to install renv, which will hopefully fix the problems.    |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
+
+### Troubleshooting when upgrading to R4.4.x
+
+If you encounter difficulties upgrading older RStudio projects that use R4.1.x and R4.2.x to the latest releases of RStudio that use R4.4.0 and above, try following these steps (helpfully provided by an AP user):
+
+
+1. Ensure that you have the latest CRAN set in your RStudio environment. Depending on the source you want to use for package management, run either:
+
+    ```r
+    options(repos = c(CRAN = "https://packagemanager.rstudio.com/cran/__linux__/jammy/latest"))
+    ```
+    or
+
+    ```r
+    options(repos = c(CRAN ="https://p3m.dev/cran/linux/jammy/latest"))
+    ```
+
+2. Attempt to restore your project:
+
+    ```r
+    renv::restore()
+    ```
+
+3. If running `renv::restore()` throws errors:
+    - Identify the package causing error and find the latest version of that on CRAN
+    - Run `renv::install("thatpackage@latest_version")`
+    - Run `renv::record("that_package")` - this will update the version in your renv.lock file
+    - Run `renv::restore()` again and repeat the process for all packages that throw errors
+    - Finally run `renv::snapshot()` - this will save details of all package versions in your renv.lock file
+
+Remember to commit and push your changes when you have finished upgrading your project.
+
+More general troubleshooting advice for using `renv` can be found [above](#common-pitfalls-with-renv).
+
+You may find further assistance with R specific issues in the [#r slack channel](https://moj.enterprise.slack.com/archives/C1PUCG719).
+
+
 ## Conda
 
 **NB Use of `conda` is now considered outdated for Rstudio on the Analytical Platform.**
