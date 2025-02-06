@@ -36,9 +36,9 @@ show_contribution_banner: true
 github_repo: moj-analytical-services/user-guidance
 
 # Slack options
-owner_slack_workspace: asdslack
-default_owner_slack: '#analytical-platform-support'
+owner_slack_workspace: mojdt
+default_owner_slack: '#analytical-platform'
 
 footer_links:
   Get in touch by email: mailto:analytical-platform@digital.justice.gov.uk
-  Get in touch by Slack: https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ
+  Get in touch by Slack: https://moj.enterprise.slack.com/archives/C06TFT94JTC
