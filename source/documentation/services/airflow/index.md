@@ -39,7 +39,7 @@ The workflow manifest will be hosted in our [GitHub repository](https://github.c
 
 ### Request access
 
-To access the Airflow componentsy, you will need a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)), and to also be part of the `ministryofjustice` GitHub organisation, which you can join by using [this link](https://github.com/orgs/ministryofjustice/sso).
+To access the Airflow components, you will need a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)), and to also be part of the `ministryofjustice` GitHub organisation, which you can join by using [this link](https://github.com/orgs/ministryofjustice/sso).
 
 Once you have joined the `ministryofjustice` GitHub organisation, please raise a [request](link-tbc).
 
