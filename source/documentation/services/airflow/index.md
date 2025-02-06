@@ -303,6 +303,13 @@ _TBC_
 
 ## Troubleshooting
 
+## Configuartion testing
+
+If a misconfiguration is detected in your container, your build will fail. Our [configuration](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/blob/main/assets/container-structure-test/container-structure-test.yml) requires:
+
+- `USER` set to `1000`
+- `WORKDIR` set to `/opt/analyticalplatform`
+
 ### Vulnerability scanning
 
 If a CVE is detected in your container, your build will fail. You will need to either update the offending package or skip the CVE by adding it to `.trivyignore` in the root of your repository.
