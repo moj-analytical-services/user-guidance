@@ -13,7 +13,8 @@ Pipelines are executed on the Analytical Platform's Kubernetes infrastructure an
 Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, providing connectivity to the Cloud Platform, Modernisation Platform, and HMCTS SDP. If you require further connectivity, please raise a [feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
 
 > **Please note**: Analytical Platform Airflow does not support pipelines that use `BashOperator` or `PythonOperator`.
-This is because we run a multi-tenant Airflow service and do not permit running code on the Airflow control plane, which is where non-container operators would run.
+>
+> This is because we run a multi-tenant Airflow service and do not permit running code on the Airflow control plane, which is where non-container operators would run.
 
 ## Concepts
 
@@ -35,6 +36,21 @@ You will need to provide us with a container image and a workflow manifest.
 The container image will be built and pushed from a GitHub repository you [create](#creating-a-repository) and maintain.
 
 The workflow manifest will be hosted in our [GitHub repository](https://github.com/ministryofjustice/analytical-platform-airflow).
+
+### Request access
+
+To access the Airflow components:
+
+- [GitHub repository](https://github.com/ministryofjustice/analytical-platform-airflow)
+- [Airflow console](#accessing-environments)
+- AWS console
+  - [Elastic Container Registry]((https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2F509399598587-pyma7ahz.eu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2))
+  - [Secrets Manager](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F)
+- [Observability Platform](#observability-platform)
+
+You will need a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)), and to also be part of the `ministryofjustice` GitHub organisation, which you can join by using [this link](https://github.com/orgs/ministryofjustice/sso).
+
+Once you have joined the `ministryofjustice` GitHub organisation, please raise a [request](link-tbc).
 
 ### Creating a repository
 
@@ -62,6 +78,8 @@ The workflow manifest will be hosted in our [GitHub repository](https://github.c
 (https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release))
 
 After a release is created, your container image will be built and published to the Analytical Platform's container registry.
+
+You can check if your container image has been pushed by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2F509399598587-pyma7ahz.eu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2).
 
 An example repository can be [found here](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
 
@@ -234,7 +252,19 @@ Secret names with hyphens (`-`) will be converted to use underscores (`_`) for t
 
 ### Updating a secret value
 
-Secrets are initially created with a placeholder value. To update this, log in to the Analytical Platform Data Production AWS account and update the value.
+Secrets are initially created with a placeholder value. To update this, [log in to the Analytical Platform Data Production AWS account](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F) and update the value.
+
+## Accessing environments
+
+To access the Airflow console, you can use these links:
+
+- [Development](https://moj.awsapps.com/start/#/console?account_id=381491960855&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Fdevelopment%2Fsso)
+- [Test](https://moj.awsapps.com/start/#/console?account_id=767397661611&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Ftest%2Fsso)
+- [Production](https://moj.awsapps.com/start/#/console?account_id=992382429243&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Fproduction%2Fsso)
+
+## Observability Platform
+
+> This functionality is coming soon.
 
 ## Runtime templates
 
