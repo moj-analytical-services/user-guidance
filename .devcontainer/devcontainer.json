@@ -1,5 +1,5 @@
 {
-  "name": "analytical-platform-user-guidance",
+  "name": "analytical-platform-user-guide",
   "image": "ghcr.io/ministryofjustice/devcontainer-base:latest",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
