@@ -39,16 +39,7 @@ The workflow manifest will be hosted in our [GitHub repository](https://github.c
 
 ### Request access
 
-To access the Airflow components:
-
-- [GitHub repository](https://github.com/ministryofjustice/analytical-platform-airflow)
-- [Airflow console](#accessing-environments)
-- AWS console
-  - [Elastic Container Registry]((https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2F509399598587-pyma7ahz.eu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2))
-  - [Secrets Manager](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F)
-- [Observability Platform](#observability-platform)
-
-You will need a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)), and to also be part of the `ministryofjustice` GitHub organisation, which you can join by using [this link](https://github.com/orgs/ministryofjustice/sso).
+To access the Airflow componentsy, you will need a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)), and to also be part of the `ministryofjustice` GitHub organisation, which you can join by using [this link](https://github.com/orgs/ministryofjustice/sso).
 
 Once you have joined the `ministryofjustice` GitHub organisation, please raise a [request](link-tbc).
 
