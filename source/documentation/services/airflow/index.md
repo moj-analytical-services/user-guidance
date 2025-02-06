@@ -253,7 +253,7 @@ To access the Airflow console, you can use these links:
 - [Test](https://moj.awsapps.com/start/#/console?account_id=767397661611&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Ftest%2Fsso)
 - [Production](https://moj.awsapps.com/start/#/console?account_id=992382429243&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Fproduction%2Fsso)
 
-## Observability Platform
+## Workflow logs and metrics
 
 > This functionality is coming soon.
 
