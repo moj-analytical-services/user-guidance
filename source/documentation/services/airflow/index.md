@@ -31,24 +31,29 @@ We organise Airflow pipelines using **environments**, **projects** and **workflo
 
 ## Getting started
 
-You will need to provide us with a container image and a workflow manifest.
+Before you can use Airflow, you'll need to:
+* [request access](#request-access) on GitHub
+* [create a GitHub repository](#create-a-github-repository) 
+* [send us a container image](#send-us-a-container-image)
+* [send us a workflow manifest](#create-a-workflow-manifest) 
 
-The container image will be built and pushed from a GitHub repository you [create](#creating-a-repository) and maintain.
-
-The workflow manifest will be hosted in our [GitHub repository](https://github.com/ministryofjustice/analytical-platform-airflow).
+Follow the next steps to get started.
 
 ### Request access
 
 To access the Airflow components, you will need a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)), and to also be part of the `ministryofjustice` GitHub organisation, which you can join by using [this link](https://github.com/orgs/ministryofjustice/sso).
 
-Once you have joined the `ministryofjustice` GitHub organisation, please raise a [request](link-tbc).
+When you have joined the `ministryofjustice` GitHub organisation, please raise a [request](link-tbc).
 
-### Creating a repository
+After your request is granted, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
+
+> Access to AWS may take up to 3 hours.
+
+### Create a GitHub repository
 
 1. Create a repository using one of the provided runtime templates:
 
     > You can create this repository in either the [`ministryofjustice`](https://github.com/ministryofjustice/) or [`moj-analytical-services`](https://github.com/moj-analytical-services/) GitHub organisation
-
     >
     > Repository standards, such as branch protection, are out of scope for this guidance.
     >
@@ -275,13 +280,14 @@ The GitHub Actions workflows call shared workflows we maintain here.
 
 ### Vulnerability scanning
 
-The GitHub Actions workflow to build and scan your container for vulnerabilities with Trivy will alert on any CVEs (Common Vulnerabilities and Exposures) marked `HIGH` or `CRITICAL` that have a fix available.
+The GitHub Actions workflow to build and scan your container for vulnerabilities with Trivy will alert on any CVEs (Common Vulnerabilities and Exposures) marked `HIGH` or `CRITICAL` that have a fix available. You will need to either update the offending package or skip the CVE by adding it to `.trivyignore` in the root of your repository.
 
 ### Configuration testing
 
 To ensure your container is running as the right user, we perform a test using Google's [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test) package.
 
 The source for the test can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/blob/main/assets/container-structure-test/container-structure-test.yml).
+
 
 ## Runtime images
 
@@ -300,19 +306,6 @@ Additionally, we create a non-root user (`analyticalplatform`) and a working dir
 ## Migration from Data Engineering Airflow
 
 _TBC_
-
-## Troubleshooting
-
-## Configuration testing
-
-If a misconfiguration is detected in your container, your build will fail. Our [configuration](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/blob/main/assets/container-structure-test/container-structure-test.yml) requires:
-
-- `USER` set to `1000`
-- `WORKDIR` set to `/opt/analyticalplatform`
-
-### Vulnerability scanning
-
-If a CVE is detected in your container, your build will fail. You will need to either update the offending package or skip the CVE by adding it to `.trivyignore` in the root of your repository.
 
 ## Getting help
 
