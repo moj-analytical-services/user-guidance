@@ -32,10 +32,11 @@ We organise Airflow pipelines using **environments**, **projects** and **workflo
 ## Getting started
 
 Before you can use Airflow, you'll need to:
-* [request access](#request-access) on GitHub
-* [create a GitHub repository](#create-a-github-repository) 
-* [send us a container image](#send-us-a-container-image)
-* [send us a workflow manifest](#create-a-workflow-manifest) 
+
+- [request access](#request-access) on GitHub
+- [create a GitHub repository](#create-a-github-repository) 
+- [send us a container image](#send-us-a-container-image)
+- [send us a workflow manifest](#create-a-workflow-manifest) 
 
 Follow the next steps to get started.
 
