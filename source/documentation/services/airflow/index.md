@@ -277,7 +277,7 @@ The GitHub Actions workflows call shared workflows we maintain here.
 
 The GitHub Actions workflow to build and scan your container for vulnerabilities with Trivy will alert on any CVEs (Common Vulnerabilities and Exposures) marked `HIGH` or `CRITICAL` that have a fix available.
 
-### Configuartion testing
+### Configuration testing
 
 To ensure your container is running as the right user, we perform a test using Google's [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test) package.
 
@@ -303,7 +303,7 @@ _TBC_
 
 ## Troubleshooting
 
-## Configuartion testing
+## Configuration testing
 
 If a misconfiguration is detected in your container, your build will fail. Our [configuration](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/blob/main/assets/container-structure-test/container-structure-test.yml) requires:
 
