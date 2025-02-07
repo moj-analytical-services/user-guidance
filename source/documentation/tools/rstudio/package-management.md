@@ -150,7 +150,15 @@ renv::use_python()
 If you encounter difficulties upgrading older RStudio projects that use R4.1.x and R4.2.x to the latest releases of RStudio that use R4.4.0 and above, try following these steps (helpfully provided by an AP user):
 
 
-1. Ensure that you have the latest CRAN set in your RStudio environment. Depending on the source you want to use for package management, run either:
+1. You may need to reinstall `renv`. You can install it in the R console with:
+    
+    ```r
+    install_packages("renv")
+    ```
+
+    You can find more guidance about working with renv [above](#renv).
+
+2. Ensure that you have the latest CRAN set in your RStudio environment. Depending on the source you want to use for package management, in the R console run either:
 
     ```r
     options(repos = c(CRAN = "https://packagemanager.rstudio.com/cran/__linux__/jammy/latest"))
@@ -161,13 +169,13 @@ If you encounter difficulties upgrading older RStudio projects that use R4.1.x a
     options(repos = c(CRAN ="https://p3m.dev/cran/linux/jammy/latest"))
     ```
 
-2. Attempt to restore your project:
+3. In the R console try to restore your project:
 
     ```r
     renv::restore()
     ```
 
-3. If running `renv::restore()` throws errors:
+4. If running `renv::restore()` throws errors:
     - Identify the package causing error and find the latest version of that on CRAN
     - Run `renv::install("thatpackage@latest_version")`
     - Run `renv::record("that_package")` - this will update the version in your renv.lock file
