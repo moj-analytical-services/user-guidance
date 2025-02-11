@@ -2,11 +2,11 @@
 
 > This documentation is for the new Analytical Platform Airflow service.
 >
-> For Data Engineering Airflow, please refer to [Data Engineering Airflow](/tools/airflow)
+> For Data Engineering Airflow, please refer to [Data Engineering Airflow](/tools/airflow).
 
 ## Overview
 
-[Apache Airflow](https://airflow.apache.org/) is a workflow management platform designed for data engineering pipelines.
+[Apache Airflow](https://airflow.apache.org/) is a workflow management platform for data engineering pipelines. We recommend using it for long-running workflows. 
 
 Pipelines are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Bedrock and Amazon S3.
 
@@ -33,18 +33,21 @@ We organise Airflow pipelines using **environments**, **projects** and **workflo
 
 Before you can use Airflow, you'll need to:
 
-- [request access](#request-access) on GitHub
+- [request Airflow access](#request-airflow-access) 
 - [create a GitHub repository](#create-a-github-repository) 
-- [send us a container image](#send-us-a-container-image)
-- [send us a workflow manifest](#create-a-workflow-manifest) 
+- [create a release](#create-a-release) 
+- [create a project and workflow](#create-a-project-and-workflow)
 
 Follow the next steps to get started.
 
-### Request access
+### Request Airflow access
 
-To access the Airflow components, you will need a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)), and to also be part of the `ministryofjustice` GitHub organisation, which you can join by using [this link](https://github.com/orgs/ministryofjustice/sso).
+To access the Airflow components, you'll need to:
 
-When you have joined the `ministryofjustice` GitHub organisation, please raise a [request](link-tbc).
+* have a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)) 
+* [join the `ministryofjustice` GitHub organisation](https://github.com/orgs/ministryofjustice/sso)
+
+When you have joined the `ministryofjustice` GitHub organisation, [raise a request for Airflow access](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-airflow-access-request.yml).
 
 After your request is granted, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
 
@@ -70,6 +73,8 @@ After your request is granted, you will be added to a GitHub team that will give
 
   > For more information on runtime images, please refer to [runtime images](#runtime-images).
 
+### Create a release
+
 1. Create a [release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) (please refer to GitHub's
 [documentation]
 (https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release))
@@ -80,11 +85,9 @@ You can check if your container image has been pushed by [logging in to the Anal
 
 An example repository can be [found here](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
 
-### Creating a project
+### Create a project and workflow
 
 To initialise a project, create a directory in the [relevant environment in our repository](https://github.com/ministryofjustice/analytical-platform-airflow/tree/main/environments), for example, `environments/development/analytical-platform`.
-
-### Creating a workflow
 
 To create a workflow, you need to provide us with a workflow manifest yaml document (`workflow.yml` - [Learn YAML in Y minutes](https://learnxinyminutes.com/yaml/)) in your project.
 This manifest specifies the desired state for the Airflow DAG, and provides contextual information used to categorise and label the DAG.
