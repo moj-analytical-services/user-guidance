@@ -33,6 +33,7 @@ Once you are comfortable with these, you may wish to try the following AWS tutor
 
 You may also find the following documents, published by the **Central Digital & Data Office**, useful for general guidance on generative AI
 
+- [GDS AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html)
 - [Generative AI Framework for HMG](https://www.gov.uk/government/publications/generative-ai-framework-for-hmg/generative-ai-framework-for-hmg-html)
 - [Guidance to civil servants on the use of generative AI](https://www.gov.uk/government/publications/guidance-to-civil-servants-on-use-of-generative-ai/guidance-to-civil-servants-on-use-of-generative-ai)
 
