@@ -10,11 +10,15 @@
 
 Pipelines are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Bedrock and Amazon S3.
 
-Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, providing connectivity to the Cloud Platform, Modernisation Platform, and HMCTS SDP. If you require further connectivity, please raise a [feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
+Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which connects to:
 
-> **Please note**: Analytical Platform Airflow does not support pipelines that use `BashOperator` or `PythonOperator`.
->
-> This is because we run a multi-tenant Airflow service and do not permit running code on the Airflow control plane, which is where non-container operators would run.
+* the MoJ Cloud Platform
+* the Modernisation Platform 
+* HMCTS SDP 
+
+If you need further connectivity, [raise a feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
+
+> **Please note**: You cannot use Analytical Platform Airflow for pipelines using `BashOperator` or `PythonOperator`. 
 
 ## Concepts
 
@@ -51,9 +55,11 @@ When you have joined the `ministryofjustice` GitHub organisation, [raise a reque
 
 After your request is granted, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
 
-> Access to AWS may take up to 3 hours.
+> Our team manually approves requests. After approval it can take up to 3 hours for you to get AWS access.
 
 ### Create a GitHub repository
+
+If you already have a repository you've used for Airflow, you should create a new one. 
 
 1. Create a repository using one of the provided runtime templates:
 
@@ -75,15 +81,12 @@ After your request is granted, you will be added to a GitHub team that will give
 
 ### Create a release
 
-1. Create a [release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) (please refer to GitHub's
-[documentation]
-(https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release))
+1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)=
 
-After a release is created, your container image will be built and published to the Analytical Platform's container registry.
+1. After you've created a release, check if your container image has been successfully built and published by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2F509399598587-pyma7ahz.eu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2). 
+If your release appears in the list, you've completed this step. 
 
-You can check if your container image has been pushed by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2F509399598587-pyma7ahz.eu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2).
-
-An example repository can be [found here](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
+You can also see [our example repository](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
 
 ### Create a project and workflow
 
@@ -106,10 +109,10 @@ dag:
   tag: 1.0.2
 ```
 
-- `tags.business_unit` must be either `central`, `hq`, or `platforms`.
-- `tags.owner` must be an email address ending with `@justice.gov.uk`.
-- `dag.repository` is the name of the GitHub repository where your code is stored.
-- `dag.tag` is the tag you used when creating a release in your GitHub repository.
+- `tags.business_unit` must be `central`, `hq`, or `platforms`
+- `tags.owner` must be an email address ending with `@justice.gov.uk`
+- `dag.repository` is the name of the GitHub repository where your code is stored
+- `dag.tag` is the tag you used when creating a release in your GitHub repository
 
 ## Workflow tasks
 
