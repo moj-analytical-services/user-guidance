@@ -6,17 +6,17 @@
 
 ## Overview
 
-[Apache Airflow](https://airflow.apache.org/) is a workflow management platform for data engineering pipelines. We recommend using it for long-running workflows. 
+[Apache Airflow](https://airflow.apache.org/) is a workflow management platform for data engineering pipelines. We recommend using it for long-running or compute intensive tasks. 
 
 Pipelines are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Bedrock and Amazon S3.
 
 Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which connects to:
 
-* the MoJ Cloud Platform
-* the Modernisation Platform 
-* HMCTS SDP 
+* MoJ Cloud Platform
+* MoJ Modernisation Platform 
+* HMCTS SDP
 
-If you need further connectivity, [raise a feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
+If you need additionaly connectivity, [submit a feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
 
 > **Please note**: You cannot use Analytical Platform Airflow for pipelines using `BashOperator` or `PythonOperator`. 
 
@@ -26,7 +26,9 @@ We organise Airflow pipelines using **environments**, **projects** and **workflo
 
   * **Environments** are the different stages of infrastructure we provide: `development`, `test` and `production`
 
-  * **Projects** are a unit for grouping workflows dedicated to a distinct business area, business domain, or specific project.
+  > **Please note**: `development` is not connected to the MoJO Transit Gateway.
+
+  * **Projects** are a unit for grouping workflows dedicated to a distinct service area, business domain, or specific project.
   For example: `BOLD`, `HMCTS` or `HMPPS`.
 
   * **Workflows** are pipelines, also referred to as [DAGs](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/dags.html#dags).
@@ -51,7 +53,7 @@ To access the Airflow components, you'll need to:
 * have a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)) 
 * [join the `ministryofjustice` GitHub organisation](https://github.com/orgs/ministryofjustice/sso)
 
-When you have joined the `ministryofjustice` GitHub organisation, [raise a request for Airflow access](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-airflow-access-request.yml).
+When you have joined the `ministryofjustice` GitHub organisation, [submit a request for Airflow access](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-airflow-access-request.yml).
 
 After your request is granted, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
 
@@ -63,7 +65,7 @@ If you already have a repository you've used for Airflow, you should create a ne
 
 1. Create a repository using one of the provided runtime templates:
 
-    > You can create this repository in either the [`ministryofjustice`](https://github.com/ministryofjustice/) or [`moj-analytical-services`](https://github.com/moj-analytical-services/) GitHub organisation
+    > You can create this repository in either the [`ministryofjustice`](https://github.com/ministryofjustice/) or [`moj-analytical-services`](https://github.com/moj-analytical-services/) GitHub organisation.
     >
     > Repository standards, such as branch protection, are out of scope for this guidance.
     >
@@ -73,7 +75,7 @@ If you already have a repository you've used for Airflow, you should create a ne
 
     **R** (coming soon)
 
-1. Add your code to the repo to populate the image that will run in Airflow.
+1. Add your code to the repository.
 
 1. Update the `Dockerfile` instructions to copy your code into the image and install packages required to run.
 
@@ -81,7 +83,7 @@ If you already have a repository you've used for Airflow, you should create a ne
 
 ### Create a release
 
-1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)=
+1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
 
 1. After you've created a release, check if your container image has been successfully built and published by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2F509399598587-pyma7ahz.eu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2). 
 If your release appears in the list, you've completed this step. 
@@ -92,27 +94,31 @@ You can also see [our example repository](https://github.com/moj-analytical-serv
 
 To initialise a project, create a directory in the [relevant environment in our repository](https://github.com/ministryofjustice/analytical-platform-airflow/tree/main/environments), for example, `environments/development/analytical-platform`.
 
-To create a workflow, you need to provide us with a workflow manifest yaml document (`workflow.yml` - [Learn YAML in Y minutes](https://learnxinyminutes.com/yaml/)) in your project.
+To create a workflow, you need to provide us with a workflow manifest (`workflow.yml` - [Learn YAML in Y minutes](https://learnxinyminutes.com/yaml/)) in your project.
 This manifest specifies the desired state for the Airflow DAG, and provides contextual information used to categorise and label the DAG.
 
 For example, create `environments/development/analytical-platform/example-workflow/workflow.yml`, where `example-workflow` is an identifier for your workflow's name.
 
-The minimum requirements for a workflow file look like this:
+The minimum requirements for a workflow manifest look like this:
 
 ```yaml
-tags:
-  business_unit: hq
-  owner: analytical-platform@justice.gov.uk
-
 dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
-  tag: 1.0.2
+  tag: 2.0.0
+
+maintainers:
+  - jacobwoffenden
+
+tags:
+  business_unit: Central Digital
+  owner: analytical-platform@justice.gov.uk
 ```
 
-- `tags.business_unit` must be `central`, `hq`, or `platforms`
-- `tags.owner` must be an email address ending with `@justice.gov.uk`
 - `dag.repository` is the name of the GitHub repository where your code is stored
 - `dag.tag` is the tag you used when creating a release in your GitHub repository
+- `maintainers` is a list of GitHub usernames of individuals responsible for maintaining the workflow
+- `tags.business_unit` must be one of `Central Digital`, `CICA`, `HMCTS`, `HMPPS`, `HQ`, `LAA`, `OPG`, `Platforms`, `Technology Services`
+- `tags.owner` must be an email address ending with `@justice.gov.uk`
 
 ## Workflow tasks
 
@@ -133,7 +139,7 @@ To pass extra environment variables, you can reference them in `env_vars`, like 
 ```yaml
 dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
-  tag: 1.0.2
+  tag: 2.0.0
   env_vars:
     FOO: "bar"
 ```
@@ -152,7 +158,7 @@ This is done using the `compute_profile` key, and by default (if not specified),
 
 In addition to the `general` fleet, we also offer `gpu`, which provides your workflow with an NVIDIA GPU.
 
-The full list of available compute profiles can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/scripts/workflow_schema_validation/schema.json#L30-L57).
+The full list of available compute profiles can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/scripts/workflow_schema_validation/schema.json#L14-L41).
 
 ### Multi-task
 
@@ -161,7 +167,9 @@ Workflows can also run multiple tasks, with dependencies on other tasks in the s
 ```yaml
 dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
-  tag: 1.0.2
+  tag: 2.0.0
+  env_vars:
+    FOO: "bar"
   tasks:
     init:
       env_vars:
@@ -176,12 +184,15 @@ dag:
       dependencies: [phase-one]
     phase-three:
       env_vars:
+        FOO: "baz"
         PHASE: "three"
       compute_profile: gpu-spot-1vcpu-4gb
       dependencies: [phase-one, phase-two]
 ```
 
 Tasks take the same keys (`env_vars` and `compute_profile`) and can also take `dependencies`, which can be used to make a task dependent on other tasks completing successfully.
+
+You can define global environment variables under `dag.env_var`, making them available in all tasks. You can then override these by specifying the same environment variable key in the task.
 
 `compute_profile` can either be specified at `dag.compute_profile` to set it for all tasks, or at `dag.tasks.{task_name}.compute_profile` to override it for a specific task.
 
@@ -195,21 +206,33 @@ To extend the permissions of your workflow's IAM policy, you can do so under the
 
 ```yaml
 iam:
+  athena: write
   bedrock: true
+  glue: true
   kms:
     - arn:aws:kms:eu-west-2:123456789012:key/mrk-12345678909876543212345678909876
+  s3_deny:
+    - mojap-compute-development-dummy/deny1/*
+    - mojap-compute-development-dummy/deny2/*
   s3_read_only:
     - mojap-compute-development-dummy/readonly1/*
     - mojap-compute-development-dummy/readonly2/*
   s3_read_write:
     - mojap-compute-development-dummy/readwrite1/*
     - mojap-compute-development-dummy/readwrite2/*
+  s3_write_only:
+    - mojap-compute-development-dummy/writeonly1/*
+    - mojap-compute-development-dummy/writeonly2/*
 ```
 
-- `iam.bedrock`: When set to true, enables Amazon Bedrock access.
-- `iam.kms`: A list of KMS ARNs used for encrypt and decrypt operations if objects are KMS encrypted.
-- `iam.s3_read_only`: A list of Amazon S3 paths to provide read-only access.
-- `iam.s3_read_write`: A list of Amazon S3 paths to provide read-write access.
+- `iam.athena`: Can be `read` or `write`, to provide access to Amazon Athena
+- `iam.bedrock`: When set to true, enables Amazon Bedrock access
+- `iam.glue`: When set to true, enables AWS Glue
+- `iam.kms`: A list of KMS ARNs used for encrypt and decrypt operations if objects are KMS encrypted
+- `iam.s3_deny`: A list of Amazon S3 paths to deny access
+- `iam.s3_read_only`: A list of Amazon S3 paths to provide read-only access
+- `iam.s3_read_write`: A list of Amazon S3 paths to provide read-write access
+- `iam.s3_write_only`: A list of Amazon S3 paths to provide write-only access
 
 ### Advanced configuration
 
@@ -272,6 +295,7 @@ To access the Airflow console, you can use these links:
 ## Runtime templates
 
 We provide repository templates for the supported runtimes:
+
 - [Python](https://github.com/ministryofjustice/analytical-platform-airflow-python-template)
 - R (coming soon).
 
@@ -283,7 +307,7 @@ These templates include:
 - GitHub Actions workflow to build and push your container to the Analytical Platform's container registry.
 - Dependabot configuration for updating GitHub Actions, Docker, and dependencies such as Pip.
 
-The GitHub Actions workflows call shared workflows we maintain here.
+The GitHub Actions workflows call shared workflows we maintain [here](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions).
 
 ### Vulnerability scanning
 
@@ -291,7 +315,7 @@ The GitHub Actions workflow to build and scan your container for vulnerabilities
 
 ### Configuration testing
 
-To ensure your container is running as the right user, we perform a test using Google's [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test) package.
+To ensure your container is running as the right user, we perform a test using Google's [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test) tool.
 
 The source for the test can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/blob/main/assets/container-structure-test/container-structure-test.yml).
 
