@@ -6,9 +6,11 @@
 
 ## Overview
 
-[Apache Airflow](https://airflow.apache.org/) is a workflow management platform for data engineering pipelines. We recommend using it for long-running or compute intensive tasks. 
+[Apache Airflow](https://airflow.apache.org/) is a workflow management platform for data engineering pipelines.
 
-Pipelines are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Bedrock and Amazon S3.
+We recommend using it for long-running or compute intensive tasks. 
+
+Pipelines are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Athena, Amazon Bedrock, and Amazon S3.
 
 Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which connects to:
 
@@ -18,31 +20,30 @@ Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which co
 
 If you need additional connectivity, [submit a feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
 
-> **Please note**: You cannot use Analytical Platform Airflow for pipelines using `BashOperator` or `PythonOperator`. 
+> **Please note**: You cannot use Analytical Platform Airflow for pipelines using `BashOperator` or `PythonOperator`
 
 ## Concepts
 
 We organise Airflow pipelines using **environments**, **projects** and **workflows**:
 
-  * **Environments** are the different stages of infrastructure we provide: `development`, `test` and `production`
+* **Environments** are the different stages of infrastructure we provide: `development`, `test` and `production`
 
-  > **Please note**: `development` is not connected to the MoJO Transit Gateway.
+> **Please note**: `development` is not connected to the MoJO Transit Gateway
 
-  * **Projects** are a unit for grouping workflows dedicated to a distinct service area, business domain, or specific project.
-  For example: `BOLD`, `HMCTS` or `HMPPS`.
+* **Projects** are a unit for grouping workflows dedicated to a distinct business domain, service area, or specific project, for example: `BOLD`, `HMCTS` or `HMPPS`.
 
-  * **Workflows** are pipelines, also referred to as [DAGs](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/dags.html#dags).
-  This is a list of the tasks to work through, organised to reflect the relationships between the tasks.
-  The workflow definition includes other information such as your repository name and release tag.
+* **Workflows** are pipelines, also known as [DAGs](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/dags.html#dags).
+  They consist of a list of tasks organised to reflect the relationships between them.
+  The workflow definition includes additional information, such as your repository name and release tag.
 
 ## Getting started
 
 Before you can use Airflow, you'll need to:
 
-- [request Airflow access](#request-airflow-access) 
-- [create a GitHub repository](#create-a-github-repository) 
-- [create a release](#create-a-release) 
-- [create a project and workflow](#create-a-project-and-workflow)
+* [request Airflow access](#request-airflow-access) 
+* [create a GitHub repository](#create-a-github-repository) 
+* [create a release](#create-a-release) 
+* [create a project and workflow](#create-a-project-and-workflow)
 
 Follow the next steps to get started.
 
@@ -57,7 +58,9 @@ When you have joined the `ministryofjustice` GitHub organisation, [submit a requ
 
 After your request is granted, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
 
-> Our team manually approves requests. After approval it can take up to 3 hours for you to get AWS access.
+> Our team manually approves requests
+>
+> Once approved, it can take up to three hours to gain access to AWS
 
 ### Create a GitHub repository
 
@@ -65,28 +68,27 @@ If you already have a repository you've used for Airflow, you should create a ne
 
 1. Create a repository using one of the provided runtime templates:
 
-    > You can create this repository in either the [`ministryofjustice`](https://github.com/ministryofjustice/) or [`moj-analytical-services`](https://github.com/moj-analytical-services/) GitHub organisation.
+    > You can create this repository in either the [`ministryofjustice`](https://github.com/ministryofjustice/) or [`moj-analytical-services`](https://github.com/moj-analytical-services/) GitHub organisation
     >
-    > Repository standards, such as branch protection, are out of scope for this guidance.
+    > Repository standards, such as branch protection, are out of scope for this guidance
     >
-    > For more information on runtime templates, please refer to [runtime templates](#runtime-templates).
+    > For more information on runtime templates, please refer to [runtime templates](#runtime-templates)
 
-    [**Python**](https://github.com/new?template_name=analytical-platform-airflow-python-template&template_owner=ministryofjustice)
+    [Python](https://github.com/new?template_name=analytical-platform-airflow-python-template&template_owner=ministryofjustice)
 
-    **R** (coming soon)
+    R (coming soon)
 
-1. Add your code to the repository.
+1. Add your code to the repository
 
-1. Update the `Dockerfile` instructions to copy your code into the image and install packages required to run.
+1. Update the `Dockerfile` instructions to copy your code into the image and install packages required to run
 
-  > For more information on runtime images, please refer to [runtime images](#runtime-images).
+  > For more information on runtime images, please refer to [runtime images](#runtime-images)
 
 ### Create a release
 
 1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
 
-1. After you've created a release, check if your container image has been successfully built and published by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2F509399598587-pyma7ahz.eu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2). 
-If your release appears in the list, you've completed this step. 
+1. After you've created a release, check if your container image has been successfully built and published by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2)
 
 You can also see [our example repository](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
 
@@ -94,10 +96,11 @@ You can also see [our example repository](https://github.com/moj-analytical-serv
 
 To initialise a project, create a directory in the [relevant environment in our repository](https://github.com/ministryofjustice/analytical-platform-airflow/tree/main/environments), for example, `environments/development/analytical-platform`.
 
-To create a workflow, you need to provide us with a workflow manifest (`workflow.yml` - [Learn YAML in Y minutes](https://learnxinyminutes.com/yaml/)) in your project.
+To create a workflow, you need to provide us with a workflow manifest in your project.
+
 This manifest specifies the desired state for the Airflow DAG, and provides contextual information used to categorise and label the DAG.
 
-For example, create `environments/development/analytical-platform/example-workflow/workflow.yml`, where `example-workflow` is an identifier for your workflow's name.
+For example, create `environments/development/analytical-platform/example/workflow.yml`, where `example` is an identifier for your workflow's name.
 
 The minimum requirements for a workflow manifest look like this:
 
@@ -119,6 +122,22 @@ tags:
 - `maintainers` is a list of GitHub usernames of individuals responsible for maintaining the workflow
 - `tags.business_unit` must be one of `Central Digital`, `CICA`, `HMCTS`, `HMPPS`, `HQ`, `LAA`, `OPG`, `Platforms`, `Technology Services`
 - `tags.owner` must be an email address ending with `@justice.gov.uk`
+
+## Workflow scheduling
+
+There are several options for configuring your workflow's schedule. By default, if no options are specified, you must manually trigger it in the Airflow console.
+
+The following options are available under `dag`:
+
+- `catchup`: please refer to [Airflow's guidance](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/dag-run.html#catchup) (defaults to `false`)
+- `depends_on_past`: when set to true, task instances will run sequentially while relying on the previous task’s schedule to succeed (defaults to `false`)
+- `end_date`: the timestamp (`YYYY-MM-DD`) that the scheduler won’t go beyond (defaults to `null`)
+- `is_paused_upon_creation`: specifies if the dag is paused when created for the first time (defaults to `false`)
+- `max_active_runs`: maximum number of active workflow runs (defaults to `1`)
+- `retries`: the number of retries that should be performed before failing the task (defaults to `0`)
+- `retry_delay`: delay in seconds between retries (defaults to `300`)
+- `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`)
+- `start_date`: the timestamp (`YYYY-MM-DD`) from which the scheduler will attempt to backfill (defaults to `2025-01-01`)
 
 ## Workflow tasks
 
