@@ -301,17 +301,17 @@ Secret names with hyphens (`-`) will be converted to use underscores (`_`) for t
 
 Secrets are initially created with a placeholder value. To update this, [log in to the Analytical Platform Data Production AWS account](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F) and update the value.
 
-## Accessing environments
+## Workflow logs and metrics
+
+> This functionality is coming soon
+
+## Accessing the Airflow console
 
 To access the Airflow console, you can use these links:
 
 - [Development](https://moj.awsapps.com/start/#/console?account_id=381491960855&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Fdevelopment%2Fsso)
 - [Test](https://moj.awsapps.com/start/#/console?account_id=767397661611&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Ftest%2Fsso)
 - [Production](https://moj.awsapps.com/start/#/console?account_id=992382429243&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fmwaa%2Fhome%3Fregion%3Deu-west-2%23environments%2Fproduction%2Fsso)
-
-## Workflow logs and metrics
-
-> This functionality is coming soon.
 
 ## Runtime templates
 
@@ -339,7 +339,6 @@ The GitHub Actions workflow builds and scans your container for vulnerabilities 
 To ensure your container is running as the right user, we perform a test using Google's [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test) tool.
 
 The source for the test can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/blob/main/assets/container-structure-test/container-structure-test.yml).
-
 
 ## Runtime images
 
