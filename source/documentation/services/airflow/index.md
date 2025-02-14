@@ -259,15 +259,16 @@ mwaa:${project}-${workflow}
 
 ## Workflow secrets
 
-To provide your workflow with secrets, such as a username or password, you can pass a list of secrets names using the `secrets` key in your workflow manifest, for example:
+To provide your workflow with sensitive information, such as a username, password or API key, you can pass a list of secret identifiers using the `secrets` key in your workflow manifest, for example:
 
 ```yaml
 secrets:
   - username
   - password
+  - api-key
 ```
 
-This will create an encrypted secret in AWS Secrets Manager in the following path: `/airflow/${environment}/${project}/${workflow}/${secret_id}`, (which you can populate with the secret value via the console) and it will then be injected into your container using an environment variable, for example:
+This will create an encrypted secret in AWS Secrets Manager in the following path: `/airflow/${environment}/${project}/${workflow}/${secret_id}`, (which you can populate with the secret value via the AWS console) and it will then be injected into your container using an environment variable, for example:
 
 ```bash
 SECRET_USERNAME=xxxxxx
@@ -297,21 +298,21 @@ To access the Airflow console, you can use these links:
 We provide repository templates for the supported runtimes:
 
 - [Python](https://github.com/ministryofjustice/analytical-platform-airflow-python-template)
-- R (coming soon).
+- R (coming soon)
 
 These templates include:
 
-- GitHub Actions workflow to build and scan your container for vulnerabilities with Trivy.
-- GitHub Actions workflow to build and test your container's structure.
-- GitHub Actions workflow to perform a dependency review of your repository, if it's public.
-- GitHub Actions workflow to build and push your container to the Analytical Platform's container registry.
-- Dependabot configuration for updating GitHub Actions, Docker, and dependencies such as Pip.
+- GitHub Actions workflow to build and scan your container for vulnerabilities with Trivy
+- GitHub Actions workflow to build and test your container's structure
+- GitHub Actions workflow to perform a dependency review of your repository, if it's public
+- GitHub Actions workflow to build and push your container to the Analytical Platform's container registry
+- Dependabot configuration for updating GitHub Actions, Docker, and dependencies such as Pip
 
 The GitHub Actions workflows call shared workflows we maintain [here](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions).
 
 ### Vulnerability scanning
 
-The GitHub Actions workflow to build and scan your container for vulnerabilities with Trivy will alert on any CVEs (Common Vulnerabilities and Exposures) marked `HIGH` or `CRITICAL` that have a fix available. You will need to either update the offending package or skip the CVE by adding it to `.trivyignore` in the root of your repository.
+The GitHub Actions workflow builds and scans your container for vulnerabilities with Trivy, alerting you to any CVEs (Common Vulnerabilities and Exposures) marked as `HIGH` or `CRITICAL` that have a fix available. You will need to either update the offending package or skip the CVE by adding it to `.trivyignore` in the root of your repository.
 
 ### Configuration testing
 
@@ -323,8 +324,9 @@ The source for the test can be found [here](https://github.com/ministryofjustice
 ## Runtime images
 
 We provide container images for the supported runtimes:
+
 - [Python](https://github.com/ministryofjustice/analytical-platform-airflow-python-base)
-- R (coming soon).
+- R (coming soon)
 
 These images include:
 
@@ -342,4 +344,4 @@ _TBC_
 
 If you have any questions about Analytical Platform Airflow, please reach out to us on Slack in the [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C06TFT94JTC) channel.
 
-For assistance, you can raise a [support issue](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-airflow-support.yml).
+For assistance, you can [raise a support issue](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-airflow-support.yml).
