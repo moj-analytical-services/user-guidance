@@ -122,7 +122,7 @@ tags:
 
 ## Workflow tasks
 
-Providing the minimum keys under `dag` will create a main task that will execute the entrypoint of your container, providing a set of default environment variables:
+Providing the minimum keys under `dag` will create a main task. This task will execute the entrypoint of your container and provide a set of default environment variables; for example, in `development`:
 
 ```bash
 AWS_DEFAULT_REGION=eu-west-1
@@ -130,6 +130,7 @@ AWS_ATHENA_QUERY_EXTRACT_REGION=eu-west-1
 AWS_DEFAULT_EXTRACT_REGION=eu-west-1
 AWS_METADATA_SERVICE_TIMEOUT=60
 AWS_METADATA_SERVICE_NUM_ATTEMPTS=5
+AIRFLOW_ENVIRONMENT=DEVELOPMENT
 ```
 
 ### Environment variables
