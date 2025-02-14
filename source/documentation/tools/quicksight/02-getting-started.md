@@ -14,7 +14,7 @@ These permissions are defined in [the data-engineering-database-access GitHub re
 
 ### Enable QuickSight in Analytical Platform Control Panel
 
-To enable Quicksight, go to your user page in control panel. This is accessed by clicking your username next to the sign out link in the header. Go to the Quicksight access section and check either author or reader depending on your needs. Then hit the save changes button to grant access.
+To enable Quicksight, go to your user page in control panel. This is accessed by clicking your username next to the sign out link at the top of the page. Go to the Quicksight access section and check either author or reader depending on your needs. Then hit the save changes button to grant access.
 
 ## Accessing QuickSight
 

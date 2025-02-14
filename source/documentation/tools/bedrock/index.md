@@ -4,7 +4,7 @@
 
 First, you will need access to the Control Panel, [see Analytical Platform User Guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html).
 
-To enable Bedrock for your user, go to your user page in control panel. This is accessed by clicking your username next to the sign out link in the header. Go to the Enable Bedrock section and check the Bedrock Enabled box. Then hit the save changes button to grant access.
+To enable Bedrock for your user, go to your user page in control panel. This is accessed by clicking your username next to the sign out link at the top of the page. Go to the Enable Bedrock section and check the Bedrock Enabled box. Then hit the save changes button to grant access.
 
 To grant Bedrock access to your Webapp, [raise a support request](https://github.com/ministryofjustice/data-platform-support/issues/new/choose).
 
