@@ -1,5 +1,10 @@
 # Airflow
 
+> This documentation is for the Data Engineering Airflow service.
+>
+> For Analytical Platform Airflow, please refer to [Analytical Platform Airflow](/services/airflow)
+
+
 [Airflow](https://airflow.apache.org) is a platform to programmatically author, schedule and monitor workflows
 
 ## Important links
