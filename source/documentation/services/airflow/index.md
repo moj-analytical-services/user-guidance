@@ -125,7 +125,7 @@ tags:
 
 ## Workflow scheduling
 
-There are several options for configuring your workflow's schedule. By default, if no options are specified, you must manually trigger it in the Airflow console.
+There are several options for configuring your workflow's schedule. By default, if no options are specified, you must manually trigger it in the [Airflow console](#accessing-the-airflow-console).
 
 The following options are available under `dag`:
 
