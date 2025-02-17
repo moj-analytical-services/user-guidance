@@ -301,6 +301,10 @@ Secret names with hyphens (`-`) will be converted to use underscores (`_`) for t
 
 Secrets are initially created with a placeholder value. To update this, [log in to the Analytical Platform Data Production AWS account](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F) and update the value.
 
+## Workflow notifications
+
+> This functionality is coming soon
+
 ## Workflow logs and metrics
 
 > This functionality is coming soon
