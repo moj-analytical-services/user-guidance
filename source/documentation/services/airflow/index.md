@@ -139,6 +139,20 @@ The following options are available under `dag`:
 - `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`)
 - `start_date`: the timestamp (`YYYY-MM-DD`) from which the scheduler will attempt to backfill (defaults to `2025-01-01`)
 
+The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of setting some of the scheduling options:
+
+```yaml
+---
+dag:
+  repository: moj-analytical-services/analytical-platform-airflow-python-example
+  tag: 2.0.0
+  retries: 3
+  retry_delay: 150
+  schedule: "0 8 * * *"
+
+...
+```
+
 ## Workflow tasks
 
 Providing the minimum keys under `dag` will create a main task. This task will execute the entrypoint of your container and provide a set of default environment variables; for example, in `development`:
