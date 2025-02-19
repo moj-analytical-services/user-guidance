@@ -317,7 +317,22 @@ Secrets are initially created with a placeholder value. To update this, [log in 
 
 ## Workflow notifications
 
+### Email
+
 > This functionality is coming soon
+
+### Slack
+
+To enable Slack notifications, you need to:
+
+1. Add the folllowing to your workflow manifest:
+
+    ```yaml
+    notifications:
+      slack_channel: your-channel-name # e.g. analytical-platform
+    ```
+
+1. Invite Analytical Platform's Slack application (`@Analytical Platform`) to your channel
 
 ## Workflow logs and metrics
 
