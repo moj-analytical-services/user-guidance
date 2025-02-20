@@ -13,4 +13,4 @@ If you cannot find a fix for your problem or do not know where the problem is, y
 ## Raise an issue
 If you still need help, [select your problem on our GitHub form](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) to find the right support. 
 
-If you’re not a DOM1 user or cannot access GitHub, [send us an email](analytical_platform@digital.justice.gov.uk). 
+If you’re not a DOM1 user or cannot access GitHub, [send us an email](analytical-platform@digital.justice.gov.uk). 
