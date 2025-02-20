@@ -142,15 +142,12 @@ The following options are available under `dag`:
 The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of setting some of the scheduling options:
 
 ```yaml
----
 dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
   tag: 2.0.0
   retries: 3
   retry_delay: 150
   schedule: "0 8 * * *"
-
-...
 ```
 
 ## Workflow tasks
@@ -319,13 +316,22 @@ Secrets are initially created with a placeholder value. To update this, [log in 
 
 ### Email
 
-> This functionality is coming soon
+To enable email notifications, you need to:
+
+1. Add the following to your workflow manifest:
+
+    ```yaml
+    notifications:
+      emails:
+        - analytical-platform@justice.gov.uk
+        - data-platform@justice.gov.uk
+    ```
 
 ### Slack
 
 To enable Slack notifications, you need to:
 
-1. Add the folllowing to your workflow manifest:
+1. Add the following to your workflow manifest:
 
     ```yaml
     notifications:
