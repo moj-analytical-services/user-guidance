@@ -318,7 +318,7 @@ Secrets are initially created with a placeholder value. To update this, [log in 
 
 To enable email notifications, you need to:
 
-1. Add the folllowing to your workflow manifest:
+1. Add the following to your workflow manifest:
 
     ```yaml
     notifications:
@@ -331,7 +331,7 @@ To enable email notifications, you need to:
 
 To enable Slack notifications, you need to:
 
-1. Add the folllowing to your workflow manifest:
+1. Add the following to your workflow manifest:
 
     ```yaml
     notifications:
