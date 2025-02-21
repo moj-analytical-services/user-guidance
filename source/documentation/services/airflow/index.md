@@ -413,6 +413,8 @@ USER ${CONTAINER_UID} # Switch back to analyticalplatform
 
 ## Migrating from Data Engineering Airflow
 
+### GitHub repository
+
 If you have an existing repository that was created using [moj-analytical-services/template-airflow-python](https://github.com/moj-analytical-services/template-airflow-python) or [moj-analytical-services/template-airflow-r](https://github.com/moj-analytical-services/template-airflow-r), you need to perform the following actions:
 
 1. Remove `.github/workflows/ecr_push.yml`
@@ -424,6 +426,16 @@ If you have an existing repository that was created using [moj-analytical-servic
 1. Refactor your Dockerfile to consume the equivalent [runtime image](#runtime-images)
 
 Refactoring your Dockerfile may cause issues as the legacy templates contain older versions of Python and R, did not provide a non-root user, and used a different working directory. We maintain a repository that can serve as a reference for how to use our runtime image, you can find that [here](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
+
+### Airflow configuration
+
+#### IAM
+
+We do not provide a way of reusing the IAM role from Data Engineering Airflow, you will need to populate `iam` with the same configuration, and update any external references to use the new role format, please refer to [workflow identity](#workflow-identity).
+
+#### Secrets
+
+We do not provide a way of reusing secrets or parameters from Data Engineering Airflow, you will need to follow [workflow secrets](#workflow-secrets), and update your application code to consume the injected variables, or retrieve the value from AWS Secrets Manager ([AWS documentation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets-python-sdk.html)).
 
 ## Getting help
 
