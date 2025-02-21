@@ -316,7 +316,7 @@ Secrets are initially created with a placeholder value. To update this, [log in 
 
 ### Email
 
-To enable email notifications, you need to add the following to your workflow manifest:
+To enable email notifications, add the following to your workflow manifest:
 
     ```yaml
     notifications:
