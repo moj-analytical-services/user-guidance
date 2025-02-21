@@ -316,9 +316,7 @@ Secrets are initially created with a placeholder value. To update this, [log in 
 
 ### Email
 
-To enable email notifications, you need to:
-
-1. Add the following to your workflow manifest:
+To enable email notifications, you need to add the following to your workflow manifest:
 
     ```yaml
     notifications:
@@ -426,6 +424,8 @@ If you have an existing repository that was created using [moj-analytical-servic
 1. Refactor your Dockerfile to consume the equivalent [runtime image](#runtime-images)
 
 Refactoring your Dockerfile may cause issues as the legacy templates contain older versions of Python and R, did not provide a non-root user, and used a different working directory. We maintain a repository that can serve as a reference for how to use our runtime image, you can find that [here](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
+
+> **Please note**: We require that you use our [runtime images](#runtime-images) as we regularly update the operating system and software 
 
 ### Airflow configuration
 
