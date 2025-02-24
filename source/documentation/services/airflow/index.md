@@ -355,7 +355,7 @@ To access the Airflow console, you can use these links:
 We provide repository templates for the supported runtimes:
 
 - [Python](https://github.com/ministryofjustice/analytical-platform-airflow-python-template)
-- [R]((https://github.com/ministryofjustice/analytical-platform-airflow-r-template))
+- [R](https://github.com/ministryofjustice/analytical-platform-airflow-r-template)
 
 These templates include:
 
