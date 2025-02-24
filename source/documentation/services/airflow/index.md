@@ -76,7 +76,7 @@ After your request is granted, you will be added to a GitHub team that will give
 
     [Python](https://github.com/new?template_name=analytical-platform-airflow-python-template&template_owner=ministryofjustice)
 
-    R (coming soon)
+    [R](https://github.com/new?template_name=analytical-platform-airflow-r-template&template_owner=ministryofjustice)
 
 1. Add your code to the repository
 
@@ -355,7 +355,7 @@ To access the Airflow console, you can use these links:
 We provide repository templates for the supported runtimes:
 
 - [Python](https://github.com/ministryofjustice/analytical-platform-airflow-python-template)
-- R (coming soon)
+- [R]((https://github.com/ministryofjustice/analytical-platform-airflow-r-template))
 
 These templates include:
 
@@ -382,7 +382,7 @@ The source for the test can be found [here](https://github.com/ministryofjustice
 We provide container images for the supported runtimes:
 
 - [Python](https://github.com/ministryofjustice/analytical-platform-airflow-python-base)
-- R (coming soon)
+- [R](https://github.com/ministryofjustice/analytical-platform-airflow-r-base)
 
 These images include:
 
