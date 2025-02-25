@@ -54,6 +54,8 @@ To access the Airflow components, you'll need to:
 * have a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)) 
 * [join the `ministryofjustice` GitHub organisation](https://github.com/orgs/ministryofjustice/sso)
 
+> If you are a member of Data Engineering's GitHub team ([@ministryofjustice/data-engineering](https://github.com/orgs/ministryofjustice/teams/data-engineering)), you are automatically granted access and do not need to submit a request
+
 When you have joined the `ministryofjustice` GitHub organisation, [submit a request for Airflow access](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-airflow-access-request.yml).
 
 After your request is granted, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
@@ -119,7 +121,7 @@ tags:
 
 - `dag.repository` is the name of the GitHub repository where your code is stored
 - `dag.tag` is the tag you used when creating a release in your GitHub repository
-- `maintainers` is a list of GitHub usernames of individuals responsible for maintaining the workflow
+- `maintainers` is a list of GitHub usernames of individuals responsible for maintaining the workflow, and updating any secret values
 - `tags.business_unit` must be one of `Central Digital`, `CICA`, `HMCTS`, `HMPPS`, `HQ`, `LAA`, `OPG`, `Platforms`, `Technology Services`
 - `tags.owner` must be an email address ending with `@justice.gov.uk`
 
@@ -310,7 +312,7 @@ Secret names with hyphens (`-`) will be converted to use underscores (`_`) for t
 
 ### Updating a secret value
 
-Secrets are initially created with a placeholder value. To update this, [log in to the Analytical Platform Data Production AWS account](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F) and update the value.
+Secrets are initially created with a placeholder value. To update this, your GitHub username must be listed in the `maintainers` section, and then [log in to the Analytical Platform Data Production AWS account](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F) and update the value.
 
 ## Workflow notifications
 
@@ -318,12 +320,12 @@ Secrets are initially created with a placeholder value. To update this, [log in 
 
 To enable email notifications, add the following to your workflow manifest:
 
-    ```yaml
-    notifications:
-      emails:
-        - analytical-platform@justice.gov.uk
-        - data-platform@justice.gov.uk
-    ```
+```yaml
+notifications:
+  emails:
+    - analytical-platform@justice.gov.uk
+    - data-platform@justice.gov.uk
+```
 
 ### Slack
 
