@@ -102,3 +102,7 @@ Register of deployed data science assets. The repository for managing and updati
 
 ### [MLFlow Tracking Server](mlflow-tracking-server)
 A user interface for [MLFlow Tracking Server](https://mlflow.org/docs/latest/tracking/server.html) that allows users to track their model experiments.
+
+## Generative AI
+### [Amazon Bedrock](bedrock)
+Guidance on the access and use of Amazon Bedrock.

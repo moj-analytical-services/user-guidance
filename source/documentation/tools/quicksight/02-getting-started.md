@@ -14,7 +14,7 @@ These permissions are defined in [the data-engineering-database-access GitHub re
 
 ### Enable QuickSight in Analytical Platform Control Panel
 
-[Raise a support request] to enable QuickSight for your user
+To enable Quicksight, go to [your user page] in control panel. Go to the Quicksight access section and check either author or reader depending on your needs. Then hit the save changes button to grant access.
 
 ## Accessing QuickSight
 
@@ -25,8 +25,10 @@ These permissions are defined in [the data-engineering-database-access GitHub re
 
 [the `mojap-derived-table` domains]: https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models
 [the data-engineering-database-access GitHub repository]: https://github.com/moj-analytical-services/data-engineering-database-access/?tab=readme-ov-file#access-to-curated-databases
-[Raise a support request]: https://github.com/ministryofjustice/data-platform-support/issues/new/choose
 [Azure portal]: https://portal.azure.com/
 [\#analytical-platform-quicksight-mvp]: https://moj.enterprise.slack.com/archives/C07LAJB86TZ
 [Analytical Platform]: https://analytical-platform.service.justice.gov.uk/
 [QuickSight UI within Control Panel]: https://controlpanel.services.analytical-platform.service.justice.gov.uk/quicksight/
+[your user page]: https://controlpanel.services.analytical-platform.service.justice.gov.uk/user/
+
+

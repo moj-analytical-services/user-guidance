@@ -10,13 +10,13 @@ service_link: https://user-guidance.analytical-platform.service.justice.gov.uk
 header_links:
   Control Panel: https://controlpanel.services.analytical-platform.service.justice.gov.uk/
   Status: https://status.analytical-platform.service.justice.gov.uk/
-  Support: https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-support.yml
+  Support: https://github.com/ministryofjustice/data-platform-support/issues/new/choose
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
-ga_tracking_id: G-M0RD516WGR
+# ga_tracking_id: G-R6XQGCZFY1
 
 # Enable multipage navigation in the sidebar
 multipage_nav: true
@@ -36,9 +36,9 @@ show_contribution_banner: true
 github_repo: moj-analytical-services/user-guidance
 
 # Slack options
-owner_slack_workspace: asdslack
-default_owner_slack: '#analytical-platform-support'
+owner_slack_workspace: mojdt
+default_owner_slack: '#analytical-platform'
 
 footer_links:
   Get in touch by email: mailto:analytical-platform@digital.justice.gov.uk
-  Get in touch by Slack: https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ
+  Get in touch by Slack: https://moj.enterprise.slack.com/archives/C06TFT94JTC
