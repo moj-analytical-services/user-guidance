@@ -762,6 +762,10 @@ module "analytical_platform_assumable_role" {
 }
 ```
 
+The trusted role ARN should be your Analytical Platform app ARN.
+
+The custom role policy arns you should create via Cloud Platform. Analytical Platform does not support this.
+
 Once you have raised the PR with Cloud Platform and the code has applied, go to your webapp page in control panel and check `Access via Cloud Platform`. Add the ARN of the new role you created in the text box and click the save changes button.
 
 From there, you will need to contact someone from cloud platform to help you set up whatever service is required.git 
