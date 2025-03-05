@@ -6,15 +6,15 @@
 
 ## Overview
 
-[Apache Airflow](https://airflow.apache.org/) is a workflow management platform for automating pipelines, such as:
+[Apache Airflow](https://airflow.apache.org/) is a workflow management platform. Analytical Platform users primarily use it for:
 
-* data engineering data pipelines
-* machine learning model training
-* automated reproducible analytical pipelines (RAP)
+* automating data engineering pipelines
+* training machine learning models
+* reproducible analytical pipelines ([RAP](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/))
 
 We recommend using it for long-running or compute intensive tasks. 
 
-Pipelines are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Athena, Amazon Bedrock, and Amazon S3.
+Workflows are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Athena, Amazon Bedrock, and Amazon S3.
 
 Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which connects to:
 
@@ -24,11 +24,13 @@ Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which co
 
 If you need additional connectivity, [submit a feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
 
-> **Please note**: You cannot use Analytical Platform Airflow for pipelines using `BashOperator` or `PythonOperator`
+> **Please note**: You cannot use Analytical Platform Airflow for workflows using `BashOperator` or `PythonOperator`
 
 ## Concepts
 
-We organise Airflow pipelines using **environments**, **projects** and **workflows**:
+![](images/airflow/airflow_diagram.png)
+
+The Analytical Platform Airflow is made up of **environments**, **projects** and **workflows**:
 
 * **Environments** are the different stages of infrastructure we provide: `development`, `test` and `production`.
 
@@ -83,7 +85,6 @@ After your request is granted, you will be added to a GitHub team that will give
   > Repository standards, such as branch protection, are out of scope for this guidance
   >
   > For more information on runtime templates, please refer to [runtime templates](#runtime-templates)
-
 
 2\. Add your code to the repository, including the script(s) your want Airflow to run and a file for your package management
 
@@ -195,7 +196,7 @@ dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
   tag: 2.0.0
   env_vars:
-    FOO: "bar"
+    x: "1"
 ```
 
 ### Compute profiles
@@ -215,7 +216,10 @@ In addition to the `general` fleet, we also offer `gpu`, which provides your wor
 The full list of available compute profiles can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/scripts/workflow_schema_validation/schema.json#L14-L41).
 
 > Analytical Platform tooling (such as JupyterLab, VSCode and RStudio) tend to run on a profile similar to `general-spot-2vcpu-8gb` or `general-spot-4vcpu-16gb`; therefore, the default compute profile is smaller.
+
 ### Multi-task
+
+![](images/airflow/airflow_diagram_deps.png)
 
 Workflows can also run multiple tasks, with dependencies on other tasks in the same workflow. To enable this, specify the `tasks` key, for example:
 
@@ -224,24 +228,24 @@ dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
   tag: 2.0.0
   env_vars:
-    FOO: "bar"
+    x: "1"
   tasks:
     init:
       env_vars:
-        PHASE: "init"
+        y: "0"
     phase-one:
       env_vars:
-        PHASE: "one"
+        y: "1"
+      compute_profile: cpu-spot-2vcpu-8gb
       dependencies: [init]
     phase-two:
       env_vars:
-        PHASE: "two"
-      dependencies: [phase-one]
+        y: "2"
+      compute_profile: gpu-spot-1vcpu-4gb
     phase-three:
       env_vars:
-        FOO: "baz"
-        PHASE: "three"
-      compute_profile: gpu-spot-1vcpu-4gb
+        x: "2"
+        y: "3"
       dependencies: [phase-one, phase-two]
 ```
 
