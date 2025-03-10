@@ -6,11 +6,15 @@
 
 ## Overview
 
-[Apache Airflow](https://airflow.apache.org/) is a workflow management platform for data engineering pipelines.
+[Apache Airflow](https://airflow.apache.org/) is a workflow management platform. Analytical Platform users primarily use it for:
+
+* automating data engineering pipelines
+* training machine learning models
+* reproducible analytical pipelines ([RAP](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/))
 
 We recommend using it for long-running or compute intensive tasks. 
 
-Pipelines are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Athena, Amazon Bedrock, and Amazon S3.
+Workflows are executed on the Analytical Platform's Kubernetes infrastructure and can interact with services such as Amazon Athena, Amazon Bedrock, and Amazon S3.
 
 Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which connects to:
 
@@ -20,19 +24,21 @@ Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which co
 
 If you need additional connectivity, [submit a feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
 
-> **Please note**: You cannot use Analytical Platform Airflow for pipelines using `BashOperator` or `PythonOperator`
+> **Please note**: You cannot use Analytical Platform Airflow for workflows using `BashOperator` or `PythonOperator`
 
 ## Concepts
 
-We organise Airflow pipelines using **environments**, **projects** and **workflows**:
+![](images/airflow/airflow_diagram.png)
 
-* **Environments** are the different stages of infrastructure we provide: `development`, `test` and `production`
+The Analytical Platform Airflow is made up of **environments**, **projects** and **workflows**:
+
+* **Environments** are the different stages of infrastructure we provide: `development`, `test` and `production`.
 
 > **Please note**: `development` is not connected to the MoJO Transit Gateway
 
 * **Projects** are a unit for grouping workflows dedicated to a distinct business domain, service area, or specific project, for example: `BOLD`, `HMCTS` or `HMPPS`.
 
-* **Workflows** are pipelines, also known as [DAGs](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/dags.html#dags).
+* **Workflows** are pipelines, also known as [directed acyclic graph (DAGs)](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/dags.html#dags).
   They consist of a list of tasks organised to reflect the relationships between them.
   The workflow definition includes additional information, such as your repository name and release tag.
 
@@ -42,8 +48,8 @@ Before you can use Airflow, you'll need to:
 
 * [request Airflow access](#request-airflow-access) 
 * [create a GitHub repository](#create-a-github-repository) 
-* [create a release](#create-a-release) 
-* [create a project and workflow](#create-a-project-and-workflow)
+* [create a GitHub release](#create-a-github-release) 
+* [create an Airflow pipeline project and workflow](#create-an-airflow-pipeline-project-and-workflow)
 
 Follow the next steps to get started.
 
@@ -70,37 +76,51 @@ After your request is granted, you will be added to a GitHub team that will give
 
 1. Create a repository using one of the provided runtime templates:
 
-    > You can create this repository in either the [`ministryofjustice`](https://github.com/ministryofjustice/) or [`moj-analytical-services`](https://github.com/moj-analytical-services/) GitHub organisation
-    >
-    > Repository standards, such as branch protection, are out of scope for this guidance
-    >
-    > For more information on runtime templates, please refer to [runtime templates](#runtime-templates)
+- [Python Airflow Template](https://github.com/new?template_name=analytical-platform-airflow-python-template&template_owner=ministryofjustice)
 
-    [Python](https://github.com/new?template_name=analytical-platform-airflow-python-template&template_owner=ministryofjustice)
+- [R Airflow Template](https://github.com/new?template_name=analytical-platform-airflow-r-template&template_owner=ministryofjustice)
+     
+  > You can create this repository in either the [`ministryofjustice`](https://github.com/ministryofjustice/) or [`moj-analytical-services`](https://github.com/moj-analytical-services/) GitHub organisation
+  >
+  > Repository standards, such as branch protection, are out of scope for this guidance
+  >
+  > For more information on runtime templates, please refer to [runtime templates](#runtime-templates)
 
-    [R](https://github.com/new?template_name=analytical-platform-airflow-r-template&template_owner=ministryofjustice)
+2\. Add your code to the repository, including the script(s) your want Airflow to run and a file for your package management
 
-1. Add your code to the repository
+3\. Update the `Dockerfile` instructions to copy your code into the image, install packages required to run, and call the script(s) to run. For example, for Python:
 
-1. Update the `Dockerfile` instructions to copy your code into the image and install packages required to run
+```Dockerfile
+FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.7.0@sha256:5de4dfa5a59c219789293f843d832b9939fb0beb65ed456c241b21928b6b8f59
+
+USER root
+
+COPY requirements.txt requirements.txt
+COPY src/ .
+RUN pip install -r requirements.txt
+
+USER ${CONTAINER_UID}
+
+ENTRYPOINT ["python3", "main.py"]
+```
 
   > For more information on runtime images, please refer to [runtime images](#runtime-images)
 
-### Create a release
+### Create a GitHub release
 
-1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
+1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release). Make note of the release tag.
 
 1. After you've created a release, check if your container image has been successfully built and published by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2)
 
-You can also see [our example repository](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
+> You can also see [our example Python repository](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
 
-### Create a project and workflow
+### Create an Airflow pipeline project and workflow
 
-To initialise a project, create a directory in the [relevant environment in our repository](https://github.com/ministryofjustice/analytical-platform-airflow/tree/main/environments), for example, `environments/development/analytical-platform`.
+To initialise an [Airflow pipeline project](#concepts), create a directory in the [relevant environment in the Airflow repository](https://github.com/ministryofjustice/analytical-platform-airflow/tree/main/environments), for example, `environments/development/analytical-platform`.
 
-To create a workflow, you need to provide us with a workflow manifest in your project.
+To create a [Airflow pipeline workflow](#concepts) (a DAG), you need to provide a workflow manifest (`workflow.yml`) file in your project under a workflow identifier name.
 
-This manifest specifies the desired state for the Airflow DAG, and provides contextual information used to categorise and label the DAG.
+This manifest file specifies the desired state for workflow, and provides contextual information used to categorise and label the workflow.
 
 For example, create `environments/development/analytical-platform/example/workflow.yml`, where `example` is an identifier for your workflow's name.
 
@@ -119,11 +139,13 @@ tags:
   owner: analytical-platform@justice.gov.uk
 ```
 
-- `dag.repository` is the name of the GitHub repository where your code is stored
-- `dag.tag` is the tag you used when creating a release in your GitHub repository
-- `maintainers` is a list of GitHub usernames of individuals responsible for maintaining the workflow, and updating any secret values
-- `tags.business_unit` must be one of `Central Digital`, `CICA`, `HMCTS`, `HMPPS`, `HQ`, `LAA`, `OPG`, `Platforms`, `Technology Services`
+- `dag.repository` is the name of the GitHub repository where your code is stored and release has been created
+- `dag.tag` is the tag you used when creating the release in your GitHub repository
+- `maintainers` are a list of GitHub usernames of individuals responsible for maintaining the workflow, and updating any secret values
+- `tags.business_unit` **must** be one of `Central Digital`, `CICA`, `HMCTS`, `HMPPS`, `HQ`, `LAA`, `OPG`, `Platforms`, `Technology Services`
 - `tags.owner` must be an email address ending with `@justice.gov.uk`
+
+> Providing a `tags.business_unit` other than `Central Digital`, `CICA`, `HMCTS`, `HMPPS`, `HQ`, `LAA`, `OPG`, `Platforms`, `Technology Services` will result in an error.
 
 ## Workflow scheduling
 
@@ -141,7 +163,7 @@ The following options are available under `dag`:
 - `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`)
 - `start_date`: the timestamp (`YYYY-MM-DD`) from which the scheduler will attempt to backfill (defaults to `2025-01-01`)
 
-The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of setting some of the scheduling options:
+The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of a workflow that runs at 08:00 every day and retries 3 times, with a 150 second delay between each retry:
 
 ```yaml
 dag:
@@ -174,7 +196,7 @@ dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
   tag: 2.0.0
   env_vars:
-    FOO: "bar"
+    x: "1"
 ```
 
 ### Compute profiles
@@ -189,11 +211,15 @@ This is done using the `dag.compute_profile` key, and by default (if not specifi
 - `1vcpu`: 1 vCPU is guaranteed
 - `4gb`: 4GB of memory is guaranteed
 
-In addition to the `general` fleet, we also offer `gpu`, which provides your workflow with an NVIDIA GPU.
+In addition to the `general` fleet, we also offer `gpu`, which provides your workflow with an NVIDIA GPU pre-installed with CUDA.
 
 The full list of available compute profiles can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/scripts/workflow_schema_validation/schema.json#L14-L41).
 
+> Analytical Platform tooling (such as JupyterLab, RStudio and Visual Studio Code) has access to 1 vCPU and 12GB RAM. The closest compute profile is `general-on-demand-4vcpu-16gb`.
+
 ### Multi-task
+
+![](images/airflow/airflow_diagram_deps.png)
 
 Workflows can also run multiple tasks, with dependencies on other tasks in the same workflow. To enable this, specify the `tasks` key, for example:
 
@@ -202,24 +228,24 @@ dag:
   repository: moj-analytical-services/analytical-platform-airflow-python-example
   tag: 2.0.0
   env_vars:
-    FOO: "bar"
+    x: "1"
   tasks:
     init:
       env_vars:
-        PHASE: "init"
+        y: "0"
     phase-one:
       env_vars:
-        PHASE: "one"
+        y: "1"
+      compute_profile: cpu-spot-2vcpu-8gb
       dependencies: [init]
     phase-two:
       env_vars:
-        PHASE: "two"
-      dependencies: [phase-one]
+        y: "2"
+      compute_profile: gpu-spot-1vcpu-4gb
     phase-three:
       env_vars:
-        FOO: "baz"
-        PHASE: "three"
-      compute_profile: gpu-spot-1vcpu-4gb
+        x: "2"
+        y: "3"
       dependencies: [phase-one, phase-two]
 ```
 
@@ -235,7 +261,7 @@ By default, for each workflow, we create an associated IAM policy and IAM role i
 
 The name of your workflow's role is derived from its environment, project, and workflow: `airflow-${environment}-${project}-${workflow}`.
 
-To extend the permissions of your workflow's IAM policy, you can do so under the top-level `iam` key in your workflow manifest, for example:
+To extend the permissions of your workflow's IAM policy to include access to Athena, Bedrock, Glue, KMS ARNs and/or S3 buckets, you can do so under the top-level `iam` key in your workflow manifest, for example:
 
 ```yaml
 iam:
@@ -284,6 +310,7 @@ We can provide the Amazon EKS OpenID Connect provider URL upon request.
 
 You must also create a role that is [enabled for IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 We recommend using [this Terraform module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks).
+
 You must use the following when referencing service accounts:
 
 ```
@@ -306,13 +333,14 @@ This will create an encrypted secret in AWS Secrets Manager in the following pat
 ```bash
 SECRET_USERNAME=xxxxxx
 SECRET_PASSWORD=yyyyyy
+SECRET_API_KEY=zzzzzz
 ```
 
 Secret names with hyphens (`-`) will be converted to use underscores (`_`) for the environment variable.
 
 ### Updating a secret value
 
-Secrets are initially created with a placeholder value. To update this, your GitHub username must be listed in the `maintainers` section, and then [log in to the Analytical Platform Data Production AWS account](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F) and update the value.
+Secrets are initially created with a placeholder value. To update this, your GitHub username must be listed in the `maintainers` section of the [workflow manifest file](#create-an-airflow-pipeline-project-and-workflow), and then [log in to the Analytical Platform Data Production AWS account](https://moj.awsapps.com/start/#/console?account_id=593291632749&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fsecretsmanager%2Flistsecrets%3Fregion%3Deu-west-2%26search%3Dall%253D%25252Fairflow%25252F) and update the value.
 
 ## Workflow notifications
 
