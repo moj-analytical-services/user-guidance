@@ -215,7 +215,7 @@ In addition to the `general` fleet, we also offer `gpu`, which provides your wor
 
 The full list of available compute profiles can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/scripts/workflow_schema_validation/schema.json#L14-L41).
 
-> Analytical Platform tooling (such as JupyterLab, VSCode and RStudio) tend to run on a profile similar to `general-spot-2vcpu-8gb` or `general-spot-4vcpu-16gb`; therefore, the default compute profile is smaller.
+> Analytical Platform tooling (such as JupyterLab, RStudio and Visual Studio Code) has access to 1 vCPU and 12GB RAM. The closest compute profile is `general-on-demand-4vcpu-16gb`.
 
 ### Multi-task
 
