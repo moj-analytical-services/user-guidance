@@ -28,7 +28,7 @@ If you need additional connectivity, [submit a feature request](https://github.c
 
 ## Concepts
 
-![](images/airflow/airflow_diagram.png)
+![](images/airflow/airflow_diagram.svg)
 
 The Analytical Platform Airflow is made up of **environments**, **projects** and **workflows**:
 
@@ -219,7 +219,7 @@ The full list of available compute profiles can be found [here](https://github.c
 
 ### Multi-task
 
-![](images/airflow/airflow_diagram_deps.png)
+![](images/airflow/airflow_diagram_deps.svg)
 
 Workflows can also run multiple tasks, with dependencies on other tasks in the same workflow. To enable this, specify the `tasks` key, for example:
 
