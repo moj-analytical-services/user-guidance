@@ -153,7 +153,7 @@ If you encounter difficulties upgrading older RStudio projects that use R4.1.x a
 1. You may need to reinstall `renv`. You can install it in the R console with:
     
     ```r
-    install_packages("renv")
+    install.packages("renv")
     ```
 
     You can find more guidance about working with renv [above](#renv).
