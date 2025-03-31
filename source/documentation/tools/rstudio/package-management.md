@@ -156,6 +156,8 @@ If you encounter difficulties upgrading older RStudio projects that use R4.1.x a
     install.packages("renv")
     ```
 
+    If you encounter issues installing `renv`, please try [resetting your home directory](/tools/rstudio/#clearing-your-rstudio-session), restarting your deployment and then retry.
+
     You can find more guidance about working with renv [above](#renv).
 
 2. Ensure that you have the latest CRAN set in your RStudio environment. Depending on the source you want to use for package management, in the R console run either:
