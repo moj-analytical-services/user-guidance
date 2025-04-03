@@ -1,8 +1,9 @@
 # Airflow
 
-> This documentation is for the Data Engineering Airflow service.
+> [IMPORTANT] This documentation is for the (now-depricated) Data Engineering Airflow service.
 >
-> For Analytical Platform Airflow, please refer to [Analytical Platform Airflow](/services/airflow)
+> For our new service, Analytical Platform Airflow, please refer to [Analytical Platform Airflow](/services/airflow)
+> As of 07/04/25 this service will no longer be accepting new DAGs/Roles, these must be created via Analytical Platform Airflow instead.
 
 
 [Airflow](https://airflow.apache.org) is a platform to programmatically author, schedule and monitor workflows
