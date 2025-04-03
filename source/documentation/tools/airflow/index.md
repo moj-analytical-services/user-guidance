@@ -1,6 +1,6 @@
 # Airflow
 
-> [IMPORTANT] This documentation is for the (now-depricated) Data Engineering Airflow service.
+> [IMPORTANT] This documentation is for the (now-deprecated) Data Engineering Airflow service.
 >
 > For our new service, Analytical Platform Airflow, please refer to [Analytical Platform Airflow](/services/airflow)
 > As of 07/04/25 this service will no longer be accepting new DAGs/Roles, these must be created via Analytical Platform Airflow instead.
