@@ -1,8 +1,11 @@
 # Airflow
 
-> This documentation is for the Data Engineering Airflow service.
+> **Important**
 >
-> For Analytical Platform Airflow, please refer to [Analytical Platform Airflow](/services/airflow)
+> This documentation is for the now deprecated Data Engineering Airflow service.
+> This service is now in updates only mode, and will be shuttered on July 8th 2025.
+>
+> Please refer to [Analytical Platform Airflow](/services/airflow) for more information on our new Airflow service.
 
 
 [Airflow](https://airflow.apache.org) is a platform to programmatically author, schedule and monitor workflows
@@ -15,7 +18,7 @@
 - [Airflow repo](https://github.com/moj-analytical-services/airflow): Github repo to store Airflow DAGs and roles
 - [Airflow template for Python](https://github.com/moj-analytical-services/template-airflow-python): Github template repository for creating a Python image to run an Airflow pipeline
 - [Airflow template for R](https://github.com/moj-analytical-services/template-airflow-r): Github template repository for creating an R image to run an Airflow pipeline
-- Support: contact the Data Engineering team on [#ask-data-engineering](https://asdslack.slack.com/archives/C8X3PP1TN)
+- Support: contact the Analytical Platform team on [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C06TFT94JTC)
 
 ## To find out more
 
