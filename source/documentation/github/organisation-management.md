@@ -23,20 +23,6 @@ We use outside collaborators for external users, such as analysts from other gov
 
 To add an outside collaborator you must be a Repository Administrator. Repository Administrators can invite external collaborators directly from the [GitHub](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization#adding-outside-collaborators-to-a-repository).
 
-#### Adding an outside collaborator
-
-To add an outside collaborator to the GitHub organisation, you can either submit an [issue](https://github.com/moj-analytical-services/github-outside-collaborators/issues/new?assignees=&labels=collaborator%2Cpr-create-issue&template=create-pr-from-issue.yaml&title=Please+create+an+outside+collaborator+pull+request+) in the [moj-analytical-services/github-outside-collaborators](https://github.com/moj-analytical-services/github-outside-collaborators) repository or manually make changes to the relevant [Terraform files](https://github.com/moj-analytical-services/github-outside-collaborators/tree/main/terraform). You will need to provide:
-
-- the GitHub username of the user
-- the name of the user
-- the email of the user
-- the organisation of the user
-- the reason the user needs access to the organisation
-- your name and email
-- a review date
-- the level of permission needed by the user
-- a list of repositories the user should have access to
-
 ## Automation
 
 All automated processes are managed in the [moj-analytical-services/operations-engineering](https://github.com/moj-analytical-services/operations-engineering) repository.
