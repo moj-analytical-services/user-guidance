@@ -21,7 +21,7 @@ An outside collaborator is a person who is not a member of the organisation, but
 
 We use outside collaborators for external users, such as analysts from other government departments and partner organisations.
 
-Outside collaborators are managed in Terraform in the [moj-analytical-services/github-outside-collaborators](https://github.com/moj-analytical-services/github-outside-collaborators) repository.
+To add an outside collaborator you must be a Repository Administrator. Repository Administrators can invite external collaborators directly from the [GitHub](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization#adding-outside-collaborators-to-a-repository).
 
 #### Adding an outside collaborator
 
