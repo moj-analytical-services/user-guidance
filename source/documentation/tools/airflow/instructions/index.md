@@ -8,7 +8,7 @@ These instructions will show you how to build and run a standard Airflow pipelin
 
 - [Analytical Platform Account](get-started)
 
-- [Slack Account](get-started) Channel: #ask-data-engineering
+- [Slack Account](get-started) Channel: #ask-analytical-platform
 
 ## Create image and save to ECR
 

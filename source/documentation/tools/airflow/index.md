@@ -15,7 +15,7 @@
 - [Airflow repo](https://github.com/moj-analytical-services/airflow): Github repo to store Airflow DAGs and roles
 - [Airflow template for Python](https://github.com/moj-analytical-services/template-airflow-python): Github template repository for creating a Python image to run an Airflow pipeline
 - [Airflow template for R](https://github.com/moj-analytical-services/template-airflow-r): Github template repository for creating an R image to run an Airflow pipeline
-- Support: contact the Data Engineering team on [#ask-data-engineering](https://asdslack.slack.com/archives/C8X3PP1TN)
+- Support: contact the Analytical Platform team on [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C06TFT94JTC)
 
 ## To find out more
 

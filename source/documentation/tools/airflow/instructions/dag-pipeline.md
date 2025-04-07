@@ -252,6 +252,6 @@ airflow
 │   │   └── APPROVAL REQUIRED
 ```
     
-4.  Once checks pass and PR approved by DE, please merge the PR into main
+4.  Once checks pass and PR is approved in #ask-analytical-platform by the Analytical Platform Team, please merge the PR into main
     
 5.  The code in main is then automatically deployed to the Airflow prod and dev instances
