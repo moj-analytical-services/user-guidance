@@ -1,8 +1,11 @@
 # Airflow
 
-> This documentation is for the Data Engineering Airflow service.
+> **Important**
 >
-> For Analytical Platform Airflow, please refer to [Analytical Platform Airflow](/services/airflow)
+> This documentation is for the now deprecated Data Engineering Airflow service.
+> This service is now in updates only mode, and will be shuttered on July 8th 2025.
+>
+> Please refer to [Analytical Platform Airflow](/services/airflow) for more information on our new Airflow service.
 
 
 [Airflow](https://airflow.apache.org) is a platform to programmatically author, schedule and monitor workflows
