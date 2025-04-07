@@ -21,7 +21,7 @@ An outside collaborator is a person who is not a member of the organisation, but
 
 We use outside collaborators for external users, such as analysts from other government departments and partner organisations.
 
-To add an outside collaborator you must be a Repository Administrator. Repository Administrators can invite external collaborators directly from the [GitHub](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization#adding-outside-collaborators-to-a-repository).
+To add an outside collaborator you must be a Repository Administrator. Repository Administrators can invite external collaborators directly from the [GitHub](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization#adding-outside-collaborators-to-a-repository). Operations Engineering guidance relating to this is located [here](https://user-guide.operations-engineering.service.justice.gov.uk/documentation/information/storing-source-code.html#member-of-the-moj-organisation).
 
 ## Automation
 
