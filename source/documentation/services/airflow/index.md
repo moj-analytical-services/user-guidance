@@ -21,6 +21,7 @@ Our Kubernetes infrastructure is connected to the MoJO Transit Gateway, which co
 * MoJ Cloud Platform
 * MoJ Modernisation Platform 
 * HMCTS SDP
+* SOP
 
 If you need additional connectivity, [submit a feature request](https://github.com/ministryofjustice/analytical-platform/issues/new?template=feature-request-template.yml).
 
