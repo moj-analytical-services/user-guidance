@@ -7,8 +7,6 @@ We have now fully migrated to using [dbt-athena](https://pypi.org/project/dbt-at
 - [Test set up](#test-set-up)
 - [Test `prod` models](#test-prod-models)
 - [Test `dev` models](#test-dev-models)
-- [Insert external_location](#insert-external-location)
-- [SQLFluff linting changes](#sqlfluff-linting-changes)
 - [Update your branch with the `dbt-athena` upgrade](#update-your-branch-with-the-dbt-athena-upgrade)
 - [S3 location change for `seeds`](#s3-location-change-for-seeds)
 - [License](#license)
