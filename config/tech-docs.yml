@@ -42,3 +42,7 @@ default_owner_slack: '#analytical-platform'
 footer_links:
   Get in touch by email: mailto:analytical-platform@digital.justice.gov.uk
   Get in touch by Slack: https://moj.enterprise.slack.com/archives/C06TFT94JTC
+
+redirects:
+  /raise-a-feature-request.html: https://github.com/ministryofjustice/analytical-platform/issues/new?assignees=&labels=feature-request&projects=&template=feature-request-template.yml&title=+%E2%9C%A8+%3Ctitle%3E
+  /raise-an-issue.html: https://github.com/ministryofjustice/data-platform-support/issues/new/choose
