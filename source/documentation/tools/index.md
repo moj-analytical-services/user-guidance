@@ -27,8 +27,8 @@ Extracts data from applications, services or microservices to the Analytical Pla
 ### [Data Uploader](data-uploader)
 Web application for uploading data (.csv, .json, .jsonl) to the Analytical Platform in a standardised way.
 
-### [Ingestion](ingestion)
-An SFTP based service that allows users to ingest data into their Analytical Platform data warehouse.
+### [Transfer](transfer)
+An SFTP based service that allows users to transfer data into their Analytical Platform data warehouse.
 
 ### [Register my data](https://github.com/ministryofjustice/register-my-data)
 Moves data from microservices into the Analytical Platform's [curated databases](../data/curated-databases) in a standardised way.
