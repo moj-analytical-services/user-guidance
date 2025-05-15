@@ -285,9 +285,9 @@ iam:
     - mojap-compute-development-dummy/writeonly2/*
 ```
 
-- `iam.athena`: Can be `read` or `write`, to provide access to Amazon Athena
-- `iam.bedrock`: When set to true, enables Amazon Bedrock access
-- `iam.glue`: When set to true, enables AWS Glue
+- `iam.athena`: Can be `read` or `write`, to provide access to Amazon Athena (`write` includes `read`)
+- `iam.bedrock`: When set to `true`, enables Amazon Bedrock access
+- `iam.glue`: When set to `true`, enables AWS Glue
 - `iam.kms`: A list of KMS ARNs used for encrypt and decrypt operations if objects are KMS encrypted
 - `iam.s3_deny`: A list of Amazon S3 paths to deny access
 - `iam.s3_read_only`: A list of Amazon S3 paths to provide read-only access
