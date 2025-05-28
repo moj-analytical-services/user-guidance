@@ -9,9 +9,14 @@
 
 ## Register dashboard in Analytical Platform Control Panel
 
-First go to the [QuickSight UI within Control Panel] and click the dashboards tab on the Quicksight UI. Right click on the dashboard you want to share and click Copy Link. Go to the [dashboards page] on Control Panel and click the Register a dashboard button. From here, add a dashboad name and paste the link you copied into the Dashboard URL form. The dashboard link should look something like `https://eu-west-2.quicksight.aws.amazon.com/sn/dashboards/<unique-code-here>`. Dashboard names and URLs should be unique and can be registered by one user only. Click the Register dashboard button. If your dashboard has been registered successfully, you will be taken to the dashboard management screen.
+1. Go to the [QuickSight UI within Control Panel] and select the *Dashboards* tab on the QuickSight UI. 
+1. Right click on the dashboard you want to share and select *Copy link*. 
+1. Go to the [Dashboards page] on Control Panel and select the *Register a dashboard* button. 
+1. Enter a dashboard name which is unique and descriptive. 
+1. Paste the dashboard link you copied from step 2 into the Dashboard URL form. The link should look similar to this example: `https://eu-west-2.quicksight.aws.amazon.com/sn/dashboards/<unique-code-here>`. 
+1. Select the *Register dashboard* button. 
 
-The management screen provides a link to the viewable dashboard in the dashboard service as well as other management functions such as granting admin access and de-register the dashboard from control panel. Dashboard admins can manage access to the dashboard and de-register it from the dashboard service.
+If your dashboard has been registered successfully, you will be taken to the dashboard management screen.
 
 ## Managing Dashboard Access
 
