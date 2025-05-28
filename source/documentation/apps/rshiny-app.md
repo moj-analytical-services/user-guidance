@@ -628,16 +628,17 @@ It also provides more [configuration options as outlined here](https://docs.posi
 
 The following example can be used as the starting point when making your own Dockerfile. You may need to make adjustments specific to your app.
 
-```
+Please note, the example below is for using version [2.0.0](https://github.com/ministryofjustice/analytical-platform-rshiny-open-source-base/releases/tag/2.0.0) of the [Analytical Platform RShiny Open Source Base image](https://github.com/ministryofjustice/analytical-platform-rshiny-open-source-base). The Dockerfile may vary for apps using older versions of the base image.
+
+```docker
 # The base docker image
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.3.0
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.0
 
-# ** Optional step: only if some of R pakcages requires the system libraries which are not covered by base image
-#   the one in the example below has been provided in base image.
-# RUN apt-get update \
-#   && apt-get install -y --no-install-recommends \
-#     libglpk-dev
-
+# ** Optional step: only required if your R packages require system libraries
+#   which are not provided by the base image
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    <package-name>
 
 # use renv for packages
 ADD renv.lock renv.lock
@@ -645,12 +646,15 @@ ADD renv.lock renv.lock
 # Install R packages
 RUN R -e "install.packages('renv'); renv::restore()"
 
-# ** Optional step: only if the app requires python packages
-# Make sure reticulate uses the system Python
-# ENV RETICULATE_PYTHON="/usr/bin/python3"
-# ensure requirements.txt exists (created automatically when making a venv in renv)
-# COPY requirements.txt requirements.txt
-# RUN python3 -m pip install -r requirements.txt
+# ** Optional step: only required if the app requires python packages
+# Set the Python interpreter path for reticulate
+ENV RETICULATE_PYTHON="/opt/venv/bin/python"
+# Ensure requirements.txt exists (renv or otherwise)
+COPY requirements.txt requirements.txt
+# Create venv in the path specified above and install dependencies e.g.
+RUN python3 -m venv /opt/venv \
+    && /opt/venv/bin/pip install --upgrade pip \
+    && /opt/venv/bin/pip install -r requirements.txt
 
 # Add shiny app code
 ADD . .
@@ -658,19 +662,21 @@ ADD . .
 USER 998
 ```
 
-### Instructions for switching from the AP shiny server to the open-source server
+### Instructions for switching from the legacy AP shiny server image to the Analytical Platform RShiny Open Source Base image
 
 If you already use the legacy AP shiny server image, and would like to switch to the open source server, the key changes you need to make are:
 
-- Change the base docker image in your Dockerfile:
+- Ensure your R project dependencies are up to date and compatible with the R version used by the open source image version you are switching to. You can view a list of releases [here](https://github.com/ministryofjustice/analytical-platform-rshiny-open-source-base/releases)
 
-```
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:1.3.0
+- Change the base docker image in your Dockerfile to your chosen release:
+
+```docker
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.0
 ```
 
 - If present, ensure the following redundant parts of your Dockerfile are removed:
 
-```
+```docker
 ENV PATH="/opt/shiny-server/bin:/opt/shiny-server/ext/node/bin:${PATH}"
 ENV SHINY_APP=/srv/shiny-server
 ENV NODE_ENV=production

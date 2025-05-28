@@ -145,7 +145,7 @@ renv::use_python()
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
 
-### Troubleshooting when upgrading to R4.4.x
+### Troubleshooting when upgrading to R>4.4.0
 
 If you encounter difficulties upgrading older RStudio projects that use R4.1.x and R4.2.x to the latest releases of RStudio that use R4.4.0 and above, try following these steps (helpfully provided by an AP user):
 
