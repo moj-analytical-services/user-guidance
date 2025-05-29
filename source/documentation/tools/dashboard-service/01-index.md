@@ -4,7 +4,7 @@
 
 ## Overview
 
-The [dashboard service] allows users to share dashboards created in Quicksight in a secure manner.
+The [Dashboard Service] allows users to securely share dashboards created in QuickSight. 
 
 ## [Getting Started](/tools/dashboard-service/getting-started.html)
 
