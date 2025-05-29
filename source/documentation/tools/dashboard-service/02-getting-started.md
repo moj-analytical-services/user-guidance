@@ -19,9 +19,31 @@ You will need:
 
 If your dashboard has been registered successfully, you will be taken to the dashboard management screen.
 
-## Managing Dashboard Access
+## Managing dashboard access
 
-Sharing access can be managed in two ways. The first is granting access to individuals via their email on the customer management page. Individual viewers will be sent a notificaiton email that the dashboard has been shared with them and give them instructions on how to access it. The second method is on the dashboard management page under Domain Access. By adding a domain, this will allow anyone with an email address in that domain to access your dashboard. For example, if you granted access to the justice.gov.uk domain, anybody with a justice email address would be able to access your dashboard through the dashboard service. A notification email will not be sent when granting access through a domain and you may wish to email the dashboard link to users.
+You can find the dashboard management screen by selecting a dashboard on the *Your Dashboards* overview. The management screen provides a link to the viewable dashboard. Dashboard admins can also find other management functions here, such as granting admin access and removing the dashboard from the Analytical Platform Control Panel. 
+
+You can add dashboard viewers by giving access to an individual or to an email domain.
+
+### Add an individual viewer
+
+You can give view access to an individual by using their email address. They do not need to be an Analytical Platform Control Platform user. To do this: 
+1. From the *Your Dashboards* overview, select *Manage users*.
+1. Enter their email in the box above *Add user*. 
+1. Select *Add user*. 
+
+The viewer will be sent an email to notify them you've shared the dashboard with them and give instructions on how to access it. 
+
+### Add view access for an email domain
+
+You can also give view access for an email domain. Adding a domain allows anyone with an email address in that domain to access your dashboard. For example, if you grant access to the `justice.gov.uk` domain, anybody with a Ministry of Justice email address could access your dashboard through the dashboard service. 
+
+To do this:
+1. From the *Your Dashboards* overview, select the dashboard name. 
+1. Under the *Domain access* section, select the domain. If the domain you want to add is not listed, [contact support](/./support.html). 
+1. Select *Grant access*. 
+
+The Dashboard Service does not send a notification email to users when you add view access for an email domain, so you'll need to manually send the dashboard link to users.
 
 ## Accessing shared dashboards
 
