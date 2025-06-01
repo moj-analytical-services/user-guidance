@@ -1,12 +1,12 @@
-# Ingestion
+# Transfer
 
-> Ingestion on the Analytical Platform is currently a beta feature.
+> Transfer on the Analytical Platform is currently a beta feature.
 
 ## Service Requirements
 
 ### Information to be provided to Analytical Platform
 
-To use the Ingestion feature, data owners must provide the following information to the team via the approved process:
+To use the Transfer feature, data owners must provide the following information to the team via the approved process:
 
 - Supplier's name
 - Supplier's email
@@ -55,10 +55,10 @@ Once you receive confirmation from us that you have been onboarded and we have p
 Production:
 
 ```bash
-sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.uk
+sftp -P 2222 ${USERNAME}@sftp.transfer.analytical-platform.service.justice.gov.uk
 ```
 Development:
 
 ```bash
-sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
+sftp -P 2222 ${USERNAME}@sftp.development.transfer.analytical-platform.service.justice.gov.uk
 ```
