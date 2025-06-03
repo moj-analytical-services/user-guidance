@@ -28,7 +28,8 @@ You can add dashboard viewers by giving access to an individual or to an email d
 
 ### Add an individual viewer
 
-You can give view access to an individual by using their email address. They do not need to be an Analytical Platform Control Platform user. To do this: 
+You can give view access to an individual by using their email address. They do not need to be an Analytical Platform Control Platform user. To do this:
+
 1. From the *Your Dashboards* overview, select *Manage users*.
 1. Enter their email in the box above *Add user*. 
 1. Select *Add user*. 
