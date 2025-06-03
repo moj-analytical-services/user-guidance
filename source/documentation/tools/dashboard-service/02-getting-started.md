@@ -3,6 +3,7 @@
 ## Prerequisites to registering dashboards
 
 You will need:
+
 * access to the Analytical Platform Control Panel
 * QuickSight author permissions for your account in the Analytical Platform Control Panel
 * a dashboard you created with QuickSight
