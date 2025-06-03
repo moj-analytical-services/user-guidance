@@ -12,7 +12,7 @@ You will need:
 ## Register dashboard in Analytical Platform Control Panel
 
 1. Go to the [QuickSight UI within Control Panel] and select the *Dashboards* tab on the QuickSight UI. 
-1. Right click on the dashboard you want to share and select *Copy link*. 
+1. Right click on the dashboard you want to share and select *Copy link* (this can vary per browser, for example Chrome users will see *Copy Link Address* instead). 
 1. Go to the [Dashboards page] on Control Panel and select the *Register a dashboard* button. 
 1. Enter a dashboard name which is unique and descriptive. 
 1. Paste the dashboard link you copied from step 2 into the Dashboard URL form. The link should look similar to this example: `https://eu-west-2.quicksight.aws.amazon.com/sn/dashboards/<unique-code-here>`. 
@@ -50,7 +50,7 @@ The Dashboard Service does not send a notification email to users when you add v
 
 ## Accessing shared dashboards
 
-To access registered dashboards, go to the [dashboard service] page and log into the service using your justice identity. Once there, you will see a list of dashboards that you have access to. To view a dashboard, click the view dashboard link of the dashboard you want to see.
+To access registered dashboards, go to the [dashboard service] page and log into the service using your email address. If you have a justice identity, you can access the dashboard service without having a dashboard shared with you. You will be sent a one time code by email to authorise your identity. Once logged in, you will see a list of dashboards that you have access to. To view a dashboard, click the view dashboard link of the dashboard you want to see.
 
 <!-- External links -->
 
