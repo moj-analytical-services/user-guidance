@@ -41,6 +41,7 @@ The viewer will be sent an email to notify them you've shared the dashboard with
 You can also give view access for an email domain. Adding a domain allows anyone with an email address in that domain to access your dashboard. For example, if you grant access to the `justice.gov.uk` domain, anybody with a Ministry of Justice email address could access your dashboard through the dashboard service. 
 
 To do this:
+
 1. From the *Your Dashboards* overview, select the dashboard name. 
 1. Under the *Domain access* section, select the domain. If the domain you want to add is not listed, [contact support](/./support.html). 
 1. Select *Grant access*. 
