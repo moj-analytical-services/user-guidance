@@ -12,7 +12,7 @@ To make use of this, you will need to do the following:
 
     This example gives all workflows on all branches the read permission.
 
-    > Not all permissions are available via Octo STS
+    > Not all permissions are available via Octo STS, refer to [their guidance](https://github.com/octo-sts/app?tab=readme-ov-file#repository-permissions) for the enabled permissions
 
     ```yaml
     ---
