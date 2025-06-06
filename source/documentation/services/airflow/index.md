@@ -92,7 +92,7 @@ After your request is granted, you will be added to a GitHub team that will give
 3\. Update the `Dockerfile` instructions to copy your code into the image, install packages required to run, and call the script(s) to run. For example, for Python:
 
 ```Dockerfile
-FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.7.0@sha256:5de4dfa5a59c219789293f843d832b9939fb0beb65ed456c241b21928b6b8f59
+FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.14.0
 
 USER root
 
@@ -408,6 +408,30 @@ To ensure your container is running as the right user, we perform a test using G
 
 The source for the test can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/blob/main/assets/container-structure-test/container-structure-test.yml).
 
+### Accessing private repositories from GitHub Actions
+
+Starting from [v2.0.0](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/releases/tag/v2.0.0) of [ministryofjustice/analytical-platform-airflow-github-actions](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions), we have enabled the use of [Octo STS](https://github.com/apps/octo-sts) in all container build workflows.
+
+To enable Octo STS, you will need to follow our [guidance for creating the Octo STS configuration](/github/accessing-private-repositories-from-github-actions.html) on the source repository, and then create `.github/analytical-platform/octo-sts.json` in your repository:
+
+```json
+[
+  {
+    "scope": "<GitHub organisation>/<GitHub repository>", // Source repository to clone e.g. ministryofjustice/private-repository
+    "identity": "<STS identity>",                         // STS identity e.g. ministryofjustice-example-repository
+    "branch": "<branch or tag>",                          // Branch or tag of the source repository to checkout when cloning
+  }
+]
+```
+
+This will clone the repository defined in `scope` to `${GITHUB_WORKSPACE}/${scope}` (e.g. `${GITHUB_WORKSPACE}/ministryofjustice/private-repository`).
+
+You can then amend your `Dockerfile` to copy that folder and make it available:
+
+```dockerfile
+COPY ministryofjustice/private-repository private-repository
+```
+
 ## Runtime images
 
 We provide container images for the supported runtimes:
@@ -429,14 +453,17 @@ Our runtime images are set to run as a non-root user (`analyticalplatform`) whic
 To install system packages, you will need to switch to `root`, perform any installations, and switch back to `analyticalplatform`, for example:
 
 ```dockerfile
-FROM FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.6.0
+FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.14.0
+
 USER root # Switch to root
+
 RUN <<EOF
 apt-get update # Refresh APT package lists
 apt-get install --yes ${PACKAGE} # Install packages
 apt-get clean --yes # Clear APT cache
 rm --force --recursive /var/lib/apt/lists/* # Clear APT package lists
 EOF
+
 USER ${CONTAINER_UID} # Switch back to analyticalplatform
 ```
 
