@@ -410,7 +410,7 @@ The source for the test can be found [here](https://github.com/ministryofjustice
 
 ### Accessing private repositories from GitHub Actions
 
-Starting from [v2.0.0](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/releases/tag/v2.0.0) of [ministryofjustice/analytical-platform-airflow-github-actions](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions), we have enabled the use of Octo STS in all container build workflows.
+Starting from [v2.0.0](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions/releases/tag/v2.0.0) of [ministryofjustice/analytical-platform-airflow-github-actions](https://github.com/ministryofjustice/analytical-platform-airflow-github-actions), we have enabled the use of [Octo STS](https://github.com/apps/octo-sts) in all container build workflows.
 
 To enable Octo STS, you will need to follow our [guidance for creating the Octo STS configuration](/github/accessing-private-repositories-from-github-actions.html) on the source repository, and then create the following file in your repository:
 
