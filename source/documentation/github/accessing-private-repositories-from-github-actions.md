@@ -23,7 +23,6 @@ To make use of this, you will need to do the following:
       contents: read
     ```
 
-
 1. Retrieve the token in the repository you are consuming the private repository from
 
     ```yaml
