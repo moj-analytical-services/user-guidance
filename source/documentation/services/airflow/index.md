@@ -155,7 +155,7 @@ There are several options for configuring your workflow's schedule. By default, 
 The following options are available under `dag`:
 
 - `catchup`: please refer to [Airflow's guidance](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/dag-run.html#catchup) (defaults to `false`)
-- `depends_on_past`: when set to true, task instances will run sequentially while relying on the previous task’s schedule to succeed (defaults to `false`)
+- `depends_on_past`: when set to `true`, task instances will run sequentially while relying on the previous task’s schedule to succeed (defaults to `false`)
 - `end_date`: the timestamp (`YYYY-MM-DD`) that the scheduler won’t go beyond (defaults to `null`)
 - `is_paused_upon_creation`: specifies if the dag is paused when created for the first time (defaults to `false`)
 - `max_active_runs`: maximum number of active workflow runs (defaults to `1`)
@@ -163,6 +163,7 @@ The following options are available under `dag`:
 - `retry_delay`: delay in seconds between retries (defaults to `300`)
 - `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`)
 - `start_date`: the timestamp (`YYYY-MM-DD`) from which the scheduler will attempt to backfill (defaults to `2025-01-01`)
+- `python_dag`: when set to `true`, will not render a dag-factory manifest, instead will use `dag.py`
 
 The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of a workflow that runs at 08:00 every day and retries 3 times, with a 150 second delay between each retry:
 
@@ -369,9 +370,89 @@ To enable Slack notifications, you need to:
 
 1. Invite Analytical Platform's Slack application (`@Analytical Platform`) to your channel
 
-## Workflow logs and metrics
+## Workflow metrics
 
-> This functionality is coming soon
+You can view your workflow's metrics on Analytical Platform's [Grafana instance](https://observability.analytical-platform.service.justice.gov.uk/goto/LH2qcQPHR?orgId=1).
+
+You may need to change the environment to select your task ID. You may also need to change the time range.
+
+If your workflow's logs are missing from the Airflow console, please [get in touch with us](#getting-help).
+
+## Python DAG configuration
+
+> This functionality is experimental, and is subject to change
+
+Analytical Platform Airflow uses Astronomer's [dag-factory](https://github.com/astronomer/dag-factory) package to provide a simple YAML interface for creating DAGs, however this does not cover advanced DAG configuration that some users require.
+
+To enable Python DAGs, we have introduced a new flag, `dag.python_dag`, in `workflow.yml`. Setting this flag to `true` allows you to include `dag.py` in your workflow folder.
+
+When using `dag.python_dag` you can remove the following:
+
+- `dag.catchup`
+- `dag.depends_on_past`
+- `dag.end_date`
+- `dag.is_paused_upon_creation`
+- `dag.max_active_runs`
+- `dag.retries`
+- `dag.retry_delay`
+- `dag.schedule`
+- `dag.start_date`
+- `dag.env_vars`
+- `dag.compute_profile`
+- `dag.tasks`
+- `notifications.email`
+- `notifications.slack_channel`
+
+Python DAGs must conform to some requirements we set out:
+
+1. It must use operators that perform tasks on the Airflow control plane appropriately
+
+2. It must use `AnalyticalPlatformStandardOperator` when running tasks on Kubernetes
+
+3. It must contain a specific set of placeholder values, seen below. These will be automatically replaced with the appropriate values before your DAG is sent to our airflow instance.
+
+    ```
+    REPOSITORY_NAME="PLACEHOLDER_REPOSITORY_NAME"
+    REPOSITORY_TAG="PLACEHOLDER_REPOSITORY_TAG"
+    PROJECT="PLACEHOLDER_PROJECT"
+    WORKFLOW="PLACEHOLDER_WORKFLOW"
+    ENVIRONMENT="PLACEHOLDER_ENVIRONMENT"
+    OWNER="PLACEHOLDER_OWNER"
+    ```
+
+An example of the minimum we expect can be found [here](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-python-dag/dag.py).
+
+### `AnalyticalPlatformStandardOperator`
+
+We provide a [wrapper](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/airflow/analytical_platform/standard_operator.py) for `KubernetesPodOperator` to provide sensible defaults when running tasks on our Kubernetes cluster.
+
+You can provide standard `KubernetesPodOperator` arguments such as `cmds` or `env_vars`, however to pass [secrets](#workflow-secrets), you will need to use `secrets` as follows
+
+```python
+...
+from airflow.providers.cncf.kubernetes.secret import (
+    Secret,
+)
+...
+task = AnalyticalPlatformStandardOperator(
+    dag=dag,
+    task_id="main",
+    name=f"{PROJECT}.{WORKFLOW}",
+    compute_profile="general-spot-1vcpu-4gb",
+    image=f"509399598587.dkr.ecr.eu-west-2.amazonaws.com/{REPOSITORY_NAME}:{REPOSITORY_TAG}",
+    environment=f"{ENVIRONMENT}",
+    project=f"{PROJECT}",
+    workflow=f"{WORKFLOW}"
+    secrets=[
+        Secret(
+            deploy_type="env",
+            deploy_target="SECRET_EXAMPLE",
+            secret=f"{PROJECT}-{WORKFLOW}-example",
+            key="data"
+        )
+    ]
+)
+```
 
 ## Accessing the Airflow console
 
