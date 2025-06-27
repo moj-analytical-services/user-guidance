@@ -409,7 +409,7 @@ Python DAGs must conform to some requirements we set out:
 
 2. It must use `AnalyticalPlatformStandardOperator` when running tasks on Kubernetes
 
-3. It must contain a specific set of placeholder values that we populate when building your project
+3. It must contain a specific set of placeholder values, seen below. These will be automatically replaced with the appropriate values before your DAG is sent to our airflow instance.
 
     ```
     REPOSITORY_NAME="PLACEHOLDER_REPOSITORY_NAME"
