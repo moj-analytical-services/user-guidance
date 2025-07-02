@@ -163,7 +163,6 @@ The following options are available under `dag`:
 - `retry_delay`: delay in seconds between retries (defaults to `300`)
 - `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`)
 - `start_date`: the timestamp (`YYYY-MM-DD`) from which the scheduler will attempt to backfill (defaults to `2025-01-01`)
-- `python_dag`: when set to `true`, will not render a dag-factory manifest, instead will use `dag.py`
 
 The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of a workflow that runs at 08:00 every day and retries 3 times, with a 150 second delay between each retry:
 
@@ -187,6 +186,10 @@ AWS_DEFAULT_EXTRACT_REGION=eu-west-1
 AWS_METADATA_SERVICE_TIMEOUT=60
 AWS_METADATA_SERVICE_NUM_ATTEMPTS=5
 AIRFLOW_ENVIRONMENT=DEVELOPMENT
+AIRFLOW_RUN_ID=<Airflow variable {{ run_id }} e.g. manual__2025-07-02T07:13:37+00:00>
+AIRFLOW_TIMESTAMP=<Airflow variable {{ ts }} e.g. 2025-07-02T07:13:37+00:00>
+AIRFLOW_TIMESTAMP_NO_DASH=<Airflow variable {{ ts_nodash }} e.g. 20250702T071337>
+AIRFLOW_TIMESTAMP_NO_DASH_WITH_TZ=<Airflow variable {{ runts_nodash_with_tz_id }} e.g. 20250702T071337+0000>
 ```
 
 ### Environment variables
@@ -200,6 +203,18 @@ dag:
   env_vars:
     x: "1"
 ```
+
+You can also pass [parameters](https://airflow.apache.org/docs/apache-airflow/2.10.3/core-concepts/params.html) to your workflows using `dag.params`, for example:
+
+```yaml
+dag:
+  repository: moj-analytical-services/analytical-platform-airflow-python-example
+  tag: 2.0.0
+  params:
+    example: placeholder-value
+```
+
+The value will then be injected into your workflow as `PARAM_EXAMPLE`
 
 ### Compute profiles
 
@@ -400,6 +415,7 @@ When using `dag.python_dag` you can remove the following:
 - `dag.env_vars`
 - `dag.compute_profile`
 - `dag.tasks`
+- `dag.params`
 - `notifications.email`
 - `notifications.slack_channel`
 
