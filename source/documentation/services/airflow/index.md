@@ -186,6 +186,10 @@ AWS_DEFAULT_EXTRACT_REGION=eu-west-1
 AWS_METADATA_SERVICE_TIMEOUT=60
 AWS_METADATA_SERVICE_NUM_ATTEMPTS=5
 AIRFLOW_ENVIRONMENT=DEVELOPMENT
+AIRFLOW_RUN_ID=<Airflow variable {{ run_id }} e.g. manual__2025-07-02T07:13:37+00:00>
+AIRFLOW_TIMESTAMP=<Airflow variable {{ ts }} e.g. 2025-07-02T07:13:37+00:00>
+AIRFLOW_TIMESTAMP_NO_DASH=<Airflow variable {{ ts_nodash }} e.g. 20250702T071337>
+AIRFLOW_TIMESTAMP_NO_DASH_WITH_TZ=<Airflow variable {{ runts_nodash_with_tz_id }} e.g. 20250702T071337+0000>
 ```
 
 ### Environment variables
