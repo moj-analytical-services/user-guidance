@@ -63,13 +63,13 @@ To access the Airflow components, you'll need to:
 
 > If you are a member of Data Engineering's GitHub team ([@ministryofjustice/data-engineering](https://github.com/orgs/ministryofjustice/teams/data-engineering)), you are automatically granted access and do not need to submit a request
 
-When you have joined the `ministryofjustice` GitHub organisation, [submit a request for Airflow access](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-airflow-access-request.yml).
+When you have joined the `ministryofjustice` GitHub organisation, create a pull request in the [Data Platform Github Access GitHub repository](https://github.com/ministryofjustice/data-platform-github-access/) which adds your GitHub username to the Analytical Platform Airflow team defined [here](https://github.com/ministryofjustice/data-platform-github-access/blob/main/analytical-platform-teams.tf#L322). Send a message with your pull request link in the [#ask-analytical-platform Slack channel](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) to request a review.
 
-After your request is granted, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
+After your pull request has been merged, you will be added to a GitHub team that will give you access to our GitHub repository, and AWS environments.
 
 > Our team manually approves requests
 >
-> Once approved, it can take up to three hours to gain access to AWS
+> Once merged, it can take up to three hours to gain access to AWS
 
 ### Create a GitHub repository
 
