@@ -106,3 +106,9 @@ A user interface for [MLFlow Tracking Server](https://mlflow.org/docs/latest/tra
 ## Generative AI
 ### [Amazon Bedrock](bedrock)
 Guidance on the access and use of Amazon Bedrock.
+
+### [Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html)
+Comprehend is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
+
+### [Amazon Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
+Textract is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
