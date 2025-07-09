@@ -19,6 +19,9 @@ Online hosting platform for git. Git is a distributed version control system tha
 ### [QuickSight](quicksight)
 Business Intelligence (BI/MI) tool for visualising / dashboarding data.
 
+### [Dashboard Service](dashboard-service)
+Securely share dashboards created in QuickSight with other users.
+
 ## Data Ingest
 
 ### [Data Extractor](https://github.com/ministryofjustice/data-engineering-data-extractor)
@@ -35,7 +38,7 @@ Moves data from microservices into the Analytical Platform's [curated databases]
 
 ## Integrated Development Environments (IDE)
 
-### [Amazon Athena Console](https://user-guidance.analytical-platform.service.justice.gov.uk/data/curated-databases/amazon-athena/#amazon-athena)
+### [Amazon Athena Console](/data/curated-databases/amazon-athena/#amazon-athena)
 Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. See  [Athena documentation](https://user-guidance.analytical-platform.service.justice.gov.uk/data/curated-databases/amazon-athena/#amazon-athena) for more information.
 
 ### [JupyterLab](jupyterlab)
@@ -49,7 +52,7 @@ General purpose code editor. For more information, see the [Visual Studio Code d
 
 ## Orchestration
 
-### [Airflow](airflow)
+### [Airflow](/services/airflow/)
 A tool for scheduling and monitoring workflows.
 
 ### [Create a Derived Table](create-a-derived-table)
@@ -106,3 +109,9 @@ A user interface for [MLFlow Tracking Server](https://mlflow.org/docs/latest/tra
 ## Generative AI
 ### [Amazon Bedrock](bedrock)
 Guidance on the access and use of Amazon Bedrock.
+
+### [Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html)
+Comprehend is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
+
+### [Amazon Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
+Textract is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
