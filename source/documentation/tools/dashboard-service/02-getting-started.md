@@ -48,9 +48,14 @@ To do this:
 
 The Dashboard Service does not send a notification email to users when you add view access for an email domain, so you'll need to manually send the dashboard link to users.
 
-## Accessing shared dashboards
+## Viewing shared dashboards
 
-To access registered dashboards, go to the [dashboard service] page and log into the service using your email address. If you have a justice identity, you can access the dashboard service without having a dashboard shared with you. You will be sent a one time code by email to authorise your identity. Once logged in, you will see a list of dashboards that you have access to. To view a dashboard, click the view dashboard link of the dashboard you want to see.
+To view registered dashboards, go to the [dashboard service] page.
+
+- Ministry of Justice staff can log in with SSO using the "Continue with Microsoft Entra ID" button. You can log in to the Dashboard Service even if a dashboard has not been shared with you.
+- Non-MoJ staff members must have had a dashboard shared with them to be able to log in. You will need to enter your email address, then check your email for a one-time code that is used to authenticate you.
+
+After successfully logging in, you will see a list of dashboards that you can view. The list of dashboards you can view are is based on the email address used to log in with. To view a dashboard, click the "View dashboard" link of the dashboard you want to see.
 
 <!-- External links -->
 
