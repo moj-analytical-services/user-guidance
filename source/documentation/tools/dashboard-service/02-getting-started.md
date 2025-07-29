@@ -52,7 +52,7 @@ The Dashboard Service does not send a notification email to users when you add v
 
 To view registered dashboards, go to the [dashboard service] page.
 
-- Ministry of Justice staff can log in with SSO using the "Continue with Microsoft Entra ID" button. You can log in to the Dashboard Service even if a dashboard has not been shared with you.
+- Ministry of Justice staff can log in with Single sign-on using the "Continue with Microsoft Entra ID" button. You can log in to the Dashboard Service even if a dashboard has not been shared with you.
 - Non-MoJ staff members must have had a dashboard shared with them to be able to log in. You will need to enter your email address, then check your email for a one-time code that is used to authenticate you.
 
 After successfully logging in, you will see a list of dashboards that you can view. The list of dashboards you can view are is based on the email address used to log in with. To view a dashboard, click the "View dashboard" link of the dashboard you want to see.
