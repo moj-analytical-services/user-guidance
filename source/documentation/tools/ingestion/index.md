@@ -24,7 +24,7 @@ Please reach out on Slack ([#ask-analytical-platform](https://moj.enterprise.sla
 
 The destination S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
 
-For a given S3 bucket `<supplier-bucket-name>` include the following statement:
+For a given S3 bucket `<destination-bucket-name>` include the following statement:
 
 ```json
 {
