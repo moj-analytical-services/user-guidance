@@ -1,12 +1,12 @@
 # Ingestion
 
-> Ingestion on the Analytical Platform is currently a beta feature.
+> Ingestion on the Analytical Platform is currently a beta service.
 
 ## Service Requirements
 
-### Information to be provided to Analytical Platform
+### Required Information
 
-To use the Ingestion feature, data owners must provide the following information to the team via the approved process:
+To use the Ingestion service, data owners must provide the following information:
 
 - Supplier's name
 - Supplier's email
@@ -14,13 +14,17 @@ To use the Ingestion feature, data owners must provide the following information
 - Supplier's SSH public key
 - Target location on Analytical Platform (e.g. `s3://${TARGET_BUCKET}/${OPTIONAL_PREFIX}`)
 
-This information will then be merged into the requisite repository. Examples of this information can be found [here](https://github.com/ministryofjustice/modernisation-platform-environments/blob/main/terraform/environments/analytical-platform-ingestion/transfer-user.tf).
+Please reach out on Slack ([#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)) to start the onboarding process.
+
+### Optional Information
+
+- Slack channel
 
 ### User Action Required
 
-The user's S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
+The destination S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
 
-For a given S3 bucket `<supplier-bucket-name>` include the following statement 
+For a given S3 bucket `<destination-bucket-name>` include the following statement:
 
 ```json
 {
@@ -34,14 +38,16 @@ For a given S3 bucket `<supplier-bucket-name>` include the following statement
                 "AWS": "arn:aws:iam::<ingestion-account-ID>:role/transfer"
             },
             "Action": [
-                "s3:GetObject",
-                "s3:PutObject",
                 "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:PutObject",
+                "s3:PutObjectAcl",
                 "s3:PutObjectTagging"
             ],
             "Resource": [
-                "arn:aws:s3:::<supplier-bucket-name>",
-                "arn:aws:s3:::<supplier-bucket-name>/*"
+                "arn:aws:s3:::<destination-bucket-name>",
+                "arn:aws:s3:::<destination-bucket-name>/*"
             ]
         }
     ]
