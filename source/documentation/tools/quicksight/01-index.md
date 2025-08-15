@@ -25,6 +25,12 @@ We currently have each of the [domains/business areas](/tools/create-a-derived-t
 - [Publishing dashboards](/tools/quicksight/working-with-quicksight.html#publishing-dashboards)
 - [Sharing dashboards](/tools/quicksight/working-with-quicksight.html#sharing-dashboards)
 
+## [Offboarding from QuickSight](/tools/quicksight/offboarding.html)
+
+- [Transferring dashboards](/tools/quicksight/offboarding.html#transferring-dashboards)
+- [Transferring analyses](/tools/quicksight/offboarding.html#transferring-analyses)
+- [Transferring datasets](/tools/quicksight/offboarding.html#transferring-datasets)
+
 ## [FAQs](/tools/quicksight/faqs.html)
 
 ## [Best Practices](/tools/quicksight/best-practices.html)
