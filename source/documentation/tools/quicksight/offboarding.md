@@ -15,7 +15,7 @@ To transfer a dashboard:
 
 ## Transferring analyses
 
-To tranfer an analysis:
+To transfer an analysis:
 
 - Go to the [QuickSight UI within Control Panel].
 - Select the **Analyses** tab, then select the analysis you want to transfer.
