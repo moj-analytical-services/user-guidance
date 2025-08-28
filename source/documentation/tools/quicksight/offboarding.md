@@ -27,7 +27,7 @@ To transfer an analysis:
 
 ## Transferring datasets
 
-To tranfer a dataset:
+To transfer a dataset:
 
 - Go to the [QuickSight UI within Control Panel].
 - Select the **Datasets** tab.
