@@ -1,44 +1,47 @@
 # Offboarding from QuickSight
 
-Before leaving the organisation, it is important that you transfer all assets, such as dashboards, analyses and datasets, to a colleague as there is a risk of these assets becoming orphaned or lost.
+If you're leaving the organisation, you are responsible for transferring all assets (such as dashboards, analyses and datasets) to a colleague. This prevents these assets becoming orphaned or lost.
 
 ## Transferring dashboards
 
 To transfer a dashboard:
 
-- Go to the [QuickSight UI within Control Panel].
-- Click on the dashboards tab and select the dashboard you wish to transfer.
-- Click the share icon on the top right of the screen.
-- Click Share dashboard.
-- Enter the email of the colleague you wish to transfer ownership to in the textbox under Invite users and groups to dashboard.
-- Click the add button and select co-owner.
+1. Go to the [QuickSight UI within Control Panel].
+1. Select the **Dashboards** tab, then select the dashboard you want to transfer.
+1. Select the share icon on the top right of the screen.
+1. Select **Share dashboard**.
+1. Enter the email of the colleague you want to transfer ownership to in the textbox under **Invite users and groups to dashboard**.
+1. Select **Add** and then select **Co-owner**.
 
 ## Transferring analyses
 
 To tranfer an analysis:
 
 - Go to the [QuickSight UI within Control Panel].
-- Click on the analyses tab and select the analysis you wish to transfer.
-- Click file on the top left of the screen.
-- Click Share.
-- Enter the email of the colleague you wish to transfer ownership to in the textbox.
-- Select the user. Ensure Co-owner is selected under Permission.
-- Click the Share button.
+- Select the **Analyses** tab, then select the analysis you want to transfer.
+- Select **File** on the top left of the screen.
+- Select **Share**.
+- Enter the email of the colleague you want to transfer ownership to in the textbox.
+- Select the user. Make sure **Co-owner** is selected under **Permission**.
+- Select **Share**.
 
 ## Transferring datasets
 
 To tranfer a dataset:
 
 - Go to the [QuickSight UI within Control Panel].
-- Click on the datasets tab.
-- Click the three dots on the right side of the dataset you wish to transfer.
-- Click Manage permissions.
-- Click the Invite users button.
-- Enter the email of the colleague you wish to transfer ownership to in the textbox.
-- Select the user. Ensure Owner is selected under Permission.
-- Click the Share button.
+- Select the **Datasets** tab.
+- Select the three dots on the right side of the dataset you want to transfer.
+- Select **Manage permissions**.
+- Select **Invite users**.
+- Enter the email of the colleague you want to transfer ownership to in the textbox.
+- Select the user. Make sure **Owner** is selected under **Permission**.
+- Select **Share**.
 
-Once all assets have been transferred, go to your [user page in the Control Panel] and remove QuickSight access by unticking all permissions under QuickSight access and clicking the Save changes button.
+After you've transferred your assets, remove your QuickSight access and permissions:
+1. Go to your [user page in the Control Panel].
+1. Remove QuickSight access by unticking all permissions under **QuickSight access** .
+1. Select **Save changes**.
 
 <!-- External links -->
 
