@@ -68,3 +68,5 @@ Development:
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
 ```
+
+> **Note**: Filenames with spaces included are not supported.
