@@ -69,9 +69,13 @@ If the data is stored in your own S3 bucket, you may wish to create your own Ath
 
 ## How do I create my own Athena database?
 
+> Please note: going forward, in order to create your own athena databases, you must specify the naming convention for any databases you create using your project access file in the [database access repository], using the key `allowed_database_names` to either specify an exact name (e.g. `finance_dim_dev_dbt`) or a naming pattern (e.g. `finance_dim_*`). An example of this can be seen in [this config file], which grants the project members the ability to create a number of databases. Owners of existing projects that rely on this functionality should update their projects accordingly. More info on this can be found in the readme of the database access repository.
+
 **Athena workbench/Python/R**: You can run `CREATE DATABASE` and `CREATE TABLE AS SELECT` (CTAS) queries to create your own database and tables from data you have in S3. There are more details in this guidance or you can use what is provided by [AWS]. When running CTAS queries a key thing to remember is to specify the location (s3 bucket and path) of the data. [here is a nice example of setting up your own database]. The tutorial is in python but the SQL can be ran from any tool on the AP.
 
 **Create a Derived Table**: When you create and run an SQL script with [Create a Derived Table](../../tools/create-a-derived-table/) it will automatically build your database and table. See the user guidance for more information.
+
+
 
 <!-- External links -->
 
@@ -95,3 +99,4 @@ If the data is stored in your own S3 bucket, you may wish to create your own Ath
 [`Rdbtools`]: https://github.com/moj-analytical-services/Rdbtools
 [AWS]: https://docs.aws.amazon.com/athena/latest/ug/language-reference.html
 [here is a nice example of setting up your own database]: https://github.com/moj-analytical-services/mojap-aws-tools-demo/blob/main/creating_and_maintaining_database_tables_in_athena.ipynb
+[this config file]: https://github.com/moj-analytical-services/data-engineering-database-access/blob/5b4d28e5f370700e09c3fb4cd4fa907154ba6de9/project_access/CaDeT_Sandpit_Access.yaml#L11-L14
