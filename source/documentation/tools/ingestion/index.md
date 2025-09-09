@@ -14,7 +14,7 @@ To use the Ingestion service, data owners must provide the following information
 - Supplier's SSH public key
 - Target location on Analytical Platform (e.g. `s3://${TARGET_BUCKET}/${OPTIONAL_PREFIX}`)
 
-Please reach out on Slack ([#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)) to start the onboarding process.
+Please raise a support ticket [here](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-transfer.yml) with the required information to start the onboarding process.
 
 ### Optional Information
 
