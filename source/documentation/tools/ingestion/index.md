@@ -34,18 +34,25 @@ Buckets in `analytical-platform-data-production`, such as:
 - `mojap-land`
 - `mojap-land-dev`
 
-Buckets outside `analytical-platform-data-production`
+Buckets outside `analytical-platform-data-production`.
 
 ### Who Is Responsible?
 
-*Ministry of Justice colleagues* should raise the appropriate Pull Requests to enable the transfer.
+*Ministry of Justice colleagues* should raise the appropriate Pull Requests on the target bucket configuration, to enable the transfer.
 *Third-party consumers* who cannot raise Pull Requests can request help in the Slack channel: [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)
 
-### Destination Bucket Permissions
+### Adding permissions to `mojap-land` or `mojap-land-dev`
 
 The target S3 bucket (and if using SSE-KMS, the KMS key) must have the correct permissions to allow the final `transfer` Lambda function to copy files to it. 
 
-For a given S3 bucket `<destination-bucket-name>` include the following statement:
+- Development resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L564)
+- Production resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L742)
+
+An [example Pull Request](https://github.com/ministryofjustice/analytical-platform/commit/e63d25a23d557db679b9823b4b8da8e4331bb9ee) showing how to add a bucket to `mojap-land-dev`.
+
+### Destination Bucket Permissions
+
+For a given S3 bucket `<destination-bucket-name>` not located in `analytical-platform-data-production`, include the following statement:
 
 ```json
 {
@@ -79,16 +86,6 @@ Use the correct `ingestion-account-ID` based on the environment:
 
 - for development, use `471112983409`
 - for production, use `730335344807`
-
-### Adding permissions to `mojap-land` or `mojap-land-dev`
-
-If your target bucket is a folder within `mojap-land` or `mojap-land-dev`, it must be added as a resource in the appropriate Terraform file:
-
-- Development resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L564)
-- Production resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L742)
-
-An [example Pull Request](https://github.com/ministryofjustice/analytical-platform/commit/e63d25a23d557db679b9823b4b8da8e4331bb9ee) showing how to add a bucket to `mojap-land-dev`.
-
 
 ## Connection Instructions
 
