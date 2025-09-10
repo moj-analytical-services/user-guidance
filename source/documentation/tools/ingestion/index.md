@@ -22,18 +22,28 @@ Please raise a support ticket [here](https://github.com/ministryofjustice/data-p
 
 - Slack channel
 
-## Target Bucket Setup and Responsibilities
+## Target Bucket Overview
 
-The Target Bucket is defined as the S3 bucket which files should arrive in. These buckets can be in any AWS Account, there are two distinct scenarios however: 
+The *Target Bucket* is the S3 bucket where transferred files will be delivered. Buckets can exist in any Ministry of Justice AWS account, but setup differs depending on ownership.
 
-- A bucket in `analytical-platform-data-prodcution`
-- A bucket not in `analytical-platform-data-prodcution`
+Target Bucket Scenarios
+There are two main scenarios:
 
-Ministry of Justice colleagues are expected to raise the appropriate Pull Requests to enable the transfer to succeed. Third party consumers can request help in doing this in our ask channel [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ).
+Buckets in `analytical-platform-data-production`, such as:
 
-### Configuring Destination Bucket Permissions
+- `mojap-land`
+- `mojap-land-dev`
 
-The destination S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
+Buckets outside `analytical-platform-data-production`
+
+### Who Is Responsible?
+
+*Ministry of Justice colleagues* should raise the appropriate Pull Requests to enable the transfer.
+*Third-party consumers* who cannot raise PRs can request help in the Slack channel: [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)
+
+### Destination Bucket Permissions
+
+The target S3 bucket must have the correct permissions to allow the final `transfer` Lambda function to copy files to it. 
 
 For a given S3 bucket `<destination-bucket-name>` include the following statement:
 
@@ -65,7 +75,18 @@ For a given S3 bucket `<destination-bucket-name>` include the following statemen
 }
 ```
 
-The `ingestion-account-ID` should be `471112983409` when connections are being made by the `transfer` lambda function in `analytical-platform-ingestion-production` and `730335344807` when connections are being made from `analytical-platform-ingestion-development`.
+Use the correct `ingestion-account-ID` based on the environment:
+
+- for development, use 471112983409 
+- for production, use730335344807
+
+### Adding permissions to mojap-land or mojap-land-dev
+If your target bucket is a folder within `mojap-land` or `mojap-land-dev`, it must be added as a resource in the appropriate Terraform file:
+
+- Development resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L564)
+- Production resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L742)
+
+An [example Pull Request](https://github.com/ministryofjustice/analytical-platform/commit/e63d25a23d557db679b9823b4b8da8e4331bb9ee) showing how to add a bucket to `mojap-land-dev`.
 
 
 ## Connection Instructions
@@ -82,7 +103,5 @@ sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
 ```
-
-
 
 > **Note**: Filenames with spaces included are not supported.
