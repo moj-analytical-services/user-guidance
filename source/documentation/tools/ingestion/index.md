@@ -80,7 +80,8 @@ Use the correct `ingestion-account-ID` based on the environment:
 - for development, use 471112983409 
 - for production, use730335344807
 
-### Adding permissions to mojap-land or mojap-land-dev
+### Adding permissions to `mojap-land` or `mojap-land-dev`
+
 If your target bucket is a folder within `mojap-land` or `mojap-land-dev`, it must be added as a resource in the appropriate Terraform file:
 
 - Development resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L564)
@@ -93,12 +94,12 @@ An [example Pull Request](https://github.com/ministryofjustice/analytical-platfo
 
 Connect to our ingestion service using the following commands:
 
-### Production:
+### Production
 
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.uk
 ```
-### Development:
+### Development
 
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
