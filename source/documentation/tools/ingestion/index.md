@@ -16,11 +16,22 @@ To use the Ingestion service, data owners must provide the following information
 
 Please raise a support ticket [here](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
 
+> **Note**: The Supplier's name you provide us will become your USERNAME.
+
 ### Optional Information
 
 - Slack channel
 
-### User Action Required
+## Target Bucket Setup and Responsibilities
+
+The Target Bucket is defined as the S3 bucket which files should arrive in. These buckets can be in any AWS Account, there are two distinct scenarios however: 
+
+- A bucket in `analytical-platform-data-prodcution`
+- A bucket not in `analytical-platform-data-prodcution`
+
+Ministry of Justice colleagues are expected to raise the appropriate Pull Requests to enable the transfer to succeed. Third party consumers can request help in doing this in our ask channel [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ).
+
+### Configuring Destination Bucket Permissions
 
 The destination S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
 
@@ -56,17 +67,22 @@ For a given S3 bucket `<destination-bucket-name>` include the following statemen
 
 The `ingestion-account-ID` should be `471112983409` when connections are being made by the `transfer` lambda function in `analytical-platform-ingestion-production` and `730335344807` when connections are being made from `analytical-platform-ingestion-development`.
 
-Once you receive confirmation from us that you have been onboarded and we have provided you with a username, you will be able to connect to our transfer service using the following commands:
 
-Production:
+## Connection Instructions
+
+Connect to our ingestion service using the following commands:
+
+### Production:
 
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.uk
 ```
-Development:
+### Development:
 
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
 ```
+
+
 
 > **Note**: Filenames with spaces included are not supported.
