@@ -43,7 +43,7 @@ Buckets outside `analytical-platform-data-production`
 
 ### Destination Bucket Permissions
 
-The target S3 bucket must have the correct permissions to allow the final `transfer` Lambda function to copy files to it. 
+The target S3 bucket (and if using SSE-KMS, the KMS key) must have the correct permissions to allow the final `transfer` Lambda function to copy files to it. 
 
 For a given S3 bucket `<destination-bucket-name>` include the following statement:
 
