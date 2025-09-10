@@ -16,7 +16,7 @@ To use the Ingestion service, data owners must provide the following information
 
 Please raise a support ticket [here](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
 
-> **Note**: The Supplier's name you provide us will become your USERNAME.
+> **Note**: The Supplier's name you provide us will become your `USERNAME`.
 
 ### Optional Information
 
@@ -26,7 +26,7 @@ Please raise a support ticket [here](https://github.com/ministryofjustice/data-p
 
 The *Target Bucket* is the S3 bucket where transferred files will be delivered. Buckets can exist in any Ministry of Justice AWS account, but setup differs depending on ownership.
 
-Target Bucket Scenarios
+### Target Bucket Scenarios
 There are two main scenarios:
 
 Buckets in `analytical-platform-data-production`, such as:
@@ -39,7 +39,7 @@ Buckets outside `analytical-platform-data-production`
 ### Who Is Responsible?
 
 *Ministry of Justice colleagues* should raise the appropriate Pull Requests to enable the transfer.
-*Third-party consumers* who cannot raise PRs can request help in the Slack channel: [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)
+*Third-party consumers* who cannot raise Pull Requests can request help in the Slack channel: [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)
 
 ### Destination Bucket Permissions
 
@@ -77,8 +77,8 @@ For a given S3 bucket `<destination-bucket-name>` include the following statemen
 
 Use the correct `ingestion-account-ID` based on the environment:
 
-- for development, use 471112983409 
-- for production, use730335344807
+- for development, use `471112983409`
+- for production, use `730335344807`
 
 ### Adding permissions to `mojap-land` or `mojap-land-dev`
 
