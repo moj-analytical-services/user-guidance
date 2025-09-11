@@ -16,15 +16,43 @@ To use the Ingestion service, data owners must provide the following information
 
 Please raise a support ticket [here](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
 
+> **Note**: The Supplier's name you provide us will become your `USERNAME`.
+
 ### Optional Information
 
 - Slack channel
 
-### User Action Required
+## Target Bucket Overview
 
-The destination S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
+The *Target Bucket* is the S3 bucket where transferred files will be delivered. Buckets can exist in any Ministry of Justice AWS account, but setup differs depending on ownership.
 
-For a given S3 bucket `<destination-bucket-name>` include the following statement:
+### Target Bucket Scenarios
+There are two main scenarios:
+
+Buckets in `analytical-platform-data-production`, such as:
+
+- `mojap-land`
+- `mojap-land-dev`
+
+Buckets outside `analytical-platform-data-production`.
+
+### Who Is Responsible?
+
+*Ministry of Justice colleagues* should raise the appropriate Pull Requests on the target bucket configuration, to enable the transfer.
+*Third-party consumers* who cannot raise Pull Requests can request help in the Slack channel: [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)
+
+### Adding permissions to `mojap-land` or `mojap-land-dev`
+
+The target S3 bucket (and if using SSE-KMS, the KMS key) must have the correct permissions to allow the final `transfer` Lambda function to copy files to it. 
+
+- Development resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L564)
+- Production resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L742)
+
+An [example Pull Request](https://github.com/ministryofjustice/analytical-platform/commit/e63d25a23d557db679b9823b4b8da8e4331bb9ee) showing how to add a bucket to `mojap-land-dev`.
+
+### Destination Bucket Permissions
+
+For a given S3 bucket `<destination-bucket-name>` not located in `analytical-platform-data-production`, include the following statement:
 
 ```json
 {
@@ -54,16 +82,21 @@ For a given S3 bucket `<destination-bucket-name>` include the following statemen
 }
 ```
 
-The `ingestion-account-ID` should be `471112983409` when connections are being made by the `transfer` lambda function in `analytical-platform-ingestion-production` and `730335344807` when connections are being made from `analytical-platform-ingestion-development`.
+Use the correct `ingestion-account-ID` based on the environment:
 
-Once you receive confirmation from us that you have been onboarded and we have provided you with a username, you will be able to connect to our transfer service using the following commands:
+- for development, use `471112983409`
+- for production, use `730335344807`
 
-Production:
+## Connection Instructions
+
+Connect to our ingestion service using the following commands:
+
+### Production
 
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.uk
 ```
-Development:
+### Development
 
 ```bash
 sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
