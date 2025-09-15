@@ -20,6 +20,20 @@ Please raise a support ticket [here](https://github.com/ministryofjustice/data-p
 
 - Slack channel
 
+### User with Egress 
+
+In addition to the default Ingestion user, a user can also request to be added as a User with Egress. 
+
+In effect this allows a user to download files from SFTP as well as upload them.
+
+If requested a user must also supply the following information in their access [request](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml):
+
+- Egress S3 bucket
+- Egress KMS key
+
+> **Note**: Users with Egress are presented with two directories when connected to SFTP `/upload` for ingestion and `/download` for egress. 
+
+
 ### User Action Required
 
 The destination S3 bucket must have the correct permisssions to allow the final `transfer` Lambda function to copy files to it. 
