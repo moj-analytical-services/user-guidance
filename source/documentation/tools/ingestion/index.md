@@ -31,8 +31,7 @@ If requested a user must also supply the following information in their access [
 - Egress S3 bucket
 - Egress KMS key
 
-> **Note**: Users with Egress are presented with two directories when connected to SFTP `/upload` for ingestion and `/download` for egress. 
-
+> **Note**: Users with Egress are presented with two directories when connected to SFTP `/upload` for ingestion and `/download` for egress.
 
 ### User Action Required
 
