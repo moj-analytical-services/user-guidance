@@ -13,6 +13,7 @@ To use the Ingestion service, data owners must provide the following information
 - Supplier's IP address(es)
 - Supplier's SSH public key
 - Target location on Analytical Platform (e.g. `s3://${TARGET_BUCKET}/${OPTIONAL_PREFIX}`)
+- Target bucket's KMS key if encrypted
 
 Please raise a support ticket [here](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
 
@@ -95,8 +96,46 @@ For a given S3 bucket `<destination-bucket-name>` not located in `analytical-pla
 
 Use the correct `ingestion-account-ID` based on the environment:
 
-- for development, use `471112983409`
-- for production, use `730335344807`
+- for development, use `730335344807`
+- for production, use `471112983409`
+
+### Destination Bucket uses a KMS key
+
+If the destination S3 bucket is encrypted with a customer-managed KMS key, the Analytical Platform ingestion role must be allowed to encrypt objects with that key. Add the following statement to the KMS key policy for the bucket’s key.
+
+#### Production
+
+```json
+    {
+      "Sid": "AllowAnalyticalPlatformIngestionService",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::471112983409:role/transfer"
+      },
+      "Action": [
+        "kms:GenerateDataKey",
+        "kms:Encrypt"
+      ],
+      "Resource": "*"
+    }
+```
+
+#### Development
+
+```json
+    {
+      "Sid": "AllowAnalyticalPlatformIngestionService",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::730335344807:role/transfer"
+      },
+      "Action": [
+        "kms:GenerateDataKey",
+        "kms:Encrypt"
+      ],
+      "Resource": "*"
+    }
+```
 
 ## Connection Instructions
 
