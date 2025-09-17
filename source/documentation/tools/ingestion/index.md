@@ -152,4 +152,10 @@ sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.
 sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
 ```
 
-> **Note**: Filenames with spaces included are not supported.
+## Know Limitations
+
+### File Names
+File names with spaces included are not supported. Use underscores (_) or hyphens (-) instead.
+
+### File Size Transfer Limit
+The File Transfer Service supports files up to 5 GB in size. Larger files are not supported. 
