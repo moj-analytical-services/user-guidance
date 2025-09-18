@@ -99,6 +99,7 @@ Use the correct `ingestion-account-ID` based on the environment:
 - for development, use `730335344807`
 - for production, use `471112983409`
 
+
 ### Destination Bucket KMS key
 
 If the destination S3 bucket is encrypted with a customer-managed KMS key, the Analytical Platform ingestion role must be allowed to encrypt objects with that key. Add the following statement to the KMS key policy for the bucket’s key.
@@ -117,6 +118,7 @@ If the destination S3 bucket is encrypted with a customer-managed KMS key, the A
       "Resource": "*"
     }
 ```
+
 
 Use the correct `ingestion-account-ID` based on the environment:
 

@@ -92,7 +92,7 @@ After your pull request has been merged, you will be added to a GitHub team that
 3\. Update the `Dockerfile` instructions to copy your code into the image, install packages required to run, and call the script(s) to run. For example, for Python:
 
 ```Dockerfile
-FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.14.0
+FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.18.0
 
 USER root
 
@@ -550,7 +550,7 @@ Our runtime images are set to run as a non-root user (`analyticalplatform`) whic
 To install system packages, you will need to switch to `root`, perform any installations, and switch back to `analyticalplatform`, for example:
 
 ```dockerfile
-FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.14.0
+FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.18.0
 
 USER root # Switch to root
 
