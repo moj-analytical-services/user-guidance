@@ -11,7 +11,7 @@ Data on the Analytical Platform can largely be split into four categories:
 
 ## Where do I find out what data is already on the Platform?
 
-Check [Find MoJ data] to find _curated_ and _derived_ databases maintained by the Data Engineering and Modelling Team (DMET). 
+Check [Find MoJ data] to find _curated_ and _derived_ databases maintained by the Data Engineering and Modelling Team (DMET).
 
 Users can also create their own S3 buckets which may have _processed_ data useful to other teams. Ask on Slack to see if there's an existing dataset for your needs.
 

@@ -11,7 +11,7 @@ Also see [Demos on how to use our AWS Tools](https://github.com/moj-analytical-s
 
 ## Getting the data you need
 
-The data you need may already exist on the Analytical Platform. The diagram and steps below show the process for finding and getting access to it. 
+The data you need may already exist on the Analytical Platform. The diagram and steps below show the process for finding and getting access to it.
 
 If, after following this, you find out the data you need is not on the Platform, you may need to find it and upload it yourself. In that case please refer to the [Information Governance](../information-governance.html) section.
 
@@ -40,7 +40,7 @@ If, after following this, you find out the data you need is not on the Platform,
 * When you have access, go to step 7.
 
 7. Query the data
-* If the data is in a maintained database, use your chosen software to query it. 
+* If the data is in a maintained database, use your chosen software to query it.
 * If the data is an S3 bucket, access it directly from R or Python.
 
 ## FAQs
