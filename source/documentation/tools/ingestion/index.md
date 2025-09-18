@@ -103,14 +103,12 @@ Use the correct `ingestion-account-ID` based on the environment:
 
 If the destination S3 bucket is encrypted with a customer-managed KMS key, the Analytical Platform ingestion role must be allowed to encrypt objects with that key. Add the following statement to the KMS key policy for the bucket’s key.
 
-#### Production
-
 ```json
     {
       "Sid": "AllowAnalyticalPlatformIngestionService",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::471112983409:role/transfer"
+        "AWS": "arn:aws:iam::<ingestion-account-ID>:role/transfer"
       },
       "Action": [
         "kms:GenerateDataKey",
@@ -120,22 +118,10 @@ If the destination S3 bucket is encrypted with a customer-managed KMS key, the A
     }
 ```
 
-#### Development
+Use the correct `ingestion-account-ID` based on the environment:
 
-```json
-    {
-      "Sid": "AllowAnalyticalPlatformIngestionService",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::730335344807:role/transfer"
-      },
-      "Action": [
-        "kms:GenerateDataKey",
-        "kms:Encrypt"
-      ],
-      "Resource": "*"
-    }
-```
+- for development, use `730335344807`
+- for production, use `471112983409`
 
 ## Connection Instructions
 
