@@ -11,11 +11,11 @@ Data on the Analytical Platform can largely be split into four categories:
 
 ## Where do I find out what data is already on the Platform?
 
-> 🚩 Note: in the future the Data Catalogue will be developed and provide a useful resource for finding data
+Check [Find MoJ data] to find _curated_ and _derived_ databases maintained by the Data Engineering and Modelling Team (DMET).
 
-The Data Engineering and Modelling Team (DMET) maintain a number of databases on the Platform (_curated_ and _derived_ databases). The best way to find out about _curated_ and _derived_ databases is using the [data discovery tool] \(access to the tool is now governed via GitHub; Analytical Platform users have access by default\). The data discovery tool can be updated by anyone, so if you find something out about the data that isn't already documented, please do add to it. _Derived_ tables can also be found by visiting the [create-a-derived-table repository]. For more information about _curated_ databases please visit [#ask-data-engineering] and for _derived_ databases please visit [#ask-data-modelling].
+Users can also create their own S3 buckets which may have _processed_ data useful to other teams. Ask on Slack to see if there's an existing dataset for your needs.
 
-In addition to this users can create their own S3 buckets which may have _processed_ data useful to other teams, you may have to ask around to see if there is an existing dataset that may suit your needs.
+You can use the [data discovery tool] to understand how to use maintained databases. For more information about databases, visit [#ask-data-engineering] for _curated_ and [#ask-data-modelling] for _derived_.
 
 ## How do I gain access to existing data?
 
@@ -77,6 +77,7 @@ If the data is stored in your own S3 bucket, you may wish to create your own Ath
 
 [denormalized]: https://en.wikipedia.org/wiki/Denormalization#:~:text=Denormalization%20is%20a%20strategy%20used,data%20or%20by%20grouping%20data.
 [data discovery tool]: https://data-discovery-tool.analytical-platform.service.justice.gov.uk/  
+[Find MoJ data]: https://find-moj-data.service.justice.gov.uk/
 [create-a-derived-table repository]: https://github.com/moj-analytical-services/create-a-derived-table
 [#ask-data-engineering]: https://moj.enterprise.slack.com/archives/C8X3PP1TN
 [#ask-data-modelling]: https://moj.enterprise.slack.com/archives/C03J21VFHQ9

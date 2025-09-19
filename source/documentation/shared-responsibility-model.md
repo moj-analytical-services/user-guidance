@@ -71,11 +71,11 @@ Some of the responsibilities are shared between users and the Analytical Platfor
 | Adding sources                                          | ✅                |  |           |  |
 | Managing and supporting the Create a derived table tool | ✅                |  |           |  |
 
-### Data discovery
+### Data Discovery Tool
 
 | Responsibility                                  | Analytical Platform | User  | Other MoJ Team | Notes                                         |
 | :----------------------------------------------- | :-------------------: | :-----: | :--------------: | :--------------------------------------------- |
-| Managing and supporting the Data Discovery tool | ✅                |  |           |  |
+| Managing and supporting the Data Discovery tool |                 |  |    ✅      |  |
 
 ### Data extractor
 
