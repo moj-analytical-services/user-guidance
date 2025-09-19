@@ -1,11 +1,8 @@
 # Data
-There are several different data sources on the Analytical Platform:
+There are 2 main data sources on the Analytical Platform:
 
 * [Amazon S3](amazon-s3/)
 * [Curated databases](curated-databases/)
-
-Also see [Demos on how to use our AWS Tools](https://github.com/moj-analytical-services/mojap-aws-tools-demo/)
-
 
 ## Getting the data you need
 
