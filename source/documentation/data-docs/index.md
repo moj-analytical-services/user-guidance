@@ -3,8 +3,6 @@ There are several different data sources on the Analytical Platform:
 
 * [Amazon S3](amazon-s3/)
 * [Curated databases](curated-databases/)
-* [Home directories](home-directories)
-
 
 Also see [Demos on how to use our AWS Tools](https://github.com/moj-analytical-services/mojap-aws-tools-demo/)
 
