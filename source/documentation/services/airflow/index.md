@@ -164,7 +164,7 @@ The following options are available under `dag`:
 - `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`), can also use dataset scheduling as shown in the [example-dataset-schedule workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-dataset-schedule/workflow.yml)
 - `start_date`: the timestamp (`YYYY-MM-DD`) from which the scheduler will attempt to backfill (defaults to `2025-01-01`)
 - `inlets`: used to provide lineage when using dataset scheduling. An example is shown in the [example-dataset-schedule workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-dataset-schedule/workflow.yml)
-- `outlets`: used in conjunction with downstram dataset scheduling. An example is shown in the [example-outlet workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-outlet/workflow.yml)
+- `outlets`: used in conjunction with downstream dataset scheduling. An example is shown in the [example-outlet workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-outlet/workflow.yml)
 
 
 The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of a workflow that runs at 08:00 every day and retries 3 times, with a 150 second delay between each retry:
