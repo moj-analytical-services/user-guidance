@@ -40,12 +40,12 @@ Our Release Schedule is outlined below.
 - A new image (version `n`) is created, tested, and ready for deployment. This becomes the `latest` release.
 - Version `n` is made available to customers to deploy in the Control Panel.
 
-#### Previous Image (Version `n-1`) Remains
-- The previous image (version `n-1`) remains available and supported.
+#### Deprecated Image (Version `n-1`) Remains
+- The previous image (version `n-1`) is deprecated and remains available and supported.
 - Updates for `n-1` cease, but support is still available.
 
-#### Discontinue Older Image (Version `n-2`)
-- The older image (version `n-2`) is discontinued and no longer available for download or use.
+#### Retired Image (Version `n-2`)
+- The older image (version `n-2`) is retired and no longer available for download or use.
 
 ### Version Availability
 - At any time, only the Latest (`n`) and Previous (`n-1`) versions are supported and available.
