@@ -1,4 +1,15 @@
-# R Shiny app publishing
+# R Shiny apps
+
+You can build an R Shiny app to turn R analyses into interactive web apps. For example, if you want to model your data visually for stakeholders instead of provide a static report. You can also [use Quicksight to visualise data](../tools/quicksight/#using-quicksight-to-visualise-your-data) and we recommend considering this option before an R Shiny app. 
+
+If you build an R Shiny app, it is your responsibility to maintain it. The Analytical Platform team is not responsible for apps. 
+
+Before creating an R Shiny app, you should be able to:
+
+* debug your deployment with relevant coding knowledge
+* maintain your app's Docker image file and manage its dependencies
+
+## Publish your R Shiny app
 
 Once you've built your Shiny app, you can make it available to users through the Analytical Platform.
 We have guidance for:
@@ -164,7 +175,7 @@ A `Dockerfile` is a text document that contains all the commands a user could ca
 
 In most cases, you will not need to change the `Dockerfile` when deploying your app.
 
-If your app uses packages that have additional system dependencies, you will need to add these in the `Dockerfile`. If you are unsure how to do this, contact the Analytical Platform team.
+If your app uses packages that have additional system dependencies, you will need to add these in the `Dockerfile`. 
 
 A `Dockerfile` reference can be found in the [Docker documentation](https://docs.docker.com/engine/reference/builder/).
 
