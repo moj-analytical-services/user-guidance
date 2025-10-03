@@ -1,4 +1,4 @@
-# IDE Maintanance Policy
+# Tooling Maintenance Policy
 
 ## Release Naming
 
@@ -53,4 +53,4 @@ Our Release Schedule is outlined below.
 - Version `n-1` and `n-2` can be any `MAJOR`, `MINOR`, or `PATCH` update as per [Semantic Versioning definitions](https://semver.org/#summary).
 
 ## Release Communications
-Communications for each new release will be sent to the `#analytical-platform-support` channel. An example of this communication can be seen [here](https://mojdt.slack.com/archives/C4PF7QAJZ/p1730731994273979).
+Communications for each new release will be sent to the `#ask-analytical-platform` channel. An example of this communication can be seen [here](https://mojdt.slack.com/archives/C4PF7QAJZ/p1759397923226149).
