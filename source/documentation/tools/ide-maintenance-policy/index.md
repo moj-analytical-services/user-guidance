@@ -11,6 +11,8 @@ We will publish release notes of all changes for each tool. You can find these o
 - [RStudio Releases](https://github.com/ministryofjustice/analytical-platform-rstudio/releases)
 - [Cloud Development Environment Base Releases](https://github.com/ministryofjustice/analytical-platform-jupyterlab/releases)
 
+Release communications will summarise changes and provide a link to the relevant release note containing all changes.
+
 In the Control Panel, there has historically been a loose naming convention for tooling releases. Going forward, we will adopt a clearer naming convention in the form:
 
 `[release x.y.z] Tool Name x.y.z`
