@@ -209,6 +209,8 @@ You can see a [full example of a namespace directory](https://github.com/ministr
 
 ## Register the application 
 
+The Analytical Team manages app registration through user issues. We make sure apps follow MoJ approaches and policies, such as the organisation's hosting strategy.
+
 Raise an issue to 'Register an app' using the [Analytical Platform support form](https://github.com/ministryofjustice/data-platform-support/issues/new/choose). We will review your request and contact you if we need more information.
 
 

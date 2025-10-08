@@ -2,11 +2,11 @@
 
 You can build an R Shiny app to turn R analyses into interactive web apps. For example, if you want to model your data visually for stakeholders instead of provide a static report. You can also [use Quicksight to visualise data](../tools/quicksight/#using-quicksight-to-visualise-your-data) and we recommend considering this option before an R Shiny app. 
 
-If you build an R Shiny app, it is your responsibility to maintain it. The Analytical Platform team is not responsible for apps. 
+If you build an R Shiny app, it is your responsibility to maintain it. The Analytical Platform team is not responsible for apps, but will need to approve apps before they're registered. 
 
 Before creating an R Shiny app, you should be able to:
 
-* debug your deployment with relevant coding knowledge
+* debug your Kubernetes deployment with relevant coding knowledge
 * maintain your app's Dockerfile and dependencies
 
 ## Publish your R Shiny app
