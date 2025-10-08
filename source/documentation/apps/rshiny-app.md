@@ -7,7 +7,7 @@ If you build an R Shiny app, it is your responsibility to maintain it. The Analy
 Before creating an R Shiny app, you should be able to:
 
 * debug your deployment with relevant coding knowledge
-* maintain your app's Docker image file and manage its dependencies
+* maintain your app's Dockerfile and dependencies
 
 ## Publish your R Shiny app
 
