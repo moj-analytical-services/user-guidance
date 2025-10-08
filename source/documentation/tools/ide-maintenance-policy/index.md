@@ -23,8 +23,6 @@ For example, for Visual Studio Code, this will appear as:
 
 Semantic versions will match across both the GitHub repository and the Control Panel.
 
-Release notes in GitHub will include all changes, while release communications will provide a summary.
-
 ## Release Schedule
 Our Release Schedule is outlined below.
 
