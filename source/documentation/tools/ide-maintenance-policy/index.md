@@ -4,7 +4,7 @@
 
 Each release will adopt [Semantic Versioning](https://semver.org).
 
-In GitHub, we will include detailed release notes for each tool. You can find these here:
+We will publish release notes of all changes for each tool. You can find these on GitHub:
 
 - [JupyterLab Releases](https://github.com/ministryofjustice/analytical-platform-jupyterlab/releases)
 - [Visual Studio Code Releases](https://github.com/ministryofjustice/analytical-platform-visual-studio-code/releases)
