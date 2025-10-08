@@ -1,6 +1,6 @@
-# Tools and services
+# Tools and Services
 
-The Analytical (AP) provides a range of tools, services and packages. This page describes the core tools and services that comprise the platform, as well as additional packages you can use to perform data analysis.
+The Analytical Platform (AP) provides a range of tools, services and packages. This page describes the core tools and services that comprise the platform, as well as additional packages you can use to perform data analysis.
 
 Note that we only provides support for third-party tools and services for features directly involving the Analytical Platform, such as bespoke configurations. For any other support with third-party tools and services, see the vendor's documentation; we have provided links where possible.
 
@@ -52,6 +52,9 @@ Development environment for writing R code and R Shiny apps. For more informatio
 
 ### [Visual Studio Code](visual-studio-code)
 General purpose code editor. For more information, see the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
+
+### [Integrated Development Environment Maintenance Policy](ide-maintenance-policy)
+Our [maintenance policy](ide-maintenance-policy) on the maintenance of the above tools.
 
 ## Orchestration
 
