@@ -749,3 +749,29 @@ If you use our [application template](https://github.com/ministryofjustice/data-
 ```bash
 --set ServiceAccount.RoleARN="< ARN of your Cloud Platform IRSA role >"
 ```
+
+You will also need to add a new file to your resources folder in the cloud-platform-environments repository called `analytical-platform-cross-account.tf`. This file contains the following
+
+```tf
+module "analytical_platform_assumable_role" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+  version = "5.52.2"
+  create_role  = true
+  trusted_role_arns = [
+    "<arn_of_your_analytical_platform_app_role>"
+  ]
+  role_name                     = "<your-project-name>-role-assumable-from-ap"
+  role_requires_mfa = false
+  custom_role_policy_arns = [
+    module.iam_policy.arn # <--- this is the policy you pass to the IRSA role module
+  ]
+}
+```
+
+The trusted role ARN should be your Analytical Platform app ARN.
+
+The custom role policy arns you should create via Cloud Platform. Analytical Platform does not support this.
+
+Once you have raised the PR with Cloud Platform and the code has applied, go to your webapp page in control panel and check `Access via Cloud Platform`. Add the ARN of the new role you created in the text box and click the save changes button.
+
+From there, you will need to contact someone from cloud platform to help you set up whatever service is required.git 
