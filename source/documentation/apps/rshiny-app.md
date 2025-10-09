@@ -749,3 +749,7 @@ If you use our [application template](https://github.com/ministryofjustice/data-
 ```bash
 --set ServiceAccount.RoleARN="< ARN of your Cloud Platform IRSA role >"
 ```
+
+You can allow your web app’s IAM role to be assumed by multiple Cloud Platform roles — for example, if you use a different Cloud Platform role for each environment. This allows your app to run under a Cloud Platform role while still accessing resources that remain in the Analytical Platform account when necessary.
+
+You can manage this from the “Access via Cloud Platform” section of your “Manage App” page. Adding a role to the text box automatically updates the trust policy of your web app’s IAM role.
