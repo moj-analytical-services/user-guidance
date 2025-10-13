@@ -19,12 +19,12 @@ If you already have a repository you will need to copy these files manually.
 
 ### Create a Repository from the Template
 
-1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser
-1. Click the "Use this template" button in the top right corner
-1. On the "Create a new repository" form, ensure the `ministryofjustice/data-platform-app-template` template is selected
-1. Enter a repository name of your choosing make sure to use hypens and not underscores. NOTE: the name of the repository will later be used to create your Cloud Platform namespace, and will be used in the URL to access your deployed app. 
-1. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository
-1. Click the "Create repository" button and wait for your repository to be created
+1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser.
+1. Click the "Use this template" button in the top right corner.
+1. On the "Create a new repository" form, ensure the `ministryofjustice/data-platform-app-template` template is selected.
+1. Enter a repository name of your choosing make sure to use hypens and not underscores.  
+1. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository.
+1. Click the "Create repository" button and wait for your repository to be created.
 
 ### Using an Existing Repository
 
@@ -211,7 +211,7 @@ You can see a [full example of a namespace directory](https://github.com/ministr
 
 The Analytical Team manages app registration through user issues. We make sure apps follow MoJ approaches and policies, such as the organisation's hosting strategy.
 
-Raise an issue to 'Register an app' using the [Analytical Platform support form](https://github.com/ministryofjustice/data-platform-support/issues/new/choose). We will review your request and contact you if we need more information.
+Raise an issue to 'Register an app' using the [Analytical Platform support form](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-register-app.yml). We will review your request and contact you if we need more information.
 
 
 ### Manage the Application
