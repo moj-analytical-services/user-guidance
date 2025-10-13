@@ -477,7 +477,7 @@ task = AnalyticalPlatformStandardOperator(
 
 To send notifications to Slack from a Python DAG follow the guidance [here](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/notifications/slack_notifier_howto_guide.html).
 
-This is demonstrated in our Python DAG example.
+This is demonstrated in our Python DAG [example](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-python-dag/dag.py).
 
 ## Accessing the Airflow console
 
