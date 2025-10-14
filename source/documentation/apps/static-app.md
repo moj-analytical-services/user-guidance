@@ -19,12 +19,12 @@ If you already have a repository you will need to copy these files manually.
 
 ### Create a Repository from the Template
 
-1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser
-1. Click the "Use this template" button in the top right corner
-1. On the "Create a new repository" form, ensure the `ministryofjustice/data-platform-app-template` template is selected
-1. Enter a repository name of your choosing make sure to use hypens and not underscores. NOTE: the name of the repository will later be used to create your Cloud Platform namespace, and will be used in the URL to access your deployed app. 
-1. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository
-1. Click the "Create repository" button and wait for your repository to be created
+1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser.
+1. Click the "Use this template" button in the top right corner.
+1. On the "Create a new repository" form, ensure the `ministryofjustice/data-platform-app-template` template is selected.
+1. Enter a repository name of your choosing make sure to use hypens and not underscores.  
+1. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository.
+1. Click the "Create repository" button and wait for your repository to be created.
 
 ### Using an Existing Repository
 
@@ -207,18 +207,12 @@ Further details about these settings can be found in the [Cloud Platform documen
 
 You can see a [full example of a namespace directory](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev) used to host an Analytical Platform application here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes. For a list of deployed applications you may also view the [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples).
 
-## Register the Application in Control Panel
+## Register the application 
 
-> **IMPORTANT:**
-> You will need to have setup your GitHub repository to complete ths step
+The Analytical Team manages app registration through user issues. We make sure apps follow MoJ approaches and policies, such as the organisation's hosting strategy.
 
-1. Login to the [Control Panel](https://controlpanel.services.analytical-platform.service.justice.gov.uk)
-1. Click the "Webapps" link in the main navigation, and click the "Register app" button at the bottom of the page
-1. Enter the full URL of your GitHub repository
-1. Enter your Cloud Platform namespace, without any env suffix
-1. Choose to create a new webapp data source (S3 bucket), connect an existing data source, or choose to do this later.
-> **NOTE:**
-> If you choose "Do this later" you will be able to create a Webapp data source by clicking the "Webapp data" button in the main navigation after registering your app. You will then need to come back to the "Manage app" page to link it to your Application.
+Raise an issue to 'Register an app' using the [Analytical Platform support form](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-register-app.yml). We will review your request and contact you if we need more information.
+
 
 ### Manage the Application
 
