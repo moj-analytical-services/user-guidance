@@ -6,7 +6,7 @@ First, you will need access to the Control Panel, [see Analytical Platform User 
 
 To enable Bedrock for your user, go to your user page in control panel. This is accessed by clicking your username next to the sign out link at the top of the page. Go to the Enable Bedrock section and check the Bedrock Enabled box. Then hit the save changes button to grant access.
 
-You must be an admin of your webapp to grant Bedrock access to it. Go to the *Manage Application* page for your app to do this. 
+You must be an admin of your webapp to grant Bedrock access to it. Go to the *Manage Application* page for your app and select *Enable Bedrock*.
 
 ## What is Amazon Bedrock?
 
