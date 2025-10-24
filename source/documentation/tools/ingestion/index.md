@@ -140,6 +140,18 @@ sftp -P 2222 ${USERNAME}@sftp.ingestion.analytical-platform.service.justice.gov.
 sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.justice.gov.uk
 ```
 
+### User Home Directories and Access Permissions
+
+Each user connecting to the ingestion service is assigned a dedicated home directory within the `mojap-ingestion-<environment>-landing` S3 bucket. The directory format is:
+
+`/mojap-ingestion-<environment>-landing/<username>`
+
+For example:
+
+`/mojap-ingestion-production-landing/john.smith`
+
+When users connect via their SFTP, FTPS, or FTP client, they are automatically restricted to their assigned home directory. Attempts to list or read directories outside of this path (for example, the root `/`) will result in permission errors.
+
 ## Known Limitations
 
 ### File Names
