@@ -2,7 +2,11 @@
 
 > Ingestion on the Analytical Platform is currently a beta service.
 
-The ingestion service allows you to copy data from outside the Analytical Platform to a bucket in `analytical-platform-data-production` or another bucket in a Ministry of Justice AWS account. You should only use this for data files under 90GB. 
+The ingestion service provides a secure and approved route for transferring data into the Ministry of Justice’s AWS environments.
+
+It is primarily used to copy data into the Analytical Platform but can also transfer files to other authorised buckets in Ministry of Justice AWS accounts.
+
+The ingestion service supports data transfers up to 5 GB in size. For larger files, please contact us at [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)..
 
 To use the ingestion service, you'll need to give us the following:
 
