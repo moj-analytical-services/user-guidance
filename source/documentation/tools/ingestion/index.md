@@ -148,9 +148,9 @@ Each user connecting to the ingestion service is assigned a dedicated home direc
 
 For example:
 
-`/mojap-ingestion-production-landing/john.smith`
+`/mojap-ingestion-production-landing/analytical-platform`
 
-When users connect via their SFTP, FTPS, or FTP client, they are automatically restricted to their assigned home directory. Attempts to list or read directories outside of this path (for example, the root `/`) will result in permission errors.
+When users connect via their SFTP they are restricted to their assigned home directory. Attempts to list or read directories outside of this path (for example, the root `/`) will result in permission errors.
 
 ## Known Limitations
 
