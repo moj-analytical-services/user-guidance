@@ -120,4 +120,6 @@ Guidance on the access and use of Amazon Bedrock.
 Comprehend is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
 
 ### [Amazon Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
-Textract is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
+Textract is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/textract/latest/dg/what-is.html) for usage instructions.
+
+App admins can enable Textract for their app using the *Manage Application* page for their app.
