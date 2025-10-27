@@ -6,7 +6,7 @@ First, you will need access to the Control Panel, [see Analytical Platform User 
 
 To enable Bedrock for your user, go to your user page in control panel. This is accessed by clicking your username next to the sign out link at the top of the page. Go to the Enable Bedrock section and check the Bedrock Enabled box. Then hit the save changes button to grant access.
 
-To grant Bedrock access to your Webapp, [raise a support request](https://github.com/ministryofjustice/data-platform-support/issues/new/choose).
+You must be an admin of your webapp to grant Bedrock access to it. Go to the *Manage Application* page for your app and select *Enable Bedrock*.
 
 ## What is Amazon Bedrock?
 
@@ -20,7 +20,7 @@ There is a range of foundation models that are tailored to specific use cases. A
 
 Amazon Bedrock enables you to use foundation models for generative AI applications through a unified API. See [What can I do with Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#servicename-feature-overview) for further information.
 
-## Getting started withAmazon Bedrock
+## Getting started with Amazon Bedrock
 
 A good starting point is familiarising yourself with the [terms and concepts](https://docs.aws.amazon.com/bedrock/latest/userguide/key-definitions.html) used by AWS Bedrock.
 
