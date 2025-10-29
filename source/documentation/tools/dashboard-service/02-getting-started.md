@@ -11,9 +11,9 @@ You will need:
 
 ## Register dashboard in Analytical Platform Control Panel
 
-1. Go to the [QuickSight UI within Control Panel] and select the *Dashboards* tab on the QuickSight UI. 
+1. Go to the <a href="https://controlpanel.services.analytical-platform.service.justice.gov.uk/quicksight/" target="_blank">QuickSight UI within Control Panel</a> and select the *Dashboards* tab on the QuickSight UI. 
 1. Right click on the dashboard you want to share and select *Copy link* (this can vary per browser, for example Chrome users will see *Copy Link Address* instead). 
-1. Go to the [Dashboards page] on Control Panel and select the *Register a dashboard* button. 
+1. Go to the <a href="https://controlpanel.services.analytical-platform.service.justice.gov.uk/dashboards/" target="_blank">Dashboards page</a> on Control Panel and select the *Register a dashboard* button. 
 1. Enter a dashboard name which is unique and descriptive. 
 1. Paste the dashboard link you copied from step 2 into the Dashboard URL form. The link should look similar to this example: `https://eu-west-2.quicksight.aws.amazon.com/sn/dashboards/<unique-code-here>`. 
 1. Select the *Register dashboard* button. 
@@ -50,7 +50,7 @@ The Dashboard Service does not send a notification email to users when you add v
 
 ## Viewing shared dashboards
 
-To view registered dashboards, go to the [dashboard service] page.
+To view registered dashboards, go to the <a href="https://dashboards.analytical-platform.service.justice.gov.uk/dashboards/" target="_blank">dashboard service</a> page.
 
 - Ministry of Justice staff can log in with Single sign-on using the "Continue with Microsoft Entra ID" button. You can log in to the Dashboard Service even if a dashboard has not been shared with you.
 - Non-MoJ staff members must have had a dashboard shared with them to be able to log in. You will need to enter your email address, then check your email for a one-time code that is used to authenticate you.
@@ -59,6 +59,3 @@ After successfully logging in, you will see a list of dashboards that you can vi
 
 <!-- External links -->
 
-[QuickSight UI within Control Panel]: https://controlpanel.services.analytical-platform.service.justice.gov.uk/quicksight/
-[dashboards page]: https://controlpanel.services.analytical-platform.service.justice.gov.uk/dashboards/
-[dashboard service]: https://dashboards.analytical-platform.service.justice.gov.uk/dashboards/
