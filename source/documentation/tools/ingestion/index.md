@@ -6,7 +6,7 @@ The ingestion service provides a secure and approved route for transferring data
 
 It is primarily used to copy data into the Analytical Platform but can also transfer files to other authorised buckets in Ministry of Justice AWS accounts.
 
-The ingestion service supports data transfers up to 5 GB in size. For larger files, please contact us at [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ)..
+The ingestion service supports data transfers up to 5 GB in size. For larger files, please contact us at [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ).
 
 To use the ingestion service, you'll need to give us the following:
 
