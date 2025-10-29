@@ -8,7 +8,7 @@
 
 To use the Ingestion service, data owners must provide the following information:
 
-- Supplier's name
+- Supplier's username
 - Supplier's email
 - Supplier's IP address(es)
 - Supplier's SSH public key
@@ -17,7 +17,7 @@ To use the Ingestion service, data owners must provide the following information
 
 Please raise a support ticket [here](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
 
-> **Note**: The Supplier's name you provide us will become your `USERNAME`.
+> **Note**: The Supplier's username you provide us will become your `USERNAME`.
 
 ### Optional Information
 
@@ -127,7 +127,7 @@ Use the correct `ingestion-account-ID` based on the environment:
 
 ## Connection Instructions
 
-Connect to our ingestion service using the following commands:
+Connect to our ingestion service using the following commands (see note on `USERNAME` above):
 
 ### Production
 
