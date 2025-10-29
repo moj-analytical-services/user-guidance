@@ -34,7 +34,7 @@ You'll need to include your:
 
 ## Choose your destination bucket 
 
-The 'destination bucket' is the S3 bucket where transferred files will be delivered. Buckets can exist in any Ministry of Justice AWS account, but set up differs depending on ownership.
+The 'destination bucket' is the S3 bucket where transferred files will be delivered. Buckets can exist in any Ministry of Justice AWS account, but setup differs depending on ownership.
 
 There are two options for where to copy your data.
 
