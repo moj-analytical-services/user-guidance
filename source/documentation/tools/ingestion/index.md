@@ -127,7 +127,7 @@ Use the correct `ingestion-account-ID` based on the environment:
 
 ## Connection Instructions
 
-Connect to our ingestion service using the following commands:
+Connect to our ingestion service using the following commands (see note on `USERNAME` above):
 
 Production
 
