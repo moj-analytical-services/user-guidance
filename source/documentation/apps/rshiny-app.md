@@ -643,7 +643,7 @@ Please note, the example below is for using version [2.0.0](https://github.com/m
 
 ```docker
 # The base docker image
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.0
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.5
 
 # ** Optional step: only required if your R packages require system libraries
 #   which are not provided by the base image
@@ -682,7 +682,7 @@ If you already use the legacy AP shiny server image, and would like to switch to
 - Change the base docker image in your Dockerfile to your chosen release:
 
 ```docker
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.0
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.5
 ```
 
 - If present, ensure the following redundant parts of your Dockerfile are removed:
