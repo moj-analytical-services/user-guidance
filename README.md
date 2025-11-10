@@ -14,7 +14,7 @@ The legacy CloudFront distribution serving "user-guidance.services.alpha.mojanal
 
 ## Contribute to the guidance
 
-To make changes to the documentation for the Tech Docs Template website, edit files in the `source` folder of the repository.
+If you think the guidance needs an update, [contact the Analytical Platform team on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) before making changes or raising a PR. 
 
 ### Structure
 
