@@ -92,7 +92,7 @@ After your pull request has been merged, you will be added to a GitHub team that
 3\. Update the `Dockerfile` instructions to copy your code into the image, install packages required to run, and call the script(s) to run. For example, for Python:
 
 ```Dockerfile
-FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.14.0
+FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.18.0
 
 USER root
 
@@ -161,8 +161,11 @@ The following options are available under `dag`:
 - `max_active_runs`: maximum number of active workflow runs (defaults to `1`)
 - `retries`: the number of retries that should be performed before failing the task (defaults to `0`)
 - `retry_delay`: delay in seconds between retries (defaults to `300`)
-- `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`)
+- `schedule`: [cron expression](https://crontab.guru/) that defines how often the workflow runs (defaults to `null`), can also use dataset scheduling as shown in the [example-dataset-schedule workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-dataset-schedule/workflow.yml). Time-delta scheduling can be set by using `seconds`, `minutes` or `hours` as shown in the [example-timedelta workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/70c79909a2fe5d9db60f06ee91cce2d4b2f861c0/environments/development/analytical-platform/example-timedelta/workflow.yml#L8)
 - `start_date`: the timestamp (`YYYY-MM-DD`) from which the scheduler will attempt to backfill (defaults to `2025-01-01`)
+- `inlets`: used to provide lineage when using dataset scheduling. An example is shown in the [example-dataset-schedule workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-dataset-schedule/workflow.yml)
+- `outlets`: used in conjunction with downstream dataset scheduling. An example is shown in the [example-outlet workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-outlet/workflow.yml)
+
 
 The [`example-schedule` workflow](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-schedule/workflow.yml) shows an example of a workflow that runs at 08:00 every day and retries 3 times, with a 150 second delay between each retry:
 
@@ -470,6 +473,12 @@ task = AnalyticalPlatformStandardOperator(
 )
 ```
 
+### Slack Notifications in Python DAGs
+
+To send notifications to Slack from a Python DAG follow the guidance [here](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/notifications/slack_notifier_howto_guide.html).
+
+This is demonstrated in our Python DAG [example](https://github.com/ministryofjustice/analytical-platform-airflow/blob/main/environments/development/analytical-platform/example-python-dag/dag.py).
+
 ## Accessing the Airflow console
 
 To access the Airflow console, you can use these links:
@@ -550,7 +559,7 @@ Our runtime images are set to run as a non-root user (`analyticalplatform`) whic
 To install system packages, you will need to switch to `root`, perform any installations, and switch back to `analyticalplatform`, for example:
 
 ```dockerfile
-FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.14.0
+FROM ghcr.io/ministryofjustice/analytical-platform-airflow-python-base:1.18.0
 
 USER root # Switch to root
 

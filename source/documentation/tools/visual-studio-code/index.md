@@ -12,6 +12,15 @@ To access an application running locally, it must be running on port `8081`, you
 
 This cannot be accessed by anyone other than yourself as it uses the same authentication method as Visual Studio Code.
 
+### Resource Options
+
+By default, Visual Studio Code runs with a standard set of resources. If your work requires more capacity, the following options are available on request:
+
+- *GPU enabled*
+- *High-memory CPU environment*: 2 CPUs with 24 GB of RAM
+
+To request one of these options, please contact the Analytical Platform team through [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ).
+
 ## Known Issues and Limitations
 
 * Like JupyterLab and RStudio, Visual Studio Code runs on Analytical Platform's Kubernetes infrastructure, therefore we cannot provide access to Docker.

@@ -1,6 +1,6 @@
-# Tools and services
+# Tools and Services
 
-The Analytical (AP) provides a range of tools, services and packages. This page describes the core tools and services that comprise the platform, as well as additional packages you can use to perform data analysis.
+The Analytical Platform (AP) provides a range of tools, services and packages. This page describes the core tools and services that comprise the platform, as well as additional packages you can use to perform data analysis.
 
 Note that we only provides support for third-party tools and services for features directly involving the Analytical Platform, such as bespoke configurations. For any other support with third-party tools and services, see the vendor's documentation; we have provided links where possible.
 
@@ -9,8 +9,11 @@ Note that we only provides support for third-party tools and services for featur
 ### [Control Panel](control-panel.html)
 Main entry point to the Analytical Platform. Allows you to configure tools and view their status.
 
-### [Data Discovery](../data/curated-databases/data-documentation)
-Allows you to browse the databases that are available on the Analytical Platform.
+### [Find MoJ data](https://find-moj-data.service.justice.gov.uk/) 
+Shows you what data exists across the organisation and how to access it. This service is still in development, so it does not catalogue all MoJ data assets yet. Check [MoJ data sources](https://user-guide.find-moj-data.service.justice.gov.uk/#moj-data-sources) to see what it currently includes.
+
+### [Data Discovery Tool](../data/curated-databases/data-documentation)
+Use the [data discovery tool](https://data-discovery-tool.analytical-platform.service.justice.gov.uk/) to understand how to use  databases maintained by Data Engineering.
 
 ### [GitHub](https://github.com/)
 Online hosting platform for git. Git is a distributed version control system that allows you to track changes in files, while GitHub hosts the Analytical Platform's code.
@@ -49,6 +52,9 @@ Development environment for writing R code and R Shiny apps. For more informatio
 
 ### [Visual Studio Code](visual-studio-code)
 General purpose code editor. For more information, see the [Visual Studio Code documentation](https://code.visualstudio.com/docs).
+
+### [Integrated Development Environment Maintenance Policy](ide-maintenance-policy)
+Our [maintenance policy](ide-maintenance-policy) on the maintenance of the above tools.
 
 ## Orchestration
 
@@ -114,4 +120,6 @@ Guidance on the access and use of Amazon Bedrock.
 Comprehend is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
 
 ### [Amazon Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
-Textract is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html) for usage instructions.
+Textract is enabled for all Analytical Platform users `alpha_user` role. Please see the [AWS documentation](https://docs.aws.amazon.com/textract/latest/dg/what-is.html) for usage instructions.
+
+App admins can enable Textract for their app using the *Manage Application* page for their app.

@@ -1,4 +1,15 @@
-# R Shiny app publishing
+# R Shiny apps
+
+You can build an R Shiny app to turn R analyses into interactive web apps. For example, if you want to model your data visually for stakeholders instead of provide a static report. You can also [use Quicksight to visualise data](../tools/quicksight/#using-quicksight-to-visualise-your-data) and we recommend considering this option before an R Shiny app. 
+
+If you build an R Shiny app, it is your responsibility to maintain it. The Analytical Platform team is not responsible for apps, but will need to approve apps before they're registered. 
+
+Before creating an R Shiny app, you should be able to:
+
+* debug your Kubernetes deployment with relevant coding knowledge
+* maintain your app's Dockerfile and dependencies
+
+## Publish your R Shiny app
 
 Once you've built your Shiny app, you can make it available to users through the Analytical Platform.
 We have guidance for:
@@ -164,7 +175,7 @@ A `Dockerfile` is a text document that contains all the commands a user could ca
 
 In most cases, you will not need to change the `Dockerfile` when deploying your app.
 
-If your app uses packages that have additional system dependencies, you will need to add these in the `Dockerfile`. If you are unsure how to do this, contact the Analytical Platform team.
+If your app uses packages that have additional system dependencies, you will need to add these in the `Dockerfile`. 
 
 A `Dockerfile` reference can be found in the [Docker documentation](https://docs.docker.com/engine/reference/builder/).
 
@@ -632,7 +643,7 @@ Please note, the example below is for using version [2.0.0](https://github.com/m
 
 ```docker
 # The base docker image
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.0
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.5
 
 # ** Optional step: only required if your R packages require system libraries
 #   which are not provided by the base image
@@ -671,7 +682,7 @@ If you already use the legacy AP shiny server image, and would like to switch to
 - Change the base docker image in your Dockerfile to your chosen release:
 
 ```docker
-FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.0
+FROM ghcr.io/ministryofjustice/analytical-platform-rshiny-open-source-base:2.0.5
 ```
 
 - If present, ensure the following redundant parts of your Dockerfile are removed:
@@ -749,3 +760,14 @@ If you use our [application template](https://github.com/ministryofjustice/data-
 ```bash
 --set ServiceAccount.RoleARN="< ARN of your Cloud Platform IRSA role >"
 ```
+
+You can allow your web app’s IAM role to be assumed by multiple Cloud Platform roles — for example, if you use a different Cloud Platform role for each environment. This allows your app to run under a Cloud Platform role while still accessing resources that remain in the Analytical Platform account when necessary.
+
+You can manage this from the “Access via Cloud Platform” section of your “Manage App” page. Adding a role to the text box automatically updates the trust policy of your web app’s IAM role.
+
+## Enable AWS services
+
+App admins can enable the following AWS services on the app's *Manage Application* page:
+
+- [Bedrock](/tools/bedrock/#amazon-bedrock)
+- [Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
