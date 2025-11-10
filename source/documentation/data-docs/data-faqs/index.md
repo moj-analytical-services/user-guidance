@@ -100,4 +100,4 @@ If the data is stored in your own S3 bucket, you may wish to create your own Ath
 [`Rdbtools`]: https://github.com/moj-analytical-services/Rdbtools
 [AWS]: https://docs.aws.amazon.com/athena/latest/ug/language-reference.html
 [here is a nice example of setting up your own database]: https://github.com/moj-analytical-services/mojap-aws-tools-demo/blob/main/creating_and_maintaining_database_tables_in_athena.ipynb
-[this config file]: https://github.com/moj-analytical-services/data-engineering-database-access/blob/5b4d28e5f370700e09c3fb4cd4fa907154ba6de9/project_access/CaDeT_Sandpit_Access.yaml#L11-L14
+[this config file]: https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/project_access/CaDeT_Sandpit_Access.yaml#L12-L15
