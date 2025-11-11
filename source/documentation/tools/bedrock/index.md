@@ -46,7 +46,7 @@ It is your responsibility to check with the data owners and the security team th
 
 ## AWS Bedrock Cross-Region Inference
 
-When you request access to AWS Bedrock ([here](https://github.com/ministryofjustice/data-platform-support/issues/new/choose)), Cross-Region Inference is granted to your user permissions by default.
+When you enable access to AWS Bedrock Cross-Region Inference is granted to your user permissions by default.
 
 Only a subset of Bedrock’s models are available for cross-region inference.
 
