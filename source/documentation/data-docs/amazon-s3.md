@@ -68,7 +68,7 @@ To gain access to a bucket (warehouse data source or webapp data source), you mu
 
 If you know an admin of the bucket you require access to, you should ask them to add you to the data access group.
 
-If you do not know any of the admins of the bucket you require access to, you can find a list of the GitHub usernames of all bucket admins on the Warehouse Data page of Control Panel (scroll down the page), or contact the Analytical Platform team via [Slack](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ), [GitHub](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) or email ([analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk)).
+If you do not know any of the admins of the bucket you require access to, you can find a list of the GitHub usernames of all bucket admins on the Warehouse Data page of Control Panel (scroll down the page), or contact the Analytical Platform team via [Slack](https://app.slack.com/client/T02DYEB3A/C4PF7QAJZ), [GitHub](https://github.com/ministryofjustice/data-platform-support/issues/new/choose) or email ([analytical-platform@justice.gov.uk](mailto:analytical-platform@justice.gov.uk)).
 
 If all bucket admins are unavailable (e.g. have left the MoJ), the Analytical Platform team will be able to grant you access to the datasource if the request is approved by your line manager.
 
