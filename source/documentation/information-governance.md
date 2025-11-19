@@ -10,7 +10,7 @@ If you are an admin for a data source or webapp, you can control which users hav
 
 Some webapp access permissions can also be specified in `deploy.json`.
 
-You can request access to a data source or app (for yourself, another user or a customer) by contacting an admin for the data source or app, or by contacting the Analytical Platform team on the [#ap-admin-request](https://asdslack.slack.com/messages/CBLAGCQG6/) Slack channel or at [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
+You can request access to a data source or app (for yourself, another user or a customer) by contacting an admin for the data source or app, or by contacting the Analytical Platform team on the [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) Slack channel or at [analytical-platform@justice.gov.uk their role](mailto:analytical-platform@justice.gov.uk their role).
 
 When requesting access to a data source, you should provide the GitHub usernames of the users to be added. When requesting access to an app, you should provide the email addresses of the users to be added.
 
@@ -28,7 +28,7 @@ When requesting access to a data source, you should provide the GitHub usernames
 * Files stored in users' home directories are backed up to Amazon S3 automatically.
 * Previous versions of files stored in users' home directories are also backed up to Amazon S3.
 * Once files are deleted from a user's home directory, the backup is retained for a further 90 days and can be restored.
-* To request that a file be restored or to access a previous version of a file, contact the Analytical Platform team at [analytical_platform@digital.justice.gov.uk](mailto:analytical_platform@digital.justice.gov.uk).
+* To request that a file be restored or to access a previous version of a file, contact the Analytical Platform team at [analytical-platform@justice.gov.uk](mailto:analytical-platform@justice.gov.uk).
 
 ## Data movements
 

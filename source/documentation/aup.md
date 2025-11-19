@@ -15,7 +15,7 @@ This policy applies to all users of the Analytical Platform (excluding users of 
 __All users will:__
 
 * report any security incidents, including a loss of data, in line with the relevant MoJ, HMPPS or HMCTS procedures;
-* report any breach of this acceptable use policy to the [Analytical Platform team](mailto:analytical_platform@digital.justice.gov.uk);
+* report any breach of this acceptable use policy to the [Analytical Platform team](mailto:analytical-platform@justice.gov.uk);
 * follow all relevant information governance procedures;
 * protect their login credentials appropriately;
 * create secure passwords following best practice guidelines (see [here](https://github.com/ministryofjustice/itpolicycontent/blob/master/content/security/framework/password-standard.md));
