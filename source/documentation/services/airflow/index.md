@@ -111,7 +111,9 @@ ENTRYPOINT ["python3", "main.py"]
 
 1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release). Make note of the release tag.
 
-1. After you've created a release, check if your container image has been successfully built and published by [logging in to the Analytical Platform Common Production AWS account](https://moj.awsapps.com/start/#/console?account_id=509399598587&role_name=modernisation-platform-mwaa-user&destination=https%3A%2F%2Feu-west-2.console.aws.amazon.com%2Fecr%2Fprivate-registry%2Frepositories%3Fregion%3Deu-west-2)
+1. Make sure the release you created was successfully published by checking the relevant release feature in your repo. 
+
+>**Note**: For example, if you use GitHub Actions, go to **Actions** and check your repo's 'Release Container' logs. Or if you use GitHub Releases, check the repo's **Releases** page and make sure the new release is there and marked 'Published'.  
 
 > You can also see [our example Python repository](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
 
