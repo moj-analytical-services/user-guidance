@@ -111,7 +111,9 @@ ENTRYPOINT ["python3", "main.py"]
 
 1. Follow GitHub's documentation on [creating a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release). Make note of the release tag.
 
-1. Users can establish the status of a release by examining the Release Action in their respective GitHub repository.
+1. Make sure the release you created was successfully published by checking the relevant release feature in your repo. 
+
+>**Note**: For example, if you use GitHub Actions, go to **Actions** and check your repo's 'Release Container' logs. Or if you use GitHub Releases, check the repo's **Releases** page and make sure the new release is there and marked 'Published'.  
 
 > You can also see [our example Python repository](https://github.com/moj-analytical-services/analytical-platform-airflow-python-example).
 
