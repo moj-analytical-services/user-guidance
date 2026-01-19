@@ -6,6 +6,10 @@ The Analytical Platform (AP) is a data analysis platform made up of tools, packa
 
 This site provides instructions on how to configure and use the Analytical Platform.
 
+## The Analytical Platform team
+
+The Analytical Platform team provides and maintains the platform and its tools, but users are responsible for their own code and resolving application-level problems. If you think there's a problem with the platform, you can [get support from the Analytical Platform team](./support.html#get-support-from-the-analytical-platform-team). 
+
 ## Intended users
 
 Primarily intended for Data Analysts and Data Scientists in the Data and Analysis Directorates, the Analytical Platform also hosts users from:
