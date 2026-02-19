@@ -331,7 +331,7 @@ Please refer to [Amazon's documentation](https://docs.aws.amazon.com/eks/latest/
 We can provide the Amazon EKS OpenID Connect provider URL upon request.
 
 You must also create a role that is [enabled for IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
-We recommend using [this Terraform module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks).
+We recommend using [this Terraform module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts).
 
 You must use the following when referencing service accounts:
 
