@@ -4,6 +4,20 @@
 
 Visual Studio Code uses our Cloud Development Environment Base image, and includes the features highlighted [here](https://github.com/ministryofjustice/analytical-platform-cloud-development-environment-base?tab=readme-ov-file#features).
 
+## GitHub Copilot
+
+Starting from release 2.41.0, we have included GitHub's [CLI](https://cli.github.com/) and [Copilot CLI](https://github.com/features/copilot/cli).
+
+To authenticate with GitHub, run the following command:
+
+```bash
+gh auth login --git-protocol ssh --hostname github.com --skip-ssh-key --web
+```
+
+Once authenticated, you can launch GitHub Copilot by running `copilot`.
+
+For more information on using GitHub Copilot CLI, please refer to GitHub's [documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli).
+
 ## Accessing a Locally Running Application
 
 As Visual Studio Code's [port forwarding](https://code.visualstudio.com/docs/editor/port-forwarding) functionality does not work in our environment, we have enabled similar functionality using [host based routing](https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/).
