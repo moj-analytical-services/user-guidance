@@ -9,11 +9,10 @@ You can [share a dashboard](https://dashboards.analytical-platform.service.justi
 >
 
 You can manage your dashboard to:
-* add viewer or admin permissions
-* remove viewer or admin permissions 
-* add user or domain access
-* remove user or domain access
- 
+- add viewer or admin permissions
+- remove viewer or admin permissions 
+- add or remove domain access
+
  
 <!-- External links --> 
 
