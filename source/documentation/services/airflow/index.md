@@ -400,7 +400,7 @@ If you only want to receive notifications on success _or_ failure events you can
     ```
 The above will only send notifications on workflow failures.
 
-If `slack_events` is not specified, notifications will be send on both Success and Failure events.
+If `slack_events` is not specified, notifications will be sent on both Success and Failure events.
 
 ## Workflow metrics
 
