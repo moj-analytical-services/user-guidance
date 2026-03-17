@@ -390,7 +390,7 @@ To enable Slack notifications, you need to:
 
 2. Invite Analytical Platform's Slack application (`@Analytical Platform`) to your channel
 
-If you only want to receive notifications on success or failure events you can add the slack_events parameter, e.g:
+If you only want to receive notifications on success _or_ failure events you can add the slack_events parameter, e.g:
 
     ```yaml
     notifications:
@@ -400,7 +400,7 @@ If you only want to receive notifications on success or failure events you can a
     ```
 The above will only send notifications on workflow failures.
 
-Leaving this out means notifications are sent on both success and failure events.
+If `slack_events` is not specified, notifications will be send on both Success and Failure events as normal. 
 
 ## Workflow metrics
 
