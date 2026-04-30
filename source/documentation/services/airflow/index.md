@@ -55,7 +55,7 @@ To access the Airflow components, you'll need to:
 * have a GitHub account (see our [Quickstart guide](/get-started.html#3-create-github-account)) 
 * [join the `ministryofjustice` GitHub organisation](https://github.com/orgs/ministryofjustice/sso)
 
-> If you are a member of ing's GitHub team ([@ministryofjustice/data-engineering](https://github.com/orgs/ministryofjustice/teams/data-engineering)), you are automatically granted access and do not need to submit a request
+> If you are a member of Data Engineering's GitHub team ([@ministryofjustice/data-engineering](https://github.com/orgs/ministryofjustice/teams/data-engineering)), you are automatically granted access and do not need to submit a request
 
 When you have joined the `ministryofjustice` GitHub organisation, create a pull request in the [Data Platform Github Access GitHub repository](https://github.com/ministryofjustice/data-platform-github-access/) which adds your GitHub username to the Analytical Platform Airflow team defined [here](https://github.com/ministryofjustice/data-platform-github-access/blob/main/analytical-platform-teams.tf#L322). Send a message with your pull request link in the [#ask-analytical-platform Slack channel](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) to request a review.
 
