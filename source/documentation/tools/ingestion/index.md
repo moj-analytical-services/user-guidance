@@ -16,7 +16,7 @@ The ingestion service cannot:
 - transform, clean, or process your data
 - support custom security requirements outside the standard offering
 
-If you need to receive larger files, contact us at [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) to discuss.
+If you need to receive files larger than 5 GB, you'll need to split them up to use the ingestion service.
 
 ## How the ingestion service works
 
@@ -38,7 +38,6 @@ If you need to receive larger files, contact us at [#ask-analytical-platform](ht
 1. When GuardDuty finishes scanning, the service moves clean files to your destination bucket and infected files to a quarantine bucket.
 1. Your team accesses the files in the destination bucket. 
 
-
 ## Onboard to the service
 
 To use the ingestion service, you'll need to give us the following:
@@ -50,7 +49,7 @@ To use the ingestion service, you'll need to give us the following:
 - destination bucket's location on Analytical Platform (for example: `s3://${DESTINATION_BUCKET}/${OPTIONAL_PREFIX}`)
 - destination bucket's KMS key if encrypted
 
-Please raise a support ticket [here](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
+Please [raise a support ticket](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
 
 > **Note**: We'll use the supplier's name as your `USERNAME`.
 
