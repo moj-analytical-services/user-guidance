@@ -4,9 +4,10 @@ The Analytical Platform [Control Panel](https://controlpanel.services.analytical
 
 ## Analytical tools
 
+
 Tools on the Analytical Platform include RStudio and JupyterLab. To use these, you need to start your own copy of the software. This gives you individual reserved memory space (compared to the more common shared R Studio Server) and some control over the version of R that is running. 
 
-**Supported browser:** Tools on the Analytical Platform are only supported in Google Chrome. Using other browsers (such as Edge, Firefox or Safari) may result in a degraded experience or unexpected behaviour.
+**Supported browser:** Tools on the Analytical Platform are only supported in Chromium based browser such as Google Chrome or Microsoft Edge. Using other browsers such as Firefox or Safari may result in a degraded experience or unexpected behaviour.
 
  ![Tool options in Control Panel](images/tools/tools_options.png)
 
