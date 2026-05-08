@@ -28,30 +28,33 @@ If you need to receive files larger than 5 GB, you'll need to split them up to u
 1. We configure the destination bucket location.
 1. We check the bucket's permissions. You may need to update the bucket's policy to allow the ingestion service to copy files into it.  
 1. If your destination bucket uses KMS encryption, we use the key you sent us to set up write permissions for the ingestion service.
-1. We notify you that the onboarding request has been completed and confirm the username for your account.
+1. We notify you that the onboarding request has been completed and confirm the username for your account. 
 
 ### Copying data to an S3 bucket
 
 1. Your supplier connects to the SFTP endpoint with the username we created and SSH key.
 1. Your supplier uploads files to their home directory in a landing bucket.
 1. Each file triggers a GuardDuty security scan. 
-1. When GuardDuty finishes scanning, the service moves clean files to your destination bucket and infected files to a quarantine bucket.
-1. Your team accesses the files in the destination bucket. 
+1. When GuardDuty finishes scanning, you'll receive a notification by Slack or email if you requested this The service moves clean files to your destination bucket and infected files to a quarantine bucket. You cannot access files in the quarantine bucket. 
+1. Your team accesses the files in the destination bucket. If any files are in the quarantine bucket, speak to your supplier.
 
 ## Onboard to the service
 
-To use the ingestion service, you'll need to give us the following:
+To use the ingestion service, you'll need to give us information about the supplier using the service and the destination bucket. We need contact information of an individual to send notification and updates about the ingestion service. 
 
-- supplier's name (this can be a person or organisation)
-- supplier's email
-- supplier's IP address(es)
+[Raise a support ticket](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the following information to start the onboarding process:
+
+- supplier's name (this should be a specific person)
+- supplier's email (not a generic inbox)
+- supplier's IP addresses
 - supplier's SSH public key
 - destination bucket's location on Analytical Platform (for example: `s3://${DESTINATION_BUCKET}/${OPTIONAL_PREFIX}`)
-- destination bucket's KMS key if encrypted
+- destination bucket's KMS key, if encrypted
+- an email address or Slack channel to send scan completion alerts to (optional)
 
 Please [raise a support ticket](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
 
-> **Note**: We'll use the supplier's name as your `USERNAME`.
+> **Note**: We'll generally use the supplier's name or organisation as the account's `USERNAME`, which the person or system using the ingestion service needs to log in. We may change it if we think there's a security issue.
 
 ### Request access if you need to download files
 
