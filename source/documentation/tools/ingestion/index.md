@@ -52,8 +52,6 @@ To use the ingestion service, you'll need to give us information about the suppl
 - destination bucket's KMS key, if encrypted
 - an email address or Slack channel to send scan completion alerts to (optional)
 
-Please [raise a support ticket](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the required information to start the onboarding process.
-
 > **Note**: We'll generally use the supplier's name or organisation as the account's `USERNAME`, which the person or system using the ingestion service needs to log in. We may change it if we think there's a security issue.
 
 ### Request access if you need to download files
