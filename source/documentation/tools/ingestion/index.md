@@ -52,7 +52,7 @@ To use the ingestion service, you'll need to give us information about the suppl
 - destination bucket's KMS key, if encrypted
 - an email address or Slack channel to send scan completion alerts to (optional)
 
-> **Note**: We'll generally use the supplier's name or organisation as the account's `USERNAME`, which the person or system using the ingestion service needs to log in. We may change it if we think there's a security issue.
+> **Note**: We'll generally use the supplier or organisation name as the account's `USERNAME`, which the person or system using the ingestion service needs to log in. As this is stored publicly in code, we may ask you for an alternative name to avoid exposing sensitive information.
 
 ### Request access if you need to download files
 
