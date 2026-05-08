@@ -40,7 +40,7 @@ If you need to receive files larger than 5 GB, you'll need to split them up to u
 
 ## Onboard to the service
 
-To use the ingestion service, you'll need to give us information about the supplier using the service and the destination bucket. We need contact information of an individual to send notification and updates about the ingestion service. 
+To use the ingestion service, you'll need to give us information about the supplier using the service and the destination bucket. We need contact information of an individual to send notifications and updates about the ingestion service. 
 
 [Raise a support ticket](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the following information to start the onboarding process:
 
