@@ -27,17 +27,19 @@ Securely share dashboards created in QuickSight with other users.
 
 ## Data Ingest
 
+We offer several standardised options for copying data from other locations to the Analytical Platform.
+
 ### [Data Extractor](https://github.com/ministryofjustice/data-engineering-data-extractor)
-Extracts data from applications, services or microservices to the Analytical Platform in a standardised way.
+Use this for data from applications, services or microservices using `Postgres`. It copies data to any Ministry of Justice S3 bucket.
 
 ### [Data Uploader](data-uploader)
-Web application for uploading data (.csv, .json, .jsonl) to the Analytical Platform in a standardised way.
+Use this for data in `CSV`, `JSON` or `JSONL` formats. It copies data to the `analytical-platform-data-prodution` AWS account.
 
 ### [Ingestion](ingestion)
-An SFTP based service that allows users to ingest data into their Analytical Platform data warehouse.
+Use this for data from suppliers or external organisations. It copies data to any Ministry of Justice S3 bucket.
 
 ### [Register my data](https://github.com/ministryofjustice/register-my-data)
-Moves data from microservices into the Analytical Platform's [curated databases](../data/curated-databases) in a standardised way.
+Use this for data in Cloud Platform microservices. It copies data to the `analytical-platform-data-prodution` AWS account.
 
 ## Integrated Development Environments (IDE)
 
