@@ -1,3 +1,32 @@
+# Testing
+
+## Introduction
+
+## Types of testing
+
+| Scope of testing | Link to content             |
+|------------------|-----------------------------|
+| Single column    | [Nullability](#Nullability) |
+|                  | [Uniqueness](#Uniqueness)   |
+|                  | [Data type](#Data type)     |
+|                  | [Data format](#Data format) |
+
+## Testing a single column
+### Nullability
+
+
+## Testing columns within a model
+
+## Testing columns across models
+
+
+
+
+
+
+
+# Original content --------------------------------------------------------------------
+
 # Tests
 
 Tests are assertions you make about your models and other resources (e.g. sources, seeds and snapshots). You can do things like test whether a column contains nulls or only unique values, compare row counts between tables, or check all of the records in a child table have a corresponding record in a parent table. dbt ships with some [tests](https://docs.getdbt.com/reference/resource-properties/tests) you can use but there many more out there in packages like [dbt_utils](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/), so do checkout dbt's package hub for what's available.
