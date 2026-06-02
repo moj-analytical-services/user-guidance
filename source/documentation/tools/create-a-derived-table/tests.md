@@ -4,18 +4,51 @@
 
 ## Types of testing
 
-| Scope of testing | Link to content             |
-|------------------|-----------------------------|
-| Single column    | [Nullability](#Nullability) |
-|                  | [Uniqueness](#Uniqueness)   |
-|                  | [Data type](#Data type)     |
-|                  | [Data format](#Data format) |
+| Scope of testing | Link to content                     |
+|------------------|-------------------------------------|
+| Single column    | [Nullability](#Nullability)         |
+|                  | [Uniqueness](#Uniqueness)           |
+|                  | [Data type](#Data type)             |
+|                  | [Data format](#Data format)         |
+|                  | [Accepted values](#Accepted values) |
+|                  | [Completeness](#Completeness)       |
+|                  | [Free text](#Free text)             |
+| Multiple columns | [Combinations of values in a single model](#Combinations of values in a single model) |
+|                  | [Relationships](#Relationships) |
+|                  | [](#) |
+|                  | [](#) |
+|                  | [](#) |
+|                  | [](#) |
+|                  | [](#) |
 
 ## Testing a single column
 ### Nullability
 
+### Uniqueness
 
-## Testing columns within a model
+### Data type
+
+### Data format
+
+### Accepted values
+
+List
+
+Range
+
+### Completeness
+
+% or absolute
+
+### Free text
+
+Avoid revealing PII
+
+## Testing multiple columns within a model
+
+### Combinations of values in a single model
+
+### Relationships
 
 ## Testing columns across models
 
