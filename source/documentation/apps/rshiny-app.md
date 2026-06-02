@@ -771,3 +771,4 @@ App admins can enable the following AWS services on the app's *Manage Applicatio
 
 - [Bedrock](/tools/bedrock/#amazon-bedrock)
 - [Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
+- [Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html)
