@@ -8,12 +8,12 @@
 |------------------|-------------------------------------|
 | Single column    | [Nullability](#Nullability)         |
 |                  | [Uniqueness](#Uniqueness)           |
-|                  | [Data type](#Data type)             |
-|                  | [Data format](#Data format)         |
-|                  | [Accepted values](#Accepted values) |
+|                  | [Data type](#Data-type)             |
+|                  | [Data format](#Data-format)         |
+|                  | [Accepted values](#Accepted-values) |
 |                  | [Completeness](#Completeness)       |
-|                  | [Free text](#Free text)             |
-| Multiple columns | [Combinations of values in a single model](#Combinations of values in a single model) |
+|                  | [Free text](#Free-text)             |
+| Multiple columns | [Combinations of values in a single model](#Combinations-of-values-in-a-single-model) |
 |                  | [Relationships](#Relationships) |
 |                  | [](#) |
 |                  | [](#) |
