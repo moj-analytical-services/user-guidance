@@ -4,24 +4,45 @@
 
 ## Types of testing
 
-| Scope of testing | Link to content                     |
-|------------------|-------------------------------------|
-| Single column    | [Nullability](#Nullability)         |
-|                  | [Uniqueness](#Uniqueness)           |
-|                  | [Data type](#Data-type)             |
-|                  | [Data format](#Data-format)         |
-|                  | [Accepted values](#Accepted-values) |
-|                  | [Completeness](#Completeness)       |
-|                  | [Free text](#Free-text)             |
-| Multiple columns | [Combinations of values in a single model](#Combinations-of-values-in-a-single-model) |
-|                  | [Relationships](#Relationships) |
-|                  | [](#) |
-|                  | [](#) |
-|                  | [](#) |
-|                  | [](#) |
-|                  | [](#) |
+<table>
+  <tr>
+    <th>Scope of testing</th>
+    <th>Link to content</th>
+  </tr>
+  <tr>
+    <td rowspan="7">Single column within a model</td>
+    <td><a href="#Nullability">Nullability</a></td>
+  </tr>
+  <tr>
+    <td><a href="#Uniqueness">Uniqueness</a></td>
+  </tr>
+  <tr>
+    <td><a href="#Data-type">Data type</a></td>
+  </tr>
+  <tr>
+    <td><a href="#Data-format">Data format</a></td>
+  </tr>
+  <tr>
+    <td><a href="#Accepted-values">Accepted values</a></td>
+  </tr>
+  <tr>
+    <td><a href="#Completeness">Completeness</a></td>
+  </tr>
+  <tr>
+    <td><a href="#Free-text">Free text</a></td>
+  </tr>
+  <tr>
+    <td>Multiple columns within a model</td>
+    <td><a href="#Combinations-of-values">Combinations of values</a></td>
+  </tr>
+  <tr>
+    <td>Relationships between models</td>
+    <td><a href="#Testing-relationships">Relationships</a></td>
+  </tr>
+</table>
 
 ## Testing a single column
+
 ### Nullability
 
 ### Uniqueness
@@ -46,9 +67,9 @@ Avoid revealing PII
 
 ## Testing multiple columns within a model
 
-### Combinations of values in a single model
+### Combinations of values
 
-### Relationships
+## Testing relationships
 
 ## Testing columns across models
 
