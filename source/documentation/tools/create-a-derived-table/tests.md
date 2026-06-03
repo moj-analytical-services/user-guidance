@@ -177,7 +177,9 @@ It is not always possible, or desirable, to execute every possible type of test 
 
 ### Testing types by layer
 
-The different **dbt** layers have different purposes, and carry out different types of data transformation.  This means that different types of testing are more appropriate to some layers than others.  The following table aims to summarise whether the different types of testing are suitable for use in the different layers.  **Note: This is not definitive, and should be used only as a starting point for planning testing.**
+The different **dbt** layers have different purposes, and carry out different types of data transformation.  This means that different types of testing are more appropriate to some layers than others.  The following table aims to summarise whether the different types of testing are suitable for use in the different layers.
+
+**Note: This is not definitive or prescriptive, and should be used only as a starting point for planning testing.**
 
 | Scope of testing | Type of test | Staging | Intermediate | Datamart | Notes |
 |:-----------------|:-------------|:--------|:-------------|:---------|:------|
