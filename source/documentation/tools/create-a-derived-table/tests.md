@@ -5,6 +5,7 @@
 - [Introduction](#Introduction)
 - [Types of testing](#Types-of-testing)
 - [Use cases](#Use-cases)
+- [Testing resources and standards](#Testing-resources-and-standards)
 
 ## Introduction
 
@@ -20,17 +21,18 @@
 |              | [Combinations of values](#Combinations-of-values) | When **col_a** is null, **col_b** must be not null. |
 |              | [Completeness](#Completeness) | Maximum 1% of rows in a column are null. |
 |              | [Free text](#Free-text) | Identify free text columns, which might accidentally expose personally identifiable information. |
+|              | [Row count](#Row-count) | Row count should not be zero. |
+|              | [Data freshness](#Data-freshness) | Data should have been updated within the last 7 days. |
+| Macros       | tbc | tbc |
 | Multiple models | [Relationships](#Relationships) | **Foreign key** in **model_a** should be present at least once in **primary_key** in **model_b**. |
 |                 | [Custom dbt tests](#Custom-dbt-tests) | When **column_1** in **model_a** = "ABC", **column_3** in **model_b** must be > 0. |
+|                 | [Row counts](#Row-counts) | Row counts of two models should match. |
 | Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | Regression testing, to check that the data in development is the same as the production data. |
-| Performance testing | [SQL performance tuning](#SQL-performance-tuning) | Assess improvements to build time of changing SQL. |
-|                     | [Data chunking](#Data-chunking) | Assess improvements to build time of materialising models using chunking. |
+| Non-functional testing | [Performance testing](#Performance-testing) | Compare before and after build times, when performance tuning SQL or using data chunking, where data volumes may prevent timely delivery of data. |
 
 ## Testing a single model
 
 ### Nullability
-
-
 
 ### Uniqueness
 
@@ -40,19 +42,21 @@
 
 ### Accepted values
 
+Range 
 List
+Dictionary
 
-Range
+### Combinations of values
 
 ### Completeness
 
-% or absolute
-
 ### Free text
 
-Avoid revealing PII
+### Row count
 
-### Combinations of values
+### Data freshness
+
+## Testing macros
 
 ## Testing multiple models
 
@@ -60,17 +64,17 @@ Avoid revealing PII
 
 ### Custom dbt tests
 
-## Data reconciliation
+### Row counts
 
-### dbt audit helper
+## Data reconciliation 
 
-## Performance testing
+### dbt audit_helper
 
-### SQL performance tuning
+## Non-functional testing
 
+### Performance testing
 
-
-
+## Testing resources and standards
 
 
 # Original content --------------------------------------------------------------------
