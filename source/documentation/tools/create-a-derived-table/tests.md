@@ -41,7 +41,6 @@ The testing materials in this page are split into three main sections:
 
 - [Types of testing](#Types-of-testing) - This section provides information on the types of testing tools or strategies available (e.g. checking nullability and uniqueness).  It may be useful to developers wishing to gain an understanding of the types of testing that are available, or to understand how to use a specific type of test.
 - [Testing strategies](#Testing-strategies) - This section aims to provide information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing are appropriate.
-- A guide to some of the types of testing that are applicable in certain scenarios, such as adding a single model to a datamarts layer, or creating a new macro.
 - [Testing resources and standards](#Testing-resources-and-standards) - links to **dbt** testing resources, and wider information on testing techniques and standards.
 
 ## Types of testing
@@ -169,6 +168,26 @@ The type of testing performed depends on a number of factors, including:
 - The cope of the testing.  A single new model might require different testing to a new macro, or an entire new project.
 - Whether new code is being created, or existing code modified.
 - The volume of the data to be processed.
+
+| Scope of testing | Type of test | Suitability |
+|:-----------------|:-------------|:--------------|
+| Single model | [Nullability](#Nullability) |  |
+|              | [Uniqueness](#Uniqueness) |  |
+|              | [Data type](#Data-type) |  |
+|              | [Data format](#Data-format) |  |
+|              | [Accepted values](#Accepted-values) |  |
+|              | [Combinations of values](#Combinations-of-values) |  |
+|              | [Completeness](#Completeness) |  |
+|              | [Free text](#Free-text) |  |
+|              | [Row count](#Row-count) |  |
+|              | [Data freshness](#Data-freshness) |  |
+| Multiple models | [Relationships](#Relationships) |  |
+|                 | [Custom dbt tests](#Custom-dbt-tests) |  |
+|                 | [Row counts](#Row-counts) |  |
+| Macros       | [Unit tests](#Unit-tests) | tbc |
+| Data reconciliation | [dbt audit_helper](#dbt-audit_helper) |  |
+| Non-functional testing | [Performance testing](#Performance-testing) | Should be considered for any model that will have to be modified (e.g. through SQL tuning or chunking) because it has a long build time. |
+
 
 To help developers decide which types of testing to use in different scenarios, a number of different use cases are outlined below.  These are not prescriptive lists of testing that must be carried out - there will always be differences between domains and projects that make this difficult - but rather a list of options that should be considered for inclusion.
 
