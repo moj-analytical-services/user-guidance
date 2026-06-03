@@ -14,6 +14,20 @@
 - Tracking errors over time
 - Custom tests using data dictionaries (ask Quin)
 - Model contracts - schema consistency
+- Investigate [this](https://github.com/dbt-labs/dbt-utils#generic-tests)
+- Investigate [this](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/people/grievance_conduct_and_performance_diagnostic/entity_diagnostics)
+- Investigate [this](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/people/grievance_conduct_and_performance_diagnostic/entity_diagnostics) and [this](https://github.com/moj-analytical-services/create-a-derived-table/blob/main/corporate_property_cafm_data_migration_tables/macros/generic/property/tests/cafm_data_dictionary_mappings.sql)
+- Investigate [this](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/staging/stg_corporate_epm/source_integration)
+- [dbt contracts](https://docs.getdbt.com/reference/resource-configs/contract?version=1.10)
+- Example of unit testing before dbt unit testing was a thing: [here](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/tests/transform_table/unit/models/join_scd2)
+- Diagnostic database used in people: [here](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/people/people_diagnostics)
+- (Neil) dbt_utils.unpivot to quickly calculate % missingness in dimension attributes: [here](https://github.com/moj-analytical-services/create-a-derived-table/commit/768516e66509c66d540895714a56173c080a930f)
+- Unit test for SCD2 macro: [here](https://github.com/moj-analytical-services/create-a-derived-table/tree/main/mojap_derived_tables/models/people/people_diagnostics/macro_unit_testing)
+- store test results used for seperate project "https://github.com/moj-analytical-services/create-a-derived-table/blob/main/hmpps_electronic_monitoring_data_tables/macros/utils/store_all_test_results.sql" which requires "store_test_results = "a_table_name_here" in model definition
+- exclude unit tests from running during every build command - https://github.com/moj-analytical-services/create-a-derived-table/blob/main/.github/workflows/data-hub-template-workflow.yml#L245C11-L246C46
+- ... then we have a standalone unit test step which only runs in dev - https://github.com/moj-analytical-services/create-a-derived-table/blob/main/.github/workflows/data-hub-template-workflow.yml#L211-L215
+- Accepted values check to check source when column is pipe delemited/multiple values - https://github.com/moj-analytical-services/create-a-derived-table/blob/main/mojap_derived_tables/tests/generic/corporate/accepted_pipe_delimited_values.sql 
+
 
 ## Introduction
 
@@ -79,8 +93,6 @@ models:
       - name: case_id
         data_tests:
           - not_null
-              config:
-                severity: warn
 ```
 
 ### Uniqueness
