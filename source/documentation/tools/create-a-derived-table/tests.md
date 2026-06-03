@@ -10,69 +10,21 @@
 
 ## Types of testing
 
-<table>
-  <tr>
-    <th align="left">Scope of testing</th>
-    <th align="left">Type of test</th>
-    <th align="left">Example usage</th>
-  </tr>
-  <tr>
-    <td rowspan="8">Single model</td>
-    <td><a href="#Nullability">Nullability</a></td>
-    <td><strong>Primary key</strong> column is not nullable.</td>
-  </tr>
-  <tr>
-    <td><a href="#Uniqueness">Uniqueness</a></td>
-    <td><strong>Primary key</strong> column should contain only unique values.</td>
-  </tr>
-  <tr>
-    <td><a href="#Data-type">Data type</a></td>
-    <td>Dates should have a data type of <strong>date</strong>, not a <strong>varchar</strong>.</td>
-  </tr>
-  <tr>
-    <td><a href="#Data-format">Data format</a></td>
-    <td>Dates should be formatted <strong>ccyy-mm-dd</strong>.</td>
-  </tr>
-  <tr>
-    <td><a href="#Accepted-values">Accepted values</a></td>
-    <td>Years should be in the range 2016-2026.</td>
-  </tr>
-  <tr>
-    <td><a href="#Combinations-of-values">Combinations of values</a></td>
-    <td>When <strong>col_a</strong> is null, <strong>col_b</strong> must not be null.</td>
-  </tr>
-  <tr>
-    <td><a href="#Completeness">Completeness</a></td>
-    <td>Maximum 1% of rows are null.</td>
-  </tr>
-  <tr>
-    <td><a href="#Free-text">Free text</a></td>
-    <td>Identify free text columns, which might accidentally expose personally identifiable information.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Multiple models</td>
-    <td><a href="#Testing-relationships">Relationships</a></td>
-    <td><strong>Foreign key</strong> column to <strong>table_a</strong> should be present at least once in the <strong>primary key</strong> column in <strong>table_b</strong>.</td>
-  </tr>
-  <tr>
-    <td><a href="#Custom-dbt-tests">Custom dbt tests</a></td>
-    <td>When <strong>column_1</strong> in <strong>model_a</strong> = "ABC", <strong>column_3</strong> in <strong>model_b</strong> must be >= 1.</td>
-  </tr>
-  <tr>
-    <td>Data reconciliation</td>
-    <td><a href="#dbt-audit_helper">dbt audit_helper</a></td>
-    <td>Regression testing, to check that the data in development is the same as the production data.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Performance testing</td>
-    <td><a href="#SQL-performance-tuning">SQL performance tuning</a></td>
-    <td>Establish baseline time to build model(s), and assess impact of changes to SQL.</td>
-  </tr>
-  <tr>
-    <td><a href="#Data chunking">Data chunking</a></td>
-    <td>Establish baseline time to build model(s), and assess impact of materialising using chunking.</td>
-  </tr>
-</table>
+| Scope of testing | Type of test | Example usage |
+|:-----------------|:-------------|:--------------|
+| Single model | [Nullability](#Nullability) | **Primary key** column is not nullable. |
+|              | [Uniqueness](#Uniqueness) | **Primary key** column should contain only unique values. |
+|              | [Data type](#Data-type) | A year should have a data type of **integer**, not **varchar**. |
+|              | [Data format](#Data-format) | Dates should be formatted **ccyy-mm-dd**. |
+|              | [Accepted values](#Accepted-values) | Years should be in the range 2016-2026. |
+|              | [Combinations of values](#Combinations-of-values) | When **col_a** is null, **col_b** must be not null. |
+|              | [Completeness](#Completeness) | Maximum 1% of rows in a column are null. |
+|              | [Free text](#Free-text) | Identify free text columns, which might accidentally expose personally identifiable information. |
+| Multiple models | [Relationships](#Relationships) | **Foreign key** in **model_a** should be present at least once in **primary_key** in **model_b**. |
+|                 | [Custom dbt tests](#Custom-dbt-tests) | When **column_1** in **model_a** = "ABC", **column_3** in **model_b** must be > 0. |
+| Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | Regression testing, to check that the data in development is the same as the production data. |
+| Performance testing | [SQL performance tuning](#SQL-performance-tuning) | Assess improvements to build time of changing SQL. |
+|                     | [Data chunking](#Data-chunking) | Assess improvements to build time of materialising models using chunking. |
 
 ## Testing a single model
 
