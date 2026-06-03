@@ -88,7 +88,7 @@ The table below provides a summary of the different types of testing that can be
 
 **Athena compatible:** Yes
 
-**Executed by:** Running a `dbt build` or `dbt test` command.  Executed by **dbt** as an SQL query after the model is materialised.
+**Executed by:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
 
 **On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
 
@@ -115,7 +115,7 @@ models:
 
 **Athena compatible:** Yes
 
-**Executed by:** Running a `dbt build` or `dbt test` command.  Executed by **dbt** as an SQL query after the model is materialised.
+**Executed by:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
 
 **On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
 
