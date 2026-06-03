@@ -1,5 +1,11 @@
 # Testing
 
+## Table of Contents
+
+- [Introduction](#Introduction)
+- [Types of testing](#Types-of-testing)
+- [Use cases](#Use-cases)
+
 ## Introduction
 
 ## Types of testing
@@ -52,11 +58,27 @@
     <td><a href="#Custom-dbt-tests">Custom dbt tests</a></td>
     <td>When <strong>column_1</strong> in <strong>model_a</strong> = "ABC", <strong>column_3</strong> in <strong>model_b</strong> must be >= 1.</td>
   </tr>
+  <tr>
+    <td>Data reconciliation</td>
+    <td><a href="#dbt-audit_helper">dbt audit_helper</a></td>
+    <td>Regression testing, to check that the data in development is the same as the production data.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Performance testing</td>
+    <td><a href="#SQL-performance-tuning">SQL performance tuning</a></td>
+    <td>Establish baseline time to build model(s), and assess impact of changes to SQL.</td>
+  </tr>
+  <tr>
+    <td><a href="#Data chunking">Data chunking</a></td>
+    <td>Establish baseline time to build model(s), and assess impact of materialising using chunking.</td>
+  </tr>
 </table>
 
 ## Testing a single model
 
 ### Nullability
+
+
 
 ### Uniqueness
 
@@ -86,6 +108,13 @@ Avoid revealing PII
 
 ### Custom dbt tests
 
+## Data reconciliation
+
+### dbt audit helper
+
+## Performance testing
+
+### SQL performance tuning
 
 
 
