@@ -15,13 +15,21 @@ Most testing is functional, i.e. it aims to test whether the code is meeting req
 
 Some testing is non-functional, i.e. it aims to test whether the code is working well.  Non-functional testing includes things such as testing that dbt model builds complete within a certain time period, or that unauthorised users cannot access sensitive data.  Much of the non-functional testing within **Create a Derived Table** is handled by Data Engineers, but performance testing is something that Analytics Engineers should be aware of.  (Long-running models may need changes to their SQL to reduce the build time, and large volumes of data may need to use chunking.)
 
-The testing materials in this page are split into two main sections:
+The testing materials in this page are split into three main sections:
 
 - [Types of testing](#Types-of-testing) - a summary of the types of testing tools or strategies available.
 - [Use cases](#Use-cases) - a guide to some of the types of testing that are applicable in certain scenarios, such as adding a single model to a datamarts layer, or creating a new macro.
+- [Testing resources and standards](#Testing-resources-and-standards) - links to **dbt** testing resources, and wider information on testing techniques and standards.
 
 ## Types of testing
 
+The table below provides a summary of the different types of testing that can be considered.  They are split according to their scope:
+
+- **Single model** - Testing the data within a single **dbt** model.
+- **Multiple models** - Testing data across multiple **dbt** models, including relationships.
+- **Macros** - Specific techniques for testing **dbt** macros.
+- **Data reconciliation** - Testing for differences in data across models.
+- **Non-functional testing** - Testing non-functional aspects of **dbt** models, especially performance.
 
 | Scope of testing | Type of test | Example usage |
 |:-----------------|:-------------|:--------------|
@@ -35,10 +43,10 @@ The testing materials in this page are split into two main sections:
 |              | [Free text](#Free-text) | Identify free text columns, which might accidentally expose personally identifiable information. |
 |              | [Row count](#Row-count) | Row count should not be zero. |
 |              | [Data freshness](#Data-freshness) | Data should have been updated within the last 7 days. |
-| Macros       | tbc | tbc |
 | Multiple models | [Relationships](#Relationships) | **Foreign key** in **model_a** should be present at least once in **primary_key** in **model_b**. |
 |                 | [Custom dbt tests](#Custom-dbt-tests) | When **column_1** in **model_a** = "ABC", **column_3** in **model_b** must be > 0. |
 |                 | [Row counts](#Row-counts) | Row counts of two models should match. |
+| Macros       | tbc | tbc |
 | Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | Regression testing, to check that the data in development is the same as the production data. |
 | Non-functional testing | [Performance testing](#Performance-testing) | Where data volumes may prevent timely delivery of data, compare before and after build times to assess the impact of performance tuning the SQL or using data chunking. |
 
