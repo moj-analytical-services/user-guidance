@@ -41,11 +41,13 @@ Some testing is non-functional, i.e. it aims to test whether the code is working
 
 ### Purpose of this documentation
 
-All domains and projects are different, so this guidance is not intended to be definitive or prescriptive.  It is intended to improve awareness of the types of testing available, and to act as a starting point when deciding which testing is appropriate in a specific instance.  The guidance is split into three main sections:
+All domains and projects are different, so this guidance is not intended to be definitive or prescriptive.  It is intended to improve awareness of the types of testing available, and to act as a starting point when deciding which testing is appropriate in a specific instance.
 
-- [Types of testing](#Types-of-testing) - This section provides information on the types of testing available (e.g. checking nullability and uniqueness).  It may be useful to developers wishing to gain an understanding of the types of testing that are available, or to understand how to use a specific type of test.
-- [Testing strategies](#Testing-strategies) - This section aims to provide information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model, or testing a staging model versus an intermediate model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing might be appropriate.
-- [Testing resources and standards](#Testing-resources-and-standards) - links to **dbt** testing resources, and wider information on testing techniques and standards.
+The guidance is split into three main sections:
+
+- [Types of testing](#Types-of-testing) - Provides information on the types of testing available (e.g. checking nullability and uniqueness).  It may be useful to developers wishing to gain an understanding of the types of testing that are available, or to understand how to use a specific type of test.
+- [Testing strategies](#Testing-strategies) - Provides information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model, or testing a staging model versus an intermediate model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing might be appropriate.
+- [Testing resources and standards](#Testing-resources-and-standards) - Contains links to **dbt** testing resources, and wider information on testing techniques and standards.
 
 ## Types of testing
 
