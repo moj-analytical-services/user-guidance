@@ -6,42 +6,55 @@
 
 <table>
   <tr>
-    <th>Scope of testing</th>
-    <th>Link to content</th>
+    <th align="left">Scope of testing</th>
+    <th align="left">Type of test</th>
+    <th align="left">Example usage</th>
   </tr>
   <tr>
-    <td rowspan="7">Single column within a model</td>
+    <td rowspan="8">Single model</td>
     <td><a href="#Nullability">Nullability</a></td>
+    <td><strong>Primary key</strong> column is not nullable.</td>
   </tr>
   <tr>
     <td><a href="#Uniqueness">Uniqueness</a></td>
+    <td><strong>Primary key</strong> column should contain only unique values.</td>
   </tr>
   <tr>
     <td><a href="#Data-type">Data type</a></td>
+    <td>Dates should have a data type of <strong>date</strong>, not a <strong>varchar</strong>.</td>
   </tr>
   <tr>
     <td><a href="#Data-format">Data format</a></td>
+    <td>Dates should be formatted <strong>ccyy-mm-dd</strong>.</td>
   </tr>
   <tr>
     <td><a href="#Accepted-values">Accepted values</a></td>
+    <td>Years should be in the range 2016-2026.</td>
+  </tr>
+  <tr>
+    <td><a href="#Combinations-of-values">Combinations of values</a></td>
+    <td>When <strong>col_a</strong> is null, <strong>col_b</strong> must not be null.</td>
   </tr>
   <tr>
     <td><a href="#Completeness">Completeness</a></td>
+    <td>Maximum 1% of rows are null.</td>
   </tr>
   <tr>
     <td><a href="#Free-text">Free text</a></td>
+    <td>Identify free text columns, which might accidentally expose personally identifiable information.</td>
   </tr>
   <tr>
-    <td>Multiple columns within a model</td>
-    <td><a href="#Combinations-of-values">Combinations of values</a></td>
-  </tr>
-  <tr>
-    <td>Relationships between models</td>
+    <td rowspan="2">Multiple models</td>
     <td><a href="#Testing-relationships">Relationships</a></td>
+    <td><strong>Foreign key</strong> column to <strong>table_a</strong> should be present at least once in the <strong>primary key</strong> column in <strong>table_b</strong>.</td>
+  </tr>
+  <tr>
+    <td><a href="#Custom-dbt-tests">Custom dbt tests</a></td>
+    <td>When <strong>column_1</strong> in <strong>model_a</strong> = "ABC", <strong>column_3</strong> in <strong>model_b</strong> must be >= 1.</td>
   </tr>
 </table>
 
-## Testing a single column
+## Testing a single model
 
 ### Nullability
 
@@ -65,13 +78,13 @@ Range
 
 Avoid revealing PII
 
-## Testing multiple columns within a model
-
 ### Combinations of values
 
-## Testing relationships
+## Testing multiple models
 
-## Testing columns across models
+### Relationships
+
+### Custom dbt tests
 
 
 
