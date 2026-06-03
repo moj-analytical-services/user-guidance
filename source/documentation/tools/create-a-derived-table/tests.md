@@ -41,7 +41,7 @@ Some testing is non-functional, i.e. it aims to test whether the code is working
 
 ### Purpose of this documentation
 
-All domains and projects are different, so this guidance is not intended to be definitive or prescriptive.  It is intended to improve awareness of the types of testing available, and to act as a starting point when deciding which testing is appropriate in a specific instance.
+All domains and projects are different, so this guidance is **not** intended to be definitive or prescriptive.  It is intended to improve awareness of the types of testing available, and to act as a starting point when deciding which testing is appropriate in a specific instance.
 
 The guidance is split into three main sections:
 
