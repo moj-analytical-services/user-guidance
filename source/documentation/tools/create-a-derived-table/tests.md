@@ -9,7 +9,19 @@
 
 ## Introduction
 
+Testing is a fundamental part of Analytics Engineering.  It provides confidence that data models, transformations, and metrics are accurate, reliable, and fit for purpose.  By validating business logic, data quality, and relationships between datasets, testing helps detect errors early, prevents regressions when code changes are made, and ensures consistency across environments and downstream reporting.  Effective testing reduces the risk of incorrect insights driving decisions, improves trust in data products, and enables teams to develop and deploy changes more quickly and safely.
+
+Most testing is functional, i.e. it aims to test whether the code is meeting requirements, and transforming the data as expected.  Functional testing focuses on inputs and outputs, and expected behaviour.  Functional testing includes things such as testing that a primary key column does not contain nulls, or testing that a percentage value is always between 0 and 100.
+
+Some testing is non-functional, i.e. it aims to test whether the code is working well.  Non-functional testing includes things such as testing that dbt model builds complete within a certain time period, or that unauthorised users cannot access sensitive data.  Much of the non-functional testing within **Create a Derived Table** is handled by Data Engineers, but performance testing is something that Analytics Engineers should be aware of.  (Long-running models may need changes to their SQL to reduce the build time, and large volumes of data may need to use chunking.)
+
+The testing materials in this page are split into two main sections:
+
+- [Types of testing](#Types-of-testing) - a summary of the types of testing tools or strategies available.
+- [Use cases](#Use-cases) - a guide to some of the types of testing that are applicable in certain scenarios, such as adding a single model to a datamarts layer, or creating a new macro.
+
 ## Types of testing
+
 
 | Scope of testing | Type of test | Example usage |
 |:-----------------|:-------------|:--------------|
@@ -28,7 +40,7 @@
 |                 | [Custom dbt tests](#Custom-dbt-tests) | When **column_1** in **model_a** = "ABC", **column_3** in **model_b** must be > 0. |
 |                 | [Row counts](#Row-counts) | Row counts of two models should match. |
 | Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | Regression testing, to check that the data in development is the same as the production data. |
-| Non-functional testing | [Performance testing](#Performance-testing) | Compare before and after build times, when performance tuning SQL or using data chunking, where data volumes may prevent timely delivery of data. |
+| Non-functional testing | [Performance testing](#Performance-testing) | Where data volumes may prevent timely delivery of data, compare before and after build times to assess the impact of performance tuning the SQL or using data chunking. |
 
 ## Testing a single model
 
