@@ -4,7 +4,7 @@
 
 - [Introduction](#Introduction)
 - [Types of testing](#Types-of-testing)
-- [Use cases](#Use-cases)
+- [Testing strategies](#Testing-strategies)
 - [Testing resources and standards](#Testing-resources-and-standards)
 - [Out of scope](#Out-of-scope)
 
@@ -78,6 +78,10 @@ The table below provides a summary of the different types of testing that can be
 
 **Tools:** Generic **dbt** data test.
 
+**Database support:** Supported by all databases that **dbt** supports.
+
+**Athena compatible:** Yes
+
 **Executed by:** Running a `dbt build` or `dbt test` command.  Executed by **dbt** as an SQL query after the model is materialised.
 
 **On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
@@ -100,6 +104,10 @@ models:
 **Test:** A column does not contain duplicate values.  (Nulls are ignored.)
 
 **Tools:** Generic **dbt** data test.
+
+**Database support:** Supported by all databases that **dbt** supports.
+
+**Athena compatible:** Yes
 
 **Executed by:** Running a `dbt build` or `dbt test` command.  Executed by **dbt** as an SQL query after the model is materialised.
 
@@ -150,7 +158,24 @@ Dictionary
 
 ### Performance testing
 
-## Use cases
+## Testing strategies
+
+### Different testing approaches
+
+The type of testing performed depends on a number of factors, including:
+
+- The layer that a model belongs to.  Different testing might be appropriate in staging compared to intermediate.
+- The cope of the testing.  A single new model might require different testing to a new macro, or an entire new project.
+- Whether new code is being created, or existing code modified.
+- The volume of the data to be processed.
+
+To help developers decide which types of testing to use in different scenarios, a number of different use cases are outlined below.  These are not prescriptive lists of testing that must be carried out - there will always be differences between domains and projects that make this difficult - but rather a list of options that should be considered for inclusion.
+
+### Use cases
+
+Staging	- Clean and standardise source data	- not_null, unique, accepted_values, source freshness, basic relationships
+Intermediate - Apply joins, filters, calculations, deduplication, business rules - Custom singular tests, row-count checks, reconciliation checks, relationship tests, logic/unit tests
+Datamart / marts - Produce final business-facing facts, dimensions, reports, metrics - Primary key tests, metric validation, referential integrity, accepted values, regression/parity tests
 
 ### Creating a staging model
 
