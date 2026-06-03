@@ -6,6 +6,14 @@
 - [Types of testing](#Types-of-testing)
 - [Use cases](#Use-cases)
 - [Testing resources and standards](#Testing-resources-and-standards)
+- [Out of scope](#Out-of-scope)
+
+**Look at adding:**
+
+- Error reporting / dashboard; thresholds
+- Tracking errors over time
+- Custom tests using data dictionaries (ask Quin)
+- Model contracts - schema consistency
 
 ## Introduction
 
@@ -35,26 +43,70 @@ The table below provides a summary of the different types of testing that can be
 |:-----------------|:-------------|:--------------|
 | Single model | [Nullability](#Nullability) | **Primary key** column is not nullable. |
 |              | [Uniqueness](#Uniqueness) | **Primary key** column should contain only unique values. |
-|              | [Data type](#Data-type) | A year should have a data type of **integer**, not **varchar**. |
-|              | [Data format](#Data-format) | Dates should be formatted **ccyy-mm-dd**. |
+|              | [Data type](#Data-type) | A year should have a data type of `integer`, not `varchar`. |
+|              | [Data format](#Data-format) | Dates should be formatted `ccyy-mm-dd`. |
 |              | [Accepted values](#Accepted-values) | Years should be in the range 2016-2026. |
-|              | [Combinations of values](#Combinations-of-values) | When **col_a** is null, **col_b** must be not null. |
+|              | [Combinations of values](#Combinations-of-values) | When `col_a` is null, `col_b` must be not null. |
 |              | [Completeness](#Completeness) | Maximum 1% of rows in a column are null. |
 |              | [Free text](#Free-text) | Identify free text columns, which might accidentally expose personally identifiable information. |
 |              | [Row count](#Row-count) | Row count should not be zero. |
 |              | [Data freshness](#Data-freshness) | Data should have been updated within the last 7 days. |
-| Multiple models | [Relationships](#Relationships) | **Foreign key** in **model_a** should be present at least once in **primary_key** in **model_b**. |
-|                 | [Custom dbt tests](#Custom-dbt-tests) | When **column_1** in **model_a** = "ABC", **column_3** in **model_b** must be > 0. |
+| Multiple models | [Relationships](#Relationships) | **Foreign key** in `model_a` should be present at least once in **primary_key** in `model_b`. |
+|                 | [Custom dbt tests](#Custom-dbt-tests) | When `model_a.column_1` = "ABC", `model_b.column_3` must be > 0. |
 |                 | [Row counts](#Row-counts) | Row counts of two models should match. |
-| Macros       | tbc | tbc |
+| Macros       | [Unit tests](#Unit-tests) | tbc |
 | Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | Regression testing, to check that the data in development is the same as the production data. |
 | Non-functional testing | [Performance testing](#Performance-testing) | Where data volumes may prevent timely delivery of data, compare before and after build times to assess the impact of performance tuning the SQL or using data chunking. |
 
-## Testing a single model
-
 ### Nullability
 
+**Test:** A column does not contain nulls.
+
+**Tools:** Generic **dbt** data test.
+
+**Executed by:** Running a `dbt build` or `dbt test` command.  Executed by **dbt** as an SQL query after the model is materialised.
+
+**On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
+
+**Setup:**  The test is specified in the model details in the `schema.yml` file.  
+
+**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any nulls.  If any nulls are present, the model will be materialised, but the build will error.
+
+```
+models:
+  - name: cases
+    columns:
+      - name: case_id
+        data_tests:
+          - not_null
+              config:
+                severity: warn
+```
+
 ### Uniqueness
+
+**Test:** A column does not contain duplicate values.  (Nulls are ignored.)
+
+**Tools:** Generic **dbt** data test.
+
+**Executed by:** Running a `dbt build` or `dbt test` command.  Executed by **dbt** as an SQL query after the model is materialised.
+
+**On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
+
+**Setup:**  The test is specified in the model details in the `schema.yml` file.  
+
+**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any duplicates.  If any duplicates are present, the model will be materialised, the build will not error, and any downstream models will be built.
+
+```
+models:
+  - name: cases
+    columns:
+      - name: case_id
+        data_tests:
+          - unique
+              config:
+                severity: warn
+```
 
 ### Data type
 
@@ -76,26 +128,52 @@ Dictionary
 
 ### Data freshness
 
-## Testing macros
-
-## Testing multiple models
-
 ### Relationships
 
 ### Custom dbt tests
 
 ### Row counts
 
-## Data reconciliation 
-
 ### dbt audit_helper
-
-## Non-functional testing
 
 ### Performance testing
 
+## Use cases
+
+### Creating a staging model
+
+### Creating an intermediate model
+
+### Creating a datamarts model
+
+### Creating a macro
+
+### Updating a model
+
 ## Testing resources and standards
 
+### dbt documentation
+
+**dbt labs** provide reference material on testing:
+
+- [Testing overview](https://docs.getdbt.com/docs/build/data-tests?version=2.0&name=Fusion)
+- [The **data_tests** property](https://docs.getdbt.com/reference/resource-properties/data-tests?version=2.0&name=Fusion), which is used for the 4 built-in data tests (unique, not null, relationships and accepted values).
+- [Custom data tests][custom tests](https://docs.getdbt.com/best-practices/writing-custom-generic-tests?version=2.0&name=Fusion) (defined using SQL).
+- [The **dbt_utils** package](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/).
+- [Freshness](https://docs.getdbt.com/reference/resource-properties/freshness?version=2.0&name=Fusion)
+
+### Other resources
+
+[dbt Tests Hub](https://www.elementary-data.com/dbt-test-hub) - a website aimed at helping **dbt** developers identify suitable testing tools.
+
+## Out of scope
+
+Some types of testing are outside the scope of this document.  These are listed below, along with the reason for their exclusion.
+
+- **dbt constraints** - These are not compatible with Athena.
+
+<br>
+<br>
 
 # Original content --------------------------------------------------------------------
 
