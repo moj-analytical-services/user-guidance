@@ -39,8 +39,9 @@ Some testing is non-functional, i.e. it aims to test whether the code is working
 
 The testing materials in this page are split into three main sections:
 
-- [Types of testing](#Types-of-testing) - a summary of the types of testing tools or strategies available.
-- [Use cases](#Use-cases) - a guide to some of the types of testing that are applicable in certain scenarios, such as adding a single model to a datamarts layer, or creating a new macro.
+- [Types of testing](#Types-of-testing) - This section provides information on the types of testing tools or strategies available (e.g. checking nullability and uniqueness).  It may be useful to developers wishing to gain an understanding of the types of testing that are available, or to understand how to use a specific type of test.
+- [Testing strategies](#Testing-strategies) - This section aims to provide information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing are appropriate.
+- A guide to some of the types of testing that are applicable in certain scenarios, such as adding a single model to a datamarts layer, or creating a new macro.
 - [Testing resources and standards](#Testing-resources-and-standards) - links to **dbt** testing resources, and wider information on testing techniques and standards.
 
 ## Types of testing
@@ -185,7 +186,26 @@ Datamart / marts - Produce final business-facing facts, dimensions, reports, met
 
 ### Creating a macro
 
-### Updating a model
+### Adding a column to an existing model
+
+**Scenario:** A new column needs to be added to an existing model.  No other changes should be made to the model.  The values in all other columns should remain unchanged.
+
+**Testing to consider:**  
+Nullability - Consider whether the new column should be nullable.
+Uniqueness - Consider whether the new column should only contain unique values.
+Data type and data format - If the model is in the staging layer, consider testing the data type and format.
+Accepted values - If the model is in the staging layer, it is often appropriate to test for unexpected values.  This is especially if any data cleansing takes place in this layer.  For example, the expected values are 'Y' and 'N'.  Values of 'y', 'yes' and 'Yes' are changed to 'Y', and values of 'n', 'no' and 'No' are changed to 'N' in this layer, so testing for the expected values would be appropriate.
+Combinations of values
+Completeness
+Free text
+Row count
+Data freshness
+Relationships
+Custom dbt tests
+Row counts
+Unit tests
+dbt audit_helper
+
 
 ## Testing resources and standards
 
