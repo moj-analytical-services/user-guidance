@@ -169,33 +169,32 @@ The type of testing performed depends on a number of factors, including:
 - Whether new code is being created, or existing code modified.
 - The volume of the data to be processed.
 
-| Scope of testing | Type of test | Suitability |
-|:-----------------|:-------------|:--------------|
-| Single model | [Nullability](#Nullability) |  |
-|              | [Uniqueness](#Uniqueness) |  |
-|              | [Data type](#Data-type) |  |
-|              | [Data format](#Data-format) |  |
-|              | [Accepted values](#Accepted-values) |  |
-|              | [Combinations of values](#Combinations-of-values) |  |
-|              | [Completeness](#Completeness) |  |
-|              | [Free text](#Free-text) |  |
-|              | [Row count](#Row-count) |  |
-|              | [Data freshness](#Data-freshness) |  |
-| Multiple models | [Relationships](#Relationships) |  |
-|                 | [Custom dbt tests](#Custom-dbt-tests) |  |
-|                 | [Row counts](#Row-counts) |  |
-| Macros       | [Unit tests](#Unit-tests) | tbc |
-| Data reconciliation | [dbt audit_helper](#dbt-audit_helper) |  |
-| Non-functional testing | [Performance testing](#Performance-testing) | Should be considered for any model that will have to be modified (e.g. through SQL tuning or chunking) because it has a long build time. |
+### Testing types by layer
 
+The different **dbt** layers have different purposes, and carry out different types of data transformation.  This means that different types of testing are more appropriate to some layers than others.  The following table aims to summarise whether the different types of testing are suitable for use in the different layers.  **Note: This is not definitive, and should be used only as a starting point for planning testing.**
 
-To help developers decide which types of testing to use in different scenarios, a number of different use cases are outlined below.  These are not prescriptive lists of testing that must be carried out - there will always be differences between domains and projects that make this difficult - but rather a list of options that should be considered for inclusion.
+| Scope of testing | Type of test | Staging | Intermediate | Datamart | Notes |
+|:-----------------|:-------------|:--------|:-------------|:---------|:------|
+| Single model | [Nullability](#Nullability) | 🟡 consider | 🟡 consider | 🟢 recommended | |
+|              | [Uniqueness](#Uniqueness) | 🟡 consider| 🟡 consider | 🟢 recommended | |
+|              | [Data type](#Data-type) | 🟢 recommended | 🔴 less recommended | 🔴 less recommended | |
+|              | [Data format](#Data-format) | 🟢 recommended | 🔴 less recommended | 🔴 less recommended |  |
+|              | [Accepted values](#Accepted-values) | 🟢 recommended | 🟡 consider | 🟡 consider |  |
+|              | [Combinations of values](#Combinations-of-values) | 🔴 less recommended | 🟡 consider | 🟡 consider |  |
+|              | [Completeness](#Completeness) | 🟢 recommended | 🟡 consider | 🟢 recommended |  |
+|              | [Free text](#Free-text) |  | | | |
+|              | [Row count](#Row-count) | 🟢 recommended | 🟢 recommended |  🟢 recommended | |
+|              | [Data freshness](#Data-freshness) |  🟢 recommended | 🔴 less recommended | 🟢 recommended | |
+| Multiple models | [Relationships](#Relationships) | 🟡 consider | 🔴 less recommended | 🟢 recommended | |
+|                 | [Custom dbt tests](#Custom-dbt-tests) | 🔴 less recommended | 🟡 consider | 🟡 consider | |
+|                 | [Row counts](#Row-counts) | 🟢 recommended | 🟢 recommended |  🟢 recommended | |
+| Macros       | [Unit tests](#Unit-tests) | tbc | | | | |
+| Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | 🟡 consider | 🟡 consider | 🟡 consider | |
+| Non-functional testing | [Performance testing](#Performance-testing) | 🟡 consider | 🟡 consider | 🟡 consider | Should be considered for any model that will have to be modified (e.g. through SQL tuning or chunking) due to a long build time or timing out. |
 
 ### Use cases
 
-Staging	- Clean and standardise source data	- not_null, unique, accepted_values, source freshness, basic relationships
-Intermediate - Apply joins, filters, calculations, deduplication, business rules - Custom singular tests, row-count checks, reconciliation checks, relationship tests, logic/unit tests
-Datamart / marts - Produce final business-facing facts, dimensions, reports, metrics - Primary key tests, metric validation, referential integrity, accepted values, regression/parity tests
+To help developers decide which types of testing to use in different scenarios, a number of different use cases are outlined below.  These are not prescriptive lists of testing that must be carried out - there will always be differences between domains and projects that make this difficult - but rather a list of options that should be considered for inclusion.
 
 ### Creating a staging model
 
