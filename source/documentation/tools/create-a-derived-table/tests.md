@@ -171,7 +171,7 @@ Dictionary
 It is not always possible, or desirable, to execute every possible type of test in all circumstances.  The suitability of different types of testing depends on a number of factors, including:
 
 - The layer that a model belongs to.  Different testing might be appropriate in staging compared to intermediate.
-- The cope of the testing.  A single new model might require different testing to a new macro, or an entire new project.
+- The scope of the testing.  A single new model might require different testing to a new macro, or an entire new project.
 - Whether new code is being created, or existing code modified.
 - The volume of the data to be processed.
 
