@@ -31,11 +31,15 @@
 
 ## Introduction
 
+### Why do we need testing?
+
 Testing is a fundamental part of Analytics Engineering.  It provides confidence that data models, transformations, and metrics are accurate, reliable, and fit for purpose.  By validating business logic, data quality, and relationships between datasets, testing helps detect errors early, prevents regressions when code changes are made, and ensures consistency across environments and downstream reporting.  Effective testing reduces the risk of incorrect insights driving decisions, improves trust in data products, and enables teams to develop and deploy changes more quickly and safely.
 
 Most testing is functional, i.e. it aims to test whether the code is meeting requirements, and transforming the data as expected.  Functional testing focuses on inputs and outputs, and expected behaviour.  Functional testing includes things such as testing that a primary key column does not contain nulls, or testing that a percentage value is always between 0 and 100.
 
 Some testing is non-functional, i.e. it aims to test whether the code is working well.  Non-functional testing includes things such as testing that **dbt** model builds complete within a certain time period, or that unauthorised users cannot access sensitive data.  Much of the non-functional testing within **Create a Derived Table** is handled by Data Engineers, but performance testing is something that Analytics Engineers should be aware of.  (Long-running models may need changes to their SQL to reduce the build time, and large volumes of data may need to use chunking.)
+
+### Purpose of this documentation
 
 All domains and projects are different, so this guidance is not intended to be definitive or prescriptive.  It is intended to improve awareness of the types of testing available, and to act as a starting point when deciding which testing is appropriate in a specific instance.  The guidance is split into three main sections:
 
