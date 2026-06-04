@@ -14,7 +14,6 @@
 
 <details>
 <summary>Types of testing</summary>
-<br>
 <ul>
     <li><a href="#Overview">Overview</a></li>
     <li><a href="#Nullability">Nullability</a></li>
@@ -38,7 +37,6 @@
 
 <details>
 <summary>Testing strategies</summary>
-<br>
 <ul>
     <li><a href="#Different-testing-approaches">Different testing approaches</a></li>
     <li><a href="#Testing-suitability-by-layer">Testing suitability by layer</a></li>
@@ -53,7 +51,6 @@
 
 <details>
 <summary>Testing resources and standards</summary>
-<br>
 <ul>
     <li><a href="#dbt-documentation">dbt documentation</a></li>
     <li><a href="#Other-resources">Other resources</a></li>
