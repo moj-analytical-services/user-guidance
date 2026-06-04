@@ -3,7 +3,26 @@
 ## Table of Contents
 
 - [Introduction](#Introduction)
-- [Types of testing](#Types-of-testing)
+    - [Purpose of testing](#Purpose-of-testing)
+    - [Types of testing](#Types-of-testing)
+    - [How to use this guide](#How-to-use-this-guide)
+- [Testing in Create a Derived Table](#Testing-in-Create-a-Derived-Table)
+    - [Nullability](#Nullability)
+    - [Uniqueness](#Uniqueness)
+    - [Data type](#Data-type)
+    - [Data format](#Data-format)
+    - [Accepted values](#Accepted-values)
+    - [Combinations of values](#Combinations-of-values)
+    - [Free text](#Free-text)
+    - [Completeness](#Completeness)
+    - [Row count (single table)](#Row-count)
+    - [Data freshness](#Data-freshness)
+    - [Relationships](#Relationships)
+    - [Custom dbt tests](#Custom-dbt-tests)
+    - [Row counts (across tables)](#Row-counts)
+    - [Unit tests](#Unit-tests)
+    - [dbt audit_helper](#dbt-audit_helper)
+    - [Performance testing](#Performance-testing)
 - [Testing strategies](#Testing-strategies)
 - [Testing resources and standards](#Testing-resources-and-standards)
 - [Out of scope](#Out-of-scope)
@@ -31,15 +50,17 @@
 
 ## Introduction
 
-### Why do we need testing?
+### Purpose of testing
 
 Testing is a fundamental part of Analytics Engineering.  It provides confidence that data models, transformations, and metrics are accurate, reliable, and fit for purpose.  By validating business logic, data quality, and relationships between datasets, testing helps detect errors early, prevents regressions when code changes are made, and ensures consistency across environments and downstream reporting.  Effective testing reduces the risk of incorrect insights driving decisions, improves trust in data products, and enables teams to develop and deploy changes more quickly and safely.
+
+### Types of testing
 
 Most testing is functional, i.e. it aims to test whether the code is meeting requirements, and transforming the data as expected.  Functional testing focuses on inputs and outputs, and expected behaviour.  Functional testing includes things such as testing that a primary key column does not contain nulls, or testing that a percentage value is always between 0 and 100.
 
 Some testing is non-functional, i.e. it aims to test whether the code is working well.  Non-functional testing includes things such as testing that **dbt** model builds complete within a certain time period, or that unauthorised users cannot access sensitive data.  Much of the non-functional testing within **Create a Derived Table** is handled by Data Engineers, but performance testing is something that Analytics Engineers should be aware of.  (Long-running models may need changes to their SQL to reduce the build time, and large volumes of data may need to use chunking.)
 
-### Purpose of this documentation
+### How to use this guide
 
 All domains and projects are different, so this guidance is **not** intended to be definitive or prescriptive.  It is intended to improve awareness of the types of testing available, and to act as a starting point when deciding which testing is appropriate in a specific instance.
 
@@ -49,9 +70,9 @@ The guidance is split into three main sections:
 - [Testing strategies](#Testing-strategies) - Provides information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model, or testing a staging model versus an intermediate model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing might be appropriate.
 - [Testing resources and standards](#Testing-resources-and-standards) - Contains links to **dbt** testing resources, and wider information on testing techniques and standards.
 
-## Types of testing
+## Testing in Create a Derived Table
 
-The table below provides a summary of the different types of testing that can be considered.  They are split according to their scope:
+The table below provides a summary of the different types of testing that are avilable.  They are split according to their scope:
 
 - **Single model** - Testing the data within a single **dbt** model.
 - **Multiple models** - Testing data across multiple **dbt** models, including relationships.
@@ -183,9 +204,9 @@ The different **dbt** layers have different purposes, and carry out different ty
 
 | Scope of testing | Type of test | Staging | Intermediate | Datamart | Notes |
 |:-----------------|:-------------|:-------:|:------------:|:--------:|:------|
-| Single model | [Nullability](#Nullability) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | Missing values will cause problems, so nullability should be checked whenever a column is not nullable.  **Note:** A column can legitimately be nullable in one layer and not nullable in another layer. |
+| Single model | [Nullability](#Nullability) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | Missing values will cause problems, so nullability should be checked whenever a column is mandatory.  **Note:** A column can legitimately be nullable in one layer and not nullable in another layer. |
 |              | [Uniqueness](#Uniqueness) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | Invalid duplicate rows will cause problems, so this should be checked in multiple places: staging (in line with the grain of the curated data); intermediate (where the grain might change); datamarts (where uniqueness of primary keys is vital for the dimensional model). |
-|              | [Data type](#Data-type) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider | If columns are cast to the required data type in the staging layer, this should be tested in that layer.  Data types should be tested downstream as required.  |
+|              | [Data type](#Data-type) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider | If columns are cast to the required data type in the staging layer, this should be tested in that layer.  Data types should be tested downstream as required, e.g. if a date is extracted from a timestamp.  |
 |              | [Data format](#Data-format) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider | If data formats are standardised in the staging layer, this should be tested in that layer.  Formats should be tested downstream as required, e.g. if a new column as added in intermediate layer. |
 |              | [Accepted values](#Accepted-values) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider |  |
 |              | [Combinations of values](#Combinations-of-values) | 🔴<br>less recommended | 🟡<br>consider | 🟡<br>consider |  |
@@ -212,26 +233,11 @@ To help developers decide which types of testing to use in different scenarios, 
 
 ### Creating a macro
 
-### Adding a column to an existing model
+### Adding a column to an existing dimensional model
 
-**Scenario:** A new column needs to be added to an existing model.  No other changes should be made to the model.  The values in all other columns should remain unchanged.
+**Scenario:** A new column needs to be added to an existing dimensional model.  The column is present in the curated data, so the **dbt** models in the staging, intermediate and datamarts layers all need to be updated to include this additional column.  All other columns should remain unchanged.
 
 **Testing to consider:**  
-Nullability - Consider whether the new column should be nullable.
-Uniqueness - Consider whether the new column should only contain unique values.
-Data type and data format - If the model is in the staging layer, consider testing the data type and format.
-Accepted values - If the model is in the staging layer, it is often appropriate to test for unexpected values.  This is especially if any data cleansing takes place in this layer.  For example, the expected values are 'Y' and 'N'.  Values of 'y', 'yes' and 'Yes' are changed to 'Y', and values of 'n', 'no' and 'No' are changed to 'N' in this layer, so testing for the expected values would be appropriate.
-Combinations of values
-Completeness
-Free text
-Row count
-Data freshness
-Relationships
-Custom dbt tests
-Row counts
-Unit tests
-dbt audit_helper
-
 
 ## Testing resources and standards
 
@@ -254,62 +260,3 @@ dbt audit_helper
 Some types of testing are outside the scope of this document.  These are listed below, along with the reason for their exclusion.
 
 - **dbt constraints** - These are not compatible with Athena.
-
-<br>
-<br>
-
-# Original content --------------------------------------------------------------------
-
-# Tests
-
-Tests are assertions you make about your models and other resources (e.g. sources, seeds and snapshots). You can do things like test whether a column contains nulls or only unique values, compare row counts between tables, or check all of the records in a child table have a corresponding record in a parent table. dbt ships with some [tests](https://docs.getdbt.com/reference/resource-properties/tests) you can use but there many more out there in packages like [dbt_utils](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/), so do checkout dbt's package hub for what's available.
-
-For more information on tests, see [dbt's tests documentation](https://docs.getdbt.com/docs/building-a-dbt-project/tests).
-
-## Available tests
-
-There is an ecosystem of packages containing helpful macros and tests you can use, see [dbt package hub](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/). If you need a package adding to the dbt project, update the [`packages.yml`](./mojap_derived_tables/packages.yml) file then rerun `dbt deps`.
-
-## Custom generic tests
-
-A test is really just a SQL query that returns rows that meet a certain criteria. If the number of returned rows is not zero, then the test fails. When you know that, you'll soon realise that it's not too difficult to write your own tests. Tests you write yourself are called custom generic tests and are writen in special macros; read the [dbt guidance on how to write custom generic tests](https://docs.getdbt.com/guides/legacy/writing-custom-generic-tests) to find out more. There are some requirements specific to Create a Derived Table that you must follow when writing custom generic tests. They must live subdirectory named after the team, project, or database they relate to in the [`./mojap_derived_tables/tests/generic/`](./mojap_derived_tables/tests/generic/) directory and should follow a naming convention where the subdirectory and test name are separated by double underscores, for example `team_name__test_name`. This is so that ownership of the test is clear and so that the filename is unique.
-
-```
-├── mojap_derived_tables
-  ├── dbt_project.yml
-  └── tests
-      └── generic
-          ├── prison_safety_and_security  # team name
-              ├── prison_safety_and_security__test_name.sql
-              ...
-          ├── other_project_name  # project name
-              ├── other_project_name__test_name.sql
-              ...
-          ├── other_database_name  # database name
-              ├── other_database_name__test_name.sql
-              ...
-          ...
-```
-
-## Singular tests
-
-Singular tests should not be used and they will not be run in the production environment.
-
-## Configuring tests
-
-Defining tests for your resources is done within the property file for that resource under the `tests` property. See the example below.
-
-```
-version: 2
-
-models:
-  - name: <model_a>
-    tests:
-      - dbt_utils.equal_rowcount:
-          compare_model: <model_b>
-    columns:
-      - name: <column_a>
-        tests:
-          - not_null
-          - dbt_utils.not_constant
-```
