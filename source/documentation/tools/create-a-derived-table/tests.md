@@ -13,24 +13,22 @@
 <ul>
     <li><a href="#Nullability">Nullability</a></li>
     <li><a href="#Uniqueness">Uniqueness</a></li>
+    <li><a href="#Data-type">Data type</a></li>
+    <li><a href="#Data-format">Data format</a></li>
+    <li><a href="#Accepted-values">Accepted values</a></li>
+    <li><a href="#Combinations-of-values">Combinations of values</a></li>
+    <li><a href="#Free-text">Free text</a></li>
+    <li><a href="#Completeness">Completeness</a></li>
+    <li><a href="#Row-count">Row count (single table)</a></li>
+    <li><a href="#Data-freshness">Data freshness</a></li>
+    <li><a href="#Relationships">Relationships</a></li>
+    <li><a href="#Custom-dbt-tests">Custom dbt tests</a></li>
+    <li><a href="#Row-counts">Row counts (across tables)</a></li>
+    <li><a href="#Unit-tests">Unit tests</a></li>
+    <li><a href="#dbt-audit_helper">dbt audit_helper</a></li>
+    <li><a href="#Performance testing">Performance-testing</a></li>
 </ul>
     
-    
-    - [Data type](#Data-type)
-    - [Data format](#Data-format)
-    - [Accepted values](#Accepted-values)
-    - [Combinations of values](#Combinations-of-values)
-    - [Free text](#Free-text)
-    - [Completeness](#Completeness)
-    - [Row count (single table)](#Row-count)
-    - [Data freshness](#Data-freshness)
-    - [Relationships](#Relationships)
-    - [Custom dbt tests](#Custom-dbt-tests)
-    - [Row counts (across tables)](#Row-counts)
-    - [Unit tests](#Unit-tests)
-    - [dbt audit_helper](#dbt-audit_helper)
-    - [Performance testing](#Performance-testing)
-
 </details>
 
 
