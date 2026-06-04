@@ -10,8 +10,12 @@
 <details>
 <summary>Types of testing</summary>
 <br>
-    <a href="#Nullability">Nullability</a>
-    <a href="#Uniqueness">Uniqueness</a>
+<ul>
+    <li><a href="#Nullability">Nullability</a></li>
+    <li><a href="#Uniqueness">Uniqueness</a></li>
+</ul>
+    
+    
     - [Data type](#Data-type)
     - [Data format](#Data-format)
     - [Accepted values](#Accepted-values)
