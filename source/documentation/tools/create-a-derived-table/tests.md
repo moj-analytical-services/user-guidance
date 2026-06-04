@@ -38,7 +38,7 @@
 <details>
 <summary>Selecting appropriate tests</summary>
 <ul>
-    <li><a href="#Different-testing-approaches">Different testing approaches</a></li>
+    <li><a href="#Testing-considerations">Testing considerations</a></li>
     <li><a href="#Testing-suitability-by-layer">Testing suitability by layer</a></li>
     <li><a href="#Use-cases">Use cases</a></li>
     <ul>
@@ -260,7 +260,7 @@ Dictionary
 
 ## Selecting appropriate tests
 
-### Different testing approaches
+### Testing considerations
 
 It is not always possible, or desirable, to execute every possible type of test in all circumstances.  The suitability of different types of testing depends on a number of factors, including:
 
