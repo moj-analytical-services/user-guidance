@@ -19,10 +19,10 @@
     <li><a href="#Nullability">Nullability</a></li>
     <li><a href="#Uniqueness">Uniqueness</a></li>
     <li><a href="#Data-type">Data type</a></li>
+    <li><a href="#Free-text">Free text</a></li>
     <li><a href="#Data-format">Data format</a></li>
     <li><a href="#Accepted-values">Accepted values</a></li>
     <li><a href="#Combinations-of-values">Combinations of values</a></li>
-    <li><a href="#Free-text">Free text</a></li>
     <li><a href="#Completeness">Completeness</a></li>
     <li><a href="#Row-count">Row count (single table)</a></li>
     <li><a href="#Data-freshness">Data freshness</a></li>
@@ -122,16 +122,16 @@ The table below provides a summary of the different types of testing that are av
 | Single model | [Nullability](#Nullability) | **Primary key** column is not nullable. |
 |              | [Uniqueness](#Uniqueness) | **Primary key** column should contain only unique values. |
 |              | [Data type](#Data-type) | A year should have a data type of `integer`, not `varchar`. |
+|              | [Free text](#Free-text) | Identify free text columns, which might accidentally expose personally identifiable information. |
 |              | [Data format](#Data-format) | Dates should be formatted `ccyy-mm-dd`. |
 |              | [Accepted values](#Accepted-values) | Years should be in the range 2016-2026. |
 |              | [Combinations of values](#Combinations-of-values) | When `col_a` is null, `col_b` must be not null. |
 |              | [Completeness](#Completeness) | Maximum 1% of rows in a column are null. |
-|              | [Free text](#Free-text) | Identify free text columns, which might accidentally expose personally identifiable information. |
-|              | [Row count](#Row-count) | Row count should not be zero. |
+|              | [Row count](#Row-count) | The model row count should not be zero. |
 |              | [Data freshness](#Data-freshness) | Data should have been updated within the last 7 days. |
 | Multiple models | [Relationships](#Relationships) | **Foreign key** in `model_a` should be present at least once in **primary_key** in `model_b`. |
 |                 | [Custom dbt tests](#Custom-dbt-tests) | When `model_a.column_1` = "ABC", `model_b.column_3` must be > 0. |
-|                 | [Row counts](#Row-counts) | Row counts of two models should match. |
+|                 | [Row counts](#Row-counts) | `model_b` aggregates the data from `model_a`, so the `model_b` must not contain more rows than `model_a`. |
 | Macros       | [Unit tests](#Unit-tests) | tbc |
 | Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | Regression testing, to check that the data in development is the same as the production data. |
 | Non-functional testing | [Performance testing](#Performance-testing) | Where data volumes may prevent timely delivery of data, compare before and after build times to assess the impact of performance tuning the SQL or using data chunking. |
@@ -230,6 +230,8 @@ models:
 
 ### Data type
 
+### Free text
+
 ### Data format
 
 ### Accepted values
@@ -239,8 +241,6 @@ List
 Dictionary
 
 ### Combinations of values
-
-### Free text
 
 ### Completeness
 
@@ -280,11 +280,11 @@ The different **dbt** layers have different purposes, and carry out different ty
 | Single model | [Nullability](#Nullability) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | Missing values will cause problems, so nullability should be checked whenever a column is mandatory.  **Note:** A column can legitimately be nullable in one layer and not nullable in another layer. |
 |              | [Uniqueness](#Uniqueness) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | Invalid duplicate rows will cause problems, so this should be checked in multiple places: staging (in line with the grain of the curated data); intermediate (where the grain might change); datamarts (where uniqueness of primary keys is vital for the dimensional model). |
 |              | [Data type](#Data-type) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider | If columns are cast to the required data type in the staging layer, this should be tested in that layer.  Data types should be tested downstream as required, e.g. if a date is extracted from a timestamp.  |
+|              | [Free text](#Free-text) |  | | | |
 |              | [Data format](#Data-format) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider | If data formats are standardised in the staging layer, this should be tested in that layer.  Formats should be tested downstream as required, e.g. if a new column as added in intermediate layer. |
 |              | [Accepted values](#Accepted-values) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider |  |
 |              | [Combinations of values](#Combinations-of-values) | 🔴<br>less recommended | 🟡<br>consider | 🟡<br>consider |  |
 |              | [Completeness](#Completeness) | 🟢<br>recommended | 🟡<br>consider | 🟢<br>recommended |  |
-|              | [Free text](#Free-text) |  | | | |
 |              | [Row count](#Row-count) | 🟢<br>recommended | 🟢<br>recommended |  🟢<br>recommended | |
 |              | [Data freshness](#Data-freshness) |  🟢<br>recommended | 🔴<br>less recommended | 🟢<br>recommended | |
 | Multiple models | [Relationships](#Relationships) | 🟡<br>consider | 🔴<br>less recommended | 🟢<br>recommended | |
