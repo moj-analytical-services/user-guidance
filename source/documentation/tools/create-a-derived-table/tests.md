@@ -283,7 +283,7 @@ To help developers decide which types of testing to use in different scenarios, 
 
 - [Testing overview](https://docs.getdbt.com/docs/build/data-tests?version=2.0&name=Fusion)
 - [The **data_tests** property](https://docs.getdbt.com/reference/resource-properties/data-tests?version=2.0&name=Fusion), which is used for the 4 built-in data tests (unique, not null, relationships and accepted values).
-- [Custom generic tests][custom tests](https://docs.getdbt.com/best-practices/writing-custom-generic-tests?version=2.0&name=Fusion) (defined using SQL).
+- [Custom generic tests](https://docs.getdbt.com/best-practices/writing-custom-generic-tests?version=2.0&name=Fusion) (defined using SQL).
 - [The **dbt_utils** package](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/).
 - [Freshness](https://docs.getdbt.com/reference/resource-properties/freshness?version=2.0&name=Fusion)
 
