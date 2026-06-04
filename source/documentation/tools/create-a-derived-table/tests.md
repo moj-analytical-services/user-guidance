@@ -99,6 +99,12 @@ The guidance is split into three main sections:
 - [Testing strategies](#Testing-strategies) - Provides information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model, or testing a staging model versus an intermediate model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing might be appropriate.
 - [Testing resources and standards](#Testing-resources-and-standards) - Contains links to **dbt** testing resources, and wider information on testing techniques and standards.
 
+## Out of scope
+
+Some types of testing are outside the scope of this document.  These are listed below, along with the reason for their exclusion.
+
+- **dbt constraints** - These are not compatible with Athena.
+
 ## Types of testing
 
 ### Overview
@@ -318,8 +324,3 @@ To help developers decide which types of testing to use in different scenarios, 
 
 [dbt Tests Hub](https://www.elementary-data.com/dbt-test-hub) - a website aimed at helping **dbt** developers identify suitable testing tools.
 
-## Out of scope
-
-Some types of testing are outside the scope of this document.  These are listed below, along with the reason for their exclusion.
-
-- **dbt constraints** - These are not compatible with Athena.
