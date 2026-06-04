@@ -24,7 +24,15 @@
     - [dbt audit_helper](#dbt-audit_helper)
     - [Performance testing](#Performance-testing)
 - [Testing strategies](#Testing-strategies)
+    - [Different testing approaches](#Different-testing-approaches)
+    - [Testing suitability by layer](#Testing-suitability-by-layer)
+    - [Use cases](#Use-cases)
+        - [Creating a macro](#Creating-a-macro)
+        - [Adding a column to a dimensional model](#Adding-a-column-to-a-dimensional-model)
+        - [Creating a model to stage large data volumes](#Creating-a-model-to-stage-large-data-volumes)
 - [Testing resources and standards](#Testing-resources-and-standards)
+    - [dbt documentation](#dbt-documentation)
+    - [Other resources](#Other-resources)
 - [Out of scope](#Out-of-scope)
 
 **Look at adding:**
@@ -203,9 +211,9 @@ Dictionary
 
 ### Combinations of values
 
-### Completeness
-
 ### Free text
+
+### Completeness
 
 ### Row count
 
@@ -232,7 +240,7 @@ It is not always possible, or desirable, to execute every possible type of test 
 - Whether new code is being created, or existing code modified.
 - The volume of the data to be processed.
 
-### Testing types by layer
+### Testing suitability by layer
 
 The different **dbt** layers have different purposes, and carry out different types of data transformation.  This means that different types of testing are more appropriate to some layers than others.  The following table aims to summarise whether the different types of testing are suitable for use in the different layers.
 
@@ -261,19 +269,15 @@ The different **dbt** layers have different purposes, and carry out different ty
 
 To help developers decide which types of testing to use in different scenarios, a number of different use cases are outlined below.  These are not prescriptive lists of testing that must be carried out - there will always be differences between domains and projects that make this difficult - but rather a list of options that should be considered for inclusion.
 
-### Creating a staging model
-
-### Creating an intermediate model
-
-### Creating a datamarts model
-
 ### Creating a macro
 
-### Adding a column to an existing dimensional model
+### Adding a column to a dimensional model
 
 **Scenario:** A new column needs to be added to an existing dimensional model.  The column is present in the curated data, so the **dbt** models in the staging, intermediate and datamarts layers all need to be updated to include this additional column.  All other columns should remain unchanged.
 
 **Testing to consider:**  
+
+### Creating a model to stage large data volumes
 
 ## Testing resources and standards
 
