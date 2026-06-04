@@ -178,7 +178,7 @@ models:
 - If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.
 - If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.
 
-**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any duplicates.  The severity is set to `warn`, by setting the config to override the default `error`.  If any duplicates are present, the model will be materialised, the build will not error, and any downstream models will be built.
+**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any duplicates.  Adding `config` with `severity: warn` sets the severity to `warn`.  (This overrides the default severity of `error`.)  If any duplicates are present, the model will be materialised, the build will not error, and any downstream models will be built.
 
 ```
 models:
