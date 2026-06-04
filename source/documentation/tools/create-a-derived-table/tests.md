@@ -109,11 +109,11 @@ The table below provides a summary of the different types of testing that are av
 
 **Athena compatible:** Yes
 
-**Executed by:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
+**Setup:**  The test is specified in the model details in the `schema.yml` file.  
+
+**Executing:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
 
 **On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
-
-**Setup:**  The test is specified in the model details in the `schema.yml` file.  
 
 **Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any nulls.  If any nulls are present, the model will be materialised, but the build will error.
 
@@ -136,11 +136,11 @@ models:
 
 **Athena compatible:** Yes
 
-**Executed by:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
+**Setup:**  The test is specified in the model details in the `schema.yml` file.  
+
+**Executing:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
 
 **On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
-
-**Setup:**  The test is specified in the model details in the `schema.yml` file.  
 
 **Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any duplicates.  If any duplicates are present, the model will be materialised, the build will not error, and any downstream models will be built.
 
