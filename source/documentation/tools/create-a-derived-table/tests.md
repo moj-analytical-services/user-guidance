@@ -6,6 +6,30 @@
     - [Why we test](#Why-we-test)
     - [What we test](#What-we-test)
     - [How to use this guide](#How-to-use-this-guide)
+
+<details>
+<summary>[Types of testing](#Types-of-testing)</summary>
+
+    - [Nullability](#Nullability)
+    - [Uniqueness](#Uniqueness)
+    - [Data type](#Data-type)
+    - [Data format](#Data-format)
+    - [Accepted values](#Accepted-values)
+    - [Combinations of values](#Combinations-of-values)
+    - [Free text](#Free-text)
+    - [Completeness](#Completeness)
+    - [Row count (single table)](#Row-count)
+    - [Data freshness](#Data-freshness)
+    - [Relationships](#Relationships)
+    - [Custom dbt tests](#Custom-dbt-tests)
+    - [Row counts (across tables)](#Row-counts)
+    - [Unit tests](#Unit-tests)
+    - [dbt audit_helper](#dbt-audit_helper)
+    - [Performance testing](#Performance-testing)
+
+</details>
+
+
 - [Types of testing](#Types-of-testing)
     - [Nullability](#Nullability)
     - [Uniqueness](#Uniqueness)
