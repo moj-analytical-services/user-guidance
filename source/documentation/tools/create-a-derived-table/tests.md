@@ -4,7 +4,6 @@
 
 <details>
 <summary>Introduction</summary>
-<br>
 <ul>
     <li><a href="#Why-we-test">Why we test</a></li>
     <li><a href="#What-we-test">What we test</a></li>
