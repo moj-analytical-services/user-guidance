@@ -9,6 +9,7 @@
     <li><a href="#Why-we-test">Why we test</a></li>
     <li><a href="#What-we-test">What we test</a></li>
     <li><a href="#How-to-use-this-guide">How to use this guide</a></li>
+    <li><a href="#Out-of-scope">Out of scope</a></li>
 </ul>
 </details>
 
@@ -58,8 +59,6 @@
     <li><a href="#dbt-documentation">dbt documentation</a></li>
     <li><a href="#Other-resources">Other resources</a></li>
 </details>
-
-- [Out of scope](#Out-of-scope)
 
 **Look at adding:**
 
