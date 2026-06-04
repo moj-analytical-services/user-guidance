@@ -78,7 +78,7 @@ The guidance is split into three main sections:
 - [Testing strategies](#Testing-strategies) - Provides information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model, or testing a staging model versus an intermediate model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing might be appropriate.
 - [Testing resources and standards](#Testing-resources-and-standards) - Contains links to **dbt** testing resources, and wider information on testing techniques and standards.
 
-## Testing in Create a Derived Table
+## Types of testing
 
 The table below provides a summary of the different types of testing that are avilable.  They are split according to their scope:
 
