@@ -109,13 +109,31 @@ The table below provides a summary of the different types of testing that are av
 
 **Athena compatible:** Yes
 
-**Setup:**  The test is specified in the model details in the `schema.yml` file.  
+**Setup:**  
+
+- The test is specified in the model details in the `schema.yml` file.
+- By default, the severity is set to `error`.  (If the test fails, any downstream model builds will be skipped.)
+- The severity can be set to `warn` by optionally adding `config` with `severity: warn`.  (If the test fails, the downstream models will be built.)
+
+```
+models:
+  - name: my_model
+    columns:
+      - name: my_column
+        data_tests:
+          - not_null
+              config:
+                severity: warn
+```
 
 **Executing:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
 
-**On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
+**On failure:** 
 
-**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any nulls.  If any nulls are present, the model will be materialised, but the build will error.
+- If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.
+- If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.
+
+**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any nulls.  The severity is set to `error` (this is the default value, and does not need to be specified using `config`.)  If any nulls are present, the model will be materialised, but the build will error.
 
 ```
 models:
@@ -136,13 +154,31 @@ models:
 
 **Athena compatible:** Yes
 
-**Setup:**  The test is specified in the model details in the `schema.yml` file.  
+**Setup:**  
+
+- The test is specified in the model details in the `schema.yml` file.
+- By default, the severity is set to `error`.  (If the test fails, any downstream model builds will be skipped.)
+- The severity can be set to `warn` by optionally adding `config` with `severity: warn`.  (If the test fails, the downstream models will be built.)
+
+```
+models:
+  - name: my_model
+    columns:
+      - name: my_column
+        data_tests:
+          - unique
+              config:
+                severity: warn
+```
 
 **Executing:** Running a `dbt build` or `dbt test` command for the corresponding model.  **dbt** creates an SQL query to execute the test, after the model is materialised.
 
-**On failure:** If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.  If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.  **Note:** `error` is the default, and does not need to be specified.
+**On failure:** 
 
-**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any duplicates.  If any duplicates are present, the model will be materialised, the build will not error, and any downstream models will be built.
+- If the test severity is set to `error`, the model will be materialised, but a failing test will cause an error and downstream models will be skipped.
+- If the test severity is set to `warn`, the model will be materialised and any downstream build can continue.
+- 
+**Example usage:** In the example shown below, column `case_id` in the `cases` model must not contain any duplicates.  The severity is set to `warn`, by setting the config to override the default `error`.  If any duplicates are present, the model will be materialised, the build will not error, and any downstream models will be built.
 
 ```
 models:
