@@ -36,7 +36,7 @@
 </details>
 
 <details>
-<summary>Testing strategies</summary>
+<summary>Selecting appropriate tests</summary>
 <ul>
     <li><a href="#Different-testing-approaches">Different testing approaches</a></li>
     <li><a href="#Testing-suitability-by-layer">Testing suitability by layer</a></li>
@@ -258,7 +258,7 @@ Dictionary
 
 ### Performance testing
 
-## Testing strategies
+## Selecting appropriate tests
 
 ### Different testing approaches
 
