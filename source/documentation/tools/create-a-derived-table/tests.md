@@ -66,7 +66,7 @@ All domains and projects are different, so this guidance is **not intended to be
 
 The guidance is split into three main sections:
 
-- [Types of testing](#Types-of-testing) - Provides information on the types of testing available (e.g. checking nullability and uniqueness).  It may be useful to developers wishing to gain an understanding of the types of testing that are available, or to understand how to use a specific type of test.
+- [Types of testing](#Types-of-testing) - Provides information on the types of testing available (e.g. checking nullability and uniqueness).  It may be useful to developers wishing to gain an understanding of the types of testing that are available, and those wanting to learn how to implement a specific type of test.
 - [Testing strategies](#Testing-strategies) - Provides information on which types of testing are appropriate in different scenarioes (e.g. testing a macro versus a model, or testing a staging model versus an intermediate model).  It may be useful to developers who have identified their testing use case, and would like to understand which types of testing might be appropriate.
 - [Testing resources and standards](#Testing-resources-and-standards) - Contains links to **dbt** testing resources, and wider information on testing techniques and standards.
 
@@ -247,7 +247,7 @@ To help developers decide which types of testing to use in different scenarios, 
 
 - [Testing overview](https://docs.getdbt.com/docs/build/data-tests?version=2.0&name=Fusion)
 - [The **data_tests** property](https://docs.getdbt.com/reference/resource-properties/data-tests?version=2.0&name=Fusion), which is used for the 4 built-in data tests (unique, not null, relationships and accepted values).
-- [Custom data tests][custom tests](https://docs.getdbt.com/best-practices/writing-custom-generic-tests?version=2.0&name=Fusion) (defined using SQL).
+- [Custom generic tests][custom tests](https://docs.getdbt.com/best-practices/writing-custom-generic-tests?version=2.0&name=Fusion) (defined using SQL).
 - [The **dbt_utils** package](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/).
 - [Freshness](https://docs.getdbt.com/reference/resource-properties/freshness?version=2.0&name=Fusion)
 
