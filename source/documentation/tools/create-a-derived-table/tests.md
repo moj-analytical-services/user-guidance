@@ -8,7 +8,7 @@
     - [How to use this guide](#How-to-use-this-guide)
 
 <details>
-<summary>[Types of testing](#Types-of-testing)</summary>
+<summary>Types of testing</summary>
 
     - [Nullability](#Nullability)
     - [Uniqueness](#Uniqueness)
