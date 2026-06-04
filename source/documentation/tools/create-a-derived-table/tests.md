@@ -131,7 +131,7 @@ The table below provides a summary of the different types of testing that are av
 |              | [Data freshness](#Data-freshness) | Data should have been updated within the last 7 days. |
 | Multiple models | [Relationships](#Relationships) | **Foreign key** in `model_a` should be present at least once in **primary_key** in `model_b`. |
 |                 | [Custom dbt tests](#Custom-dbt-tests) | When `model_a.column_1` = "ABC", `model_b.column_3` must be > 0. |
-|                 | [Row counts](#Row-counts) | `model_b` aggregates the data from `model_a`, so the `model_b` must not contain more rows than `model_a`. |
+|                 | [Row counts](#Row-counts) | `model_b` aggregates the data from `model_a`, so `model_b` must not contain more rows than `model_a`. |
 | Macros       | [Unit tests](#Unit-tests) | tbc |
 | Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | Regression testing, to check that the data in development is the same as the production data. |
 | Non-functional testing | [Performance testing](#Performance-testing) | Where data volumes may prevent timely delivery of data, compare before and after build times to assess the impact of performance tuning the SQL or using data chunking. |
