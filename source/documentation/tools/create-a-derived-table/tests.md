@@ -2,15 +2,21 @@
 
 ## Table of Contents
 
-- [Introduction](#Introduction)
-    - [Why we test](#Why-we-test)
-    - [What we test](#What-we-test)
-    - [How to use this guide](#How-to-use-this-guide)
+<details>
+<summary>Introduction</summary>
+<br>
+<ul>
+    <li><a href="#Why-we-test">Why we test</a></li>
+    <li><a href="#What-we-test">What we test</a></li>
+    <li><a href="#How-to-use-this-guide">How to use this guide</a></li>
+</ul>
+</details>
 
 <details>
 <summary>Types of testing</summary>
 <br>
 <ul>
+    <li><a href="#Overview">Overview</a></li>
     <li><a href="#Nullability">Nullability</a></li>
     <li><a href="#Uniqueness">Uniqueness</a></li>
     <li><a href="#Data-type">Data type</a></li>
@@ -28,37 +34,31 @@
     <li><a href="#dbt-audit_helper">dbt audit_helper</a></li>
     <li><a href="#Performance testing">Performance-testing</a></li>
 </ul>
-    
 </details>
 
+<details>
+<summary>Testing strategies</summary>
+<br>
+<ul>
+    <li><a href="#Different-testing-approaches">Different testing approaches</a></li>
+    <li><a href="#Testing-suitability-by-layer">Testing suitability by layer</a></li>
+    <li><a href="#Use-cases">Use cases</a></li>
+    <ul>
+        <li><a href="#Creating a macro">Creating-a-macro</a></li>
+        <li><a href="#Adding-a-column-to-a-dimensional-model">Adding a column to a dimensional model</a></li>
+        <li><a href="#Creating-a-model-to-stage-large-data-volumes">Creating a model to stage large data volumes</a></li>
+    </ul>
+</ul>
+</details>
 
-- [Types of testing](#Types-of-testing)
-    - [Nullability](#Nullability)
-    - [Uniqueness](#Uniqueness)
-    - [Data type](#Data-type)
-    - [Data format](#Data-format)
-    - [Accepted values](#Accepted-values)
-    - [Combinations of values](#Combinations-of-values)
-    - [Free text](#Free-text)
-    - [Completeness](#Completeness)
-    - [Row count (single table)](#Row-count)
-    - [Data freshness](#Data-freshness)
-    - [Relationships](#Relationships)
-    - [Custom dbt tests](#Custom-dbt-tests)
-    - [Row counts (across tables)](#Row-counts)
-    - [Unit tests](#Unit-tests)
-    - [dbt audit_helper](#dbt-audit_helper)
-    - [Performance testing](#Performance-testing)
-- [Testing strategies](#Testing-strategies)
-    - [Different testing approaches](#Different-testing-approaches)
-    - [Testing suitability by layer](#Testing-suitability-by-layer)
-    - [Use cases](#Use-cases)
-        - [Creating a macro](#Creating-a-macro)
-        - [Adding a column to a dimensional model](#Adding-a-column-to-a-dimensional-model)
-        - [Creating a model to stage large data volumes](#Creating-a-model-to-stage-large-data-volumes)
-- [Testing resources and standards](#Testing-resources-and-standards)
-    - [dbt documentation](#dbt-documentation)
-    - [Other resources](#Other-resources)
+<details>
+<summary>Testing resources and standards</summary>
+<br>
+<ul>
+    <li><a href="#dbt-documentation">dbt documentation</a></li>
+    <li><a href="#Other-resources">Other resources</a></li>
+</details>
+
 - [Out of scope](#Out-of-scope)
 
 **Look at adding:**
@@ -105,6 +105,8 @@ The guidance is split into three main sections:
 - [Testing resources and standards](#Testing-resources-and-standards) - Contains links to **dbt** testing resources, and wider information on testing techniques and standards.
 
 ## Types of testing
+
+### Overview
 
 The table below provides a summary of the different types of testing that are avilable.  They are split according to their scope:
 
