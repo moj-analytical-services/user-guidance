@@ -9,7 +9,7 @@
 
 <details>
 <summary>Types of testing</summary>
-
+<br>
     - [Nullability](#Nullability)
     - [Uniqueness](#Uniqueness)
     - [Data type](#Data-type)
