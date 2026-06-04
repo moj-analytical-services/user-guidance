@@ -179,26 +179,26 @@ It is not always possible, or desirable, to execute every possible type of test 
 
 The different **dbt** layers have different purposes, and carry out different types of data transformation.  This means that different types of testing are more appropriate to some layers than others.  The following table aims to summarise whether the different types of testing are suitable for use in the different layers.
 
-**Note: This is not definitive or prescriptive, and should be used only as a starting point for planning testing.**
+**Note: This is not definitive or prescriptive, and should be used only as a starting point for planning testing.  So testing labelled as "recommended" is not compulsory, but it is strongly suggested that this type of testing is considered.  And testing labelled as "less recommended" should not be excluded from consideration, but is potentially less appropriate than other types of testing.**
 
 | Scope of testing | Type of test | Staging | Intermediate | Datamart | Notes |
-|:-----------------|:-------------|:--------|:-------------|:---------|:------|
-| Single model | [Nullability](#Nullability) | 🟡 consider | 🟡 consider | 🟢 recommended | |
-|              | [Uniqueness](#Uniqueness) | 🟡 consider| 🟡 consider | 🟢 recommended | |
-|              | [Data type](#Data-type) | 🟢 recommended | 🔴 less recommended | 🔴 less recommended | |
-|              | [Data format](#Data-format) | 🟢 recommended | 🔴 less recommended | 🔴 less recommended |  |
-|              | [Accepted values](#Accepted-values) | 🟢 recommended | 🟡 consider | 🟡 consider |  |
-|              | [Combinations of values](#Combinations-of-values) | 🔴 less recommended | 🟡 consider | 🟡 consider |  |
-|              | [Completeness](#Completeness) | 🟢 recommended | 🟡 consider | 🟢 recommended |  |
+|:-----------------|:-------------|:-------:|:------------:|:--------:|:------|
+| Single model | [Nullability](#Nullability) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | Missing values will cause problems, so nullability should be checked whenever a column is not nullable.  **Note:** A column can legitimately be nullable in one layer and not nullable in another layer. |
+|              | [Uniqueness](#Uniqueness) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | Invalid duplicate rows will cause problems, so this should be checked in multiple places: staging (in line with the grain of the curated data); intermediate (where the grain might change); datamarts (where uniqueness of primary keys is vital for the dimensional model). |
+|              | [Data type](#Data-type) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider | If columns are cast to the required data type in the staging layer, this should be tested in that layer.  Data types should be tested downstream as required.  |
+|              | [Data format](#Data-format) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider | If data formats are standardised in the staging layer, this should be tested in that layer.  Formats should be tested downstream as required, e.g. if a new column as added in intermediate layer. |
+|              | [Accepted values](#Accepted-values) | 🟢<br>recommended | 🟡<br>consider | 🟡<br>consider |  |
+|              | [Combinations of values](#Combinations-of-values) | 🔴<br>less recommended | 🟡<br>consider | 🟡<br>consider |  |
+|              | [Completeness](#Completeness) | 🟢<br>recommended | 🟡<br>consider | 🟢<br>recommended |  |
 |              | [Free text](#Free-text) |  | | | |
-|              | [Row count](#Row-count) | 🟢 recommended | 🟢 recommended |  🟢 recommended | |
-|              | [Data freshness](#Data-freshness) |  🟢 recommended | 🔴 less recommended | 🟢 recommended | |
-| Multiple models | [Relationships](#Relationships) | 🟡 consider | 🔴 less recommended | 🟢 recommended | |
-|                 | [Custom dbt tests](#Custom-dbt-tests) | 🔴 less recommended | 🟡 consider | 🟡 consider | |
-|                 | [Row counts](#Row-counts) | 🟢 recommended | 🟢 recommended |  🟢 recommended | |
+|              | [Row count](#Row-count) | 🟢<br>recommended | 🟢<br>recommended |  🟢<br>recommended | |
+|              | [Data freshness](#Data-freshness) |  🟢<br>recommended | 🔴<br>less recommended | 🟢<br>recommended | |
+| Multiple models | [Relationships](#Relationships) | 🟡<br>consider | 🔴<br>less recommended | 🟢<br>recommended | |
+|                 | [Custom dbt tests](#Custom-dbt-tests) | 🔴<br>less recommended | 🟡<br>consider | 🟡<br>consider | |
+|                 | [Row counts](#Row-counts) | 🟢<br>recommended | 🟢<br>recommended | 🟢<br>recommended | |
 | Macros       | [Unit tests](#Unit-tests) | tbc | | | | |
-| Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | 🟡 consider | 🟡 consider | 🟡 consider | |
-| Non-functional testing | [Performance testing](#Performance-testing) | 🟡 consider | 🟡 consider | 🟡 consider | Should be considered for any model that will have to be modified (e.g. through SQL tuning or chunking) due to a long build time or timing out. |
+| Data reconciliation | [dbt audit_helper](#dbt-audit_helper) | 🟡<br>consider | 🟡<br>consider | 🟡<br>consider | |
+| Non-functional testing | [Performance testing](#Performance-testing) | 🟡<br>consider | 🟡<br>consider | 🟡<br>consider | Should be considered for any model that will have to be modified (e.g. through SQL tuning or chunking) due to a long build time or timing out. |
 
 ### Use cases
 
