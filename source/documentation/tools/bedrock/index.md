@@ -1,20 +1,26 @@
 # Amazon Bedrock
 
-## Getting Access to Amazon Bedrock in the Analytical Platform
+[Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) is a managed service that provides an API interface and access to high-performing generative AI foundation models (FMs). These are large-scale, general-purpose machine learning models trained on extensive datasets that can be adapted to perform a wide range of tasks across various applications. FMs generate outputs from one or more inputs (prompts) in the form of human language instructions.
+
+There is a range of foundation models that are tailored to specific use cases. Amazon Bedrock allows users to test leading foundation models, tailor them to your specific use case using methods like fine-tuning and Retrieval Augmented Generation (RAG), and create AI-driven agents that can interact with your data sources.
+
+[See the list of supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+
+## Data privacy
+
+Amazon states it does not share data on Amazon Bedrock with foundation model providers or other organisations.
+
+We do not control or maintain Amazon's data handling policies and cannot guarantee that this information remains current. Before using Amazon Bedrock for sensitive data, you should review the latest Amazon policies to confirm the service meets your security, privacy and compliance requirements.
+
+You can check [Amazon's Data Privacy FAQs](https://aws.amazon.com/compliance/data-privacy-faq/) and [Amazon Bedrock's documentation on data protection](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html) for up to date information.
+
+## Getting access to Amazon Bedrock in the Analytical Platform
 
 First, you will need access to the Control Panel, [see Analytical Platform User Guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/get-started.html).
 
 To enable Bedrock for your user, go to your user page in control panel. This is accessed by clicking your username next to the sign out link at the top of the page. Go to the Enable Bedrock section and check the Bedrock Enabled box. Then hit the save changes button to grant access.
 
 You must be an admin of your webapp to grant Bedrock access to it. Go to the *Manage Application* page for your app and select *Enable Bedrock*.
-
-## What is Amazon Bedrock?
-
-[Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) is a managed service that provides an API interface and access to high-performing generative AI foundation models (FMs). These are large-scale, general-purpose machine learning models trained on extensive datasets that can be adapted to perform a wide range of tasks across various applications. FMs generate outputs from one or more inputs (prompts) in the form of human language instructions.
-
-There is a range of foundation models that are tailored to specific use cases. Amazon Bedrock allows users to test leading foundation models, tailor them to your specific use case using methods like fine-tuning and Retrieval Augmented Generation (RAG), and create AI-driven agents that can interact with your data sources.
-
-[See the list of supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html)
 
 ## What can Amazon Bedrock be used for?
 
@@ -58,9 +64,9 @@ For **supported models**, you are able to take advantage of cross-region inferen
 
 Cross-region inference helps maximise application throughput and performance regardless of compute per-region availability. The GPU-enabled compute that these models run on is supply-constrained as all AWS customers rush towards adoption of generative AI that runs on this compute type. Cross-region inference mitigates localised demand constraints.
 
-### Cross-Region Inference Caveats 
+### Cross-Region Inference Caveats
 
-As requests are dynamically routed to one of the 3 enabled EU ‘cross-region inference’ regions, there is no way of knowing at the time the query is sent to AWS which region the data will be processed in. 
+As requests are dynamically routed to one of the 3 enabled EU ‘cross-region inference’ regions, there is no way of knowing at the time the query is sent to AWS which region the data will be processed in.
 
 If there are governance restrictions on the underlying data that limit data processing in any specific AWS region, this feature should **not** be implemented.
 
