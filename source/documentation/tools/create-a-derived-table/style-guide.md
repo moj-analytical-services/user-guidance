@@ -1,7 +1,7 @@
 # Project and Model Style Guide
 
 - **last updated:** 19/08/2024
-- based on dbt best practices version [v1.7](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects) 
+- based on dbt best practices version [v1.7](https://docs.getdbt.com/best-practices/how-we-style/0-how-we-style-our-dbt-projects)
 
 ## How we style our create-a-derived-table projects
 
@@ -38,7 +38,7 @@ Once you've established a clear style, stay consistent. This is the most importa
   - ❌ `CamelCaseModels`
   - Most data platforms use dots to separate `database.schema.object`, so using underscores instead of dots reduces your need for [quoting](/reference/resource-properties/quoting). For more background, refer to [this GitHub issue](https://github.com/dbt-labs/dbt-core/issues/3246).
 - 🔑 Keys should be string data types. We advise using the hash function `dbt_utils.generate_surrogate_key` ([guidance here](https://github.com/dbt-labs/dbt-utils?tab=readme-ov-file#generate_surrogate_key-source)) to create unique keys - this ensures there is a unique id for each row, as well as making the ids uniform in length. Some advice (for example Kimball) suggests integer data type instead of string, but we feel this is outdated.
-- ❌ Avoid reserved words as column names. create-a-derived-table reserved words, for example `order` (full list [here](https://docs.aws.amazon.com/athena/latest/ug/reserved-words.html)). 
+- ❌ Avoid reserved words as column names. create-a-derived-table reserved words, for example `order` (full list [here](https://docs.aws.amazon.com/athena/latest/ug/reserved-words.html)).
 - ➕ Booleans should be prefixed with `is_` or `has_`.
 - 🕰️ Timestamp columns should be named `<event>_at`(for example, `created_at`) and should be in UTC. If a different timezone is used, this should be indicated with a suffix (`created_at_pt`).
 - 📆 Dates should be named `<event>_date`. For example, `created_date.`
@@ -102,7 +102,8 @@ select * from renamed
 ### Basics
 
 - 👻 Use Jinja comments (`{# #}`) for comments that should not be included in the compiled SQL. When dbt compiles your code it will include code using SQL comments like `/* */` and `--`
-- ⏭️ Use trailing commas in lists for readability. e.g.
+- ⏭️ Use trailing commas in lists for readability. For example:
+
 ```SQL
 select
     defendant_id,
@@ -111,7 +112,9 @@ select
     ho_offence_code
     ...
 ```
-rather than
+
+rather than:
+
 ```SQL
 select
     defendant_id
@@ -123,7 +126,7 @@ select
 
 - ⬇️ Column names, keywords, and function names (`select`, `as`, `group by`, etc...) should all be lowercase.
 - 4️⃣ Indents should be four spaces.
-- 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks. See [here](https://stackoverflow.com/questions/29968499/how-can-i-have-multiple-vertical-rulers-in-vs-code) for a guide) to mark where 80 characters is. 
+- 📏 Lines of SQL should be no longer than 80 characters. This is excluding model names as they can often be longer than 80 characters themselves. It is helpful to add a vertical line to your IDE (R, VS code or jupyter notebooks. See [here](https://stackoverflow.com/questions/29968499/how-can-i-have-multiple-vertical-rulers-in-vs-code) for a guide) to mark where 80 characters is.
 - 🫧 The `as` keyword should be used explicitly when aliasing a column or table. e.g. `id as defendant_id` not `id defendant_id`
 
 
@@ -132,7 +135,7 @@ select
 - 🔙 Columns should be stated before aggregates and window functions (i.e. those using over()).
 - 🤏🏻 Aggregations should be executed as early as possible (on the smallest data set possible) before joining to another table to improve performance.
 - 🔢 Grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see [this classic rant](https://www.getdbt.com/blog/write-better-sql-a-defense-of-group-by-1) for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design.
-- 🔢 Column names should be written out explicitly in order statements to avoid ambiguity. 
+- 🔢 Column names should be written out explicitly in order statements to avoid ambiguity.
 Example:
 
 ```SQL
@@ -173,7 +176,7 @@ order by defendant_on_case_id
 
 ### 'Import' CTEs (Common Table Expressions)
 
-'Import' CTEs are used at the start of each model, to introduce the building blocks required for the model. 
+'Import' CTEs are used at the start of each model, to introduce the building blocks required for the model.
 
 For more information on CTEs (Common Table Expressions), see the [dbt docs](https://docs.getdbt.com/terms/cte).
 
@@ -191,7 +194,7 @@ requirements as (
 ),
 
 reference_1 as (
-    select * from {{ ref("derived_delius_stg__stg_standard_reference_1") }} 
+    select * from {{ ref("derived_delius_stg__stg_standard_reference_1") }}
     where code_set_name = 'REQUIREMENT SUB CATEGORY'
 ),
 
@@ -207,7 +210,7 @@ reference_3 as (
 
 reference_4 as (
     select * from {{ ref("derived_delius_stg__stg_standard_reference_4") }}
-    where code_set_name = 'UNITS'  
+    where code_set_name = 'UNITS'
 ),
 
 joined as (
