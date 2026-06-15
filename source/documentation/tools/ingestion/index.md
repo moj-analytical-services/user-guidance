@@ -8,39 +8,40 @@ You should use the ingestion service if:
 - you want a standardised approach that automatically scans files
 - the files are under 5 GB in size
 
-The ingestion service cannot: 
+The ingestion service cannot:
 
-- provide full control over AWS infrastructure or security configuration
 - allow a user to copy data to more than one bucket (you need separate usernames for a test bucket and a prod bucket)
-- support custom workflows or bespoke configurations per team
+- provide full control over AWS infrastructure or security configuration
+- support custom security requirements outside the standard offering (for example: checksum generation or additional encryption)
+- support any other custom workflows or bespoke configurations per team
 - transform, clean, or process your data
-- support custom security requirements outside the standard offering
+
 
 If you need to receive files larger than 5 GB, you'll need to split them up to use the ingestion service.
 
 ## How the ingestion service works
 
-### Onboarding 
+### Onboarding
 
 1. You raise an onboarding request by sending us information about the supplier and destination bucket.
 1. We check whether this is a standard use case. If the request needs bespoke logging, security rules, transformations, or other non-standard behaviour, it may be outside our current offer.
 1. We use the supplier details to create access with an SFTP account and IP addresses.
 1. We configure the destination bucket location.
-1. We check the bucket's permissions. You may need to update the bucket's policy to allow the ingestion service to copy files into it.  
+1. We check the bucket's permissions. You may need to update the bucket's policy to allow the ingestion service to copy files into it.
 1. If your destination bucket uses KMS encryption, we use the key you sent us to set up write permissions for the ingestion service.
-1. We notify you that the onboarding request has been completed and confirm the username for your account. 
+1. We notify you that the onboarding request has been completed and confirm the username for your account.
 
 ### Copying data to an S3 bucket
 
 1. Your supplier connects to the SFTP endpoint with the username we created and SSH key.
 1. Your supplier uploads files to their home directory in a landing bucket.
-1. Each file triggers a GuardDuty security scan. 
-1. When GuardDuty finishes scanning, you'll receive a notification by Slack or email if you requested this The service moves clean files to your destination bucket and infected files to a quarantine bucket. You cannot access files in the quarantine bucket. 
+1. Each file triggers a GuardDuty security scan.
+1. When GuardDuty finishes scanning, you'll receive a notification by Slack or email if you requested this The service moves clean files to your destination bucket and infected files to a quarantine bucket. You cannot access files in the quarantine bucket.
 1. Your team accesses the files in the destination bucket. If any files are in the quarantine bucket, speak to your supplier.
 
 ## Onboard to the service
 
-To use the ingestion service, you'll need to give us information about the supplier using the service and the destination bucket. We need contact information of an individual to send notifications and updates about the ingestion service. 
+To use the ingestion service, you'll need to give us information about the supplier using the service and the destination bucket. We need contact information of an individual to send notifications and updates about the ingestion service.
 
 [Raise a support ticket](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-ingestion.yml) with the following information to start the onboarding process:
 
@@ -65,7 +66,7 @@ You'll need to include your:
 
 > **Note**: Users with Egress are presented with two directories when connected to SFTP: `/upload` for ingestion and `/download` for Egress.
 
-### Choose your destination bucket 
+### Choose your destination bucket
 
 The 'destination bucket' is the S3 bucket where transferred files will be delivered. Buckets can exist in any Ministry of Justice AWS account, but setup differs depending on ownership.
 
@@ -78,7 +79,7 @@ Option 1: Buckets in `analytical-platform-data-production`, such as:
 
 Option 2: Buckets outside `analytical-platform-data-production` but within a Ministry of Justice AWS account.
 
-#### Update destination bucket's permissions 
+#### Update destination bucket's permissions
 
 You'll need to add the correct permissions to the destination bucket's configuration by raising a pull request to update the bucket policy file.
 
@@ -88,7 +89,7 @@ If you are a not member of the Ministry of Justice GitHub organisation, ask some
 
 #### Adding permissions to `mojap-land` or `mojap-land-dev`
 
-The destination S3 bucket (and if using SSE-KMS, the KMS key) must have the correct permissions to allow the final `transfer` Lambda function to copy files to it. 
+The destination S3 bucket (and if using SSE-KMS, the KMS key) must have the correct permissions to allow the final `transfer` Lambda function to copy files to it.
 
 - Development resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L564)
 - Production resource [block](https://github.com/ministryofjustice/analytical-platform/blob/12588ba107e6a490394fb6bbf0cb5d64922c9290/terraform/aws/analytical-platform-data-production/data-engineering-pipelines/locals.tf#L742)
