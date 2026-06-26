@@ -183,13 +183,9 @@ The directory format is:
 
 When users connect via SFTP they are restricted to their `<username>` home directory. Attempts to access directories outside this path (for example, the root `/`, `mojap-ingestion-<environment>-landing` or another `<username>`) will result in permission errors.
 
-This directory format, including `<username>`, copies across to the destination bucket, a file uploaded as above arrives here:
-
-`<destination-bucket>/<username>/<file>`
-
 ### Specify Destination Bucket Prefix
 
-Once connected to the ingestion service the user can specify the destination prefix structure when uploading with the `put` command:
+The directory format, including `<username>`, copies across to the destination bucket. However, once connected to the ingestion service, the user can specify the destination prefix structure when uploading with the `put` command:
 
 ```bash
 sftp> put <local/file/path> <destination/file/path>
@@ -198,14 +194,13 @@ sftp> put <local/file/path> <destination/file/path>
 For example:
 
 ```bash
-sftp> put test.csv inbound/test.csv
+sftp> put test.csv test-sub-directory/test.csv
 ```
 This uploads the `test.csv` file in the current local directory which then arrives as below in the landing and destination buckets:
 
-`mojap-ingestion-<environment>-landing/<username>/inbound/test.csv`
+`mojap-ingestion-<environment>-landing/<username>/test-sub-directory/test.csv`
 
-`<destination-bucket>/<username>/inbound/test.csv`
-
+`<destination-bucket>/<username>/test-sub-directory/test.csv`
 
 ## Known Limitations
 
