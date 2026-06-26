@@ -49,7 +49,7 @@ To use the ingestion service, you'll need to give us information about the suppl
 - supplier's email (not a generic inbox)
 - supplier's IP addresses
 - supplier's SSH public key
-- destination bucket's location on Analytical Platform (for example: `s3://${DESTINATION_BUCKET}/${OPTIONAL_PREFIX}`)
+- destination bucket's location on Analytical Platform (for example: `s3://<DESTINATION_BUCKET>`)
 - destination bucket's KMS key, if encrypted
 - an email address or Slack channel to send scan completion alerts to (optional)
 
@@ -176,15 +176,36 @@ sftp -P 2222 ${USERNAME}@sftp.development.ingestion.analytical-platform.service.
 
 ### User Home Directories and Access Permissions
 
-Each user connecting to the ingestion service is assigned a dedicated home directory within the `mojap-ingestion-<environment>-landing` S3 bucket. The directory format is:
+The `<username>` creates a prefix on the `mojap-ingestion-<environment>-landing` S3 bucket which mimics a home directory.
+The directory format is:
 
-`/mojap-ingestion-<environment>-landing/<username>`
+`mojap-ingestion-<environment>-landing/<username>/<file>`
+
+When users connect via SFTP they are restricted to their `<username>` home directory. Attempts to access directories outside this path (for example, the root `/`, `mojap-ingestion-<environment>-landing` or another `<username>`) will result in permission errors.
+
+This directory format, including `<username>`, copies across to the destination bucket, an uploaded file as above will end up here:
+
+`<destination-bucket>/<username>/<file>`
+
+### Specify Destination Bucket Prefix
+
+Once connected to the ingestion service the user can specify the destination prefix structure when uploading with the `put` command:
+
+```bash
+sftp> put <local/file/path> <destination/file/path>
+```
 
 For example:
 
-`/mojap-ingestion-production-landing/analytical-platform`
+```bash
+sftp> put test.csv inbound/test.csv
+```
+This uploads the `test.csv` file in the current local directory which then arrives as below in the landing and destination buckets:
 
-When users connect via their SFTP they are restricted to their assigned home directory. Attempts to list or read directories outside of this path (for example, the root `/`) will result in permission errors.
+`mojap-ingestion-<environment>-landing/<username>/inbound/test.csv`
+
+`<destination-bucket>/<username>/inbound/test.csv`
+
 
 ## Known Limitations
 
