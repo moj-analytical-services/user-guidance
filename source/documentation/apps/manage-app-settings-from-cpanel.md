@@ -21,7 +21,7 @@ You can have multiple deployment environments for an app for different purposes,
 **What is an application environment?**
 
 Environments contain the following parts:
-- A namespace with other required resources on Cloud Platform's cluster, e.g. an ECR repo for storing your app's docker images
+- A namespace with other required resources on Cloud Platform's cluster, e.g. an ECR repo for storing your app's Docker images
 - An environment on GitHub repo
 - [Deployment settings](#introduction-to-the-settings) under each GitHub environment and can be managed through Control Panel
 - An ingress (app URL) for you to access the deployed app in each environment 
