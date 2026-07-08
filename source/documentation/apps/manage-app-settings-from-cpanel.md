@@ -21,21 +21,11 @@ You can have multiple deployment environments for an app for different purposes,
 **What is an application environment?**
 
 Environments contain the following parts:
-- A namepace with other required resources on Cloud Platform's cluster, e.g. an ECR repo for storing your app's docker images
+- A namespace with other required resources on Cloud Platform's cluster, e.g. an ECR repo for storing your app's docker images
 - An environment on GitHub repo
 - [Deployment settings](#introduction-to-the-settings) under each GitHub environment and can be managed through Control Panel
 - An ingress (app URL) for you to access the deployed app in each environment 
 The docker image of app will be built and pushed into app's ECR, then be deployed with deployment settings on its namespace via GitHub workflow and can be accessed via the app's URL. 
-
-By default, 2 deployment environments are provided :-
-- `dev` environment: used for testing changes to your application and can be used as the staging environment before releasing a new version to the production environment.
-  - namespace: `data-platform-app-<repo-name>-dev`
-  - `dev` environment on GitHub repo
-  - app URL: `<repo_name>-dev.apps.live.cloud-platform.service.justice.gov.uk`
-- `prod` environment:  the production environment where the live application sits 
-  - namespace: `data-platform-app-<repo-name>-prod`
-  - `prod` enviroment on GitHub repo
-  - app URL: `<repo_name>.apps.live.cloud-platform.service.justice.gov.uk`
 
 All the deployment settings linked to each deployment environment will be displayed and can be managed under the app-detail page on Control Panel.
 
