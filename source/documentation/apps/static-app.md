@@ -22,13 +22,13 @@ If you already have a repository you will need to copy these files manually.
 1. Visit https://github.com/ministryofjustice/data-platform-app-template in your browser.
 1. Click the "Use this template" button in the top right corner.
 1. On the "Create a new repository" form, ensure the `ministryofjustice/data-platform-app-template` template is selected.
-1. Enter a repository name of your choosing make sure to use hypens and not underscores.  
+1. Enter a repository name of your choosing make sure to use hypens and not underscores.
 1. Select "Internal" so that only members of the `ministryofjustice` organisation can see your repository.
 1. Click the "Create repository" button and wait for your repository to be created.
 
 ### Using an Existing Repository
 
-If you already have a repository and do not wish to create a new one with the `ministryofjustice/data-platform-app-template` you will need to manually copy the contents of the [`.github/workflows`](https://github.com/ministryofjustice/data-platform-app-template/tree/main/.github/workflows) directory into your existing repository. These files are required to deploy the application. 
+If you already have a repository and do not wish to create a new one with the `ministryofjustice/data-platform-app-template` you will need to manually copy the contents of the [`.github/workflows`](https://github.com/ministryofjustice/data-platform-app-template/tree/main/.github/workflows) directory into your existing repository. These files are required to deploy the application.
 
 You will need to create a pull request adding the files and merge to your `main` branch. The CI will fail at this point, but merging will ensure that the `dev` and `prod` repository environments are created.
 
@@ -60,6 +60,7 @@ Check your environments in your [repository settings](https://docs.github.com/en
 If you do not require one of the environments, you should delete it before proceeding to register your application with Control Panel and creating your Cloud Platform namespace.
 
 Follow these steps to delete an environment:
+
 1. Delete the relevant GitHub action workflow file for `dev` or `prod` from your repository
 2. Then go to the "Environments" settings in your GitHub repository (steps above) and delete the appropriate environment
 
@@ -78,7 +79,9 @@ When ready to deploy, you can move on to:
 
 ## Cloud Platform Environments
 
-Repeat the following process for each of the environments (`dev`, `prod`) that you require.
+Complete the following steps for each environment you need (`dev`, `prod` or both).
+
+Every Cloud Platform namespace must have at least one deployment environment (`dev` or `prod`) associated with it. Make sure the namespace name includes the environment suffix, for example `my-webapp-dev` or `my-webapp-prod`.
 
 You can follow the instructions for each step individually, with a pull request for each, or complete all steps and include all the files in a single pull request.
 
@@ -207,7 +210,7 @@ Further details about these settings can be found in the [Cloud Platform documen
 
 You can see a [full example of a namespace directory](https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/data-platform-app-ap-rshiny-notesbook-dev) used to host an Analytical Platform application here, with all the above amends made. There are also many other `data-platform-app-` namespaces within the cloud platform environments repo, although as these are managed by the app owners, there may be some custom changes. For a list of deployed applications you may also view the [webapp_examples repo](https://github.com/moj-analytical-services/webapp_examples).
 
-## Register the application 
+## Register the application
 
 The Analytical Team manages app registration through user issues. We make sure apps follow MoJ approaches and policies, such as the organisation's hosting strategy.
 
@@ -255,12 +258,12 @@ Note that characters that are not compatible with website URLs are converted. Th
 
 [Further information about managing deployed apps, including managing user access, can be found in the Managing published apps section.](/apps/rshiny-app.html#managing-published-apps)
 
-### Deleting your Webapp 
+### Deleting your Webapp
 
 To delete your Webapp:
 
 > **NOTE:**
 > If your webapp uses [data-engineering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access) to access data on the AP, you will need to **remove all references to the app (alpha_app_*) in any project_access .yaml files and [scripts/db_app_policies.py](https://github.com/moj-analytical-services/data-engineering-database-access/blob/main/scripts/db_app_policies.py) before asking for the webapp to be deleted**. Failure to do this may cause breakages to the [data-engineering-database-access](https://github.com/moj-analytical-services/data-engineering-database-access) repository.
 
-1. Raise a support request detailing the name of the webapp via our [support process](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-support.yml). Only Control Panel Administrators can delete webapps from the Control Panel. 
+1. Raise a support request detailing the name of the webapp via our [support process](https://github.com/ministryofjustice/data-platform-support/issues/new?template=analytical-platform-support.yml). Only Control Panel Administrators can delete webapps from the Control Panel.
 1. Follow the Cloud Platform's guidance on [removing an unneeded namespace](https://user-guide.cloud-platform.service.justice.gov.uk/documentation/deploying-an-app/cleaning-up.html)
