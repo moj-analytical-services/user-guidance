@@ -6,32 +6,8 @@
 <summary>Introduction</summary>
 <ul>
     <li><a href="#Why-we-test">Why we test</a></li>
-    <li><a href="#What-we-test">What we test</a></li>
     <li><a href="#How-to-use-this-guide">How to use this guide</a></li>
     <li><a href="#Out-of-scope">Out of scope</a></li>
-</ul>
-</details>
-
-<details>
-<summary>Types of testing</summary>
-<ul>
-    <li><a href="#Overview">Overview</a></li>
-    <li><a href="#Nullability">Nullability</a></li>
-    <li><a href="#Uniqueness">Uniqueness</a></li>
-    <li><a href="#Data-type">Data type</a></li>
-    <li><a href="#Free-text">Free text</a></li>
-    <li><a href="#Data-format">Data format</a></li>
-    <li><a href="#Accepted-values">Accepted values</a></li>
-    <li><a href="#Combinations-of-values">Combinations of values</a></li>
-    <li><a href="#Completeness">Completeness</a></li>
-    <li><a href="#Row-count">Row count (single table)</a></li>
-    <li><a href="#Data-freshness">Data freshness</a></li>
-    <li><a href="#Relationships">Relationships</a></li>
-    <li><a href="#Custom-dbt-tests">Custom dbt tests</a></li>
-    <li><a href="#Row-counts">Row counts (across tables)</a></li>
-    <li><a href="#Unit-tests">Unit tests</a></li>
-    <li><a href="#dbt-audit_helper">dbt audit_helper</a></li>
-    <li><a href="#Performance testing">Performance-testing</a></li>
 </ul>
 </details>
 
