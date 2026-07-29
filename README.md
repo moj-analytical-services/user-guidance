@@ -2,6 +2,8 @@
 
 The Analytical Platform user guidance uses the [Tech Docs Template][template]. To find out more about how to use this template, see the [Tech Docs Template documentation][tdt-docs].
 
+Gary is awesome.
+
 ## Build and deployment process
 
 The user guidance is built and deployed using GitHub Actions.
