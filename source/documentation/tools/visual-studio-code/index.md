@@ -4,9 +4,13 @@ We provide a version of VS Code with a curated set of development tools pre-inst
 
 ## Computing resources
 
-VS Code runs with a standard set of resources. You can request more powerful computing resources (a GPU or 2 CPUs with 24GB of RAM) for your VS Code environment if you need them. This includes situations where you’re working with very large datasets, or using AI to process data.
+VS Code runs with a standard set of resources. You can request more powerful computing resources (a GPU or 2 CPUs with 24GB of RAM) for your environment if you need them. This includes situations where you’re working with very large datasets, or using AI to process data.
 
-Send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) with the email address for your Analytical Platform account and the resources you need.
+Send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) with:
+
+* the email address for your Analytical Platform account
+* the tooling you're using
+* the resources you need
 
 >The Analytical Platform provides on-demand GPU resources and sometimes AWS cannot meet our capacity needs. Your environment may fail to start more often compared to the version of VS Code without GPU access. Retrying later usually resolves the issue.
 
