@@ -1,10 +1,23 @@
 # JupyterLab
 
-A development environment for writing Python code including Python notebooks. If you are new to python and juptyerlab, there is a self-paced introduction which can be found [here](https://github.com/moj-analytical-services/intro-to-python).
+A development environment for writing Python code, including Python notebooks. If you're new to Python and JuptyerLab, you can follow a [self-paced introduction to Python](https://github.com/moj-analytical-services/intro-to-python).
+
+You can also use JupyterLab All Spark, a version with tooling for Spark development.
+
+## Resourcing options
+
+JupyterLab runs with a standard set of resources. You can request more powerful computing resources (2 CPUs with 24GB of RAM) for your environment if you need them. This includes situations where you’re working with very large datasets, or using AI to process data. However, we do not have additional options for JupyterLab All Spark.
+
+To request increased resourcing, send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) with:
+
+* the email address for your Analytical Platform account
+* the tooling you're using
+* the resources you need
+
 
 ## Run notebooks
 
-In Jupyter, before you can successfully run the notebook, you'll need to select the Jupyter kernel for this project. If it doesn't appear in the drop-down list, run this in a terminal:
+In JupyterLab, before you can successfully run the notebook, you'll need to select the kernel for this project. If it doesn't appear in the drop-down list, run this in a terminal:
 
 ```bash
 . myproject/venv/bin/activate
@@ -23,9 +36,9 @@ cd myproject
 python3 myscript.py
 ```
 
-### Using a virtual environment in Jupyter
+### Using a virtual environment
 
-It is advisable to use a different virtual environment (venv) for each project you do in Python. There is a little bit of set up to get Jupyter working with a venv. Follow the instructions below to get started:
+You should use a different virtual environment (venv) for each project you do in Python. There is a little bit of set up to get JupyterLab working with a venv. Follow the instructions below to get started:
 
 0. If you haven't yet created a virtual environment for your project, in terminal run:
 
@@ -40,19 +53,19 @@ It is advisable to use a different virtual environment (venv) for each project y
     source venv/bin/activate
     ```
 
-2. Install the module ipykernel within this venv (for creating/managing kernels for ipython which is what Jupyter sits on top of):
+2. Install the module ipykernel within this venv:
 
     ```bash
     pip install ipykernel
     ```
 
-3. Create a Jupyter kernel which is configured to use your venv. (Change the display name to match your project name):
+3. Create a JupyterLab kernel which is configured to use your venv, changing the display name to match your project name:
 
     ```bash
     python3 -m ipykernel install --user --name="venv_PROJECTNAMEHERE" --display-name="My project (Python3)"
     ```
 
-4. In Jupyter, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
+4. In JupyterLab, open your notebook and then select this new kernel by its pretty name in the top right hand corner. It might take a little time/refreshes for it to show up.
 
 To resume work on this after working on another project:
 
@@ -69,7 +82,7 @@ To resume work on this after working on another project:
 
 Note: *Once you have associated the kernel with the venv you dont need to recreate/update it*. Any packages that are installed to the venv via pip after the kernel is established are immediately available to the kernel.
 
-### Using pipenv in Jupyter
+### Using pipenv in JupyterLab
 
 pipenv is another environment manager for Python. In general, please refer to their [basic guidance](https://pipenv-fork.readthedocs.io/en/latest/basics.html).
 
@@ -82,16 +95,16 @@ cd myproject
 pipenv install
 ```
 
-To use the pipenv in Jupyter, compared to [using a venv in Jupyter](../tools/package-management.html#venv-and-pip), the syntax of creating the kernel is simply adjusted to:
+To use the pipenv in JupyterLab, compared to [using a venv in JupyterLab](../tools/package-management.html#venv-and-pip), the syntax of creating the kernel changes to:
 
 ```bash
 pipenv install ipykernel
 python3 -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
 ```
 
-And then select the kernel in Jupyter as [normal](../tools/package-management.html#venv-and-pip).
+And then select the kernel in JupyteLab as [normal](../tools/package-management.html#venv-and-pip).
 
-## Accessing a Locally Running Application
+## Accessing a locally running application
 
 As of version `JupyterLab v3.6.3-4.1.0`, to access an application running locally (such as Dash or Streamlit), it **must** be running on port `8081`.
 
@@ -121,4 +134,4 @@ There is no longer a requirement to run your app (e.g. Dash or Steamlit) on a ba
 
 ## Hidden Files
 
-As per [this](https://jupyterlab.readthedocs.io/en/stable/user/files.html#displaying-hidden-files) documentation, to display or hide the hidden files through the menu `View` -> `Show Hidden Files`.
+Follow [JupyterLab's documentation to hide or display hidden files](https://jupyterlab.readthedocs.io/en/stable/user/files.html#displaying-hidden-files).
