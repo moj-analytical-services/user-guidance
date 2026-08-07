@@ -1,8 +1,16 @@
-# Visual Studio Code
+# Visual Studio Code (VS Code)
 
-## Packaged Tools
+We provide a version of VS Code with a curated set of development tools pre-installed. You can check the [full list of included tools](https://github.com/ministryofjustice/analytical-platform-cloud-development-environment-base?tab=readme-ov-file#features).
 
-Visual Studio Code uses our Cloud Development Environment Base image, and includes the features highlighted [here](https://github.com/ministryofjustice/analytical-platform-cloud-development-environment-base?tab=readme-ov-file#features).
+## Computing resources
+
+VS Code runs with a standard set of resources. You can request more powerful computing resources (a GPU or 2 CPUs with 24GB of RAM) for your VS Code environment if you need them. This includes situations where you’re working with very large datasets, or using AI to process data.
+
+Send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) with the email address for your Analytical Platform account and the resources you need.
+
+>The Analytical Platform provides on-demand GPU resources and sometimes AWS cannot meet our capacity needs. Your environment may fail to start more often compared to the version of VS Code without GPU access. Retrying later usually resolves the issue.
+
+>The GPU is also not dedicated and can support multiple users or sessions. This means workloads may run more slowly or fail if there is insufficient GPU resourcing. Try reducing your workload's GPU requirements or retry later.
 
 ## GitHub Copilot
 
@@ -18,7 +26,7 @@ Once authenticated, you can launch GitHub Copilot by running `copilot`.
 
 For more information on using GitHub Copilot CLI, please refer to GitHub's [documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli).
 
-## Accessing a Locally Running Application
+## Accessing a locally running application
 
 As Visual Studio Code's [port forwarding](https://code.visualstudio.com/docs/editor/port-forwarding) functionality does not work in our environment, we have enabled similar functionality using [host based routing](https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/).
 
@@ -26,16 +34,7 @@ To access an application running locally, it must be running on port `8081`, you
 
 This cannot be accessed by anyone other than yourself as it uses the same authentication method as Visual Studio Code.
 
-### Resource Options
-
-By default, Visual Studio Code runs with a standard set of resources. If your work requires more capacity, the following options are available on request:
-
-- *GPU enabled*
-- *High-memory CPU environment*: 2 CPUs with 24 GB of RAM
-
-To request one of these options, please contact the Analytical Platform team through [#ask-analytical-platform](https://moj.enterprise.slack.com/archives/C4PF7QAJZ).
-
-## Known Issues and Limitations
+## Known issues and limitations
 
 * Like JupyterLab and RStudio, Visual Studio Code runs on Analytical Platform's Kubernetes infrastructure, therefore we cannot provide access to Docker.
 
