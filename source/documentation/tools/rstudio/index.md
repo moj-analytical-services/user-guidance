@@ -4,14 +4,13 @@ For general guidance in using RStudio, see the [RStudio documentation](https://d
 
 ## Resourcing options
 
-RStudio runs with a standard set of resources. You can request more powerful computing resources (2 CPUs with 24GB of RAM) for your environment if you need them. This includes situations where you’re working with very large datasets, or using AI to process data. If you're working with normal sized datasets,
+RStudio runs with a standard set of resources. You can request an option with more powerful computing resources (2 CPUs with 24GB of RAM) for your environment if you need it. This includes situations where you’re working with very large or very complex datasets. If you're working with normal sized datasets,
 make sure you've checked for [RStudio memory issues](#rstudio-memory-issues) first, which you can troubleshoot to solve problems.
 
 To request increased resourcing, send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) with:
 
 * the email address for your Analytical Platform account
 * the tooling you're using
-* the resources you need
 
 ### RStudio memory issues
 

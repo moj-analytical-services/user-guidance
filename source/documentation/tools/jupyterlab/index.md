@@ -6,14 +6,12 @@ You can also use JupyterLab All Spark, a version with tooling for Spark developm
 
 ## Resourcing options
 
-JupyterLab runs with a standard set of resources. You can request more powerful computing resources (2 CPUs with 24GB of RAM) for your environment if you need them. This includes situations where you’re working with very large datasets, or using AI to process data. However, we do not have additional options for JupyterLab All Spark.
+JupyterLab runs with a standard set of resources. You can request an option with more powerful computing resources (2 CPUs with 24GB of RAM) for your environment if you need it. This includes situations where you’re working with very large or very complex datasets. However, we do not have additional options for JupyterLab All Spark.
 
 To request increased resourcing, send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) with:
 
 * the email address for your Analytical Platform account
 * the tooling you're using
-* the resources you need
-
 
 ## Run notebooks
 
@@ -102,7 +100,7 @@ pipenv install ipykernel
 python3 -m ipykernel install --user --name="pipenv-name" --display-name="My project (Python3)"
 ```
 
-And then select the kernel in JupyteLab as [normal](../tools/package-management.html#venv-and-pip).
+And then select the kernel in JupyterLab as [normal](../tools/package-management.html#venv-and-pip).
 
 ## Accessing a locally running application
 
