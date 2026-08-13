@@ -6,15 +6,21 @@ We provide a version of VS Code with a curated set of development tools pre-inst
 
 VS Code runs with a standard set of resources. You can request more powerful computing resources (a GPU or 2 CPUs with 24GB of RAM) for your environment if you need them. This includes situations where you’re working with very large or very complex datasets.
 
+Use the following as a guide for which resourcing option to request:
+
+* choose the 2 CPU, 24 GB RAM environment if your work is slow or runs out of memory when using the standard environment
+
+* choose the GPU environment only if the software or guidance you're following specifically recommends using a GPU
+
 Send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.slack.com/archives/C4PF7QAJZ) with:
 
 * the email address for your Analytical Platform account
 * the tooling you're using
 * the resourcing option you need
 
->The Analytical Platform provides on-demand GPU resources and sometimes AWS cannot meet our capacity needs. Your environment may fail to start more often compared to the version of VS Code without GPU access. Retrying later usually resolves the issue.
+>The Analytical Platform provides on-demand GPU resources, but sometimes AWS does not have sufficient capacity to meet demand. Your environment may fail to start more often compared to the version of VS Code without GPU access. Retrying later usually resolves the issue.
 
->The GPU is also not dedicated and can support multiple users or sessions. This means workloads may run more slowly or fail if there is insufficient GPU resourcing. Try reducing your workload's GPU requirements or retry later.
+>GPU resources are also shared between multiple users and sessions, so workloads may run more slowly or stop unexpectedly when GPU capacity is limited. If this happens, reduce your workload's GPU requirements or try again later.
 
 ## GitHub Copilot
 
