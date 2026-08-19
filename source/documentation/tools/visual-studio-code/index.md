@@ -18,7 +18,7 @@ Send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.sla
 * the tooling you're using
 * the resourcing option you need
 
->The Analytical Platform provides on-demand GPU resources, but sometimes AWS does not have sufficient capacity to meet demand. Your environment may fail to start more often compared to the version of VS Code without GPU access. Retrying later usually resolves the issue.
+>The Analytical Platform provides on-demand GPU resources, but sometimes AWS cannot meet demand. Your environment may fail to start more often compared to the version of VS Code without GPU access. Retrying later usually resolves the issue.
 
 >GPU resources are also shared between multiple users and sessions, so workloads may run more slowly or stop unexpectedly when GPU capacity is limited. If this happens, reduce your workload's GPU requirements or try again later.
 
