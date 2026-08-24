@@ -1,5 +1,11 @@
 # Collaborate on a project
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 ### Working on a branch
 
 One of the most useful aspects of git is 'branching'.  This involves a few extra steps, but it enables some really important benefits:

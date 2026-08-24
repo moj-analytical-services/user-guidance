@@ -1,5 +1,11 @@
 # Work with git on the command line
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 The command line is the text interface to your Analytical Platform tools. When googling, it may also be referred to as the shell, terminal, or console (and perhaps other names). In Jupyter, you can get the command line by selecting 'Terminal' from the launcher screen (the + button in the top left of JupyterLab). You can also use all these commands in RStudio by going to Tools -> Terminal -> New Terminal. In Visual Studio Code, it's Terminal -> New Terminal.
 
 Once you are comfortable using the Terminal (in RStudio, Visual Studio Code or Jupyter) you can run all Git commands from the command line. If you are quite new to the command line, there are a few commands you may find useful to know, in addition to the git commands described later in this section:

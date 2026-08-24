@@ -1,12 +1,18 @@
 # Manage access in GitHub
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 Access to repositories in GitHub is managed via [teams](https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams). You can set up teams in any way you like. Commonly, teams in GitHub correspond directly to team in the organisation or to a group of people that are working together on the same project. You can also nest teams in GitHub to mirror organisational structures and cascade permissions.
 
 You cannot provide direct access to repositories, except for [outside collaborators](../github/organisation-management.html#outside-collaborators). If you give a member direct access to a repository, they will [automatically be added to a team](../github/organisation-management.html#moving-members-with-direct-repository-access-to-teams) with the same permissions.
 
 ### About teams
 
-Invidividuals can be a member of a team or a maintainer of a team.
+Individuals can be a member of a team or a maintainer of a team.
 
 Maintainers can add and remove members from the team, and change the role of members in the team.
 

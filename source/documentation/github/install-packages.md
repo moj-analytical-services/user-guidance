@@ -1,5 +1,11 @@
 # Install packages from GitHub
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 ### R packages
 
 When the visibility of a repository containing an R package is set to internal or private, you need to authenticate to GitHub to access it from R. Otherwise, you will get a 404 error.

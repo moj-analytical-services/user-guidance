@@ -1,5 +1,11 @@
 # Learning resources
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 If you are new to git and you want to learn more, you may find the following resources useful:
 
 - The [GitHub training kit](https://training.github.com/), including the [git cheat sheet](https://training.github.com/downloads/github-git-cheat-sheet/) and the [GitHub training manual](https://githubtraining.github.io/training-manual/)
