@@ -1,6 +1,12 @@
 # Security in GitHub
 
-### Protecting information in GitHub
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
+## Protecting information in GitHub
 
 GitHub should primarily be used to store code.
 
@@ -18,9 +24,9 @@ You can use the following approaches to reduce the risk of accidentally publishi
 | Pushing to repositories outside the MoJ Analytical Services GitHub organistion | [Pre-push hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) | You should only store code in the MoJ Analytical Services GitHub organisation. | Force push using `git push -f <remote> <branch>` |
 <div style="height:0px;font-size:0px;">&nbsp;</div>
 
-You should also not store secrets in GitHub, including passwords, credentials and keys. You can use [parameters](../parameters.html) to securely store secrets on the Analytical Platform.
+You should also not store secrets in GitHub, including passwords, credentials and keys. You can use [parameters](../parameters.html) to securely store secrets.
 
-### Accidentally publishing data to GitHub
+## Accidentally publishing data to GitHub
 
 If you accidentally publish sensitive data to GitHub, you should:
 

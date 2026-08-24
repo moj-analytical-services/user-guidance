@@ -1,5 +1,11 @@
 # Work with git in RStudio
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 Below are point and click steps you can use to sync with your new GitHub repo in RStudio. You can also use the [command line](command-line-git.html).
 
 ### Step 1: Navigate to your platform R Studio and make a copy of the Github project in your R Studio

@@ -1,5 +1,11 @@
 # Git and GitHub
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+>If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 ### What is git?
 
 [Git](https://git-scm.com/) is a distributed version control system. It allows you to track changes in files and directories, and to collaborate with others on code development.

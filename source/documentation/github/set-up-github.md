@@ -1,5 +1,11 @@
 # Set up GitHub
 
+> This page contains general guidance about GitHub.
+>
+> It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
+>
+> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+
 To set up GitHub for use with git in RStudio or JupyterLab, you'll need to:
 
 1. [Create an SSH key](#create-an-ssh-key).
@@ -50,9 +56,9 @@ To add the SSH key to GitHub, you should follow the [guidance from GitHub](https
 
 You also need to authorise your SSH key for use with the MoJ-Analytical-Services organisation before you can use it; see [GitHub: Authorizing an SSH key](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on#authorizing-an-ssh-key) for instructions.
 
-### Configure your username and email in git on the Analytical Platform
+### Configure your username and email in git
 
-To configure your username and email in git on the Analytical Platform using RStudio or JupyterLab, follow the steps below:
+To configure your username and email in git using RStudio or JupyterLab, follow the steps below:
 
 1.  Open a new terminal:
     - In RStudio, select **Tools** in the menu bar and then **Shell...**
