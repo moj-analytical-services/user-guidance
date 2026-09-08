@@ -16,9 +16,9 @@ Individuals can be a member of a team or a maintainer of a team.
 
 Maintainers can add and remove members from the team, and change the role of members in the team.
 
-It is often useful for a team to have at least one maintainer. To add a maintainer to a team, contact the [Operations Engineering Team](../github/organisation-management.html#contact).
+It is often useful for a team to have at least one maintainer. To add a maintainer to a team, [contact the Developer Experience team on Slack](https://moj.enterprise.slack.com/archives/C0AJBK3P5A8).
 
-If your team has no maintainers, you can also ask the [Operations Engineering Team](../github/organisation-management.html#contact) to add and remove members on your behalf.
+If your team has no maintainers, you can also [contact the Developer Experience team on Slack](https://moj.enterprise.slack.com/archives/C0AJBK3P5A8) to add and remove members on your behalf.
 
 ### Create a team
 

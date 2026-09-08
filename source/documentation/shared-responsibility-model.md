@@ -45,7 +45,7 @@ Some responsibilities are shared between users and the Analytical Platform team 
 
 | Responsibility                                      | Analytical Platform | User  | Other MoJ Team | Notes                                                                                                                                                                   |
 | :--------------------------------------------------- | :-------------------: | :-----: | :--------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Managing Single-Sign On (SSO) access                | ✅                |  | ✅           | The Analytical Platform and Operations Engineering share the responsibilities of managing SSO access.<br><br> We report any changes to SSO via email and Slack. |
+| Managing Single-Sign On (SSO) access                | ✅                |  | ✅           | The Analytical Platform and Developer Experience teams share the responsibilities of managing SSO access.<br><br> We report any changes to SSO via email and Slack. |
 | Implementing, enforcing and managing security rules | ✅                |  |           | The Analytical Platform and Platforms & Architecture (P&A) Cyber team share the responsibilities of security rules.                                                |
 
 ## Tools and packages
