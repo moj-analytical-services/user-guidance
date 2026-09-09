@@ -25,7 +25,7 @@ All code written on the Analytical Platform should be stored in a [git repositor
 
 ### Join GitHub
 
-If you do not have a GitHub account, you will be prompted to create one when you join the moj-analytical-services or ministryofjustice GitHub Organisations via SSO. [Click here](https://github.com/orgs/ministryofjustice/sso) to join the ministryofjustice Organisation. [Click here](https://github.com/orgs/moj-analytical-services/sso) to join the moj-analytical-services Organisation. If you experience any issues with the SSO process please contact [#ask-operations-engineering](https://mojdt.slack.com/archives/C01BUKJSZD4)
+If you do not have a GitHub account, you will be prompted to create one when you join the moj-analytical-services or ministryofjustice GitHub Organisations via SSO. [Click here](https://github.com/orgs/ministryofjustice/sso) to join the ministryofjustice Organisation. [Click here](https://github.com/orgs/moj-analytical-services/sso) to join the moj-analytical-services Organisation. If you experience any issues with the SSO process, [contact the Developer Experience team on Slack](https://moj.enterprise.slack.com/archives/C0AJBK3P5A8).
 
 ### Get started
 

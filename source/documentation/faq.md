@@ -23,8 +23,6 @@ Analytical Platform Applications hosted on Cloud Platform will use the IP addres
 
 ## I have been removed from the GitHub Organisation
 
-You will be notified of this action via an email from GitHub - "[GitHub] You've been removed from the "MoJ Analytical Services" organization".
+If this happens, GitHub will send you an email saying: 'You've been removed from the "MoJ Analytical Services" organization'.
 
-You were removed due to inactivity, as part of this Operations Engineering’s dormant GitHub user process noted [here](https://runbooks.operations-engineering.service.justice.gov.uk/documentation/services/github/remove-dormant-users.html).
- 
-To rejoin, you can use this link (https://github.com/orgs/moj-analytical-services/sso).
+You can [use this SSO link to rejoin the organisation](https://github.com/orgs/moj-analytical-services/sso).

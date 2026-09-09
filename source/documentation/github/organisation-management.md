@@ -4,9 +4,9 @@
 >
 > It's not specific to the Analytical Platform, and the Analytical Platform team cannot provide support or troubleshoot GitHub issues.
 >
-> If you need help, ask in the [#ask-about-github Slack channel](https://moj.enterprise.slack.com/archives/C08SV6MR2P7).
+> If you need help, ask in the [#ask-developer-experience Slack channel](https://moj.enterprise.slack.com/archives/C0AJBK3P5A8).
 
-The MoJ Analytical Services GitHub organisation is managed by the Operations Engineering Team.
+The MoJ Analytical Services GitHub organisation is managed by the Developer Experience team.
 
 ## Processes and practices
 
@@ -27,7 +27,7 @@ An outside collaborator is a person who is not a member of the organisation, but
 
 We use outside collaborators for external users, such as analysts from other government departments and partner organisations.
 
-To add an outside collaborator you must be a Repository Administrator. Repository Administrators can invite external collaborators directly from the [GitHub](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization#adding-outside-collaborators-to-a-repository). Operations Engineering guidance relating to this is located [here](https://user-guide.operations-engineering.service.justice.gov.uk/documentation/information/storing-source-code.html#member-of-the-moj-organisation).
+To add an outside collaborator you must be a repository administrator. Repository administrators can [invite external collaborators directly from GitHub](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization#adding-outside-collaborators-to-a-repository). You can check [legacy guidance about adding outside collaborators](https://developer-portal.service.justice.gov.uk/docs/cloud-optimisation-and-accountability/operations-engineering-legacy/operations-engineering-user-guide/github/storing-source-code.html#outside-collaborator) until the Developer Experience team publishes updated guidance.
 
 ## Automation
 
@@ -37,7 +37,7 @@ All automated processes are managed in the [moj-analytical-services/operations-e
 
 GitHub repositories are automatically archived when there is no activity on the `main` or `master` branch for more than 1.5 years.
 
-If you still need a repository that has been archived, [contact](#contact) the Operations Engineering Team. Where a repository is inactive but should not be archived, it can be added to an allow list, so it is not archived again in future.
+If you still need a repository that has been archived, [contact the Developer Experience team on Slack](https://moj.enterprise.slack.com/archives/C0AJBK3P5A8). Where a repository is inactive but should not be archived, it can be added to an allow list, so it is not archived again in future.
 
 ### Moving members with direct repository access to teams
 
@@ -45,7 +45,7 @@ Any members that only have direct access to a repository will be moved to a new 
 
 If a member has both direct access to a repository and access via a team, they will only retain access via the team. If the level of access provided by the team is less than the level of direct access, their level of access will be reduced. For example, if a member has direct admin access to a repository and read access via a team, they will only retain read access via the team.
 
-By default, members that are moved to teams will not be maintainers. Therefore, they will not be able to manage team permissions, including adding and removing members, and changing the role of members. You can request to be made a maintainer by [contacting](#contact) the Operations Engineering Team.
+By default, members that are moved to teams will not be maintainers. Therefore, they will not be able to manage team permissions, including adding and removing members, and changing the role of members. You can request to be made a maintainer by [contacting the Developer Experience team on Slack](https://moj.enterprise.slack.com/archives/C0AJBK3P5A8).
 
 ### Adding members to the everyone team
 
@@ -57,4 +57,4 @@ Occasionally, we will review active members of the GitHub organisation, and remo
 
 ## Contact
 
-The team can be contacted in the [#ask-operations-engineering](https://mojdt.slack.com/archives/C01BUKJSZD4) Slack channel or by email at [operations-engineering@digital.justice.gov.uk](mailto:operations-engineering@digital.justice.gov.uk).
+The team can be contacted in the [#ask-developer-experience Slack channel](https://moj.enterprise.slack.com/archives/C0AJBK3P5A8).
