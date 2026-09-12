@@ -96,6 +96,6 @@ Configurations are prioritised in order of specificity, which is generally the i
 Materialisations are strategies for persisting dbt models in a warehouse. There are four types of materializations built into dbt. They are:
 
 - [table](https://docs.getdbt.com/docs/build/materializations#table)
-- [view](https://docs.getdbt.com/docs/build/materializations#view) ⚠️ not currently supported ⚠️
+- [view](https://docs.getdbt.com/docs/build/materializations#view)
 - [incremental](https://docs.getdbt.com/docs/build/materializations#incremental)
 - [ephemeral](https://docs.getdbt.com/docs/build/materializations#ephemeral)
