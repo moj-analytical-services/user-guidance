@@ -216,6 +216,14 @@ s3:
     - alpha-everyone/airflow-example/*
 ```
 
+If you want to use [AWS Bedrock](https://aws.amazon.com/bedrock/) in airflow, then you will need to add the following to your yaml file:
+
+```
+bedrock: true
+```
+
+For more options to include in your yaml file please see the [IAM Builder README](https://github.com/moj-analytical-services/iam_builder).
+
 ## Validate from the command line (optional)
 
 The `airflow` repo validates the folder structure, DAGs (`validation.dags`) and Roles (`validation.roles`). The validation will run automatically when you raise a PR, but you can also validate using the command line to spot errors sooner.
