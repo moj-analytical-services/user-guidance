@@ -510,7 +510,7 @@ We provide repository templates for the supported runtimes:
 
 These templates include:
 
-- GitHub Actions workflow to build and scan your container for vulnerabilities with Trivy
+- GitHub Actions workflow to build and scan your container for vulnerabilities with Snyk
 - GitHub Actions workflow to build and test your container's structure
 - GitHub Actions workflow to perform a dependency review of your repository, if it's public
 - GitHub Actions workflow to build and push your container to the Analytical Platform's container registry
@@ -520,7 +520,13 @@ The GitHub Actions workflows call shared workflows we maintain [here](https://gi
 
 ### Vulnerability scanning
 
-The GitHub Actions workflow builds and scans your container for vulnerabilities with Trivy, alerting you to any CVEs (Common Vulnerabilities and Exposures) marked as `HIGH` or `CRITICAL` that have a fix available. You will need to either update the offending package or skip the CVE by adding it to `.trivyignore` in the root of your repository.
+The GitHub Actions workflow builds and scans your container for vulnerabilities with Snyk, alerting you to any CVEs (Common Vulnerabilities and Exposures) marked as `HIGH` or `CRITICAL` that have a fix available. You will need to either update the offending package or skip the CVE by adding it to a `.snyk` in the root of your repository.
+
+## The `.snyk` file
+
+This will allow you to manage a list of excluded vulnerabilities to be ignored by scanning. Ignores should be temporary whenever possible, using the `expires:` field whenever reasonable to remind you to update any packages you have previously ignored. A permanent ignore when a project has _no other option_ than to rely on the package at a vunerable version, and this should be explained in the `reason:` field.
+
+An example of a `.snyk` file can be seen in either of our [Python](https://github.com/ministryofjustice/analytical-platform-airflow-python-base) and [R](https://github.com/ministryofjustice/analytical-platform-airflow-r-base) base image repos, and more information can be found in the Snyk documentation on [setting up and managing your own .snyk file](https://docs.snyk.io/manage-risk/policies/the-.snyk-file).
 
 ### Configuration testing
 
