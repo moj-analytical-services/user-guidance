@@ -1,5 +1,7 @@
 # Information governance
 
+This page explains how data is stored and processed on the Analytical Platform. For information you may find useful when completing a DPIA, see [Common security questions](common-security-questions.html).
+
 ## Data management
 
 ### Permissions and access

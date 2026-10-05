@@ -1,4 +1,4 @@
-# AP security – responses to common questions
+# Security
 
 ## General information
 
