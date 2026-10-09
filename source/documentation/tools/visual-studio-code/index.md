@@ -24,17 +24,74 @@ Send a message in [#ask-analytical-platform on Slack](https://moj.enterprise.sla
 
 ## GitHub Copilot
 
+> [!CAUTION]
+> **Seek advice before using Copilot** with production, privileged or high-value credentials, sensitive operational data, personal or case-level data, restricted systems or repositories, or where you are otherwise unsure whether the proposed use is appropriate.
+
 Starting from release 2.41.0, we have included GitHub's [CLI](https://cli.github.com/) and [Copilot CLI](https://github.com/features/copilot/cli).
 
-To authenticate with GitHub, run the following command:
+GitHub Copilot is an AI coding assistant that can read files, generate and modify code, and, when using agent capabilities, run commands and tools within your development environment. **Users remain responsible for reviewing Copilot's actions and outputs and for ensuring that data, credentials and other sensitive information are handled appropriately.**
+
+The requirements below apply specifically to the use of GitHub Copilot and should be followed alongside the wider Analytical Platform guidance. Existing requirements for secure data handling, information assurance and development continue to apply.
+
+### Before using Copilot
+
+#### Approval and information assurance
+- **Make sure your use of Copilot has been agreed with your line management chain.** Teams should have an agreed approach to using Copilot, including when additional advice or approval is required.
+- **Follow normal information-assurance requirements.** Where a DPIA or other approval is required for the data or activity, it should cover the intended use of GitHub Copilot.
+
+#### Protect data and credentials
+
+- **Keep data in approved storage.** Datasets and other sensitive information should not be saved within your development environment, including within your Analytical Platform VS Code workspace. Data should be stored in AWS in line with [Analytical Platform guidance](https://user-guidance.analytical-platform.service.justice.gov.uk/data/data-faqs/index.html#where-should-i-store-my-own-data). Be particularly mindful of data inadvertently retained locally in notebook outputs, temporary files or downloads.
+- **Keep secrets out of source code and Git.** Never hard-code API keys, passwords or other credentials. Ensure local secret files such as `.env` are excluded from GitHub using `.gitignore`.
+- **Be aware that `.gitignore` is not a security boundary.** Copilot Agent may be able to access files in your workspace even where they are excluded from GitHub. GitHub's Copilot content-exclusion controls do not currently apply to Agent mode or Copilot CLI.
+- **Check your entire workspace before using agent capabilities.** Review your workspace for sensitive data, outputs or credentials stored locally, and remove anything Copilot does not need access to.
+
+#### Use agent capabilities safely
+- **Keep approval controls enabled.** Do not use **Allow all**, **Autopilot**, or equivalent settings that allow Agent actions to proceed without appropriate review. Review terminal commands and tool calls before approving them.
+- **Only enable the tools you need.** Copilot Agent can be given access to tools for reading and editing files, executing code, accessing the web and interacting with other services. Review the enabled tools and disable those that are not required for your work. In VS Code, use the **Configure Tools** button in Copilot Chat. In Copilot CLI, use the `--available-tools` or `--excluded-tools` options ([guidance](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools)).
+- **Treat Copilot-generated code like your own code.** Review and test changes before committing or running them. Do not bypass secret scanning, push protection or other security controls.
+
+### Getting started
+
+To authenticate with GitHub, run:
 
 ```bash
 gh auth login --git-protocol ssh --hostname github.com --skip-ssh-key --web
 ```
 
-Once authenticated, you can launch GitHub Copilot by running `copilot`.
+Once authenticated, you can use Copilot through either VS Code Chat or Copilot CLI.
 
-For more information on using GitHub Copilot CLI, please refer to GitHub's [documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli).
+### Using GitHub Copilot
+
+There are two main ways to use GitHub Copilot on the Analytical Platform.
+
+#### Option 1 – VS Code Chat
+
+Copilot is integrated directly into VS Code. To open it:
+
+1. Use the VS Code search bar at the top of the window.
+2. Search for and select `>Chat: Focus on Chat View` (exact wording may vary).
+3. In the Chat window, select **Agent** mode where available.
+
+Agent mode allows Copilot to work across your workspace, including reading and editing files and using enabled tools such as running terminal commands. You will normally be asked to approve actions where required.
+
+#### Option 2 – Copilot CLI
+
+Copilot CLI provides similar agent capabilities through the command line.
+
+From VS Code, use the search bar and select:
+
+`>Chat: New Copilot CLI Session to the Side`
+
+Alternatively, launch it directly from a terminal:
+
+```bash
+copilot
+```
+
+You can then interact with Copilot directly from the terminal:
+
+For more information, see GitHub's [Copilot CLI documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli).
 
 ## Accessing a locally running application
 
