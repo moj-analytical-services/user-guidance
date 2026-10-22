@@ -43,3 +43,21 @@ To clear the RStudio session:
     ![RStudio's "Restart" button in Control Panel](images/tools/restart_rstudio.png)
 
 4. In the control panel, select __Open__ for RStudio. It may take between one and five minutes before RStudio is available. You may need to refresh your browser for the tool to load.
+
+
+## GitHub Copilot
+
+Starting from release 4.6.1, we have included GitHub's [CLI](https://cli.github.com/) and [Copilot CLI](https://github.com/features/copilot/cli).
+
+To request a GitHub Copilot license, [follow the guidance](https://github.com/ministryofjustice/.github/blob/main/docs/github-copilot-guidance.md#github-copilot-guidance).
+
+
+To authenticate with GitHub open a terminal session, run the command below and follow the instructions:
+
+```bash
+gh auth login --git-protocol ssh --hostname github.com --skip-ssh-key --web
+```
+
+Once authenticated, you can launch GitHub Copilot by running `copilot`.
+
+For more information on using GitHub Copilot CLI, please refer to GitHub's [documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli).
